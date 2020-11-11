@@ -1,0 +1,107 @@
+﻿using Giny.Protocol.Enums;
+using Giny.Protocol.Types;
+using Giny.World.Managers.Effects;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Spells;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Giny.World.Managers.Fights.Buffs
+{
+    public abstract class Buff
+    {
+        public int Id
+        {
+            get;
+            set;
+        }
+        public SpellCast Cast
+        {
+            get;
+            set;
+        }
+        public Fighter Target
+        {
+            get;
+            private set;
+        }
+        public EffectDice Effect
+        {
+            get;
+            private set;
+        }
+
+        protected FightDispellableEnum Dispellable
+        {
+            get;
+            private set;
+        }
+        private short? CustomActionId
+        {
+            get;
+            set;
+        }
+        public int Duration
+        {
+            get;
+            set;
+        }
+
+        public Buff(int id, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null)
+        {
+            this.Id = id;
+            this.Target = target;
+            this.Cast = cast;
+            this.Effect = effect;
+            this.Duration = effect.Duration;
+            this.Dispellable = dispellable;
+            this.CustomActionId = customActionId;
+        }
+
+        public bool DecrementDuration()
+        {
+            return this.Duration != -1 && (this.Duration -= 1) <= 0;
+        }
+
+        public abstract void Apply();
+
+        public abstract void Dispell();
+
+        public abstract short GetDelta();
+
+        public short GetActionId()
+        {
+            return CustomActionId.HasValue ? CustomActionId.Value : Effect.EffectId;
+        }
+
+        public virtual AbstractFightDispellableEffect GetAbstractFightDispellableEffect()
+        {
+            return new FightTemporaryBoostEffect()
+            {
+                delta = Math.Abs(GetDelta()),
+                dispelable = (byte)Dispellable,
+                turnDuration = (short)Duration,
+                effectId = Effect.EffectId,
+                parentBoostUid = 0,
+                spellId = Cast.SpellId,
+                targetId = Target.Id,
+                uid = Id,
+            };
+        }
+
+        public FightDispellableEffectExtendedInformations GetFightDispellableEffectExtendedInformations() => new FightDispellableEffectExtendedInformations(GetActionId(), Cast.Source.Id, GetAbstractFightDispellableEffect());
+
+        public virtual BuffTriggerType GetTriggerType()
+        {
+            return BuffTriggerType.Instant;
+        }
+        public virtual bool HasDelay()
+        {
+            return false;
+        }
+    }
+}

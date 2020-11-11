@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using Giny.Core.Network.Messages;
+using Giny.Protocol.Types;
+using Giny.Core.IO.Interfaces;
+using Giny.Protocol;
+using Giny.Protocol.Enums;
+
+namespace Giny.Protocol.Messages
+{ 
+    public class HaapiAuthErrorMessage : NetworkMessage  
+    { 
+        public new const ushort Id = 1617;
+        public override ushort MessageId => Id;
+
+        public byte type;
+
+        public HaapiAuthErrorMessage()
+        {
+        }
+        public HaapiAuthErrorMessage(byte type)
+        {
+            this.type = type;
+        }
+        public override void Serialize(IDataWriter writer)
+        {
+            writer.WriteByte((byte)type);
+        }
+        public override void Deserialize(IDataReader reader)
+        {
+            type = (byte)reader.ReadByte();
+            if (type < 0)
+            {
+                throw new Exception("Forbidden value (" + type + ") on element of HaapiAuthExceptionMessage.type.");
+            }
+
+        }
+
+
+    }
+}
+
+
+
+
+
+
+
+

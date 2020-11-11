@@ -1,0 +1,68 @@
+﻿
+
+-----------> Roleplay <-----------
+
+-Mimibiotes
+-Mounts
+-SpellList
+-Monster Groups
+-Achievements
+-Npcs
+-Quests
+-Interactives
+-Item drop
+-Npc Dialogs
+-Parties
+-Pokéfus
+-Idols
+-Guilds Alliances?
+-Anomalies?
+-Portals
+-Almanach
+-fixer bug banque objectexchangekamasmove byte reversed trop bizzare....
+sushivan ordre living object record 
+jobtypeenum en anglais miscbuilder
+rework bank system
+
+Invisibility
+Poison damage client display
+Sort air en ligne iop (prob zone)
+
+
+
+Sorts a debug
+
+-> IOP
+
+> Tempête de puissance
+> Duel-
+> Fustigation (Fuite & tacle)
+> Fendoir
+> Friction (n'attire pas de la bonne manière en diagonale) ATTENTION ne pas toujours attirer en diagonale ! sur PullForward.
+> Fracture (Zone)
+> Couperet (sub mp roll)
+> Conquête (HP invoc + passif de la conquête)
+> Violence
+> Précipitation not workin'
+
+Sort conquête : 9676 + dommage subis 50%
+
+-> CRA
+
+> Fleche fulminante
+> Acuitée Absolue
+> Sentinelle
+> Fleche complice (wtf)
+
+-> SRAM
+
+> perfidie
+> Injection toxique (spell cooldown, historique)
+> Epidémie	
+> Marque Mortuaire
+> Dérobade
+> Double
+> Invisiblité
+> Méprise
+> Fosse commune
+> Funeste.
