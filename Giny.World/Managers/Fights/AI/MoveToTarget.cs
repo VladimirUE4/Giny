@@ -14,19 +14,16 @@ namespace Giny.World.Managers.Fights.AI
 
         }
 
-        public override void Analyse()
-        {
-
-        }
-
         public override double ComputePriority()
         {
-            return 0d;
+            return 0.5d;
         }
 
         public override void Execute()
         {
-
+            var target = Fighter.EnemyTeam.CloserFighter(Fighter);
+            var path = Fighter.FindPath(target);
+            Fighter.Move(path);
         }
     }
 }

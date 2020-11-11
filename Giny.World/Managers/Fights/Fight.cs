@@ -30,7 +30,7 @@ namespace Giny.World.Managers.Fights
     {
         public const int TurnTime = 30;
 
-        public const int SynchronizerTimout = 5;
+        public const int SynchronizerTimout = 8;
 
         public const int TurnBeforeDisconnection = 20;
 

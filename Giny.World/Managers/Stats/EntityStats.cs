@@ -30,7 +30,13 @@ namespace Giny.World.Managers.Stats
             get;
             set;
         }
-
+        public double LifePercentage
+        {
+            get
+            {
+                return LifePoints / (double)MaxLifePoints;
+            }
+        }
         [ProtoMember(2)]
         public short MaxEnergyPoints
         {

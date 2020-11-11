@@ -1,4 +1,6 @@
-﻿using Giny.World.Managers.Fights.Fighters;
+﻿using Giny.Core.Extensions;
+using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +15,21 @@ namespace Giny.World.Managers.Fights.AI
         {
         }
 
-        public override void Analyse()
-        {
-            
-        }
-
         public override double ComputePriority()
         {
-            return 0d;
+            return 2d;
         }
 
         public override void Execute()
         {
-           
+            var mp = Fighter.Stats.MovementPoints.TotalInContext();
+
+            var points = MapPoint.GetOrthogonalGridReference().Where(x => x.DistanceTo(Fighter.Cell.Point) == mp); // erf
+
+            var target = points.Random();
+
+            var path = Fighter.FindPath(target);
+            Fighter.Move(path);
         }
     }
 }

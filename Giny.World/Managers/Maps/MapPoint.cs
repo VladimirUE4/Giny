@@ -510,5 +510,12 @@ namespace Giny.World.Managers.Maps
 
             return lastCell;
         }
+        public static MapPoint[] GetOrthogonalGridReference()
+        {
+            lock (OrthogonalGridReference)
+            {
+                return OrthogonalGridReference;
+            }
+        }
     }
 }

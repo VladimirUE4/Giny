@@ -29,6 +29,7 @@ namespace Giny.World.Managers.Fights.AI
         public void Initialize()
         {
             Actions.Add(new BuffAction(Fighter));
+            Actions.Add(new HealAction(Fighter));
             Actions.Add(new MoveToTarget(Fighter));
             Actions.Add(new AgressAction(Fighter));
             Actions.Add(new FleeAction(Fighter));
@@ -37,11 +38,10 @@ namespace Giny.World.Managers.Fights.AI
 
         public void Play()
         {
-            IEnumerable<AIAction> actions = Actions.OrderByDescending(x => x.ComputePriority()); // Sort all actions by priority 
+            IEnumerable<AIAction> actions = Actions.OrderBy(x => x.ComputePriority()); // Sort all actions by priority 
 
             foreach (var action in actions)
             {
-                action.Analyse(); 
                 action.Execute();
             }
         }

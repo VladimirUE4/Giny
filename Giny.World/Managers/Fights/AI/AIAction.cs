@@ -26,11 +26,6 @@ namespace Giny.World.Managers.Fights.AI
         public abstract void Execute();
 
         /*
-         * Analyse environement before execute
-         */
-        public abstract void Analyse();
-
-        /*
          *  returns a priority factor between 0 and 1
          */
         public abstract double ComputePriority(); 

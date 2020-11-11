@@ -108,6 +108,7 @@
     <Compile Include="Managers\Fights\AI\AIAction.cs" />
     <Compile Include="Managers\Fights\AI\BuffAction.cs" />
     <Compile Include="Managers\Fights\AI\FleeAction.cs" />
+    <Compile Include="Managers\Fights\AI\HealAction.cs" />
     <Compile Include="Managers\Fights\AI\MonsterBrain.cs" />
     <Compile Include="Managers\Fights\AI\MoveToTarget.cs" />
     <Compile Include="Managers\Fights\Buffs\ErosionBuff.cs" />
@@ -225,6 +226,8 @@
     <Compile Include="Managers\Fights\Marks\MarkTriggerType.cs" />
     <Compile Include="Managers\Fights\Marks\Trap.cs" />
     <Compile Include="Managers\Items\WeaponManager.cs" />
+    <Compile Include="Managers\Maps\Paths\Node.cs" />
+    <Compile Include="Managers\Maps\Paths\Pathfinding.cs" />
     <Compile Include="Managers\Misc\SpellCategoryManager.cs" />
     <Compile Include="Managers\Spells\SpellManager.cs" />
     <Compile Include="Managers\Fights\Cast\SpellShapeEnum.cs" />

@@ -11,6 +11,7 @@ using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Generic;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Npcs;
+using Giny.World.Managers.Maps.Paths;
 using Giny.World.Managers.Maps.Teleporters;
 using Giny.World.Managers.Monsters;
 using Giny.World.Network;
@@ -222,8 +223,8 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("<b>" + targetName + "</b> is not connected.");
             }
         }
-        [ChatCommand("spell",ServerRoleEnum.ADMINISTRATOR)]
-        public static void LearnSpell(WorldClient client,short spellId)
+        [ChatCommand("spell", ServerRoleEnum.ADMINISTRATOR)]
+        public static void LearnSpell(WorldClient client, short spellId)
         {
             client.Character.LearnSpell(spellId, true);
         }
@@ -250,21 +251,8 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
-            using (client.Character.Fighter.Fight.SequenceManager.StartSequence(Fights.Sequences.SequenceTypeEnum.SEQUENCE_SPELL))
-            {
-                foreach (var buff in client.Character.Fighter.GetBuffs())
-                {
-                    client.Character.Fighter.Fight.Send(new GameActionFightDispellEffectMessage()
-                    {
-                        actionId = (short)ActionsEnum.ACTION_CHARACTER_BOOST_DISPELLED,
-                        boostUID = buff.Id,
-                        sourceId = buff.Target.Id, // ?
-                        targetId = buff.Target.Id,
-                        verboseCast = true,
-                    });
-                }
-            }
-            
+            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(5);
+            MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
         }
     }
 }

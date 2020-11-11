@@ -27,11 +27,18 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         {
             Damage damages = GetTriggerToken<Damage>();
 
-            damages.Computed = (short)(damages.Computed * (Effect.Min / 100d));
-
-            foreach (var fighter in Source.GetMeleeFighters())
+            if (damages != null)
             {
-                fighter.InflictDamage(damages);
+                damages.Computed = (short)(damages.Computed * (Effect.Min / 100d));
+
+                foreach (var fighter in Source.GetMeleeFighters())
+                {
+                    fighter.InflictDamage(damages);
+                }
+            }
+            else
+            {
+                Source.Fight.Warn("Unknown trigger token Dispatch Damages");
             }
         }
     }

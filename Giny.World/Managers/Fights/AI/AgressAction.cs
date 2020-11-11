@@ -1,4 +1,5 @@
-﻿using Giny.World.Managers.Fights.Fighters;
+﻿using Giny.Core.Extensions;
+using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,6 @@ namespace Giny.World.Managers.Fights.AI
         {
         }
 
-        public override void Analyse()
-        {
-
-        }
 
         public override double ComputePriority()
         {
@@ -28,7 +25,7 @@ namespace Giny.World.Managers.Fights.AI
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
-            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category == SpellCategoryEnum.Damages))
+            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category.HasFlag(SpellCategoryEnum.Damages)).Shuffle())
             {
                 Fighter.CastSpell(spellRecord.Key, target.Cell.Id);
             }

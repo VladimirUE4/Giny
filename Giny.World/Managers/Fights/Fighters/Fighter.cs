@@ -267,7 +267,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             DirectionsEnum direction = (DirectionsEnum)PathReader.GetDirection(path.Last().Id);
 
-            short mpCost = Cell.Point.ManhattanDistanceTo(new MapPoint(path.Last().Id));
+            short mpCost = (short)(path.Count - 1);
 
             if (mpCost <= Stats.MovementPoints.TotalInContext() && mpCost > 0)
             {
@@ -653,11 +653,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        public void CastSpell(short spellId, short cellId)
+        public bool CastSpell(short spellId, short cellId)
         {
             Spell spell = GetSpell(spellId);
             CellRecord cell = Fight.Map.GetCell(cellId);
-            this.CastSpell(new SpellCast(this, spell, Fight.Map.GetCell(cellId)));
+            return this.CastSpell(new SpellCast(this, spell, Fight.Map.GetCell(cellId)));
         }
 
         public virtual bool CastSpell(SpellCast cast)

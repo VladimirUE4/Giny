@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.AI
 {
-    public class BuffAction : AIAction
+    public class HealAction : AIAction
     {
-        public BuffAction(AIFighter fighter) : base(fighter)
+        public HealAction(AIFighter fighter) : base(fighter)
         {
-
         }
+
 
         public override double ComputePriority()
         {
-            return 0d;
+            return 0.2d;
         }
 
         public override void Execute()
         {
-            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category.HasFlag(SpellCategoryEnum.Buff)))
+            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category.HasFlag(SpellCategoryEnum.Healing)))
             {
-                foreach (var ally in Fighter.Team.GetFighters<Fighter>())
+                foreach (var ally in Fighter.Team.GetFighters<Fighter>().OrderBy(x => x.Stats.LifePercentage))
                 {
                     Fighter.CastSpell(spellRecord.Key, ally.Cell.Id);
                 }
