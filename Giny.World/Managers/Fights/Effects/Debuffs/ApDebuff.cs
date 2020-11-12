@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                 }
                 else
                 {
-                    target.LooseAp(Source, (short)Effect.Min);
+                    target.LooseAp(Source, (short)Effect.Min, Actions.ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST);
                 }
             }
         }

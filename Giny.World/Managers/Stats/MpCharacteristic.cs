@@ -27,13 +27,25 @@ namespace Giny.World.Managers.Stats
         }
 
         [ProtoMember(1)]
-        public override short Base { get => base.Base; set => base.Base = value; }
+        public override short Base
+        {
+            get => base.Base;
+            set => base.Base = value;
+        }
 
         [ProtoMember(2)]
-        public override short Additional { get => base.Additional; set => base.Additional = value; }
+        public override short Additional
+        {
+            get => base.Additional;
+            set => base.Additional = value;
+        }
 
         [ProtoMember(3)]
-        public override short Objects { get => base.Objects; set => base.Objects = value; }
+        public override short Objects
+        {
+            get => base.Objects;
+            set => base.Objects = value;
+        }
 
 
         public new static MpCharacteristic New(short @base)

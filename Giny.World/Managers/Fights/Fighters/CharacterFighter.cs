@@ -79,7 +79,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Id = (int)Character.Id;
             this.Look = Character.Look.Clone();
             this.Stats = new FighterStats(Character);
-
             if (Character.Inventory.HasWeaponEquiped)
             {
                 this.WeaponRecord = WeaponRecord.GetWeapon(Character.Inventory.GetWeapon().GId);
@@ -192,7 +191,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
 
                 if (!cast.ApFree)
-                    LooseAp(this, cast.Spell.Level.ApCost);
+                    LooseAp(this, cast.Spell.Level.ApCost, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_USE);
 
                 if (!handler.Execute())
                 {

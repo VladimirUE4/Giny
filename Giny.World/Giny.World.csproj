@@ -125,6 +125,8 @@
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2160.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\AddSpellDamages.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\DispellState.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\SubApRoll.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\SubMpRoll.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\Retreat.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\SwitchPosition.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ReduceSpellCooldown.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Managers\Fights\Marks\MarkShape.cs" />
     <Compile Include="Managers\Fights\Marks\MarkTriggerType.cs" />
     <Compile Include="Managers\Fights\Marks\Trap.cs" />
+    <Compile Include="Managers\Fights\Tackle.cs" />
     <Compile Include="Managers\Items\WeaponManager.cs" />
     <Compile Include="Managers\Maps\Paths\Node.cs" />
     <Compile Include="Managers\Maps\Paths\Pathfinding.cs" />
@@ -325,6 +328,7 @@
     <Compile Include="Managers\Stats\LimitedCharacteristic.cs" />
     <Compile Include="Managers\Stats\MpCharacteristic.cs" />
     <Compile Include="Managers\Stats\RangeCharacteristic.cs" />
+    <Compile Include="Managers\Stats\RelativeCharacteristic.cs" />
     <Compile Include="Managers\Stats\ResitanceCharacteristic.cs" />
     <Compile Include="Managers\WorldSaveManager.cs" />
     <Compile Include="Network\IPCClient.cs" />

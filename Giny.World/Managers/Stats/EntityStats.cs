@@ -64,7 +64,7 @@ namespace Giny.World.Managers.Stats
             set;
         }
         [ProtoMember(4)]
-        public Characteristic Prospecting
+        public RelativeCharacteristic Prospecting
         {
             get;
             set;
@@ -210,13 +210,13 @@ namespace Giny.World.Managers.Stats
             set;
         }
         [ProtoMember(28)]
-        public Characteristic DodgePAProbability
+        public RelativeCharacteristic DodgePAProbability
         {
             get;
             set;
         }
         [ProtoMember(29)]
-        public Characteristic DodgePMProbability
+        public RelativeCharacteristic DodgePMProbability
         {
             get;
             set;
@@ -336,25 +336,25 @@ namespace Giny.World.Managers.Stats
             set;
         }
         [ProtoMember(49)]
-        public Characteristic TackleBlock
+        public RelativeCharacteristic TackleBlock
         {
             get;
             set;
         }
         [ProtoMember(50)]
-        public Characteristic TackleEvade
+        public RelativeCharacteristic TackleEvade
         {
             get;
             set;
         }
         [ProtoMember(51)]
-        public Characteristic PAAttack
+        public RelativeCharacteristic APAttack
         {
             get;
             set;
         }
         [ProtoMember(52)]
-        public Characteristic PMAttack
+        public RelativeCharacteristic MPAttack
         {
             get;
             set;
@@ -418,6 +418,17 @@ namespace Giny.World.Managers.Stats
         {
             this.LifePoints = this.MaxLifePoints;
             this.Energy = this.MaxEnergyPoints;
+
+            this.DodgePAProbability.Bind(this.Wisdom);
+            this.APAttack.Bind(this.Wisdom);
+
+            this.DodgePMProbability.Bind(this.Wisdom);
+            this.MPAttack.Bind(this.Wisdom);
+
+            this.TackleBlock.Bind(this.Agility);
+            this.TackleEvade.Bind(this.Agility);
+
+            this.Prospecting.Bind(this.Chance);
         }
         public Characteristic GetCharacteristic(StatsBoostEnum statId)
         {
@@ -478,8 +489,8 @@ namespace Giny.World.Managers.Stats
                 airElementResistPercent = AirResistPercent.GetBaseCharacteristic(),
                 allDamagesBonus = AllDamagesBonus.GetBaseCharacteristic(),
                 dodgePALostProbability = DodgePAProbability.GetBaseCharacteristic(),
-                PAAttack = PAAttack.GetBaseCharacteristic(),
-                PMAttack = PMAttack.GetBaseCharacteristic(),
+                PAAttack = APAttack.GetBaseCharacteristic(),
+                PMAttack = MPAttack.GetBaseCharacteristic(),
                 chance = Chance.GetBaseCharacteristic(),
                 criticalDamageBonus = CriticalDamageBonus.GetBaseCharacteristic(),
                 criticalDamageReduction = CriticalDamageReduction.GetBaseCharacteristic(),
@@ -570,8 +581,8 @@ namespace Giny.World.Managers.Stats
                 CriticalHit = Characteristic.Zero(),
                 Initiative = Characteristic.Zero(),
                 CriticalHitWeapon = 0,
-                DodgePAProbability = Characteristic.Zero(),
-                DodgePMProbability = Characteristic.Zero(),
+                DodgePAProbability = RelativeCharacteristic.Zero(),
+                DodgePMProbability = RelativeCharacteristic.Zero(),
                 EarthDamageBonus = Characteristic.Zero(),
                 EarthReduction = Characteristic.Zero(),
                 EarthResistPercent = ResistanceCharacteristic.Zero(),
@@ -591,7 +602,7 @@ namespace Giny.World.Managers.Stats
                 NeutralDamageBonus = Characteristic.Zero(),
                 NeutralReduction = Characteristic.Zero(),
                 NeutralResistPercent = ResistanceCharacteristic.Zero(),
-                Prospecting = Characteristic.New(BreedManager.BREED_DEFAULT_PROSPECTING),
+                Prospecting = RelativeCharacteristic.New(BreedManager.BREED_DEFAULT_PROSPECTING),
                 PushDamageBonus = Characteristic.Zero(),
                 PushDamageReduction = Characteristic.Zero(),
                 Range = RangeCharacteristic.Zero(),
@@ -606,10 +617,10 @@ namespace Giny.World.Managers.Stats
                 WaterResistPercent = ResistanceCharacteristic.Zero(),
                 WeaponDamagesBonusPercent = Characteristic.Zero(),
                 Wisdom = Characteristic.Zero(),
-                TackleBlock = Characteristic.Zero(),
-                TackleEvade = Characteristic.Zero(),
-                PAAttack = Characteristic.Zero(),
-                PMAttack = Characteristic.Zero(),
+                TackleBlock = RelativeCharacteristic.Zero(),
+                TackleEvade = RelativeCharacteristic.Zero(),
+                APAttack = RelativeCharacteristic.Zero(),
+                MPAttack = RelativeCharacteristic.Zero(),
                 MeleeDamageDonePercent = Characteristic.Zero(),
                 MeleeDamageResistancePercent = Characteristic.Zero(),
                 RangedDamageDonePercent = Characteristic.Zero(),
@@ -620,6 +631,9 @@ namespace Giny.World.Managers.Stats
                 WeaponDamageResistancePercent = Characteristic.Zero(),
                 WeightBonus = Characteristic.Zero(),
             };
+
+            stats.Initialize();
+
             return stats;
         }
 

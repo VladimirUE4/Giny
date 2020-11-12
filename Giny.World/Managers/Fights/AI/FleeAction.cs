@@ -22,14 +22,22 @@ namespace Giny.World.Managers.Fights.AI
 
         public override void Execute()
         {
+            if (Fighter.IsTackled() && Fighter.Stats.LifePercentage > 0.2)
+            {
+                return;
+            }
             var mp = Fighter.Stats.MovementPoints.TotalInContext();
 
-            var points = MapPoint.GetOrthogonalGridReference().Where(x => x.DistanceTo(Fighter.Cell.Point) == mp); // erf
+            if (mp > 0)
+            {
+                var points = MapPoint.GetOrthogonalGridReference().Where(x => x.DistanceTo(Fighter.Cell.Point) == mp); // erf
 
-            var target = points.Random();
+                var target = points.Random();
 
-            var path = Fighter.FindPath(target);
-            Fighter.Move(path);
+                var path = Fighter.FindPath(target);
+
+                Fighter.Move(path);
+            }
         }
     }
 }

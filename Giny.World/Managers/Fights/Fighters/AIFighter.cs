@@ -48,6 +48,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnBegin()
         {
+
+            this.Brain.Play();
+            PassTurn();
+            return;
+
             try
             {
                 this.Brain.Play();

@@ -20,7 +20,7 @@ namespace Giny.World.Managers.Misc
 
         public const string MOUNTS_URL = "http://www.dofus.tools/myAvatar3/assets/data/Mounts.ma3";
 
-        [StartupInvoke("MA3 Builder", StartupInvokePriority.SixthPath)]
+        [StartupInvoke("MA3 Builder", StartupInvokePriority.Disabled)]
         public void Initialize()
         {
             Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, MessageState.INFO2);

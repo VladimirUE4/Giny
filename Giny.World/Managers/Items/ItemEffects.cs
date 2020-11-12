@@ -26,37 +26,31 @@ namespace Giny.World.Managers.Items
         {
             character.Record.Stats.MovementPoints.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddStrength)]
         public static void AddStrength(Character character, int delta)
         {
             character.Record.Stats.Strength.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddChance)]
         public static void AddChance(Character character, int delta)
         {
             character.Record.Stats.Chance.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddIntelligence)]
         public static void AddIntelligence(Character character, int delta)
         {
             character.Record.Stats.Intelligence.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddAgility)]
         public static void AddAgility(Character character, int delta)
         {
             character.Record.Stats.Agility.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddWisdom)]
         public static void AddWisdom(Character character, int delta)
         {
             character.Record.Stats.Wisdom.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddVitality)]
         public static void AddVitality(Character character, int delta)
         {
@@ -92,6 +86,11 @@ namespace Giny.World.Managers.Items
         public static void AddCriticalHit(Character character, int delta)
         {
             character.Record.Stats.CriticalHit.Objects += (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubCriticalHit)]
+        public static void SubCriticalHit(Character character, int delta)
+        {
+            character.Record.Stats.CriticalHit.Objects -= (short)delta;
         }
         [ItemEffect(EffectsEnum.Effect_AddDamageBonus)]
         public static void AddDamagesBonus(Character character, int delta)
@@ -129,7 +128,7 @@ namespace Giny.World.Managers.Items
             character.Record.Stats.SummonableCreaturesBoost.Objects += (short)delta;
         }
         [ItemEffect(EffectsEnum.Effect_AddLock)]
-        public static void AddLock(Character character,int delta)
+        public static void AddLock(Character character, int delta)
         {
             character.Record.Stats.TackleBlock.Objects += (short)delta;
         }
@@ -196,40 +195,42 @@ namespace Giny.World.Managers.Items
         {
             character.Record.Stats.CriticalDamageReduction.Objects += (short)delta;
         }
+        [ItemEffect(EffectsEnum.Effect_SubCriticalDamageReduction)]
+        public static void SubCriticalDamageReduction(Character character, int delta)
+        {
+            character.Record.Stats.CriticalDamageReduction.Objects -= (short)delta;
+        }
         [ItemEffect(EffectsEnum.Effect_AddCriticalDamageBonus)]
         public static void AddCriticalDamageBonus(Character character, int delta)
         {
             character.Record.Stats.CriticalDamageBonus.Objects += (short)delta;
         }
+        [ItemEffect(EffectsEnum.Effect_SubCriticalDamageBonus)]
+        public static void SubCriticalDamageBonus(Character character, int delta)
+        {
+            character.Record.Stats.CriticalDamageBonus.Objects -= (short)delta;
+        }
+
         [ItemEffect(EffectsEnum.Effect_AddFireResistPercent)]
         public static void AddFireResistPercent(Character character, int delta)
         {
             character.Record.Stats.FireResistPercent.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_SubFireResistPercent)]
         public static void SubFireResistPercent(Character character, int delta)
         {
             character.Record.Stats.FireResistPercent.Objects -= (short)delta;
         }
-
-       
-
-
         [ItemEffect(EffectsEnum.Effect_AddEarthResistPercent)]
         public static void AddEarthResistPercent(Character character, int delta)
         {
             character.Record.Stats.EarthResistPercent.Objects += (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_SubEarthResistPercent)]
         public static void SubEarthResistPercent(Character character, int delta)
         {
             character.Record.Stats.EarthResistPercent.Objects -= (short)delta;
         }
-
-     
-
         [ItemEffect(EffectsEnum.Effect_AddWaterDamageBonus)]
         public static void WaterDamageBonus(Character character, int delta)
         {
@@ -332,7 +333,6 @@ namespace Giny.World.Managers.Items
             character.Record.Stats.MeleeDamageResistancePercent.Objects -= (short)delta;
         }
 
-
         [ItemEffect(EffectsEnum.Effect_RangedDamageDonePercent)]
         public static void AddRangeDamageDone(Character character, int delta)
         {
@@ -343,7 +343,6 @@ namespace Giny.World.Managers.Items
         {
             character.Record.Stats.RangedDamageDonePercent.Objects -= (short)delta;
         }
-
         [ItemEffect(EffectsEnum.Effect_AddRangedResistance)]
         public static void AddRangedResistances(Character character, int delta)
         {
@@ -354,10 +353,6 @@ namespace Giny.World.Managers.Items
         {
             character.Record.Stats.RangedDamageResistancePercent.Objects -= (short)delta;
         }
-
-
-
-
 
         [ItemEffect(EffectsEnum.Effect_SpellDamageBonusPercent)]
         public static void AddSpellDamageDone(Character character, int delta)
@@ -382,7 +377,7 @@ namespace Giny.World.Managers.Items
         }
 
         [ItemEffect(EffectsEnum.Effect_AddDodgeAPProbability)]
-        public static void AddDodgeAppProbability(Character character,int delta)
+        public static void AddDodgeAppProbability(Character character, int delta)
         {
             character.Record.Stats.DodgePAProbability.Objects += (short)delta;
         }
@@ -390,6 +385,76 @@ namespace Giny.World.Managers.Items
         public static void SubDodgeAPProbability(Character character, int delta)
         {
             character.Record.Stats.DodgePAProbability.Objects -= (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_AddDodgeMPProbability)]
+        public static void AddDodgeMPProbability(Character character, int delta)
+        {
+            character.Record.Stats.DodgePMProbability.Objects += (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubDodgeMPProbability)]
+        public static void SubDodgeMPProbability(Character character, int delta)
+        {
+            character.Record.Stats.DodgePMProbability.Objects -= (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_AddAPAttack)]
+        public static void AddApAttack(Character character, int delta)
+        {
+            character.Record.Stats.APAttack.Objects += (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubAPAttack)]
+        public static void SubApAttack(Character character, int delta)
+        {
+            character.Record.Stats.APAttack.Objects -= (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_AddMPAttack)]
+        public static void AddMpAttack(Character character, int delta)
+        {
+            character.Record.Stats.MPAttack.Objects += (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_SubMPAttack)]
+        public static void SubMpAttack(Character character, int delta)
+        {
+            character.Record.Stats.MPAttack.Objects -= (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_SubChance)]
+        public static void SubChance(Character character, int delta)
+        {
+            character.Record.Stats.Chance.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubIntelligence)]
+        public static void SubIntelligence(Character character, int delta)
+        {
+            character.Record.Stats.Intelligence.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubStrength)]
+        public static void SubStrength(Character character, int delta)
+        {
+            character.Record.Stats.Strength.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubAgility)]
+        public static void SubAgility(Character character, int delta)
+        {
+            character.Record.Stats.Agility.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubWisdom)]
+        public static void SubWisdom(Character character, int delta)
+        {
+            character.Record.Stats.Wisdom.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubMP)]
+        public static void SubMp(Character character, int delta)
+        {
+            character.Record.Stats.MovementPoints.Objects -= (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubRange)]
+        public static void SubRange(Character character, int delta)
+        {
+            character.Record.Stats.Range.Objects -= (short)delta;
         }
     }
 }

@@ -22,6 +22,11 @@ namespace Giny.World.Managers.Fights.AI
         public override void Execute()
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
+
+            if (target.IsMeleeWith(Fighter))
+            {
+                return;
+            }
             var path = Fighter.FindPath(target);
             Fighter.Move(path);
         }

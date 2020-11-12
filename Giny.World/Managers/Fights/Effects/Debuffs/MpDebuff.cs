@@ -1,4 +1,5 @@
 ﻿using Giny.Protocol.Enums;
+using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -26,13 +27,13 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
         {
             foreach (var target in targets)
             {
-                if (this.Effect.Duration > 0)
+                if (this.Effect.Duration > 1)
                 {
                     base.AddStatBuff(target, (short)-Effect.Min, target.Stats.MovementPoints, FightDispellableEnum.DISPELLABLE);
                 }
                 else
                 {
-                    target.LooseMp(Source, (short)Effect.Min);
+                    target.LooseMp(Source, (short)Effect.Min, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST);
                 }
             }
         }

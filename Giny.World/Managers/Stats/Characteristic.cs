@@ -60,7 +60,7 @@ namespace Giny.World.Managers.Stats
                 Objects = 0
             };
         }
-        public CharacterBaseCharacteristic GetBaseCharacteristic()
+        public virtual CharacterBaseCharacteristic GetBaseCharacteristic()
         {
             return new CharacterBaseCharacteristic(Base, Additional, Objects, Context, Context);
         }

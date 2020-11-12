@@ -4,10 +4,7 @@
 
 -Mimibiotes
 -Mounts
--SpellList
--Monster Groups
 -Achievements
--Npcs
 -Quests
 -Interactives
 -Item drop
@@ -18,8 +15,10 @@
 -Guilds Alliances?
 -Anomalies?
 -Portals
+-Tackle multiple target in fight (turn around the target)
+-Effets d'item en combats (dofus etc)
+-Panoplies !
 -Almanach
--fixer bug banque objectexchangekamasmove byte reversed trop bizzare....
 sushivan ordre living object record 
 jobtypeenum en anglais miscbuilder
 rework bank system

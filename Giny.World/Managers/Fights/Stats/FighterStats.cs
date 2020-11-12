@@ -180,8 +180,8 @@ namespace Giny.World.Managers.Fights.Stats
             this.CriticalHit = character.Stats.CriticalHit.Clone();
             this.CriticalHitWeapon = character.Stats.CriticalHitWeapon;
             this.DamagesBonusPercent = character.Stats.DamagesBonusPercent.Clone();
-            this.DodgePAProbability = character.Stats.DodgePAProbability.Clone();
-            this.DodgePMProbability = character.Stats.DodgePMProbability.Clone();
+            this.DodgePAProbability = (RelativeCharacteristic)character.Stats.DodgePAProbability.Clone();
+            this.DodgePMProbability = (RelativeCharacteristic)character.Stats.DodgePMProbability.Clone();
             this.EarthDamageBonus = character.Stats.EarthDamageBonus.Clone();
             this.EarthReduction = character.Stats.EarthReduction.Clone();
             this.EarthResistPercent = (ResistanceCharacteristic)character.Stats.EarthResistPercent.Clone();
@@ -203,9 +203,9 @@ namespace Giny.World.Managers.Fights.Stats
             this.NeutralDamageBonus = character.Stats.NeutralDamageBonus.Clone();
             this.NeutralReduction = character.Stats.NeutralReduction.Clone();
             this.NeutralResistPercent = (ResistanceCharacteristic)character.Stats.NeutralResistPercent.Clone();
-            this.PAAttack = character.Stats.PAAttack.Clone();
+            this.APAttack = (RelativeCharacteristic)character.Stats.APAttack.Clone();
             this.PermanentDamagePercent = character.Stats.PermanentDamagePercent.Clone();
-            this.PMAttack = character.Stats.PMAttack.Clone();
+            this.MPAttack = (RelativeCharacteristic)character.Stats.MPAttack.Clone();
             this.Prospecting = character.Stats.Prospecting;
             this.PushDamageBonus = character.Stats.PushDamageBonus.Clone();
             this.PushDamageReduction = character.Stats.PushDamageReduction.Clone();
@@ -218,8 +218,8 @@ namespace Giny.World.Managers.Fights.Stats
             this.SpellDamageResistancePercent = character.Stats.SpellDamageResistancePercent.Clone();
             this.Strength = character.Stats.Strength.Clone();
             this.SummonableCreaturesBoost = character.Stats.SummonableCreaturesBoost.Clone();
-            this.TackleBlock = character.Stats.TackleBlock.Clone();
-            this.TackleEvade = character.Stats.TackleEvade.Clone();
+            this.TackleBlock = (RelativeCharacteristic)character.Stats.TackleBlock.Clone();
+            this.TackleEvade = (RelativeCharacteristic)character.Stats.TackleEvade.Clone();
             this.TrapBonus = character.Stats.TrapBonus.Clone();
             this.TrapBonusPercent = character.Stats.TrapBonusPercent.Clone();
             this.Vitality = character.Stats.Vitality.Clone();
@@ -253,8 +253,9 @@ namespace Giny.World.Managers.Fights.Stats
             this.CriticalHit = Characteristic.Zero();
             this.CriticalHitWeapon = 0;
             this.DamagesBonusPercent = Characteristic.Zero();
-            this.DodgePAProbability = Characteristic.New(monsterGrade.ApDodge);
-            this.DodgePMProbability = Characteristic.New(monsterGrade.MpDodge);
+            this.Wisdom = Characteristic.New(monsterGrade.Wisdom);
+            this.DodgePAProbability = RelativeCharacteristic.New(monsterGrade.ApDodge);
+            this.DodgePMProbability = RelativeCharacteristic.New(monsterGrade.MpDodge);
             this.EarthDamageBonus = Characteristic.Zero();
             this.EarthReduction = Characteristic.Zero();
             this.EarthResistPercent = ResistanceCharacteristic.New(monsterGrade.EarthResistance);
@@ -275,10 +276,10 @@ namespace Giny.World.Managers.Fights.Stats
             this.NeutralDamageBonus = Characteristic.Zero();
             this.NeutralReduction = Characteristic.Zero();
             this.NeutralResistPercent = ResistanceCharacteristic.New(monsterGrade.NeutralResistance);
-            this.PAAttack = Characteristic.Zero();
+            this.APAttack = RelativeCharacteristic.Zero();
             this.PermanentDamagePercent = Characteristic.Zero();
-            this.PMAttack = Characteristic.Zero();
-            this.Prospecting = Characteristic.Zero();
+            this.MPAttack = RelativeCharacteristic.Zero();
+            this.Prospecting = RelativeCharacteristic.Zero();
             this.PushDamageBonus = Characteristic.Zero();
             this.PushDamageReduction = Characteristic.Zero();
 
@@ -289,8 +290,8 @@ namespace Giny.World.Managers.Fights.Stats
 
             this.Strength = Characteristic.New(monsterGrade.Strength);
             this.SummonableCreaturesBoost = Characteristic.Zero();
-            this.TackleBlock = Characteristic.Zero();
-            this.TackleEvade = Characteristic.Zero();
+            this.TackleBlock = RelativeCharacteristic.Zero();
+            this.TackleEvade = RelativeCharacteristic.Zero();
             this.TrapBonus = Characteristic.Zero();
             this.TrapBonusPercent = Characteristic.Zero();
             this.Vitality = Characteristic.New(monsterGrade.Vitality);
@@ -308,11 +309,10 @@ namespace Giny.World.Managers.Fights.Stats
             this.SpellDamageDonePercent = Characteristic.Zero();
             this.SpellDamageResistancePercent = Characteristic.Zero();
             this.WeightBonus = Characteristic.Zero();
-            this.Wisdom = Characteristic.New(monsterGrade.Wisdom);
             InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
             this.BaseMaxLife = MaxLifePoints;
-
             this.Erosion = NaturalErosion;
+            this.Initialize();
         }
 
         public GameFightMinimalStats GetFightMinimalStats(Fighter fighter)

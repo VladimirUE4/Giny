@@ -71,6 +71,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
+
         public CellRecord Cell
         {
             get;
@@ -239,9 +240,72 @@ namespace Giny.World.Managers.Fights.Fighters
         {
 
         }
+        protected virtual void OnTackled(short looseMp, short looseAp, IEnumerable<Fighter> tacklers)
+        {
+            Fight.Send(new GameActionFightTackledMessage()
+            {
+                actionId = 0,
+                sourceId = this.Id,
+                tacklersIds = tacklers.Select(x => (double)x.Id).ToArray(),
+            });
+
+            this.LooseAp(this, looseAp, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST);
+            this.LooseMp(this, looseMp, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST);
+        }
+        [WIP("turn around a character your tackle by")]
+        private List<CellRecord> ApplyTackle(List<CellRecord> path)
+        {
+            IEnumerable<Fighter> tacklers = GetTacklers(Cell);
+
+            Tackle tackle = GetTackle(tacklers);
+
+            if (tackle.ApLoss > 0 || tackle.MpLoss > 0)
+            {
+                if (tackle.MpLoss >= Stats.MovementPoints.TotalInContext())
+                {
+                    return new List<CellRecord>();
+                }
+
+                OnTackled((short)tackle.MpLoss, (short)tackle.ApLoss, tacklers);
+            }
+
+            return path.Take(1 + Stats.MovementPoints.TotalInContext()).ToList();
+        }
+        private IEnumerable<Fighter> GetTacklers(CellRecord cell)
+        {
+            return this.EnemyTeam.GetFighters<Fighter>().Where(x => x.IsMeleeWith(cell.Point));
+        }
+        private Tackle GetTackle(IEnumerable<Fighter> tacklers)
+        {
+            double result = 1;
+
+            foreach (var tackler in tacklers)
+            {
+                result *= (Stats.TackleEvade.TotalInContext() + 2) / (2d * (tackler.Stats.TackleBlock.TotalInContext() + 2));
+            }
+
+            short looseAp = 0;
+            short looseMp = 0;
+
+            if (result < 1 && result > 0)
+            {
+                looseAp = (short)Math.Round(Stats.ActionPoints.TotalInContext() * (1 - result));
+                looseMp = (short)Math.Round(Stats.MovementPoints.TotalInContext() * (1 - result));
+            }
+
+            return new Tackle(looseAp, looseMp);
+        }
+        public bool IsTackled()
+        {
+            return GetTackle(GetTacklers(Cell)).Consistent();
+        }
 
         public void Move(List<CellRecord> path)
         {
+            if (path.Count <= 1)
+            {
+                return;
+            }
             if (Fight.Ended || !Fight.Started)
                 return;
 
@@ -250,8 +314,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 this.OnMoveFailed();
                 return;
             }
-
-
 
             for (int i = 1; i < path.Count; i++)
             {
@@ -265,85 +327,49 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
 
-            DirectionsEnum direction = (DirectionsEnum)PathReader.GetDirection(path.Last().Id);
-
-            short mpCost = (short)(path.Count - 1);
-
-            if (mpCost <= Stats.MovementPoints.TotalInContext() && mpCost > 0)
+            using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_MOVE))
             {
-                using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_MOVE))
+                short mpCost = (short)(path.Count - 1);
+
+                if (mpCost <= Stats.MovementPoints.TotalInContext() && mpCost > 0 && Stats.MovementPoints.TotalInContext() > 0)
                 {
+                    path = ApplyTackle(path);
 
-                    /*   var cell = path[0];
-                       short tackledMp = 0;
-                       short tackledAp = 0;
-                       var mp = this.Stats.MovementPoints.TotalInContext();
-                       var ap = this.Stats.ActionPoints.TotalInContext();
-                       List<Fighter> tacklers = new List<Fighter>();
-
-                       foreach (var fighter in GetNearFighters<Fighter>())
-                       {
-                           if ((tackledMp = (short)this.GetTackledMP(mp, cell)) > 0)
-                           {
-                               if (tackledMp > mp)
-                                   tackledMp += mp;
-
-                               mp -= tackledMp;
-
-                               tacklers.Add(fighter);
-
-                           }
-
-                           if ((tackledAp = (short)this.GetTackledAP(ap, cell)) > 0)
-                           {
-                               if (tackledAp > ap)
-                                   tackledAp += ap;
-
-                               ap -= tackledAp;
-
-                               if (!tacklers.Contains(fighter))
-                               {
-                                   tacklers.Add(fighter);
-                               }
-
-                           }
-                       }
-
-                       if (tackledMp > 0 || tackledAp > 0)
-                       {
-                           this.OnTackled(tackledMp, tackledAp, tacklers.ToArray());
-                       } */
-
-
-                    if (Stats.MovementPoints.TotalInContext() > 0)
+                    if (path.Count() > 0)
                     {
-                        if (path.Count() > 0)
+
+                        mpCost = (short)(path.Count - 1);
+
+                        DirectionsEnum direction = (DirectionsEnum)PathReader.GetDirection(path.Last().Id);
+
+                        this.Cell = Fight.Map.GetCell(path.Last().Id);
+
+                        this.Direction = direction;
+
+                        if (Stats.InvisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE)
                         {
-                            this.Cell = Fight.Map.GetCell(path.Last().Id);
-
-                            this.Direction = direction;
-
-                            if (Stats.InvisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE)
-                            {
-                                Team.Send(new GameMapMovementMessage(path.Select(x => x.Id).ToArray(), -1, Id));
-                            }
-                            else
-                            {
-                                Fight.Send(new GameMapMovementMessage(path.Select(x => x.Id).ToArray(), -1, Id));
-                            }
-                            this.LooseMp(this, mpCost);
-
-                            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
-                            /*   TriggerBuffs(TriggerType.AFTER_MOVE, mpCost);
-                               TriggerMarks(this, MarkTriggerTypeEnum.AFTER_MOVE, mpCost); */
+                            Team.Send(new GameMapMovementMessage(path.Select(x => x.Id).ToArray(), -1, Id));
                         }
+                        else
+                        {
+                            Fight.Send(new GameMapMovementMessage(path.Select(x => x.Id).ToArray(), -1, Id));
+                        }
+                        this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
+
+                        Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+                    }
+                    else
+                    {
+                        this.OnMoveFailed();
                     }
                 }
+                else
+                {
+                    this.OnMoveFailed();
+                }
+
             }
-            else
-            {
-                this.OnMoveFailed();
-            }
+
 
         }
         public bool IsFriendlyWith(Fighter actor)
@@ -354,15 +380,15 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return !IsFriendlyWith(actor);
         }
-        public void LooseMp(Fighter source, short amount)
+        public void LooseMp(Fighter source, short amount, ActionsEnum action)
         {
             Stats.UseMp(amount);
-            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE, (short)(-amount));
+            Fight.PointsVariation(source.Id, Id, action, (short)(-amount));
         }
-        public void LooseAp(Fighter source, short amount)
+        public void LooseAp(Fighter source, short amount, ActionsEnum action)
         {
             Stats.UseAp(amount);
-            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_USE, (short)(-amount));
+            Fight.PointsVariation(source.Id, Id, action, (short)(-amount));
         }
         public void GainAp(Fighter source, short delta)
         {
@@ -623,11 +649,11 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public EntityDispositionInformations GetEntityDispositionInformations()
         {
-            return new EntityDispositionInformations()
+            return new FightEntityDispositionInformations()
             {
                 cellId = (short)Cell.Id,
                 direction = (byte)Direction,
-                //carryingCharacterId = 0, // todo
+                carryingCharacterId = 0,
             };
         }
 
@@ -692,7 +718,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     OnSpellCasting(cast);
 
                 if (!cast.ApFree)
-                    LooseAp(this, GetApCost(cast.Spell.Level));
+                    LooseAp(this, GetApCost(cast.Spell.Level), ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_USE);
 
                 if (!handler.Execute())
                 {
@@ -1436,6 +1462,10 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return this.Cell.Point.ManhattanDistanceTo(fighter.Cell.Point) == 1;
         }
+        public bool IsMeleeWith(MapPoint point)
+        {
+            return this.Cell.Point.ManhattanDistanceTo(point) == 1;
+        }
         public IEnumerable<Fighter> GetMeleeFighters()
         {
             return Fight.GetFighters<Fighter>(x => x.IsMeleeWith(this));
@@ -1472,6 +1502,46 @@ namespace Giny.World.Managers.Fights.Fighters
             }
 
         }
+        public void OnDodge(Fighter source, ActionsEnum action, int delta)
+        {
+            Fight.Send(new GameActionFightDodgePointLossMessage()
+            {
+                actionId = (short)action,
+                amount = (short)delta,
+                sourceId = source.Id,
+                targetId = Id,
+            });
+        }
+        public virtual bool RollMPLose(Fighter from, short value)
+        {
+            var mpAttack = from.Stats.MPAttack.TotalInContext() > 1 ? from.Stats.MPAttack.TotalInContext() : 1;
+            var mpDodge = Stats.DodgePMProbability.TotalInContext() > 1 ? Stats.DodgePMProbability.TotalInContext() : 1;
+            var prob = ((Stats.MovementPoints.TotalInContext() - value) / (double)(Stats.MovementPoints.TotalInContext())) * (mpAttack / (double)mpDodge) / 2d;
+
+            if (prob < 0.10)
+                prob = 0.10;
+            else if (prob > 0.90)
+                prob = 0.90 - (0.10 * value);
+
+            var rnd = new AsyncRandom().NextDouble();
+
+            return rnd < prob;
+        }
+        public virtual bool RollAPLose(Fighter from, int value)
+        {
+            var apAttack = from.Stats.APAttack.TotalInContext() > 1 ? from.Stats.APAttack.TotalInContext() : 1;
+            var apDodge = Stats.DodgePAProbability.TotalInContext() > 1 ? Stats.DodgePAProbability.TotalInContext() : 1;
+            var prob = ((Stats.ActionPoints.TotalInContext() - value) / (double)(Stats.ActionPoints.TotalInContext())) * (apAttack / (double)apDodge) / 2d;
+
+            if (prob < 0.10)
+                prob = 0.10;
+            else if (prob > 0.90)
+                prob = 0.90;
+
+            var rnd = new AsyncRandom().NextDouble();
+
+            return rnd < prob;
+        }
         public virtual bool IsSummoned()
         {
             return false;
@@ -1494,5 +1564,5 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
     }
-}
 
+}
