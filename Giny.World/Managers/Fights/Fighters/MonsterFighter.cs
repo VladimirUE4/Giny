@@ -46,7 +46,7 @@ namespace Giny.World.Managers.Fights.Fighters
             base.Initialize();
         }
     
-        public override GameFightFighterInformations GetFightFighterInformations()
+        public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()
             {
@@ -56,8 +56,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 creatureLevel = Monster.Grade.Level,
                 disposition = GetEntityDispositionInformations(),
                 look = Look.ToEntityLook(),
-                previousPositions = new short[0],
-                stats = Stats.GetFightMinimalStats(this),
+                previousPositions = GetPreviousPositions(),
+                stats = Stats.GetFightMinimalStats(this, target),
                 wave = 0,
                 spawnInfo = new GameContextBasicSpawnInformation()
                 {

@@ -49,9 +49,6 @@ namespace Giny.MapEditor
         {
             InitializeComponent();
             this.Loaded += TileSelection_Loaded;
-
-
-
         }
 
         private void TileSelection_Loaded(object sender, RoutedEventArgs e)

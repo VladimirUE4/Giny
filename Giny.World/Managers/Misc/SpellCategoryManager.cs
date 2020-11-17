@@ -44,7 +44,7 @@ namespace Giny.World.Managers.Misc
             EffectsEnum.Effect_AddState,
         };
 
-        [StartupInvoke("Spell category manager", StartupInvokePriority.Disabled)]
+        [StartupInvoke("Spell category manager", StartupInvokePriority.Last)]
         public void Initialize()
         {
             foreach (var spell in SpellRecord.GetSpellRecords())

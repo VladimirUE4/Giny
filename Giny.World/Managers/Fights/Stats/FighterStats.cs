@@ -31,16 +31,16 @@ namespace Giny.World.Managers.Fights.Stats
             private set;
         }
 
-        private short ApUsed
+        public short ApUsed
         {
             get;
-            set;
+            private set;
         }
 
-        private short MpUsed
+        public short MpUsed
         {
             get;
-            set;
+            private set;
         }
         public short Erosion
         {
@@ -67,6 +67,11 @@ namespace Giny.World.Managers.Fights.Stats
             set;
         }
         public short SpellDamageBonusPercent
+        {
+            get;
+            set;
+        }
+        public short FinalDamagePercent
         {
             get;
             set;
@@ -315,11 +320,11 @@ namespace Giny.World.Managers.Fights.Stats
             this.Initialize();
         }
 
-        public GameFightMinimalStats GetFightMinimalStats(Fighter fighter)
+        public GameFightMinimalStats GetFightMinimalStats(Fighter owner, CharacterFighter target)
         {
-            Fighter summoner = fighter.GetSummoner();
+            Fighter summoner = owner.GetSummoner();
 
-            if (!fighter.Fight.Started)
+            if (!owner.Fight.Started)
             {
                 return new GameFightMinimalStatsPreparation()
                 {
@@ -337,7 +342,7 @@ namespace Giny.World.Managers.Fights.Stats
                     fireElementReduction = FireReduction.TotalInContext(),
                     fireElementResistPercent = FireResistPercent.TotalInContext(),
                     fixedDamageReflection = Reflect.TotalInContext(),
-                    invisibilityState = (byte)InvisibilityState,
+                    invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
                     lifePoints = LifePoints,
                     maxLifePoints = MaxLifePoints,
                     maxMovementPoints = MovementPoints.Total(),
@@ -359,7 +364,7 @@ namespace Giny.World.Managers.Fights.Stats
                     pvpAirElementResistPercent = 0,
                     pvpFireElementResistPercent = 0,
                     shieldPoints = ShieldPoints,
-                    summoned = fighter.IsSummoned(),
+                    summoned = owner.IsSummoned(),
                     summoner = summoner != null ? summoner.Id : 0,
                     tackleBlock = TackleBlock.TotalInContext(),
                     tackleEvade = TackleEvade.TotalInContext(),
@@ -386,7 +391,7 @@ namespace Giny.World.Managers.Fights.Stats
                     fireElementReduction = FireReduction.TotalInContext(),
                     fireElementResistPercent = FireResistPercent.TotalInContext(),
                     fixedDamageReflection = Reflect.TotalInContext(),
-                    invisibilityState = (byte)InvisibilityState,
+                    invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
                     lifePoints = LifePoints,
                     maxLifePoints = MaxLifePoints,
                     shieldPoints = ShieldPoints,
@@ -410,7 +415,7 @@ namespace Giny.World.Managers.Fights.Stats
                     meleeDamageReceivedPercent = (short)(100 - MeleeDamageResistancePercent.TotalInContext()),
                     spellDamageReceivedPercent = (short)(100 - SpellDamageResistancePercent.TotalInContext()),
                     weaponDamageReceivedPercent = (short)(100 - WeaponDamageResistancePercent.TotalInContext()),
-                    summoned = fighter.IsSummoned(),
+                    summoned = owner.IsSummoned(),
                     summoner = summoner != null ? summoner.Id : 0,
                     tackleBlock = TackleBlock.TotalInContext(),
                     tackleEvade = TackleEvade.TotalInContext(),

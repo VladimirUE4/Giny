@@ -30,8 +30,14 @@ namespace Giny.World.Managers.Effects.Targets
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
-            return MustBeGreater ? actor.Stats.LifePoints / (double)actor.Stats.MaxLifePoints > LifePercent :
-                actor.Stats.LifePoints / (double)actor.Stats.MaxLifePoints <= LifePercent;
+            bool result = MustBeGreater ? actor.Stats.LifePercentage > LifePercent :
+                actor.Stats.LifePercentage <= LifePercent;
+
+            return result;
+        }
+        public override string ToString()
+        {
+            return "Life (" + LifePercent + "%)";
         }
     }
 }

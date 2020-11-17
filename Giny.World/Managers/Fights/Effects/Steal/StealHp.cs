@@ -20,6 +20,8 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     [SpellEffectHandler(EffectsEnum.Effect_StealHPFix)]
     public class StealHp : SpellEffectHandler
     {
+        public override bool RefreshTargets => false;
+
         public StealHp(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }

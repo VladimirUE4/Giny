@@ -14,6 +14,8 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     [SpellEffectHandler(EffectsEnum.Effect_PullForward)]
     public class PullForward : SpellEffectHandler
     {
+        public override bool RefreshTargets => false;
+
         public PullForward(EffectDice effect,SpellCastHandler castHandler) : base(effect, castHandler)
         {
 

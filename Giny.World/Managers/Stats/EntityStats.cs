@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Stats
         {
             get
             {
-                return LifePoints / (double)MaxLifePoints;
+                return (LifePoints / (double)MaxLifePoints) * 100;
             }
         }
         [ProtoMember(2)]

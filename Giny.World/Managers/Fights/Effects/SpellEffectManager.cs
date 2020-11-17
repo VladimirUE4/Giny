@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -14,34 +15,35 @@ namespace Giny.World.Managers.Fights.Effects
 {
     public class SpellEffectManager : Singleton<SpellEffectManager>
     {
-        private static Dictionary<SpellEffectHandlerAttribute[], Type> Handlers = new Dictionary<SpellEffectHandlerAttribute[], Type>();
+        private static readonly Dictionary<EffectsEnum, Type> m_handlers = new Dictionary<EffectsEnum, Type>();
 
         [StartupInvoke(StartupInvokePriority.FifthPass)]
-        public static void Initialize()
+        public void Initialize()
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 SpellEffectHandlerAttribute[] handlers = type.GetCustomAttributes<SpellEffectHandlerAttribute>().ToArray();
 
-                if (handlers.Length > 0)
+                foreach (var handler in handlers)
                 {
-                    Handlers.Add(handlers, type);
+                    m_handlers.Add(handler.Effect, type);
                 }
             }
         }
-
+        public bool Exists(EffectsEnum effect)
+        {
+            return m_handlers.ContainsKey(effect);
+        }
         public SpellEffectHandler GetSpellEffectHandler(Effect effect, SpellCastHandler castHandler)
         {
-            var handler = Handlers.FirstOrDefault(x => x.Key.FirstOrDefault(w => w.Effect == effect.EffectEnum) != null);
+            Type type = null;
 
-            if (handler.Value != null)
-            {
-                return (SpellEffectHandler)Activator.CreateInstance(handler.Value, new object[] { effect, castHandler, });
-            }
-            else
+            if (!m_handlers.TryGetValue(effect.EffectEnum, out type))
             {
                 return null;
             }
+
+            return (SpellEffectHandler)Activator.CreateInstance(type, new object[] { effect, castHandler, });
         }
     }
 }

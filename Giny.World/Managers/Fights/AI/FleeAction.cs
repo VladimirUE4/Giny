@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Fights.AI
 
         public override void Execute()
         {
-            if (Fighter.IsTackled() && Fighter.Stats.LifePercentage > 0.2)
+            if (Fighter.IsTackled() && Fighter.Stats.LifePercentage > 20)
             {
                 return;
             }

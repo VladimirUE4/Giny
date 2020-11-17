@@ -206,6 +206,10 @@ namespace Giny.World.Records.Spells
             get;
             set;
         }
+        public override string ToString()
+        {
+            return "Grade : (" + Grade + ")";
+        }
         public static IEnumerable<SpellLevelRecord> GetSpellLevels(short spellId)
         {
             return SpellsLevels.Values.Where(x => x.SpellId == spellId);

@@ -92,5 +92,6 @@ namespace Giny.World.Managers.Fights.Cast
         }
 
         public bool IsConditionBypassed(SpellCastResult result) => BypassedConditions != null && (BypassedConditions.Contains(result) || BypassedConditions.Contains(SpellCastResult.OK));
+
     }
 }

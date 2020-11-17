@@ -52,6 +52,12 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             set;
         }
+        public bool IgnoreBoost
+        {
+            get;
+            set;
+        }
+
         public Damage(Fighter source, Fighter target, EffectSchoolEnum school, short min, short max, SpellEffectHandler effectHandler = null)
         {
             this.Source = source;
@@ -60,6 +66,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
             this.BaseMinDamages = min;
             this.EffectSchool = school;
             this.EffectHandler = effectHandler;
+            this.IgnoreBoost = false;
         }
         public void Compute()
         {
@@ -88,9 +95,16 @@ namespace Giny.World.Managers.Fights.Cast.Units
                 return;
             }
 
+            if (BaseMinDamages <= 0)
+            {
+                Computed = 0;
+                return;
+            }
+
             Jet jet = EvaluateConcreteJet();
 
-            ComputeCriticalDamageBonus(jet);
+            if (!IgnoreBoost)
+                ComputeCriticalDamageBonus(jet);
 
             ComputeShapeEfficiencyModifiers(jet);
 
@@ -98,13 +112,23 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             ComputeCriticalDamageReduction(jet);
 
-            ComputeDamageDone(jet);
+            if (!IgnoreBoost)
+                ComputeDamageDone(jet);
+
+            if (!IgnoreBoost)
+                ComputeFinalDamageBoost(jet);
 
             jet.ValidateBounds();
 
             Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
 
             Computed = jet.Generate();
+        }
+
+        private void ComputeFinalDamageBoost(Jet jet)
+        {
+            jet.Min += jet.Min * (Source.Stats.FinalDamagePercent / 100d);
+            jet.Max += jet.Max * (Source.Stats.FinalDamagePercent / 100d);
         }
 
         private void ComputeCriticalDamageBonus(Jet jet)
@@ -232,6 +256,10 @@ namespace Giny.World.Managers.Fights.Cast.Units
         {
             double weaponDamageBonus = 0;
             double spellDamageBonus = 0;
+            double damageBonusPercent = 0;
+            double elementDamageBonus = 0;
+            double allDamageBonus = 0;
+            double elementDelta = 0;
 
             if (this.EffectHandler.CastHandler.Cast.Weapon)
             {
@@ -241,29 +269,48 @@ namespace Giny.World.Managers.Fights.Cast.Units
             {
                 spellDamageBonus = Source.Stats.SpellDamageBonusPercent;
             }
-            double result;
 
-            switch (EffectSchool)
+            if (!IgnoreBoost)
             {
-                case EffectSchoolEnum.Neutral:
-                    result = (double)(jet * (100d + Source.Stats.Strength.TotalInContext() + Source.Stats.DamagesBonusPercent.TotalInContext() + weaponDamageBonus + spellDamageBonus) / 100.0d + (Source.Stats.AllDamagesBonus.TotalInContext() + Source.Stats.NeutralDamageBonus.TotalInContext()));
-                    break;
-                case EffectSchoolEnum.Earth:
-                    result = (double)(jet * (100d + Source.Stats.Strength.TotalInContext() + Source.Stats.DamagesBonusPercent.TotalInContext() + weaponDamageBonus + spellDamageBonus) / 100.0d + (Source.Stats.AllDamagesBonus.TotalInContext() + Source.Stats.EarthDamageBonus.TotalInContext()));
-                    break;
-                case EffectSchoolEnum.Water:
-                    result = (double)(jet * (100d + Source.Stats.Chance.TotalInContext() + Source.Stats.DamagesBonusPercent.TotalInContext() + weaponDamageBonus + spellDamageBonus) / 100.0d + (Source.Stats.AllDamagesBonus.TotalInContext() + Source.Stats.WaterDamageBonus.TotalInContext()));
-                    break;
-                case EffectSchoolEnum.Air:
-                    result = (double)(jet * (100d + Source.Stats.Agility.TotalInContext() + Source.Stats.DamagesBonusPercent.TotalInContext() + weaponDamageBonus + spellDamageBonus) / 100.0d + (Source.Stats.AllDamagesBonus.TotalInContext() + Source.Stats.AirDamageBonus.TotalInContext()));
-                    break;
-                case EffectSchoolEnum.Fire:
-                    result = (double)(jet * (100d + Source.Stats.Intelligence.TotalInContext() + Source.Stats.DamagesBonusPercent.TotalInContext() + weaponDamageBonus + spellDamageBonus) / 100.0d + (Source.Stats.AllDamagesBonus.TotalInContext() + Source.Stats.FireDamageBonus.TotalInContext()));
-                    break;
-                default:
-                    result = jet;
-                    break;
+                allDamageBonus = Source.Stats.AllDamagesBonus.TotalInContext();
+                damageBonusPercent = Source.Stats.DamagesBonusPercent.TotalInContext();
             }
+
+            if (!IgnoreBoost)
+            {
+
+                switch (EffectSchool)
+                {
+                    case EffectSchoolEnum.Neutral:
+                        elementDelta = Source.Stats.Strength.TotalInContext();
+                        elementDamageBonus = Source.Stats.NeutralDamageBonus.TotalInContext();
+                        break;
+                    case EffectSchoolEnum.Earth:
+                        elementDelta = Source.Stats.Strength.TotalInContext();
+                        elementDamageBonus = Source.Stats.EarthDamageBonus.TotalInContext();
+                        break;
+                    case EffectSchoolEnum.Water:
+                        elementDelta = Source.Stats.Chance.TotalInContext();
+                        elementDamageBonus = Source.Stats.WaterDamageBonus.TotalInContext();
+                        break;
+                    case EffectSchoolEnum.Air:
+                        elementDelta = Source.Stats.Agility.TotalInContext();
+                        elementDamageBonus = Source.Stats.AirDamageBonus.TotalInContext();
+                        break;
+                    case EffectSchoolEnum.Fire:
+                        elementDelta = Source.Stats.Intelligence.TotalInContext();
+                        elementDamageBonus = Source.Stats.FireDamageBonus.TotalInContext();
+                        break;
+                    default:
+                        elementDelta = jet;
+                        break;
+                }
+            }
+
+
+
+
+            double result = (double)(jet * (100d + elementDelta + damageBonusPercent + weaponDamageBonus + spellDamageBonus) / 100.0d + (allDamageBonus + elementDamageBonus));
 
             return (short)(result < jet ? jet : result);
         }

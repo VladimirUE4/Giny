@@ -22,7 +22,12 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Source.Teleport(Source, TargetCell);
+            Telefrag telefrag = Source.Teleport(Source, TargetCell);
+
+            if (telefrag != null)
+            {
+                CastHandler.AddTelefrag(telefrag);
+            }
         }
         public override bool CanApply()
         {

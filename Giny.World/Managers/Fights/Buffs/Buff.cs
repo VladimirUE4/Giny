@@ -35,7 +35,7 @@ namespace Giny.World.Managers.Fights.Buffs
             private set;
         }
 
-        protected FightDispellableEnum Dispellable
+        public FightDispellableEnum Dispellable
         {
             get;
             private set;

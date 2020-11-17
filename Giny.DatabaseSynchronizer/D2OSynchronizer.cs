@@ -252,7 +252,8 @@ namespace Giny.DatabaseSynchronizer
 
             foreach (var effectInstance in effectInstances)
             {
-                results.Add(BuildEffect(effectInstance));
+                if (!effectInstance.ForClientOnly)
+                    results.Add(BuildEffect(effectInstance));
             }
             return results.ToArray();
         }

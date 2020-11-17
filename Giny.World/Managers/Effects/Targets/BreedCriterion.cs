@@ -48,5 +48,9 @@ namespace Giny.World.Managers.Effects.Targets
             else
                 return Required ? (int)BreedEnum.MONSTER == Breed : (int)BreedEnum.MONSTER != Breed;
         }
+        public override string ToString()
+        {
+            return "Breed (" + (BreedEnum)Breed + ")";
+        }
     }
 }

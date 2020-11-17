@@ -87,6 +87,17 @@ namespace Giny.World.Managers.Items
 
         }
 
+        public IEnumerable<CharacterItemRecord> GetSpellCastItems()
+        {
+            foreach (var item in GetEquipedItems())
+            {
+                if (item.HasEffect(EffectsEnum.Effect_CastSpell_1175))
+                {
+                    yield return item;
+                }
+            }
+        }
+
         void Inventory_OnItemsQuantityChanged(IEnumerable<CharacterItemRecord> obj)
         {
             foreach (var item in obj)
@@ -320,7 +331,7 @@ namespace Giny.World.Managers.Items
 
         //}
         //}
-      
+
         //private void OnSetUpdated(ItemSetRecord set, int num)
         //    {
         //  Character.Client.Send(new SetUpdateMessage((ushort)set.Id, set.Items.ToArray(),

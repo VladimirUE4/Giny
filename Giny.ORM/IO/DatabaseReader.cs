@@ -20,8 +20,6 @@ namespace Giny.ORM.IO
 {
     public class DatabaseReader
     {
-        public const bool NOTIFY_PROGRESS = true;
-
         private MySqlDataReader m_reader;
 
         public string TableName
@@ -96,18 +94,16 @@ namespace Giny.ORM.IO
         {
             long rowCount = 0;
 
-            if (NOTIFY_PROGRESS)
+            try
             {
-                try
-                {
-                    rowCount = Count(connection);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Write("Unable to read table " + TableName + " " + ex, MessageState.WARNING);
-                    AskForStructureRebuild(connection, parameter);
-                }
+                rowCount = Count(connection);
             }
+            catch (Exception ex)
+            {
+                Logger.Write("Unable to read table " + TableName + " " + ex, MessageState.WARNING);
+                AskForStructureRebuild(connection, parameter);
+            }
+
             lock (DatabaseManager.SyncRoot)
             {
                 using (var command = new MySqlCommand(parameter, connection))
@@ -123,13 +119,6 @@ namespace Giny.ORM.IO
                         Logger.Write("Unable to read table " + TableName + " " + ex, MessageState.WARNING);
                         AskForStructureRebuild(connection, parameter);
                         return;
-                    }
-
-                    UpdateLogger updateLogger = null;
-
-                    if (NOTIFY_PROGRESS)
-                    {
-                        updateLogger = new UpdateLogger();
                     }
 
                     double n = 0;
@@ -148,18 +137,12 @@ namespace Giny.ORM.IO
                         }
 
                         this.Elements.Add(itable.Id, itable);
+                        n++;
 
-                        if (NOTIFY_PROGRESS)
-                        {
-                            n++;
-                            double ratio = (n / rowCount) * 100;
-                            updateLogger.Update((int)ratio);
-                        }
+                        DatabaseManager.Instance.OnProgress(TableName, n / rowCount);
 
                     }
                     this.m_reader.Close();
-
-                    updateLogger?.End();
                 }
             }
         }

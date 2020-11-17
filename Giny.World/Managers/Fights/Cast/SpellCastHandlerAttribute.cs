@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Cast
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class SpellCastHandlerAttribute : Attribute
     {
         public SpellEnum SpellEnum

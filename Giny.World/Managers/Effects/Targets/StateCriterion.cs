@@ -44,5 +44,10 @@ namespace Giny.World.Managers.Effects.Targets
 
             return Required ? actor.HasState(State) : !actor.HasState(State);
         }
+
+        public override string ToString()
+        {
+            return "State (" + State + ")";
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Giny.Core.Time;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Effects;
 using System;
@@ -108,9 +109,7 @@ namespace Giny.World.Managers.Fights.Cast
                 }
             }
 
-            BeforeExecute();
-
-            IEnumerable<SpellEffectHandler> handlers = Handlers.OrderBy(x => x.GetPriority());
+            IEnumerable<SpellEffectHandler> handlers = OrderHandlers();
 
             foreach (var handler in handlers)
             {
@@ -121,9 +120,13 @@ namespace Giny.World.Managers.Fights.Cast
             return true;
         }
 
-        public virtual void BeforeExecute()
+        protected virtual IEnumerable<SpellEffectHandler> OrderHandlers()
         {
-             
+            return Handlers; // Handlers.OrderBy(x => x.GetPriority());
+        }
+        protected IEnumerable<SpellEffectHandler> OrderByEffects(params EffectsEnum[] effects)
+        {
+            return Handlers.OrderBy(x => Array.IndexOf(effects, x.Effect.EffectEnum));
         }
     }
 }

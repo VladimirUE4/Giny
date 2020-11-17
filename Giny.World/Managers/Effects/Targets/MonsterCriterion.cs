@@ -34,5 +34,10 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
             => Required ? ((actor is IMonster) && (actor as IMonster).MonsterId == MonsterId) :
                 (!(actor is IMonster) || (actor as IMonster).MonsterId != MonsterId);
+
+        public override string ToString()
+        {
+            return "Monster (" + MonsterId + ")";
+        }
     }
 }

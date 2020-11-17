@@ -196,7 +196,6 @@ namespace Giny.World.Managers.Effects
         {
             switch (Triggers.ToUpper())
             {
-           
                 case "TE":
                     return BuffTriggerType.OnTurnEnd;
                 case "TB":
@@ -229,6 +228,10 @@ namespace Giny.World.Managers.Effects
             return result;
         }
 
+        public override string ToString()
+        {
+            return EffectEnum.ToString();
+        }
         public abstract ObjectEffect GetObjectEffect();
 
         public abstract object Clone();

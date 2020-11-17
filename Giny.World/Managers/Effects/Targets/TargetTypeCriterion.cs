@@ -92,5 +92,9 @@ namespace Giny.World.Managers.Effects.Targets
 
             return false;
         }
+        public override string ToString()
+        {
+            return TargetType.ToString();
+        }
     }
 }

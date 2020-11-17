@@ -27,5 +27,10 @@ namespace Giny.World.Managers.Effects.Targets
                 (actor.GetSummoner() != null && (actor.GetSummoner() == handler.Source || actor.GetSummoner() == handler.Source.GetSummoner())) ||
                 handler.Source.GetSummoner() != null && handler.Source.GetSummoner() == actor);
         }
+
+        public override string ToString()
+        {
+            return "Summoner";
+        }
     }
 }

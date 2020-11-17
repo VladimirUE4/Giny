@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Misc
 
         public const int DROPPED_KAMAS_RATIO = 3;
 
-        [StartupInvoke("Monsters Kamas Drop", StartupInvokePriority.Disabled)]
+        [StartupInvoke("Monsters Kamas Drop", StartupInvokePriority.Last)]
         public void Initialize()
         {
             AsyncRandom random = new AsyncRandom();

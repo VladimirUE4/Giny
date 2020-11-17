@@ -2434,7 +2434,7 @@
         /// <summary>
         /// Aumenta a resistência aos feitiços : #1{~1~2 a }#2% de resistência aos feitiços
         /// </summary>
-        Effect_SpellResistance = 2815,
+        Effect_AddSpellResistance = 2815,
         Effect_2816 = 2816,
         Effect_2817 = 2817,
         Effect_2818 = 2818,

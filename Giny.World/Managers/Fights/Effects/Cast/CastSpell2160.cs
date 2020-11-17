@@ -2,6 +2,7 @@
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2160)]
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2160)] // Dofus Abyssal
     public class CastSpell2160 : SpellEffectHandler
     {
         public CastSpell2160(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -22,10 +23,18 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            var test = Effect;
+            SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
+            SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
+
+            Spell spell = new Spell(spellRecord, level);
+
             foreach (var target in targets)
             {
+                SpellCast cast = new SpellCast(Source, spell, target.Cell);
+                cast.Token = this.GetTriggerToken<ITriggerToken>();
+                cast.Force = true;
 
+                Source.CastSpell(cast);
             }
         }
     }

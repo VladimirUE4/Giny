@@ -15,5 +15,9 @@ namespace Giny.World.Managers.Effects.Targets
         {
             return actor.IsSummoned() && handler.CastHandler.Initialized && handler.CastHandler.GetEffectHandlers().Any(x => actor.GetSummoningEffect() == x);
         }
+        public override string ToString()
+        {
+            return "Just summoned";
+        }
     }
 }

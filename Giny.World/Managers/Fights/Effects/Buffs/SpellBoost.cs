@@ -27,8 +27,11 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
         {
             foreach (var target in targets)
             {
-                SpellBoostBuff buff = new SpellBoostBuff(target.BuffIdProvider.Pop(), (short)Effect.Min, (short)Effect.Value, CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
-                target.AddBuff(buff);
+                if (target.HasSpell((short)Effect.Min))
+                {
+                    SpellBoostBuff buff = new SpellBoostBuff(target.BuffIdProvider.Pop(), (short)Effect.Min, (short)Effect.Value, CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
+                    target.AddBuff(buff);
+                }
             }
         }
          

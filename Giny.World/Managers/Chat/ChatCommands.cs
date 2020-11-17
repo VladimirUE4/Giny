@@ -251,10 +251,13 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
-            client.Character.Stats.ActionPoints.Base = 10;
-            client.Character.Stats.MovementPoints.Base = 10;
-            client.Character.Stats.TackleEvade.Base =100;
-            client.Character.RefreshStats();
+            var p = client.Character.Fighter.EnemyTeam.GetFighters<Fighter>().First().GetPreviousPositions();
+
+            foreach (var v in p)
+            {
+                client.Character.Fighter.Send(new ShowCellMessage(client.Character.Id, v));
+                Thread.Sleep(500);
+            }
             /*
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(5);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());

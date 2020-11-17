@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Debuffs
 {
+    [SpellEffectHandler(EffectsEnum.Effect_LostAP)]
     [SpellEffectHandler(EffectsEnum.Effect_SubAP)]
     public class ApDebuff : SpellEffectHandler
     {
@@ -25,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
         {
             foreach (var target in targets)
             {
-                if (this.Effect.Duration > 0)
+                if (this.Effect.Duration > 0 && Effect.EffectEnum != EffectsEnum.Effect_LostAP)
                 {
                     base.AddStatBuff(target, (short)-Effect.Min, target.Stats.ActionPoints, FightDispellableEnum.DISPELLABLE);
                 }

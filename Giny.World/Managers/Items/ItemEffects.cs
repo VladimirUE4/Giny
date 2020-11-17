@@ -333,6 +333,29 @@ namespace Giny.World.Managers.Items
             character.Record.Stats.MeleeDamageResistancePercent.Objects -= (short)delta;
         }
 
+
+        [ItemEffect(EffectsEnum.Effect_WeaponDamageDonePercent)]
+        public static void AddWeaponDamageDone(Character character, int delta)
+        {
+            character.Record.Stats.WeaponDamageDonePercent.Objects += (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubWeaponDamageDonePercent)]
+        public static void SubWeaponDamageDone(Character character, int delta)
+        {
+            character.Record.Stats.WeaponDamageDonePercent.Objects -= (short)delta;
+        }
+
+        [ItemEffect(EffectsEnum.Effect_WeaponResistance)]
+        public static void AddWeaponResistance(Character character, int delta)
+        {
+            character.Record.Stats.WeaponDamageResistancePercent.Objects += (short)delta;
+        }
+        [ItemEffect(EffectsEnum.Effect_SubWeaponResistance)]
+        public static void SubWeaponResistance(Character character, int delta)
+        {
+            character.Record.Stats.WeaponDamageResistancePercent.Objects -= (short)delta;
+        }
+
         [ItemEffect(EffectsEnum.Effect_RangedDamageDonePercent)]
         public static void AddRangeDamageDone(Character character, int delta)
         {
@@ -365,7 +388,7 @@ namespace Giny.World.Managers.Items
             character.Record.Stats.SpellDamageDonePercent.Objects -= (short)delta;
         }
 
-        [ItemEffect(EffectsEnum.Effect_SpellResistance)]
+        [ItemEffect(EffectsEnum.Effect_AddSpellResistance)]
         public static void AddSpellResistances(Character character, int delta)
         {
             character.Record.Stats.SpellDamageResistancePercent.Objects += (short)delta;

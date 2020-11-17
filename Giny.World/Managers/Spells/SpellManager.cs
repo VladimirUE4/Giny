@@ -19,9 +19,7 @@ namespace Giny.World.Managers.Spells
         {
             foreach (var type in Assembly.GetEntryAssembly().GetTypes())
             {
-                var attribute = type.GetCustomAttribute<SpellCastHandlerAttribute>();
-
-                if (attribute != null)
+                foreach (var attribute in type.GetCustomAttributes<SpellCastHandlerAttribute>())
                 {
                     m_handlers.Add(attribute.SpellEnum, type);
                 }

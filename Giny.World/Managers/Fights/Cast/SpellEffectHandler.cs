@@ -44,10 +44,10 @@ namespace Giny.World.Managers.Fights.Cast
                 return CastHandler.Cast.TargetCell;
             }
         }
-        protected EffectDice Effect
+        public EffectDice Effect
         {
             get;
-            set;
+            private set;
         }
         protected abstract int Priority
         {
@@ -82,6 +82,10 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         } = false;
 
+        public virtual bool RefreshTargets => true;
+
+        protected virtual bool Reveals => false;
+
         public Zone Zone
         {
             get;
@@ -98,6 +102,7 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         }
 
+
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
             Targets = effect.GetTargets();
@@ -106,6 +111,8 @@ namespace Giny.World.Managers.Fights.Cast
             Zone = Effect.GetZone(CastCell.Point.OrientationTo(TargetCell.Point));
             this.AffectedFighters = GetAffectedFighters();
         }
+
+
 
         [WIP(WIPState.Warn, "Dont like this post condition to fill cells")]
         private IEnumerable<Fighter> GetAffectedFighters()
@@ -137,9 +144,14 @@ namespace Giny.World.Managers.Fights.Cast
             return true;
         }
 
+        public bool RevealsInvisible()
+        {
+            return Reveals && Effect.TriggersEnum == BuffTriggerType.Instant;
+        }
+
         public void Execute()
         {
-            if (Targets.Any(x => x.CheckWhenExecute))
+            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
             {
                 AffectedFighters = GetAffectedFighters();
             }
@@ -157,7 +169,7 @@ namespace Giny.World.Managers.Fights.Cast
                     AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Effect.TriggersEnum, delegate (TriggerBuff buff, ITriggerToken token)
                     {
                         this.TriggerToken = token;
-                        Apply(AffectedFighters);
+                        Apply(new Fighter[] { target }); // AffectedFighters ?
                         return false;
 
                     }, (short)Effect.Delay);
@@ -201,10 +213,10 @@ namespace Giny.World.Managers.Fights.Cast
             target.AddBuff(triggerBuff);
             return triggerBuff;
         }
-        public StatBuff AddStatBuff(Fighter target, short value, Characteristic characteristic, FightDispellableEnum dispellable)
+        public StatBuff AddStatBuff(Fighter target, short value, Characteristic characteristic, FightDispellableEnum dispellable, short? customActionId = null)
         {
             int id = target.BuffIdProvider.Pop();
-            StatBuff statBuff = new StatBuff(id, CastHandler.Cast, target, Effect, Critical, dispellable, characteristic, value);
+            StatBuff statBuff = new StatBuff(id, CastHandler.Cast, target, Effect, Critical, dispellable, characteristic, value, customActionId);
             target.AddBuff(statBuff);
             return statBuff;
         }

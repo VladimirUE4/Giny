@@ -4,8 +4,10 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Actions;
+using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Stats;
@@ -88,16 +90,26 @@ namespace Giny.World.Managers.Fights.Fighters
             base.Initialize();
         }
 
-        public override void OnMoveFailed()
-        {
-            this.NoMove();
-        }
+      
         public void NoMove()
         {
             this.Send(new GameMapNoMovementMessage((short)Cell.Point.X, (short)Cell.Point.Y));
 
         }
+        public override void OnFightStarted()
+        {
+            base.OnFightStarted();
 
+            foreach (var item in Character.Inventory.GetSpellCastItems())
+            {
+                EffectDice effect = item.GetEffect<EffectDice>(EffectsEnum.Effect_CastSpell_1175);
+                SpellRecord record = SpellRecord.GetSpellRecord((short)effect.Min);
+                Spell spell = new Spell(record, record.GetLevel((byte)effect.Max));
+                SpellCast cast = new SpellCast(this, spell, this.Cell);
+                cast.Force = true;
+                this.CastSpell(cast);
+            }
+        }
         public override void OnJoined()
         {
             this.Fight.SendGameFightJoinMessage(this);
@@ -206,14 +218,14 @@ namespace Giny.World.Managers.Fights.Fighters
             return true;
         }
 
-        public override GameFightFighterInformations GetFightFighterInformations() // todo
+        public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target) // todo
         {
             return new GameFightCharacterInformations()
             {
                 contextualId = Id,
                 disposition = GetEntityDispositionInformations(),
                 look = Look.ToEntityLook(),
-                previousPositions = new short[0],
+                previousPositions = GetPreviousPositions(),
                 wave = 0,
                 spawnInfo = new GameContextBasicSpawnInformation()
                 {
@@ -222,7 +234,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     teamId = (byte)Team.TeamId,
                 },
 
-                stats = Stats.GetFightMinimalStats(this),
+                stats = Stats.GetFightMinimalStats(this, target),
                 alignmentInfos = new ActorAlignmentInformations(),//todo
                 breed = Character.Breed.Id,
                 hiddenInPrefight = false,
@@ -234,7 +246,15 @@ namespace Giny.World.Managers.Fights.Fighters
                 status = Character.GetPlayerStatus(),
             };
         }
+        public override void OnMoveFailed(MovementFailedReason reason)
+        {
+            if (reason == MovementFailedReason.Obstacle)
+            {
+                Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 276);
+            }
 
+            this.NoMove();
+        }
         public void ToggleReady(bool isReady)
         {
             this.IsReady = isReady;

@@ -43,10 +43,12 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
                     {
                         target.Fight.Warn("Unable to add multiple appearance buffs to " + target.Name);
                     }
-
-
                 }
+
+
+
             }
         }
     }
 }
+

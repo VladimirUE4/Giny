@@ -41,10 +41,10 @@ namespace Giny.World.Managers.Fights.Marks
             get;
             private set;
         }
-        protected CellRecord CenterCell
+        public CellRecord CenterCell
         {
             get;
-            set;
+            private set;
         }
         protected Spell MarkSpell
         {
@@ -130,9 +130,9 @@ namespace Giny.World.Managers.Fights.Marks
             {
                 active = Active,
                 markAuthorId = Source.Id,
-                cells = Shapes.Select(x => x.GetGameActionMarkedCell()).ToArray(),
+                cells = new GameActionMarkedCell[0],
                 markId = (short)Id,
-                markimpactCell = CenterCell.Id,
+                markimpactCell = -1,
                 markSpellId = MarkSpell.Record.Id,
                 markSpellLevel = MarkSpell.Level.Grade,
                 markTeamId = (byte)Source.Team.TeamId,

@@ -25,12 +25,12 @@ namespace Giny.World.Managers.Fights.Marks
         public Trap(int id, EffectDice effect, MarkTriggerType triggers, Zone zone, Color color, Fighter source, CellRecord centerCell, SpellRecord spellRecord, SpellLevelRecord spellLevel) :
             base(id, effect, zone, triggers, color, source, centerCell, spellRecord, spellLevel)
         {
-         
+
         }
 
         public override bool IsVisibleFor(CharacterFighter fighter)
         {
-            return Source.IsFriendlyWith(Source);
+            return Source.IsFriendlyWith(fighter);
         }
 
         public override void Trigger(Fighter target, MarkTriggerType triggerType)

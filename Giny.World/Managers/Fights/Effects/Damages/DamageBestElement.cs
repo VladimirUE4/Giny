@@ -20,6 +20,10 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     {
         protected override int Priority => 0;
 
+        public override bool RefreshTargets => false;
+
+        protected override bool Reveals => true;
+
         public DamageBestElement(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 

@@ -396,12 +396,12 @@ namespace Giny.World.Managers.Fights
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
             {
-                if (!FighterPlaying.IsSummoned())
+                if (!FighterPlaying.IsSummoned() && RoundNumber > 1)
                 {
                     FighterPlaying.DecrementAllCastedBuffsDuration();
                     FighterPlaying.DecrementSummonsCastedBuffsDuration();
                     FighterPlaying.DecrementSummonsCastedBuffsDelays();
-                    FighterPlaying.DecrementBuffsDelay();
+                    FighterPlaying.DecrementAllCastedBuffsDelay();
                 }
 
                 FighterPlaying.TriggerBuffs(BuffTriggerType.OnTurnBegin, null);
@@ -580,6 +580,10 @@ namespace Giny.World.Managers.Fights
                 }
             }
         }
+        public bool MarkExist<T>(Func<T, bool> markExist) where T : Mark
+        {
+            return Marks.OfType<T>().Any(markExist);
+        }
         public bool ShouldTriggerOnMove(short cellId)
         {
             return Marks.Any(x => x.StopMovement && x.ContainsCell(cellId));
@@ -660,6 +664,11 @@ namespace Giny.World.Managers.Fights
                 sourceId = mark.Source.Id,
             });
         }
+
+        public IEnumerable<Mark> GetMarks(Fighter fighter)
+        {
+            return Marks.Where(x => x.Source == fighter);
+        }
         public void AddSummon(Fighter source, SummonedFighter fighter)
         {
             AddSummons(source, new SummonedFighter[] { fighter });
@@ -673,12 +682,16 @@ namespace Giny.World.Managers.Fights
                 summon.Initialize();
             }
 
-            this.Send(new GameActionFightSummonMessage()
+            foreach (var target in GetFighters<CharacterFighter>())
             {
-                actionId = 0,
-                sourceId = source.Id,
-                summons = summons.Select(x => x.GetFightFighterInformations()).ToArray(),
-            });
+                target.Send(new GameActionFightSummonMessage()
+                {
+                    actionId = 0,
+                    sourceId = source.Id,
+                    summons = summons.Select(x => x.GetFightFighterInformations(target)).ToArray(),
+                });
+            }
+            
 
             this.UpdateTimeLine();
         }
@@ -688,7 +701,10 @@ namespace Giny.World.Managers.Fights
         }
         public void Synchronize()
         {
-            this.Send(new GameFightSynchronizeMessage(GetFighters().Select(x => x.GetFightFighterInformations()).ToArray()));
+            foreach (var fighter in GetFighters<CharacterFighter>())
+            {
+                fighter.Send(new GameFightSynchronizeMessage(GetFighters().Select(x => x.GetFightFighterInformations(fighter)).ToArray()));
+            }
         }
         public virtual GameFightStartMessage GetGameFightStartMessage()
         {
@@ -836,7 +852,7 @@ namespace Giny.World.Managers.Fights
 
             var occupiedCells = new short[0];
             if (!throughEntities)
-                occupiedCells = GetFighters<Fighter>().Where(x => x != except).Select(x => x.Cell.Id).ToArray();
+                occupiedCells = GetFighters<Fighter>().Where(x => x != except && x.BlockLOS()).Select(x => x.Cell.Id).ToArray();
 
             var line = new LineSet(from, to);
             return !(from point in line.EnumerateValidPoints().Skip(1)
@@ -873,5 +889,6 @@ namespace Giny.World.Managers.Fights
             Map.Instance.RemoveFight(this);
             FightManager.Instance.RemoveFight(this);
         }
+
     }
 }

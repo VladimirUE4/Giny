@@ -1,4 +1,4 @@
-﻿using Giny.World.Managers.Fights.Cast;
+﻿ using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
 using System.Collections.Generic;
@@ -71,6 +71,8 @@ namespace Giny.World.Managers.Effects.Targets
                         return new LifeCriterion(int.Parse(str.Remove(0, 1)), true);
                     case 'V':
                         return new LifeCriterion(int.Parse(str.Remove(0, 1)), false);
+                    case 'T':
+                        return new TelefragCriterion();
                     case 'U':
                         return new JustSummonedCriterion();
                     case 'P':

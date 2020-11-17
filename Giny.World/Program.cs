@@ -42,13 +42,7 @@ namespace Giny.World
             ConsoleCommandsManager.Instance.ReadCommand();
         }
 
-        [StartupInvoke("Database", StartupInvokePriority.SecondPass)]
-        public static void InitializeDatabase()
-        {
-            DatabaseManager.Instance.Initialize(Assembly.GetExecutingAssembly(), ConfigFile.Instance.SQLHost,
-               ConfigFile.Instance.SQLDBName, ConfigFile.Instance.SQLUser, ConfigFile.Instance.SQLPassword);
-            DatabaseManager.Instance.LoadTables();
-        }
+       
         [StartupInvoke("Protocol Manager", StartupInvokePriority.Initial)]
         public static void InitializeProtocolManager()
         {

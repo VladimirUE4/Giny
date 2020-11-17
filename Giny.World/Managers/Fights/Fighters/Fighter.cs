@@ -11,9 +11,9 @@ using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
-using Giny.World.Managers.Fights.Cast.History;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Effects.Damages;
+using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
@@ -70,13 +70,19 @@ namespace Giny.World.Managers.Fights.Fighters
                 return Team == Fight.BlueTeam ? Fight.RedTeam : Fight.BlueTeam;
             }
         }
-
+        private bool IsMoving
+        {
+            get;
+            set;
+        }
 
         public CellRecord Cell
         {
             get;
             protected set;
         }
+
+
         public CellRecord TurnStartCell
         {
             get;
@@ -161,6 +167,11 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             private set;
         }
+        public MovementHistory MovementHistory
+        {
+            get;
+            private set;
+        }
         public Fighter LastAttacker
         {
             get;
@@ -176,7 +187,6 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             set;
         }
-
 
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
@@ -198,6 +208,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public virtual void Initialize()
         {
             this.TurnStartCell = this.Cell;
+            this.MovementHistory = new MovementHistory(this);
             this.BaseLook = Look.Clone();
         }
         public void FindPlacementDirection()
@@ -236,7 +247,7 @@ namespace Giny.World.Managers.Fights.Fighters
             return new DroppedItem[0];
         }
 
-        public virtual void OnMoveFailed()
+        public virtual void OnMoveFailed(MovementFailedReason reason)
         {
 
         }
@@ -252,9 +263,13 @@ namespace Giny.World.Managers.Fights.Fighters
             this.LooseAp(this, looseAp, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST);
             this.LooseMp(this, looseMp, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST);
         }
-        [WIP("turn around a character your tackle by")]
         private List<CellRecord> ApplyTackle(List<CellRecord> path)
         {
+            if (CantBeTackled() || IsInvisible())
+            {
+                return path;
+            }
+
             IEnumerable<Fighter> tacklers = GetTacklers(Cell);
 
             Tackle tackle = GetTackle(tacklers);
@@ -269,11 +284,28 @@ namespace Giny.World.Managers.Fights.Fighters
                 OnTackled((short)tackle.MpLoss, (short)tackle.ApLoss, tacklers);
             }
 
+            int index = 1;
+
+            foreach (var cell in path.Skip(1))
+            {
+                tacklers = GetTacklers(cell);
+                tackle = GetTackle(tacklers);
+
+                if (tackle.Consistent())
+                {
+                    break;
+                }
+
+                index++;
+            }
+
+            path = path.Take(index + 1).ToList();
+
             return path.Take(1 + Stats.MovementPoints.TotalInContext()).ToList();
         }
         private IEnumerable<Fighter> GetTacklers(CellRecord cell)
         {
-            return this.EnemyTeam.GetFighters<Fighter>().Where(x => x.IsMeleeWith(cell.Point));
+            return this.EnemyTeam.GetFighters<Fighter>().Where(x => x.IsMeleeWith(cell.Point) && !x.CantTackle());
         }
         private Tackle GetTackle(IEnumerable<Fighter> tacklers)
         {
@@ -311,7 +343,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (!path.Skip(1).All(x => Fight.IsCellFree(x)))
             {
-                this.OnMoveFailed();
+
+                this.OnMoveFailed(MovementFailedReason.Obstacle);
                 return;
             }
 
@@ -337,6 +370,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                     if (path.Count() > 0)
                     {
+                        IsMoving = true;
 
                         mpCost = (short)(path.Count - 1);
 
@@ -356,22 +390,29 @@ namespace Giny.World.Managers.Fights.Fighters
                         }
                         this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
 
+                        this.MovementHistory.OnMove(path);
+
                         Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+
+                        IsMoving = false;
                     }
                     else
                     {
-                        this.OnMoveFailed();
+                        this.OnMoveFailed(MovementFailedReason.Tackle);
                     }
                 }
                 else
                 {
-                    this.OnMoveFailed();
+                    this.OnMoveFailed(MovementFailedReason.MissingMp);
                 }
 
             }
 
 
         }
+
+
+
         public bool IsFriendlyWith(Fighter actor)
         {
             return actor.Team == this.Team;
@@ -448,7 +489,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             foreach (var summon in GetSummons())
             {
-                summon.DecrementBuffsDelay();
+                summon.DecrementAllCastedBuffsDelay();
             }
         }
         private IEnumerable<Fighter> GetSummons()
@@ -477,17 +518,29 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public abstract void OnTurnBegin();
 
-        public void DecrementBuffsDelay()
+        public void DecrementAllCastedBuffsDelay()
         {
-            foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
+            foreach (var fighter in Fight.GetFighters<Fighter>())
             {
-                if (buff.DecrementDelay())
+                foreach (var buff in fighter.Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
+                {
+                    if (buff.Cast.Source == this && buff.DecrementDelay())
+                    {
+                        buff.Apply();
+
+                        RemoveAndDispellBuff(buff);
+                    }
+                }
+            }
+            /*foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
+            {
+                if (buff.Cast.Source == this && buff.DecrementDelay())
                 {
                     buff.Apply();
 
-                    RemoveBuff(buff);
+                    RemoveAndDispellBuff(buff);
                 }
-            }
+            } */
         }
         public void RemoveAndDispellBuff(Buff buff)
         {
@@ -531,7 +584,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (BuffMaxStackReached(buff)) // WIP censer cumuler la durée ?
             {
                 Buff oldBuff = Buffs.FirstOrDefault(x => IsSimilar(x, buff));
-                RemoveBuff(oldBuff);
+                RemoveAndDispellBuff(oldBuff);
             }
 
             Buffs.Add(buff);
@@ -640,11 +693,14 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void ShowFighter()
         {
-            Fight.Send(new GameFightShowFighterMessage(GetFightFighterInformations()));
+            foreach (var characterFighter in Fight.GetFighters<CharacterFighter>())
+            {
+                ShowFighter(characterFighter);
+            }
         }
         public void ShowFighter(CharacterFighter fighter)
         {
-            fighter.Character.Client.Send(new GameFightShowFighterMessage(GetFightFighterInformations()));
+            fighter.Character.Client.Send(new GameFightShowFighterMessage(GetFightFighterInformations(fighter)));
         }
 
         public EntityDispositionInformations GetEntityDispositionInformations()
@@ -676,6 +732,11 @@ namespace Giny.World.Managers.Fights.Fighters
                 direction = (byte)Direction,
                 id = Id,
             };
+        }
+
+        public bool IsInvisible()
+        {
+            return Stats.InvisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE;
         }
 
 
@@ -714,6 +775,8 @@ namespace Giny.World.Managers.Fights.Fighters
                     return false;
                 }
 
+             
+
                 if (!cast.SilentNetwork)
                     OnSpellCasting(cast);
 
@@ -733,8 +796,30 @@ namespace Giny.World.Managers.Fights.Fighters
             return true;
         }
 
+        private void DispellInvisiblity()
+        {
+            foreach (var buff in Buffs.OfType<InvisibilityBuff>().ToArray())
+            {
+                RemoveAndDispellBuff(buff);
+            }
+
+            ShowFighter();
+        }
+
         protected virtual void OnSpellCasted(SpellCastHandler handler)
         {
+            if (IsInvisible() && !handler.Cast.Force)
+            {
+                if (handler.RevealsInvisible())
+                {
+                    DispellInvisiblity();
+                }
+                else
+                {
+                    OnDetected();
+                }
+
+            }
             this.SpellHistory.RegisterCastedSpell(handler.Cast.Spell.Level, this.Fight.GetFighter(handler.Cast.TargetCell.Id));
         }
 
@@ -884,8 +969,25 @@ namespace Giny.World.Managers.Fights.Fighters
             return Buffs.OfType<StateBuff>().Any(x => x.Record.Id == stateId);
         }
 
-        public void Teleport(Fighter source, CellRecord targetCell)
+        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
         {
+            if (CantBeMoved())
+            {
+                return null;
+            }
+            Fighter otherTarget = Fight.GetFighter(targetCell.Id);
+
+            if (otherTarget != null && otherTarget != this)
+            {
+                this.SwitchPosition(otherTarget, register);
+                return new Telefrag(this, otherTarget);
+            }
+
+            if (!Fight.IsCellFree(targetCell))
+            {
+                return null;
+            }
+
             var msg = new GameActionFightTeleportOnSameMapMessage()
             {
                 actionId = (short)ActionsEnum.ACTION_CHARACTER_TELEPORT_ON_SAME_MAP,
@@ -903,7 +1005,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 Fight.Send(msg);
             }
 
-            source.Cell = targetCell;
+            var oldCell = Cell;
+
+            this.Cell = targetCell;
+
+            if (register)
+                MovementHistory.OnCellChanged(oldCell);
+
+            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+
+            return null;
         }
         public void PushBack(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
         {
@@ -1120,13 +1231,18 @@ namespace Giny.World.Managers.Fights.Fighters
 
             }
 
+            var oldCell = this.Cell;
+
             this.Cell = Fight.Map.GetCell(destinationPoint);
+
+            MovementHistory.OnCellChanged(oldCell);
 
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
 
+
         }
         [WIP("teleport triggered")]
-        public void SwitchPosition(Fighter source)
+        public void SwitchPosition(Fighter source, bool register = true)
         {
             if (CantSwitchPosition() || CantBeMoved())
                 return;
@@ -1143,6 +1259,17 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetCellId = this.Cell.Id,
                 targetId = Id,
             });
+
+            if (register)
+            {
+                source.MovementHistory.RegisterEntry(this.Cell);
+                MovementHistory.RegisterEntry(cell);
+            }
+            else
+            {
+                source.MovementHistory.RegisterEntry(this.Cell);
+            }
+
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)
@@ -1175,20 +1302,24 @@ namespace Giny.World.Managers.Fights.Fighters
                 return Stats.InvisibilityState;
             }
         }
-        private void OnDetected(Fighter source)
+        public bool BlockLOS()
+        {
+            return Stats.InvisibilityState != GameActionFightInvisibilityStateEnum.INVISIBLE;
+        }
+        private void OnDetected()
         {
             this.EnemyTeam.Send(new GameActionFightInvisibleDetectedMessage()
             {
-                actionId = 0,
+                actionId = (short)ActionsEnum.ACTION_CHARACTER_MAKE_INVISIBLE,
                 cellId = Cell.Id,
-                sourceId = source.Id,
+                sourceId = Id,
                 targetId = Id,
             });
         }
 
         public abstract void Kick(Fighter source);
 
-        public abstract GameFightFighterInformations GetFightFighterInformations();
+        public abstract GameFightFighterInformations GetFightFighterInformations(CharacterFighter to);
 
         public abstract FightTeamMemberInformations GetFightTeamMemberInformations();
 
@@ -1197,12 +1328,25 @@ namespace Giny.World.Managers.Fights.Fighters
             this.FightStartCell = this.Cell;
         }
 
+        public short[] GetPreviousPositions()
+        {
+            return MovementHistory.GetEntries(2).Select(x => (short)x.Cell.Id).ToArray();
+        }
+
         public void DispelState(Fighter source, int stateId)
         {
             foreach (var buff in Buffs.OfType<StateBuff>().Where(x => x.Record.Id == stateId).ToArray())
             {
-                RemoveBuff(buff);
+                RemoveAndDispellBuff(buff);
             }
+        }
+        public bool CantTackle()
+        {
+            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantTackle);
+        }
+        public bool CantBeTackled()
+        {
+            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantBeTackled);
         }
         public bool IsInvulnerableMelee()
         {
@@ -1248,13 +1392,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 delta = Stats.MaxLifePoints - Stats.LifePoints;
             }
 
+            Stats.LifePoints += delta;
+
             Fight.Send(new GameActionFightLifePointsGainMessage()
             {
-                actionId = 0,
+                actionId = (short)ActionsEnum.ACTION_CHARACTER_LIFE_POINTS_WIN,
                 delta = delta,
                 sourceId = healing.Source.Id,
                 targetId = Id,
             });
+
 
         }
         private void DispellShieldBuffs(int amount)
@@ -1470,31 +1617,53 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Fight.GetFighters<Fighter>(x => x.IsMeleeWith(this));
         }
-        public void Die(Fighter killedBy, bool recusiveCall = false)
+        public void KillAllSummons()
+        {
+            foreach (var summon in Fight.GetFighters<Fighter>().Where(x => x.IsSummoned() && x.GetSummoner() == this).ToArray())
+            {
+                summon.Die(this);
+            }
+        }
+        public void RemoveAndDispellAllBuffs(Fighter source, FightDispellableEnum dispellable = FightDispellableEnum.REALLY_NOT_DISPELLABLE)
+        {
+            foreach (var buff in Buffs.Where(x => x.Cast.Source == source && x.Dispellable <= dispellable).ToArray())
+            {
+                RemoveAndDispellBuff(buff);
+            }
+        }
+        public void RemoveAllCastedBuffs()
+        {
+            foreach (Fighter current in this.Fight.GetFighters<Fighter>())
+            {
+                current.RemoveAndDispellAllBuffs(this);
+            }
+        }
+        public void RemoveMarks()
+        {
+            foreach (var mark in this.Fight.GetMarks(this).ToArray())
+            {
+                Fight.RemoveMark(mark);
+            }
+        }
+
+        public void Die(Fighter killedBy)
         {
             if (Alive)
             {
-                /* TriggerBuffs(TriggerType.BEFORE_DEATH);
-                 this.KillSummons(killedBy);
-                 this.RemoveAndDispellAllBuffs();
-                 this.DropCarried();
-                 this.RemoveAllCastedBuffs();
-                 this.RemoveMarks(); */
+                KillAllSummons();
+                RemoveAllCastedBuffs();
+                this.RemoveMarks();
 
                 this.DeathTime = DateTime.Now;
 
-                //  BeforeDeadEvt?.Invoke(this);
                 Fight.Send(new GameActionFightDeathMessage()
                 {
                     actionId = (short)ActionsEnum.ACTION_CHARACTER_DEATH,
                     sourceId = killedBy.Id,
                     targetId = this.Id,
                 });
-                // TriggerBuffs(TriggerType.AFTER_DEATH);
 
                 this.Alive = false;
-
-                //  AfterDeadEvt?.Invoke(this, recusiveCall);
             }
             else
             {

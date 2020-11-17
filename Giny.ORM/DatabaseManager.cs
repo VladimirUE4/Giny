@@ -1,17 +1,13 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
+using Giny.ORM.Attributes;
+using Giny.ORM.Interfaces;
+using Giny.ORM.IO;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using System.Collections;
-using Giny;
-using System.Threading;
-using Giny.ORM.IO;
-using Giny.ORM.Interfaces;
-using Giny.ORM.Attributes;
-using Giny.Core.DesignPattern;
-using Giny.Core;
-using Giny.Core.Extensions;
+using System.Reflection;
 
 namespace Giny.ORM
 {
@@ -30,6 +26,13 @@ namespace Giny.ORM
             get;
             private set;
         }
+
+        public event Action<Type, string> OnStartLoadTable;
+
+        public event Action<Type, string> OnEndLoadTable;
+
+        public event Action<string, double> OnLoadProgress;
+
         public void Initialize(Assembly recordsAssembly, string host, string database, string user, string password)
         {
             if (ConnectionProvider != null)
@@ -101,10 +104,9 @@ namespace Giny.ORM
         {
             var reader = new DatabaseReader(type);
             var tableName = reader.TableName;
-
-            if (DatabaseReader.NOTIFY_PROGRESS)
-                Logger.Write("Loading " + tableName.FirstCharToUpper() + " ...", MessageState.INFO2);
+            OnStartLoadTable?.Invoke(type, tableName);
             reader.Read(this.UseProvider());
+            OnEndLoadTable?.Invoke(type, tableName);
         }
         public void LoadTable<T>() where T : ITable
         {
@@ -154,6 +156,12 @@ namespace Giny.ORM
                 }
             }
         }
+
+        public void OnProgress(string tableName, double ratio)
+        {
+            OnLoadProgress?.Invoke(tableName, ratio);
+        }
+
         public void DeleteTable<T>() where T : ITable
         {
             var definition = TableManager.Instance.GetDefinition(typeof(T));

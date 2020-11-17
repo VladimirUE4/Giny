@@ -1,4 +1,5 @@
-﻿using Giny.World.Records.Spells;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
+
+        public SpellEnum SpellEnum => (SpellEnum)Record.Id;
+
         public Spell(SpellRecord record,SpellLevelRecord level)
         {
             this.Record = record;
