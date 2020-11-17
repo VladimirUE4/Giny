@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\FightApi.cs" />
     <Compile Include="ConfigFile.cs" />
     <Compile Include="Handlers\BasicHandler.cs" />
     <Compile Include="Handlers\Fights\FightsHandler.cs" />
@@ -262,7 +263,6 @@
     <Compile Include="Managers\Items\WeaponManager.cs" />
     <Compile Include="Managers\Maps\Paths\Node.cs" />
     <Compile Include="Managers\Maps\Paths\Pathfinding.cs" />
-    <Compile Include="Managers\Misc\SpellCategoryManager.cs" />
     <Compile Include="Managers\Spells\SpellManager.cs" />
     <Compile Include="Managers\Fights\Cast\SpellShapeEnum.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DirectDamage.cs" />
@@ -337,10 +337,6 @@
     <Compile Include="Managers\Maps\Shapes\Square.cs" />
     <Compile Include="Managers\Maps\Shapes\Zone.cs" />
     <Compile Include="Managers\Maps\Teleporters\TeleportersManager.cs" />
-    <Compile Include="Managers\Misc\ElementsSpawnManager.cs" />
-    <Compile Include="Managers\Misc\MA3Manager.cs" />
-    <Compile Include="Managers\Misc\MonsterKamasDropManager.cs" />
-    <Compile Include="Managers\Misc\MonsterSpawnsManager.cs" />
     <Compile Include="Managers\Entities\Monsters\Monster.cs" />
     <Compile Include="Managers\Entities\Monsters\MonsterGrade.cs" />
     <Compile Include="Managers\Entities\Monsters\MonsterGroup.cs" />
@@ -362,6 +358,9 @@
     <Compile Include="Managers\Stats\RelativeCharacteristic.cs" />
     <Compile Include="Managers\Stats\ResitanceCharacteristic.cs" />
     <Compile Include="Managers\WorldSaveManager.cs" />
+    <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\ModuleAttribute.cs" />
+    <Compile Include="Modules\ModuleManager.cs" />
     <Compile Include="Network\IPCClient.cs" />
     <Compile Include="Network\IPCManager.cs" />
     <Compile Include="Network\WorldClient.cs" />

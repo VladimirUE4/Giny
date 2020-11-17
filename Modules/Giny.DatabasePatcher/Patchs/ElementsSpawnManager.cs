@@ -10,11 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Misc
+namespace Giny.DatabasePatcher.Patchs
 {
-    public class ElementsSpawnManager : Singleton<ElementsSpawnManager>
+    public class ElementsSpawnManager 
     {
-        [StartupInvoke("Elements Spawn Manager", StartupInvokePriority.Last)]
         public static void SynchronizeElements()
         {
             int count = 0;

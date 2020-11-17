@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Misc
+namespace Giny.DatabasePatcher.Patchs
 {
-    public class SpellCategoryManager : Singleton<SpellCategoryManager>
+    public class SpellCategoryManager 
     {
         private static readonly EffectsEnum[] DamageEffects = new EffectsEnum[]
         {
@@ -44,8 +44,7 @@ namespace Giny.World.Managers.Misc
             EffectsEnum.Effect_AddState,
         };
 
-        [StartupInvoke("Spell category manager", StartupInvokePriority.Last)]
-        public void Initialize()
+        public static void Initialize()
         {
             foreach (var spell in SpellRecord.GetSpellRecords())
             {
@@ -54,7 +53,7 @@ namespace Giny.World.Managers.Misc
         }
 
 
-        private void AssignCategory(SpellRecord record)
+        private static void AssignCategory(SpellRecord record)
         {
             SpellCategoryEnum category = SpellCategoryEnum.None;
 

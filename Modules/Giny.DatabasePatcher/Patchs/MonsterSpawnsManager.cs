@@ -10,11 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Misc
+namespace Giny.DatabasePatcher.Patchs
 {
-    public class MonsterSpawnsManager : Singleton<MonsterSpawnsManager>
+    public class MonsterSpawnsManager 
     {
-        [StartupInvoke("MonsterSpawnsManager", StartupInvokePriority.Disabled)]
         public static void Initialize()
         {
             long id = 1;

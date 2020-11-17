@@ -17,6 +17,7 @@ namespace Giny.Core.DesignPattern
         FifthPass = 5,
         SixthPath = 6,
         Last = 7,
+        Modules = 8,
         Disabled,
     }
     public class StartupInvoke : Attribute
@@ -71,6 +72,7 @@ namespace Giny.Core.DesignPattern
             StartupInvokePriority.FifthPass,
             StartupInvokePriority.SixthPath,
             StartupInvokePriority.Last,
+            StartupInvokePriority.Modules,
         };
 
         public void Initialize(Assembly startupAssembly)

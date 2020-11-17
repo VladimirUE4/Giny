@@ -9,16 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Misc
+namespace Giny.DatabasePatcher.Patchs
 {
-    public class MonsterKamasDropManager : Singleton<MonsterKamasDropManager>
+    public class MonsterKamasDropManager 
     {
         public const int BOSS_MULTIPLICATOR = 4;
 
         public const int DROPPED_KAMAS_RATIO = 3;
 
-        [StartupInvoke("Monsters Kamas Drop", StartupInvokePriority.Last)]
-        public void Initialize()
+        public static void Initialize()
         {
             AsyncRandom random = new AsyncRandom();
 

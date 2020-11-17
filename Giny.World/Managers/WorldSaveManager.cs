@@ -21,7 +21,7 @@ namespace Giny.World.Managers
 
         private Task m_queueRefresherTask;
 
-        [StartupInvoke("Connection Queue", StartupInvokePriority.Last)]
+        [StartupInvoke("Save Task", StartupInvokePriority.Last)]
         public void CreateNextTask()
         {
             m_queueRefresherTask = Task.Factory.StartNewDelayed((int)((SAVE_INTERVAL_MINUTES * 60) * 1000), PerformSave);

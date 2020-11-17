@@ -5,6 +5,7 @@ using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Api;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Buffs;
@@ -691,7 +692,7 @@ namespace Giny.World.Managers.Fights
                     summons = summons.Select(x => x.GetFightFighterInformations(target)).ToArray(),
                 });
             }
-            
+
 
             this.UpdateTimeLine();
         }
@@ -790,7 +791,10 @@ namespace Giny.World.Managers.Fights
                 this.DeterminsWinners();
 
                 this.Synchronizer = null;
+
                 IEnumerable<IFightResult> results = this.GenerateResults();
+
+                FightApi.GenerateResults(this, results);
 
                 this.ApplyResults(results);
 
