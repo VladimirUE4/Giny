@@ -21,9 +21,9 @@ namespace Giny.Core.Commands
     {
         private readonly Dictionary<string, MethodInfo> m_commands = new Dictionary<string, MethodInfo>();
 
-        public void Initialize(Assembly assembly)
+        public void Initialize(IEnumerable<Type> types)
         {
-            foreach (var type in assembly.GetTypes())
+            foreach (var type in types)
             {
                 foreach (var method in type.GetMethods())
                 {

@@ -1,4 +1,5 @@
 ﻿using Giny.Protocol.Types;
+using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

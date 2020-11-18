@@ -343,7 +343,7 @@
         /// <summary>
         /// Quelqu'un vous suit !
         /// </summary>
-        Effect_148 = 148,
+        Effect_Followed = 148,
         /// <summary>
         /// Change l'apparence
         /// </summary>

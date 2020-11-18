@@ -276,7 +276,7 @@ namespace Giny.World.Managers.Fights
             return 0;
         }
 
-        public virtual void StartPlacement()
+        public void StartPlacement()
         {
             if (GetPlacementDelay() > 0)
             {
@@ -289,6 +289,8 @@ namespace Giny.World.Managers.Fights
                 ShowBladesOnMap();
                 this.Send(new IdolFightPreparationUpdateMessage(0, new Idol[0]));
             }
+
+            FightApi.PlacementStarted(this);
         }
         private void ShowBladesOnMap()
         {
@@ -794,15 +796,12 @@ namespace Giny.World.Managers.Fights
 
                 IEnumerable<IFightResult> results = this.GenerateResults();
 
-                FightApi.GenerateResults(this, results);
-
                 this.ApplyResults(results);
 
                 this.Send(new GameFightEndMessage(GetFightDuration(), 1, 0, (from entry in results
                                                                              select entry.GetFightResultListEntry()).ToArray(),
                                                                                     new NamedPartyTeamWithOutcome[0]));
             }
-
 
             foreach (CharacterFighter current in this.GetFighters<CharacterFighter>(false))
             {

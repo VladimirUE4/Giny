@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Modules;
 using Giny.World.Network;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Giny.World.Managers.Chat
         [StartupInvoke("Chat Commands", StartupInvokePriority.SixthPath)]
         public void Initialize()
         {
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            foreach (var type in AssemblyCore.GetTypes())
             {
                 foreach (var method in type.GetMethods())
                 {
@@ -48,7 +49,6 @@ namespace Giny.World.Managers.Chat
                     {
                         m_commands.Add(attribute, method);
                     }
-
                 }
             }
             Logger.Write(m_commands.Count + " command(s) registered");

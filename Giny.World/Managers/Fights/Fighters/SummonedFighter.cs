@@ -41,13 +41,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Summoner = owner;
         }
 
-        public override void Initialize()
-        {
-            this.Look = Record.Look.Clone();
-            this.Stats = new FighterStats(Grade);
-            base.Initialize();
-        }
-
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()

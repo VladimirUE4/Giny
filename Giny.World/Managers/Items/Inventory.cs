@@ -1,7 +1,9 @@
-﻿using Giny.ORM;
+﻿using Giny.Core.DesignPattern;
+using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
+using Giny.World.Api;
 using Giny.World.Managers.Criterias;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
@@ -132,7 +134,6 @@ namespace Giny.World.Managers.Items
             {
                 item.UId = ItemManager.Instance.PopItemUID();
                 item.AddElement();
-
             }
             Character.Client.Send(new ObjectsAddedMessage(Array.ConvertAll(obj.ToArray(), x => x.GetObjectItem())));
             RefreshWeight();
@@ -145,11 +146,12 @@ namespace Giny.World.Managers.Items
             Character.GeneralShortcutBar.OnItemRemoved(obj);
             RefreshWeight();
         }
-        void Inventory_OnItemAdded(CharacterItemRecord obj)
+        [WIP]
+        void Inventory_OnItemAdded(CharacterItemRecord item)
         {
-            obj.UId = ItemManager.Instance.PopItemUID();
-            obj.AddElement();
-            Character.Client.Send(new ObjectAddedMessage(obj.GetObjectItem(), 0)); // 0??????
+            item.UId = ItemManager.Instance.PopItemUID();
+            item.AddElement();
+            Character.Client.Send(new ObjectAddedMessage(item.GetObjectItem(), 0)); // 0??????
             RefreshWeight();
         }
         public void UnequipAll()

@@ -21,6 +21,7 @@ namespace Giny.DatabasePatcher
 
         }
 
+
         public void Initialize()
         {
             ElementsSpawnManager.SynchronizeElements();
@@ -28,5 +29,7 @@ namespace Giny.DatabasePatcher
             MonsterKamasDropManager.Initialize();
             SpellCategoryManager.Initialize();
         }
+
+
     }
 }

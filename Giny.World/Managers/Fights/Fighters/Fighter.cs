@@ -6,6 +6,7 @@ using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Api;
 using Giny.World.Handlers.Roleplay.Maps.Paths;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Look;
@@ -690,6 +691,8 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Fight.UpdateFightersPlacementDirection();
             this.Fight.UpdateEntitiesPositions();
             Fight.UpdateTeams();
+
+            FightApi.FighterJoined(this);
         }
         public void ShowFighter()
         {

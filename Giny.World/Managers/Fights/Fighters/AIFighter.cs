@@ -33,6 +33,10 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public short MonsterId => (short)Record.Id;
 
+        public override short Level => Grade.Level;
+
+        public override string Name => Record.Name;
+
         public AIFighter(FightTeam team, CellRecord roleplayCell, MonsterRecord record, MonsterGrade grade) : base(team, roleplayCell)
         {
             this.Record = record;
@@ -42,6 +46,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             this.Id = Fight.PopNextContextualId();
             this.Stats = new FighterStats(Grade);
+            this.Look = Record.Look.Clone();
             this.Brain = new MonsterBrain(this);
             base.Initialize();
             this.IsReady = true;

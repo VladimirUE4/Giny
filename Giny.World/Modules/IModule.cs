@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Modules
 {
-    public interface IModule
+    public interface IModule 
     {
         void Initialize();
 

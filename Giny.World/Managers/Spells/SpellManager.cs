@@ -1,6 +1,7 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Fights.Cast;
+using Giny.World.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Giny.World.Managers.Spells
         [StartupInvoke(StartupInvokePriority.FourthPass)]
         public void Initialize()
         {
-            foreach (var type in Assembly.GetEntryAssembly().GetTypes())
+            foreach (var type in AssemblyCore.GetTypes())
             {
                 foreach (var attribute in type.GetCustomAttributes<SpellCastHandlerAttribute>())
                 {

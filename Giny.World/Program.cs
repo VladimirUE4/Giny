@@ -10,6 +10,7 @@ using Giny.ORM;
 using Giny.Protocol;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Modules;
 using Giny.World.Network;
 using Giny.World.Records.Items;
 using System;
@@ -43,7 +44,7 @@ namespace Giny.World
         }
 
        
-        [StartupInvoke("Protocol Manager", StartupInvokePriority.Initial)]
+        [StartupInvoke("Protocol Manager", StartupInvokePriority.SecondPass)]
         public static void InitializeProtocolManager()
         {
             ProtocolMessageManager.Initialize(Assembly.GetAssembly(typeof(RawDataMessage)), Assembly.GetAssembly(typeof(Program)));
@@ -57,7 +58,7 @@ namespace Giny.World
         [StartupInvoke("Console Commands", StartupInvokePriority.Last)]
         public static void InitializeConsoleCommand()
         {
-            ConsoleCommandsManager.Instance.Initialize(Assembly.GetExecutingAssembly());
+            ConsoleCommandsManager.Instance.Initialize(AssemblyCore.GetTypes());
         }
     }
 }

@@ -39,13 +39,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override bool Sex => false;
 
-        public override void Initialize()
-        {
-            this.Look = Monster.Record.Look.Clone();
-            this.Stats = new FighterStats(Monster.Grade);
-            base.Initialize();
-        }
-    
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()

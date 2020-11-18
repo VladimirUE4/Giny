@@ -6,6 +6,7 @@ using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Api;
 using Giny.World.Handlers.Roleplay.Maps.Paths;
 using Giny.World.Managers.Bidshops;
 using Giny.World.Managers.Breeds;
@@ -388,6 +389,8 @@ namespace Giny.World.Managers.Entities.Characters
 
         public void CreateHumanOptions()
         {
+            this.HumanOptions.Add(new CharacterHumanOptionFollowers());
+
             if (Record.ActiveOrnamentId > 0)
             {
                 HumanOptions.Add(HumanOptionsManager.Instance.CreateHumanOptionOrnament(this));
@@ -396,6 +399,9 @@ namespace Giny.World.Managers.Entities.Characters
             {
                 HumanOptions.Add(HumanOptionsManager.Instance.CreateHumanOptionTitle(this));
             }
+
+            CharacterApi.HumanOptionsCreated(this);
+
         }
 
         public void UpdateSpells(short oldLevel, short newLevel)
@@ -1193,6 +1199,10 @@ namespace Giny.World.Managers.Entities.Characters
                 RefreshActorOnMap();
             }
         }
+        public T GetHumanOption<T>() where T : CharacterHumanOption
+        {
+            return HumanOptions.OfType<T>().FirstOrDefault();
+        }
         public void RemoveHumanOption(CharacterHumanOption characterHumanOption, bool notify = false)
         {
             HumanOptions.Remove(characterHumanOption);
@@ -1334,6 +1344,16 @@ namespace Giny.World.Managers.Entities.Characters
             RemoveKamas(MerchantBag.GetMerchantTax());
             Client.Disconnect();
             MerchantsManager.Instance.AddMerchant(this);
+        }
+
+        public void AddFollower(ServerEntityLook look)
+        {
+            GetHumanOption<CharacterHumanOptionFollowers>().Add(look);
+        }
+
+        public void RemoveFollower(ServerEntityLook look)
+        {
+            GetHumanOption<CharacterHumanOptionFollowers>().Remove(look);
         }
     }
 

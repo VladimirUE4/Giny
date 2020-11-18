@@ -14,8 +14,8 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Giny.World\bin\Debug\Modules\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -58,6 +58,7 @@
     <ProjectReference Include="..\..\Giny.IO\Giny.IO.csproj">
       <Project>{125FA15D-C012-4AF3-8A65-F6A104A67FC1}</Project>
       <Name>Giny.IO</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Giny.ORM\Giny.ORM.csproj">
       <Project>{c6182b67-9d36-4e64-8ba9-9e186f818667}</Project>

@@ -3,6 +3,7 @@ using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Modules;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Giny.World.Managers.Fights.Effects
         [StartupInvoke(StartupInvokePriority.FifthPass)]
         public void Initialize()
         {
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            foreach (var type in AssemblyCore.GetTypes())
             {
                 SpellEffectHandlerAttribute[] handlers = type.GetCustomAttributes<SpellEffectHandlerAttribute>().ToArray();
 

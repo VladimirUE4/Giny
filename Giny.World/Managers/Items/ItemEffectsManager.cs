@@ -4,6 +4,7 @@ using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Modules;
 using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
@@ -33,15 +34,19 @@ namespace Giny.World.Managers.Items
         [StartupInvoke("Item effects", StartupInvokePriority.FourthPass)]
         public static void Initialize()
         {
-            foreach (var method in typeof(ItemEffects).GetMethods())
+            foreach (var type in AssemblyCore.GetTypes())
             {
-                var attribute = method.GetCustomAttribute<ItemEffectAttribute>();
-
-                if (attribute != null)
+                foreach (var method in type.GetMethods())
                 {
-                    Handlers.Add(attribute.Effect, method);
+                    var attribute = method.GetCustomAttribute<ItemEffectAttribute>();
+
+                    if (attribute != null)
+                    {
+                        Handlers.Add(attribute.Effect, method);
+                    }
                 }
             }
+            
         }
 
         public void AddEffects(Character character, Effect[] effects)

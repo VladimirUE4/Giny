@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Effects
         {
             get;
             set;
-        }
+        } 
         [ProtoMember(9)]
         public int Duration
         {

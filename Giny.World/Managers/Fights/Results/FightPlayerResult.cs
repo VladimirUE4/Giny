@@ -2,6 +2,7 @@
 using Giny.Core.DesignPattern;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
+using Giny.World.Api;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Formulas;
@@ -90,8 +91,7 @@ namespace Giny.World.Managers.Fights.Results
                 this.PvpData.Apply();
             }
 
-            /*  if (Outcome == FightOutcomeEnum.RESULT_VICTORY && !Fighter.Left)
-                  CustomFightLootProvider.Apply(this); */
+            FightApi.PlayerResultApplied(this);
 
             this.Character.RefreshStats();
         }

@@ -122,6 +122,10 @@ namespace Giny.World.Records.Items
             return effects;
         }
 
+        public T GetFirstEffect<T>() where T : Effect
+        {
+            return Effects.OfType<T>().FirstOrDefault();
+        }
         public T GetEffect<T>(Predicate<Effect> predicate) where T : Effect
         {
             return (T)Effects.Find(predicate);
@@ -134,13 +138,17 @@ namespace Giny.World.Records.Items
         {
             return Effects.OfType<T>();
         }
-        public void AddEffect<T>(T effect) where T : Effect
+        public void AddEffect(Effect effect) 
         {
             Effects.Add(effect);
         }
         public bool HasEffect(EffectsEnum effect)
         {
             return Effects.Any(x => x.EffectEnum == effect);
+        }
+        public bool HasEffect<T>() where T : Effect
+        {
+            return Effects.OfType<T>().Count() > 0;
         }
         public void RemoveEffects()
         {

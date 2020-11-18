@@ -18,7 +18,9 @@ namespace Giny.World.Modules
 
         private readonly Dictionary<string, IModule> m_modules = new Dictionary<string, IModule>();
 
-        [StartupInvoke("Modules", StartupInvokePriority.Initial)]
+        private readonly List<Type> m_modulesTypes = new List<Type>();
+
+        [StartupInvoke(StartupInvokePriority.Initial)]
         public void Initialize()
         {
             string path = Path.Combine(Environment.CurrentDirectory, ModulesPath);
@@ -34,7 +36,11 @@ namespace Giny.World.Modules
                 {
                     Assembly assembly = Assembly.LoadFile(file);
 
-                    foreach (var type in assembly.GetTypes())
+                    IEnumerable<Type> types = assembly.GetTypes();
+
+                    m_modulesTypes.AddRange(types);
+
+                    foreach (var type in types)
                     {
                         if (type.GetCustomAttribute<ModuleAttribute>() != null)
                         {
@@ -47,6 +53,7 @@ namespace Giny.World.Modules
                 }
             }
 
+            AssemblyCore.OnAssembliesLoaded();
         }
         [StartupInvoke("Modules", StartupInvokePriority.Modules)]
         public void LoadModules()
@@ -56,6 +63,18 @@ namespace Giny.World.Modules
                 module.Initialize();
                 module.CreateHooks();
             }
+        }
+        public void UnloadModules()
+        {
+            foreach (var module in m_modules.Values)
+            {
+                module.DestroyHooks();
+            }
+        }
+
+        public IEnumerable<Type> GetModuleTypes()
+        {
+            return m_modulesTypes;
         }
         private void LoadModule(Type type)
         {
