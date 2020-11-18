@@ -1,4 +1,5 @@
-﻿using Giny.World.Managers.Effects;
+﻿using Giny.Protocol.Types;
+using Giny.World.Managers.Effects;
 using Giny.World.Managers.Experiences;
 using Giny.World.Records.Characters;
 using ProtoBuf;
@@ -15,14 +16,7 @@ namespace Giny.Pokefus.Effects
     {
         private const string Description = "Niveau {0}";
 
-        [ProtoMember(1)]
-        public override short EffectId
-        {
-            get => base.EffectId;
-            set => base.EffectId = value;
-        }
-
-        [ProtoMember(2)]
+        [ProtoMember(21)]
         public long Exp
         {
             get;
@@ -51,24 +45,20 @@ namespace Giny.Pokefus.Effects
         }
         public EffectPokefusLevel()
         {
-
+            EffectId = TextEffectId;
         }
         public EffectPokefusLevel(long exp)
         {
             this.Exp = exp;
+            EffectId = TextEffectId;
         }
 
         public void AddExperience(long value)
         {
-            if (this.Level >= PokefusManager.MaxPokefusLevel)
-            {
-                return;
-            }
-
             Exp += value;
         }
 
-        public override string GetEffectDescription()
+        protected override string GetEffectDescription()
         {
             return string.Format(Description, Level);
         }
@@ -86,5 +76,6 @@ namespace Giny.Pokefus.Effects
         {
             return new EffectPokefusLevel(Exp);
         }
+
     }
 }

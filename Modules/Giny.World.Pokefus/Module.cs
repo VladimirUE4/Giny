@@ -1,5 +1,4 @@
-﻿using Giny.Pokefus.Effects;
-using Giny.World.Api;
+﻿using Giny.World.Api;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;

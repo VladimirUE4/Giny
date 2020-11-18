@@ -46,9 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatCommands.cs" />
-    <Compile Include="Effects\EffectCustom.cs" />
-    <Compile Include="Effects\EffectPokefus.cs" />
-    <Compile Include="Effects\EffectPokefusLevel.cs" />
     <Compile Include="Fight\Fighters\PokefusFighter.cs" />
     <Compile Include="ItemEffects.cs" />
     <Compile Include="PokefusManager.cs" />

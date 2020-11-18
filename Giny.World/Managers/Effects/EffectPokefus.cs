@@ -14,25 +14,19 @@ namespace Giny.Pokefus.Effects
     {
         private const string Description = "Contrôle du monstre {0} ({1})";
 
-        [ProtoMember(1)]
-        public override short EffectId
-        {
-            get => base.EffectId;
-            set => base.EffectId = value;
-        }
-        [ProtoMember(2)]
+        [ProtoMember(18)]
         public short MonsterId
         {
             get;
             set;
         }
-        [ProtoMember(3)]
+        [ProtoMember(19)]
         public byte GradeId
         {
             get;
             set;
         }
-        [ProtoMember(4)]
+        [ProtoMember(20)]
         public string MonsterName
         {
             get;
@@ -40,13 +34,14 @@ namespace Giny.Pokefus.Effects
         }
         public EffectPokefus()
         {
-
+            EffectId = TextEffectId;
         }
         public EffectPokefus(short monsterId, string monsterName, byte gradeId)
         {
             this.MonsterId = monsterId;
             this.MonsterName = monsterName;
             this.GradeId = gradeId;
+            EffectId = TextEffectId;
         }
 
         public override object Clone()
@@ -59,7 +54,7 @@ namespace Giny.Pokefus.Effects
                 MonsterName = MonsterName,
             };
         }
-
+    
         public override bool Equals(object obj)
         {
             return obj is EffectPokefus ? Equals((EffectPokefus)obj) : false;
@@ -68,7 +63,7 @@ namespace Giny.Pokefus.Effects
         {
             return MonsterId == effect.MonsterId && GradeId == effect.GradeId && MonsterName == effect.MonsterName;
         }
-        public override string GetEffectDescription()
+        protected override string GetEffectDescription()
         {
             return string.Format(Description, MonsterName, GradeId);
         }

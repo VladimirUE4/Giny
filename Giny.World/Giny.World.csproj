@@ -60,6 +60,9 @@
     <Compile Include="Api\CharacterApi.cs" />
     <Compile Include="Api\FightApi.cs" />
     <Compile Include="Api\InventoryApi.cs" />
+    <Compile Include="Managers\Effects\EffectCustom.cs" />
+    <Compile Include="Managers\Effects\EffectPokefus.cs" />
+    <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Modules\AssemblyCore.cs" />
     <Compile Include="ConfigFile.cs" />
     <Compile Include="Handlers\BasicHandler.cs" />

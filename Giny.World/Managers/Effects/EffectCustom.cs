@@ -1,13 +1,11 @@
 ﻿using Giny.Protocol.Types;
-using Giny.World.Managers.Effects;
-using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.Pokefus.Effects
+namespace Giny.World.Managers.Effects
 {
     public abstract class EffectCustom : Effect
     {
@@ -17,7 +15,7 @@ namespace Giny.Pokefus.Effects
         {
             this.EffectId = TextEffectId;
         }
-        
+
         public override ObjectEffect GetObjectEffect()
         {
             return new ObjectEffectString()
@@ -27,7 +25,6 @@ namespace Giny.Pokefus.Effects
             };
         }
 
-
-        public abstract string GetEffectDescription();
+        protected abstract string GetEffectDescription();
     }
 }

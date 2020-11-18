@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Pokefus.Effects;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
@@ -20,6 +21,10 @@ namespace Giny.World.Managers.Effects
     [ProtoInclude(3, typeof(EffectDice))]
     [ProtoInclude(5, typeof(EffectInteger))]
     [ProtoInclude(4, typeof(EffectInteger))]
+    [ProtoInclude(18, typeof(EffectPokefus))]
+    [ProtoInclude(19, typeof(EffectPokefus))]
+    [ProtoInclude(20, typeof(EffectPokefus))]
+    [ProtoInclude(21, typeof(EffectPokefusLevel))]
     public abstract class Effect : ICloneable
     {
         public EffectsEnum EffectEnum
@@ -52,7 +57,7 @@ namespace Giny.World.Managers.Effects
         {
             get;
             set;
-        } 
+        }
         [ProtoMember(9)]
         public int Duration
         {
