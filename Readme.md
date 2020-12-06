@@ -6,7 +6,7 @@
 
  | Name   |      State      |  Comment  
 |----------|:-------------:|:-------------:|
-| Map entities |   ![alt text](https://img.shields.io/badge/Done-green) | errzee
+| Map entities |   ![alt text](https://img.shields.io/badge/Done-green) | 
 | Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    |
 | Titles | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Ornaments | ![alt text](https://img.shields.io/badge/Done-green)   |
@@ -27,8 +27,8 @@
 | Quests | ![alt text](https://img.shields.io/badge/Todo-red)  |
 | Modular Dungeons | ![alt text](https://img.shields.io/badge/Done-green) |
 | Spells & Variants | ![alt text](https://img.shields.io/badge/Done-green)   |
-| Living items (find skin Id) ! | ![alt text](https://img.shields.io/badge/Started-orange)  |
-| Pokefus Module | ![alt text](https://img.shields.io/badge/Started-orange)  |
+| Living items | ![alt text](https://img.shields.io/badge/Started-orange)  | Missing few skin Id(s)
+| Pokefus Module | ![alt text](https://img.shields.io/badge/Started-orange)  | Fighters must be controlable ! 
 | Mimicry | ![alt text](https://img.shields.io/badge/Todo-red)  |
 | Arena  | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Criterions | ![alt text](https://img.shields.io/badge/Done-green)   |
