@@ -36,6 +36,8 @@
   * Friend list  ![alt text](https://img.shields.io/badge/Todo-red)
   * Houses ![alt text](https://img.shields.io/badge/Todo-red)
   * Monsters ![alt text](https://img.shields.io/badge/Done-green) 
+  * Exchanges ![alt text](https://img.shields.io/badge/Done-green) 
+  * Shortcuts ![alt](https://img.shields.io/badge/Done-green) 
  
 
 # Fights
