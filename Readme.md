@@ -4,7 +4,7 @@
 
 ## Roleplay
 
- | Name   |      State      |  Comment  
+ | Nom  |      Etat     |  Commentaire  
 |----------|:-------------:|:-------------:|
 | Creation et supression personnage | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Entitée carte |   ![alt text](https://img.shields.io/badge/Done-green) | 
