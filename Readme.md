@@ -49,6 +49,8 @@
 
 # Fights
 
+ | Name   |      State      |  Comment  
+|----------|:-------------:|:-------------:|
 | Feca | ![alt text](https://img.shields.io/badge/Todo-red) | 
 | Osamodas | ![alt text](https://img.shields.io/badge/Todo-red)
 | Enutrof | ![alt text](https://img.shields.io/badge/Todo-red)
