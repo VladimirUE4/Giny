@@ -148,7 +148,6 @@
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Concentration de Chakra | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 
 ### Autres
