@@ -3,6 +3,13 @@
 # Giny Emulator
 
 # Roleplay
+
+ | Name   |      State      
+|----------|:-------------:|
+| col 1 is |  left-aligned |
+| col 2 is |    centered   |
+| col 3 is | right-aligned |
+
   * Map entities ![alt text](https://img.shields.io/badge/Done-green) 
   * Map movements ![alt text](https://img.shields.io/badge/Done-green) 
   * Titles ![alt text](https://img.shields.io/badge/Done-green) 
