@@ -99,6 +99,57 @@
 | Colère de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Fureur| ![alt text](https://img.shields.io/badge/Done-green) | 
 
+
+### Sram
+
+ * Couleur des pièges
+ 
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Chausse Trape | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Piege Sournois | ![alt text](https://img.shields.io/badge/Done-green) |
+| Invisiblité | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Brume | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Double | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Fangeux| ![alt text](https://img.shields.io/badge/Bug-red) |
+| Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Cruauté | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Guet-apens | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
+| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Fourberie | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Bug-red) | Perte de PM non affiché (séquence?)
+| Fausse commune | ![alt text](https://img.shields.io/badge/Done-green) |
+| Fourvoiement | ![alt text](https://img.shields.io/badge/Done-green) |
+| Injection toxique | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Répulsif | ![alt text](https://img.shields.io/badge/Done-green) |
+| Poisse | ![alt text](https://img.shields.io/badge/Bug-red) | Minimise les effets aléatoires
+| Peur | ![alt text](https://img.shields.io/badge/Done-green) |
+| Méprise | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Concentration de Chakra | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
+| Pillage| ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
+| Perquisition | ![alt text](https://img.shields.io/badge/Bug-red) | Heal received damages
+| Attaque Mortelle| ![alt text](https://img.shields.io/badge/Done-green) |
+| Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
+| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Concentration de Chakra | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
+
 ### Autres
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
