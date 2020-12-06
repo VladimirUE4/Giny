@@ -56,12 +56,12 @@
 | Feca | ![alt text](https://img.shields.io/badge/Todo-red) | 
 | Osamodas | ![alt text](https://img.shields.io/badge/Todo-red)
 | Enutrof | ![alt text](https://img.shields.io/badge/Todo-red)
-| Sram | ![alt text](https://img.shields.io/badge/Todo-red)
+| Sram | ![alt text](https://img.shields.io/badge/Started-orange)
 | Xelor  | ![alt text](https://img.shields.io/badge/Started-orange)   | 
 | Ecaflip | ![alt text](https://img.shields.io/badge/Todo-red)   |
 | Eniripsa | ![alt text](https://img.shields.io/badge/Todo-red)  |
 | Iop | ![alt text](https://img.shields.io/badge/Started-orange)   | 
-| Cra  |![alt text](https://img.shields.io/badge/Todo-red)  |
+| Cra  |![alt text](https://img.shields.io/badge/Started-orange)  |
 | Sadida |![alt text](https://img.shields.io/badge/Todo-red) | 
 | Sacrieur  |![alt text](https://img.shields.io/badge/Todo-red)   |
 | Pandawa | ![alt text](https://img.shields.io/badge/Todo-red) |
