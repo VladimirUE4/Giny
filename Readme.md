@@ -6,7 +6,7 @@
 
  | Name   |      State      |  Comment  
 |----------|:-------------:|:-------------:|
-| Map entities |   ![alt text](https://img.shields.io/badge/Done-green) |
+| Map entities |   ![alt text](https://img.shields.io/badge/Done-green) | errzee
 | Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    |
 | Titles | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Ornaments | ![alt text](https://img.shields.io/badge/Done-green)   |
