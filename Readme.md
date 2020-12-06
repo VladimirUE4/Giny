@@ -53,6 +53,7 @@
 
  | Name   |      State      |
 |----------|:-------------:|
+| Fight Logic | ![alt text](https://img.shields.io/badge/Done-green) |
 | Feca | ![alt text](https://img.shields.io/badge/Todo-red) | 
 | Osamodas | ![alt text](https://img.shields.io/badge/Todo-red)
 | Enutrof | ![alt text](https://img.shields.io/badge/Todo-red)
@@ -76,5 +77,6 @@
 | Summoned Fighter| ![alt text](https://img.shields.io/badge/Started-orange)  | 
 | Controlable Fighter | ![alt text](https://img.shields.io/badge/Started-orange)  | 
 | Damage calculation | ![alt text](https://img.shields.io/badge/Started-orange)  | 
-
+| Fight Reconnect | ![alt text](https://img.shields.io/badge/Todo-red) |
+| Fight Spectate | ![alt text](https://img.shields.io/badge/Todo-red) |
 
