@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giny.Core.DesignPattern;
 using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Managers.Entities.Monsters;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Formulas;
@@ -44,7 +46,7 @@ namespace Giny.World.Managers.Fights
                 , GetFightOptionsInformations());
         }
 
-      
+
         public override int GetPlacementDelay()
         {
             return 30;
@@ -61,6 +63,7 @@ namespace Giny.World.Managers.Fights
             return Map.Instance.MonsterGroupExists(this.MonsterGroup);
         }
 
+        [WIP]
         protected override IEnumerable<IFightResult> GenerateResults()
         {
             List<IFightResult> results = new List<IFightResult>();
@@ -95,8 +98,29 @@ namespace Giny.World.Managers.Fights
                     looter.Loot.Kamas = teamPP > 0 ? FightFormulas.Instance.AdjustDroppedKamas(looter, teamPP, kamas) : 0;
                 }
             }
-         
+
             return results;
+        }
+        public override void OnFighterJoined(Fighter fighter)
+        {
+            if (MonsterGroup is ModularMonsterGroup)
+            {
+                FightTeam monsterTeam = this.GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER);
+
+                FightTeam playerTeam = monsterTeam.EnemyTeam;
+
+                if (fighter.Team == playerTeam)
+                {
+                    var modularGroup = (ModularMonsterGroup)MonsterGroup;
+
+                    foreach (var monsterFighter in modularGroup.CreateFighters(monsterTeam, monsterTeam.GetFightersCount(), playerTeam.GetFightersCount()))
+                    {
+                        monsterTeam.AddFighter(monsterFighter);
+                    }
+                }
+
+            }
+
         }
     }
 }

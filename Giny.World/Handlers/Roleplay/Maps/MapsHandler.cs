@@ -25,7 +25,12 @@ namespace Giny.World.Handlers.Maps
         [MessageHandler]
         public static void HandleFriendJoinRequestMessage(FriendJoinRequestMessage message, WorldClient client)
         {
+            var target = WorldServer.Instance.GetConnectedClient(message.name);
 
+            if (target != null)
+            {
+                client.Character.Teleport(target.Character.Record.MapId, target.Character.Map.Instance.GetNearEntityCell(target.Character.GetCell()));
+            }
         }
         [MessageHandler]
         public static void HandleGameMapChangeOriantation(GameMapChangeOrientationRequestMessage message, WorldClient client)
@@ -113,12 +118,13 @@ namespace Giny.World.Handlers.Maps
 
                         FightPvM fight = FightManager.Instance.CreateFightPvM(group, client.Character.Map, cell);
 
+                        foreach (var monsterFighter in group.CreateFighters(fight.BlueTeam))
+                        {
+                            fight.BlueTeam.AddFighter(monsterFighter);
+                        }
+
                         fight.RedTeam.AddFighter(client.Character.CreateFighter(fight.RedTeam));
 
-                        foreach (Monster monster in group.GetMonsters())
-                        {
-                            fight.BlueTeam.AddFighter(monster.CreateFighter(fight.BlueTeam));
-                        }
 
                         fight.StartPlacement();
                     }

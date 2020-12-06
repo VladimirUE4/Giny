@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Time;
 using Giny.Pokefus.Effects;
 using Giny.Pokefus.Fight.Fighters;
 using Giny.Protocol.Enums;
@@ -9,9 +10,11 @@ using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Items;
 using Giny.World.Records.Items;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +32,6 @@ namespace Giny.Pokefus
         private ItemRecord m_regularItemRecord;
         private ItemRecord m_miniBossItemRecord;
         private ItemRecord m_bossItemRecord;
-
 
         public const short MaxPokefusLevel = 200;
 
@@ -51,13 +53,64 @@ namespace Giny.Pokefus
         }
         public void OnPlayerResultApplied(FightPlayerResult result)
         {
-            foreach (var monster in result.Fighter.EnemyTeam.GetFighters<MonsterFighter>(false))
-            {
-                CharacterItemRecord item = CreatePokefusItem(result.Character.Id, monster.Record, monster.Monster.Grade.GradeId);
+            AsyncRandom random = new AsyncRandom();
 
-                result.Loot.AddItem(item.GId, item.Quantity);
-                result.Character.Inventory.AddItem(item);
+            if (result.Fight.Winners == result.Fighter.Team)
+            {
+                foreach (var monster in result.Fighter.EnemyTeam.GetFighters<MonsterFighter>(false))
+                {
+                    var chance = (random.Next(0, 100) + random.NextDouble());
+                    var dropRate = GetDropRate(monster, result.Fighter);
+
+                    if (!(dropRate >= chance))
+                        continue;
+
+                    CharacterItemRecord item = CreatePokefusItem(result.Character.Id, monster.Record, monster.Monster.Grade.GradeId);
+                    result.Loot.AddItem(item.GId, item.Quantity);
+                    result.Character.Inventory.AddItem(item);
+                }
             }
+        }
+        private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
+        {
+            double probability = 0d;
+
+
+            if (monster.Level >= 1)
+            {
+                probability = 0.1;
+            }
+            if (monster.Level >= 50)
+            {
+                probability = 0.05;
+            }
+            if (monster.Level >= 100)
+            {
+                probability = 0.04;
+            }
+            if (monster.Level >= 150)
+            {
+                probability = 0.03;
+            }
+            if (monster.Level >= 200)
+            {
+                probability = 0.02;
+            }
+            if (monster.Record.IsBoss)
+            {
+                probability = 0.01;
+            }
+
+            probability += (fighter.Level / 200) / 20;
+
+
+            probability += (fighter.Stats.Prospecting.TotalInContext() / 5000);
+
+            var percentage = Math.Round(probability * 100d, 2);
+
+            fighter.Character.Reply("Chance de drop pour " + monster.Name + ": " + percentage + "%", Color.CornflowerBlue);
+
+            return percentage;
         }
         public void OnFighterJoined(Fighter fighter)
         {
@@ -71,7 +124,9 @@ namespace Giny.Pokefus
                 EffectPokefus effect = pokefusItem.GetFirstEffect<EffectPokefus>();
                 MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(effect.MonsterId);
 
-                PokefusFighter pokefusFighter = new PokefusFighter(characterFighter.Team, characterFighter.RoleplayCell, monsterRecord, monsterRecord.GetGrade(effect.GradeId));
+                CellRecord cell = fighter.Team.GetPlacementCell();
+
+                PokefusFighter pokefusFighter = new PokefusFighter(characterFighter, monsterRecord, null, effect.GradeId, cell);
 
                 fighter.Team.AddFighter(pokefusFighter);
             }

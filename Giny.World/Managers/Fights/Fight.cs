@@ -44,6 +44,11 @@ namespace Giny.World.Managers.Fights
             get;
             private set;
         }
+        public long? TargetMapId
+        {
+            get;
+            set;
+        }
         public FightTeam BlueTeam
         {
             get;
@@ -165,6 +170,9 @@ namespace Giny.World.Managers.Fights
             BlueTeam.OnFighters(action, aliveOnly);
             RedTeam.OnFighters(action, aliveOnly);
         }
+
+        public abstract void OnFighterJoined(Fighter fighter);
+
         public Fighter GetFighter(short cellId)
         {
             Fighter target = BlueTeam.GetFighter<Fighter>(x => x.Cell.Id == cellId);
@@ -214,6 +222,11 @@ namespace Giny.World.Managers.Fights
             this.SequenceManager = new SequenceManager(this);
             this.Synchronizer = null;
             this.Marks = new List<Mark>();
+
+            if (map.IsDungeonMap)
+            {
+                this.TargetMapId = map.DungeonMap.NextMapId;
+            }
         }
 
 
@@ -803,10 +816,12 @@ namespace Giny.World.Managers.Fights
                                                                                     new NamedPartyTeamWithOutcome[0]));
             }
 
+            long targetMapId = TargetMapId.HasValue ? TargetMapId.Value : Map.Id;
+
             foreach (CharacterFighter current in this.GetFighters<CharacterFighter>(false))
             {
                 bool winner = current.Team == Winners ? true : false;
-                current.Character.RejoinMap(FightType, winner, SpawnJoin);
+                current.Character.RejoinMap(targetMapId, FightType, winner, SpawnJoin);
             }
 
             OnFightEnded();

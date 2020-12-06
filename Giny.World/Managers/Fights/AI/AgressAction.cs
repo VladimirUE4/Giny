@@ -25,9 +25,9 @@ namespace Giny.World.Managers.Fights.AI
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
-            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category.HasFlag(SpellCategoryEnum.Damages)).Shuffle())
+            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Damages)).Shuffle())
             {
-                Fighter.CastSpell(spellRecord.Key, target.Cell.Id);
+                Fighter.CastSpell(spellRecord.Id, target.Cell.Id);
             }
         }
     }

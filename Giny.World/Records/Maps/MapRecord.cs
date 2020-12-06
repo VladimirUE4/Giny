@@ -135,13 +135,16 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Ignore]
-        public bool CanSpawnMonsters
+        public DungeonMapRecord DungeonMap
         {
-            get
-            {
-                return Position.AllowMonsterRespawn && !HasZaap() && Cells.All(x => !x.FarmCell);
-            }
+            get;
+            set;
         }
+        [Ignore]
+        public bool CanSpawnMonsters => IsDungeonMap || Position.AllowMonsterRespawn && !HasZaap() && Cells.All(x => !x.FarmCell);
+
+        [Ignore]
+        public bool IsDungeonMap => DungeonMap != null;
 
         [StartupInvoke("Maps Bindings", StartupInvokePriority.SecondPass)]
         public static void Initialize()
@@ -171,10 +174,7 @@ namespace Giny.World.Records.Maps
         {
             return WalkableCells.Where(x => !x.FarmCell).Random();
         }
-        public CellRecord FindMonsterGroupCell()
-        {
-            return Cells.Where(x => x.IsValidFightCell()).Random();
-        }
+
         public static MapRecord GetMap(long mapId)
         {
             return Maps[mapId];
@@ -207,6 +207,8 @@ namespace Giny.World.Records.Maps
                 element.MapId = this.Id;
                 element.Skill = InteractiveSkillRecord.GetInteractiveSkill(element.Identifier);
             }
+
+            this.DungeonMap = DungeonMapRecord.GetDungeonMap(Id);
         }
         public CellRecord[] GetMapChangeCells(MapScrollEnum scrollType)
         {
@@ -419,7 +421,8 @@ namespace Giny.World.Records.Maps
 
         public bool IsValidFightCell()
         {
-            return Walkable && !FarmCell && !NonWalkableDuringFight;
+            return Walkable && !FarmCell && !NonWalkableDuringFight && !IsRightChange && !IsBottomChange &&
+                !IsTopChange && !IsLeftChange;
         }
         public override string ToString()
         {

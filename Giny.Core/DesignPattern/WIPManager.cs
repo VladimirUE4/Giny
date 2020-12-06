@@ -71,17 +71,17 @@ namespace Giny.Core.DesignPattern
                 case WIPState.Ok:
                     Logger.Write(result, MessageState.SUCCES);
                     break;
-                case WIPState.Warn:
+                case WIPState.Architecture:
                     Logger.Write(result, MessageState.WARNING);
                     break;
-                case WIPState.Grave:
+                case WIPState.BadCode:
                     Logger.Write(result, MessageState.ERROR);
                     break;
                 case WIPState.Todo:
                     Logger.WriteColor1(result);
                     break;
                 default:
-                    break;
+                    throw new Exception("Unhandled WIP State : " + state);
             }
         }
     }
@@ -112,9 +112,9 @@ namespace Giny.Core.DesignPattern
     public enum WIPState
     {
         Ok,
-        Warn,
-        Grave,
+        BadCode,
         Todo,
+        Architecture,
         None,
     }
 }

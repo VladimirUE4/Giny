@@ -1,4 +1,5 @@
 ﻿using Giny.Core.Extensions;
+using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
@@ -47,6 +48,20 @@ namespace Giny.World.Managers.Chat
             }
 
             client.Character.ReplyWarning(sb.ToString());
+        }
+        [ChatCommand("donjon", ServerRoleEnum.ADMINISTRATOR)]
+        public static void SpawnDungeonMonsterCommand(WorldClient client, string monsters, int nextMapId)
+        {
+            DungeonMapRecord dungeonMap = new DungeonMapRecord();
+            dungeonMap.Id = client.Character.Map.Id;
+            dungeonMap.Monsters = monsters.Split(',').Select(x => short.Parse(x)).ToList();
+            dungeonMap.RespawnDelay = 10f;
+            dungeonMap.NextMapId = nextMapId;
+
+            dungeonMap.AddInstantElement();
+
+            client.Character.Map.ReloadMembers();
+            client.Character.Map.Instance.Reload();
         }
         [ChatCommand("monsters", ServerRoleEnum.ADMINISTRATOR)]
         public static void SpawnMonstersCommand(WorldClient client, string monsters)
@@ -194,7 +209,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("item", ServerRoleEnum.ADMINISTRATOR)]
         public static void AddItemCommand(WorldClient client, short itemId, int quantity)
         {
-            client.Character.Inventory.AddItem(itemId, quantity);
+            client.Character.Inventory.AddItem(itemId, quantity, true);
             client.Character.OnItemGained(itemId, quantity);
         }
         [ChatCommand("relative", ServerRoleEnum.ADMINISTRATOR)]
@@ -251,13 +266,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
-            var p = client.Character.Fighter.EnemyTeam.GetFighters<Fighter>().First().GetPreviousPositions();
-
-            foreach (var v in p)
-            {
-                client.Character.Fighter.Send(new ShowCellMessage(client.Character.Id, v));
-                Thread.Sleep(500);
-            }
+            var t = client.Character.GuestedParties;
             /*
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(5);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());

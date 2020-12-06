@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Giny.World.Managers.Generic;
 using Giny.World.Managers.Entities.Merchants;
 using Giny.Core.Time;
+using Giny.Core.Extensions;
 
 namespace Giny.World.Managers.Maps.Instances
 {
@@ -40,6 +41,7 @@ namespace Giny.World.Managers.Maps.Instances
             }
         }
 
+
         private List<MapElement> m_elements = new List<MapElement>();
 
         private Dictionary<long, Entity> m_entities = new Dictionary<long, Entity>();
@@ -48,9 +50,8 @@ namespace Giny.World.Managers.Maps.Instances
 
         private Dictionary<int, Fight> m_fights = new Dictionary<int, Fight>();
 
-        //private List<DropItem> m_droppedItems = new List<DropItem>();
-
         private ReversedUniqueIdProvider m_npIdPopper = new ReversedUniqueIdProvider(0);
+
 
         private UniqueIdProvider m_dropItemIdPopper = new UniqueIdProvider(0);
 
@@ -70,9 +71,26 @@ namespace Giny.World.Managers.Maps.Instances
         {
             this.Record = record;
             this.m_elements = Record.Elements.Where(x => x.Skill != null).Select(x => x.GetMapElement(this)).ToList();
-            this.m_monsterSpawner = new ActionTimer(MonstersManager.MonsterSpawningPoolInterval, SpawnMonsterGroup, true);
+            InitializeSpawnCycle();
         }
-
+        private void InitializeSpawnCycle()
+        {
+            if (Record.IsDungeonMap)
+            {
+                this.m_monsterSpawner = new ActionTimer(Record.DungeonMap.GetRespawnInterval(), SpawnDungeonGroup, true);
+            }
+            else
+            {
+                this.m_monsterSpawner = new ActionTimer(MonstersManager.MonsterSpawningPoolInterval, SpawnMonsterGroup, true);
+            }
+        }
+        private void SpawnDungeonGroup()
+        {
+            if (MonsterGroupCount == 0)
+            {
+                MonstersManager.Instance.SpawnDungeonGroup(Record);
+            }
+        }
         private void SpawnMonsterGroup()
         {
             if (this.MonsterGroupCount < MonstersManager.MAX_MONSTER_GROUP_PER_MAP)
@@ -105,6 +123,7 @@ namespace Giny.World.Managers.Maps.Instances
                 character.Client.Send(GetMapComplementaryInformationsDataMessage(character));
             }
 
+            InitializeSpawnCycle();
         }
 
         public void AddEntity(Entity entity)
@@ -194,16 +213,6 @@ namespace Giny.World.Managers.Maps.Instances
             Send(new MapFightCountMessage((short)m_fights.Count));
         }
 
-
-        public bool IsCellFree(short cellId)
-        {
-            foreach (var entity in GetEntities<Entity>())
-            {
-                if (entity.CellId == cellId)
-                    return false;
-            }
-            return true;
-        }
         public bool IsCellFree(short cellId, short exclude)
         {
             foreach (var entity in GetEntities<Entity>())
@@ -216,6 +225,34 @@ namespace Giny.World.Managers.Maps.Instances
                     return false;
             }
             return true;
+        }
+
+        public bool IsCellFree(short cellId)
+        {
+            foreach (var entity in GetEntities<Entity>())
+            {
+                if (entity.CellId == cellId)
+                    return false;
+            }
+            return true;
+        }
+
+        public CellRecord FindMonsterGroupCell()
+        {
+            return Record.Cells.Where(x => x.IsValidFightCell() && IsCellFree(x.Id)).Random();
+        }
+        public short? GetNearEntityCell(CellRecord cellRecord)
+        {
+            var point = cellRecord.Point.GetNearPoints().Shuffle().FirstOrDefault(x => Record.IsCellWalkable(x.CellId) && IsCellFree(x.CellId));
+
+            if (point != null)
+            {
+                return point.CellId;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public T GetEntity<T>(Func<T, bool> predicate) where T : Entity

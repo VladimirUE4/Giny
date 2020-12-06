@@ -72,13 +72,13 @@ namespace Giny.World.Managers.Fights
             }
             if (RestrictedToParty)
             {
-                /* if (Team.LeaderAsParty)
-                 {
-                     if (((CharacterFighter)Team.Leader).Character.Party != character.Party)
-                     {
-                         return false;
-                     }
-                 } */
+                if (Team.LeaderAsParty)
+                {
+                    if (((CharacterFighter)Team.Leader).Character.Party != character.Party)
+                    {
+                        return false;
+                    }
+                }
             }
             if (!Team.IsPlacementCellsFree(character.FighterCount))
             {

@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Maps
 
         public Point Coordinates
         {
-            get
+            get 
             {
                 return new Point(X, Y);
             }

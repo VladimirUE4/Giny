@@ -22,6 +22,8 @@ namespace Giny.World.Managers.Items
     {
         public const long MAXIMUM_KAMAS = 2000000000;
 
+        public const EffectsEnum ItemCastEffect = EffectsEnum.Effect_CastSpell_1175;
+
         public static CharacterInventoryPositionEnum[] DofusPositions = new CharacterInventoryPositionEnum[]
         {
             CharacterInventoryPositionEnum.INVENTORY_POSITION_DOFUS_1,
@@ -93,7 +95,7 @@ namespace Giny.World.Managers.Items
         {
             foreach (var item in GetEquipedItems())
             {
-                if (item.HasEffect(EffectsEnum.Effect_CastSpell_1175))
+                if (item.HasEffect(ItemCastEffect))
                 {
                     yield return item;
                 }

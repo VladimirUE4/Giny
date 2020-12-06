@@ -50,7 +50,7 @@ namespace Giny.World.Managers.Effects
         {
 
         }
-        public EffectInteger Generate(AsyncRandom random)
+        public EffectInteger Generate(AsyncRandom random, bool perfect = false)
         {
             if (Value != 0)
             {
@@ -60,7 +60,14 @@ namespace Giny.World.Managers.Effects
             {
                 return new EffectInteger(EffectId, Min);
             }
-            return new EffectInteger(EffectId, (short)random.Next(Min, Max + 1));
+            if (perfect)
+            {
+                return new EffectInteger(EffectId, Max);
+            }
+            else
+            {
+                return new EffectInteger(EffectId, (short)random.Next(Min, Max + 1));
+            }
         }
 
         public short GetDelta()

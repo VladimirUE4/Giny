@@ -77,10 +77,7 @@ namespace Giny.MapEditor
                     if (i >= files.Length)
                         break;
 
-
                     double percentage = (double)i / files.Length * 100;
-
-                    //this.Dispatcher.Invoke(() => { }, DispatcherPriority.ContextIdle);
 
                     Rectangle rect = new Rectangle();
                     rect.Uid = Path.GetFullPath(files[i]);

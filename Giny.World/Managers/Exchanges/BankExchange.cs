@@ -103,7 +103,6 @@ namespace Giny.World.Managers.Exchanges
                 }
             }
         }
-        [WIP(WIPState.Warn, "Weird client behaviour (sending weird packet for kamas trade)")]
         public override void MoveKamas(long quantity)
         {
             if (quantity < 0)

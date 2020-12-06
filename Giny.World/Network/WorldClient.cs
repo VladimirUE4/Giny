@@ -60,7 +60,6 @@ namespace Giny.World.Network
             set;
         }
 
-
         public WorldClient(Socket socket) : base(socket)
         {
             base.Send(new HelloGameMessage());
@@ -79,9 +78,6 @@ namespace Giny.World.Network
         {
             throw new NotImplementedException();
         }
-
-
-
         public override void OnMessageReceived(NetworkMessage message)
         {
             Logger.Write("(World) Received " + message);

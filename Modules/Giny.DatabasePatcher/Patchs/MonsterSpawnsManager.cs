@@ -14,6 +14,12 @@ namespace Giny.DatabasePatcher.Patchs
 {
     public class MonsterSpawnsManager 
     {
+        private static long[] NotSpawn = new long[]
+        {
+            1247, // Leprechaun
+            793, // Bouftou d'Hallouine
+        };
+
         public static void Initialize()
         {
             long id = 1;
@@ -54,10 +60,11 @@ namespace Giny.DatabasePatcher.Patchs
 
         private static double ComputeMonsterSpawnProbability(MonsterRecord record)
         {
-            if (record.Id == 1247) // Leprechaun
+            if (NotSpawn.Contains(record.Id))
             {
                 return 0d;
             }
+
             if (record.IsBoss)
             {
                 return 0d;

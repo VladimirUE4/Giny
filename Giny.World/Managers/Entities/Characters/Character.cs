@@ -23,6 +23,7 @@ using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Items;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Elements;
+using Giny.World.Managers.Parties;
 using Giny.World.Managers.Shortcuts;
 using Giny.World.Managers.Skills;
 using Giny.World.Managers.Spells;
@@ -57,18 +58,28 @@ namespace Giny.World.Managers.Entities.Characters
             private set;
         }
 
+        public Party Party
+        {
+            get;
+            set;
+        }
+
+        public List<Party> GuestedParties
+        {
+            get;
+            set;
+        }
+
+        public bool HasParty => Party != null;
+
         public GameContextEnum? Context
         {
             get;
             private set;
         }
-        public bool Busy
-        {
-            get
-            {
-                return Dialog != null || RequestBox != null || ChangeMap || Collecting || IsMoving;
-            }
-        }
+
+        public bool Busy => Dialog != null || RequestBox != null || ChangeMap || Collecting || IsMoving;
+
         public CharacterFighter Fighter
         {
             get;
@@ -123,6 +134,8 @@ namespace Giny.World.Managers.Entities.Characters
                 Record.CellId = value;
             }
         }
+
+
         private short m_level;
 
         public short Level
@@ -139,6 +152,7 @@ namespace Giny.World.Managers.Entities.Characters
                 this.UpperBoundExperience = ExperienceManager.Instance.GetCharacterXPForNextLevel(Level);
             }
         }
+
 
 
         public short SafeLevel
@@ -323,6 +337,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.Inventory = new Inventory(this, CharacterItemRecord.GetCharacterItems(Id));
             this.MerchantBag = new MerchantBag(this, MerchantItemRecord.GetMerchantItems(Id));
 
+            this.GuestedParties = new List<Party>();
             this.GeneralShortcutBar = new GeneralShortcutBar(this);
             this.SpellShortcutBar = new SpellShortcutBar(this);
             this.HumanOptions = new List<CharacterHumanOption>();
@@ -732,11 +747,12 @@ namespace Giny.World.Managers.Entities.Characters
             if (Busy)
                 return;
 
-            if (Record.MapId != teleportMap.Id)
-                ChangeMap = true;
-
             if (teleportMap != null)
             {
+
+                if (Record.MapId != teleportMap.Id)
+                    ChangeMap = true;
+
                 if (cellId < 0 || cellId > 560)
                     cellId = teleportMap.RandomWalkableCell().Id;
 
@@ -747,16 +763,16 @@ namespace Giny.World.Managers.Entities.Characters
 
                 MovementKeys = null;
 
-                if (Map != null)
-                    Map.Instance.RemoveEntity(this.Id);
-
                 this.IsMoving = false;
 
 
                 if (cellId != null)
                     this.Record.CellId = cellId.Value;
 
+
                 this.Record.MapId = teleportMap.Id;
+                if (Map != null)
+                    Map.Instance.RemoveEntity(this.Id);
 
                 CurrentMapMessage(teleportMap.Id);
             }
@@ -910,10 +926,11 @@ namespace Giny.World.Managers.Entities.Characters
 
             CharacterLevelRewardManager.Instance.OnCharacterLevelUp(this, oldLevel, Level);
 
-            //  if (HasParty())
-            // {
-            //  Party.UpdateMember(this);
-            //  }
+            if (HasParty)
+            {
+                Party.UpdateMember(this);
+            }
+
             if (CharacterLoadingComplete)
             {
                 RefreshActorOnMap();
@@ -967,10 +984,10 @@ namespace Giny.World.Managers.Entities.Characters
                 Client.Send(new BasicNoOperationMessage());
                 Client.Send(new BasicTimeMessage(DateTime.Now.GetUnixTimeStampDouble(), 1));
             }
-            /*  if (HasParty())
-              {
-                  Party.UpdateMember(this);
-              } */
+            if (HasParty)
+            {
+                Party.UpdateMember(this);
+            }
         }
         public void OnDisconnected()
         {
@@ -981,6 +998,8 @@ namespace Giny.World.Managers.Entities.Characters
             if (IsInRequest())
                 CancelRequest();
 
+            if (HasParty)
+                Party.Leave(this);
 
             if (Fighting)
                 Fighter.OnDisconnected();
@@ -1051,10 +1070,6 @@ namespace Giny.World.Managers.Entities.Characters
             }
 
         }
-        public CellRecord GetCellRecord()
-        {
-            return Map.GetCell(CellId);
-        }
         public bool ForgetOrnament(short id, bool notify)
         {
             if (Record.KnownOrnaments.Contains(id))
@@ -1074,6 +1089,10 @@ namespace Giny.World.Managers.Entities.Characters
             }
             return false;
 
+        }
+        public bool HasOrnament(short id)
+        {
+            return Record.KnownOrnaments.Contains(id);
         }
         public bool ActiveOrnament(short id)
         {
@@ -1258,10 +1277,10 @@ namespace Giny.World.Managers.Entities.Characters
             this.CreateContext(GameContextEnum.FIGHT);
             this.RefreshStats();
             SendGameFightStartingMessage(team.Fight);
-            this.Fighter = new CharacterFighter(this, team, GetCellRecord());
+            this.Fighter = new CharacterFighter(this, team, GetCell());
             return Fighter;
         }
-        public void RejoinMap(FightTypeEnum fightType, bool winner, bool spawnJoin)
+        public void RejoinMap(long mapId, FightTypeEnum fightType, bool winner, bool spawnJoin)
         {
             DestroyContext();
             CreateContext(GameContextEnum.ROLE_PLAY);
@@ -1274,8 +1293,14 @@ namespace Giny.World.Managers.Entities.Characters
             }
             else
             {
-                //  if (!OnFightEnded(winner, fightType))
-                CurrentMapMessage(Record.MapId);
+                if (mapId == Record.MapId)
+                {
+                    CurrentMapMessage(mapId);
+                }
+                else
+                {
+                    Teleport(mapId);
+                }
             }
 
         }
@@ -1355,6 +1380,90 @@ namespace Giny.World.Managers.Entities.Characters
         {
             GetHumanOption<CharacterHumanOptionFollowers>().Remove(look);
         }
+
+        public PartyMemberInformations GetPartyMemberInformations()
+        {
+            return new PartyMemberInformations()
+            {
+                id = Id,
+                alignmentSide = 0,
+                subAreaId = Map.SubareaId,
+                breed = Record.BreedId,
+                entities = new PartyEntityBaseInformation[0],
+                entityLook = Look.ToEntityLook(),
+                initiative = (short)Stats.TotalInitiative,
+                level = Level,
+                lifePoints = Stats.LifePoints,
+                mapId = Record.MapId,
+                maxLifePoints = Stats.MaxLifePoints,
+                name = Name,
+                prospecting = Stats.Prospecting.TotalInContext(),
+                regenRate = 0,
+                sex = Record.Sex,
+                status = GetPlayerStatus(),
+                worldX = (short)Map.Position.X,
+                worldY = (short)Map.Position.Y,
+            };
+        }
+
+
+        public PartyInvitationMemberInformations GetPartyInvitationMemberInformations()
+        {
+            return new PartyInvitationMemberInformations()
+            {
+                id = Id,
+                breed = Record.BreedId,
+                entities = new PartyEntityBaseInformation[0],
+                entityLook = Record.Look.ToEntityLook(),
+                level = Level,
+                mapId = Map.Id,
+                subAreaId = Map.SubareaId,
+                name = Name,
+                sex = Record.Sex,
+                worldX = (short)Map.Position.X,
+                worldY = (short)Map.Position.Y,
+            };
+        }
+        public PartyGuestInformations GetPartyGuestInformations(Party party)
+        {
+            return new PartyGuestInformations()
+            {
+                breed = Record.BreedId,
+                entities = new PartyEntityBaseInformation[0],
+                guestId = Id,
+                guestLook = Look.ToEntityLook(),
+                hostId = party.Leader.Id,
+                name = Name,
+                sex = Record.Sex,
+                status = GetPlayerStatus(),
+            };
+        }
+        public void OnPartyJoinError(int partyId, PartyJoinErrorEnum errorEnum)
+        {
+            Client.Send(new PartyCannotJoinErrorMessage()
+            {
+                partyId = partyId,
+                reason = (byte)errorEnum,
+            });
+        }
+
+        public void InviteParty(Character character)
+        {
+            if (!this.HasParty)
+            {
+                Party party = PartyManager.Instance.CreateParty(this);
+                party.Create(this, character);
+            }
+            else
+            {
+                if (!Party.IsFull)
+                {
+                    Party.OnInvited(character, this);
+                }
+            }
+        }
+
+
     }
 
 }

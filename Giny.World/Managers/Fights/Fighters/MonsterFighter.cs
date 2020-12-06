@@ -13,6 +13,7 @@ using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Formulas;
 using Giny.World.Managers.Monsters;
 using Giny.World.Records.Maps;
+using Giny.World.Records.Monsters;
 using Giny.World.Records.Spells;
 
 namespace Giny.World.Managers.Fights.Fighters
@@ -26,7 +27,7 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             private set;
         }
-        public MonsterFighter(FightTeam team, CellRecord roleplayCell, Monster monster) : base(team, roleplayCell, monster.Record, monster.Grade)
+        public MonsterFighter(FightTeam team, CellRecord roleplayCell, Monster monster) : base(team, roleplayCell)
         {
             this.Monster = monster;
         }
@@ -39,6 +40,16 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override bool Sex => false;
 
+        public MonsterGrade Grade => Monster.Grade;
+
+        public MonsterRecord Record => Monster.Record;
+
+        public override void Initialize()
+        {
+            this.Stats = new FighterStats(Grade);
+            this.Look = Record.Look.Clone();
+            base.Initialize();
+        }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()
@@ -117,10 +128,22 @@ namespace Giny.World.Managers.Fights.Fighters
 
             return items;
         }
+
+        public override Spell GetSpell(short spellId)
+        {
+            var record = Record.SpellRecords[spellId];
+            var level = record.GetLevel(Grade.GradeId);
+            return new Spell(record, level);
+        }
+
         public override void Kick(Fighter source)
         {
             throw new NotImplementedException();
         }
- 
+
+        public override IEnumerable<SpellRecord> GetSpells()
+        {
+            return Record.SpellRecords.Values;
+        }
     }
 }

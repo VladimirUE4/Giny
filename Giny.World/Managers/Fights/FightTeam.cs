@@ -74,6 +74,14 @@ namespace Giny.World.Managers.Fights
             }
         }
 
+        public bool LeaderAsParty
+        {
+            get
+            {
+                return (Leader is CharacterFighter) && ((CharacterFighter)Leader).Character.HasParty;
+            }
+        }
+
         public FightTeam(TeamEnum id, CellRecord[] placementCells, AlignmentSideEnum side, TeamTypeEnum teamtype)
         {
             this.Side = side;
@@ -134,6 +142,8 @@ namespace Giny.World.Managers.Fights
 
             if (!Fight.Started)
                 fighter.OnJoined();
+
+            Fight.OnFighterJoined(fighter);
         }
 
         public void ShowCell(CharacterFighter source, short cellId)
@@ -166,7 +176,7 @@ namespace Giny.World.Managers.Fights
             return PlacementCells.Count(x => !Fighters.Any(fighter => fighter.Cell.Id == x.Id)) >= count;
         }
 
-        public int GetFightersCount(bool aliveOnly)
+        public int GetFightersCount(bool aliveOnly = true)
         {
             return GetFighters<Fighter>(aliveOnly).Count();
         }

@@ -109,7 +109,7 @@ namespace Giny.World.Managers.Items
                 }
                 else
                 {
-                    result.Add(effect.Generate(random));
+                    result.Add(effect.Generate(random, perfect));
                 }
             }
 
@@ -123,6 +123,7 @@ namespace Giny.World.Managers.Items
                 character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 34);
                 return false;
             }
+
             var function = m_usageHandlers.FirstOrDefault(x => x.Key.GId == item.GId);
 
             if (function.Value != null)

@@ -1,4 +1,4 @@
-﻿using Giny.IO.D2OClasses;
+﻿using Giny.World.Managers.Monsters;
 using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,11 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public interface IMonster
     {
-        public short MonsterId
+        public MonsterGrade Grade
+        {
+            get;
+        }
+        public MonsterRecord Record
         {
             get;
         }

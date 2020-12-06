@@ -369,6 +369,7 @@
     <Compile Include="MA3\MA3MountFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawPatch\RawPatchManager.cs" />
+    <Compile Include="SWL\SwlFile.cs" />
     <Compile Include="ZIP\ZipHelper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -47,5 +47,10 @@ namespace Giny.World.Managers.Fights
                    select entry into fighter
                    select fighter.GetFightResult();
         }
+
+        public override void OnFighterJoined(Fighter fighter)
+        {
+           
+        }
     }
 }

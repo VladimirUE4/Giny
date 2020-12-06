@@ -613,10 +613,12 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         private void OnBuffAdded(Buff buff)
         {
+            var abstractFightDispellableEffect = buff.GetAbstractFightDispellableEffect();
+
             Fight.Send(new GameActionFightDispellableEffectMessage()
             {
                 actionId = buff.GetActionId(),
-                effect = buff.GetAbstractFightDispellableEffect(),
+                effect = abstractFightDispellableEffect,
                 sourceId = buff.Cast.Source.Id,
             }); ;
         }

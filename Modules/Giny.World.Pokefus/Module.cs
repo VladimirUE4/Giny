@@ -23,7 +23,10 @@ namespace Giny.Pokefus
 
         public void CreateHooks()
         {
-            FightApi.OnPlayerResultApplied += PokefusManager.Instance.OnPlayerResultApplied;
+            /*
+             * PokefusManager.Instance.OnPlayerResultApplied est une fonction, dans le module.
+             */
+            FightApi.OnPlayerResultApplied += PokefusManager.Instance.OnPlayerResultApplied; 
             CharacterApi.OnHumanOptionsCreated += PokefusManager.Instance.OnHumanOptionsCreated;
             FightApi.OnFighterJoined += PokefusManager.Instance.OnFighterJoined;
         }

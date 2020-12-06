@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
             foreach (var target in targets)
             {
                 int id = target.BuffIdProvider.Pop();
-                FinalDamageBuff buff = new FinalDamageBuff(id, (short)Effect.Min, CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
+                FinalDamageBuff buff = new FinalDamageBuff(id, (short)(-Effect.Min), CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
                 target.AddBuff(buff);
             }
         }

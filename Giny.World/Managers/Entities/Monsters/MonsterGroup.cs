@@ -1,4 +1,5 @@
-﻿using Giny.Core.Extensions;
+﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
@@ -6,19 +7,22 @@ using Giny.World.Managers.Entities;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Maps.Paths;
+using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Monsters
 {
     public class MonsterGroup : Entity
     {
-        private List<Monster> Monsters = new List<Monster>();
+        protected readonly List<Monster> Monsters = new List<Monster>();
 
         public int MonsterCount
         {
@@ -27,6 +31,7 @@ namespace Giny.World.Managers.Monsters
                 return Monsters.Count;
             }
         }
+
         public MonsterGroup(MapRecord map, short cellId)
         {
             this.Map = map;
@@ -95,42 +100,37 @@ namespace Giny.World.Managers.Monsters
         }
         private void Move(List<short> keys)
         {
-            this.Map.Instance.Send(new GameMapMovementMessage(keys.ToArray(), 0, Id));
+            this.Map.Instance.Send(new GameMapMovementMessage(keys.ToArray(), 1, Id));
             this.CellId = keys.Last();
         }
 
+        [WIP]
+        public void MoveRandomly()
+        {
+            Lozenge lozenge = new Lozenge(1, 5);
 
-        /*    public void RandomMapMove()
+            CellRecord cell = lozenge.GetCells(Map.GetCell(CellId), Map).Where((CellRecord entry) => entry.Walkable).Random();
+
+            if (cell != null)
             {
-                Lozenge lozenge = new Lozenge(1, 4);
-                short cellId = lozenge.GetCells((short)this.CellId, Map).Where((short entry) => Map.IsCellWalkable(entry)).Random();
+                Pathfinding pathfinder = new Pathfinding(Map);
 
-                if (cellId != 0)
+                var cells = pathfinder.FindPath(this.CellId, cell.Id);
+
+                if (cells != null && cells.Count > 0)
                 {
-                    Pathfinder pathfinder = new Pathfinder(Map, (short)this.CellId, cellId);
-                    var cells = pathfinder.FindPath();
-
-                    if (cells != null && cells.Count > 0)
-                    {
-                        cells.Insert(0, (short)this.CellId);
-                        this.Move(cells);
-                    }
+                    cells.Insert(0, (short)this.CellId);
+                    this.Move(cells);
                 }
             }
-            public IEnumerable<Fighter> CreateFighters(FightTeam team)
-            {
-                foreach (var monster in Monsters)
-                {
-                    yield return monster.CreateFighter(team);
-                }
-            }
-             */
+        }
+
         public MonsterInGroupInformations[] GetMonsterInGroupInformations()
         {
             return Monsters.FindAll(x => x != Leader).ConvertAll<MonsterInGroupInformations>(x => x.GetMonsterInGroupInformations()).ToArray();
         }
 
-        public GroupMonsterStaticInformations GetGroupMonsterStaticInformations()
+        public virtual GroupMonsterStaticInformations GetGroupMonsterStaticInformations()
         {
             return new GroupMonsterStaticInformations()
             {
@@ -138,7 +138,10 @@ namespace Giny.World.Managers.Monsters
                 underlings = GetMonsterInGroupInformations(),
             };
         }
-
+        public virtual IEnumerable<Fighter> CreateFighters(FightTeam team)
+        {
+            return Monsters.Select(x => x.CreateFighter(team));
+        }
         public override GameRolePlayActorInformations GetActorInformations()
         {
             return new GameRolePlayGroupMonsterInformations()

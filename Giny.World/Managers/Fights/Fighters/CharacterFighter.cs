@@ -90,7 +90,7 @@ namespace Giny.World.Managers.Fights.Fighters
             base.Initialize();
         }
 
-      
+
         public void NoMove()
         {
             this.Send(new GameMapNoMovementMessage((short)Cell.Point.X, (short)Cell.Point.Y));
@@ -102,7 +102,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var item in Character.Inventory.GetSpellCastItems())
             {
-                EffectDice effect = item.GetEffect<EffectDice>(EffectsEnum.Effect_CastSpell_1175);
+                EffectDice effect = item.GetEffect<EffectDice>(Inventory.ItemCastEffect);
                 SpellRecord record = SpellRecord.GetSpellRecord((short)effect.Min);
                 Spell spell = new Spell(record, record.GetLevel((byte)effect.Max));
                 SpellCast cast = new SpellCast(this, spell, this.Cell);
@@ -218,7 +218,8 @@ namespace Giny.World.Managers.Fights.Fighters
             return true;
         }
 
-        public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target) // todo
+        [WIP]
+        public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightCharacterInformations()
             {
@@ -283,9 +284,9 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
                 if (teleportToSpawn)
-                    Character.RejoinMap(Fight.FightType, false, Fight.SpawnJoin);
+                    Character.RejoinMap(Character.Record.MapId,Fight.FightType, false, Fight.SpawnJoin);
                 else
-                    Character.RejoinMap(Fight.FightType, false, false);
+                    Character.RejoinMap(Character.Record.MapId, Fight.FightType, false, false);
 
             }
             else
@@ -338,7 +339,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 if (IsFighterTurn)
                     this.PassTurn();
 
-                this.Character.RejoinMap(Fight.FightType, false, Fight.SpawnJoin);
+                this.Character.RejoinMap(Character.Record.MapId,Fight.FightType, false, Fight.SpawnJoin);
             }
         }
 

@@ -37,7 +37,14 @@ namespace Giny.World.Managers.Maps
 
                 if (record.CanSpawnMonsters)
                 {
-                    MonstersManager.Instance.SpawnMonsterGroups(record, random);
+                    if (record.IsDungeonMap)
+                    {
+                        MonstersManager.Instance.SpawnDungeonGroup(record);
+                    }
+                    else
+                    {
+                        MonstersManager.Instance.SpawnMonsterGroups(record, random);
+                    }
                 }
 
                 double ratio = (n / maps.Length) * 100;

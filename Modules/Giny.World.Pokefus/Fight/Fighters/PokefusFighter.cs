@@ -1,5 +1,6 @@
 ﻿using Giny.Protocol.Types;
 using Giny.World.Managers.Fights;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Monsters;
@@ -13,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace Giny.Pokefus.Fight.Fighters
 {
-    public class PokefusFighter : AIFighter, IMonster
+    public class PokefusFighter : SummonedMonster
     {
-        public PokefusFighter(FightTeam team, CellRecord roleplayCell, MonsterRecord record, MonsterGrade grade) : base(team, roleplayCell, record, grade)
+        public PokefusFighter(Fighter owner, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
         {
 
         }

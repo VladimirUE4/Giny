@@ -22,11 +22,11 @@ namespace Giny.World.Managers.Fights.AI
 
         public override void Execute()
         {
-            foreach (var spellRecord in Fighter.Record.SpellRecords.Where(x => x.Value.Category.HasFlag(SpellCategoryEnum.Healing)))
+            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Healing)))
             {
                 foreach (var ally in Fighter.Team.GetFighters<Fighter>().OrderBy(x => x.Stats.LifePercentage))
                 {
-                    Fighter.CastSpell(spellRecord.Key, ally.Cell.Id);
+                    Fighter.CastSpell(spellRecord.Id, ally.Cell.Id);
                 }
             }
         }

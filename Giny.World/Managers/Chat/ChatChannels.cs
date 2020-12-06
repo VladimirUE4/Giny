@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Custom.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.World.Network;
 using System;
@@ -9,16 +10,28 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Chat
 {
+    [WIP(WIPState.Todo, "Muted")]
     class ChatChannels
     {
+        [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_PARTY)]
+        public static void HandleChatParty(WorldClient client, string message)
+        {
+            if (client.Character.HasParty)
+            {
+                client.Character.Party.SendMembers(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_PARTY, message, client));
+            }
+        }
+        [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_ADMIN)]
+        public static void Admin(WorldClient client, string message)
+        {
+            if (client.Account.Role == ServerRoleEnum.ADMINISTRATOR)
+            {
+                WorldServer.Instance.Send(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_ADMIN, message, client));
+            }
+        }
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_GLOBAL)]
         public static void HandleChatGlobal(WorldClient client, string message)
         {
-            /* if (client.Character.Record.Muted)
-             {
-                 client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 107);
-                 return;
-             } */
             if (!client.Character.Fighting)
             {
                 if (client.Character.Map != null)
@@ -33,12 +46,10 @@ namespace Giny.World.Managers.Chat
                 else
                     client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_INVALID_MAP);
             }
-            //   else
-            //    {
-            //  client.Character.Fighter.Fight.Send(GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_GLOBAL, message, client));
-            //  client.Character.Fighter.Fight.CheckFightEnd();
-
-            //  }
+            else
+            {
+                client.Character.Fighter.Fight.Send(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_GLOBAL, message, client));
+            }
         }
     }
 }

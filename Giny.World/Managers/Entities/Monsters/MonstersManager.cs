@@ -2,6 +2,7 @@
 using Giny.Core.Extensions;
 using Giny.Core.Time;
 using Giny.World.Managers.Entities;
+using Giny.World.Managers.Entities.Monsters;
 using Giny.World.Managers.Maps.Instances;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
@@ -39,7 +40,7 @@ namespace Giny.World.Managers.Monsters
         }
         public void AddGeneratedMonsterGroup(MapInstance instance, MonsterSpawnRecord[] spawns, AsyncRandom random)
         {
-            MonsterGroup group = new MonsterGroup(instance.Record, instance.Record.FindMonsterGroupCell().Id);
+            MonsterGroup group = new MonsterGroup(instance.Record, instance.FindMonsterGroupCell().Id);
             group.Direction = Entity.RandomDirection4D(random);
 
             int monsterCount = random.Next(1, MAX_MONSTER_PER_GROUP + 1);
@@ -72,9 +73,23 @@ namespace Giny.World.Managers.Monsters
                 group.AddMonster(monster);
             }
 
-
             instance.AddEntity(group);
         }
+
+        public void SpawnDungeonGroup(MapRecord map)
+        {
+            ModularMonsterGroup group = new ModularMonsterGroup(map, map.Instance.FindMonsterGroupCell().Id);
+
+            foreach (var monsterId in map.DungeonMap.Monsters)
+            {
+                MonsterRecord template = MonsterRecord.GetMonsterRecord(monsterId);
+                Monster monster = new Monster(template, group);
+                group.AddMonster(monster);
+            }
+
+            map.Instance.AddEntity(group);
+        }
+
         public void AddFixedMonsterGroup(MapInstance instance, short cellId, MonsterRecord[] monsterRecords)
         {
             MonsterGroup group = new MonsterGroup(instance.Record, cellId);

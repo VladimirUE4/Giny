@@ -2238,15 +2238,15 @@
         /// <summary>
         /// Pose un portail (+#3% dommages)
         /// </summary>
-        Effect_1181 = 1181,
+        Effect_SpawnPortal = 1181,
         /// <summary>
         /// Téléportation portail
         /// </summary>
-        Effect_1182 = 1182,
+        Effect_TeleportPortal = 1182,
         /// <summary>
         /// Désactiver un portail
         /// </summary>
-        Effect_1183 = 1183,
+        Effect_DisablePortal = 1183,
         /// <summary>
         /// Expérience du niveau : #3
         /// </summary>

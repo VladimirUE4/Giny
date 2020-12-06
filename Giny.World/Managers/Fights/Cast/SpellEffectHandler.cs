@@ -114,7 +114,7 @@ namespace Giny.World.Managers.Fights.Cast
 
 
 
-        [WIP(WIPState.Warn, "Dont like this post condition to fill cells")]
+        [WIP(WIPState.BadCode, "Dont like this post condition to fill cells (no genercity)")]
         private IEnumerable<Fighter> GetAffectedFighters()
         {
             List<CellRecord> affectedCells = GetAffectedCells();

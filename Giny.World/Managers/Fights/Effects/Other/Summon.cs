@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects.Other
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             MonsterRecord record = MonsterRecord.GetMonsterRecord((short)Effect.Min);
-            SummonedFighter fighter = new SummonedFighter(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell);
+            SummonedFighter fighter = new SummonedMonster(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell);
             Source.Fight.AddSummon(Source, fighter);
         }
     }

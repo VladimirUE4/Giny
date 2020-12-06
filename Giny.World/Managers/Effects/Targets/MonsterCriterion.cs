@@ -32,8 +32,8 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsDisjonction => Required;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
-            => Required ? ((actor is IMonster) && (actor as IMonster).MonsterId == MonsterId) :
-                (!(actor is IMonster) || (actor as IMonster).MonsterId != MonsterId);
+            => Required ? ((actor is IMonster) && (actor as IMonster).Record.Id == MonsterId) :
+                (!(actor is IMonster) || (actor as IMonster).Record.Id != MonsterId);
 
         public override string ToString()
         {

@@ -62,7 +62,7 @@ namespace Giny.Auth
         [StartupInvoke("Console Commands", StartupInvokePriority.Last)]
         public static void InitializeConsoleCommand()
         {
-            ConsoleCommandsManager.Instance.Initialize(Assembly.GetExecutingAssembly());
+            ConsoleCommandsManager.Instance.Initialize(Assembly.GetExecutingAssembly().GetTypes());
         }
     }
 }

@@ -111,9 +111,11 @@ namespace Giny.Core.Network
         {
             if (m_socket != null && m_socket.Connected)
             {
-                BigEndianWriter writer = new BigEndianWriter();
-                message.Pack(writer);
-                m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+                using (var writer = new BigEndianWriter())
+                {
+                    message.Pack(writer);
+                    m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+                }
             }
 
         }
