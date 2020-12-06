@@ -50,11 +50,13 @@
 
 ## Combats
 
- | Nom   |      Etat     |
-|----------|:-------------:|
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
 | Iop | 
 | Pression | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Fracture | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Determination | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Anneau destructeur | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
 
