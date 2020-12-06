@@ -59,4 +59,20 @@
 | Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Anneau destructeur | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
+| Epée divine | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Couperet| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Accumulation | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Intimidiation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Pdv invoc & buffs
+| Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Massacre | ![alt text](https://img.shields.io/badge/WIP-orange) | Verifier la manière dont le trigger s'applique
+| Rassemblement | ![alt text](https://img.shields.io/badge/Bug-red) | a voir (bug)
+| Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
+| Epée du jugement| ![alt text](https://img.shields.io/badge/?-blue) | a voir
+
+
+
+
 
