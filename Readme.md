@@ -73,6 +73,8 @@
 | Ouginak | ![alt text](https://img.shields.io/badge/Todo-red) | 
 | Dofus Effects | ![alt text](https://img.shields.io/badge/Started-orange)   |
 | Monsters IA | ![alt text](https://img.shields.io/badge/Started-orange)  | 
+| Summoned Fighter| ![alt text](https://img.shields.io/badge/Started-orange)  | 
+| Controlable Fighter | ![alt text](https://img.shields.io/badge/Started-orange)  | 
 
 
 
