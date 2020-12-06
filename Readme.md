@@ -1,6 +1,6 @@
 
 
-# Giny Emulator
+## Giny 
 
 # Roleplay
 
