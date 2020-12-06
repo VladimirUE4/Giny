@@ -75,6 +75,6 @@
 | Monsters IA | ![alt text](https://img.shields.io/badge/Started-orange)  | 
 | Summoned Fighter| ![alt text](https://img.shields.io/badge/Started-orange)  | 
 | Controlable Fighter | ![alt text](https://img.shields.io/badge/Started-orange)  | 
-
+| Damage calculation | ![alt text](https://img.shields.io/badge/Started-orange)  | 
 
 
