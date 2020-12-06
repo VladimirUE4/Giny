@@ -6,6 +6,7 @@
 
  | Name   |      State      |  Comment  
 |----------|:-------------:|:-------------:|
+| Character creation & deletion| ![alt text](https://img.shields.io/badge/Done-green)  |
 | Map entities |   ![alt text](https://img.shields.io/badge/Done-green) | 
 | Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    | Teleport on same map ?
 | Titles | ![alt text](https://img.shields.io/badge/Done-green)  | 
@@ -45,20 +46,21 @@
 | Guilds | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Alliances | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Criterions | ![alt text](https://img.shields.io/badge/Started-orange)  | Missings fews
+| Map placements | ![alt text](https://img.shields.io/badge/Done-green)  |
 
 
 # Fights
 
- | Name   |      State      |  Comment  
-|----------|:-------------:|:-------------:|
+ | Name   |      State      |
+|----------|:-------------:|
 | Feca | ![alt text](https://img.shields.io/badge/Todo-red) | 
 | Osamodas | ![alt text](https://img.shields.io/badge/Todo-red)
 | Enutrof | ![alt text](https://img.shields.io/badge/Todo-red)
 | Sram | ![alt text](https://img.shields.io/badge/Todo-red)
-| Xelor  | ![alt text](https://img.shields.io/badge/Started-orange)   |  
+| Xelor  | ![alt text](https://img.shields.io/badge/Started-orange)   | 
 | Ecaflip | ![alt text](https://img.shields.io/badge/Todo-red)   |
 | Eniripsa | ![alt text](https://img.shields.io/badge/Todo-red)  |
-| Iop | ![alt text](https://img.shields.io/badge/Todo-red)   |
+| Iop | ![alt text](https://img.shields.io/badge/Started-orange)   | 
 | Cra  |![alt text](https://img.shields.io/badge/Todo-red)  |
 | Sadida |![alt text](https://img.shields.io/badge/Todo-red) | 
 | Sacrieur  |![alt text](https://img.shields.io/badge/Todo-red)   |
