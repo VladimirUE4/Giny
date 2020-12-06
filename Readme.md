@@ -33,7 +33,7 @@
 | Chat | ![alt text](https://img.shields.io/badge/Started-orange)   | Missing channels
 | Magicsmith | ![alt text](https://img.shields.io/badge/Todo-red)   |
 | Craft | ![alt text](https://img.shields.io/badge/Todo-red)|
-| Jobs | ![alt text](https://img.shields.io/badge/Done-green)  |
+| Jobs (generic system) | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Almanach | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Haven Bag | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Endless dreams | ![alt text](https://img.shields.io/badge/Todo-red) |
