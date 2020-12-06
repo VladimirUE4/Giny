@@ -54,7 +54,7 @@
 |----------|:-------------:|:-------------:|
 | Iop | 
 | Pression | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Fracture | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fracture | ![alt text](https://img.shields.io/badge/Bug-red) | Bug zone
 | Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -71,8 +71,29 @@
 | Rassemblement | ![alt text](https://img.shields.io/badge/Bug-red) | a voir (bug)
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Unknown-blue) | 
-
-
-
-
-
+| Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
+| Menace| ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
+| Friction| ![alt text](https://img.shields.io/badge/Unknown-blue) | 
+| Coup pour coup| ![alt text](https://img.shields.io/badge/Bug-red) |
+| Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
+| Tumulte| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée celeste| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Zénith| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Puissance| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vertue| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Precipitation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Agitation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fustigation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Endurance| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Pugilat| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vitalité| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vindicte| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée du destin| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tannée| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fendoir| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Sentence| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Colère de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fureur| ![alt text](https://img.shields.io/badge/Done-green) | 
