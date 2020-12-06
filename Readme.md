@@ -4,8 +4,8 @@
 
 # Roleplay
 
- | Name   |      State      
-|----------|:-------------:|
+ | Name   |      State      |  Comment  
+|----------|:-------------:|:-------------:|
 | Map entities |   ![alt text](https://img.shields.io/badge/Done-green) |
 | Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    |
 | Titles | ![alt text](https://img.shields.io/badge/Done-green)  |
@@ -40,7 +40,7 @@
 | Haven Bag | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Endless dreams | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Friend list | ![alt text](https://img.shields.io/badge/Todo-red) |
-| Houses ![alt text](https://img.shields.io/badge/Todo-red) |
+| Houses | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Monsters | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Exchanges | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Shortcuts | ![alt](https://img.shields.io/badge/Done-green) |
