@@ -154,3 +154,9 @@
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Maîtrise d'arme | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Dofus Emeraude | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Abyssal | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Argenté | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Argenté Scintillant | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Nébuleux | ![alt text](https://img.shields.io/badge/Bug-red) | Problème d'affichage du client
+| Dofus Ocre | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attribution PA
