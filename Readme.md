@@ -98,3 +98,8 @@
 | Sentence| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Colère de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Fureur| ![alt text](https://img.shields.io/badge/Done-green) | 
+
+### Autres
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Maîtrise d'arme | ![alt text](https://img.shields.io/badge/Done-green) | 
