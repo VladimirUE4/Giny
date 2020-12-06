@@ -52,8 +52,9 @@
 
  | Nom   |      Etat     |
 |----------|:-------------:|
-| Iop | .
+| Iop | 
 | Pression | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Fracture | ![alt text](https://img.shields.io/badge/Done-green) | 
-
+| Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Determination | ![alt text](https://img.shields.io/badge/Done-green) | 
 
