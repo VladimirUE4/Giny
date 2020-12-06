@@ -1,8 +1,8 @@
 
 
-## Giny 
+# Giny 
 
-# Roleplay
+## Roleplay
 
  | Name   |      State      |  Comment  
 |----------|:-------------:|:-------------:|
@@ -48,7 +48,7 @@
 | Cellule de placement | ![alt text](https://img.shields.io/badge/Done-green)  |
 
 
-# Fights
+## Combats
 
  | Nom   |      Etat     |
 |----------|:-------------:|
