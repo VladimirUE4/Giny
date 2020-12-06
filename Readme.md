@@ -7,25 +7,23 @@
  | Name   |      State      |  Comment  
 |----------|:-------------:|:-------------:|
 | Map entities |   ![alt text](https://img.shields.io/badge/Done-green) | 
-| Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    |
-| Titles | ![alt text](https://img.shields.io/badge/Done-green)  |
+| Map movements |   ![alt text](https://img.shields.io/badge/Done-green)    | Teleport on same map ?
+| Titles | ![alt text](https://img.shields.io/badge/Done-green)  | 
 | Ornaments | ![alt text](https://img.shields.io/badge/Done-green)   |
-| Merchants mode  | ![alt text](https://img.shields.io/badge/Todo-red)   |
+| Merchants mode  | ![alt text](https://img.shields.io/badge/Started-orange)   | Cannot buy item from merchant (exchange todo)
 | Inventory | ![alt text](https://img.shields.io/badge/Done-green)   |
 | ItemSet | ![alt text](https://img.shields.io/badge/Todo-red)  |
 | Parties | ![alt text](https://img.shields.io/badge/Done-green)   |
-| Titles | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Achievements  |![alt text](https://img.shields.io/badge/Todo-red)  |
-| Bidshops |![alt text](https://img.shields.io/badge/Started-orange) |
+| Bidshops |![alt text](https://img.shields.io/badge/Started-orange) | Bug with item UID.. investigate
 | Banks  |![alt text](https://img.shields.io/badge/Done-green)   |
 | Remodeling potions | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Interactives! | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Zaap & Zaapis | ![alt text](https://img.shields.io/badge/Done-green)   |
-| Stats | ![alt text](https://img.shields.io/badge/Done-green)    |
+| Stats | ![alt text](https://img.shields.io/badge/Done-green)    | Think about vitality ?
 | Quests | ![alt text](https://img.shields.io/badge/Todo-red)  |
-| Npcs  |![alt text](https://img.shields.io/badge/Done-green)  |
-| Quests | ![alt text](https://img.shields.io/badge/Todo-red)  |
-| Modular Dungeons | ![alt text](https://img.shields.io/badge/Done-green) |
+| Npcs  |![alt text](https://img.shields.io/badge/Done-green)  
+| Modular Dungeons | ![alt text](https://img.shields.io/badge/Done-green) | Verify rules ? 4->4
 | Spells & Variants | ![alt text](https://img.shields.io/badge/Done-green)   |
 | Living items | ![alt text](https://img.shields.io/badge/Started-orange)  | Missing few skin Id(s)
 | Pokefus Module | ![alt text](https://img.shields.io/badge/Started-orange)  | Fighters must be controlable ! 
