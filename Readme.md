@@ -38,6 +38,8 @@
   * Monsters ![alt text](https://img.shields.io/badge/Done-green) 
   * Exchanges ![alt text](https://img.shields.io/badge/Done-green) 
   * Shortcuts ![alt](https://img.shields.io/badge/Done-green) 
+  * Guilds ![alt text](https://img.shields.io/badge/Todo-red)
+  * Alliances ![alt text](https://img.shields.io/badge/Todo-red)
  
 
 # Fights
