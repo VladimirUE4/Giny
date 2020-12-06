@@ -18,7 +18,7 @@
 | Bidshops |![alt text](https://img.shields.io/badge/Started-orange) | Bug with item UID
 | Banks  |![alt text](https://img.shields.io/badge/Done-green)   |
 | Remodeling potions | ![alt text](https://img.shields.io/badge/Todo-red) |
-| Interactives! | ![alt text](https://img.shields.io/badge/Done-green)  |
+| Interactives | ![alt text](https://img.shields.io/badge/Done-green)  |
 | Zaap & Zaapis | ![alt text](https://img.shields.io/badge/Done-green)   |
 | Stats | ![alt text](https://img.shields.io/badge/Done-green)    | Think about vitality ?
 | Quests | ![alt text](https://img.shields.io/badge/Todo-red)  |
@@ -44,30 +44,31 @@
 | Shortcuts | ![alt](https://img.shields.io/badge/Done-green) |
 | Guilds | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Alliances | ![alt text](https://img.shields.io/badge/Todo-red) |
+| Criterions | ![alt text](https://img.shields.io/badge/Started-orange)  | Missings fews
 
 
 # Fights
 
-  * Feca ![alt text](https://img.shields.io/badge/Todo-red)
-  * Osamodas ![alt text](https://img.shields.io/badge/Todo-red)
-  * Enutrof ![alt text](https://img.shields.io/badge/Todo-red)
-  * Sram (started) ![alt text](https://img.shields.io/badge/Todo-red)
-  * Xelor (started) ![alt text](https://img.shields.io/badge/Todo-red)
-  * Ecaflip ![alt text](https://img.shields.io/badge/Todo-red)
-  * Eniripsa ![alt text](https://img.shields.io/badge/Todo-red)
-  * Iop (started) ![alt text](https://img.shields.io/badge/Todo-red)
-  * Cra (started) ![alt text](https://img.shields.io/badge/Todo-red)
-  * Sadida ![alt text](https://img.shields.io/badge/Todo-red) 
-  * Sacrieur ![alt text](https://img.shields.io/badge/Todo-red)
-  * Pandawa ![alt text](https://img.shields.io/badge/Todo-red)
-  * Roublard ![alt text](https://img.shields.io/badge/Todo-red)
-  * Zobal (started) ![alt text](https://img.shields.io/badge/Todo-red)
-  * Steamer ![alt text](https://img.shields.io/badge/Todo-red)
-  * Eliotrope ![alt text](https://img.shields.io/badge/Todo-red)
-  * Huppermage  ![alt text](https://img.shields.io/badge/Todo-red)
-  * Ouginak ![alt text](https://img.shields.io/badge/Todo-red)
-  * Dofus Effects (started)  ![alt text](https://img.shields.io/badge/Todo-red)
-  * Monsters IA (started)  ![alt text](https://img.shields.io/badge/Todo-red)
+| Feca | ![alt text](https://img.shields.io/badge/Todo-red) | 
+| Osamodas | ![alt text](https://img.shields.io/badge/Todo-red)
+| Enutrof | ![alt text](https://img.shields.io/badge/Todo-red)
+| Sram | ![alt text](https://img.shields.io/badge/Todo-red)
+| Xelor  | ![alt text](https://img.shields.io/badge/Started-orange)   |  
+| Ecaflip | ![alt text](https://img.shields.io/badge/Todo-red)   |
+| Eniripsa | ![alt text](https://img.shields.io/badge/Todo-red)  |
+| Iop | ![alt text](https://img.shields.io/badge/Todo-red)   |
+| Cra  |![alt text](https://img.shields.io/badge/Todo-red)  |
+| Sadida |![alt text](https://img.shields.io/badge/Todo-red) | 
+| Sacrieur  |![alt text](https://img.shields.io/badge/Todo-red)   |
+| Pandawa | ![alt text](https://img.shields.io/badge/Todo-red) |
+| Roublard | ![alt text](https://img.shields.io/badge/Todo-red)  |
+| Zobal | ![alt text](https://img.shields.io/badge/Todo-red)  |
+| Steamer | ![alt text](https://img.shields.io/badge/Todo-red)   |
+| Eliotrope | ![alt text](https://img.shields.io/badge/Todo-red)  |
+| Huppermage  |![alt text](https://img.shields.io/badge/Todo-red)
+| Ouginak | ![alt text](https://img.shields.io/badge/Todo-red) | 
+| Dofus Effects | ![alt text](https://img.shields.io/badge/Started-orange)   |
+| Monsters IA | ![alt text](https://img.shields.io/badge/Started-orange)  | 
 
-# Misc
-  * Criterions (done)
+
+
