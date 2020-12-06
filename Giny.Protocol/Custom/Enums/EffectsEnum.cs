@@ -1331,11 +1331,11 @@
         /// <summary>
         /// #1
         /// </summary>
-        Effect_TriggerBuff = 792,
+        Effect_CastSpell792 = 792,
         /// <summary>
         /// #1
         /// </summary>
-        Effect_TriggerBuff_793 = 793,
+        Effect_CastSpell793 = 793,
         /// <summary>
         /// Arme de chasse
         /// </summary>

@@ -141,6 +141,10 @@ namespace Giny.World.Managers.Fights.Fighters
             throw new NotImplementedException();
         }
 
+        public override bool HasSpell(short spellId)
+        {
+            return Record.Spells.Contains(spellId);
+        }
         public override IEnumerable<SpellRecord> GetSpells()
         {
             return Record.SpellRecords.Values;

@@ -87,7 +87,7 @@ namespace Giny.SpellExplorer
             effectInfo.Items.Add("Record Priority : " + effectRecord.Priority);
 
             if (effect.EffectEnum == EffectsEnum.Effect_CastSpell_1160 ||
-                effect.EffectEnum == EffectsEnum.Effect_TriggerBuff)
+                effect.EffectEnum == EffectsEnum.Effect_CastSpell792)
             {
                 Button button = new Button();
                 button.Content = "Explore";

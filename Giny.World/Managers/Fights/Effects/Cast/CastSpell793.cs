@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
     [WIP("cast spell ?")]
-    [SpellEffectHandler(EffectsEnum.Effect_TriggerBuff_793)]
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell793)]
     public class CastSpell793 : SpellEffectHandler
     {
         public CastSpell793(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)

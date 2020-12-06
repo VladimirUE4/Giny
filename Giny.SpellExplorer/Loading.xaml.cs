@@ -2,6 +2,7 @@
 using Giny.ORM;
 using Giny.ORM.IO;
 using Giny.World.Managers.Fights.Effects;
+using Giny.World.Modules;
 using Giny.World.Records.Effects;
 using Giny.World.Records.Spells;
 using System;
@@ -42,6 +43,8 @@ namespace Giny.SpellExplorer
 
             new Thread(new ThreadStart(() =>
             {
+                AssemblyCore.OnAssembliesLoaded();
+
                 DatabaseManager.Instance.LoadTable<SpellRecord>();
 
                 DatabaseManager.Instance.LoadTable<EffectRecord>();

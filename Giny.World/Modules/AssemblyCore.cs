@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Modules
 {
-    class AssemblyCore
+    public class AssemblyCore
     {
         private static IEnumerable<Type> m_types = null;
 
