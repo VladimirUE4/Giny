@@ -69,7 +69,7 @@
 | Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Massacre | ![alt text](https://img.shields.io/badge/WIP-orange) | Verifier la manière dont le trigger s'applique
-| Rassemblement | ![alt text](https://img.shields.io/badge/Bug-red) | Le trigger n'attire que si on attaque au corps a corps
+| Rassemblement | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
