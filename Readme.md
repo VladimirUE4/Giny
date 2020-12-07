@@ -119,7 +119,7 @@
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Double | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Piège Fangeux| ![alt text](https://img.shields.io/badge/Bug-red) |  Heal received damages n'est pas géré
+| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
 | Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -142,7 +142,7 @@
 | Pillage| ![alt text](https://img.shields.io/badge/Unknown-blue) |
 | Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
-| Perquisition | ![alt text](https://img.shields.io/badge/Bug-red) | Heal received damages n'est pas géré
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
 | Attaque Mortelle| ![alt text](https://img.shields.io/badge/Done-green) |
 | Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
