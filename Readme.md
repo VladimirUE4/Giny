@@ -139,7 +139,7 @@
 | Méprise | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Concentration de Chakra | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
-| Pillage| ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
 | Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
 | Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
