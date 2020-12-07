@@ -68,7 +68,7 @@
 | Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Pdv invoc & buffs
 | Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Massacre | ![alt text](https://img.shields.io/badge/WIP-orange) | Verifier la manière dont le trigger s'applique
+| Massacre |![alt text](https://img.shields.io/badge/Done-green) | 
 | Rassemblement | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
