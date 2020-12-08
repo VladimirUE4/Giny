@@ -22,7 +22,12 @@ namespace Giny.World.Managers.Fights.Effects.Heals
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Source.Fight.Warn("Not handled : HealReceivedDamages...");
+            short delta = (short)(this.CastHandler.Cast.GetTotalDamageDealt() * (Effect.Min / 100d));
+         
+            foreach (var target in targets)
+            {
+                target.Heal(new Healing(Source, target, delta));
+            }
         }
     }
 

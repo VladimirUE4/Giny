@@ -24,10 +24,14 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (Source.Cell != TargetCell)
+            foreach (var target in targets)
             {
-                Source.Advance(Source, (short)Effect.Min, TargetCell);
+                if (Source.Cell != target.Cell)
+                {
+                    Source.Advance(Source, (short)Effect.Min, target.Cell);
+                }
             }
+            
         }
     }
 }

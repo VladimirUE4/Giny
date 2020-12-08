@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Buffs
 {
-    public class StateBuff : Buff , ITriggerToken
+    public class StateBuff : Buff 
     {
         public SpellStateRecord Record
         {

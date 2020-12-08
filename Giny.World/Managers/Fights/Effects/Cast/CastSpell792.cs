@@ -14,8 +14,8 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
-    [WIP("cast spell ?")]
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell792)]
+    [WIP("cast spell ?")] // mot interdit, rassemblement friction
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_792)]
     public class CastSpell792 : SpellEffectHandler
     {
         public CastSpell792(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -26,20 +26,20 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-           
             SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
             SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
-
             Spell spell = new Spell(spellRecord, level);
 
-            foreach (var target in targets)
             {
-                SpellCast cast = new SpellCast(target, spell, Source.Cell);
-                cast.Token = this.GetTriggerToken<ITriggerToken>();
-                cast.Force = true;
-                cast.Silent = true;
-                cast.SilentNetwork = true;
-                Source.CastSpell(cast);
+                foreach (var target in targets)
+                {
+                    SpellCast cast = new SpellCast(target, spell, target.Cell, CastHandler.Cast);
+                    cast.Token = this.GetTriggerToken<ITriggerToken>();
+                    cast.Force = true;
+                    cast.Silent = true;
+                    cast.SilentNetwork = true;
+                    Source.CastSpell(cast);
+                }
             }
 
         }

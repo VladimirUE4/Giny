@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
     [WIP("cast spell ?")]
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell793)]
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_793)]
     public class CastSpell793 : SpellEffectHandler
     {
         public CastSpell793(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
             foreach (var target in targets)
             {
-                SpellCast cast = new SpellCast(target, spell, Source.Cell);
+                SpellCast cast = new SpellCast(target, spell, Source.Cell,CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 Source.CastSpell(cast);

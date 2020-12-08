@@ -15,7 +15,7 @@
         <Label Content="Spell name :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
         <ListBox Name="spellSelector" HorizontalAlignment="Left" Height="407" Margin="10,54,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2"/>
         <ContentControl Name="contentControl" Content="" Grid.Column="1" Margin="142,0,0,0"/>
-        <Button Visibility="Hidden" Name="unhandledBtn" Content="View unhandled effects" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2" Height="29" Click="Button_Click"/>
+        <Button Visibility="Hidden" Name="unhandledBtn" Content="Effects Relator" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2" Height="29" Click="Button_Click"/>
 
     </Grid>
 </Window>

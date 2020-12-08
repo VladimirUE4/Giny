@@ -85,6 +85,7 @@
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedMonster.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
@@ -283,7 +284,7 @@
     <Compile Include="Managers\Fights\Effects\Movements\Teleport.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddState.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell793.cs" />
-    <Compile Include="Managers\Fights\Effects\Cast\CastSpell.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell1160.cs" />
     <Compile Include="Managers\Fights\FightDual.cs" />
     <Compile Include="Managers\Fights\Fighters\IMonster.cs" />
     <Compile Include="Managers\Fights\Fighters\LastAttackerCriterion.cs" />

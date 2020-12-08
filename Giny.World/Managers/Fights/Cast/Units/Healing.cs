@@ -32,5 +32,9 @@ namespace Giny.World.Managers.Fights.Cast.Units
             this.Delta = delta;
         }
 
+        public Fighter GetSource()
+        {
+            return Source;
+        }
     }
 }

@@ -78,9 +78,30 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-
-        public SpellCast(Fighter source, Spell spell, CellRecord targetCell)
+        private SpellCast Parent
         {
+            get;
+            set;
+        }
+        private List<SpellCast> Childs
+        {
+            get;
+            set;
+        }
+        public short DamagesDealt
+        {
+            get;
+            set;
+        }
+
+        public SpellCast(Fighter source, Spell spell, CellRecord targetCell, SpellCast parent = null)
+        {
+            if (parent != null)
+            {
+                this.Parent = parent;
+                this.Parent.AddChild(this);
+            }
+
             this.Source = source;
             this.Spell = spell;
             this.CastCell = source.Cell;
@@ -89,9 +110,46 @@ namespace Giny.World.Managers.Fights.Cast
             this.Silent = false;
             this.SilentNetwork = false;
             this.Weapon = false;
+            this.Childs = new List<SpellCast>();
+            this.DamagesDealt = 0;
         }
 
         public bool IsConditionBypassed(SpellCastResult result) => BypassedConditions != null && (BypassedConditions.Contains(result) || BypassedConditions.Contains(SpellCastResult.OK));
 
+        private void AddChild(SpellCast child)
+        {
+            this.Childs.Add(child);
+        }
+
+        public short GetTotalDamageDealt()
+        {
+            short sum = this.DamagesDealt;
+
+            SpellCast current = this;
+
+            while (current.Parent != null)
+            {
+                current = current.Parent;
+                sum += current.DamagesDealt;
+            }
+            return sum;
+        }
+        public Fighter GetInitialSource()
+        {
+            Fighter source = this.Source;
+
+            SpellCast current = this;
+
+            while (current.Parent != null)
+            {
+                current = current.Parent;
+                source = current.Source;
+            }
+            return source;
+        }
+        public override string ToString()
+        {
+            return Spell.Record.Name;
+        }
     }
 }

@@ -71,7 +71,7 @@ namespace Giny.SpellExplorer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NotHandledEffects view = new NotHandledEffects();
+            EffectsRelator view = new EffectsRelator();
             view.Show();
         }
     }

@@ -65,7 +65,7 @@ namespace Giny.SpellExplorer
             EffectRecord effectRecord = EffectRecord.GetEffectRecord(effect.EffectEnum);
 
             effectInfo.Items.Add("Effect : " + effect.EffectEnum);
-           // effectInfo.Items.Add("Effect Description : " + effectRecord.Description);
+            // effectInfo.Items.Add("Effect Description : " + effectRecord.Description);
             effectInfo.Items.Add("Min,Max : (" + effect.Min + "," + effect.Max + ")");
             effectInfo.Items.Add("Value : " + effect.Value);
             effectInfo.Items.Add("Duration : " + effect.Duration);
@@ -86,23 +86,35 @@ namespace Giny.SpellExplorer
             effectInfo.Items.Add("Modificator : " + effect.Modificator);
             effectInfo.Items.Add("Record Priority : " + effectRecord.Priority);
 
-            if (effect.EffectEnum == EffectsEnum.Effect_CastSpell_1160 ||
-                effect.EffectEnum == EffectsEnum.Effect_CastSpell792)
+          
+            switch (effect.EffectEnum)
             {
-                Button button = new Button();
-                button.Content = "Explore";
-                button.Width = 100;
-                button.Height = 30;
+                case EffectsEnum.Effect_CastSpell_793:
+                case EffectsEnum.Effect_CastSpell_792:
+                case EffectsEnum.Effect_CastSpell_2794:
+                case EffectsEnum.Effect_CastSpell_2160:
+                case EffectsEnum.Effect_CastSpell_1175:
+                case EffectsEnum.Effect_CastSpell_1160:
+                case EffectsEnum.Effect_CastSpell_1017:
 
-                button.Click += (object o, RoutedEventArgs args) =>
-               {
-                   SpellRecord spell = SpellRecord.GetSpellRecord((short)effect.Min);
-                   CastSpell castSpell = new CastSpell(spell);
-                   castSpell.Show();
-               };
+                    Button button = new Button();
+                    button.Content = "Explore";
+                    button.Width = 100;
+                    button.Height = 30;
 
-                effectInfo.Items.Add(button);
+                    button.Click += (object o, RoutedEventArgs args) =>
+                    {
+                        SpellRecord spell = SpellRecord.GetSpellRecord((short)effect.Min);
+                        CastSpell castSpell = new CastSpell(spell);
+                        castSpell.Show();
+                    };
+
+                    effectInfo.Items.Add(button);
+                    break;
+                default:
+                    break;
             }
+      
 
             if (effect.EffectEnum == EffectsEnum.Effect_AddState || effect.EffectEnum == EffectsEnum.Effect_DispelState)
             {

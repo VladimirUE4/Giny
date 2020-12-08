@@ -67,8 +67,8 @@
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotHandledEffects.xaml.cs">
-      <DependentUpon>NotHandledEffects.xaml</DependentUpon>
+    <Compile Include="EffectsRelator.xaml.cs">
+      <DependentUpon>EffectsRelator.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpellView.xaml.cs">
       <DependentUpon>SpellView.xaml</DependentUpon>
@@ -93,7 +93,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NotHandledEffects.xaml">
+    <Page Include="EffectsRelator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

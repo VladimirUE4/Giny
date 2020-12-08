@@ -119,10 +119,10 @@ namespace Giny.World.Managers.Fights.Cast
         {
             List<CellRecord> affectedCells = GetAffectedCells();
 
-            /* foreach (var cell in affectedCells)
+             foreach (var cell in affectedCells)
             {
                 Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
-            } */
+            }
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
                 affectedCells.Add(Source.Cell);
 
@@ -160,6 +160,11 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 Source.Fight.Warn("Unknown trigger : " + Effect.Triggers + " cannot cast effect " + Effect.EffectEnum);
                 return;
+            }
+
+            if (Effect.TriggersEnum != BuffTriggerType.Instant && Effect.Delay > 0)
+            {
+                throw new Exception("Unhandled ! Triggers + Delay ... ???");
             }
 
             if (Effect.TriggersEnum != BuffTriggerType.Instant || Effect.Delay > 0)

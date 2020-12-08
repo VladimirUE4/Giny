@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
     [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1160)]
-    public class CastSpell : SpellEffectHandler
+    public class CastSpell1160 : SpellEffectHandler
     {
-        public CastSpell(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public CastSpell1160(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
+
         }
 
         protected override int Priority => 0;
@@ -29,10 +30,9 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
             foreach (var target in targets)
             {
-                SpellCast cast = new SpellCast(Source, spell, target.Cell);
+                SpellCast cast = new SpellCast(Source, spell, target.Cell, CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
-                    
                 Source.CastSpell(cast);
             }
            

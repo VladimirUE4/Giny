@@ -123,6 +123,8 @@ namespace Giny.World.Managers.Fights.Cast.Units
             Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
 
             Computed = jet.Generate();
+
+            this.EffectHandler.CastHandler.Cast.DamagesDealt += Computed.Value;
         }
 
         private void ComputeFinalDamageBoost(Jet jet)
@@ -313,6 +315,11 @@ namespace Giny.World.Managers.Fights.Cast.Units
             double result = (double)(jet * (100d + elementDelta + damageBonusPercent + weaponDamageBonus + spellDamageBonus) / 100.0d + (allDamageBonus + elementDamageBonus));
 
             return (short)(result < jet ? jet : result);
+        }
+
+        public Fighter GetSource()
+        {
+            return Source;
         }
     }
 }

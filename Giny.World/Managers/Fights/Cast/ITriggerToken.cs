@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Giny.World.Managers.Fights.Fighters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Giny.World.Managers.Fights.Cast
 {
     public interface ITriggerToken
     {
+        Fighter GetSource();
     }
 }

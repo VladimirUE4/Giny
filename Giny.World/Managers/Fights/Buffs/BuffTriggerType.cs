@@ -73,7 +73,6 @@ namespace Giny.World.Managers.Fights.Buffs
         /* CUSTOM */
 
         Unknown,
-        BeforeDamaged,
         /*
         *A=lose AP (101)
         *CC=on critical hit

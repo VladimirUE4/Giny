@@ -1331,11 +1331,11 @@
         /// <summary>
         /// #1
         /// </summary>
-        Effect_CastSpell792 = 792,
+        Effect_CastSpell_792 = 792,
         /// <summary>
         /// #1
         /// </summary>
-        Effect_CastSpell793 = 793,
+        Effect_CastSpell_793 = 793,
         /// <summary>
         /// Arme de chasse
         /// </summary>
@@ -2338,7 +2338,7 @@
         /// <summary>
         /// #1
         /// </summary>
-        Effect_2794 = 2794,
+        Effect_CastSpell_2794 = 2794,
         /// <summary>
         /// #1
         /// </summary>

@@ -1381,8 +1381,6 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Buffs.OfType<StateBuff>().Any(x => x.Record.Incurable);
         }
-
-
         public void Heal(Healing healing)
         {
             if (healing.Delta <= 0 || IsIncurable())
@@ -1464,8 +1462,6 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return DamageResult.Zero();
             }
-
-            TriggerBuffs(BuffTriggerType.BeforeDamaged, damage);
 
             delta = damage.Computed.Value;
 
@@ -1737,6 +1733,10 @@ namespace Giny.World.Managers.Fights.Fighters
             return $"{Id} : {Name}";
         }
 
+        public Fighter GetSource()
+        {
+            return this;
+        }
     }
 
 }
