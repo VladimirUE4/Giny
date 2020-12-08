@@ -68,14 +68,14 @@
 | Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Pdv invoc & buffs
 | Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Massacre | ![alt text](https://img.shields.io/badge/WIP-orange) | Verifier la manière dont le trigger s'applique
-| Rassemblement | ![alt text](https://img.shields.io/badge/Bug-red) | Le trigger n'attire que si on attaque au corps a corps
+| Massacre |![alt text](https://img.shields.io/badge/Done-green) | 
+| Rassemblement | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
-| Friction| ![alt text](https://img.shields.io/badge/Done-green)  | 
-| Coup pour coup| ![alt text](https://img.shields.io/badge/Bug-red) |
+| Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Problème attirance (directions)
+| Coup pour coup| ![alt text](https://img.shields.io/badge/Bug-red) | Cible CastSpell1017 étrange...
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
@@ -99,7 +99,64 @@
 | Colère de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Fureur| ![alt text](https://img.shields.io/badge/Done-green) | 
 
+
+### Sram
+
+ * Couleur des pièges
+ 
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Chausse Trape | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Piege Sournois | ![alt text](https://img.shields.io/badge/Done-green) |
+| Invisiblité | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Brume | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Double | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Cruauté | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Guet-apens | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
+| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Fourberie | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Bug-red) | Perte de PM non affiché (séquence?)
+| Fausse commune | ![alt text](https://img.shields.io/badge/Done-green) |
+| Fourvoiement | ![alt text](https://img.shields.io/badge/Done-green) |
+| Injection toxique | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Répulsif | ![alt text](https://img.shields.io/badge/Done-green) |
+| Poisse | ![alt text](https://img.shields.io/badge/Bug-red) | Minimise les effets aléatoires
+| Peur | ![alt text](https://img.shields.io/badge/Done-green) |
+| Méprise | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Concentration de Chakra | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Attaque Mortelle| ![alt text](https://img.shields.io/badge/Done-green) |
+| Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
+
 ### Autres
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Maîtrise d'arme | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Dofus Emeraude | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Abyssal | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Argenté | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Argenté Scintillant | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
+| Dofus Nébuleux | ![alt text](https://img.shields.io/badge/Bug-red) | Problème d'affichage du client
+| Dofus Ocre | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attribution PA
