@@ -150,6 +150,59 @@
 | Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 
+
+### Cra
+
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Flèche Magique | ![alt text](https://img.shields.io/badge/WIP-orange) | Buff PO étrange quand passe tour 
+| Flèche de Concentration| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche de Recul | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Erosive | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche de Dispersion | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Représailles | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Glacée | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Glacée | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Paralysante | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Enflammée | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche Répulsive | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tir Eloigné | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Acuité Absolue| ![alt text](https://img.shields.io/badge/Bug-red) | DisableLOS not handled
+| Tir Eloigné | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche d'Expiation | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Flèche de Rédemption | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Oeil de Taupe| ![alt text](https://img.shields.io/badge/Bug-red) | Reveals Invisible
+| Flèche Ecrasante | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tir Critique | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Balise de Rappel | ![alt text](https://img.shields.io/badge/Done-green) | Problème affichage séquence ?
+| Flèche d'immobilisation| ![alt text](https://img.shields.io/badge/Bug-red) | StealMP not handled
+| Flèche Assaillante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
+| Fleche du Jugement | ![alt text](https://img.shields.io/badge/Bug-red) | Calcul dégats (MP remains) incorrect
+| Tir Puissant | ![alt text](https://img.shields.io/badge/Done-green) |
+| Balise Tactique | ![alt text](https://img.shields.io/badge/Bug-red) | Subit 2x moins de dégats alliés
+| Flèche Harcelante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Massacrante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Empoisonnée | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Curative | ![alt text](https://img.shields.io/badge/Bug-red) | Heal Buff not handled
+| Flèche Persecutrice | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Tyranique | ![alt text](https://img.shields.io/badge/Bug-red) | 2 triggers unhandled
+| Flèche Destructrice | ![alt text](https://img.shields.io/badge/Done-green) |
+| Tir de Barrage | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Absorbante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Dévorante | ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets
+| Flèche Cinglante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche de Repli | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Ralentissante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Percutante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Complice | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche D'Abolition | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Explosive | ![alt text](https://img.shields.io/badge/Done-green) |
+| Flèche Fulminante | ![alt text](https://img.shields.io/badge/Done-green) |
+| Maîtrise de l'Arc | ![alt text](https://img.shields.io/badge/Done-green) |
+| Sentinelle | ![alt text](https://img.shields.io/badge/Bug-red) | SpellDamageBonusPercent & Appearence
+
 ### Autres
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
