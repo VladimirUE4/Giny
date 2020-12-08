@@ -59,7 +59,7 @@
 | Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Anneau destructeur | ![alt text](https://img.shields.io/badge/Done-green) | Attention si modification diago PullForward
+| Anneau destructeur | ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
 | Epée divine | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Couperet| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -73,7 +73,7 @@
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
-| Menace| ![alt text](https://img.shields.io/badge/Done-green) | Attention si modification diago PullForward
+| Menace| ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
 | Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Très étrange ! last attacker criterion
 | Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
