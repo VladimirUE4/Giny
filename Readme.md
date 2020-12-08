@@ -75,7 +75,7 @@
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
 | Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Problème attirance (directions)
-| Coup pour coup| ![alt text](https://img.shields.io/badge/Bug-red) | Cible CastSpell1017 étrange...
+| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
