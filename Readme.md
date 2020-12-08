@@ -74,7 +74,7 @@
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Bug-red) | Problème attirance 
-| Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Problème attirance (directions)
+| Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Très étrange ! last attacker criterion
 | Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
