@@ -65,7 +65,7 @@
 | Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Accumulation | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Intimidiation| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Pdv invoc & buffs
+| Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Buffs de la conquête (dispatch)
 | Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Massacre |![alt text](https://img.shields.io/badge/Done-green) | 
