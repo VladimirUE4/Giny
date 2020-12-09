@@ -83,7 +83,7 @@
 | Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Cruauté | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Guet-apens | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Guet-apens | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
 | Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
 | Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
