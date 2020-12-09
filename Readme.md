@@ -168,6 +168,71 @@
 </p>
 </details>
 
+
+<details><summary>Iop</summary>
+<p>
+
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Pression | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fracture | ![alt text](https://img.shields.io/badge/Bug-red) | Bug zone
+| Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Anneau destructeur | ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
+| Epée divine | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Couperet| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Accumulation | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Intimidiation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Buffs de la conquête (dispatch)
+| Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Massacre |![alt text](https://img.shields.io/badge/Done-green) | 
+| Rassemblement | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
+| Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
+| Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
+| Menace| ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
+| Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Très étrange ! last attacker criterion
+| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
+| Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
+| Tumulte| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée celeste| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Zénith| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Puissance| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vertue| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Precipitation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Agitation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fustigation| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Endurance| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Pugilat| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vitalité| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Vindicte| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Epée du destin| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Tannée| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fendoir| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Sentence| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Colère de iop| ![alt text](https://img.shields.io/badge/Done-green) | 
+| Fureur| ![alt text](https://img.shields.io/badge/Done-green) | 
+
+</p>
+</details>
+
+<details><summary>Eniripsa</summary>
+<p>
+
+ | Nom   |      Etat     | Commentaire
+|----------|:-------------:|:-------------:|
+| Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
+
+</p>
+</details>
+
+
 <details><summary>Autres</summary>
 <p>
  
@@ -187,6 +252,8 @@
 
 ## Roleplay
 
+<details><summary>Debugs</summary>
+<p>
  | Nom  |      Etat     |  Commentaire  
 |----------|:-------------:|:-------------:|
 | Creation et supression personnage | ![alt text](https://img.shields.io/badge/Done-green)  |
@@ -229,4 +296,7 @@
 | Guildes | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Alliances | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Cellule de placement | ![alt text](https://img.shields.io/badge/Done-green)  |
+
+</p>
+</details>
 
