@@ -8,9 +8,6 @@
 <details><summary>Iop</summary>
 <p>
 
-
-### Iop
-
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Pression | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -61,7 +58,8 @@
 </p>
 </details>
 
-### Sram
+<details><summary>Sram</summary>
+<p>
 
  * Couleur des pièges
  
@@ -110,7 +108,11 @@
 | Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
+</p>
+</details>
 
+<details><summary>Cra</summary>
+<p>
 
 ### Cra
  
@@ -163,7 +165,11 @@
 | Flèche Fulminante |![alt text](https://img.shields.io/badge/Bug-red) | Ne boost pas le sort
 | Maîtrise de l'Arc | ![alt text](https://img.shields.io/badge/Done-green) |
 | Sentinelle | ![alt text](https://img.shields.io/badge/Done-green) |
+</p>
+</details>
 
+<details><summary>Autres</summary>
+<p>
 ### Autres
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
@@ -174,7 +180,8 @@
 | Dofus Argenté Scintillant | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
 | Dofus Nébuleux | ![alt text](https://img.shields.io/badge/Bug-red) | Problème d'affichage du client
 | Dofus Ocre | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attribution PA
-
+</p>
+</details>
 
 ## Roleplay
 
