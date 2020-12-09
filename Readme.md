@@ -170,6 +170,7 @@
 
 <details><summary>Autres</summary>
 <p>
+ 
 ### Autres
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
@@ -180,6 +181,7 @@
 | Dofus Argenté Scintillant | ![alt text](https://img.shields.io/badge/Done-green) | (à vérifier)
 | Dofus Nébuleux | ![alt text](https://img.shields.io/badge/Bug-red) | Problème d'affichage du client
 | Dofus Ocre | ![alt text](https://img.shields.io/badge/Bug-red) | Problème attribution PA
+
 </p>
 </details>
 
