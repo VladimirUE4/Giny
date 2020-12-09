@@ -45,6 +45,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
     [SpellEffectHandler(EffectsEnum.Effect_SubPushDamageReduction)]
     [SpellEffectHandler(EffectsEnum.Effect_SubHealBonus)]
     [SpellEffectHandler(EffectsEnum.Effect_SubCriticalDamageReduction)]
+    [SpellEffectHandler(EffectsEnum.Effect_SubSpellDamageDonePercent)]
     public class StatsDebuff : SpellEffectHandler
     {
         public const FightDispellableEnum Dispellable = FightDispellableEnum.DISPELLABLE;
@@ -54,8 +55,6 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
         {
 
         }
-
-        protected override int Priority => 1;
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
@@ -174,6 +173,9 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
 
                 case EffectsEnum.Effect_SubCriticalDamageReduction:
                     return target.Stats.CriticalDamageReduction;
+
+                case EffectsEnum.Effect_SubSpellDamageDonePercent:
+                    return target.Stats.SpellDamageDonePercent;
 
                 default:
                     target.Fight.Warn(Effect.EffectEnum + " cannot be applied to stat buff.");

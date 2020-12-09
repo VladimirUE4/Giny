@@ -299,8 +299,15 @@ namespace Giny.World.Managers.Items
             }
             else
             {
-                Character.Look = Character.Look.GetMountDriverLook();
-                Character.Look.SetBones(1);
+                if (Character.Look.IsRiding)
+                {
+                    Character.Look = Character.Look.ActorLook;
+                    Character.Look.SetBones(1);
+                }
+                else
+                {
+                    throw new Exception("err");
+                }
             }
         }
         public void OnItemModified(CharacterItemRecord item)

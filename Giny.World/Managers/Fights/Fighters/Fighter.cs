@@ -601,7 +601,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
-            foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.TriggerType == type).ToArray())
+            foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.TriggerType == type && !x.HasDelay()).ToArray())
             {
                 if (buff.Apply(token))
                 {
@@ -780,10 +780,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     return false;
                 }
 
-             
-
-                if (!cast.SilentNetwork)
-                    OnSpellCasting(cast);
+                OnSpellCasting(handler);
 
                 if (!cast.ApFree)
                     LooseAp(this, GetApCost(cast.Spell.Level), ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_USE);
@@ -801,8 +798,13 @@ namespace Giny.World.Managers.Fights.Fighters
             return true;
         }
 
-        private void DispellInvisiblity()
+        public void Reveals()
         {
+            if (!IsInvisible())
+            {
+                return;
+            }
+
             foreach (var buff in Buffs.OfType<InvisibilityBuff>().ToArray())
             {
                 RemoveAndDispellBuff(buff);
@@ -813,11 +815,17 @@ namespace Giny.World.Managers.Fights.Fighters
 
         protected virtual void OnSpellCasted(SpellCastHandler handler)
         {
+            this.SpellHistory.RegisterCastedSpell(handler.Cast.Spell.Level, this.Fight.GetFighter(handler.Cast.TargetCell.Id));
+        }
+
+        [WIP(WIPState.Todo, "see stump")]
+        private void OnSpellCasting(SpellCastHandler handler)
+        {
             if (IsInvisible() && !handler.Cast.Force)
             {
                 if (handler.RevealsInvisible())
                 {
-                    DispellInvisiblity();
+                    Reveals();
                 }
                 else
                 {
@@ -825,27 +833,25 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
             }
-            this.SpellHistory.RegisterCastedSpell(handler.Cast.Spell.Level, this.Fight.GetFighter(handler.Cast.TargetCell.Id));
-        }
 
-        [WIP(WIPState.Todo, "see stump")]
-        private void OnSpellCasting(SpellCast cast)
-        {
-            Fighter target = Fight.GetFighter(cast.TargetCell.Id);
+            Fighter target = Fight.GetFighter(handler.Cast.TargetCell.Id);
 
             Fight.Send(new GameActionFightSpellCastMessage()
             {
                 actionId = (short)ActionsEnum.ACTION_FIGHT_CAST_SPELL,
-                critical = (byte)cast.Critical,
-                destinationCellId = cast.TargetCell.Id,
+                critical = (byte)handler.Cast.Critical,
+                destinationCellId = handler.Cast.TargetCell.Id,
                 portalsIds = new short[0],
-                silentCast = false,//cast.Silent,
+                silentCast = handler.Cast.Silent,
                 sourceId = this.Id,
-                spellId = cast.Spell.Record.Id,
-                spellLevel = cast.Spell.Level.Grade,
+                spellId = handler.Cast.Spell.Record.Id,
+                spellLevel = handler.Cast.Spell.Level.Grade,
                 targetId = target == null ? 0 : target.Id,
                 verboseCast = true,
             });
+
+
+
         }
 
         public virtual FightSpellCastCriticalEnum RollCriticalDice(SpellLevelRecord spell)
@@ -1017,6 +1023,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
+            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
 
             return null;
@@ -1027,11 +1034,11 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (targetCell.Id == Cell.Id)
             {
-                direction = castCell.Point.OrientationTo(targetCell.Point, false);
+                direction = castCell.Point.OrientationTo(targetCell.Point, true);
             }
             else
             {
-                direction = targetCell.Point.OrientationTo(Cell.Point, false);
+                direction = targetCell.Point.OrientationTo(Cell.Point, true);
             }
 
             Slide(source, direction, delta, true);
@@ -1240,6 +1247,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.Cell = Fight.Map.GetCell(destinationPoint);
 
+            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
+
             MovementHistory.OnCellChanged(oldCell);
 
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
@@ -1275,6 +1284,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 source.MovementHistory.RegisterEntry(this.Cell);
             }
 
+            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
+            source.TriggerBuffs(BuffTriggerType.OnMoved, source);
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)
@@ -1579,6 +1590,27 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 TriggerBuffs(BuffTriggerType.OnDamaged, damage);
 
+                switch (damage.EffectSchool)
+                {
+                    case EffectSchoolEnum.Pushback:
+                        TriggerBuffs(BuffTriggerType.OnDamagedByPush, damage);
+                        break;
+                    case EffectSchoolEnum.Neutral:
+                        TriggerBuffs(BuffTriggerType.OnDamagedNeutral, damage);
+                        break;
+                    case EffectSchoolEnum.Earth:
+                        TriggerBuffs(BuffTriggerType.OnDamagedEarth, damage);
+                        break;
+                    case EffectSchoolEnum.Water:
+                        TriggerBuffs(BuffTriggerType.OnDamagedWater, damage);
+                        break;
+                    case EffectSchoolEnum.Air:
+                        TriggerBuffs(BuffTriggerType.OnDamagedAir, damage);
+                        break;
+                    case EffectSchoolEnum.Fire:
+                        TriggerBuffs(BuffTriggerType.OnDamagedFire, damage);
+                        break;
+                }
                 if (damage.Source.IsMeleeWith(this))
                 {
                     TriggerBuffs(BuffTriggerType.OnDamagedInCloseRange, damage);

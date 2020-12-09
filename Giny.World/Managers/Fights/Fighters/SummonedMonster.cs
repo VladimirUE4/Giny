@@ -37,7 +37,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void Initialize()
         {
-            this.Stats = new FighterStats(Grade);
+            double statsCoeff = 1 + (Summoner.Level / 100);
+            this.Stats = new FighterStats(Grade, statsCoeff);
             this.Look = Record.Look.Clone();
             base.Initialize();
         }

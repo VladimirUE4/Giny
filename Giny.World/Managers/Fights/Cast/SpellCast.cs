@@ -73,11 +73,6 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-        public bool SilentNetwork
-        {
-            get;
-            set;
-        }
         private SpellCast Parent
         {
             get;
@@ -108,7 +103,6 @@ namespace Giny.World.Managers.Fights.Cast
             this.TargetCell = targetCell;
             this.Force = false;
             this.Silent = false;
-            this.SilentNetwork = false;
             this.Weapon = false;
             this.Childs = new List<SpellCast>();
             this.DamagesDealt = 0;

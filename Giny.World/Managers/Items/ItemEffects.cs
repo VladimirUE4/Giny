@@ -377,12 +377,12 @@ namespace Giny.World.Managers.Items
             character.Record.Stats.RangedDamageResistancePercent.Objects -= (short)delta;
         }
 
-        [ItemEffect(EffectsEnum.Effect_SpellDamageBonusPercent)]
+        [ItemEffect(EffectsEnum.Effect_SpellDamageDonePercent)]
         public static void AddSpellDamageDone(Character character, int delta)
         {
             character.Record.Stats.SpellDamageDonePercent.Objects += (short)delta;
         }
-        [ItemEffect(EffectsEnum.Effect_SubSpellDamageBonusPercent)]
+        [ItemEffect(EffectsEnum.Effect_SubSpellDamageDonePercent)]
         public static void SubSpellDamageDone(Character character, int delta)
         {
             character.Record.Stats.SpellDamageDonePercent.Objects -= (short)delta;

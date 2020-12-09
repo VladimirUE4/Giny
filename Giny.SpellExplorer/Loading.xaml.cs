@@ -4,6 +4,7 @@ using Giny.ORM.IO;
 using Giny.World.Managers.Fights.Effects;
 using Giny.World.Modules;
 using Giny.World.Records.Effects;
+using Giny.World.Records.Monsters;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -40,13 +41,12 @@ namespace Giny.SpellExplorer
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
 
-
             new Thread(new ThreadStart(() =>
             {
                 AssemblyCore.OnAssembliesLoaded();
 
                 DatabaseManager.Instance.LoadTable<SpellRecord>();
-
+                DatabaseManager.Instance.LoadTable<MonsterRecord>();
                 DatabaseManager.Instance.LoadTable<EffectRecord>();
                 DatabaseManager.Instance.LoadTable<SpellStateRecord>();
                 SpellEffectManager.Instance.Initialize();

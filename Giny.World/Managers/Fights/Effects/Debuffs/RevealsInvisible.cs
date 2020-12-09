@@ -8,22 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Buffs
+namespace Giny.World.Managers.Fights.Effects.Debuffs
 {
-    [SpellEffectHandler(EffectsEnum.Effect_AddVitality)]
-    public class AddVitality : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_RevealsInvisible)]
+    public class RevealsInvisible : SpellEffectHandler
     {
-        public AddVitality(EffectDice effect, SpellCastHandler castHandler) :
-            base(effect, castHandler)
+        public RevealsInvisible(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
+
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             foreach (var target in targets)
             {
-                short delta = (short)Effect.Min;
-                this.AddVitalityBuff(target, delta, FightDispellableEnum.DISPELLABLE);
+                target.Reveals();
             }
         }
     }

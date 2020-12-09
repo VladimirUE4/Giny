@@ -49,16 +49,6 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             private set;
         }
-        protected abstract int Priority
-        {
-            get;
-        }
-
-        public int? CustomPriority
-        {
-            get;
-            set;
-        }
         protected bool Critical
         {
             get
@@ -119,10 +109,10 @@ namespace Giny.World.Managers.Fights.Cast
         {
             List<CellRecord> affectedCells = GetAffectedCells();
 
-             foreach (var cell in affectedCells)
+            /* foreach (var cell in affectedCells)
             {
                 Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
-            }
+            } */
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
                 affectedCells.Add(Source.Cell);
 
@@ -162,19 +152,13 @@ namespace Giny.World.Managers.Fights.Cast
                 return;
             }
 
-            if (Effect.TriggersEnum != BuffTriggerType.Instant && Effect.Delay > 0)
-            {
-                throw new Exception("Unhandled ! Triggers + Delay ... ???");
-            }
-
-            if (Effect.TriggersEnum != BuffTriggerType.Instant || Effect.Delay > 0)
+            if (Effect.Delay > 0)
             {
                 foreach (var target in AffectedFighters)
                 {
-                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Effect.TriggersEnum, delegate (TriggerBuff buff, ITriggerToken token)
+                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, BuffTriggerType.Delayed, delegate (TriggerBuff buff, ITriggerToken token)
                     {
-                        this.TriggerToken = token;
-                        Apply(new Fighter[] { target }); // AffectedFighters ?
+                        InternalApply(new Fighter[] { target });
                         return false;
 
                     }, (short)Effect.Delay);
@@ -183,12 +167,29 @@ namespace Giny.World.Managers.Fights.Cast
             }
             else
             {
-                Apply(AffectedFighters);
+                InternalApply(AffectedFighters);
             }
         }
-        public int GetPriority()
+        private void InternalApply(IEnumerable<Fighter> targets)
         {
-            return CustomPriority.HasValue ? CustomPriority.Value : Priority;
+            if (Effect.TriggersEnum == BuffTriggerType.Instant)
+            {
+                Apply(targets); // AffectedFighters ?
+            }
+            else
+            {
+                foreach (var target in targets)
+                {
+                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Effect.TriggersEnum, delegate (TriggerBuff buff, ITriggerToken token)
+                    {
+                        this.TriggerToken = token;
+                        Apply(new Fighter[] { target });
+                        return false;
+
+                    }, 0);
+                }
+            }
+
         }
         protected abstract void Apply(IEnumerable<Fighter> targets);
 

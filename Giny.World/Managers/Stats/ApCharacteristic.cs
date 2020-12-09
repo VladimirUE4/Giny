@@ -51,7 +51,6 @@ namespace Giny.World.Managers.Stats
             {
                 Additional = Additional,
                 Base = Base,
-                Context = Context,
                 Objects = Objects
             };
         }

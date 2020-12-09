@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Other
+namespace Giny.World.Managers.Fights.Effects.Summons
 {
     [SpellEffectHandler(EffectsEnum.Effect_Summon)]
     public class Summon : SpellEffectHandler
@@ -18,12 +18,10 @@ namespace Giny.World.Managers.Fights.Effects.Other
         {
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             MonsterRecord record = MonsterRecord.GetMonsterRecord((short)Effect.Min);
-            SummonedFighter fighter = new SummonedMonster(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell);
+            SummonedFighter fighter = new SummonedMonster(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell); // CastHandler.Cast.Spell.Level.Grade
             Source.Fight.AddSummon(Source, fighter);
         }
     }

@@ -241,24 +241,94 @@ namespace Giny.World.Managers.Fights.Stats
             this.Erosion = NaturalErosion;
 
         }
+        public FighterStats(FighterStats other)
+        {
+            this.ActionPoints = (ApCharacteristic)other.ActionPoints.Clone();
+            this.Agility = other.Agility.Clone();
+            this.AirDamageBonus = other.AirDamageBonus.Clone();
+            this.AirReduction = other.AirReduction.Clone();
+            this.AirResistPercent = (ResistanceCharacteristic)other.AirResistPercent.Clone();
+            this.AllDamagesBonus = other.AllDamagesBonus.Clone();
+            this.Chance = other.Chance.Clone();
+            this.CriticalDamageBonus = other.CriticalDamageBonus.Clone();
+            this.CriticalDamageReduction = other.CriticalDamageReduction.Clone();
+            this.CriticalHit = other.CriticalHit.Clone();
+            this.CriticalHitWeapon = other.CriticalHitWeapon;
+            this.DamagesBonusPercent = other.DamagesBonusPercent.Clone();
+            this.DodgePAProbability = (RelativeCharacteristic)other.DodgePAProbability.Clone();
+            this.DodgePMProbability = (RelativeCharacteristic)other.DodgePMProbability.Clone();
+            this.EarthDamageBonus = other.EarthDamageBonus.Clone();
+            this.EarthReduction = other.EarthReduction.Clone();
+            this.EarthResistPercent = (ResistanceCharacteristic)other.EarthResistPercent.Clone();
+            this.Energy = other.Energy;
+            this.FireDamageBonus = other.FireDamageBonus.Clone();
+            this.FireReduction = other.FireReduction.Clone();
+            this.FireResistPercent = (ResistanceCharacteristic)other.FireResistPercent.Clone();
+            this.GlobalDamageReduction = other.GlobalDamageReduction;
+            this.GlyphBonusPercent = other.GlyphBonusPercent.Clone();
+            this.HealBonus = other.HealBonus.Clone();
+            this.Initiative = other.Initiative;
+            this.Intelligence = other.Intelligence.Clone();
+            this.LifePoints = other.LifePoints;
+            this.MaxLifePoints = other.MaxLifePoints;
+            this.MaxEnergyPoints = other.MaxEnergyPoints;
+            this.MeleeDamageDonePercent = other.MeleeDamageDonePercent.Clone();
+            this.MeleeDamageResistancePercent = other.MeleeDamageResistancePercent.Clone();
+            this.MovementPoints = (MpCharacteristic)other.MovementPoints.Clone();
+            this.NeutralDamageBonus = other.NeutralDamageBonus.Clone();
+            this.NeutralReduction = other.NeutralReduction.Clone();
+            this.NeutralResistPercent = (ResistanceCharacteristic)other.NeutralResistPercent.Clone();
+            this.APAttack = (RelativeCharacteristic)other.APAttack.Clone();
+            this.PermanentDamagePercent = other.PermanentDamagePercent.Clone();
+            this.MPAttack = (RelativeCharacteristic)other.MPAttack.Clone();
+            this.Prospecting = other.Prospecting;
+            this.PushDamageBonus = other.PushDamageBonus.Clone();
+            this.PushDamageReduction = other.PushDamageReduction.Clone();
+            this.Range = (RangeCharacteristic)other.Range.Clone();
+            this.RangedDamageDonePercent = other.RangedDamageDonePercent.Clone();
+            this.RangedDamageResistancePercent = other.RangedDamageResistancePercent.Clone();
+            this.Reflect = other.Reflect.Clone();
+            this.RuneBonusPercent = other.RuneBonusPercent.Clone();
+            this.SpellDamageDonePercent = other.SpellDamageDonePercent.Clone();
+            this.SpellDamageResistancePercent = other.SpellDamageResistancePercent.Clone();
+            this.Strength = other.Strength.Clone();
+            this.SummonableCreaturesBoost = other.SummonableCreaturesBoost.Clone();
+            this.TackleBlock = (RelativeCharacteristic)other.TackleBlock.Clone();
+            this.TackleEvade = (RelativeCharacteristic)other.TackleEvade.Clone();
+            this.TrapBonus = other.TrapBonus.Clone();
+            this.TrapBonusPercent = other.TrapBonusPercent.Clone();
+            this.Vitality = other.Vitality.Clone();
+            this.WaterDamageBonus = other.WaterDamageBonus.Clone();
+            this.WaterReduction = other.WaterReduction.Clone();
+            this.WaterResistPercent = (ResistanceCharacteristic)other.WaterResistPercent.Clone();
+            this.WeaponDamageDonePercent = other.WeaponDamageDonePercent.Clone();
+            this.WeaponDamageResistancePercent = other.WeaponDamageResistancePercent.Clone();
+            this.WeaponDamagesBonusPercent = other.WeaponDamagesBonusPercent.Clone();
+            this.WeightBonus = other.WeightBonus.Clone();
+            this.Wisdom = other.Wisdom.Clone();
+            InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
+            this.BaseMaxLife = MaxLifePoints;
+            this.Erosion = NaturalErosion;
+            this.Initialize();
+        }
         /*
          * Todo : Summoned / SummonerId
          */
-        public FighterStats(MonsterGrade monsterGrade)
+        public FighterStats(MonsterGrade monsterGrade, double coeff = 1d)
         {
             this.ActionPoints = ApCharacteristic.New(monsterGrade.ActionPoints);
-            this.Agility = Characteristic.New(monsterGrade.Agility);
             this.AirDamageBonus = Characteristic.Zero();
             this.AirReduction = Characteristic.Zero();
             this.AirResistPercent = ResistanceCharacteristic.New(monsterGrade.AirResistance);
             this.AllDamagesBonus = Characteristic.Zero();
-            this.Chance = Characteristic.New(monsterGrade.Chance);
+        
+
             this.CriticalDamageBonus = Characteristic.Zero();
             this.CriticalDamageReduction = Characteristic.Zero();
             this.CriticalHit = Characteristic.Zero();
             this.CriticalHitWeapon = 0;
             this.DamagesBonusPercent = Characteristic.Zero();
-            this.Wisdom = Characteristic.New(monsterGrade.Wisdom);
+          
             this.DodgePAProbability = RelativeCharacteristic.New(monsterGrade.ApDodge);
             this.DodgePMProbability = RelativeCharacteristic.New(monsterGrade.MpDodge);
             this.EarthDamageBonus = Characteristic.Zero();
@@ -273,8 +343,12 @@ namespace Giny.World.Managers.Fights.Stats
             this.HealBonus = Characteristic.Zero();
             this.Initiative = Characteristic.Zero();
             this.Intelligence = Characteristic.New(monsterGrade.Intelligence);
-            this.LifePoints = monsterGrade.LifePoints;
-            this.MaxLifePoints = monsterGrade.LifePoints;
+            this.Wisdom = Characteristic.New((short)(monsterGrade.Wisdom * coeff));
+            this.Chance = Characteristic.New((short)(monsterGrade.Chance * coeff));
+            this.Agility = Characteristic.New((short)(monsterGrade.Agility * coeff));
+            this.Strength = Characteristic.New((short)(monsterGrade.Strength * coeff));
+            this.Vitality = Characteristic.New((short)(monsterGrade.Vitality * coeff));
+            this.MaxLifePoints = (int)(monsterGrade.LifePoints * coeff);
             this.MaxEnergyPoints = 0;
 
             this.MovementPoints = MpCharacteristic.New(monsterGrade.MovementPoints);
@@ -293,13 +367,13 @@ namespace Giny.World.Managers.Fights.Stats
             this.Reflect = Characteristic.New(monsterGrade.DamageReflect);
             this.RuneBonusPercent = Characteristic.Zero();
 
-            this.Strength = Characteristic.New(monsterGrade.Strength);
+       
             this.SummonableCreaturesBoost = Characteristic.Zero();
             this.TackleBlock = RelativeCharacteristic.Zero();
             this.TackleEvade = RelativeCharacteristic.Zero();
             this.TrapBonus = Characteristic.Zero();
             this.TrapBonusPercent = Characteristic.Zero();
-            this.Vitality = Characteristic.New(monsterGrade.Vitality);
+         
             this.WaterDamageBonus = Characteristic.Zero();
             this.WaterReduction = Characteristic.Zero();
             this.WaterResistPercent = ResistanceCharacteristic.New(monsterGrade.WaterResistance);
@@ -316,10 +390,11 @@ namespace Giny.World.Managers.Fights.Stats
             this.WeightBonus = Characteristic.Zero();
             InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
             this.BaseMaxLife = MaxLifePoints;
+            this.LifePoints = MaxLifePoints;
             this.Erosion = NaturalErosion;
             this.Initialize();
         }
-
+      
         public GameFightMinimalStats GetFightMinimalStats(Fighter owner, CharacterFighter target)
         {
             Fighter summoner = owner.GetSummoner();

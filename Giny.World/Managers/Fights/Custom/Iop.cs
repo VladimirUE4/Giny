@@ -20,13 +20,7 @@ namespace Giny.World.Managers.Fights.Custom
             }
             protected override IEnumerable<SpellEffectHandler> OrderHandlers()
             {
-                EffectsEnum[] order = new EffectsEnum[]
-                {
-                   EffectsEnum.Effect_Kill,
-                   EffectsEnum.Effect_Summon,
-                };
-
-                return OrderByEffects(order);
+                return OrderByEffects(EffectsEnum.Effect_Kill, EffectsEnum.Effect_Summon);
             }
         }
     }

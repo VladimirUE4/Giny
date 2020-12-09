@@ -13,7 +13,7 @@ namespace Giny.World.Managers.Fights.Effects
 {
     public class SpellAppearanceManager : Singleton<SpellAppearanceManager>
     {
-        public delegate void SpellAppearanceDelegate(Fighter fighter, ServerEntityLook look);
+        public delegate void SpellAppearanceDelegate(Fighter fighter, ref ServerEntityLook look);
 
         private Dictionary<int, SpellAppearanceDelegate> m_handlers = new Dictionary<int, SpellAppearanceDelegate>();
 
@@ -36,7 +36,7 @@ namespace Giny.World.Managers.Fights.Effects
             if (m_handlers.ContainsKey(appearanceId))
             {
                 var look = fighter.Look.Clone();
-                m_handlers[appearanceId](fighter, look);
+                m_handlers[appearanceId](fighter, ref look);
                 return look;
             }
             else

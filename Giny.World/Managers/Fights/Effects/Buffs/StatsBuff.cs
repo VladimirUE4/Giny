@@ -61,6 +61,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
     [SpellEffectHandler(EffectsEnum.Effect_AddPushDamageBonus)]
     [SpellEffectHandler(EffectsEnum.Effect_AddCriticalDamageReduction)]
     [SpellEffectHandler(EffectsEnum.Effect_AddCriticalDamageBonus)]
+    [SpellEffectHandler(EffectsEnum.Effect_SpellDamageDonePercent)]
     public class StatsBuff : SpellEffectHandler
     {
         public const FightDispellableEnum Dispellable = FightDispellableEnum.DISPELLABLE;
@@ -70,8 +71,6 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
         {
 
         }
-
-        protected override int Priority => 1;
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
@@ -226,6 +225,9 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
                 case EffectsEnum.Effect_AddCriticalDamageBonus:
                     return target.Stats.CriticalDamageBonus;
+
+                case EffectsEnum.Effect_SpellDamageDonePercent:
+                    return target.Stats.SpellDamageDonePercent;
 
                 default:
                     target.Fight.Warn(Effect.EffectEnum + " cannot be applied to stat buff.");

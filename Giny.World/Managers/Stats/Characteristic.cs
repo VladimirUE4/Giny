@@ -35,14 +35,15 @@ namespace Giny.World.Managers.Stats
             get;
             set;
         }
-
+        /// <summary>
+        /// We dont clone context.
+        /// </summary>
         public virtual Characteristic Clone()
         {
             return new Characteristic()
             {
                 Additional = Additional,
                 Base = Base,
-                Context = Context,
                 Objects = Objects
             };
         }

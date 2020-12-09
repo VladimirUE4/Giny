@@ -86,8 +86,14 @@
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
+    <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyph.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
+    <Compile Include="Managers\Fights\Effects\Summons\Double.cs" />
+    <Compile Include="Managers\Fights\Effects\Summons\TakeControl.cs" />
+    <Compile Include="Managers\Fights\Fighters\DoubleFighter.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedMonster.cs" />
+    <Compile Include="Managers\Fights\Marks\Glyph.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
     <Compile Include="Managers\Parties\Party.cs" />
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
@@ -170,7 +176,6 @@
     <Compile Include="Managers\Fights\Effects\Buffs\SpellReduceApCost.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2160.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2794.cs" />
-    <Compile Include="Managers\Fights\Effects\Damages\AddSpellDamages.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePercent.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerMpUsed.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerRemainingMp.cs" />
@@ -216,7 +221,7 @@
     <Compile Include="Managers\Fights\Effects\Movements\RepelsTo.cs" />
     <Compile Include="Managers\Fights\Effects\Other\Kill.cs" />
     <Compile Include="Managers\Fights\Effects\Other\NoMoreEffects.cs" />
-    <Compile Include="Managers\Fights\Effects\Other\Summon.cs" />
+    <Compile Include="Managers\Fights\Effects\Summons\Summon.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell792.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamageBestElement.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\MpDebuff.cs" />

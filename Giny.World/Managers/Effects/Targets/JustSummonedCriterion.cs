@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Effects.Targets
         }
         public override string ToString()
         {
-            return "Just summoned";
+            return "Just Summoned";
         }
     }
 }

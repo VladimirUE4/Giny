@@ -23,8 +23,6 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
@@ -37,6 +35,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
                 SpellCast cast = new SpellCast(target, spell, Source.Cell,CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
+                cast.Silent = true;
                 Source.CastSpell(cast);
             }
         }

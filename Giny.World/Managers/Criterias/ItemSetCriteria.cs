@@ -14,8 +14,7 @@ namespace Giny.World.Managers.Criterias
         [WIP]
         public override bool Eval(WorldClient client)
         {
-            return false;
-
+            return true;
         }
     }
 }

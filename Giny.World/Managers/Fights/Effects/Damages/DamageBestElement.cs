@@ -15,11 +15,10 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Damages
 {
-    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement)]
+    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement2)] // Concentration de Chakra
+    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement)] // Intimidation
     public class DamageBestElement : SpellEffectHandler
     {
-        protected override int Priority => 0;
-
         public override bool RefreshTargets => false;
 
         protected override bool Reveals => true;
@@ -31,29 +30,14 @@ namespace Giny.World.Managers.Fights.Effects.Damages
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (Effect.Duration > 0)
+            foreach (var fighter in targets)
             {
-                foreach (var target in targets)
-                {
-                    base.AddTriggerBuff(target, FightDispellableEnum.DISPELLABLE, BuffTriggerType.OnTurnBegin, DamageTrigger, 0);
-                }
-            }
-            else
-            {
-                foreach (var fighter in targets)
-                {
-                    fighter.InflictDamage(CreateDamage(fighter));
-                }
+                fighter.InflictDamage(CreateDamage(fighter));
             }
         }
         private Damage CreateDamage(Fighter target)
         {
             return new Damage(Source, target, GetEffectSchool(), (short)Effect.Min, (short)Effect.Max, this);
-        }
-        private bool DamageTrigger(TriggerBuff buff, object token)
-        {
-            buff.Target.InflictDamage(CreateDamage(buff.Target));
-            return false;
         }
 
         public EffectSchoolEnum GetEffectSchool()

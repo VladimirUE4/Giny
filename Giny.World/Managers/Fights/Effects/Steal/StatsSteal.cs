@@ -26,8 +26,6 @@ namespace Giny.World.Managers.Fights.Effects.Steal
         {
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             var displayedEffects = GetBuffDisplayedEffect();

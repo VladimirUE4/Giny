@@ -42,10 +42,10 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             set;
         }
-        private EffectSchoolEnum EffectSchool
+        public EffectSchoolEnum EffectSchool
         {
             get;
-            set;
+            private set;
         }
         private SpellEffectHandler EffectHandler
         {

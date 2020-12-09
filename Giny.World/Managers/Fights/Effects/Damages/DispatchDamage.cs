@@ -23,8 +23,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
 
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             Damage damages = GetTriggerToken<Damage>();

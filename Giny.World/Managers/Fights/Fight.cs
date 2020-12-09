@@ -412,6 +412,7 @@ namespace Giny.World.Managers.Fights
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
             {
+
                 if (!FighterPlaying.IsSummoned() && RoundNumber > 1)
                 {
                     FighterPlaying.DecrementAllCastedBuffsDuration();
@@ -421,6 +422,7 @@ namespace Giny.World.Managers.Fights
                 }
 
                 FighterPlaying.TriggerBuffs(BuffTriggerType.OnTurnBegin, null);
+                this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnStart);
 
             }
 

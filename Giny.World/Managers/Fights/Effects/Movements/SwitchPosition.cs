@@ -17,8 +17,6 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
         }
 
-        protected override int Priority => -2;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (targets.Count() > 0)

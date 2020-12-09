@@ -213,6 +213,20 @@ namespace Giny.World.Managers.Effects
                     return BuffTriggerType.OnDamagedBySpell;
                 case "DM":
                     return BuffTriggerType.OnDamagedInCloseRange;
+                case "DA":
+                    return BuffTriggerType.OnDamagedAir;
+                case "DF":
+                    return BuffTriggerType.OnDamagedFire;
+                case "DN":
+                    return BuffTriggerType.OnDamagedNeutral;
+                case "DE":
+                    return BuffTriggerType.OnDamagedEarth;
+                case "DW":
+                    return BuffTriggerType.OnDamagedWater;
+                case "PD":
+                    return BuffTriggerType.OnDamagedByPush;
+                case "M":
+                    return BuffTriggerType.OnMoved;
                 case "I":
                     return BuffTriggerType.Instant;
             }

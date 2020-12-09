@@ -23,8 +23,6 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             SpellStateRecord stateRecord = SpellStateRecord.GetSpellStateRecord(Effect.Value);

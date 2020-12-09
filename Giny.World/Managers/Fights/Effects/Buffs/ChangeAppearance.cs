@@ -23,7 +23,6 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
         }
 
-        protected override int Priority => 2;
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {

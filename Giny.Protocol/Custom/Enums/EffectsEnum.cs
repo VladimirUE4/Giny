@@ -2419,12 +2419,12 @@
         /// <summary>
         /// Aumenta o dano de spells : #1{~1~2 a }#2% de danos de feitiços
         /// </summary>
-        Effect_SpellDamageBonusPercent = 2812,
+        Effect_SpellDamageDonePercent = 2812,
 
         /// <summary>
         /// Diminui o dano de spells : -#1{~1~2 a -}#2% de danos de feitiços
         /// </summary>
-        Effect_SubSpellDamageBonusPercent = 2813,
+        Effect_SubSpellDamageDonePercent = 2813,
 
         /// <summary>
         /// Diminui a resistência aos feitiços : -#1{~1~2 a -}#2% de resistência aos feitiços
@@ -2438,8 +2438,8 @@
         Effect_2816 = 2816,
         Effect_2817 = 2817,
         Effect_2818 = 2818,
-        Effect_2828 = 2828,
         Effect_DamageBestElement = 2822,
+        Effect_DamageBestElement2 = 2828,
 
         End
     }

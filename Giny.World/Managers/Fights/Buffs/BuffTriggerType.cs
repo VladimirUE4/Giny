@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Buffs
         OnDamagedByTrap, //DP
         OnDamagedInCloseRange, //DM
         OnDamagedInLongRange, //DR
-        OnDamagedByPush, // MD
+        OnDamagedByPush, // MD-->PD
         OnDamagedByEnemyPush, //MDP
         OnDamageEnemyByPush, // MDM
         OnDamagedUnknown_2, // Dr
@@ -72,6 +72,7 @@ namespace Giny.World.Managers.Fights.Buffs
 
         /* CUSTOM */
 
+        Delayed,
         Unknown,
         /*
         *A=lose AP (101)

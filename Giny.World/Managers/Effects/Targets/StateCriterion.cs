@@ -1,5 +1,6 @@
 ﻿using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,17 @@ namespace Giny.World.Managers.Effects.Targets
 
         public override string ToString()
         {
-            return "State (" + State + ")";
+            SpellStateRecord record = SpellStateRecord.GetSpellStateRecord(State);
+
+            if (Required)
+            {
+                return "Has State (" + record.Name + ")";
+            }
+            else
+            {
+                return "Has not State (" + record.Name + ")";
+            }
+          
         }
     }
 }

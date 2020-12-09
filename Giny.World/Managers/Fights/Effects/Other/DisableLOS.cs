@@ -21,8 +21,6 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             Source.Fight.Warn(Effect.EffectEnum + " not handled.");

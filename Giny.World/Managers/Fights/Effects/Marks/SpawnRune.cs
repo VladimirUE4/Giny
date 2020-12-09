@@ -20,8 +20,6 @@ namespace Giny.World.Managers.Fights.Effects.Marks
         {
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (!Source.Fight.MarkExist<Rune>(x => x.CenterCell == TargetCell))

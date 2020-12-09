@@ -75,6 +75,7 @@ namespace Giny.World.Managers.Entities.Look
             this.Scales = new List<short>();
             this.SubEntities = new List<ServerSubentityLook>();
         }
+ 
         public ServerEntityLook(short bonesId, IEnumerable<short> skins, IEnumerable<int> colors, IEnumerable<short> scales, IEnumerable<ServerSubentityLook> subEntity)
         {
             this.BonesId = bonesId;
@@ -84,7 +85,7 @@ namespace Giny.World.Managers.Entities.Look
             this.SubEntities = subEntity.ToList();
         }
 
-        public ServerEntityLook GetMountDriverLook()
+        private ServerEntityLook GetMountDriverLook()
         {
             if (!this.IsRiding)
             {
@@ -104,6 +105,10 @@ namespace Giny.World.Managers.Entities.Look
                 look.Skins.Add(skinId);
             else
                 Logger.Write("Unable to add skin to entity, already exists.", MessageState.WARNING);
+        }
+        public void RemoveSubEntities()
+        {
+            this.SubEntities.Clear();
         }
         public void SetColors(IEnumerable<int> colors)
         {

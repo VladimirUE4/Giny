@@ -20,8 +20,6 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             double delta = Source.Stats.MaxLifePoints * (Effect.Min / 100d);

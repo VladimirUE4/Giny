@@ -8,18 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Other
+namespace Giny.World.Managers.Fights.Effects.Summons
 {
-    [SpellEffectHandler(EffectsEnum.Effect_NoMoreEffects)]
-    public class NoMoreEffects : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_Double)]
+    public class Double : SpellEffectHandler
     {
-        public NoMoreEffects(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public Double(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Source.Fight.Warn("No more effects...");
+            SummonedFighter fighter = new DoubleFighter(Source, this, TargetCell);
+            Source.Fight.AddSummon(Source, fighter);
         }
     }
 }

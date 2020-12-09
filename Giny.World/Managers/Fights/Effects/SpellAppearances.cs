@@ -11,7 +11,7 @@ namespace Giny.World.Managers.Fights.Effects
     public class SpellAppearances
     {
         [SpellAppearance(729)]
-        public static void MomificationLook(Fighter fighter, ServerEntityLook look)
+        public static void MomificationLook(Fighter fighter, ref ServerEntityLook look)
         {
             if (!look.IsRiding)
             {
@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects
             }
         }
         [SpellAppearance(106)]
-        public static void CowardLook(Fighter fighter, ServerEntityLook look)
+        public static void CowardLook(Fighter fighter, ref ServerEntityLook look)
         {
             if (!look.IsRiding)
             {
@@ -41,7 +41,7 @@ namespace Giny.World.Managers.Fights.Effects
         }
 
         [SpellAppearance(105)]
-        public static void PsychopathLook(Fighter fighter, ServerEntityLook look)
+        public static void PsychopathLook(Fighter fighter, ref ServerEntityLook look)
         {
             if (!look.IsRiding)
                 look.SetBones(1575);
@@ -57,9 +57,15 @@ namespace Giny.World.Managers.Fights.Effects
         }
 
         [SpellAppearance(1318)]
-        public static void SentinelLook(Fighter fighter, ServerEntityLook look)
+        public static void SentinelLook(Fighter fighter, ref ServerEntityLook look)
         {
-            /* Todo */
+            if (look.IsRiding)
+            {
+                look = look.ActorLook;
+            }
+
+            look.SetBones(4321);
+
         }
     }
 }

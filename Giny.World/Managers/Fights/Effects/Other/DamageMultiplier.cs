@@ -26,8 +26,6 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         }
 
-        protected override int Priority => 0;
-
         [WIP("Bond, le trigger s'applique après damages infligé, correct ? ")]
         protected override void Apply(IEnumerable<Fighter> targets)
         {

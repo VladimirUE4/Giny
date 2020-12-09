@@ -18,8 +18,6 @@ namespace Giny.World.Managers.Fights.Effects.Heals
         {
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             foreach (var target in targets)

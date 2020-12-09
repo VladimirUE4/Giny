@@ -17,8 +17,6 @@ namespace Giny.World.Managers.Fights.Effects.Other
         {
         }
 
-        protected override int Priority => -1;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             foreach (var target in targets)

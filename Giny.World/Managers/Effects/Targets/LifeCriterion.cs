@@ -37,7 +37,14 @@ namespace Giny.World.Managers.Effects.Targets
         }
         public override string ToString()
         {
-            return "Life (" + LifePercent + "%)";
+            if (MustBeGreater)
+            {
+                return "LifePercent > (" + LifePercent + "%)";
+            }
+            else
+            {
+                return "LifePercent <= (" + LifePercent + "%)";
+            }
         }
     }
 }

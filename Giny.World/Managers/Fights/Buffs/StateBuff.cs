@@ -45,7 +45,7 @@ namespace Giny.World.Managers.Fights.Buffs
                 spellId = Cast.SpellId,
                 stateId = (short)Record.Id,
                 targetId = Target.Id,
-                turnDuration = (short)Duration,
+                turnDuration = (short)(Duration == -1 ? -1000 : Duration),
                 uid = Id,
             };
         }

@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Marks
 {
-    public class SpawnPortal : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_Glyph)]
+    public class SpawnGlyph : SpellEffectHandler
     {
-        public SpawnPortal(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public SpawnGlyph(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (!Source.Fight.MarkExist<Portal>(x => x.CenterCell == TargetCell))
+            if (!Source.Fight.MarkExist<Glyph>(x => x.CenterCell == TargetCell))
             {
-                Zone zone = Effect.GetZone();
-                Color color = Color.Blue;
+               /* Zone zone = Effect.GetZone();
+                Color color = Color.FromArgb(Effect.Value);
 
-                Portal portal = new Portal(Source.Fight.PopNextMarkId(), Effect,
+                Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
                      zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
-                Source.Fight.AddMark(portal);
+                Source.Fight.AddMark(glyph); */
             }
         }
-
     }
 }

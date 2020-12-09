@@ -22,24 +22,19 @@ namespace Giny.World.Managers.Fights.Effects.Cast
         {
         }
 
-        protected override int Priority => 0;
-
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
             SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
             Spell spell = new Spell(spellRecord, level);
 
+            foreach (var target in targets)
             {
-                foreach (var target in targets)
-                {
-                    SpellCast cast = new SpellCast(target, spell, target.Cell, CastHandler.Cast);
-                    cast.Token = this.GetTriggerToken<ITriggerToken>();
-                    cast.Force = true;
-                    cast.Silent = true;
-                    cast.SilentNetwork = true;
-                    Source.CastSpell(cast);
-                }
+                SpellCast cast = new SpellCast(target, spell, target.Cell, CastHandler.Cast);
+                cast.Token = this.GetTriggerToken<ITriggerToken>();
+                cast.Force = true;
+                cast.Silent = true;
+                target.CastSpell(cast);
             }
 
         }

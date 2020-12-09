@@ -21,8 +21,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     [SpellEffectHandler(EffectsEnum.Effect_DamageNeutral)]
     public class DirectDamage : SpellEffectHandler
     {
-        protected override int Priority => 0;
-
         public override bool RefreshTargets => false;
 
         protected override bool Reveals => true;
@@ -43,11 +41,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         private Damage CreateDamage(Fighter target)
         {
             return new Damage(Source, target, GetEffectSchool(Effect.EffectEnum), (short)Effect.Min, (short)Effect.Max, this);
-        }
-        private bool DamageTrigger(TriggerBuff buff, object token)
-        {
-            buff.Target.InflictDamage(CreateDamage(buff.Target));
-            return false;
         }
 
         public static EffectSchoolEnum GetEffectSchool(EffectsEnum effect)
