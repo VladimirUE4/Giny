@@ -30,7 +30,7 @@
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
-| Friction| ![alt text](https://img.shields.io/badge/Bug-red)  | Très étrange ! last attacker criterion
+| Friction| ![alt text](https://img.shields.io/badge/Done-green) | Last Atk criterion (interactions menace)
 | Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
