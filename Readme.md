@@ -117,8 +117,8 @@
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Double | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Double | ![alt text](https://img.shields.io/badge/Done-green) |
+| Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) | Pas d'augmentation dommages
 | Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
 | Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -136,7 +136,7 @@
 | Piège Répulsif | ![alt text](https://img.shields.io/badge/Done-green) |
 | Poisse | ![alt text](https://img.shields.io/badge/Bug-red) | Minimise les effets aléatoires
 | Peur | ![alt text](https://img.shields.io/badge/Done-green) |
-| Méprise | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Méprise | ![alt text](https://img.shields.io/badge/Done-green) |
 | Concentration de Chakra| ![alt text](https://img.shields.io/badge/Done-green) |
 | Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
 | Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
