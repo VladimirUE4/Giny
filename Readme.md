@@ -106,7 +106,7 @@
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 
 
-### Cra ![alt text](https://static.ankama.com/dofus/ng/modules/mmorpg/encyclopedia/breeds/assets/illu/9.jpg)
+### Cra ![alt text](https://i.imgur.com/7Net9jn.png)
 
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
