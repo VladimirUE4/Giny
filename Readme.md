@@ -106,8 +106,7 @@
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 
 
-|----------|:-------------:|
-|![alt text](https://i.imgur.com/7Net9jn.png) Cra | Cra
+### Cra
  
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
