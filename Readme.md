@@ -224,11 +224,52 @@
 
 <details><summary>Eniripsa</summary>
 <p>
+ 
+ * Calcul du heal incorrect
 
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
-| Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
-
+| Mot Alternatif | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot Marquant | ![alt text](https://img.shields.io/badge/Bug-red) | Glyphe
+| Mot d'Amitié | ![alt text](https://img.shields.io/badge/Bug-red) | Trigger X
+| Mot d'Affection | ![alt text](https://img.shields.io/badge/Bug-red) | Trigger X
+| Mot Blessant | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot Tabou | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot de Frayeur | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot de Séduction | ![alt text](https://img.shields.io/badge/Bug-red) | 
+| Mot Stimulant | ![alt text](https://img.shields.io/badge/Done-green) | Etat stimulé ? 
+| Mot d'Abnégation | ![alt text](https://img.shields.io/badge/Bug-red) | Heal buff
+| Mot Brutal | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot Pernicieux | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot de Jouvence | ![alt text](https://img.shields.io/badge/Bug-red) | Reduce Effect duration
+| Mot Défendu | ![alt text](https://img.shields.io/badge/Bug-red) | Reduce Effect duration
+| Mot Séléctif | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Impartial | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Eclatant | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Retentissant | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot de Prévention | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot d'Entraide | ![alt text](https://img.shields.io/badge/Bug-red) | 
+| Mot Secret | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot d'Agonie | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Turbulant | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Espiègle | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot d'Immobilisation | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Vivifiant | ![alt text](https://img.shields.io/badge/Bug-red) | EON
+| Mot Déroutant | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Furieux | ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Tournoyant| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Tourbillonant| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Fracassant| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Accablant| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot de Silence| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot Sacrificiel | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Mot de Regénération| ![alt text](https://img.shields.io/badge/Done-green) |
+| Mot d'Envol | ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Mot de Ralliement| ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Mot Revitalisant | ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Mot Galvanisant| ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Mot de Reconstitution | ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Marque de Solidaritée| ![alt text](https://img.shields.io/badge/Unknown-blue) |
 </p>
 </details>
 
