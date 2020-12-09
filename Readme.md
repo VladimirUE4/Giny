@@ -88,7 +88,7 @@
 | Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
 | Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Fourberie | ![alt text](https://img.shields.io/badge/Done-green) |
-| Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Bug-red) | Perte de PM non affiché (séquence?)
+| Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fausse commune | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fourvoiement | ![alt text](https://img.shields.io/badge/Done-green) |
 | Injection toxique | ![alt text](https://img.shields.io/badge/Done-green) |
