@@ -106,8 +106,9 @@
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 
 
-### ![alt text](https://i.imgur.com/7Net9jn.png)
-
+|----------|:-------------:|
+|![alt text](https://i.imgur.com/7Net9jn.png) Cra | Cra
+ 
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Flèche Magique | ![alt text](https://img.shields.io/badge/WIP-orange) | Buff PO étrange quand passe tour 
