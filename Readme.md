@@ -179,7 +179,7 @@
 | Flèche Assaillante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
-| Fleche du Jugement | ![alt text](https://img.shields.io/badge/Bug-red) | Calcul dégats (MP remains) incorrect
+| Fleche du Jugement  | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir Puissant | ![alt text](https://img.shields.io/badge/Done-green) |
 | Balise Tactique | ![alt text](https://img.shields.io/badge/Bug-red) | Subit 2x moins de dégats alliés
 | Flèche Harcelante | ![alt text](https://img.shields.io/badge/Done-green) |
