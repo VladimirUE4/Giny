@@ -187,7 +187,7 @@
 | Flèche Empoisonnée | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Curative | ![alt text](https://img.shields.io/badge/Bug-red) | Heal Buff not handled
 | Flèche Persecutrice | ![alt text](https://img.shields.io/badge/Done-green) |
-| Flèche Tyranique | ![alt text](https://img.shields.io/badge/Bug-red) | 2 triggers unhandled
+| Flèche Tyranique |![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Destructrice | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir de Barrage | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Absorbante | ![alt text](https://img.shields.io/badge/Done-green) |
