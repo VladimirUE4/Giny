@@ -201,7 +201,7 @@
 | Flèche Explosive | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Fulminante |![alt text](https://img.shields.io/badge/Bug-red) | Ne boost pas le sort
 | Maîtrise de l'Arc | ![alt text](https://img.shields.io/badge/Done-green) |
-| Sentinelle | ![alt text](https://img.shields.io/badge/Bug-red) | SpellDamageBonusPercent & Appearence
+| Sentinelle | ![alt text](https://img.shields.io/badge/Done-green) |
 
 ### Autres
  | Nom   |      Etat     | Commentaire
