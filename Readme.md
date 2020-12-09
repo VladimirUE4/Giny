@@ -171,7 +171,7 @@
 | Tir Eloigné | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche d'Expiation | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche de Rédemption | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Oeil de Taupe| ![alt text](https://img.shields.io/badge/Bug-red) | Reveals Invisible
+| Oeil de Taupe| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Ecrasante | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tir Critique | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Balise de Rappel | ![alt text](https://img.shields.io/badge/Done-green) | Problème affichage séquence ?
