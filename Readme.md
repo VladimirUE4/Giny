@@ -76,7 +76,7 @@
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Double | ![alt text](https://img.shields.io/badge/Bug-red) |  Take control
+| Double | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Comploteur | ![alt text](https://img.shields.io/badge/Bug-red) | Pas d'augmentation dommages
 | Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
 | Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
