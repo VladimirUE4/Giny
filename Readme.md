@@ -93,7 +93,7 @@
 | Fourvoiement | ![alt text](https://img.shields.io/badge/Done-green) |
 | Injection toxique | ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Répulsif | ![alt text](https://img.shields.io/badge/Done-green) |
-| Poisse | ![alt text](https://img.shields.io/badge/Bug-red) | Minimise les effets aléatoires
+| Poisse | ![alt text](https://img.shields.io/badge/Done-green) |
 | Peur | ![alt text](https://img.shields.io/badge/Done-green) |
 | Méprise | ![alt text](https://img.shields.io/badge/Done-green) |
 | Concentration de Chakra| ![alt text](https://img.shields.io/badge/Done-green) |
