@@ -54,7 +54,7 @@ namespace Giny.World.Managers.Fights.Cast
 
         public abstract bool Initialize();
 
-        public abstract bool Execute();
+        public abstract bool Execute(IEnumerable<Fighter> overriddenTargets = null);
 
         public bool RevealsInvisible()
         {

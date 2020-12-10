@@ -87,10 +87,8 @@ namespace Giny.World.Managers.Fights.Marks
                 return;
             }
 
-            foreach (var effectHandler in handler.GetEffectHandlers())
-            {
-                effectHandler.Execute(new Fighter[] { fighter });
-            }
+            handler.Execute(new Fighter[] { fighter });
+
         }
 
         private void OnFighterMove(Fighter fighter)

@@ -745,6 +745,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 if (Alive)
                 {
+                    Fight.TriggerMarks(this, MarkTriggerType.OnTurnEnd);
                     TriggerBuffs(BuffTriggerType.OnTurnEnd, null);
                 }
 

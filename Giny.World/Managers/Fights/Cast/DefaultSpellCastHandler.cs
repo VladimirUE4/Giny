@@ -2,6 +2,7 @@
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Effects;
+using Giny.World.Managers.Fights.Fighters;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -99,7 +100,12 @@ namespace Giny.World.Managers.Fights.Cast
 
             return true;
         }
-        public override bool Execute()
+        /*
+         * 'overriddenTargets' parameter is specified in particular cases !
+         *  (Glyph triggers for exemple)
+         *  You can trust Effect.TargetMask ! 
+         */
+        public override bool Execute(IEnumerable<Fighter> overriddenTargets = null)
         {
             if (!m_initialized)
             {
@@ -114,7 +120,15 @@ namespace Giny.World.Managers.Fights.Cast
             foreach (var handler in handlers)
             {
                 handler.SetTriggerToken(Cast.Token);
-                handler.Execute();
+
+                if (overriddenTargets != null)
+                {
+                    handler.Execute(overriddenTargets);
+                }
+                else
+                {
+                    handler.Execute();
+                }
             }
 
             return true;
@@ -122,11 +136,12 @@ namespace Giny.World.Managers.Fights.Cast
 
         protected virtual IEnumerable<SpellEffectHandler> OrderHandlers()
         {
-            return Handlers; // Handlers.OrderBy(x => x.GetPriority());
+            return Handlers;
         }
         protected IEnumerable<SpellEffectHandler> OrderByEffects(params EffectsEnum[] effects)
         {
             return Handlers.OrderBy(x => Array.IndexOf(effects, x.Effect.EffectEnum));
         }
+
     }
 }

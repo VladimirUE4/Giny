@@ -93,7 +93,6 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         }
     
-
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
             Targets = effect.GetTargets();
@@ -112,6 +111,7 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
             } */
+
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
                 affectedCells.Add(Source.Cell);
 
@@ -137,7 +137,6 @@ namespace Giny.World.Managers.Fights.Cast
         {
             return Reveals && Effect.TriggersEnum == BuffTriggerType.Instant;
         }
-
         public void Execute(IEnumerable<Fighter> targets)
         {
             if (Effect.TriggersEnum == BuffTriggerType.Unknown)
