@@ -61,7 +61,7 @@
 <details><summary>Sram</summary>
 <p>
 
- * Couleur des pièges
+ *  Invocation double dans un piège répu (perds effets double)
  
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
@@ -72,7 +72,7 @@
 | Brume | ![alt text](https://img.shields.io/badge/Bug-red) |
 | Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) | Glyph Effect not handled.
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
