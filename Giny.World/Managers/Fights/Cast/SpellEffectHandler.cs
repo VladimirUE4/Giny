@@ -92,7 +92,7 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-
+    
 
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
@@ -102,8 +102,6 @@ namespace Giny.World.Managers.Fights.Cast
             Zone = Effect.GetZone(CastCell.Point.OrientationTo(TargetCell.Point));
             this.AffectedFighters = GetAffectedFighters();
         }
-
-
 
         [WIP(WIPState.BadCode, "Dont like this post condition to fill cells (no genercity)")]
         private IEnumerable<Fighter> GetAffectedFighters()
@@ -140,13 +138,8 @@ namespace Giny.World.Managers.Fights.Cast
             return Reveals && Effect.TriggersEnum == BuffTriggerType.Instant;
         }
 
-        public void Execute()
+        public void Execute(IEnumerable<Fighter> targets)
         {
-            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
-            {
-                AffectedFighters = GetAffectedFighters();
-            }
-
             if (Effect.TriggersEnum == BuffTriggerType.Unknown)
             {
                 Source.Fight.Warn("Unknown trigger : " + Effect.Triggers + " cannot cast effect " + Effect.EffectEnum);
@@ -155,7 +148,7 @@ namespace Giny.World.Managers.Fights.Cast
 
             if (Effect.Delay > 0)
             {
-                foreach (var target in AffectedFighters)
+                foreach (var target in targets)
                 {
                     AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, BuffTriggerType.Delayed, delegate (TriggerBuff buff, ITriggerToken token)
                     {
@@ -168,14 +161,24 @@ namespace Giny.World.Managers.Fights.Cast
             }
             else
             {
-                InternalApply(AffectedFighters);
+                InternalApply(targets);
             }
+        }
+        public void Execute()
+        {
+            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
+            {
+                AffectedFighters = GetAffectedFighters();
+            }
+
+            Execute(AffectedFighters);
+           
         }
         private void InternalApply(IEnumerable<Fighter> targets)
         {
             if (Effect.TriggersEnum == BuffTriggerType.Instant)
             {
-                Apply(targets); // AffectedFighters ?
+                Apply(targets); 
             }
             else
             {

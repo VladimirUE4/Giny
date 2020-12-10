@@ -21,7 +21,7 @@ namespace Giny.World.Managers.Fights.Effects.Marks
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (var trigger in Source.Fight.GetMarks(Source).OfType<Rune>().ToArray())
+            foreach (var trigger in Source.GetMarks<Rune>().ToArray())
             {
                 using (Source.Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_GLYPH_TRAP))
                 {

@@ -34,6 +34,16 @@ namespace Giny.World.Managers.Fights.Marks
             return true;
         }
 
+        public override void OnAdded()
+        {
+           
+        }
+
+        public override void OnRemoved()
+        {
+            
+        }
+
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
 

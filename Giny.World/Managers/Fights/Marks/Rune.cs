@@ -30,13 +30,20 @@ namespace Giny.World.Managers.Fights.Marks
             return true;
         }
 
+        public override void OnAdded()
+        {
+           
+        }
+
+        public override void OnRemoved()
+        {
+          
+        }
+
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
             Source.Fight.RemoveMark(this);
-            SpellCast cast = new SpellCast(Source, TriggerSpell, CenterCell);
-            cast.CastCell = CenterCell;
-            cast.Force = true;
-            Source.CastSpell(cast);
+            CastTriggerSpell();
         }
     }
 }

@@ -35,6 +35,8 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public abstract class Fighter : ITriggerToken
     {
+        public event Action<Fighter> Moved;
+
         public int Id
         {
             get;
@@ -352,7 +354,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             for (int i = 1; i < path.Count; i++)
             {
-                if (Fight.ShouldTriggerOnMove(path[i].Id))
+                if (Fight.ShouldTriggerOnMove(path[i - 1].Id, path[i].Id))
                 {
                     if (i + 1 <= path.Count)
                     {
@@ -394,8 +396,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                         this.MovementHistory.OnMove(path);
 
-                        Fight.TriggerMarks(this, MarkTriggerType.OnMove);
-
+                        OnMove(this, true);
                         IsMoving = false;
                     }
                     else
@@ -534,15 +535,6 @@ namespace Giny.World.Managers.Fights.Fighters
                     }
                 }
             }
-            /*foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
-            {
-                if (buff.Cast.Source == this && buff.DecrementDelay())
-                {
-                    buff.Apply();
-
-                    RemoveAndDispellBuff(buff);
-                }
-            } */
         }
         public void RemoveAndDispellBuff(Buff buff)
         {
@@ -654,9 +646,16 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         private bool IsSimilar(Buff current, Buff reference)
         {
-            return current.Cast.SpellId == reference.Cast.SpellId &&
+            bool result = current.Cast.SpellId == reference.Cast.SpellId &&
                  current.Effect.EffectId == reference.Effect.EffectId && current.Effect.Delay == reference.Effect.Delay
                  && current.GetTriggerType() == reference.GetTriggerType() && current.GetType().Name == reference.GetType().Name;
+
+            if (current is StateBuff && reference is StateBuff)
+            {
+                return result && ((StateBuff)current).Record.Id == ((StateBuff)reference).Record.Id;
+            }
+
+            return result;
         }
         public void SwapPlacementPosition(Fighter target)
         {
@@ -722,6 +721,9 @@ namespace Giny.World.Managers.Fights.Fighters
                 ShowFighter(characterFighter);
             }
         }
+
+
+
         public void ShowFighter(CharacterFighter fighter)
         {
             fighter.Character.Client.Send(new GameFightShowFighterMessage(GetFightFighterInformations(fighter)));
@@ -1059,11 +1061,11 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
-            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
-            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+            OnMove(source, false);
 
             return null;
         }
+
         public void PushBack(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
         {
             DirectionsEnum direction = 0;
@@ -1137,6 +1139,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 sourceId = source.Id,
                 targetId = Id,
             });
+        }
+        public void OnMove(Fighter source, bool isMapMovement)
+        {
+            if (!isMapMovement) // not a teleportation / slide / swap
+            {
+                this.TriggerBuffs(BuffTriggerType.OnMoved, source);
+            }
+
+            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+            Moved?.Invoke(this);
         }
         public void SetSpellCooldown(Fighter source, short spellId, short value)
         {
@@ -1229,13 +1241,14 @@ namespace Giny.World.Managers.Fights.Fighters
 
             for (int i = 0; i < delta; i++)
             {
+                MapPoint oldPoint = destinationPoint;
                 MapPoint targetPoint = destinationPoint.GetCellInDirection(direction, 1);
 
                 if (targetPoint != null && Fight.IsCellFree(targetPoint.CellId))
                 {
                     destinationPoint = targetPoint;
 
-                    if (Fight.ShouldTriggerOnMove(targetPoint.CellId))
+                    if (Fight.ShouldTriggerOnMove(oldPoint.CellId, targetPoint.CellId))
                     {
                         break;
                     }
@@ -1293,13 +1306,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.Cell = Fight.Map.GetCell(destinationPoint);
 
-            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
+            OnMove(source, false);
 
             MovementHistory.OnCellChanged(oldCell);
-
-            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
-
-
         }
         [WIP("teleport triggered")]
         public void SwitchPosition(Fighter source, bool register = true)
@@ -1330,8 +1339,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 source.MovementHistory.RegisterEntry(this.Cell);
             }
 
-            this.TriggerBuffs(BuffTriggerType.OnMoved, source);
-            source.TriggerBuffs(BuffTriggerType.OnMoved, source);
+            OnMove(source, false);
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)
@@ -1726,9 +1734,18 @@ namespace Giny.World.Managers.Fights.Fighters
                 current.RemoveAndDispellAllBuffs(this);
             }
         }
+        public IEnumerable<T> GetMarks<T>() where T : Mark
+        {
+            return GetMarks().OfType<T>();
+        }
+
+        public IEnumerable<Mark> GetMarks()
+        {
+            return Fight.GetMarks().Where(x => x.Source == this);
+        }
         public void RemoveMarks()
         {
-            foreach (var mark in this.Fight.GetMarks(this).ToArray())
+            foreach (var mark in GetMarks().ToArray())
             {
                 Fight.RemoveMark(mark);
             }

@@ -94,7 +94,9 @@
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercentWhenAttack.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyph.cs" />
+    <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
+    <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\Double.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummon.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummonSlave.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Managers\Fights\Fighters\DoubleFighter.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedMonster.cs" />
     <Compile Include="Managers\Fights\Marks\Glyph.cs" />
+    <Compile Include="Managers\Fights\Marks\GlyphAura.cs" />
     <Compile Include="Managers\Fights\Marks\MarksManager.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
     <Compile Include="Managers\Parties\Party.cs" />

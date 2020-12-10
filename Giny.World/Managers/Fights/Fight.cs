@@ -421,8 +421,9 @@ namespace Giny.World.Managers.Fights
                     FighterPlaying.DecrementAllCastedBuffsDelay();
                 }
 
+                this.DecrementGlyphDuration(FighterPlaying);
                 FighterPlaying.TriggerBuffs(BuffTriggerType.OnTurnBegin, null);
-                this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnStart);
+                this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
 
             }
 
@@ -447,6 +448,8 @@ namespace Giny.World.Managers.Fights
 
             TurnStarted?.Invoke(this, FighterPlaying);
         }
+
+
         public void PointsVariation(int sourceId, int targetId, ActionsEnum action, short delta)
         {
             this.Send(new GameActionFightPointsVariationMessage()
@@ -477,7 +480,7 @@ namespace Giny.World.Managers.Fights
                         }
                     }
 
-                   
+
                 }
 
                 if (current != null)
@@ -611,13 +614,21 @@ namespace Giny.World.Managers.Fights
                 }
             }
         }
+        public IEnumerable<Mark> GetMarks()
+        {
+            return this.Marks;
+        }
         public bool MarkExist<T>(Func<T, bool> markExist) where T : Mark
         {
             return Marks.OfType<T>().Any(markExist);
         }
-        public bool ShouldTriggerOnMove(short cellId)
+        public bool ShouldTriggerOnMove(short oldCell, short cellId)
         {
-            return Marks.Any(x => x.StopMovement && x.ContainsCell(cellId));
+            bool flag1 = Marks.OfType<Glyph>().Any(x => x.StopMovement &&
+            !x.ContainsCell(oldCell) && x.ContainsCell(cellId) || x.ContainsCell(oldCell) && !x.ContainsCell(cellId)) ;
+            bool flag2 = Marks.OfType<Trap>().Any(x => x.StopMovement && x.ContainsCell(cellId));
+
+            return flag1 || flag2;
         }
         private void OnTurnPassed()
         {
@@ -683,6 +694,8 @@ namespace Giny.World.Managers.Fights
                     sourceId = mark.Source.Id
                 });
             }
+
+            mark.OnAdded();
         }
         public void RemoveMark(Mark mark)
         {
@@ -694,12 +707,21 @@ namespace Giny.World.Managers.Fights
                 markId = (short)mark.Id,
                 sourceId = mark.Source.Id,
             });
+
+            mark.OnRemoved();
+        }
+        private void DecrementGlyphDuration(Fighter fighterPlaying)
+        {
+            foreach (var glyph in fighterPlaying.GetMarks<Glyph>().ToArray())
+            {
+                if (glyph.DecrementDuration())
+                {
+                    RemoveMark(glyph);
+                }
+            }
         }
 
-        public IEnumerable<Mark> GetMarks(Fighter fighter)
-        {
-            return Marks.Where(x => x.Source == fighter);
-        }
+
         public void AddSummon(Fighter source, SummonedFighter fighter)
         {
             AddSummons(source, new SummonedFighter[] { fighter });

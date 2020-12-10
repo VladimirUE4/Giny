@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Marks
 {
-    [SpellEffectHandler(EffectsEnum.Effect_Glyph)]
+    [SpellEffectHandler(EffectsEnum.Effect_TurnEndGlyph)]
+    [SpellEffectHandler(EffectsEnum.Effect_TurnBeginGlyph)]
     public class SpawnGlyph : SpellEffectHandler
     {
         public SpawnGlyph(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -28,10 +29,23 @@ namespace Giny.World.Managers.Fights.Effects.Marks
                 Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
 
                 Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
-                     zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
+                     zone, GetTriggerType(), color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
                 Source.Fight.AddMark(glyph);
             }
+        }
+
+        private MarkTriggerType GetTriggerType()
+        {
+            switch (Effect.EffectEnum)
+            {
+                case EffectsEnum.Effect_TurnBeginGlyph:
+                    return MarkTriggerType.OnTurnBegin;
+                case EffectsEnum.Effect_TurnEndGlyph:
+                    return MarkTriggerType.OnTurnEnd;
+            }
+
+            return MarkTriggerType.None;
         }
     }
 }

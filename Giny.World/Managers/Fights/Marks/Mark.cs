@@ -5,6 +5,7 @@ using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Spells;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
@@ -134,6 +135,22 @@ namespace Giny.World.Managers.Fights.Marks
 
         public abstract bool IsVisibleFor(CharacterFighter fighter);
 
+        public abstract void OnAdded();
+
+        public abstract void OnRemoved();
+
+        protected SpellCast CreateSpellCast()
+        {
+            SpellCast cast = new SpellCast(Source, TriggerSpell, CenterCell);
+            return cast;
+        }
+        protected void CastTriggerSpell()
+        {
+            SpellCast cast = CreateSpellCast();
+            cast.CastCell = CenterCell;
+            cast.Force = true;
+            Source.CastSpell(cast);
+        }
         public bool ContainsCell(short cellId)
         {
             return Cells.Any(x => x.Id == cellId);

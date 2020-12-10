@@ -18,12 +18,18 @@ namespace Giny.World.Managers.Fights.Marks
     {
         public Glyph(int id, EffectDice effect, Zone zone, MarkTriggerType triggers, Color color, Fighter source, CellRecord centerCell, SpellRecord spellRecord, SpellLevelRecord spellLevel) : base(id, effect, zone, triggers, color, source, centerCell, spellRecord, spellLevel)
         {
+            this.Duration = effect.Duration;
         }
 
         public override bool StopMovement => true;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.GLYPH;
 
+        public int Duration
+        {
+            get;
+            set;
+        }
         public override bool IsVisibleFor(CharacterFighter fighter)
         {
             return true;
@@ -31,10 +37,22 @@ namespace Giny.World.Managers.Fights.Marks
 
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
-            SpellCast cast = new SpellCast(Source, TriggerSpell, CenterCell);
-            cast.CastCell = CenterCell;
-            cast.Force = true;
-            Source.CastSpell(cast);
+            CastTriggerSpell();
+        }
+
+        public bool DecrementDuration()
+        {
+            return this.Duration != -1 && (this.Duration -= 1) <= 0;
+        }
+
+        public override void OnAdded()
+        {
+            
+        }
+
+        public override void OnRemoved()
+        {
+            
         }
     }
 }

@@ -823,11 +823,11 @@
         /// <summary>
         /// Pose un glyphe de rang #2
         /// </summary>
-        Effect_Glyph = 401,
+        Effect_TurnBeginGlyph = 401,
         /// <summary>
         /// Pose un glyphe de rang #2
         /// </summary>
-        Effect_Glyph_402 = 402,
+        Effect_TurnEndGlyph = 402,
         /// <summary>
         /// Tue la cible pour la remplacer par l'invocation : #1
         /// </summary>

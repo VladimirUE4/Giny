@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Fights.Marks
                  * Piège Insidieux
                  */
                 case SpellEnum.InsidiousTrap12918:
-                    return Color.FromArgb(0);
+                    return Color.FromArgb(3222918);
 
                 /*
                  * Piège d'Immobilisation
@@ -71,6 +71,19 @@ namespace Giny.World.Managers.Fights.Marks
                     return Color.Blue;
                 case SpellEnum.AirRune:
                     return Color.Green;
+
+
+                /*
+                * Glyphes Féca
+                */
+                case SpellEnum.AggressiveGlyph12992:
+                    return Color.LimeGreen;
+                case SpellEnum.BurningGlyph12985:
+                    return Color.OrangeRed;
+                case SpellEnum.ParalysingGlyph12990:
+                    return Color.CornflowerBlue;
+                case SpellEnum.BlindingGlyph:
+                    return Color.SaddleBrown;
             }
 
             return Color.CornflowerBlue;

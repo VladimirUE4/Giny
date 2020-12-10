@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Movements
 {
+    [WIP]
     [SpellEffectHandler(EffectsEnum.Effect_1101)]
     public class TeleportToRune : SpellEffectHandler
     {
@@ -22,7 +24,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                var rune = target.Fight.GetMarks(target).OfType<Rune>().FirstOrDefault();
+                var rune = target.GetMarks<Rune>().FirstOrDefault();
 
                 Telefrag telefrag = target.Teleport(Source, rune.CenterCell);
 
