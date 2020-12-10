@@ -214,7 +214,7 @@
 | Mot de Ralliement| ![alt text](https://img.shields.io/badge/Unknown-blue) |
 | Mot Revitalisant | ![alt text](https://img.shields.io/badge/Unknown-blue) |
 | Mot Galvanisant| ![alt text](https://img.shields.io/badge/Unknown-blue) |
-| Mot de Reconstitution | ![alt text](https://img.shields.io/badge/Unknown-blue) |
+| Mot de Reconstitution | ![alt text](https://img.shields.io/badge/Done-green) |
 | Marque de Solidaritée| ![alt text](https://img.shields.io/badge/Unknown-blue) |
 </p>
 </details>
