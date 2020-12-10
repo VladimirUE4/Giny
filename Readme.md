@@ -125,7 +125,6 @@
 | Flèche de Dispersion | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Représailles | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Glacée | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Flèche Glacée | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Paralysante | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Enflammée | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Répulsive | ![alt text](https://img.shields.io/badge/Done-green) | 
