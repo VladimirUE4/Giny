@@ -187,8 +187,8 @@
 | Mot d'Abnégation | ![alt text](https://img.shields.io/badge/Bug-red) | Heal buff
 | Mot Brutal | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Mot Pernicieux | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Mot de Jouvence | ![alt text](https://img.shields.io/badge/Bug-red) | Reduce Effect duration
-| Mot Défendu | ![alt text](https://img.shields.io/badge/Bug-red) | Reduce Effect duration
+| Mot de Jouvence | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Mot Défendu | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Mot Séléctif | ![alt text](https://img.shields.io/badge/Done-green) |
 | Mot Impartial | ![alt text](https://img.shields.io/badge/Done-green) |
 | Mot Eclatant | ![alt text](https://img.shields.io/badge/Done-green) |
