@@ -24,13 +24,13 @@ namespace Giny.World.Managers.Fights.Effects.Marks
         {
             if (!Source.Fight.MarkExist<Glyph>(x => x.CenterCell == TargetCell))
             {
-               /* Zone zone = Effect.GetZone();
-                Color color = Color.FromArgb(Effect.Value);
+                Zone zone = Effect.GetZone();
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
 
                 Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
                      zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
-                Source.Fight.AddMark(glyph); */
+                Source.Fight.AddMark(glyph);
             }
         }
     }

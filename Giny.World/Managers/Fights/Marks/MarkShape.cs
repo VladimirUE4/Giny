@@ -48,7 +48,7 @@ namespace Giny.World.Managers.Fights.Marks
             return new GameActionMarkedCell()
             {
                 cellId = Cell.Id,
-                cellColor = Color.ToArgb() & 0xFFFFFF,
+                cellColor = Color.ToArgb(),
                 cellsType = (byte)Type,
                 zoneSize = Size,
             };

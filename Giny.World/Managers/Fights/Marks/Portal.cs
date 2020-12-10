@@ -17,8 +17,9 @@ namespace Giny.World.Managers.Fights.Marks
     {
         public Portal(int id, EffectDice effect, Zone zone, MarkTriggerType triggers, Color color, Fighter source, CellRecord centerCell, SpellRecord spellRecord, SpellLevelRecord spellLevel) : base(id, effect, zone, triggers, color, source, centerCell, spellRecord, spellLevel)
         {
+
         }
-            public override bool StopMovement => true;
+        public override bool StopMovement => true;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.PORTAL;
 
@@ -35,9 +36,9 @@ namespace Giny.World.Managers.Fights.Marks
 
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
-          
+
         }
 
-      
+
     }
 }

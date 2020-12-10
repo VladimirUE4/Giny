@@ -1662,6 +1662,15 @@ namespace Giny.World.Managers.Fights.Fighters
                 {
                     TriggerBuffs(BuffTriggerType.OnDamagedBySpell, damage);
                 }
+
+                if (damage.Source.IsFriendlyWith(this))
+                {
+                    TriggerBuffs(BuffTriggerType.OnDamagedByAlly, damage);
+                }
+                else
+                {
+                    TriggerBuffs(BuffTriggerType.OnDamagedByEnemy, damage);
+                }
             }
 
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);

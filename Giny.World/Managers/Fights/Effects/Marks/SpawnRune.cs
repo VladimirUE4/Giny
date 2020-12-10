@@ -18,6 +18,7 @@ namespace Giny.World.Managers.Fights.Effects.Marks
     {
         public SpawnRune(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
+
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
@@ -25,7 +26,8 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             if (!Source.Fight.MarkExist<Rune>(x => x.CenterCell == TargetCell))
             {
                 Zone zone = Effect.GetZone();
-                Color color = Color.FromArgb(Effect.Value);
+
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
 
                 Rune rune = new Rune(Source.Fight.PopNextMarkId(), Effect,
                     zone, MarkTriggerType.None, color,

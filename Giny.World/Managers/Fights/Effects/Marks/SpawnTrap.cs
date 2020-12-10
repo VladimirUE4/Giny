@@ -25,9 +25,10 @@ namespace Giny.World.Managers.Fights.Effects.Marks
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (!Source.Fight.MarkExist<Trap>(x => x.CenterCell == TargetCell))
-            {
+            { 
                 Zone zone = Effect.GetZone();
-                Color color = Color.FromArgb(Effect.Value);
+
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
 
                 Trap trap = new Trap(Source.Fight.PopNextMarkId(), Effect,
                     MarkTriggerType.OnMove, zone, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);

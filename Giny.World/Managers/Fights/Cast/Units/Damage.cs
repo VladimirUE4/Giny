@@ -163,7 +163,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
             else
             {
                 jet.Min += (short)(jet.Min * (Source.Stats.RangedDamageDonePercent.TotalInContext() / 100d));
-                jet.Max += (short)(jet.Min * (Source.Stats.RangedDamageDonePercent.TotalInContext() / 100d));
+                jet.Max += (short)(jet.Max * (Source.Stats.RangedDamageDonePercent.TotalInContext() / 100d));
 
                 jet.Min -= (short)(jet.Min * (Target.Stats.RangedDamageResistancePercent.TotalInContext() / 100d));
                 jet.Max -= (short)(jet.Max * (Target.Stats.RangedDamageResistancePercent.TotalInContext() / 100d));

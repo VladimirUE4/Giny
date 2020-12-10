@@ -25,7 +25,8 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             if (!Source.Fight.MarkExist<Portal>(x => x.CenterCell == TargetCell))
             {
                 Zone zone = Effect.GetZone();
-                Color color = Color.Blue;
+
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
 
                 Portal portal = new Portal(Source.Fight.PopNextMarkId(), Effect,
                      zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);

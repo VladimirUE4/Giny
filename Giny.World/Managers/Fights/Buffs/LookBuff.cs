@@ -14,7 +14,7 @@ namespace Giny.World.Managers.Fights.Buffs
 {
     public class LookBuff : Buff
     {
-        private ServerEntityLook Look
+        public ServerEntityLook Look
         {
             get;
             set;
@@ -26,12 +26,22 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override void Apply()
         {
-            base.Target.ChangeLook(Look, Cast.Source);
+            base.Target.ChangeLook(Look.Clone(), Cast.Source);
         }
 
         public override void Dispell()
         {
-            base.Target.ChangeLook(Target.BaseLook.Clone(), Cast.Source);
+            LookBuff lookBuff = this.Target.GetBuffs().OfType<LookBuff>().LastOrDefault(x => x != this);
+
+            if (lookBuff != null)
+            {
+                lookBuff.Apply();
+            }
+            else
+            {
+                Target.ChangeLook(Target.BaseLook.Clone(), Cast.Source);
+
+            }
         }
 
         public override short GetDelta()

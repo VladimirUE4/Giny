@@ -18,24 +18,9 @@ namespace Giny.World.Managers.Fights.Marks
     {
         public Rune(int id, EffectDice effect, Zone zone, MarkTriggerType triggers, Color color, Fighter source, CellRecord centerCell, SpellRecord spellRecord, SpellLevelRecord spellLevel) : base(id, effect, zone, triggers, color, source, centerCell, spellRecord, spellLevel)
         {
-            UpdateColor(GetRuneColorBySpell(MarkSpell));
+            
         }
-        private static Color GetRuneColorBySpell(Spell spell)
-        {
-            switch (spell.SpellEnum)
-            {
-                case SpellEnum.EarthRune:
-                    return Color.Brown;
-                case SpellEnum.FireRune13687:
-                    return Color.Red;
-                case SpellEnum.WaterRune:
-                    return Color.Blue;
-                case SpellEnum.AirRune:
-                    return Color.Green;
-                default:
-                    return Color.Black;
-            }
-        }
+   
         public override bool StopMovement => false;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.RUNE;

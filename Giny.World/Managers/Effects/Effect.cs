@@ -225,6 +225,10 @@ namespace Giny.World.Managers.Effects
                     return BuffTriggerType.OnDamagedWater;
                 case "PD":
                     return BuffTriggerType.OnDamagedByPush;
+                case "DBE":
+                    return BuffTriggerType.OnDamagedByEnemy;
+                case "DBA":
+                    return BuffTriggerType.OnDamagedByAlly;
                 case "M":
                     return BuffTriggerType.OnMoved;
                 case "X":

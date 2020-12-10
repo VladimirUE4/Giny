@@ -56,7 +56,7 @@ namespace Giny.World.Managers.Fights.Marks
             get;
             private set;
         }
-        private Color Color
+        protected Color Color
         {
             get;
             set;
@@ -89,15 +89,7 @@ namespace Giny.World.Managers.Fights.Marks
             this.Active = true;
             this.BuildShapes(zone);
         }
-        protected void UpdateColor(Color color)
-        {
-            this.Color = color;
 
-            foreach (var shape in Shapes)
-            {
-                shape.Color = color;
-            }
-        }
         private void BuildShapes(Zone zone)
         {
             this.Cells = zone.GetCells(CenterCell, Source.Fight.Map);
