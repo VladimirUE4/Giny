@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public AIFighter(FightTeam team, CellRecord roleplayCell) : base(team, roleplayCell)
         {
-           
+
         }
         public override void Initialize()
         {
@@ -37,7 +37,11 @@ namespace Giny.World.Managers.Fights.Fighters
         public override void OnTurnBegin()
         {
             this.Brain.Play();
-            PassTurn();
+
+            if (Alive) // else has already passed turn
+            {
+                PassTurn();
+            }
             return;
 
             try
@@ -86,6 +90,6 @@ namespace Giny.World.Managers.Fights.Fighters
             IEnumerable<CellRecord> cells = path.Take(Stats.MovementPoints.TotalInContext()).Select(x => Fight.Map.GetCell(x));
             return cells.ToList();
         }
-        
+
     }
 }

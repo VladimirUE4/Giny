@@ -631,6 +631,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 sourceId = buff.Cast.Source.Id,
             }); ;
         }
+        public virtual void OnBuffDurationUpdated(Fighter source, short actionId, Buff buff, short delta)
+        {
+            Fight.Send(new GameActionFightModifyEffectsDurationMessage()
+            {
+                actionId = actionId,
+                delta = (short)(-delta),
+                sourceId = source.Id,
+                targetId = Id,
+            });
+        }
         public IEnumerable<Buff> GetBuffs()
         {
             return Buffs;
@@ -1805,6 +1815,7 @@ namespace Giny.World.Managers.Fights.Fighters
             return this;
         }
 
+       
     }
 
 }

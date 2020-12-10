@@ -42,7 +42,8 @@ namespace Giny.World.Managers.Fights.AI
 
             foreach (var action in actions)
             {
-                action.Execute();
+                if (Fighter.Alive)
+                    action.Execute();
             }
         }
     }

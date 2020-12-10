@@ -463,12 +463,26 @@ namespace Giny.World.Managers.Fights
 
             if (deads.Count() > 0)
             {
+                Fighter current = null;
+
                 using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_CHARACTER_DEATH))
                 {
                     foreach (var fighter in deads)
                     {
                         fighter.Die(fighter);
+
+                        if (fighter.IsFighterTurn)
+                        {
+                            current = fighter;
+                        }
                     }
+
+                   
+                }
+
+                if (current != null)
+                {
+                    FighterPlaying.PassTurn();
                 }
 
             }

@@ -146,7 +146,7 @@ namespace Giny.World.Managers.Fights.Timeline
                 orderby entry.Stats.TotalInitiative descending
                 select entry;
 
-            bool flag = orderedEnumerable.First().Stats.Initiative.Total() > orderedEnumerable2.First().Stats.Initiative.Total();
+            bool flag = orderedEnumerable2.First().Stats.Initiative.Total() > orderedEnumerable.First().Stats.Initiative.Total();
             System.Collections.Generic.IEnumerator<Fighter> enumerator = orderedEnumerable.GetEnumerator();
             System.Collections.Generic.IEnumerator<Fighter> enumerator2 = orderedEnumerable2.GetEnumerator();
             System.Collections.Generic.List<Fighter> list = new System.Collections.Generic.List<Fighter>();

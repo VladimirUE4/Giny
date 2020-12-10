@@ -59,7 +59,11 @@ namespace Giny.World.Managers.Fights.Effects
         [SpellAppearance(1318)]
         public static void SentinelLook(Fighter fighter, ref ServerEntityLook look)
         {
-            look = EntityLookManager.Instance.CreateLookFromBones(4321, 100);
+            if (look.IsRiding)
+            {
+                look = look.ActorLook;
+            }
+            look.SetBones(4321);
         }
         [SpellAppearance(1260)]
         public static void OuginakDogLook(Fighter fighter,ref ServerEntityLook look)

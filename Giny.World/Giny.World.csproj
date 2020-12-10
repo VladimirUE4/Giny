@@ -90,6 +90,7 @@
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1019.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RandDownModifier.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyph.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
