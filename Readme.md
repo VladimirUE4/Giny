@@ -242,6 +242,7 @@
 
 <details><summary>Debugs</summary>
 <p>
+
  | Nom  |      Etat     |  Commentaire  
 |----------|:-------------:|:-------------:|
 | Creation et supression personnage | ![alt text](https://img.shields.io/badge/Done-green)  |
