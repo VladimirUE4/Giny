@@ -117,10 +117,10 @@ namespace Giny.World.Managers.Fights
             set;
         }
 
-        protected FightTimeline Timeline
+        public FightTimeline Timeline
         {
             get;
-            set;
+            private set;
         }
         public int RoundNumber
         {
@@ -468,7 +468,6 @@ namespace Giny.World.Managers.Fights
                     foreach (var fighter in deads)
                     {
                         fighter.Die(fighter);
-
                     }
                 }
 

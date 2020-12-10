@@ -59,13 +59,32 @@ namespace Giny.World.Managers.Fights.Effects
         [SpellAppearance(1318)]
         public static void SentinelLook(Fighter fighter, ref ServerEntityLook look)
         {
-            if (look.IsRiding)
-            {
-                look = look.ActorLook;
-            }
-
-            look.SetBones(4321);
-
+            look = EntityLookManager.Instance.CreateLookFromBones(4321, 100);
+        }
+        [SpellAppearance(1260)]
+        public static void OuginakDogLook(Fighter fighter,ref ServerEntityLook look)
+        {
+            IEnumerable<int> colors = look.Colors;
+            look = EntityLookManager.Instance.CreateLookFromBones(3906, 150);
+            look.SetColors(colors);
+        }
+        [SpellAppearance(1177)]
+        public static void SadidaTree(Fighter fighter,ref ServerEntityLook look)
+        {
+            look = EntityLookManager.Instance.CreateLookFromBones(3164, 80);
+        }
+        [SpellAppearance(1171)]
+        public static void SadidaLifeTree(Fighter fighter, ref ServerEntityLook look)
+        {
+            look = EntityLookManager.Instance.CreateLookFromBones(3166, 80);
+        }
+        /*
+         * Scaphandre
+         */
+        [SpellAppearance(1035)]
+        public static void SteamerDivingSuit(Fighter fighter,ref ServerEntityLook look)
+        {
+            look.AddSkin(1955);
         }
     }
 }

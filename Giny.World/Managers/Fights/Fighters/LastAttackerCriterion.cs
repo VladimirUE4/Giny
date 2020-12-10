@@ -23,7 +23,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
-            return Required ? handler.Source.LastAttacker == actor : handler.Source.LastAttacker != actor;
+            // required ?
+            return handler.Source.LastAttacker == actor;
         }
     }
 }

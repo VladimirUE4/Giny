@@ -32,22 +32,17 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
                 if (look != null)
                 {
-                    if (!target.HasBuff<LookBuff>())
-                    {
-                        int id = target.BuffIdProvider.Pop();
-                        LookBuff buff = new LookBuff(id, look, CastHandler.Cast, target, Effect, FightDispellableEnum.REALLY_NOT_DISPELLABLE);
-                        target.AddBuff(buff);
-                    }
-                    else
-                    {
-                        target.Fight.Warn("Unable to add multiple appearance buffs to " + target.Name);
-                    }
+                    target.RemoveBuffs<LookBuff>();
+                    int id = target.BuffIdProvider.Pop();
+                    LookBuff buff = new LookBuff(id, look, CastHandler.Cast, target, Effect, FightDispellableEnum.REALLY_NOT_DISPELLABLE);
+                    target.AddBuff(buff);
                 }
-
-
-
             }
+
+
+
         }
     }
+
 }
 

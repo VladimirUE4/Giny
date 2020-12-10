@@ -86,7 +86,7 @@ namespace Giny.SpellExplorer
             effectInfo.Items.Add("Modificator : " + effect.Modificator);
             effectInfo.Items.Add("Record Priority : " + effectRecord.Priority);
 
-          
+
             switch (effect.EffectEnum)
             {
                 case EffectsEnum.Effect_CastSpell_793:
@@ -95,6 +95,7 @@ namespace Giny.SpellExplorer
                 case EffectsEnum.Effect_CastSpell_2160:
                 case EffectsEnum.Effect_CastSpell_1175:
                 case EffectsEnum.Effect_CastSpell_1160:
+                case EffectsEnum.Effect_CastSpell_1019:
                 case EffectsEnum.Effect_CastSpell_1017:
 
                     Button button = new Button();
@@ -114,7 +115,7 @@ namespace Giny.SpellExplorer
                 default:
                     break;
             }
-      
+
 
             if (effect.EffectEnum == EffectsEnum.Effect_AddState || effect.EffectEnum == EffectsEnum.Effect_DispelState)
             {

@@ -29,7 +29,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         }
         public override bool CanApply()
         {
-            return Source.Fight.IsCellFree(TargetCell); // and state criteria
+            return true;// Source.Fight.IsCellFree(TargetCell); // and state criteria
         }
     }
 }

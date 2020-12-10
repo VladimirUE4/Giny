@@ -17,6 +17,7 @@ using Giny.World.Records.Effects;
 using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Stats;
 using Giny.Protocol.Enums;
+using Giny.World.Records.Monsters;
 
 namespace Giny.World.Managers.Fights.Cast
 {
@@ -193,10 +194,20 @@ namespace Giny.World.Managers.Fights.Cast
         }
         protected abstract void Apply(IEnumerable<Fighter> targets);
 
+        protected SummonedMonster CreateSummon(short monsterId)
+        {
+            MonsterRecord record = MonsterRecord.GetMonsterRecord(monsterId);
+            SummonedMonster fighter = new SummonedMonster(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell);
+            return fighter;
+        }
+
+
+        [WIP("useless?")]
         public T GetTriggerToken<T>() where T : ITriggerToken
         {
             return (T)TriggerToken;
         }
+        [WIP("useless?")]
         public void SetTriggerToken(ITriggerToken token)
         {
             TriggerToken = token;

@@ -367,8 +367,8 @@ namespace Giny.World.Managers.Fights.Stats
             this.Reflect = Characteristic.New(monsterGrade.DamageReflect);
             this.RuneBonusPercent = Characteristic.Zero();
 
-       
-            this.SummonableCreaturesBoost = Characteristic.Zero();
+
+            this.SummonableCreaturesBoost = Characteristic.New(BaseSummonsCount);
             this.TackleBlock = RelativeCharacteristic.Zero();
             this.TackleEvade = RelativeCharacteristic.Zero();
             this.TrapBonus = Characteristic.Zero();

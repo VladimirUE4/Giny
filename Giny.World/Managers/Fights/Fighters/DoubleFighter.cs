@@ -25,8 +25,11 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override void OnTurnBegin()
         {
-            System.Threading.Thread.Sleep(1000);
             base.OnTurnBegin();
+        }
+        public override void OnTurnEnded()
+        {
+         
         }
         public override void Initialize()
         {
@@ -64,7 +67,9 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override string ToString()
         {
-            return base.ToString() + "(Double)";
+            return base.ToString() + " (Double)";
         }
+
+      
     }
 }

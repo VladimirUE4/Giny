@@ -227,6 +227,9 @@ namespace Giny.World.Managers.Effects
                     return BuffTriggerType.OnDamagedByPush;
                 case "M":
                     return BuffTriggerType.OnMoved;
+                case "X":
+                    return BuffTriggerType.OnDeath;
+
                 case "I":
                     return BuffTriggerType.Instant;
             }

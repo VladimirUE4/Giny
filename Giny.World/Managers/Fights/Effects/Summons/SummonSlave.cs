@@ -11,16 +11,22 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Summons
 {
-    [SpellEffectHandler(EffectsEnum.Effect_Summon)]
-    public class Summon : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_SummonSlave)]
+    public class SummonSlave : SpellEffectHandler
     {
-        public Summon(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public SummonSlave(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            var fighter = CreateSummon((short)Effect.Min);
+            if (!(Source is CharacterFighter))
+            {
+                return;
+            }
+
+            SummonedMonster fighter = CreateSummon((short)Effect.Min);
+            fighter.SetController((CharacterFighter)Source);
             Source.Fight.AddSummon(Source, fighter);
         }
     }

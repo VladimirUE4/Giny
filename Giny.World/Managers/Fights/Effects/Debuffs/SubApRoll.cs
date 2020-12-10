@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
 
                 if (this.Effect.Duration > 1)
                 {
-                    base.AddStatBuff(target, (short)-delta, target.Stats.ActionPoints, FightDispellableEnum.DISPELLABLE);
+                    base.AddStatBuff(target, (short)-delta, target.Stats.ActionPoints, FightDispellableEnum.DISPELLABLE, (short)EffectsEnum.Effect_SubAP);
                 }
                 else
                 {

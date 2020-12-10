@@ -333,8 +333,10 @@ namespace Giny.World.Managers.Fights.Fighters
             return GetTackle(GetTacklers(Cell)).Consistent();
         }
 
-        public void Move(List<CellRecord> path)
+        public virtual void Move(List<CellRecord> path)
         {
+            path.Insert(0, this.Cell);
+
             if (path.Count <= 1)
             {
                 return;
@@ -344,7 +346,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (!path.Skip(1).All(x => Fight.IsCellFree(x)))
             {
-
                 this.OnMoveFailed(MovementFailedReason.Obstacle);
                 return;
             }
@@ -442,7 +443,7 @@ namespace Giny.World.Managers.Fights.Fighters
             Stats.GainMp(delta);
             Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
         }
-        public void PassTurn()
+        public virtual void PassTurn()
         {
             if (!IsFighterTurn)
                 return;
@@ -547,6 +548,14 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             this.RemoveBuff(buff);
             buff.Dispell();
+        }
+
+        public void RemoveBuffs<T>() where T : Buff
+        {
+            foreach (var buff in Buffs.OfType<T>().ToArray())
+            {
+                RemoveAndDispellBuff(buff);
+            }
         }
         public void RemoveSpellEffects(Fighter source, short spellId)
         {
@@ -726,8 +735,12 @@ namespace Giny.World.Managers.Fights.Fighters
                 {
                     TriggerBuffs(BuffTriggerType.OnTurnEnd, null);
                 }
+
+                OnTurnEnded();
             }
         }
+
+        public abstract void OnTurnEnded();
 
         public IdentifiedEntityDispositionInformations GetIdentifiedEntityDispositionInformations()
         {
@@ -745,7 +758,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        public bool CastSpell(short spellId, short cellId)
+        public virtual bool CastSpell(short spellId, short cellId)
         {
             Spell spell = GetSpell(spellId);
             CellRecord cell = Fight.Map.GetCell(cellId);
@@ -762,7 +775,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             var result = CanCastSpell(cast);
 
-            if (result != SpellCastResult.OK)
+            if (result != SpellCastResult.OK && !cast.Force)
             {
                 OnSpellCastFailed(cast);
                 return false;
@@ -856,9 +869,14 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public virtual FightSpellCastCriticalEnum RollCriticalDice(SpellLevelRecord spell)
         {
-            var random = new AsyncRandom();
+            FightSpellCastCriticalEnum critical = FightSpellCastCriticalEnum.NORMAL;
 
-            var critical = FightSpellCastCriticalEnum.NORMAL;
+            if (HasRandDownModifier())
+            {
+                return critical;
+            }
+
+            var random = new AsyncRandom();
 
             if (spell.CriticalHitProbability != 0 && random.NextDouble() * 100 < spell.CriticalHitProbability + Stats.CriticalHit.TotalInContext())
                 critical = FightSpellCastCriticalEnum.CRITICAL_HIT;
@@ -1034,11 +1052,13 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (targetCell.Id == Cell.Id)
             {
-                direction = castCell.Point.OrientationTo(targetCell.Point, true);
+                bool diagonal = targetCell.Point.IsOnSameDiagonal(castCell.Point);
+                direction = castCell.Point.OrientationTo(targetCell.Point, diagonal);
             }
             else
             {
-                direction = targetCell.Point.OrientationTo(Cell.Point, true);
+                bool diagonal = Cell.Point.IsOnSameDiagonal(targetCell.Point);
+                direction = targetCell.Point.OrientationTo(Cell.Point, diagonal);
             }
 
             Slide(source, direction, delta, true);
@@ -1046,13 +1066,15 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("useless. Put this in the Spell Effect handler.")]
         public void Advance(Fighter source, short delta, CellRecord targetCell)
         {
-            DirectionsEnum direction = this.Cell.Point.OrientationTo(targetCell.Point);
+            bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
+            DirectionsEnum direction = this.Cell.Point.OrientationTo(targetCell.Point, diagonal);
             source.Slide(source, direction, delta, false);
         }
         [WIP("useless. Put this in the Spell Effect handler.")]
         public void Retreat(Fighter source, short delta, CellRecord targetCell)
         {
-            DirectionsEnum direction = targetCell.Point.OrientationTo(this.Cell.Point);
+            bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
+            DirectionsEnum direction = targetCell.Point.OrientationTo(this.Cell.Point, diagonal);
             source.Slide(source, direction, delta, true);
         }
         public void PullForward(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
@@ -1065,11 +1087,13 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (targetCell.Id == Cell.Id)
             {
-                direction = targetCell.Point.OrientationTo(castCell.Point, false);
+                bool diagonal = targetCell.Point.IsOnSameDiagonal(castCell.Point);
+                direction = targetCell.Point.OrientationTo(castCell.Point, diagonal);
             }
             else
             {
-                direction = Cell.Point.OrientationTo(targetCell.Point, false);
+                bool diagonal = Cell.Point.IsOnSameDiagonal(targetCell.Point);
+                direction = Cell.Point.OrientationTo(targetCell.Point, diagonal);
             }
 
             this.Slide(source, direction, delta, false);
@@ -1129,6 +1153,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = Id,
                 value = delta,
             });
+        }
+        public bool HasRandDownModifier()
+        {
+            return Buffs.Any(x => x is RandDownBuff);
         }
         public short GetApCost(SpellLevelRecord level)
         {
@@ -1679,6 +1707,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
+        [WIP("do we past turn here... ?")]
         public void Die(Fighter killedBy)
         {
             if (Alive)
@@ -1697,6 +1726,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 });
 
                 this.Alive = false;
+
+                TriggerBuffs(BuffTriggerType.OnDeath, killedBy);
             }
             else
             {
@@ -1756,6 +1787,10 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return null;
         }
+        public virtual Fighter GetController()
+        {
+            return null;
+        }
         protected virtual bool MustSkipTurn()
         {
             return false;
@@ -1769,6 +1804,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return this;
         }
+
     }
 
 }

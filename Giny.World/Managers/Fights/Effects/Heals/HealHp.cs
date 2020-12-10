@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Heals
 {
+    [WIP("heal zone efficiency (éni)")]
     [SpellEffectHandler(EffectsEnum.Effect_HealHP_108)]
     public class HealHp : SpellEffectHandler
     {

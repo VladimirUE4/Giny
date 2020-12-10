@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Marks
 {
+    [SpellEffectHandler(EffectsEnum.Effect_SpawnPortal)]
     public class SpawnPortal : SpellEffectHandler
     {
         public SpawnPortal(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)

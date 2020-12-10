@@ -149,5 +149,10 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Record.SpellRecords.Values;
         }
+
+        public override void OnTurnEnded()
+        {
+           
+        }
     }
 }

@@ -1663,7 +1663,7 @@
         /// <summary>
         /// #1
         /// </summary>
-        Effect_1019 = 1019,
+        Effect_CastSpell_1019 = 1019,
 
         Effect_AddShieldPercentLevel = 1020,
 
@@ -2346,7 +2346,7 @@
         /// <summary>
         /// Tue la cible pour la remplacer par l'invocation : #1
         /// </summary>
-        Effect_KillAndSummon_2796 = 2796,
+        Effect_KillAndSummonSlave = 2796,
         /// <summary>
         /// 
         /// </summary>

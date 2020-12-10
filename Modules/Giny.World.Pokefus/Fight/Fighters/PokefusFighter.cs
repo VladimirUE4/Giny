@@ -29,6 +29,7 @@ namespace Giny.Pokefus.Fight.Fighters
         {
             this.Look = Record.Look.Clone();
             this.Stats = new FighterStats(Grade);
+            this.SetController((CharacterFighter)Summoner);
             base.Initialize();
         }
 

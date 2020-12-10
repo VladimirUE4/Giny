@@ -18,6 +18,8 @@ namespace Giny.World.Managers.Stats
     [ProtoContract]
     public class EntityStats
     {
+        public const short BaseSummonsCount = 1;
+
         public int LifePoints
         {
             get;
@@ -595,20 +597,20 @@ namespace Giny.World.Managers.Stats
                 PermanentDamagePercent = Characteristic.Zero(),
                 HealBonus = Characteristic.Zero(),
                 Intelligence = Characteristic.Zero(),
-                LifePoints = BreedManager.BREED_DEFAULT_LIFE,
-                MaxLifePoints = BreedManager.BREED_DEFAULT_LIFE,
+                LifePoints = BreedManager.BreedDefaultLife,
+                MaxLifePoints = BreedManager.BreedDefaultLife,
                 MaxEnergyPoints = (short)(level * 100),
                 Energy = (short)(level * 100),
                 NeutralDamageBonus = Characteristic.Zero(),
                 NeutralReduction = Characteristic.Zero(),
                 NeutralResistPercent = ResistanceCharacteristic.Zero(),
-                Prospecting = RelativeCharacteristic.New(BreedManager.BREED_DEFAULT_PROSPECTING),
+                Prospecting = RelativeCharacteristic.New(BreedManager.BreedDefaultProspecting),
                 PushDamageBonus = Characteristic.Zero(),
                 PushDamageReduction = Characteristic.Zero(),
                 Range = RangeCharacteristic.Zero(),
                 Reflect = Characteristic.Zero(),
                 Strength = Characteristic.Zero(),
-                SummonableCreaturesBoost = Characteristic.New(1),
+                SummonableCreaturesBoost = Characteristic.New(BaseSummonsCount),
                 TrapBonus = Characteristic.Zero(),
                 TrapBonusPercent = Characteristic.Zero(),
                 Vitality = Characteristic.Zero(),

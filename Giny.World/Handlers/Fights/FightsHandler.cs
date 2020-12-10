@@ -128,12 +128,6 @@ namespace Giny.World.Handlers.Fights
             if (!client.Character.Fighting)
                 return;
 
-            /*        if (client.Character.Fighter.IsSlaveTurn())
-                    {
-                        client.Character.Fighter.GetSlave().PassTurn();
-                        return;
-                    } */
-
             client.Character.Fighter.PassTurn();
         }
         [MessageHandler]

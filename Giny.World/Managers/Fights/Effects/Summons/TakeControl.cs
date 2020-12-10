@@ -20,9 +20,14 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (var target in targets)
+            if (!(Source is CharacterFighter))
             {
+                return;
+            }
 
+            foreach (var target in targets.OfType<SummonedFighter>())
+            {
+                target.SetController((CharacterFighter)Source);
             }
         }
     }

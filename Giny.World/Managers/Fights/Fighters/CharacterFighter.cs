@@ -17,6 +17,7 @@ using Giny.World.Managers.Spells;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Giny.World.Managers.Fights.Fighters
@@ -100,6 +101,13 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             base.OnFightStarted();
 
+            SummonedFighter summon = GetNextControlableSummon();
+
+            if (summon != null)
+            {
+                summon.SwitchContext();
+            }
+
             foreach (var item in Character.Inventory.GetSpellCastItems())
             {
                 EffectDice effect = item.GetEffect<EffectDice>(Inventory.ItemCastEffect);
@@ -136,6 +144,21 @@ namespace Giny.World.Managers.Fights.Fighters
         public virtual bool IsCompanion()
         {
             return false;
+        }
+        public override bool CastSpell(short spellId, short cellId)
+        {
+            if (IsFighterTurn)
+            {
+                return base.CastSpell(spellId, cellId);
+            }
+            else if (Fight.FighterPlaying.GetController() == this)
+            {
+                return Fight.FighterPlaying.CastSpell(spellId, cellId);
+            }
+            else
+            {
+                return false;
+            }
         }
         public override bool CastSpell(SpellCast cast)
         {
@@ -284,7 +307,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
                 if (teleportToSpawn)
-                    Character.RejoinMap(Character.Record.MapId,Fight.FightType, false, Fight.SpawnJoin);
+                    Character.RejoinMap(Character.Record.MapId, Fight.FightType, false, Fight.SpawnJoin);
                 else
                     Character.RejoinMap(Character.Record.MapId, Fight.FightType, false, false);
 
@@ -339,7 +362,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 if (IsFighterTurn)
                     this.PassTurn();
 
-                this.Character.RejoinMap(Character.Record.MapId,Fight.FightType, false, Fight.SpawnJoin);
+                this.Character.RejoinMap(Character.Record.MapId, Fight.FightType, false, Fight.SpawnJoin);
             }
         }
 
@@ -355,7 +378,15 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             // nothing todo
         }
+        public override void OnTurnEnded()
+        {
+            SummonedFighter summon = GetNextControlableSummon();
 
+            if (summon != null)
+            {
+                summon.SwitchContext();
+            }
+        }
         public override FightTeamMemberInformations GetFightTeamMemberInformations()
         {
             return new FightTeamMemberCharacterInformations()
@@ -402,6 +433,51 @@ namespace Giny.World.Managers.Fights.Fighters
             if (source.Team.Leader == source && source.Team == this.Team)
             {
                 Leave(false);
+            }
+        }
+        public SummonedFighter GetNextControlableSummon()
+        {
+            for (int index = Fight.Timeline.Index; index < Fight.Timeline.Fighters.Count; index++)
+            {
+                Fighter fighter = Fight.Timeline.Fighters[index];
+
+                if (fighter.GetController() == this && fighter.Alive)
+                {
+                    return (SummonedFighter)fighter;
+                }
+            }
+            for (int index = 0; index < Fight.Timeline.Index; index++)
+            {
+                Fighter fighter = Fight.Timeline.Fighters[index];
+
+                if (fighter.GetController() == this && fighter.Alive)
+                {
+                    return (SummonedFighter)fighter;
+                }
+            }
+
+            return null;
+        }
+        public override void PassTurn()
+        {
+            if (Fight.FighterPlaying.GetController() == this)
+            {
+                Fight.FighterPlaying.PassTurn();
+            }
+            else if (IsFighterTurn)
+            {
+                base.PassTurn();
+            }
+        }
+        public override void Move(List<CellRecord> path)
+        {
+            if (Fight.FighterPlaying.GetController() == this)
+            {
+                Fight.FighterPlaying.Move(path);
+            }
+            else if (IsFighterTurn)
+            {
+                base.Move(path);
             }
         }
 

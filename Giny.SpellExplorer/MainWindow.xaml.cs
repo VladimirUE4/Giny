@@ -38,7 +38,7 @@ namespace Giny.SpellExplorer
         }
         private void UpdateSpellList()
         {
-            IEnumerable<SpellRecord> searchResult = SpellRecord.GetSpellRecords().Where(x => x.Name.ToLower().Contains(textBox.Text.ToLower()));
+            IEnumerable<SpellRecord> searchResult = SpellRecord.GetSpellRecords().Where(x => x.ToString().ToLower().Contains(textBox.Text.ToLower()));
 
             spellSelector.Items.Clear();
 

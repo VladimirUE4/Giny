@@ -65,8 +65,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 return new List<CellRecord>();
             }
 
-            path.Insert(0, Cell.Id);
-            IEnumerable<CellRecord> cells = path.Take(Stats.MovementPoints.TotalInContext() + 1).Select(x => Fight.Map.GetCell(x));
+            IEnumerable<CellRecord> cells = path.Take(Stats.MovementPoints.TotalInContext()).Select(x => Fight.Map.GetCell(x));
             return cells.ToList();
         }
 
@@ -83,9 +82,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 return new List<CellRecord>();
             }
 
-            path.Insert(0, Cell.Id);
             path.Remove(target.Cell.Id);
-            IEnumerable<CellRecord> cells = path.Take(Stats.MovementPoints.TotalInContext() + 1).Select(x => Fight.Map.GetCell(x));
+            IEnumerable<CellRecord> cells = path.Take(Stats.MovementPoints.TotalInContext()).Select(x => Fight.Map.GetCell(x));
             return cells.ToList();
         }
         

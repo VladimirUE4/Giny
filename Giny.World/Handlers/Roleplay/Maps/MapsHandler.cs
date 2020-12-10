@@ -68,10 +68,9 @@ namespace Giny.World.Handlers.Maps
         {
             if (client.Character.Fighting)
             {
-                if (client.Character.Fighter.Fight.Started && client.Character.Fighter.IsFighterTurn)
+                if (client.Character.Fighter.Fight.Started)
                 {
                     List<short> path = PathReader.FightMove(PathReader.ReturnDispatchedCells(message.keyMovements)).Keys.ToList();
-                    path.Insert(0, client.Character.Fighter.Cell.Id);
 
                     IEnumerable<CellRecord> cells = path.Select(x => client.Character.Map.GetCell(x));
                     client.Character.Fighter.Move(cells.ToList());

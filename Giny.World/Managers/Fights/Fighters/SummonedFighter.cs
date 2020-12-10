@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Giny.Core.DesignPattern;
+using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Stats;
@@ -22,13 +23,13 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             set;
         }
-        public Fighter Controller
+        public CharacterFighter Controller
         {
             get;
             set;
         }
 
-        public bool Controled => Controller != null;
+        public bool IsControlled => Controller != null;
 
         private SpellEffectHandler SummoningEffect
         {
@@ -60,19 +61,52 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnBegin()
         {
-            base.OnTurnBegin();
+            if (!IsControlled)
+            {
+                base.OnTurnBegin();
+            }
         }
-        [WIP]
-        public void SetController(Fighter controller)
+        public void SetController(CharacterFighter controller)
         {
             this.Controller = controller;
+        }
+        public void SwitchContext()
+        {
+            var msg = new SlaveSwitchContextMessage()
+            {
+                masterId = Controller.Id,
+                shortcuts = GetShortcuts().ToArray(),
+                slaveId = Id,
+                slaveSpells = GetSpellItems(),
+                slaveStats = this.Stats.GetCharacterCharacteristicsInformations(Controller.Character),
+            };
+            this.Controller.Character.Client.Send(msg);
+        }
+        private Shortcut[] GetShortcuts()
+        {
+            SpellRecord[] spells = GetSpells().ToArray();
+            Shortcut[] results = new Shortcut[spells.Length];
+
+            for (byte i = 0; i < spells.Length; i++)
+            {
+                results[i] = new ShortcutSpell()
+                {
+                    slot = i,
+                    spellId = spells[i].Id,
+                };
+            }
+
+            return results;
+        }
+        private SpellItem[] GetSpellItems()
+        {
+            return GetSpells().Select(x => new SpellItem(x.Id, GetSpell(x.Id).Level.Grade)).ToArray();
         }
         public void RemoveController()
         {
             if (Controller != null)
             {
                 this.Controller = null;
-                //
             }
         }
         public override bool IsSummoned()
@@ -82,6 +116,10 @@ namespace Giny.World.Managers.Fights.Fighters
         public override Fighter GetSummoner()
         {
             return Summoner;
+        }
+        public override Fighter GetController()
+        {
+            return Controller;
         }
     }
 }

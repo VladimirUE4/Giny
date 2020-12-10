@@ -81,7 +81,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             if (EffectSchool == EffectSchoolEnum.Fix)
             {
-                Computed = new Jet(BaseMinDamages, BaseMaxDamages).Generate();
+                Computed = new Jet(BaseMinDamages, BaseMaxDamages).Generate(Source.HasRandDownModifier());
                 return;
             }
             if (EffectSchool == EffectSchoolEnum.Pushback)
@@ -122,7 +122,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
 
-            Computed = jet.Generate();
+            Computed = jet.Generate(Source.HasRandDownModifier());
 
             this.EffectHandler.CastHandler.Cast.DamagesDealt += Computed.Value;
         }
