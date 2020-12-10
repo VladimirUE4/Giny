@@ -839,6 +839,14 @@ namespace Giny.World.Managers.Fights.Fighters
         protected virtual void OnSpellCasted(SpellCastHandler handler)
         {
             this.SpellHistory.RegisterCastedSpell(handler.Cast.Spell.Level, this.Fight.GetFighter(handler.Cast.TargetCell.Id));
+
+            foreach (var summon in GetSummons())
+            {
+                if (handler.GetEffectHandlers().Contains(summon.GetSummoningEffect()))
+                {
+                    Fight.TriggerMarks(summon, MarkTriggerType.OnMove);
+                }
+            }
         }
 
         [WIP(WIPState.Todo, "see stump")]
@@ -1824,7 +1832,7 @@ namespace Giny.World.Managers.Fights.Fighters
             return this;
         }
 
-       
+
     }
 
 }

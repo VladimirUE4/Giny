@@ -66,9 +66,7 @@ namespace Giny.World.Managers.Fights
         [WIP]
         protected override IEnumerable<IFightResult> GenerateResults()
         {
-            List<IFightResult> results = new List<IFightResult>();
-
-            results.AddRange(GetFighters<Fighter>(false).Select(x => x.GetFightResult()));
+            IEnumerable<IFightResult> results = GetFighters<Fighter>(false).Where(x => !x.IsSummoned()).Select(x => x.GetFightResult());
 
             foreach (var team in GetTeams())
             {

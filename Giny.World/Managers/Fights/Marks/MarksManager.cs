@@ -11,15 +11,14 @@ namespace Giny.World.Managers.Fights.Marks
 {
     public class MarksManager : Singleton<MarksManager>
     {
-        /*
-         * Reste = Piège de masse, Piège fangeux, Piège insidieux, Calamitée
-         */
         public Color GetMarkColorFromSpellId(SpellEnum spellId)
         {
             switch (spellId)
             {
                 /* Piège Répulsif
-                 * Piège de Dérive */
+                 * Piège de Dérive
+                 * Fosse commune */
+                case SpellEnum.MassGrave14314:
                 case SpellEnum.RepellingTrap12914:
                 case SpellEnum.DriftTrap12942:
                     return Color.FromArgb(10849205);
@@ -30,19 +29,29 @@ namespace Giny.World.Managers.Fights.Marks
                 case SpellEnum.TrickyTrap12906:
                     return Color.FromArgb(12128795);
                 /*
-                 * Piège Fangeux */
+                 * Piège de masse
+                 * Piège Scélérat */
+                case SpellEnum.MassTrap12920:
                 case SpellEnum.SickratTrap:
                     return Color.FromArgb(5911580);
 
+                /*
+                 * Piège Fangeux
+                 * Calamité */
+                case SpellEnum.MiryTrap12916:
+                case SpellEnum.Calamity12950:
+                    return Color.FromArgb(4228004);
                 /*
                  * Piège Mortel
                  * Piège Funeste */
                 case SpellEnum.LethalTrap12921:
                 case SpellEnum.MalevolentTrap12948:
                     return Color.FromArgb(0);
+
                 /*
-                 * Piège de Masse */
-                case SpellEnum.MassTrap12920:
+                 * Piège Insidieux
+                 */
+                case SpellEnum.InsidiousTrap12918:
                     return Color.FromArgb(0);
 
                 /*
