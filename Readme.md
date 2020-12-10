@@ -15,7 +15,7 @@
 | Bond | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Détermination | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Déferlement | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Anneau destructeur | ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
+| Anneau destructeur | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Epée divine | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Couperet| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -29,7 +29,7 @@
 | Concentration| ![alt text](https://img.shields.io/badge/Done-green) |
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
-| Menace| ![alt text](https://img.shields.io/badge/Done-green) | PullForward NoDiag
+| Menace| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Friction| ![alt text](https://img.shields.io/badge/Done-green) | Last Atk criterion (interactions menace)
 | Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
