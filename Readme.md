@@ -61,7 +61,7 @@
 <details><summary>Sram</summary>
 <p>
 
- * Couleur des pièges
+ *  Invocation double dans un piège répu (perds effets double)
  
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
