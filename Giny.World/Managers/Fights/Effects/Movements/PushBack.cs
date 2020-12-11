@@ -26,10 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                if (CastCell != target.Cell)
-                {
                     target.PushBack(Source, CastCell, (short)Effect.Min, TargetCell);
-                }
             }
         }
     }

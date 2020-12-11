@@ -22,21 +22,17 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (var target in targets)
+            var rune = Source.GetMarks<Rune>().LastOrDefault();
+
+            Telefrag telefrag = Source.Teleport(Source, rune.CenterCell);
+
+            if (telefrag != null)
             {
-                var rune = target.GetMarks<Rune>().FirstOrDefault();
-
-                Telefrag telefrag = target.Teleport(Source, rune.CenterCell);
-
-                if (telefrag != null)
-                {
-                    CastHandler.AddTelefrag(telefrag);
-                }
-
-                target.Fight.RemoveMark(rune);
-
-
+                CastHandler.AddTelefrag(telefrag);
             }
+
+            Source.Fight.RemoveMark(rune);
+
         }
     }
 }

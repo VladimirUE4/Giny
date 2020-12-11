@@ -43,7 +43,7 @@ namespace Giny.World.Managers.Fights.Marks
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
             Source.Fight.RemoveMark(this);
-            CastTriggerSpell();
+            ApplyEffects();
         }
     }
 }

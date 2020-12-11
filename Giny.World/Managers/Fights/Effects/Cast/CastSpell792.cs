@@ -14,7 +14,11 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
-    [WIP("cast spell ?")] // mot interdit, rassemblement friction
+    /*
+     * Mot Interdit
+     * Rassemblement 
+     * Friction 
+     */
     [SpellEffectHandler(EffectsEnum.Effect_CastSpell_792)]
     public class CastSpell792 : SpellEffectHandler
     {
@@ -24,9 +28,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
-            SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
-            Spell spell = new Spell(spellRecord, level);
+            Spell spell = CreateCastedSpell();
 
             foreach (var target in targets)
             {

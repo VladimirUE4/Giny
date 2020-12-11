@@ -1,5 +1,6 @@
 ﻿using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Maps.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Giny.World.Managers.Fights.Cast
 
         public abstract bool Initialize();
 
-        public abstract bool Execute(IEnumerable<Fighter> overriddenTargets = null);
+        public abstract bool Execute();
 
         public bool RevealsInvisible()
         {

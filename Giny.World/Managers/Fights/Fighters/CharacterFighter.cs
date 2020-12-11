@@ -185,6 +185,11 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private bool CloseCombat(CellRecord targetCell, SpellLevelRecord weaponSpellLevel)
         {
+            if (Fight.Ended)
+            {
+                return;
+            }
+
             SpellCast cast = new SpellCast(this, new Spell(WeaponManager.Instance.PunchSpellRecord, weaponSpellLevel), targetCell);
             cast.Weapon = true;
 

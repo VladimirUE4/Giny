@@ -392,11 +392,13 @@ namespace Giny.World.Managers.Fights.Fighters
                         {
                             Fight.Send(new GameMapMovementMessage(path.Select(x => x.Id).ToArray(), -1, Id));
                         }
-                        this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
 
                         this.MovementHistory.OnMove(path);
 
                         OnMove(this, true);
+
+                        this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
+
                         IsMoving = false;
                     }
                     else
@@ -798,7 +800,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 cast.Critical = RollCriticalDice(cast.Spell.Level);
 
-                SpellCastHandler handler = SpellManager.Instance.GetSpellCastHandler(cast);
+                SpellCastHandler handler = SpellManager.Instance.CreateSpellCastHandler(cast);
 
                 if (!handler.Initialize())
                 {
@@ -824,9 +826,26 @@ namespace Giny.World.Managers.Fights.Fighters
             return true;
         }
 
+
+        private bool WontReveals()
+        {
+            IEnumerable<Glyph> effectiveGlyphs = GetEffectiveGlyphs().OfType<GlyphAura>();
+
+            foreach (var glyph in effectiveGlyphs)
+            {
+                bool res = GetBuffs().OfType<InvisibilityBuff>().Any(x => x.Cast.MarkSource == glyph);
+
+                if (res)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         public void Reveals()
         {
-            if (!IsInvisible())
+            if (!IsInvisible() )
             {
                 return;
             }
@@ -836,7 +855,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 RemoveAndDispellBuff(buff);
             }
 
-            ShowFighter();
         }
 
         protected virtual void OnSpellCasted(SpellCastHandler handler)
@@ -857,7 +875,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             if (IsInvisible() && !handler.Cast.Force)
             {
-                if (handler.RevealsInvisible())
+                if (handler.RevealsInvisible() && !WontReveals())
                 {
                     Reveals();
                 }
@@ -1100,19 +1118,21 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void PullForward(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
         {
-            if (this.Cell == castCell)
-            {
-                return;
-            }
             DirectionsEnum direction = 0;
 
             if (targetCell.Id == Cell.Id)
             {
+                if (targetCell.Id == castCell.Id)
+                    return;
+
                 bool diagonal = targetCell.Point.IsOnSameDiagonal(castCell.Point);
                 direction = targetCell.Point.OrientationTo(castCell.Point, diagonal);
             }
             else
             {
+                if (Cell.Id == targetCell.Id)
+                    return;
+
                 bool diagonal = Cell.Point.IsOnSameDiagonal(targetCell.Point);
                 direction = Cell.Point.OrientationTo(targetCell.Point, diagonal);
             }
@@ -1360,6 +1380,11 @@ namespace Giny.World.Managers.Fights.Fighters
                     targetId = Id,
                     state = (byte)GetInvisibilityStateFor(fighter),
                 });
+            }
+
+            if (oldState == GameActionFightInvisibilityStateEnum.INVISIBLE && state == GameActionFightInvisibilityStateEnum.VISIBLE)
+            {
+                ShowFighter();
             }
         }
         public GameActionFightInvisibilityStateEnum GetInvisibilityStateFor(Fighter fighter)
@@ -1739,10 +1764,14 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return GetMarks().OfType<T>();
         }
-
+        public IEnumerable<Glyph> GetEffectiveGlyphs()
+        {
+            return Fight.GetMarks().OfType<Glyph>().Where(x => x.ContainsCell(Cell.Id));
+        }
         public IEnumerable<Mark> GetMarks()
         {
-            return Fight.GetMarks().Where(x => x.Source == this);
+            var marks = Fight.GetMarks().Where(x => x.Source == this);
+            return marks;
         }
         public void RemoveMarks()
         {

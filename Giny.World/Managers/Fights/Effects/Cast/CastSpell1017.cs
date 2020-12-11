@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1017)] // mot blessant (chaque cible lance le sort)
+    /*
+     * Mot Blessant (chaque cible lance le sort)
+     */
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1017)] 
     public class CastSpell1017 : SpellEffectHandler
     {
         public CastSpell1017(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -21,9 +24,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
-            SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
-            Spell spell = new Spell(spellRecord, level);
+            Spell spell = CreateCastedSpell();
 
             ITriggerToken token = this.GetTriggerToken<ITriggerToken>();
 

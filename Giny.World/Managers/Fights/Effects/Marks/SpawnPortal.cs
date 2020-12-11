@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -26,7 +27,7 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             {
                 Zone zone = Effect.GetZone();
 
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
 
                 Portal portal = new Portal(Source.Fight.PopNextMarkId(), Effect,
                      zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);

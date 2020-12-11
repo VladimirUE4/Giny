@@ -16,7 +16,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     {
         public override bool RefreshTargets => false;
 
-        public PullForward(EffectDice effect,SpellCastHandler castHandler) : base(effect, castHandler)
+        public PullForward(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 
         }

@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Spells
                 }
             }
         }
-        public SpellCastHandler GetSpellCastHandler(SpellCast cast)
+        public SpellCastHandler CreateSpellCastHandler(SpellCast cast)
         {
             if (m_handlers.ContainsKey((SpellEnum)cast.SpellId))
             {

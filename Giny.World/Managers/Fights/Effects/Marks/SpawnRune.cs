@@ -27,7 +27,7 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             {
                 Zone zone = Effect.GetZone();
 
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
 
                 Rune rune = new Rune(Source.Fight.PopNextMarkId(), Effect,
                     zone, MarkTriggerType.None, color,

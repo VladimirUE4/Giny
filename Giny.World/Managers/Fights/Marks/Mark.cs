@@ -3,6 +3,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Managers.Spells;
@@ -47,7 +48,7 @@ namespace Giny.World.Managers.Fights.Marks
             get;
             private set;
         }
-        protected Spell MarkSpell
+        public Spell MarkSpell
         {
             get;
             private set;
@@ -86,7 +87,7 @@ namespace Giny.World.Managers.Fights.Marks
             this.CenterCell = centerCell;
             this.MarkSpell = new Spell(spellRecord, spellLevel);
             var triggerSpellRecord = SpellRecord.GetSpellRecord((short)effect.Min);
-            this.TriggerSpell = new Spell(triggerSpellRecord, triggerSpellRecord.GetLevel(MarkSpell.Level.Grade));
+            this.TriggerSpell = new Spell(triggerSpellRecord, triggerSpellRecord.GetLevel((byte)effect.Max));
             this.Active = true;
             this.BuildShapes(zone);
         }
@@ -142,15 +143,47 @@ namespace Giny.World.Managers.Fights.Marks
         protected SpellCast CreateSpellCast()
         {
             SpellCast cast = new SpellCast(Source, TriggerSpell, CenterCell);
+            cast.CastCell = CenterCell;
+            cast.MarkSource = this;
             return cast;
         }
-        protected void CastTriggerSpell()
+
+        public void ApplyEffects()
         {
             SpellCast cast = CreateSpellCast();
             cast.CastCell = CenterCell;
             cast.Force = true;
             Source.CastSpell(cast);
         }
+        protected void ApplyEffects(Fighter fighter)
+        {
+            SpellCastHandler castHandler = SpellManager.Instance.CreateSpellCastHandler(CreateSpellCast());
+
+            if (!castHandler.Initialize())
+            {
+                return;
+            }
+
+            foreach (var effectHandler in castHandler.GetEffectHandlers())
+            {
+                IEnumerable<Fighter> targets = effectHandler.IsValidTarget(fighter) ? new Fighter[] { fighter } : new Fighter[0];
+                effectHandler.Execute(targets);
+            }
+        }
+        protected void RemoveEffects(Fighter fighter)
+        {
+            using (fighter.Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_GLYPH_TRAP))
+            {
+                var buffs = fighter.GetBuffs().Where(x => x.Cast.SpellId == this.TriggerSpell.Record.Id);
+
+                foreach (var buff in buffs.ToArray())
+                {
+                    fighter.RemoveAndDispellBuff(buff);
+                }
+            }
+
+        }
+
         public bool ContainsCell(short cellId)
         {
             return Cells.Any(x => x.Id == cellId);

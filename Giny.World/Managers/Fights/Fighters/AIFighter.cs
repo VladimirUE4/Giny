@@ -36,23 +36,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnBegin()
         {
+
             this.Brain.Play();
 
+            var tesezaezat = GetSpells();
             if (Alive) // else has already passed turn
-            {
-                PassTurn();
-            }
-            return;
-
-            try
-            {
-                this.Brain.Play();
-            }
-            catch
-            {
-                Fight.Warn("Monster error");
-            }
-            finally
             {
                 PassTurn();
             }

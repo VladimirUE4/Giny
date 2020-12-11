@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -26,7 +27,8 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             if (!Source.Fight.MarkExist<Glyph>(x => x.CenterCell == TargetCell))
             {
                 Zone zone = Effect.GetZone();
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
+
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
 
                 Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
                      zone, GetTriggerType(), color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);

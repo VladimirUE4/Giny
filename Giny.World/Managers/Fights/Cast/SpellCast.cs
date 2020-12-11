@@ -1,5 +1,6 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Marks;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
@@ -84,6 +85,11 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         }
         public short DamagesDealt
+        {
+            get;
+            set;
+        }
+        public Mark MarkSource
         {
             get;
             set;

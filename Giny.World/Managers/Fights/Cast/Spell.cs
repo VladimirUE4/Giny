@@ -21,12 +21,28 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         }
 
-        public SpellEnum SpellEnum => (SpellEnum)Record.Id;
+        public short SpellId
+        {
+            get
+            {
+                return Record.Id;
+            }
+        }
 
         public Spell(SpellRecord record,SpellLevelRecord level)
         {
             this.Record = record;
             this.Level = level;
+        }
+
+        public override string ToString()
+        {
+            return Record.Name;
+        }
+
+        public SpellEnum GetSpellEnum()
+        {
+            return (SpellEnum)SpellId;
         }
     }
 }

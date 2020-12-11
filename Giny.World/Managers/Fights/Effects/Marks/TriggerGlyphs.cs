@@ -20,9 +20,11 @@ namespace Giny.World.Managers.Fights.Effects.Marks
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (Glyph glyph in Source.GetMarks<Glyph>().Where(x => x.ContainsCell(TargetCell.Id)))
+            IEnumerable<Glyph> targetMarks = Source.GetMarks<Glyph>().Where(x => x.MarkSpell.Record.Id == Effect.Value && x.ContainsCell(TargetCell.Id));
+
+            foreach (Glyph glyph in targetMarks)
             {
-                glyph.Trigger(Source, MarkTriggerType.Instant);
+                glyph.ApplyEffects();
             }
         }
     }

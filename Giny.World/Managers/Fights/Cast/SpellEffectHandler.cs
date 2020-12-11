@@ -92,7 +92,7 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-    
+
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
             Targets = effect.GetTargets();
@@ -118,7 +118,7 @@ namespace Giny.World.Managers.Fights.Cast
             return Source.Fight.GetFighters(affectedCells).Where(entry => entry.Alive && !entry.IsCarried() && IsValidTarget(entry)).ToArray();
         }
 
-        private bool IsValidTarget(Fighter actor)
+        public bool IsValidTarget(Fighter actor)
         {
             return Targets.ToLookup(x => x.GetType()).All(x => x.First().IsDisjonction ?
                x.Any(y => y.IsTargetValid(actor, this)) : x.All(y => y.IsTargetValid(actor, this)));
@@ -133,9 +133,24 @@ namespace Giny.World.Managers.Fights.Cast
             return true;
         }
 
+        protected Spell CreateCastedSpell()
+        {
+            SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
+            SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
+            return new Spell(spellRecord, level);
+        }
         public bool RevealsInvisible()
         {
             return Reveals && Effect.TriggersEnum == BuffTriggerType.Instant;
+        }
+        public void Execute()
+        {
+            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
+            {
+                AffectedFighters = GetAffectedFighters();
+            }
+
+            Execute(AffectedFighters);
         }
         public void Execute(IEnumerable<Fighter> targets)
         {
@@ -162,22 +177,13 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 InternalApply(targets);
             }
-        }
-        public void Execute()
-        {
-            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
-            {
-                AffectedFighters = GetAffectedFighters();
-            }
 
-            Execute(AffectedFighters);
-           
         }
         private void InternalApply(IEnumerable<Fighter> targets)
         {
             if (Effect.TriggersEnum == BuffTriggerType.Instant)
             {
-                Apply(targets); 
+                Apply(targets);
             }
             else
             {

@@ -42,14 +42,15 @@ namespace Giny.World.Managers.Fights.Marks
         {
             if (!AffectedFighters.Contains(target))
             {
-                AffectedFighters.Add(target);
                 Enter(target);
             }
         }
         public override void OnAdded()
         {
-            CastTriggerSpell();
-            AffectedFighters = Source.Fight.GetFighters<Fighter>(x => ContainsCell(x.Cell.Id)).ToList();
+            foreach (var fighter in Source.Fight.GetFighters<Fighter>(x => ContainsCell(x.Cell.Id)).ToList())
+            {
+                Enter(fighter);
+            }
         }
         public override void OnRemoved()
         {
@@ -63,33 +64,17 @@ namespace Giny.World.Managers.Fights.Marks
         private void Leave(Fighter fighter)
         {
             fighter.Moved -= OnFighterMove;
-
-            using (fighter.Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_GLYPH_TRAP))
-            {
-                var buffs = fighter.GetBuffs().Where(x => x.Cast.SpellId == this.TriggerSpell.Record.Id);
-
-                foreach (var buff in buffs.ToArray())
-                {
-                    fighter.RemoveAndDispellBuff(buff);
-                }
-
-                AffectedFighters.Remove(fighter);
-            }
+            RemoveEffects(fighter);
+            AffectedFighters.Remove(fighter);
 
         }
         private void Enter(Fighter fighter)
         {
             fighter.Moved += OnFighterMove;
-            var handler = SpellManager.Instance.GetSpellCastHandler(CreateSpellCast());
-
-            if (!handler.Initialize())
-            {
-                return;
-            }
-
-            handler.Execute(new Fighter[] { fighter });
-
+            ApplyEffects(fighter);
+            AffectedFighters.Add(fighter);
         }
+
 
         private void OnFighterMove(Fighter fighter)
         {

@@ -105,7 +105,7 @@ namespace Giny.World.Managers.Fights.Cast
          *  (Glyph triggers for exemple)
          *  You can trust Effect.TargetMask ! 
          */
-        public override bool Execute(IEnumerable<Fighter> overriddenTargets = null)
+        public override bool Execute()
         {
             if (!m_initialized)
             {
@@ -120,15 +120,7 @@ namespace Giny.World.Managers.Fights.Cast
             foreach (var handler in handlers)
             {
                 handler.SetTriggerToken(Cast.Token);
-
-                if (overriddenTargets != null)
-                {
-                    handler.Execute(overriddenTargets);
-                }
-                else
-                {
-                    handler.Execute();
-                }
+                handler.Execute();
             }
 
             return true;

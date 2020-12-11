@@ -21,7 +21,7 @@ namespace Giny.World.Managers.Fights.Marks
                 case SpellEnum.MassGrave14314:
                 case SpellEnum.RepellingTrap12914:
                 case SpellEnum.DriftTrap12942:
-                    return Color.FromArgb(10849205);
+                    return Color.FromArgb(10849205); 
 
                 /* Piège a Fragmentation
                  * Piège Sournois */
@@ -48,9 +48,13 @@ namespace Giny.World.Managers.Fights.Marks
                 case SpellEnum.MalevolentTrap12948:
                     return Color.FromArgb(0);
 
+                case SpellEnum.Mist12930:
+                    return Color.FromArgb(4149784);
                 /*
                  * Piège Insidieux
+                 * Piège Insidieux (Glyphe)
                  */
+                case SpellEnum.InsidiousTrap12926:
                 case SpellEnum.InsidiousTrap12918:
                     return Color.FromArgb(3222918);
 
@@ -86,7 +90,7 @@ namespace Giny.World.Managers.Fights.Marks
                     return Color.SaddleBrown;
             }
 
-            return Color.CornflowerBlue;
+            return Color.FromArgb(0);
         }
     }
 }

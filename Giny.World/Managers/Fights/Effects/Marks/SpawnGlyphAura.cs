@@ -26,10 +26,10 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             if (!Source.Fight.MarkExist<GlyphAura>(x => x.CenterCell == TargetCell))
             {
                 Zone zone = Effect.GetZone();
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.SpellEnum);
+                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
 
                 GlyphAura glyph = new GlyphAura(Source.Fight.PopNextMarkId(), Effect,
-                     zone, MarkTriggerType.OnMove, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
+                   zone, MarkTriggerType.OnMove, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
                 Source.Fight.AddMark(glyph);
             }

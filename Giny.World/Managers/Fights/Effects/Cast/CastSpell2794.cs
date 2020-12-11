@@ -21,10 +21,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
-            SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
-
-            Spell spell = new Spell(spellRecord, level);
+            Spell spell = CreateCastedSpell();
 
             var targetCell = this.CastHandler.Cast.GetInitialSource().Cell ;
             
