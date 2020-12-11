@@ -61,18 +61,16 @@
 <details><summary>Sram</summary>
 <p>
 
- *  Invocation double dans un piège répu (perds effets double)
- 
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Chausse Trape | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Piege Sournois | ![alt text](https://img.shields.io/badge/Done-green) |
 | Invisiblité | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
-| Brume | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Brume | ![alt text](https://img.shields.io/badge/Done-green) |
 | Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) | Glyph Effect not handled.
+| Toxines  | ![alt text](https://img.shields.io/badge/Done-green) | 
+| Piège Insidieux  | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -106,7 +104,7 @@
 | Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
-| Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Dérobade| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 </p>
 </details>
