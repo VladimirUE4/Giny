@@ -287,3 +287,13 @@
 </p>
 </details>
 
+
+<details><summary>Known bugs</summary>
+<p>
+ 
+ * Equip item with criterias (AP for example)
+ 
+</p>
+</details>
+ 
+
