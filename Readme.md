@@ -69,10 +69,10 @@
 | Chausse Trape | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
 | Piege Sournois | ![alt text](https://img.shields.io/badge/Done-green) |
 | Invisiblité | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
-| Brume | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Brume | ![alt text](https://img.shields.io/badge/Done-green) |
 | Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Piège Insidieux | ![alt text](https://img.shields.io/badge/Bug-red) | Glyph Effect not handled.
+| Piège Insidieux | ![alt text](https://img.shields.io/badge/Done-green) |
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
