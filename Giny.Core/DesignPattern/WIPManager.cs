@@ -80,6 +80,9 @@ namespace Giny.Core.DesignPattern
                 case WIPState.Todo:
                     Logger.WriteColor1(result);
                     break;
+                case WIPState.None:
+                    Logger.Write(result);
+                    break;
                 default:
                     throw new Exception("Unhandled WIP State : " + state);
             }

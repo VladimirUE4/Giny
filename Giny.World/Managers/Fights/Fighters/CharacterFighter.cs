@@ -187,7 +187,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             if (Fight.Ended)
             {
-                return;
+                return false;
             }
 
             SpellCast cast = new SpellCast(this, new Spell(WeaponManager.Instance.PunchSpellRecord, weaponSpellLevel), targetCell);

@@ -36,10 +36,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnBegin()
         {
-
             this.Brain.Play();
 
-            var tesezaezat = GetSpells();
             if (Alive) // else has already passed turn
             {
                 PassTurn();
