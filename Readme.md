@@ -106,7 +106,7 @@
 | Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
-| Dérobade | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Dérobade| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
 </p>
 </details>
