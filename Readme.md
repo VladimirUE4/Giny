@@ -71,7 +71,7 @@
 | Invisiblité | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
 | Brume | ![alt text](https://img.shields.io/badge/Done-green) |
 | Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Toxines  | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège Insidieux  | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
