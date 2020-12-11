@@ -61,8 +61,6 @@
 <details><summary>Sram</summary>
 <p>
 
- *  Invocation double dans un piège répu (perds effets double)
- 
  | Nom   |      Etat     | Commentaire
 |----------|:-------------:|:-------------:|
 | Truandrie | ![alt text](https://img.shields.io/badge/Done-green) | 
