@@ -72,7 +72,7 @@
 | Brume | ![alt text](https://img.shields.io/badge/Done-green) |
 | Poison Insidieux | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Toxines | ![alt text](https://img.shields.io/badge/Bug-red) |
-| Piège Insidieux  | ![alt text](https://img.shields.io/badge/Bug-red) |
+| Piège Insidieux  | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Arnaque | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
