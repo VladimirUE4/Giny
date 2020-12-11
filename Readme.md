@@ -283,6 +283,7 @@
 | Guildes | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Alliances | ![alt text](https://img.shields.io/badge/Todo-red) |
 | Cellule de placement | ![alt text](https://img.shields.io/badge/Done-green)  |
+| IA Monstres |  ![alt text](https://img.shields.io/badge/Started-orange)   | 
 
 </p>
 </details>
@@ -291,7 +292,7 @@
 <details><summary>Known bugs</summary>
 <p>
  
- * Equip item with criterias (AP for example)
+ * Equiper items avec critères (fonctionne mal)
  
 </p>
 </details>
