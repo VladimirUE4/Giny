@@ -12,11 +12,13 @@ namespace Giny.World.Managers.Entities.Look
 {
     public class ServerEntityLook
     {
-        public const short PET_SCALE = 80;
+        public const short PetScale = 80;
 
-        public const short AURA_SCALE = 90;
+        public const short AuraScale = 90;
 
-        public const short PETMOUNT_SCALE = 100;
+        public const short PetmountScale = 100;
+
+        public const short DefaultLookScale = 100;
 
         public short BonesId
         {
@@ -45,7 +47,18 @@ namespace Giny.World.Managers.Entities.Look
         {
             get
             {
-                return (short)(Scales.Count == 0 ? 100 : Scales[0]);
+                return (short)(Scales.Count == 0 ? DefaultLookScale : Scales[0]);
+            }
+            set
+            {
+                if (Scales.Count == 0)
+                {
+                    Scales.Add(value);
+                }
+                else
+                {
+                    Scales[0] = value;
+                }
             }
         }
         public List<ServerSubentityLook> SubEntities
@@ -75,7 +88,7 @@ namespace Giny.World.Managers.Entities.Look
             this.Scales = new List<short>();
             this.SubEntities = new List<ServerSubentityLook>();
         }
- 
+
         public ServerEntityLook(short bonesId, IEnumerable<short> skins, IEnumerable<int> colors, IEnumerable<short> scales, IEnumerable<ServerSubentityLook> subEntity)
         {
             this.BonesId = bonesId;
@@ -153,7 +166,7 @@ namespace Giny.World.Managers.Entities.Look
         public void AddAura(short bonesId)
         {
             this.SubEntities.Add(new ServerSubentityLook(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_BASE_FOREGROUND,
-                0, EntityLookManager.Instance.CreateLookFromBones(bonesId, AURA_SCALE)));
+                0, EntityLookManager.Instance.CreateLookFromBones(bonesId, AuraScale)));
         }
         public bool RemoveAura()
         {
@@ -170,6 +183,11 @@ namespace Giny.World.Managers.Entities.Look
         private static string Serialize(ServerEntityLook look)
         {
             return EntityLookManager.Instance.ConvertToString(look);
+        }
+
+        public void Rescale(double lookScale)
+        {
+            this.Scale = (short)(this.Scale * lookScale);
         }
     }
 }

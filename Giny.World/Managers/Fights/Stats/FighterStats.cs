@@ -406,7 +406,7 @@ namespace Giny.World.Managers.Fights.Stats
                     actionPoints = ActionPoints.TotalInContext(),
                     airElementReduction = AirReduction.TotalInContext(),
                     airElementResistPercent = AirResistPercent.TotalInContext(),
-                    baseMaxLifePoints = MaxLifePoints,
+                    baseMaxLifePoints = BaseMaxLife,
                     criticalDamageFixedResist = CriticalDamageReduction.TotalInContext(),
                     dodgePALostProbability = DodgePAProbability.TotalInContext(),
                     dodgePMLostProbability = DodgePMProbability.TotalInContext(),

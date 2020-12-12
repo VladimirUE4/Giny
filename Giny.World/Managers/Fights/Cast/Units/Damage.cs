@@ -57,7 +57,11 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             set;
         }
-
+        public bool IgnoreResistances
+        {
+            get;
+            set;
+        }
         public Damage(Fighter source, Fighter target, EffectSchoolEnum school, short min, short max, SpellEffectHandler effectHandler = null)
         {
             this.Source = source;
@@ -67,6 +71,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
             this.EffectSchool = school;
             this.EffectHandler = effectHandler;
             this.IgnoreBoost = false;
+            this.IgnoreResistances = false;
         }
         public void Compute()
         {
@@ -81,7 +86,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             if (EffectSchool == EffectSchoolEnum.Fix)
             {
-                Computed = new Jet(BaseMinDamages, BaseMaxDamages).Generate(Source.HasRandDownModifier());
+                Computed = new Jet(BaseMinDamages, BaseMaxDamages).Generate(Source.HasRandDownModifier(), Source.HasRandUpModifier());
                 return;
             }
             if (EffectSchool == EffectSchoolEnum.Pushback)
@@ -108,9 +113,11 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             ComputeShapeEfficiencyModifiers(jet);
 
-            ComputeDamageResistances(jet);
+            if (!IgnoreResistances)
+                ComputeDamageResistances(jet);
 
-            ComputeCriticalDamageReduction(jet);
+            if (!IgnoreResistances)
+                ComputeCriticalDamageReduction(jet);
 
             if (!IgnoreBoost)
                 ComputeDamageDone(jet);
@@ -122,7 +129,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
 
-            Computed = jet.Generate(Source.HasRandDownModifier());
+            Computed = jet.Generate(Source.HasRandDownModifier(),Source.HasRandUpModifier());
 
             this.EffectHandler.CastHandler.Cast.DamagesDealt += Computed.Value;
         }
@@ -314,7 +321,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             double result = (double)(jet * (100d + elementDelta + damageBonusPercent + weaponDamageBonus + spellDamageBonus) / 100.0d + (allDamageBonus + elementDamageBonus));
 
-            return (short)(result < jet ? jet : result);
+            return (short)result;                        // (short)(result < jet ? jet : result);
         }
 
         public Fighter GetSource()

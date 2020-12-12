@@ -35,6 +35,8 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public abstract class Fighter : ITriggerToken
     {
+        public const double DefaultLookScale = 1d;
+
         public event Action<Fighter> Moved;
 
         public int Id
@@ -191,6 +193,12 @@ namespace Giny.World.Managers.Fights.Fighters
             set;
         }
 
+        private double LookScale
+        {
+            get;
+            set;
+        }
+
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
             this.Team = team;
@@ -201,6 +209,7 @@ namespace Giny.World.Managers.Fights.Fighters
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
             this.m_spellsCosts = new Dictionary<short, short>();
+            this.LookScale = DefaultLookScale;
         }
 
         public bool IsCarried()
@@ -212,6 +221,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             this.TurnStartCell = this.Cell;
             this.MovementHistory = new MovementHistory(this);
+            this.Look.Rescale(LookScale);
             this.BaseLook = Look.Clone();
         }
         public void FindPlacementDirection()
@@ -472,7 +482,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public short GetSpellBoost(short spellId)
         {
-            return (short)Buffs.OfType<SpellBoostBuff>().Where(x => x.BoostedSpellId == spellId).Sum(x => x.Delta); // Sum, or we pick first one ?
+            return (short)GetBuffs<SpellBoostBuff>().Where(x => x.BoostedSpellId == spellId).Sum(x => x.Delta); // Sum, or we pick first one ?
         }
         public void DecrementAllCastedBuffsDuration()
         {
@@ -518,7 +528,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool HasBuff<T>() where T : Buff
         {
-            return Buffs.OfType<T>().Count() > 0;
+            return GetBuffs<T>().Count() > 0;
         }
 
         public abstract void OnTurnBegin();
@@ -527,7 +537,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             foreach (var fighter in Fight.GetFighters<Fighter>())
             {
-                foreach (var buff in fighter.Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
+                foreach (var buff in fighter.GetBuffs<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
                 {
                     if (buff.Cast.Source == this && buff.DecrementDelay())
                     {
@@ -546,7 +556,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public void RemoveBuffs<T>() where T : Buff
         {
-            foreach (var buff in Buffs.OfType<T>().ToArray())
+            foreach (var buff in GetBuffs<T>().ToArray())
             {
                 RemoveAndDispellBuff(buff);
             }
@@ -604,7 +614,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
-            foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.TriggerType == type && !x.HasDelay()).ToArray())
+            foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.TriggerType == type && !x.HasDelay()).ToArray())
             {
                 if (buff.Apply(token))
                 {
@@ -634,6 +644,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 sourceId = source.Id,
                 targetId = Id,
             });
+        }
+        public IEnumerable<T> GetBuffs<T>() where T : Buff
+        {
+            return Buffs.OfType<T>();
         }
         public IEnumerable<Buff> GetBuffs()
         {
@@ -833,7 +847,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var glyph in effectiveGlyphs)
             {
-                bool res = GetBuffs().OfType<InvisibilityBuff>().Any(x => x.Cast.MarkSource == glyph);
+                bool res = GetBuffs<InvisibilityBuff>().Any(x => x.Cast.MarkSource == glyph);
 
                 if (res)
                 {
@@ -845,12 +859,12 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void Reveals()
         {
-            if (!IsInvisible() )
+            if (!IsInvisible())
             {
                 return;
             }
 
-            foreach (var buff in Buffs.OfType<InvisibilityBuff>().ToArray())
+            foreach (var buff in GetBuffs<InvisibilityBuff>().ToArray())
             {
                 RemoveAndDispellBuff(buff);
             }
@@ -1034,7 +1048,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public bool HasState(int stateId)
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.Id == stateId);
+            return GetBuffs<StateBuff>().Any(x => x.Record.Id == stateId);
         }
 
         public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
@@ -1152,6 +1166,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public void ChangeLook(ServerEntityLook look, Fighter source)
         {
             this.Look = look;
+            this.Look.Rescale(LookScale);
 
             this.Fight.Send(new GameActionFightChangeLookMessage()
             {
@@ -1160,6 +1175,11 @@ namespace Giny.World.Managers.Fights.Fighters
                 sourceId = source.Id,
                 targetId = Id,
             });
+        }
+        public void RescaleLook(Fighter source, double factor)
+        {
+            this.LookScale += factor;
+            ChangeLook(Look, source);
         }
         public void OnMove(Fighter source, bool isMapMovement)
         {
@@ -1207,7 +1227,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool HasRandDownModifier()
         {
-            return Buffs.Any(x => x is RandDownBuff);
+            return Buffs.OfType<RandModifierBuff>().Any(x => !x.Up);
+        }
+        public bool HasRandUpModifier()
+        {
+            return Buffs.OfType<RandModifierBuff>().Any(x => x.Up);
         }
         public short GetApCost(SpellLevelRecord level)
         {
@@ -1431,46 +1455,50 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public void DispelState(Fighter source, int stateId)
         {
-            foreach (var buff in Buffs.OfType<StateBuff>().Where(x => x.Record.Id == stateId).ToArray())
+            foreach (var buff in GetBuffs<StateBuff>().Where(x => x.Record.Id == stateId).ToArray())
             {
                 RemoveAndDispellBuff(buff);
             }
         }
         public bool CantTackle()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantTackle);
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantTackle);
         }
         public bool CantBeTackled()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantBeTackled);
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantBeTackled);
+        }
+        public bool CantDealDamages()
+        {
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantDealDamage);
         }
         public bool IsInvulnerableMelee()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.InvulnerableMelee);
+            return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableMelee);
         }
         public bool IsInvulnerableRange()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.InvulnerableRange);
+            return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableRange);
         }
         public bool IsInvulnerable()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.Invulnerable);
+            return GetBuffs<StateBuff>().Any(x => x.Record.Invulnerable);
         }
         public bool CantBeMoved()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantBeMoved);
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantBeMoved);
         }
         public bool CantSwitchPosition()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantSwitchPosition);
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantSwitchPosition);
         }
         public bool CantBePushed()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.CantBePushed);
+            return GetBuffs<StateBuff>().Any(x => x.Record.CantBePushed);
         }
         public bool IsIncurable()
         {
-            return Buffs.OfType<StateBuff>().Any(x => x.Record.Incurable);
+            return GetBuffs<StateBuff>().Any(x => x.Record.Incurable);
         }
         public void Heal(Healing healing)
         {
@@ -1502,7 +1530,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             short num = (short)amount;
 
-            foreach (var buff in Buffs.OfType<ShieldBuff>().ToArray())
+            foreach (var buff in GetBuffs<ShieldBuff>().ToArray())
             {
                 buff.Delta -= num;
 
@@ -1532,7 +1560,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("shield loss not working.")]
         public DamageResult InflictDamage(Damage damage)
         {
-            if (IsInvulnerable())
+            if (IsInvulnerable() || damage.Source.CantDealDamages())
             {
                 return DamageResult.Zero();
             }
@@ -1549,18 +1577,21 @@ namespace Giny.World.Managers.Fights.Fighters
 
             int delta = damage.Computed.Value;
 
-            if (delta <= 0)
+            if (delta <= 0 || (!Alive))
             {
                 return DamageResult.Zero();
             }
+
+            this.LastAttacker = damage.Source;
+
+            TriggerBuffs(damage);
 
             delta = damage.Computed.Value;
 
-            if (!Alive)
+            if (delta <= 0 || (!Alive))
             {
                 return DamageResult.Zero();
             }
-
 
             int lifeLoss = 0;
 
@@ -1664,58 +1695,61 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
 
-            this.LastAttacker = damage.Source;
+            TriggerBuffs(BuffTriggerType.AfterDamagd, damage);
 
-            if (this.Alive)
-            {
-                TriggerBuffs(BuffTriggerType.OnDamaged, damage);
-
-                switch (damage.EffectSchool)
-                {
-                    case EffectSchoolEnum.Pushback:
-                        TriggerBuffs(BuffTriggerType.OnDamagedByPush, damage);
-                        break;
-                    case EffectSchoolEnum.Neutral:
-                        TriggerBuffs(BuffTriggerType.OnDamagedNeutral, damage);
-                        break;
-                    case EffectSchoolEnum.Earth:
-                        TriggerBuffs(BuffTriggerType.OnDamagedEarth, damage);
-                        break;
-                    case EffectSchoolEnum.Water:
-                        TriggerBuffs(BuffTriggerType.OnDamagedWater, damage);
-                        break;
-                    case EffectSchoolEnum.Air:
-                        TriggerBuffs(BuffTriggerType.OnDamagedAir, damage);
-                        break;
-                    case EffectSchoolEnum.Fire:
-                        TriggerBuffs(BuffTriggerType.OnDamagedFire, damage);
-                        break;
-                }
-                if (damage.Source.IsMeleeWith(this))
-                {
-                    TriggerBuffs(BuffTriggerType.OnDamagedInCloseRange, damage);
-                }
-                else
-                {
-                    TriggerBuffs(BuffTriggerType.OnDamagedInLongRange, damage);
-                }
-
-                if (damage.IsSpellDamage())
-                {
-                    TriggerBuffs(BuffTriggerType.OnDamagedBySpell, damage);
-                }
-
-                if (damage.Source.IsFriendlyWith(this))
-                {
-                    TriggerBuffs(BuffTriggerType.OnDamagedByAlly, damage);
-                }
-                else
-                {
-                    TriggerBuffs(BuffTriggerType.OnDamagedByEnemy, damage);
-                }
-            }
 
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
+        }
+
+
+
+        private void TriggerBuffs(Damage damage)
+        {
+            TriggerBuffs(BuffTriggerType.OnDamaged, damage);
+
+            switch (damage.EffectSchool)
+            {
+                case EffectSchoolEnum.Pushback:
+                    TriggerBuffs(BuffTriggerType.OnDamagedByPush, damage);
+                    break;
+                case EffectSchoolEnum.Neutral:
+                    TriggerBuffs(BuffTriggerType.OnDamagedNeutral, damage);
+                    break;
+                case EffectSchoolEnum.Earth:
+                    TriggerBuffs(BuffTriggerType.OnDamagedEarth, damage);
+                    break;
+                case EffectSchoolEnum.Water:
+                    TriggerBuffs(BuffTriggerType.OnDamagedWater, damage);
+                    break;
+                case EffectSchoolEnum.Air:
+                    TriggerBuffs(BuffTriggerType.OnDamagedAir, damage);
+                    break;
+                case EffectSchoolEnum.Fire:
+                    TriggerBuffs(BuffTriggerType.OnDamagedFire, damage);
+                    break;
+            }
+            if (damage.Source.IsMeleeWith(this))
+            {
+                TriggerBuffs(BuffTriggerType.OnDamagedInCloseRange, damage);
+            }
+            else
+            {
+                TriggerBuffs(BuffTriggerType.OnDamagedInLongRange, damage);
+            }
+
+            if (damage.IsSpellDamage())
+            {
+                TriggerBuffs(BuffTriggerType.OnDamagedBySpell, damage);
+            }
+
+            if (damage.Source.IsFriendlyWith(this))
+            {
+                TriggerBuffs(BuffTriggerType.OnDamagedByAlly, damage);
+            }
+            else
+            {
+                TriggerBuffs(BuffTriggerType.OnDamagedByEnemy, damage);
+            }
         }
         private int CalculateErodedLife(int damages)
         {
@@ -1849,6 +1883,21 @@ namespace Giny.World.Managers.Fights.Fighters
 
             return rnd < prob;
         }
+        public int CalculateArmorValue(short reduction)
+        {
+            return (int)(reduction * (100 + 5 * Level) / 100d);
+        }
+
+        public void OnDamageReduced(Damage damage, int dmgReduction)
+        {
+            Fight.Send(new GameActionFightReduceDamagesMessage()
+            {
+                actionId = 105,
+                amount = dmgReduction,
+                sourceId = damage.Source.Id,
+                targetId = damage.Target.Id,
+            });
+        }
         public virtual bool IsSummoned()
         {
             return false;
@@ -1865,9 +1914,9 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return null;
         }
-        protected virtual bool MustSkipTurn()
+        public virtual bool MustSkipTurn()
         {
-            return false;
+            return (!Alive) || Buffs.OfType<SkipTurnBuff>().Any();
         }
         public override string ToString()
         {

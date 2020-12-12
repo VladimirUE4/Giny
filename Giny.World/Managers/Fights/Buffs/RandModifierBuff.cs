@@ -10,20 +10,26 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Buffs
 {
-    public class RandDownBuff : Buff
+    public class RandModifierBuff : Buff
     {
-        public RandDownBuff(int id, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public bool Up
         {
+            get;
+            private set;
+        }
+        public RandModifierBuff(int id, bool up, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        {
+            this.Up = up;
         }
 
         public override void Apply()
         {
-          
+
         }
 
         public override void Dispell()
         {
-            
+
         }
 
         public override short GetDelta()

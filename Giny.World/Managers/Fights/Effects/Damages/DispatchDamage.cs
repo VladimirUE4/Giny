@@ -38,7 +38,7 @@ namespace Giny.World.Managers.Fights.Effects.Damages
             }
             else
             {
-                Source.Fight.Warn("Unknown trigger token Dispatch Damages");
+                OnTokenMissing<Damage>();
             }
         }
     }

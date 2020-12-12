@@ -271,6 +271,10 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
+            foreach (var fighter in client.Character.Fighter.Fight.GetFighters<Fighter>())
+            {
+                fighter.ShowFighter();
+            }
             var ids = new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
             var cells = ids.Select(x => client.Character.Map.GetCell(x));

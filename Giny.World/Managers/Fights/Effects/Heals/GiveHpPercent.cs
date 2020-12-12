@@ -1,4 +1,4 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
@@ -12,22 +12,20 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Heals
 {
-    [WIP("heal zone efficiency (éni)")]
-    [SpellEffectHandler(EffectsEnum.Effect_HealHP_143)]
-    [SpellEffectHandler(EffectsEnum.Effect_HealHP_81)]
-    [SpellEffectHandler(EffectsEnum.Effect_HealHP_108)]
-    public class HealHp : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_GiveHPPercent)]
+    public class GiveHpPercent : SpellEffectHandler
     {
-        public HealHp(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public GiveHpPercent(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            short jet = Effect.GetDelta();
+            short delta = (short)(Source.Stats.LifePoints * (Effect.Min / 100d));
 
-            short delta = (short)(jet * (double)(100d + Source.Stats.Intelligence.TotalInContext()) / 100d + Source.Stats.HealBonus.TotalInContext());
+            Damage damage = new Damage(Source, Source, EffectSchoolEnum.Fix, delta, delta, this);
+            Source.InflictDamage(damage);
 
             foreach (var target in targets)
             {

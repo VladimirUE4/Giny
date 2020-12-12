@@ -42,7 +42,7 @@ namespace Giny.World.Managers.Fights.Cast
                 throw new Exception("Cannot compute damages. Min > Max.");
             }
         }
-        public short Generate(bool hasRandDownModifier)
+        public short Generate(bool hasRandDownModifier, bool hasRandUpModifier)
         {
             if (Min == Max)
             {
@@ -54,6 +54,11 @@ namespace Giny.World.Managers.Fights.Cast
                 {
                     return (short)Min;
                 }
+                if (hasRandUpModifier)
+                {
+                    return (short)Max;
+                }
+
                 return (short)new AsyncRandom().Next((short)Min, (short)Max + 1);
             }
         }

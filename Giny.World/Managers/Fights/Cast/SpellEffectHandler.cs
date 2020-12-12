@@ -259,7 +259,10 @@ namespace Giny.World.Managers.Fights.Cast
             target.AddBuff(buff);
             return buff;
         }
-
+        public void OnTokenMissing<T>() where T : ITriggerToken
+        {
+            Source.Fight.Warn("Unable to compute effect (" + Effect.EffectEnum + "). Token is missing (" + typeof(T).Name + ")");
+        }
         public override string ToString()
         {
             return Effect.EffectEnum + " Z:" + Effect.RawZone + " TM:" + Effect.TargetMask + " TRIG:" + Effect.Triggers;

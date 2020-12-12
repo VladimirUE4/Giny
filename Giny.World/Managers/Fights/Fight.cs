@@ -406,8 +406,7 @@ namespace Giny.World.Managers.Fights
                 UpdateRound();
             }
 
-            this.Send(new GameFightTurnStartMessage(this.FighterPlaying.Id, Fight.TurnTime * 10));
-
+            // Game Fight Turn Start
             FighterPlaying.TurnStartCell = FighterPlaying.Cell;
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
@@ -435,11 +434,13 @@ namespace Giny.World.Managers.Fights
             {
                 return;
             }
-            if (!FighterPlaying.Alive)
+            if (FighterPlaying.MustSkipTurn())
             {
-                PassTurn();
+                StopTurn();
                 return;
             }
+
+            this.Send(new GameFightTurnStartMessage(this.FighterPlaying.Id, Fight.TurnTime * 10));
 
             this.m_turnTimer = new ActionTimer((int)Fight.TurnTime * 1000, StopTurn, false);
             this.m_turnTimer.Start();

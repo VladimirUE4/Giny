@@ -47,7 +47,7 @@ namespace Giny.World.Managers.Fights.Effects.Damages
                 { EffectSchoolEnum.Earth,Source.Stats.Strength },
                 { EffectSchoolEnum.Fire, Source.Stats.Intelligence },
                 { EffectSchoolEnum.Air,  Source.Stats.Agility },
-                { EffectSchoolEnum.Water,Source.Stats.Intelligence },
+                { EffectSchoolEnum.Water,Source.Stats.Chance },
             };
 
             EffectSchoolEnum result = values.OrderByDescending(x => x.Value.TotalInContext()).First().Key; // context of context free ?

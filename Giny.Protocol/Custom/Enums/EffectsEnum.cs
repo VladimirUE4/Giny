@@ -691,7 +691,7 @@
         /// <summary>
         /// Dommages réduits de #1{~1~2 à }#2
         /// </summary>
-        Effect_AddArmorDamageReduction = 265,
+        Effect_ArmorDamageReduction = 265,
         /// <summary>
         /// Vole #1{~1~2 à -}#2 Chance
         /// </summary>
@@ -739,7 +739,7 @@
         /// <summary>
         /// Augmente la PO du sort #1 de #3
         /// </summary>
-        Effect_281 = 281,
+        Effect_IncreaseSpellRange = 281,
         /// <summary>
         /// Rend la portée du sort #1 modifiable
         /// </summary>

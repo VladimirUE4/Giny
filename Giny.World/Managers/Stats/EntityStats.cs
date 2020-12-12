@@ -39,6 +39,13 @@ namespace Giny.World.Managers.Stats
                 return (LifePoints / (double)MaxLifePoints) * 100;
             }
         }
+        public int MissingLife
+        {
+            get
+            {
+                return MaxLifePoints - LifePoints;
+            }
+        }
         [ProtoMember(2)]
         public short MaxEnergyPoints
         {

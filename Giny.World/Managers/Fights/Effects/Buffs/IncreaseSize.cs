@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Debuffs
+namespace Giny.World.Managers.Fights.Effects.Buffs
 {
-    [SpellEffectHandler(EffectsEnum.Effect_RandDownModifier)]
-    public class RandDownModifier : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_IncreaseSize)]
+    public class IncreaseSize : SpellEffectHandler
     {
-        public RandDownModifier(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public IncreaseSize(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
 
@@ -23,10 +23,9 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
             foreach (var target in targets)
             {
                 int buffId = target.BuffIdProvider.Pop();
-                RandDownBuff buff = new RandDownBuff(buffId, CastHandler.Cast,
+                RescaleSkinBuff buff = new RescaleSkinBuff(buffId, 1 + (Effect.Min / 100d), CastHandler.Cast,
                     target, Effect, FightDispellableEnum.DISPELLABLE);
                 target.AddBuff(buff);
-
             }
         }
     }

@@ -27,6 +27,10 @@ namespace Giny.World.Managers.Fights.Effects.Heals
             {
                 Source.Heal(new Healing(Source, Source, (short)(token.Computed * (Effect.Min / 100d))));
             }
+            else
+            {
+                OnTokenMissing<Damage>();
+            }
 
         }
     }

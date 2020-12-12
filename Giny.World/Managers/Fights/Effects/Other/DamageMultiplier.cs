@@ -26,14 +26,21 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         }
 
-        [WIP("Bond, le trigger s'applique après damages infligé, correct ? ")]
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            var ratio = Effect.Min / 100d;
             Damage damages = GetTriggerToken<Damage>();
-            damages.Computed =  (short)(damages.Computed.Value * (ratio - 1));
-            damages.Target.InflictDamage(damages);
+
+            if (damages != null)
+            {
+                double ratio = Effect.Min / 100d;
+                short computed = (short)(damages.Computed.Value * (ratio));
+                damages.Computed = computed;
+            }
+            else
+            {
+                OnTokenMissing<Damage>();
+            }
+
         }
     }
 }
-    

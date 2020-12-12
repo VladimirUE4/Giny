@@ -410,7 +410,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.EnterDisconnectedState();
 
-            if (!Fight.CheckFightEnd() && IsFighterTurn && this.MustSkipTurn())
+            if (!Fight.CheckFightEnd() && IsFighterTurn)
                 Fight.StopTurn();
 
             this.Team.AddLeaver(this);
@@ -424,7 +424,7 @@ namespace Giny.World.Managers.Fights.Fighters
             LeftRound = Fight.RoundNumber;
         }
 
-        protected override bool MustSkipTurn()
+        public override bool MustSkipTurn()
         {
             return base.MustSkipTurn() || Disconnected;
         }
