@@ -35,8 +35,6 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public abstract class Fighter : ITriggerToken
     {
-        public const double DefaultLookScale = 1d;
-
         public event Action<Fighter> Moved;
 
         public int Id
@@ -48,8 +46,6 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             get;
         }
-
-
         public bool Alive
         {
             get;
@@ -192,13 +188,6 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             set;
         }
-
-        private double LookScale
-        {
-            get;
-            set;
-        }
-
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
             this.Team = team;
@@ -209,7 +198,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
             this.m_spellsCosts = new Dictionary<short, short>();
-            this.LookScale = DefaultLookScale;
         }
 
         public bool IsCarried()
@@ -221,7 +209,6 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             this.TurnStartCell = this.Cell;
             this.MovementHistory = new MovementHistory(this);
-            this.Look.Rescale(LookScale);
             this.BaseLook = Look.Clone();
         }
         public void FindPlacementDirection()
@@ -1163,23 +1150,33 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.InflictDamage(new Damage(source, this, EffectSchoolEnum.Pushback, delta, delta, null));
         }
-        public void ChangeLook(ServerEntityLook look, Fighter source)
+        public void UpdateLook(Fighter source)
         {
-            this.Look = look;
-            this.Look.Rescale(LookScale);
+            ServerEntityLook finalLook = null;
+
+            LookBuff lookBuff = GetBuffs<LookBuff>().LastOrDefault();
+
+            double rescaleValue = GetBuffs<RescaleSkinBuff>().Sum(x => x.Delta);
+
+            if (lookBuff != null)
+            {
+                finalLook = lookBuff.Look;
+            }
+            else
+            {
+                finalLook = BaseLook.Clone();
+            }
+
+            finalLook.Rescale(1 + rescaleValue);
+            this.Look = finalLook;
 
             this.Fight.Send(new GameActionFightChangeLookMessage()
             {
                 actionId = (short)ActionsEnum.ACTION_CHARACTER_CHANGE_LOOK,
-                entityLook = look.ToEntityLook(),
+                entityLook = Look.ToEntityLook(),
                 sourceId = source.Id,
                 targetId = Id,
             });
-        }
-        public void RescaleLook(Fighter source, double factor)
-        {
-            this.LookScale += factor;
-            ChangeLook(Look, source);
         }
         public void OnMove(Fighter source, bool isMapMovement)
         {

@@ -26,22 +26,12 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override void Apply()
         {
-            base.Target.ChangeLook(Look.Clone(), Cast.Source);
+            base.Target.UpdateLook(Cast.Source);
         }
 
         public override void Dispell()
         {
-            LookBuff lookBuff = this.Target.GetBuffs().OfType<LookBuff>().LastOrDefault(x => x != this);
-
-            if (lookBuff != null)
-            {
-                lookBuff.Apply();
-            }
-            else
-            {
-                Target.ChangeLook(Target.BaseLook.Clone(), Cast.Source);
-
-            }
+            base.Target.UpdateLook(Cast.Source);
         }
 
         public override short GetDelta()

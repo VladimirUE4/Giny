@@ -24,12 +24,12 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override void Apply()
         {
-            Target.RescaleLook(this.Cast.Source, Delta);
+            Target.UpdateLook(Cast.Source);
         }
 
         public override void Dispell()
         {
-            Target.RescaleLook(this.Cast.Source, -Delta);
+            Target.UpdateLook(Cast.Source);
         }
 
         public override short GetDelta()
