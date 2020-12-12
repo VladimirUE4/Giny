@@ -13,9 +13,9 @@ namespace Giny.Core.DesignPattern
         public static BindingFlags BindingFlags = BindingFlags.NonPublic | BindingFlags.Public
           | BindingFlags.Default | BindingFlags.GetField | BindingFlags.SetField | BindingFlags.Instance | BindingFlags.Static;
 
-        public const string TypeLog = "Class: ({1}.cs) Type : ({0})  State: ({2}) Comment: ({3})";
-        public const string MethodLog = "Class: ({1}.cs) Method: {0}() State: ({2}) Comment: ({3})";
-        public const string FieldLog = "Class: ({1}.cs) Field: ({0}) State: ({2}) Comment: ({3})";
+        public const string TypeLog = "Class: ({1}.cs) Type : ({0})  Comment: ({2})";
+        public const string MethodLog = "Class: ({1}.cs) Method: {0}()  Comment: ({2})";
+        public const string FieldLog = "Class: ({1}.cs) Field: ({0})  Comment: ({2})";
 
         public static void Analyse(Assembly assembly)
         {
@@ -27,7 +27,7 @@ namespace Giny.Core.DesignPattern
 
                 if (attribute != null)
                 {
-                    Print(TypeLog, type.Name, type.Name, attribute.State, attribute.Comment);
+                    Print(TypeLog, type.Name, type.Name, attribute.Comment);
                 }
 
                 foreach (var method in type.GetMethods(BindingFlags).Where(x => x.DeclaringType == type))
@@ -36,7 +36,7 @@ namespace Giny.Core.DesignPattern
 
                     if (attribute != null)
                     {
-                        Print(MethodLog, method.Name, type.Name, attribute.State, attribute.Comment);
+                        Print(MethodLog, method.Name, type.Name, attribute.Comment);
                     }
                 }
                 foreach (var field in type.GetFields(BindingFlags))
@@ -45,7 +45,7 @@ namespace Giny.Core.DesignPattern
 
                     if (attribute != null)
                     {
-                        Print(FieldLog, field.Name, type.Name, attribute.State, attribute.Comment);
+                        Print(FieldLog, field.Name, type.Name, attribute.Comment);
                     }
                 }
                 foreach (var property in type.GetProperties(BindingFlags))
@@ -54,7 +54,7 @@ namespace Giny.Core.DesignPattern
 
                     if (attribute != null)
                     {
-                        Print(FieldLog, property.Name, type.Name, attribute.State, attribute.Comment);
+                        Print(FieldLog, property.Name, type.Name, attribute.Comment);
                     }
                 }
             }
@@ -62,62 +62,23 @@ namespace Giny.Core.DesignPattern
             Logger.Write("Analysis executed in " + stopwatch.ElapsedMilliseconds + "ms", MessageState.INFO);
 
         }
-        private static void Print(string formatter, string name, string type, WIPState state, string comment)
+        private static void Print(string formatter, string name, string type, string comment)
         {
-            string result = string.Format(formatter, name, type, state, comment);
-
-            switch (state)
-            {
-                case WIPState.Ok:
-                    Logger.Write(result, MessageState.SUCCES);
-                    break;
-                case WIPState.Architecture:
-                    Logger.Write(result, MessageState.WARNING);
-                    break;
-                case WIPState.BadCode:
-                    Logger.Write(result, MessageState.ERROR);
-                    break;
-                case WIPState.Todo:
-                    Logger.WriteColor1(result);
-                    break;
-                case WIPState.None:
-                    Logger.Write(result);
-                    break;
-                default:
-                    throw new Exception("Unhandled WIP State : " + state);
-            }
+            string result = string.Format(formatter, name, type, comment);
+            Logger.Write(result);
         }
     }
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
     public class WIPAttribute : Attribute
     {
-        public WIPState State
-        {
-            get;
-            private set;
-        }
         public string Comment
         {
             get;
             private set;
         }
-        public WIPAttribute(WIPState state = WIPState.Ok, string comment = null)
-        {
-            this.State = state;
-            this.Comment = comment;
-        }
-        public WIPAttribute(string comment)
+        public WIPAttribute(string comment = null)
         {
             this.Comment = comment;
-            this.State = WIPState.None;
         }
-    }
-    public enum WIPState
-    {
-        Ok,
-        BadCode,
-        Todo,
-        Architecture,
-        None,
     }
 }
