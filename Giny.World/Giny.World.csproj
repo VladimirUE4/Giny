@@ -100,6 +100,7 @@
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerCasterHpEroded.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerHpEroded.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerHpLost.cs" />
+    <Compile Include="Managers\Fights\Effects\Damages\ReflectDamage.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercent.cs" />

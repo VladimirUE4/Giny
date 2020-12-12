@@ -137,13 +137,13 @@ namespace Giny.World.Managers.Items
         {
             character.Record.Stats.TackleBlock.Objects -= (short)delta;
         }
-        [ItemEffect(EffectsEnum.Effect_AddDodge)]
-        public static void AddDodge(Character character, int delta)
+        [ItemEffect(EffectsEnum.Effect_AddEvade)]
+        public static void AddEvade(Character character, int delta)
         {
             character.Record.Stats.TackleEvade.Objects += (short)delta;
         }
-        [ItemEffect(EffectsEnum.Effect_SubDodge)]
-        public static void SubDodge(Character character, int delta)
+        [ItemEffect(EffectsEnum.Effect_SubEvade)]
+        public static void SubEvade(Character character, int delta)
         {
             character.Record.Stats.TackleEvade.Objects -= (short)delta;
         }

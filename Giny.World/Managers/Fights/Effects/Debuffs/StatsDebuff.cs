@@ -33,7 +33,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
     [SpellEffectHandler(EffectsEnum.Effect_SubNeutralResistPercent)]
     [SpellEffectHandler(EffectsEnum.Effect_SubAirResistPercent)]
     [SpellEffectHandler(EffectsEnum.Effect_SubWaterResistPercent)]
-    [SpellEffectHandler(EffectsEnum.Effect_SubDodge)]
+    [SpellEffectHandler(EffectsEnum.Effect_SubEvade)]
     [SpellEffectHandler(EffectsEnum.Effect_SubAPAttack)]
     [SpellEffectHandler(EffectsEnum.Effect_SubMPAttack)]
     [SpellEffectHandler(EffectsEnum.Effect_SubEarthElementReduction)]
@@ -138,7 +138,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                 case EffectsEnum.Effect_SubWaterResistPercent:
                     return target.Stats.WaterResistPercent;
 
-                case EffectsEnum.Effect_SubDodge:
+                case EffectsEnum.Effect_SubEvade:
                     return target.Stats.TackleEvade;
 
                 case EffectsEnum.Effect_SubAPAttack:

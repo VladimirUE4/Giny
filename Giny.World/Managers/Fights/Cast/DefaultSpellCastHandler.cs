@@ -1,4 +1,5 @@
-﻿using Giny.Core.Time;
+﻿using Giny.Core.DesignPattern;
+using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Effects;
@@ -18,7 +19,6 @@ namespace Giny.World.Managers.Fights.Cast
         {
 
         }
-
         public override bool Initialize()
         {
             var random = new AsyncRandom();
@@ -76,12 +76,8 @@ namespace Giny.World.Managers.Fights.Cast
 
                     if (handler != null)
                     {
-                        /*   if (MarkTrigger != null)
-                               handler.MarkTrigger = MarkTrigger; */
-
                         if (!handler.CanApply())
                         {
-                            // log ?
                             return false;
                         }
 

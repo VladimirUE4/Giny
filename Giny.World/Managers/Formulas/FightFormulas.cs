@@ -175,7 +175,7 @@ namespace Giny.World.Managers.Formulas
             return new FightXp((long)_xpSolo, (long)_xpGroup, groupMembers.Count() == 1);
         }
 
-        [WIP(WIPState.Todo, "idols & chall")]
+        [WIP("idols & chall")]
         public int AdjustDroppedKamas(IFightResult looter, int teamPP, long baseKamas)
         {
             var challengeBonus = 0;// looter.Fight.GetChallengesBonus();
@@ -188,7 +188,7 @@ namespace Giny.World.Managers.Formulas
 
             return kamas;
         }
-        [WIP(WIPState.Todo, "idols & chall")]
+        [WIP("idols & chall")]
         public double AdjustDropChance(IFightResult looter, MonsterDrop item, Monster dropper)
         {
             var challengeBonus = 0;// looter.Fight.GetChallengesBonus();

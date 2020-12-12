@@ -46,7 +46,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
     [SpellEffectHandler(EffectsEnum.Effect_AddEarthResistPercent)]
     [SpellEffectHandler(EffectsEnum.Effect_AddAirResistPercent)]
     [SpellEffectHandler(EffectsEnum.Effect_AddNeutralResistPercent)]
-    [SpellEffectHandler(EffectsEnum.Effect_AddDodge)]
+    [SpellEffectHandler(EffectsEnum.Effect_AddEvade)]
     [SpellEffectHandler(EffectsEnum.Effect_AddDamageBonusPercent)]
     [SpellEffectHandler(EffectsEnum.Effect_AddNeutralElementReduction)]
     [SpellEffectHandler(EffectsEnum.Effect_AddFireElementReduction)]
@@ -181,7 +181,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
                 case EffectsEnum.Effect_AddNeutralResistPercent:
                     return target.Stats.NeutralResistPercent;
 
-                case EffectsEnum.Effect_AddDodge:
+                case EffectsEnum.Effect_AddEvade:
                     return target.Stats.TackleEvade;
 
                 case EffectsEnum.Effect_AddDamageBonusPercent:

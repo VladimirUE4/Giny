@@ -102,7 +102,7 @@ namespace Giny.World.Managers.Fights.Cast
             this.AffectedFighters = GetAffectedFighters();
         }
 
-        [WIP(WIPState.BadCode, "Dont like this post condition to fill cells (no genercity)")]
+        [WIP("Dont like this post condition to fill cells (no genercity)")]
         private IEnumerable<Fighter> GetAffectedFighters()
         {
             List<CellRecord> affectedCells = GetAffectedCells();
@@ -128,6 +128,7 @@ namespace Giny.World.Managers.Fights.Cast
             return Zone.GetCells(TargetCell, Source.Fight.Map).ToList();
         }
 
+        [WIP("usage?")]
         public virtual bool CanApply()
         {
             return true;

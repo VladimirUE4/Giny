@@ -50,6 +50,30 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Look = Record.Look.Clone();
             base.Initialize();
         }
+        public override bool CanBePushed()
+        {
+            return base.CanBePushed() && Record.CanBePushed;
+        }
+        public override bool CanTackle()
+        {
+            return base.CanTackle() && Record.CanTackle; 
+        }
+        public override bool CanSwitchPosition()
+        {
+            return base.CanSwitchPosition() && Record.CanSwitchPosition;
+        }
+        public override bool CanBeCarried()
+        {
+            return Record.CanBeCarried; 
+        }
+        public override bool CanUsePortal()
+        {
+            return Record.CanUsePortal;
+        }
+        public override bool MustSkipTurn()
+        {
+            return base.MustSkipTurn() || !Record.CanPlay;
+        }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()

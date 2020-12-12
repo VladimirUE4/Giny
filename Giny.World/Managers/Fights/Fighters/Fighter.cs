@@ -265,7 +265,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         private List<CellRecord> ApplyTackle(List<CellRecord> path)
         {
-            if (CantBeTackled() || IsInvisible())
+            if (!CanBeTackled() || IsInvisible())
             {
                 return path;
             }
@@ -305,7 +305,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         private IEnumerable<Fighter> GetTacklers(CellRecord cell)
         {
-            return this.EnemyTeam.GetFighters<Fighter>().Where(x => x.IsMeleeWith(cell.Point) && !x.CantTackle());
+            return this.EnemyTeam.GetFighters<Fighter>().Where(x => x.IsMeleeWith(cell.Point) && x.CanTackle());
         }
         private Tackle GetTackle(IEnumerable<Fighter> tacklers)
         {
@@ -871,7 +871,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
-        [WIP(WIPState.Todo, "see stump")]
+        [WIP("see stump")]
         private void OnSpellCasting(SpellCastHandler handler)
         {
             if (IsInvisible() && !handler.Cast.Force)
@@ -1040,7 +1040,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
         {
-            if (CantBeMoved())
+            if (!CanBeMoved())
             {
                 return null;
             }
@@ -1168,6 +1168,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
 
             finalLook.Rescale(1 + rescaleValue);
+
             this.Look = finalLook;
 
             this.Fight.Send(new GameActionFightChangeLookMessage()
@@ -1271,11 +1272,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void Slide(Fighter source, DirectionsEnum direction, short delta, bool isPush)
         {
-            if (CantBeMoved())
+            if (!CanBeMoved())
             {
                 return;
             }
-            if (isPush && CantBePushed())
+            if (isPush && !CanBePushed())
             {
                 return;
             }
@@ -1355,7 +1356,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("teleport triggered")]
         public void SwitchPosition(Fighter source, bool register = true)
         {
-            if (CantSwitchPosition() || CantBeMoved())
+            if (!CanSwitchPosition() || !CanBeMoved())
                 return;
 
             CellRecord cell = this.Cell;
@@ -1457,43 +1458,51 @@ namespace Giny.World.Managers.Fights.Fighters
                 RemoveAndDispellBuff(buff);
             }
         }
-        public bool CantTackle()
+        public virtual bool CanUsePortal()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantTackle);
+            return true;
         }
-        public bool CantBeTackled()
+        public virtual bool CanBeCarried()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantBeTackled);
+            return true;
         }
-        public bool CantDealDamages()
+        public virtual bool CanTackle()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantDealDamage);
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantTackle);
         }
-        public bool IsInvulnerableMelee()
+        public virtual bool CanBeTackled()
+        {
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantBeTackled);
+        }
+        public virtual bool CanDealDamages()
+        {
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantDealDamage);
+        }
+        public virtual bool IsInvulnerableMelee()
         {
             return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableMelee);
         }
-        public bool IsInvulnerableRange()
+        public virtual bool IsInvulnerableRange()
         {
             return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableRange);
         }
-        public bool IsInvulnerable()
+        public virtual bool IsInvulnerable()
         {
             return GetBuffs<StateBuff>().Any(x => x.Record.Invulnerable);
         }
-        public bool CantBeMoved()
+        public virtual bool CanBeMoved()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantBeMoved);
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantBeMoved);
         }
-        public bool CantSwitchPosition()
+        public virtual bool CanSwitchPosition()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantSwitchPosition);
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantSwitchPosition);
         }
-        public bool CantBePushed()
+        public virtual bool CanBePushed()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.CantBePushed);
+            return GetBuffs<StateBuff>().All(x => !x.Record.CantBePushed);
         }
-        public bool IsIncurable()
+        public virtual bool IsIncurable()
         {
             return GetBuffs<StateBuff>().Any(x => x.Record.Incurable);
         }
@@ -1553,11 +1562,20 @@ namespace Giny.World.Managers.Fights.Fighters
                 sourceId = source.Id,
             });
         }
+        [WIP("only spell damage reflection are mutlplied by wisdom")] // verify this information
+        public virtual int CalculateDamageReflection(int damage)
+        {
+            var reflectDamages = Stats.Reflect.TotalInContext() * (1 + (Stats.Wisdom.TotalInContext() / 100));
 
+            if (reflectDamages > damage / 2d)
+                return (int)(damage / 2d);
+
+            return reflectDamages;
+        }
         [WIP("shield loss not working.")]
         public DamageResult InflictDamage(Damage damage)
         {
-            if (IsInvulnerable() || damage.Source.CantDealDamages())
+            if (IsInvulnerable() || !damage.Source.CanDealDamages())
             {
                 return DamageResult.Zero();
             }
@@ -1581,7 +1599,10 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.LastAttacker = damage.Source;
 
-            TriggerBuffs(damage);
+            if (!damage.CannotTrigger)
+            {
+                TriggerBuffs(damage);
+            }
 
             delta = damage.Computed.Value;
 
@@ -1692,13 +1713,34 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
 
-            TriggerBuffs(BuffTriggerType.AfterDamagd, damage);
+            if (!damage.CannotTrigger)
+            {
+                short reflected = (short)CalculateDamageReflection(damage.Computed.Value);
+
+                if (reflected > 0)
+                {
+                    damage.Source.InflictDamage(new Damage(this, damage.Source, EffectSchoolEnum.Fix,
+                        reflected, reflected));
+                    OnDamageReflected(damage.Source);
+                }
+
+                TriggerBuffs(BuffTriggerType.AfterDamagd, damage);
+            }
+
 
 
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
         }
 
-
+        public void OnDamageReflected(Fighter attacker)
+        {
+            this.Fight.Send(new GameActionFightReflectDamagesMessage()
+            {
+                actionId = (short)ActionsEnum.ACTION_CHARACTER_LIFE_LOST_REFLECTOR,
+                sourceId = this.Id,
+                targetId = attacker.Id,
+            });
+        }
 
         private void TriggerBuffs(Damage damage)
         {

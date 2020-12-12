@@ -34,7 +34,7 @@ namespace Giny.World
     {
         static void Main(string[] args)
         {
-            /*WIPManager.Analyse(Assembly.GetExecutingAssembly());
+          /*  WIPManager.Analyse(Assembly.GetExecutingAssembly());
             Console.Read(); */
             
             Logger.OnStartup();

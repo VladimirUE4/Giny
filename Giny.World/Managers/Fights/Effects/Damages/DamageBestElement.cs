@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Custom.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Buffs;
@@ -15,7 +16,9 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Damages
 {
-    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement2)] // Concentration de Chakra
+    [WIP("three effects... Same handler? weird")]
+    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement_2829)]
+    [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement_2828)] // Concentration de Chakra
     [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement)] // Intimidation
     public class DamageBestElement : SpellEffectHandler
     {

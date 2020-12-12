@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Chat
 {
-    [WIP(WIPState.Todo, "Muted")]
+    [WIP("Muted")]
     class ChatChannels
     {
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_PARTY)]

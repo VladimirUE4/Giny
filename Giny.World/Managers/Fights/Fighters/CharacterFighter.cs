@@ -403,7 +403,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        [WIP(WIPState.Todo, "end this. (care about sending message to disconnected clients)")]
+        [WIP("end this. (care about sending message to disconnected clients)")]
         public void OnDisconnected()
         {
             Character.Record.FightId = this.Fight.Id;
