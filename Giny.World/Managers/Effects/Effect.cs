@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Pokefus.Effects;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
@@ -6,6 +7,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Effects.Targets;
 using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Managers.Maps.Shapes;
 using ProtoBuf;
 using System;
@@ -95,7 +97,7 @@ namespace Giny.World.Managers.Effects
             set;
         }
         [ProtoMember(15)]
-        public string Triggers
+        public string RawTriggers
         {
             get;
             set;
@@ -113,19 +115,19 @@ namespace Giny.World.Managers.Effects
             set;
         }
 
-        private BuffTriggerType? m_triggersEnum;
+        private List<Trigger> m_triggers;
 
         [WIP]
-        public BuffTriggerType TriggersEnum
+        public List<Trigger> Triggers
         {
             get
             {
-                if (!m_triggersEnum.HasValue)
+                if (m_triggers == null)
                 {
-                    m_triggersEnum = ParseTriggers();
+                    m_triggers = ParseTriggers();
                 }
 
-                return ParseTriggers();// m_triggersEnum.Value;
+                return ParseTriggers(); // m_triggers
             }
         }
         public Effect()
@@ -197,48 +199,67 @@ namespace Giny.World.Managers.Effects
             return new Zone(zoneShape, (byte)zoneSize, (byte)zoneMinSize, direction, zoneEfficiency, zoneMaxEfficiency);
         }
         [WIP]
-        private BuffTriggerType ParseTriggers()
+        private Trigger ParseTrigger(string input)
         {
-            switch (Triggers.ToUpper())
+            string identifier = input.RemoveNumbers();
+
+            switch (identifier)
             {
                 case "TE":
-                    return BuffTriggerType.OnTurnEnd;
+                    return new Trigger(TriggerType.OnTurnEnd);
                 case "TB":
-                    return BuffTriggerType.OnTurnBegin;
+                    return new Trigger(TriggerType.OnTurnBegin);
                 case "D":
-                    return BuffTriggerType.OnDamaged;
+                    return new Trigger(TriggerType.OnDamaged);
                 case "DR":
-                    return BuffTriggerType.OnDamagedInLongRange;
+                    return new Trigger(TriggerType.OnDamagedInLongRange);
                 case "DS":
-                    return BuffTriggerType.OnDamagedBySpell;
+                    return new Trigger(TriggerType.OnDamagedBySpell);
                 case "DM":
-                    return BuffTriggerType.OnDamagedInCloseRange;
+                    return new Trigger(TriggerType.OnDamagedInCloseRange);
                 case "DA":
-                    return BuffTriggerType.OnDamagedAir;
+                    return new Trigger(TriggerType.OnDamagedAir);
                 case "DF":
-                    return BuffTriggerType.OnDamagedFire;
+                    return new Trigger(TriggerType.OnDamagedFire);
                 case "DN":
-                    return BuffTriggerType.OnDamagedNeutral;
+                    return new Trigger(TriggerType.OnDamagedNeutral);
                 case "DE":
-                    return BuffTriggerType.OnDamagedEarth;
+                    return new Trigger(TriggerType.OnDamagedEarth);
                 case "DW":
-                    return BuffTriggerType.OnDamagedWater;
+                    return new Trigger(TriggerType.OnDamagedWater);
                 case "PD":
-                    return BuffTriggerType.OnDamagedByPush;
+                    return new Trigger(TriggerType.OnDamagedByPush);
                 case "DBE":
-                    return BuffTriggerType.OnDamagedByEnemy;
+                    return new Trigger(TriggerType.OnDamagedByEnemy);
                 case "DBA":
-                    return BuffTriggerType.OnDamagedByAlly;
+                    return new Trigger(TriggerType.OnDamagedByAlly);
                 case "M":
-                    return BuffTriggerType.OnMoved;
+                    return new Trigger(TriggerType.OnMoved);
                 case "X":
-                    return BuffTriggerType.OnDeath;
-
+                    return new Trigger(TriggerType.OnDeath);
                 case "I":
-                    return BuffTriggerType.Instant;
+                    return new Trigger(TriggerType.Instant);
+                case "EON":
+                    return new Trigger(TriggerType.OnStateAdded, short.Parse(new string(input.Skip(3).ToArray())));
             }
 
-            return BuffTriggerType.Unknown;
+            return new Trigger(TriggerType.Unknown);
+        }
+
+      
+        private List<Trigger> ParseTriggers()
+        {
+            List<Trigger> results = new List<Trigger>();
+
+            const char TriggerSplitter = '|';
+
+            foreach (var rawTrigger in RawTriggers.Split(TriggerSplitter))
+            {
+                Trigger trigger = ParseTrigger(rawTrigger);
+                results.Add(trigger);
+            }
+
+            return results;
         }
         public IEnumerable<TargetCriterion> GetTargets()
         {

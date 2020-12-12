@@ -1,5 +1,7 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
+using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Fighters;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Buffs
 {
+    [SpellEffectHandler(EffectsEnum.Effect_AddGlobalDamageReduction_105)]
     [SpellEffectHandler(EffectsEnum.Effect_ArmorDamageReduction)]
     public class ArmorDamageReduction : SpellEffectHandler
     {
@@ -18,6 +21,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
         {
         }
 
+        [WIP]
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             Damage damage = GetTriggerToken<Damage>();
@@ -31,7 +35,13 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
             }
             else
             {
-                OnTokenMissing<Damage>();
+                foreach (var target in targets)
+                {
+                    int id = target.BuffIdProvider.Pop();
+                    Buff buff = new GlobalDamageReductionBuff(id,
+                       (short)Effect.Min, CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
+                    target.AddBuff(buff);
+                }
             }
         }
     }

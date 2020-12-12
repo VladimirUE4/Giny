@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Buffs
+namespace Giny.World.Managers.Fights.Triggers
 {
-    public enum BuffTriggerType
+    public enum TriggerType
     {
         Instant, // I
 
@@ -72,7 +72,7 @@ namespace Giny.World.Managers.Fights.Buffs
 
         /* CUSTOM */
 
-        AfterDamagd,
+        AfterDamaged,
         Delayed,
         Unknown,
         /*

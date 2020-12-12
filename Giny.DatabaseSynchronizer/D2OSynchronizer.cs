@@ -272,7 +272,7 @@ namespace Giny.DatabaseSynchronizer
                     Modificator = effectDice.modificator,
                     Order = effectDice.order,
                     Trigger = effectDice.trigger,
-                    Triggers = effectDice.triggers,
+                    RawTriggers = effectDice.triggers,
                     RawZone = effectDice.rawZone,
                     TargetMask = effectDice.TargetMask,
                     Random = effectDice.random,

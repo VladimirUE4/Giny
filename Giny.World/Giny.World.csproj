@@ -85,6 +85,7 @@
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
+    <Compile Include="Managers\Fights\Buffs\GlobalDamageReductionBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RandModifierBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SkipTurnBuff.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Managers\Fights\Marks\GlyphAura.cs" />
     <Compile Include="Managers\Fights\Marks\MarksManager.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
+    <Compile Include="Managers\Fights\Triggers\Trigger.cs" />
     <Compile Include="Managers\Parties\Party.cs" />
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
     <Compile Include="Managers\Parties\PartyManager.cs" />
@@ -260,7 +262,7 @@
     <Compile Include="Managers\Fights\Effects\SpellEffectManager.cs" />
     <Compile Include="Managers\Effects\EffectString.cs" />
     <Compile Include="Managers\Fights\Buffs\Buff.cs" />
-    <Compile Include="Managers\Fights\Buffs\BuffTriggerType.cs" />
+    <Compile Include="Managers\Fights\Triggers\BuffTriggerType.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoostBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StatBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StateBuff.cs" />

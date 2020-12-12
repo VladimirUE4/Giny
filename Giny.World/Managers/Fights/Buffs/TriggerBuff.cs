@@ -5,6 +5,7 @@ using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Effects.Damages;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public delegate void TriggerBuffRemoveHandler(TriggerBuff buff);
 
-        public BuffTriggerType TriggerType
+        public IEnumerable<Trigger> Triggers
         {
             get;
             private set;
@@ -41,17 +42,17 @@ namespace Giny.World.Managers.Fights.Buffs
             private set;
         }
 
-     
-        public TriggerBuff(int id, BuffTriggerType triggerType, TriggerBuffApplyHandler applyTrigger,
+
+        public TriggerBuff(int id, IEnumerable<Trigger> triggers, TriggerBuffApplyHandler applyTrigger,
             TriggerBuffRemoveHandler removeTrigger, int delay,
             SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable)
             : base(id, cast, target, effect, dispellable)
         {
-            this.TriggerType = triggerType;
+            this.Triggers = triggers;
             this.ApplyTrigger = applyTrigger;
             this.Delay = delay;
             this.RemoveTrigger = removeTrigger;
-           
+
         }
 
         public bool DecrementDelay()
@@ -84,9 +85,9 @@ namespace Giny.World.Managers.Fights.Buffs
             }
         }
 
-        public override BuffTriggerType GetTriggerType()
+        public override IEnumerable<Trigger> GetTriggers()
         {
-            return TriggerType;
+            return Triggers;
         }
 
         public override AbstractFightDispellableEffect GetAbstractFightDispellableEffect()

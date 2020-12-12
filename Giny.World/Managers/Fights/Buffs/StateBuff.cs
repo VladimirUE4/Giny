@@ -26,12 +26,12 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override void Apply()
         {
-
+            Target.OnStateAdded(this);
         }
 
         public override void Dispell()
         {
-
+            Target.OnStateRemoved(this);
         }
 
         public override AbstractFightDispellableEffect GetAbstractFightDispellableEffect()

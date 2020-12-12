@@ -18,6 +18,7 @@ using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Stats;
 using Giny.Protocol.Enums;
 using Giny.World.Records.Monsters;
+using Giny.World.Managers.Fights.Triggers;
 
 namespace Giny.World.Managers.Fights.Cast
 {
@@ -142,7 +143,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public bool RevealsInvisible()
         {
-            return Reveals && Effect.TriggersEnum == BuffTriggerType.Instant;
+            return Reveals && Trigger.IsInstant(Effect.Triggers);
         }
         public void Execute()
         {
@@ -155,9 +156,9 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute(IEnumerable<Fighter> targets)
         {
-            if (Effect.TriggersEnum == BuffTriggerType.Unknown)
+            if (Effect.Triggers.Any(x => x.Type == TriggerType.Unknown))
             {
-                Source.Fight.Warn("Unknown trigger : " + Effect.Triggers + " cannot cast effect " + Effect.EffectEnum);
+                Source.Fight.Warn("Unknown trigger(s) : " + Effect.RawTriggers + " cannot cast effect " + Effect.EffectEnum);
                 return;
             }
 
@@ -165,12 +166,12 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 foreach (var target in targets)
                 {
-                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, BuffTriggerType.Delayed, delegate (TriggerBuff buff, ITriggerToken token)
-                    {
-                        InternalApply(new Fighter[] { target });
-                        return false;
+                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Trigger.Singleton(TriggerType.Delayed), delegate (TriggerBuff buff, ITriggerToken token)
+                      {
+                          InternalApply(new Fighter[] { target });
+                          return false;
 
-                    }, (short)Effect.Delay);
+                      }, (short)Effect.Delay);
                 }
 
             }
@@ -182,7 +183,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         private void InternalApply(IEnumerable<Fighter> targets)
         {
-            if (Effect.TriggersEnum == BuffTriggerType.Instant)
+            if (Trigger.IsInstant(Effect.Triggers))
             {
                 Apply(targets);
             }
@@ -190,7 +191,7 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 foreach (var target in targets)
                 {
-                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Effect.TriggersEnum, delegate (TriggerBuff buff, ITriggerToken token)
+                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Effect.Triggers, delegate (TriggerBuff buff, ITriggerToken token)
                     {
                         this.TriggerToken = token;
                         Apply(new Fighter[] { target });
@@ -221,21 +222,21 @@ namespace Giny.World.Managers.Fights.Cast
         {
             TriggerToken = token;
         }
-        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, BuffTriggerType trigger, TriggerBuff.TriggerBuffApplyHandler applyTrigger,
+        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, IEnumerable<Trigger> triggers, TriggerBuff.TriggerBuffApplyHandler applyTrigger,
             short delay)
         {
-            return AddTriggerBuff(target, dispellable, trigger, applyTrigger, null, delay);
+            return AddTriggerBuff(target, dispellable, triggers, applyTrigger, null, delay);
         }
 
-        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, BuffTriggerType trigger, TriggerBuff.TriggerBuffApplyHandler applyTrigger)
+        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, IEnumerable<Trigger> triggers, TriggerBuff.TriggerBuffApplyHandler applyTrigger)
         {
-            return AddTriggerBuff(target, dispellable, trigger, applyTrigger, 0);
+            return AddTriggerBuff(target, dispellable, triggers, applyTrigger, 0);
         }
-        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, BuffTriggerType trigger, TriggerBuff.TriggerBuffApplyHandler applyTrigger,
+        protected TriggerBuff AddTriggerBuff(Fighter target, FightDispellableEnum dispellable, IEnumerable<Trigger> triggers, TriggerBuff.TriggerBuffApplyHandler applyTrigger,
            TriggerBuff.TriggerBuffRemoveHandler removeTrigger, short delay)
         {
             int id = target.BuffIdProvider.Pop();
-            TriggerBuff triggerBuff = new TriggerBuff(id, trigger, applyTrigger, removeTrigger, delay, CastHandler.Cast, target, Effect, dispellable);
+            TriggerBuff triggerBuff = new TriggerBuff(id, triggers, applyTrigger, removeTrigger, delay, CastHandler.Cast, target, Effect, dispellable);
             target.AddBuff(triggerBuff);
             return triggerBuff;
         }
@@ -266,7 +267,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public override string ToString()
         {
-            return Effect.EffectEnum + " Z:" + Effect.RawZone + " TM:" + Effect.TargetMask + " TRIG:" + Effect.Triggers;
+            return Effect.EffectEnum + " Z:" + Effect.RawZone + " TM:" + Effect.TargetMask + " TRIG:" + Effect.RawTriggers;
         }
     }
 }

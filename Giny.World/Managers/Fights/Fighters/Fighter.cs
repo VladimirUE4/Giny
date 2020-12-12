@@ -19,6 +19,7 @@ using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Stats;
+using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Shapes.Sets;
 using Giny.World.Managers.Spells;
@@ -590,18 +591,18 @@ namespace Giny.World.Managers.Fights.Fighters
 
             Buffs.Add(buff);
 
-            if (buff.GetTriggerType() == BuffTriggerType.Instant && !buff.HasDelay())
+            if (Trigger.IsInstant(buff.GetTriggers()) && !buff.HasDelay())
             {
                 buff.Apply();
             }
 
             OnBuffAdded(buff);
         }
-        public bool TriggerBuffs(BuffTriggerType type, ITriggerToken token)
+        public bool TriggerBuffs(TriggerType type, ITriggerToken token, short? triggerParam = null)
         {
             bool result = false;
 
-            foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.TriggerType == type && !x.HasDelay()).ToArray())
+            foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay()).ToArray())
             {
                 if (buff.Apply(token))
                 {
@@ -651,7 +652,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = current.Cast.SpellId == reference.Cast.SpellId &&
                  current.Effect.EffectId == reference.Effect.EffectId && current.Effect.Delay == reference.Effect.Delay
-                 && current.GetTriggerType() == reference.GetTriggerType() && current.GetType().Name == reference.GetType().Name;
+                 && Trigger.SequenceEquals(current.GetTriggers(), reference.GetTriggers()) && current.GetType().Name == reference.GetType().Name;
 
             if (current is StateBuff && reference is StateBuff)
             {
@@ -749,7 +750,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 if (Alive)
                 {
                     Fight.TriggerMarks(this, MarkTriggerType.OnTurnEnd);
-                    TriggerBuffs(BuffTriggerType.OnTurnEnd, null);
+                    TriggerBuffs(TriggerType.OnTurnEnd, null);
                 }
 
                 OnTurnEnded();
@@ -1037,7 +1038,15 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return GetBuffs<StateBuff>().Any(x => x.Record.Id == stateId);
         }
+        public void OnStateRemoved(StateBuff buff)
+        {
+            TriggerBuffs(TriggerType.OnSpecificStateRemoved, buff, (short)buff.Record.Id);
+        }
 
+        public void OnStateAdded(StateBuff buff)
+        {
+            TriggerBuffs(TriggerType.OnSpecificStateAdded, buff, (short)buff.Record.Id);
+        }
         public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
         {
             if (!CanBeMoved())
@@ -1183,7 +1192,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             if (!isMapMovement) // not a teleportation / slide / swap
             {
-                this.TriggerBuffs(BuffTriggerType.OnMoved, source);
+                this.TriggerBuffs(TriggerType.OnMoved, source);
             }
 
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
@@ -1724,7 +1733,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     OnDamageReflected(damage.Source);
                 }
 
-                TriggerBuffs(BuffTriggerType.AfterDamagd, damage);
+                TriggerBuffs(TriggerType.AfterDamaged, damage);
             }
 
 
@@ -1744,50 +1753,50 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private void TriggerBuffs(Damage damage)
         {
-            TriggerBuffs(BuffTriggerType.OnDamaged, damage);
+            TriggerBuffs(TriggerType.OnDamaged, damage);
 
             switch (damage.EffectSchool)
             {
                 case EffectSchoolEnum.Pushback:
-                    TriggerBuffs(BuffTriggerType.OnDamagedByPush, damage);
+                    TriggerBuffs(TriggerType.OnDamagedByPush, damage);
                     break;
                 case EffectSchoolEnum.Neutral:
-                    TriggerBuffs(BuffTriggerType.OnDamagedNeutral, damage);
+                    TriggerBuffs(TriggerType.OnDamagedNeutral, damage);
                     break;
                 case EffectSchoolEnum.Earth:
-                    TriggerBuffs(BuffTriggerType.OnDamagedEarth, damage);
+                    TriggerBuffs(TriggerType.OnDamagedEarth, damage);
                     break;
                 case EffectSchoolEnum.Water:
-                    TriggerBuffs(BuffTriggerType.OnDamagedWater, damage);
+                    TriggerBuffs(TriggerType.OnDamagedWater, damage);
                     break;
                 case EffectSchoolEnum.Air:
-                    TriggerBuffs(BuffTriggerType.OnDamagedAir, damage);
+                    TriggerBuffs(TriggerType.OnDamagedAir, damage);
                     break;
                 case EffectSchoolEnum.Fire:
-                    TriggerBuffs(BuffTriggerType.OnDamagedFire, damage);
+                    TriggerBuffs(TriggerType.OnDamagedFire, damage);
                     break;
             }
             if (damage.Source.IsMeleeWith(this))
             {
-                TriggerBuffs(BuffTriggerType.OnDamagedInCloseRange, damage);
+                TriggerBuffs(TriggerType.OnDamagedInCloseRange, damage);
             }
             else
             {
-                TriggerBuffs(BuffTriggerType.OnDamagedInLongRange, damage);
+                TriggerBuffs(TriggerType.OnDamagedInLongRange, damage);
             }
 
             if (damage.IsSpellDamage())
             {
-                TriggerBuffs(BuffTriggerType.OnDamagedBySpell, damage);
+                TriggerBuffs(TriggerType.OnDamagedBySpell, damage);
             }
 
             if (damage.Source.IsFriendlyWith(this))
             {
-                TriggerBuffs(BuffTriggerType.OnDamagedByAlly, damage);
+                TriggerBuffs(TriggerType.OnDamagedByAlly, damage);
             }
             else
             {
-                TriggerBuffs(BuffTriggerType.OnDamagedByEnemy, damage);
+                TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
         }
         private int CalculateErodedLife(int damages)
@@ -1874,7 +1883,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 this.Alive = false;
 
-                TriggerBuffs(BuffTriggerType.OnDeath, killedBy);
+                TriggerBuffs(TriggerType.OnDeath, killedBy);
             }
             else
             {

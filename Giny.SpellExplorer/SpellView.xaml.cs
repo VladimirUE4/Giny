@@ -79,8 +79,8 @@ namespace Giny.SpellExplorer
                 targets = "ALL";
             }
             effectInfo.Items.Add("Targets : " + targets);
-            effectInfo.Items.Add("Triggers : " + effect.Triggers);
-            effectInfo.Items.Add("Triggers Enum : " + effect.TriggersEnum);
+            effectInfo.Items.Add("Triggers : " + effect.RawTriggers);
+            effectInfo.Items.Add("Triggers Enum : " + effect.Triggers);
             effectInfo.Items.Add("Raw Zone : " + effect.RawZone);
             effectInfo.Items.Add("Order : " + effect.Order);
             effectInfo.Items.Add("Modificator : " + effect.Modificator);

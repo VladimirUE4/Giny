@@ -80,13 +80,13 @@ namespace Giny.World.Managers.Items
             {
                 effect.RawZone = PunchRawZone;
                 effect.TargetMask = WeaponTargetMask;
-                effect.Triggers = "I";
+                effect.RawTriggers = "I";
             }
             foreach (var effect in PunchSpellRecord.Levels.Last().CriticalEffects)
             {
                 effect.RawZone = PunchRawZone;
                 effect.TargetMask = WeaponTargetMask;
-                effect.Triggers = "I";
+                effect.RawTriggers = "I";
             }
         }
 
@@ -107,7 +107,7 @@ namespace Giny.World.Managers.Items
                 }
                 effect.RawZone = rawZone;
                 effect.TargetMask = WeaponTargetMask;
-                effect.Triggers = "I";
+                effect.RawTriggers = "I";
             }
 
             IEnumerable<Effect> criticalEffects = GetCriticalEffects(weapon, effects);

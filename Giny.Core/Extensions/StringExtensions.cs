@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Giny.Core.Extensions
@@ -71,6 +72,10 @@ namespace Giny.Core.Extensions
             return result.ToString();
 
         }
+        public static string RemoveNumbers(this string input)
+        {
+            return Regex.Replace(input, @"[\d-]", string.Empty);
+        }
         public static string RemoveChars(this string input, params char[] chars)
         {
             string result = input;
@@ -95,6 +100,6 @@ namespace Giny.Core.Extensions
                 source.Normalize(NormalizationForm.FormD)
                       .Any(x => CharUnicodeInfo.GetUnicodeCategory(x) == UnicodeCategory.NonSpacingMark);
         }
-        
+
     }
 }

@@ -5,6 +5,7 @@ using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace Giny.World.Managers.Fights.Effects.Heals
         {
             foreach (var target in targets)
             {
-                AddTriggerBuff(target, FightDispellableEnum.DISPELLABLE, BuffTriggerType.AfterDamagd, Apply);
+                AddTriggerBuff(target, FightDispellableEnum.DISPELLABLE,
+                    Trigger.Singleton(TriggerType.AfterDamaged), Apply);
             }
         }
 

@@ -15,6 +15,7 @@ using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Synchronisation;
 using Giny.World.Managers.Fights.Timeline;
+using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Records.Maps;
@@ -421,7 +422,7 @@ namespace Giny.World.Managers.Fights
                 }
 
                 this.DecrementGlyphDuration(FighterPlaying);
-                FighterPlaying.TriggerBuffs(BuffTriggerType.OnTurnBegin, null);
+                FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
 
             }

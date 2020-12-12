@@ -3,6 +3,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Buffs
 {
-    public abstract class Buff
+    public abstract class Buff : ITriggerToken
     {
         public int Id
         {
@@ -95,13 +96,18 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public FightDispellableEffectExtendedInformations GetFightDispellableEffectExtendedInformations() => new FightDispellableEffectExtendedInformations(GetActionId(), Cast.Source.Id, GetAbstractFightDispellableEffect());
 
-        public virtual BuffTriggerType GetTriggerType()
+        public virtual IEnumerable<Trigger> GetTriggers()
         {
-            return BuffTriggerType.Instant;
+            return Trigger.Singleton(TriggerType.Instant);
         }
         public virtual bool HasDelay()
         {
             return false;
+        }
+
+        public Fighter GetSource()
+        {
+            return this.Cast.Source;
         }
     }
 }

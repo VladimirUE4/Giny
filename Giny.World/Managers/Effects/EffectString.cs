@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Effects
                 TargetMask = TargetMask,
                 TargetId = TargetId,
                 Trigger = Trigger,
-                Triggers = Triggers,
+                RawTriggers = RawTriggers,
                 Order = Order,
                 Random = Random,
                 RawZone = RawZone,
