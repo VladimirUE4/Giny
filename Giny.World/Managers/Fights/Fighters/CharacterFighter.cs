@@ -105,7 +105,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             SummonedFighter summon = GetNextControlableSummon();
 
-            if (summon != null)
+            if (summon != null && Fight.Timeline.IndexOf(summon) < Fight.Timeline.IndexOf(this))
             {
                 summon.SwitchContext();
             }
@@ -448,7 +448,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
-                if (fighter.GetController() == this && fighter.Alive)
+                 if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;
                 }
@@ -457,6 +457,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
+                
                 if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;
@@ -491,9 +492,17 @@ namespace Giny.World.Managers.Fights.Fighters
         public override Spell GetSpell(short spellId)
         {
             CharacterSpell characterSpell = Character.GetSpell(spellId);
-            SpellRecord record = characterSpell.ActiveSpellRecord;
-            SpellLevelRecord level = record.GetLevel(characterSpell.GetGrade(Character));
-            return new Spell(record, level);
+
+            if (characterSpell != null)
+            {
+                SpellRecord record = characterSpell.ActiveSpellRecord;
+                SpellLevelRecord level = record.GetLevel(characterSpell.GetGrade(Character));
+                return new Spell(record, level);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

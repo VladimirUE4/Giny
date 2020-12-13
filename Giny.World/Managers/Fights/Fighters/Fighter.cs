@@ -810,7 +810,15 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             Spell spell = GetSpell(spellId);
             CellRecord cell = Fight.Map.GetCell(cellId);
-            return this.CastSpell(new SpellCast(this, spell, Fight.Map.GetCell(cellId)));
+
+            if (spell != null)
+            {
+                return this.CastSpell(new SpellCast(this, spell, Fight.Map.GetCell(cellId)));
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public virtual bool CastSpell(SpellCast cast)

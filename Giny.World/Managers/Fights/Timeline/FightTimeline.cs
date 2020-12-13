@@ -135,6 +135,10 @@ namespace Giny.World.Managers.Fights.Timeline
             }
             return result;
         }
+        public int IndexOf(Fighter fighter)
+        {
+            return Fighters.IndexOf(fighter);
+        }
         public void OrderLine()
         {
             IOrderedEnumerable<Fighter> orderedEnumerable =
