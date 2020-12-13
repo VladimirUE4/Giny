@@ -583,6 +583,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             BuffIdProvider.Push(buff.Id);
         }
+        [WIP("voir dofus nébuleux")]
         public void AddBuff(Buff buff)
         {
             if (BuffMaxStackReached(buff)) // WIP censer cumuler la durée ?
@@ -600,7 +601,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             OnBuffAdded(buff);
         }
-        public bool TriggerBuffs(TriggerType type, ITriggerToken token, short? triggerParam = null)
+        public bool TriggerBuffs(TriggerType type, ITriggerToken token, int? triggerParam = null)
         {
             bool result = false;
 

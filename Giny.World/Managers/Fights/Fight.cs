@@ -378,7 +378,7 @@ namespace Giny.World.Managers.Fights
 
             this.OnFightStarted();
 
-            Synchronizer = Synchronizer.RequestCheck(this, StartTurn, LagAndStartFight, SynchronizerTimout * 1000);
+            Synchronizer = Synchronizer.RequestCheck(this, StartFight, LagAndStartFight, SynchronizerTimout * 1000);
 
         }
         public void OnFightStarted()
@@ -388,6 +388,11 @@ namespace Giny.World.Managers.Fights
                 fighter.OnFightStarted();
             }
         }
+        private void StartFight()
+        {
+            Synchronizer = null;
+            StartTurn();
+        }
         private void LagAndStartFight(CharacterFighter[] laggers)
         {
             if (Synchronizer == null)
@@ -395,7 +400,7 @@ namespace Giny.World.Managers.Fights
 
             OnLaggersSpotted(laggers);
 
-            StartTurn();
+            StartFight();
         }
         private void StartTurn()
         {

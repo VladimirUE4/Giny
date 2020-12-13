@@ -15,13 +15,13 @@ namespace Giny.World.Managers.Fights.Triggers
             private set;
         }
 
-        public short? Value
+        public int? Value
         {
             get;
             private set;
         }
 
-        public Trigger(TriggerType type, short? value = null)
+        public Trigger(TriggerType type, int? value = null)
         {
             this.Type = type;
             this.Value = value;

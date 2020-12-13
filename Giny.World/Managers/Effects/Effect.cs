@@ -250,7 +250,7 @@ namespace Giny.World.Managers.Effects
                 case "I":
                     return new Trigger(TriggerType.Instant);
                 case "EON":
-                    return new Trigger(TriggerType.OnStateAdded, short.Parse(new string(input.Skip(3).ToArray())));
+                    return new Trigger(TriggerType.OnStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
             }
 
             return new Trigger(TriggerType.Unknown);
