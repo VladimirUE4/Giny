@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Buffs
 {
-    public class StateBuff : Buff 
+    public class StateBuff : Buff
     {
         public short StateId
         {
@@ -21,13 +21,13 @@ namespace Giny.World.Managers.Fights.Buffs
                 return (short)Record.Id;
             }
         }
-     
+
         public SpellStateRecord Record
         {
             get;
             private set;
         }
-        public StateBuff(int id, SpellStateRecord record, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable) : base(id, cast, target, effect, dispellable)
+        public StateBuff(int id, SpellStateRecord record, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) : base(id, target, effectHandler, dispellable)
         {
             this.Record = record;
         }

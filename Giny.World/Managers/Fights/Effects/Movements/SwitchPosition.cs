@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
             if (targets.Count() > 0)
             {
                 var target = targets.First();
-                Source.SwitchPosition(target);
+                Source.SwitchPosition(target,CanTrigger());
             }
         }
     }

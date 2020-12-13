@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
             foreach (var target in targets)
             {
                 int id = target.BuffIdProvider.Pop();
-                InvisibilityBuff buff = new InvisibilityBuff(id, CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
+                InvisibilityBuff buff = new InvisibilityBuff(id, target, this, FightDispellableEnum.DISPELLABLE);
                 target.AddBuff(buff);
             }
         }

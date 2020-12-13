@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             private set;
         }
-        public RandModifierBuff(int id, bool up, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public RandModifierBuff(int id, bool up,   Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id,   target, effectHandler, dispellable, customActionId)
         {
             this.Up = up;
         }

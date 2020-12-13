@@ -1,4 +1,5 @@
-﻿using Giny.World.Managers.Effects;
+﻿using Giny.Core.DesignPattern;
+using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Fighters;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,10 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             private set;
         }
+
+        [WIP]
+        public bool CanTrigger => true; // nop (spell effect handler)
+
         public Healing(Fighter source, Fighter target, short delta)
         {
             this.Source = source;

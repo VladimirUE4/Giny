@@ -22,20 +22,28 @@ namespace Giny.World.Managers.Fights.Buffs
         }
         public SpellCast Cast
         {
-            get;
-            set;
+            get
+            {
+                return EffectHandler.CastHandler.Cast;
+            }
         }
         public Fighter Target
         {
             get;
             private set;
         }
-        public EffectDice Effect
+        private SpellEffectHandler EffectHandler
         {
             get;
-            private set;
+            set;
         }
-
+        public EffectDice Effect
+        {
+            get
+            {
+                return EffectHandler.Effect;
+            }
+        }
         public FightDispellableEnum Dispellable
         {
             get;
@@ -52,13 +60,14 @@ namespace Giny.World.Managers.Fights.Buffs
             set;
         }
 
-        public Buff(int id, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null)
+        public bool CanTrigger => EffectHandler.CanTrigger();
+
+        public Buff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null)
         {
             this.Id = id;
             this.Target = target;
-            this.Cast = cast;
-            this.Effect = effect;
-            this.Duration = effect.Duration;
+            this.EffectHandler = effectHandler;
+            this.Duration = effectHandler.Effect.Duration;
             this.Dispellable = dispellable;
             this.CustomActionId = customActionId;
         }

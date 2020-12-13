@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Marks
             this.Duration = effect.Duration;
         }
 
-        public override bool StopMovement => true;
+        public override bool StopMovement => false;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.GLYPH;
 

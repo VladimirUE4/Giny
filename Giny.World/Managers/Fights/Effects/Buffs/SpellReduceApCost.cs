@@ -28,8 +28,8 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
                 if (target.HasSpell(spellId))
                 {
                     int id = target.BuffIdProvider.Pop();
-                    SpellReduceApCostBuff buff = new SpellReduceApCostBuff(id, spellId, delta, CastHandler.Cast,
-                        target, Effect, FightDispellableEnum.DISPELLABLE);
+                    SpellReduceApCostBuff buff = new SpellReduceApCostBuff(id, spellId, delta,
+                        target, this, FightDispellableEnum.DISPELLABLE);
                     target.AddBuff(buff);
                 }
             }

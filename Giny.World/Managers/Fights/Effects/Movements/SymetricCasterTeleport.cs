@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
             foreach (var target in targets)
             {
                 var targetPoint = new MapPoint((2 * Source.Cell.Point.X - target.Cell.Point.X), (2 * Source.Cell.Point.Y - target.Cell.Point.Y));
-                Telefrag telefrag = target.Teleport(Source, Source.Fight.Map.GetCell(targetPoint));
+                Telefrag telefrag = target.Teleport(Source, Source.Fight.Map.GetCell(targetPoint), CanTrigger());
 
                 if (telefrag != null)
                     CastHandler.AddTelefrag(telefrag);

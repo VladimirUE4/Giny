@@ -19,7 +19,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (!(Source is  CharacterFighter))
+            if (!(Source is CharacterFighter))
             {
                 return;
             }
@@ -28,7 +28,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
             {
                 if (target.IsSummoned() && target.GetSummoner() == Source)
                 {
-                    target.Die(Source);
+                    target.Die(Source, CanTrigger());
 
                     SummonedMonster summon = CreateSummon((short)Effect.Min);
                     summon.SetController((CharacterFighter)Source);

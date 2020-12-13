@@ -9,6 +9,11 @@ namespace Giny.World.Managers.Fights.Cast
 {
     public interface ITriggerToken
     {
+        bool CanTrigger
+        {
+            get;
+        }
+
         Fighter GetSource();
     }
 }

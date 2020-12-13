@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
             {
                 if (Source.Cell != target.Cell)
                 {
-                    Source.Advance(Source, (short)Effect.Min, target.Cell);
+                    Source.Advance(Source, (short)Effect.Min, target.Cell,CanTrigger());
                 }
             }
             

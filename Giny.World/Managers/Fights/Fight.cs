@@ -434,8 +434,8 @@ namespace Giny.World.Managers.Fights
                 }
 
                 this.DecrementGlyphDuration(FighterPlaying);
-                FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
+                FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
 
             }
 
@@ -486,7 +486,7 @@ namespace Giny.World.Managers.Fights
                 {
                     foreach (var fighter in deads)
                     {
-                        fighter.Die(fighter);
+                        fighter.Die(fighter, true);
 
                         if (fighter.IsFighterTurn)
                         {
@@ -507,7 +507,6 @@ namespace Giny.World.Managers.Fights
 
         public void StopTurn()
         {
-
             if (Ended)
                 return;
 
@@ -639,7 +638,7 @@ namespace Giny.World.Managers.Fights
         public bool ShouldTriggerOnMove(short oldCell, short cellId)
         {
             bool flag1 = Marks.OfType<Glyph>().Any(x => x.StopMovement &&
-            !x.ContainsCell(oldCell) && x.ContainsCell(cellId) || x.ContainsCell(oldCell) && !x.ContainsCell(cellId));
+            (!x.ContainsCell(oldCell) && x.ContainsCell(cellId) || x.ContainsCell(oldCell) && !x.ContainsCell(cellId)));
             bool flag2 = Marks.OfType<Trap>().Any(x => x.StopMovement && x.ContainsCell(cellId));
 
             return flag1 || flag2;

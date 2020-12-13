@@ -30,9 +30,9 @@ namespace Giny.World.Managers.Fights.Buffs
             private set;
         }
 
-        public StatBuff(int id, SpellCast cast, Fighter target, EffectDice effect, bool critical, FightDispellableEnum dispelable,
+        public StatBuff(int id,  Fighter target, SpellEffectHandler effectHandler, bool critical, FightDispellableEnum dispelable,
              Characteristic characteristic, short delta, short? customActionId = null)
-            : base(id, cast, target, effect, dispelable, customActionId)
+            : base(id, target, effectHandler, dispelable, customActionId)
         {
             this.Characteristic = characteristic;
             this.Delta = delta;

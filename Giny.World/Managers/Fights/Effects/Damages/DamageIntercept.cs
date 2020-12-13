@@ -26,7 +26,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
             {
                 Damage newDamages = new Damage(damage.Source, Source, damage.EffectSchool, damage.BaseMinDamages, damage.BaseMaxDamages, this);
                 newDamages.Computed = damage.Computed;
-                newDamages.CannotTrigger = true;
                 Source.InflictDamage(newDamages);
 
                 damage.Computed = 0;

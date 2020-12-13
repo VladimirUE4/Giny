@@ -1289,7 +1289,14 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (spawnJoin && !winner)
             {
-                SpawnPoint();
+                if (Client.Account.Role >= ServerRoleEnum.ADMINISTRATOR)
+                {
+                    CurrentMapMessage(Record.MapId);
+                }
+                else
+                {
+                    SpawnPoint();
+                }
             }
             else
             {

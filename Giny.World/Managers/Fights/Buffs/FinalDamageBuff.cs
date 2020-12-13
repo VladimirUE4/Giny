@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public FinalDamageBuff(int id, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public FinalDamageBuff(int id, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id, target, effectHandler, dispellable, customActionId)
         {
             this.Delta = delta;
         }

@@ -3,6 +3,7 @@ using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Movements;
 using Giny.World.Managers.Maps;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
             if (target != null)
             {
-                target.Slide(Source, orientation, delta, MovementType.Pull);
+                target.Slide(Source, orientation, delta, MovementType.Pull, CanTrigger());
             }
         }
     }

@@ -88,6 +88,10 @@ namespace Giny.World.Managers.Fights.Marks
                     return Color.CornflowerBlue;
                 case SpellEnum.BlindingGlyph:
                     return Color.SaddleBrown;
+
+
+                case SpellEnum.LoadHeadice: // glyphe korriandre
+                    return Color.White;
             }
 
             return Color.FromArgb(0);

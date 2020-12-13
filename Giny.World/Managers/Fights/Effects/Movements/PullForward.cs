@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                target.PullForward(Source, CastCell, (short)Effect.Min, TargetCell);
+                target.PullForward(Source, CastCell, (short)Effect.Min, TargetCell,CanTrigger());
             }
         }
     }

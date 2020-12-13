@@ -23,8 +23,8 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
             foreach (var target in targets)
             {
                 int id = target.BuffIdProvider.Pop();
-                ErosionBuff buff = new ErosionBuff(id, (short)Effect.Min, CastHandler.Cast, target,
-                    Effect, FightDispellableEnum.DISPELLABLE);
+                ErosionBuff buff = new ErosionBuff(id, (short)Effect.Min, target,
+                    this, FightDispellableEnum.DISPELLABLE);
 
                 target.AddBuff(buff);
             }

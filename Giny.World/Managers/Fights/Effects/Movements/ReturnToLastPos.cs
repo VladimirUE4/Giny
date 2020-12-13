@@ -28,7 +28,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
                 {
                     if (!CastHandler.IsTelefraged(target))
                     {
-                        var telefrag = target.Teleport(Source, entry.Cell, false);
+                        var telefrag = target.Teleport(Source, entry.Cell, CanTrigger(), false);
 
                         if (telefrag != null)
                         {

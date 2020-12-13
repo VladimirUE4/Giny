@@ -12,7 +12,7 @@ namespace Giny.World.Managers.Fights.Buffs
 {
     public class SkipTurnBuff : Buff
     {
-        public SkipTurnBuff(int id, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public SkipTurnBuff(int id,  Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id,  target, effectHandler, dispellable, customActionId)
         {
 
         }

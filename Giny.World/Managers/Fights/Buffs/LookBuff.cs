@@ -19,7 +19,7 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public LookBuff(int id, ServerEntityLook look, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public LookBuff(int id, ServerEntityLook look, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id, target, effectHandler, dispellable, customActionId)
         {
             this.Look = look;
         }

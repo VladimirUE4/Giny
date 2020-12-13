@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public SpellBoostBuff(int id, short boostedSpellId, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable) : base(id, cast, target, effect, dispellable)
+        public SpellBoostBuff(int id, short boostedSpellId, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) : base(id, target, effectHandler, dispellable)
         {
             this.BoostedSpellId = boostedSpellId;
             this.Delta = delta;

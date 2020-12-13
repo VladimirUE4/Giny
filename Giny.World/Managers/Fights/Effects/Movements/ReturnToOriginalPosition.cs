@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Movements
 {
-    [SpellEffectHandler(EffectsEnum.Effect_Rewind)]
-    public class Rewind : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_ReturnToOriginalPos)]
+    public class ReturnToOriginalPosition : SpellEffectHandler
     {
-
-        public Rewind(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public ReturnToOriginalPosition(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
 
@@ -22,12 +21,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                var telefrag = target.Teleport(Source, target.TurnStartCell,CanTrigger());
-
-                if (telefrag != null)
-                {
-                    this.CastHandler.AddTelefrag(telefrag);
-                }
+                target.Teleport(Source, target.FightStartCell, CanTrigger());
             }
         }
     }

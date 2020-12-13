@@ -48,23 +48,35 @@ namespace Giny.World.Managers.Criterias
 
 
         }
-        public bool EvaluateCriterias(WorldClient client, string criteria)
+        [WIP("and or")]
+        public bool EvaluateCriterias(WorldClient client, string criterias) // todo, and > OR
         {
-            if (criteria == null || criteria == string.Empty)
+            if (criterias == null || criterias == string.Empty)
                 return true;
-            string criteriaIndentifier = new string(criteria.Take(2).ToArray());
 
-            Criteria handler = GetHandler(criteriaIndentifier, criteria);
+            foreach (var criteria in criterias.Split('&'))
+            {
+                string criteriaIndentifier = new string(criteria.Take(2).ToArray());
 
-            if (handler != null)
-            {
-                return handler.Eval(client);
+                Criteria handler = GetHandler(criteriaIndentifier, criteria);
+
+                if (handler != null)
+                {
+                    if  (!handler.Eval(client))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    client.Character.Reply("Unknown criteria indentifier: " + criteriaIndentifier + ". Skeeping criteria");
+                    return true;
+                }
             }
-            else
-            {
-                client.Character.Reply("Unknown criteria indentifier: " + criteriaIndentifier + ". Skeeping criteria");
-                return true;
-            }
+
+            return true;
+
+          
         }
     }
     public class CriteriaAttribute : Attribute

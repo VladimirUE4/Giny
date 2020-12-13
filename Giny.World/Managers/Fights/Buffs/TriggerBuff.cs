@@ -44,9 +44,8 @@ namespace Giny.World.Managers.Fights.Buffs
 
 
         public TriggerBuff(int id, IEnumerable<Trigger> triggers, TriggerBuffApplyHandler applyTrigger,
-            TriggerBuffRemoveHandler removeTrigger, int delay,
-            SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable)
-            : base(id, cast, target, effect, dispellable)
+            TriggerBuffRemoveHandler removeTrigger, int delay, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable)
+            : base(id, target, effectHandler, dispellable)
         {
             this.Triggers = triggers;
             this.ApplyTrigger = applyTrigger;

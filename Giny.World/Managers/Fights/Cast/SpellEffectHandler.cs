@@ -47,6 +47,9 @@ namespace Giny.World.Managers.Fights.Cast
                 return CastHandler.Cast.TargetCell;
             }
         }
+
+
+
         public EffectDice Effect
         {
             get;
@@ -129,7 +132,14 @@ namespace Giny.World.Managers.Fights.Cast
         {
             return Zone.GetCells(TargetCell, Source.Fight.Map).ToList();
         }
-
+        /// <summary>
+        /// prevent some stack overflow issues.
+        /// </summary>
+        /// <returns></returns>
+        public bool CanTrigger()
+        {
+            return GetTriggerToken<ITriggerToken>() == null;
+        }
         [WIP("usage?")]
         public virtual bool CanApply()
         {
@@ -237,28 +247,28 @@ namespace Giny.World.Managers.Fights.Cast
            TriggerBuff.TriggerBuffRemoveHandler removeTrigger, short delay)
         {
             int id = target.BuffIdProvider.Pop();
-            TriggerBuff triggerBuff = new TriggerBuff(id, triggers, applyTrigger, removeTrigger, delay, CastHandler.Cast, target, Effect, dispellable);
+            TriggerBuff triggerBuff = new TriggerBuff(id, triggers, applyTrigger, removeTrigger, delay, target, this, dispellable);
             target.AddBuff(triggerBuff);
             return triggerBuff;
         }
         public StatBuff AddStatBuff(Fighter target, short value, Characteristic characteristic, FightDispellableEnum dispellable, short? customActionId = null)
         {
             int id = target.BuffIdProvider.Pop();
-            StatBuff statBuff = new StatBuff(id, CastHandler.Cast, target, Effect, Critical, dispellable, characteristic, value, customActionId);
+            StatBuff statBuff = new StatBuff(id, target, this, Critical, dispellable, characteristic, value, customActionId);
             target.AddBuff(statBuff);
             return statBuff;
         }
         public StateBuff AddStateBuff(Fighter target, SpellStateRecord record, FightDispellableEnum dispellable)
         {
             int id = target.BuffIdProvider.Pop();
-            StateBuff buff = new StateBuff(id, record, CastHandler.Cast, target, Effect, dispellable);
+            StateBuff buff = new StateBuff(id, record, target, this, dispellable);
             target.AddBuff(buff);
             return buff;
         }
         public VitalityBuff AddVitalityBuff(Fighter target, short delta, FightDispellableEnum dispellable, ActionsEnum actionId)
         {
             int id = target.BuffIdProvider.Pop();
-            VitalityBuff buff = new VitalityBuff(id, delta, CastHandler.Cast, target, Effect, dispellable, actionId);
+            VitalityBuff buff = new VitalityBuff(id, delta, target, this, dispellable, actionId);
             target.AddBuff(buff);
             return buff;
         }

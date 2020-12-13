@@ -37,7 +37,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
                     sharedDamage.Computed = sharedDelta;
                     sharedDamage.IgnoreBoost = true;
                     sharedDamage.IgnoreResistances = true;
-                    sharedDamage.CannotTrigger = true;
                     ally.InflictDamage(sharedDamage);
                 }
 

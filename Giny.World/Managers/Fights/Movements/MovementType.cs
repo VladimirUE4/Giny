@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Movements
+namespace Giny.World.Managers.Fights.Movements
 {
     public enum MovementType
     {

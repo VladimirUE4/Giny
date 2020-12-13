@@ -12,7 +12,7 @@ namespace Giny.World.Managers.Fights.Buffs
 {
     public class InvisibilityBuff : Buff
     {
-        public InvisibilityBuff(int id, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable, short? customActionId = null) : base(id, cast, target, effect, dispellable, customActionId)
+        public InvisibilityBuff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id, target, effectHandler, dispellable, customActionId)
         {
         }
 

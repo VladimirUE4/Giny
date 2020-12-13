@@ -19,9 +19,9 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public VitalityBuff(int id, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable,
+        public VitalityBuff(int id, short delta , Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable,
             ActionsEnum actionId) :
-            base(id, cast, target, effect, dispellable, (short)actionId)
+            base(id, target, effectHandler, dispellable, (short)actionId)
         {
             this.Delta = delta;
         }

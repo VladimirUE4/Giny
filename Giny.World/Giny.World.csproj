@@ -118,7 +118,9 @@
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
-    <Compile Include="Managers\Fights\Effects\Movements\MovementType.cs" />
+    <Compile Include="Managers\Fights\Movements\Movement.cs" />
+    <Compile Include="Managers\Fights\Movements\MovementType.cs" />
+    <Compile Include="Managers\Fights\Effects\Movements\ReturnToOriginalPosition.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\Double.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummon.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummonSlave.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Managers\Fights\Marks\GlyphAura.cs" />
     <Compile Include="Managers\Fights\Marks\MarksManager.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
+    <Compile Include="Managers\Fights\Triggers\Death.cs" />
     <Compile Include="Managers\Fights\Triggers\Trigger.cs" />
     <Compile Include="Managers\Maps\Shapes\Manual.cs" />
     <Compile Include="Managers\Parties\Party.cs" />

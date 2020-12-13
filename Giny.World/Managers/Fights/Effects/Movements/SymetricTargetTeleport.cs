@@ -25,9 +25,9 @@ namespace Giny.World.Managers.Fights.Effects.Movements
             {
                 var targetPoint = new MapPoint((2 * target.Cell.Point.X - Source.Cell.Point.X), (2 * target.Cell.Point.Y - Source.Cell.Point.Y));
 
-                if (MapPoint.IsInMap(targetPoint.X,targetPoint.Y))
+                if (MapPoint.IsInMap(targetPoint.X, targetPoint.Y))
                 {
-                    var telefrag = Source.Teleport(Source, Source.Fight.Map.GetCell(targetPoint));
+                    var telefrag = Source.Teleport(Source, Source.Fight.Map.GetCell(targetPoint), CanTrigger());
 
                     if (telefrag != null)
                     {

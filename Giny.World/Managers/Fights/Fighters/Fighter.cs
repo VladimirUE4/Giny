@@ -17,6 +17,7 @@ using Giny.World.Managers.Fights.Effects.Damages;
 using Giny.World.Managers.Fights.Effects.Movements;
 using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Marks;
+using Giny.World.Managers.Fights.Movements;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Stats;
@@ -35,7 +36,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Fighters
 {
-    public abstract class Fighter : ITriggerToken
+    public abstract class Fighter
     {
         public event Action<Fighter> Moved;
 
@@ -190,6 +191,7 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             set;
         }
+
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
             this.Team = team;
@@ -394,7 +396,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                         this.MovementHistory.OnMove(path);
 
-                        OnMove(this, MovementType.Walk);
+                        OnMove(new Movement(MovementType.Walk, this, true));
 
                         this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
 
@@ -603,6 +605,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool TriggerBuffs(TriggerType type, ITriggerToken token, int? triggerParam = null)
         {
+            if (token != null && !token.CanTrigger)
+            {
+                return false;
+            }
+
             bool result = false;
 
             foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay()).ToArray())
@@ -1068,7 +1075,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             TriggerBuffs(TriggerType.OnSpecificStateAdded, buff, (short)buff.Record.Id);
         }
-        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
+        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool canTrigger, bool register = true)
         {
             if (!CanBeMoved())
             {
@@ -1078,7 +1085,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (otherTarget != null && otherTarget != this)
             {
-                this.SwitchPosition(otherTarget, register);
+                this.SwitchPosition(otherTarget, register, canTrigger);
                 return new Telefrag(this, otherTarget);
             }
 
@@ -1111,41 +1118,49 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
-            OnMove(source, MovementType.Teleport);
+            OnMove(new Movement(MovementType.Teleport, source, canTrigger));
 
             return null;
         }
 
-        public void PushBack(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
+        public void PushBack(Fighter source, CellRecord castCell, short delta, CellRecord targetCell, bool canTrigger)
         {
             DirectionsEnum direction = 0;
 
             if (targetCell.Id == Cell.Id)
             {
+                if (castCell.Id == targetCell.Id)
+                {
+                    return;
+                }
                 bool diagonal = targetCell.Point.IsOnSameDiagonal(castCell.Point);
                 direction = castCell.Point.OrientationTo(targetCell.Point, diagonal);
             }
             else
             {
+                if (targetCell.Id == Cell.Id)
+                {
+                    return;
+                }
                 bool diagonal = Cell.Point.IsOnSameDiagonal(targetCell.Point);
                 direction = targetCell.Point.OrientationTo(Cell.Point, diagonal);
             }
 
-            Slide(source, direction, delta, MovementType.Push);
+            Slide(source, direction, delta, MovementType.Push, canTrigger);
         }
-        public void Advance(Fighter source, short delta, CellRecord targetCell)
+        public void Advance(Fighter source, short delta, CellRecord targetCell, bool canTrigger)
         {
             bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
             DirectionsEnum direction = this.Cell.Point.OrientationTo(targetCell.Point, diagonal);
-            source.Slide(source, direction, delta, MovementType.Pull);
+            source.Slide(source, direction, delta, MovementType.Pull, canTrigger);
         }
-        public void Retreat(Fighter source, short delta, CellRecord targetCell)
+        public void Retreat(Fighter source, short delta, CellRecord targetCell, bool canTrigger)
         {
             bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
             DirectionsEnum direction = targetCell.Point.OrientationTo(this.Cell.Point, diagonal);
-            source.Slide(source, direction, delta, MovementType.Push);
+            source.Slide(source, direction, delta, MovementType.Push, canTrigger);
         }
-        public void PullForward(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
+        public void PullForward(Fighter source, CellRecord castCell, short delta, CellRecord targetCell, bool canTrigger)
         {
             DirectionsEnum direction = 0;
 
@@ -1166,7 +1181,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 direction = Cell.Point.OrientationTo(targetCell.Point, diagonal);
             }
 
-            this.Slide(source, direction, delta, MovementType.Pull);
+            this.Slide(source, direction, delta, MovementType.Pull, canTrigger);
         }
         private void InflictPushDamages(Fighter source, int n, bool headOn)
         {
@@ -1207,16 +1222,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = Id,
             });
         }
-        public void OnMove(Fighter source, MovementType type)
+        public void OnMove(Movement movement)
         {
-            if (type != MovementType.Walk)
+            if (movement.Type != MovementType.Walk)
             {
-                this.TriggerBuffs(TriggerType.OnMoved, source);
+                this.TriggerBuffs(TriggerType.OnMoved, movement);
             }
 
-            if (type == MovementType.Push)
+            if (movement.Type == MovementType.Push)
             {
-                this.TriggerBuffs(TriggerType.OnPushed, source);
+                this.TriggerBuffs(TriggerType.OnPushed, movement);
             }
 
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
@@ -1303,7 +1318,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
         }
-        public void Slide(Fighter source, DirectionsEnum direction, short delta, MovementType type)
+        public void Slide(Fighter source, DirectionsEnum direction, short delta, MovementType type, bool canTrigger)
         {
             if (!CanBeMoved())
             {
@@ -1382,12 +1397,12 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.Cell = Fight.Map.GetCell(destinationPoint);
 
-            OnMove(source, type);
+            OnMove(new Movement(type, source, canTrigger));
 
             MovementHistory.OnCellChanged(oldCell);
         }
         [WIP("teleport triggered")]
-        public void SwitchPosition(Fighter source, bool register = true)
+        public void SwitchPosition(Fighter source, bool canTrigger, bool register = true)
         {
             if (!CanSwitchPosition() || !CanBeMoved())
                 return;
@@ -1415,7 +1430,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 source.MovementHistory.RegisterEntry(this.Cell);
             }
 
-            OnMove(source, MovementType.SwitchPosition);
+            OnMove(new Movement(MovementType.SwitchPosition, source, canTrigger));
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)
@@ -1622,17 +1637,11 @@ namespace Giny.World.Managers.Fights.Fighters
             if ((IsInvulnerable() || !damage.Source.CanDealDamages()) || (IsInvulnerableMelee() && damage.Source.IsMeleeWith(this))
              || (IsInvulnerableRange() && !damage.Source.IsMeleeWith(this)) || delta < 0)
             {
-                if (!damage.CannotTrigger)
-                {
-                    TriggerBuffs(damage);
-                }
+                TriggerBuffs(damage);
                 return DamageResult.Zero();
             }
 
-            if (!damage.CannotTrigger)
-            {
-                TriggerBuffs(damage);
-            }
+            TriggerBuffs(damage);
 
             delta = damage.Computed.Value;
 
@@ -1640,8 +1649,8 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return DamageResult.Zero();
             }
-         
-            
+
+
 
             int lifeLoss = 0;
 
@@ -1745,19 +1754,17 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
 
-            if (!damage.CannotTrigger)
+            short reflected = (short)CalculateDamageReflection(damage.Computed.Value);
+
+            if (reflected > 0)
             {
-                short reflected = (short)CalculateDamageReflection(damage.Computed.Value);
-
-                if (reflected > 0)
-                {
-                    damage.Source.InflictDamage(new Damage(this, damage.Source, EffectSchoolEnum.Fix,
-                        reflected, reflected));
-                    OnDamageReflected(damage.Source);
-                }
-
-                TriggerBuffs(TriggerType.AfterDamaged, damage);
+                damage.Source.InflictDamage(new Damage(this, damage.Source, EffectSchoolEnum.Fix,
+                    reflected, reflected));
+                OnDamageReflected(damage.Source);
             }
+
+            TriggerBuffs(TriggerType.AfterDamaged, damage);
+
 
 
 
@@ -1834,7 +1841,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
 
-            
+
         }
         private int CalculateErodedLife(int damages)
         {
@@ -1862,7 +1869,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             foreach (var summon in Fight.GetFighters<Fighter>().Where(x => x.IsSummoned() && x.GetSummoner() == this).ToArray())
             {
-                summon.Die(this);
+                summon.Die(this, true);
             }
         }
         public void RemoveAndDispellAllBuffs(Fighter source, FightDispellableEnum dispellable = FightDispellableEnum.REALLY_NOT_DISPELLABLE)
@@ -1900,8 +1907,8 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
-        [WIP("do we past turn here... ?")]
-        public void Die(Fighter killedBy)
+        [WIP("null token?")]
+        public void Die(Fighter killedBy, bool canTrigger)
         {
             if (Alive)
             {
@@ -1920,7 +1927,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 this.Alive = false;
 
-                TriggerBuffs(TriggerType.OnDeath, killedBy);
+                TriggerBuffs(TriggerType.OnDeath, new Death(killedBy, canTrigger)); // null?
             }
             else
             {
@@ -2008,10 +2015,6 @@ namespace Giny.World.Managers.Fights.Fighters
             return $"{Id} : {Name}";
         }
 
-        public Fighter GetSource()
-        {
-            return this;
-        }
 
         public bool HasDamageSharingBuff(DamageSharing effect)
         {

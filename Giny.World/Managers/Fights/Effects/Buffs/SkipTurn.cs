@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
         {
             foreach (var target in targets)
             {
-                SkipTurnBuff buff = new SkipTurnBuff(target.BuffIdProvider.Pop(), CastHandler.Cast, target, Effect, FightDispellableEnum.DISPELLABLE);
+                SkipTurnBuff buff = new SkipTurnBuff(target.BuffIdProvider.Pop(), target, this, FightDispellableEnum.DISPELLABLE);
                 target.AddBuff(buff);
             }
         }

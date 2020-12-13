@@ -32,7 +32,7 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public SpellReduceApCostBuff(int id, short spellId, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable) : base(id, cast, target, effect, dispellable, (short)ActionEnum)
+        public SpellReduceApCostBuff(int id, short spellId, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) : base(id, target, effectHandler, dispellable, (short)ActionEnum)
         {
             this.SpellId = spellId;
             this.TargetSpell = Target.GetSpell(spellId);

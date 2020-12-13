@@ -21,8 +21,8 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
-        public ShieldBuff(int id, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable) :
-            base(id, cast, target, effect, dispellable, (short)ActionId)
+        public ShieldBuff(int id, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) :
+            base(id, target, effectHandler, dispellable, (short)ActionId)
         {
             this.Delta = delta;
         }
