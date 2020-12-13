@@ -27,7 +27,7 @@ Invisibility
 Poison damage client display
 Sort air en ligne iop (prob zone)
 
-
+Panache Reroll VIP StackOverflow
 
 Sorts a debug
 

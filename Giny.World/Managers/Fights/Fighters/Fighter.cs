@@ -1608,29 +1608,26 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("shield loss not working.")]
         public DamageResult InflictDamage(Damage damage)
         {
-            if (IsInvulnerable() || !damage.Source.CanDealDamages())
-            {
-                return DamageResult.Zero();
-            }
-            if (IsInvulnerableMelee() && damage.Source.IsMeleeWith(this))
-            {
-                return DamageResult.Zero();
-            }
-            if (IsInvulnerableRange() && !damage.Source.IsMeleeWith(this))
-            {
-                return DamageResult.Zero();
-            }
-
             damage.Compute();
 
             int delta = damage.Computed.Value;
 
-            if (delta <= 0 || (!Alive))
+            if (!Alive)
             {
                 return DamageResult.Zero();
             }
 
             this.LastAttacker = damage.Source;
+
+            if ((IsInvulnerable() || !damage.Source.CanDealDamages()) || (IsInvulnerableMelee() && damage.Source.IsMeleeWith(this))
+             || (IsInvulnerableRange() && !damage.Source.IsMeleeWith(this)) || delta < 0)
+            {
+                if (!damage.CannotTrigger)
+                {
+                    TriggerBuffs(damage);
+                }
+                return DamageResult.Zero();
+            }
 
             if (!damage.CannotTrigger)
             {
@@ -1643,6 +1640,8 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return DamageResult.Zero();
             }
+         
+            
 
             int lifeLoss = 0;
 
@@ -1777,11 +1776,23 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private void TriggerBuffs(Damage damage)
         {
+
             TriggerBuffs(TriggerType.OnDamaged, damage);
+
+            if (damage.Source.IsSummoned())
+            {
+                TriggerBuffs(TriggerType.OnDamagedBySummon, damage);
+            }
 
             switch (damage.EffectSchool)
             {
                 case EffectSchoolEnum.Pushback:
+
+                    if (damage.Source.IsFriendlyWith(this))
+                    {
+                        TriggerBuffs(TriggerType.OnDamagedByAllyPush, damage);
+                    }
+
                     TriggerBuffs(TriggerType.OnDamagedByPush, damage);
                     break;
                 case EffectSchoolEnum.Neutral:
@@ -1822,6 +1833,8 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
+
+            
         }
         private int CalculateErodedLife(int damages)
         {

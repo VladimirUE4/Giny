@@ -28,6 +28,8 @@ namespace Giny.World.Managers.Fights.AI
 
         public void Initialize()
         {
+            Actions.Add(new SummonAction(Fighter));
+            Actions.Add(new MarkAction(Fighter));
             Actions.Add(new BuffAction(Fighter));
             Actions.Add(new HealAction(Fighter));
             Actions.Add(new MoveToTarget(Fighter));

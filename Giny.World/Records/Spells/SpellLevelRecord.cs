@@ -220,5 +220,9 @@ namespace Giny.World.Records.Spells
         {
             return SpellsLevels.Values.Where(x => x.SpellId == spellId);
         }
+        public static IEnumerable<SpellLevelRecord> GetSpellLevels()
+        {
+            return SpellsLevels.Values;
+        }
     }
 }

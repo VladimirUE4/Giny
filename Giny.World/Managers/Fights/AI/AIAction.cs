@@ -1,4 +1,5 @@
 ﻿using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,9 @@ namespace Giny.World.Managers.Fights.AI
          */
         public abstract double ComputePriority(); 
 
+        protected IEnumerable<SpellRecord> GetSpells(SpellCategoryEnum category)
+        {
+            return Fighter.GetSpells().Where(x => x.Category.HasFlag(category));
+        }
     }
 }

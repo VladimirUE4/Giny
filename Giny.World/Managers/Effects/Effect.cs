@@ -219,6 +219,8 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnTurnEnd);
                 case "TB":
                     return new Trigger(TriggerType.OnTurnBegin);
+                case "DI":
+                    return new Trigger(TriggerType.OnDamagedBySummon);
                 case "D":
                     return new Trigger(TriggerType.OnDamaged);
                 case "DR":
@@ -239,6 +241,8 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnDamagedWater);
                 case "PD":
                     return new Trigger(TriggerType.OnDamagedByPush);
+                case "PMD":
+                    return new Trigger(TriggerType.OnDamagedByAllyPush);
                 case "DBE":
                     return new Trigger(TriggerType.OnDamagedByEnemy);
                 case "DBA":

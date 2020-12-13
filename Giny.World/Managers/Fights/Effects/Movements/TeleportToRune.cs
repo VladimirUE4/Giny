@@ -24,15 +24,22 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             var rune = Source.GetMarks<Rune>().LastOrDefault();
 
-            Telefrag telefrag = Source.Teleport(Source, rune.CenterCell);
-
-            if (telefrag != null)
+            if (rune != null)
             {
-                CastHandler.AddTelefrag(telefrag);
+                Telefrag telefrag = Source.Teleport(Source, rune.CenterCell);
+
+                if (telefrag != null)
+                {
+                    CastHandler.AddTelefrag(telefrag);
+                }
+
+                Source.Fight.RemoveMark(rune);
+
             }
-
-            Source.Fight.RemoveMark(rune);
-
+            else
+            {
+                Source.Fight.Warn("Unable to teleport to rune...");
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Giny.World.Managers.Fights.Fighters;
+﻿using Giny.Core.Extensions;
+using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,17 @@ namespace Giny.World.Managers.Fights.AI
             {
                 return;
             }
+
+            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Teleport).Shuffle())
+            {
+                var targetPoint = target.Cell.Point.GetNearPoints().FirstOrDefault(x => Fighter.Fight.IsCellFree(x.CellId));
+
+                if (targetPoint != null)
+                {
+                    Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);
+                }
+            }
+
             var path = Fighter.FindPath(target);
             Fighter.Move(path);
         }

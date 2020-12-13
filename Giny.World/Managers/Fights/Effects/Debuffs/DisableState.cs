@@ -24,8 +24,6 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
         {
             short stateId = (short)Effect.Value;
 
-            Effect.Duration = 2;
-
             foreach (var target in targets)
             {
                 if (Effect.Duration == -1 || Effect.EffectEnum == EffectsEnum.Effect_DispelState)

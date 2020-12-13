@@ -1,4 +1,5 @@
 ﻿using Giny.Core.Extensions;
+using Giny.Core.Misc;
 using Giny.ORM;
 using Giny.ORM.IO;
 using Giny.World.Managers.Effects;
@@ -54,6 +55,29 @@ namespace Giny.SpellExplorer
 
                 DatabaseManager.Instance.LoadTable<SpellLevelRecord>();
 
+
+
+                List<string> triggers = new List<string>();
+
+                foreach (var level in SpellLevelRecord.GetSpellLevels())
+                {
+                    foreach (var effect in level.Effects)
+                    {
+                        foreach (var trigger in effect.RawTriggers.Split('|'))
+                        {
+                            string v = trigger.RemoveNumbers();
+
+                            if (!triggers.Contains(v))
+                            {
+                                triggers.Add(v);
+                            }
+                        }
+                    }
+                }
+
+                Notepad.Open(string.Join(",", triggers));
+
+
                 window.Dispatcher.Invoke(() =>
                 {
                     window.OnLoadingEnd();
@@ -61,20 +85,6 @@ namespace Giny.SpellExplorer
 
             })).Start();
 
-            foreach (var spell in SpellRecord.GetSpellRecords())
-            {
-                foreach (var level in spell.Levels)
-                {
-                    foreach (var effect in level.Effects)
-                    {
-                        var test = (EffectDice)effect;
-                        if (test.Min == 13735 || test.Min == 13736)
-                        {
-
-                        }
-                    }
-                }
-            }
 
         }
 

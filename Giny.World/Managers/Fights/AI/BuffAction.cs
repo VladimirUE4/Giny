@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Fights.AI
         {
             foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Buff)))
             {
-                foreach (var ally in Fighter.Team.GetFighters<Fighter>())
+                foreach (var ally in Fighter.Team.GetFighters<Fighter>().ToArray())
                 {
                     Fighter.CastSpell(spellRecord.Id, ally.Cell.Id);
                 }

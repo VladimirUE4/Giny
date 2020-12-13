@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Giny.DatabasePatcher.Patchs
 {
-    public class SpellCategoryManager 
+    public class SpellCategoryManager
     {
         private static readonly EffectsEnum[] DamageEffects = new EffectsEnum[]
         {
@@ -25,6 +25,13 @@ namespace Giny.DatabasePatcher.Patchs
             EffectsEnum.Effect_StealHPWater,
             EffectsEnum.Effect_StealHPFix,
             EffectsEnum.Effect_StealHPNeutral,
+            EffectsEnum.Effect_DamageFirePerAP,
+            EffectsEnum.Effect_DamageWaterPerAP,
+            EffectsEnum.Effect_SwitchPosition,
+            EffectsEnum.Effect_SwitchPosition_1023,
+            EffectsEnum.Effect_SymetricPointTeleport,
+            EffectsEnum.Effect_PushBack,
+            EffectsEnum.Effect_PullForward,
         };
         private static readonly EffectsEnum[] HealingEffects = new EffectsEnum[]
         {
@@ -33,6 +40,7 @@ namespace Giny.DatabasePatcher.Patchs
             EffectsEnum.Effect_HealHP_81,
             EffectsEnum.Effect_AddVitality,
             EffectsEnum.Effect_AddVitalityPercent,
+            EffectsEnum.Effect_HealHP_407,
         };
         private static readonly EffectsEnum[] BuffEffects = new EffectsEnum[]
         {
@@ -42,6 +50,21 @@ namespace Giny.DatabasePatcher.Patchs
             EffectsEnum.Effect_AddShieldPercent,
             EffectsEnum.Effect_AddShield,
             EffectsEnum.Effect_AddState,
+        };
+        private static readonly EffectsEnum[] MarkEffects = new EffectsEnum[]
+        {
+            EffectsEnum.Effect_Trap,
+            EffectsEnum.Effect_Glyph_1165,
+            EffectsEnum.Effect_GlyphAura,
+        };
+        private static readonly EffectsEnum[] SummonEffects = new EffectsEnum[]
+        {
+            EffectsEnum.Effect_Summon,
+            EffectsEnum.Effect_KillAndSummon,
+        };
+        private static readonly EffectsEnum[] TeleportEffects = new EffectsEnum[]
+        {
+            EffectsEnum.Effect_Teleport,
         };
 
         public static void Initialize()
@@ -59,6 +82,10 @@ namespace Giny.DatabasePatcher.Patchs
 
             SpellLevelRecord level = record.Levels.LastOrDefault();
 
+            if (level.Effects.Any(x => SummonEffects.Contains(x.EffectEnum)))
+            {
+                category |= SpellCategoryEnum.Summon;
+            }
             if (level.Effects.Any(x => DamageEffects.Contains(x.EffectEnum)))
             {
                 category = SpellCategoryEnum.Damages;
@@ -67,11 +94,14 @@ namespace Giny.DatabasePatcher.Patchs
             {
                 category |= SpellCategoryEnum.Healing;
             }
-            if (level.Effects.Any(x=>BuffEffects.Contains(x.EffectEnum)))
+            if (level.Effects.Any(x => BuffEffects.Contains(x.EffectEnum)))
             {
                 category |= SpellCategoryEnum.Buff;
             }
-
+            if (level.Effects.Any(x => TeleportEffects.Contains(x.EffectEnum)))
+            {
+                category |= SpellCategoryEnum.Teleport;
+            }
             if (category == SpellCategoryEnum.None)
             {
                 category = SpellCategoryEnum.Damages;

@@ -27,8 +27,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedInCloseRange, //DM
         OnDamagedInLongRange, //DR
         OnDamagedByPush, // MD-->PD
-        OnDamagedByEnemyPush, //MDP
-        OnDamageEnemyByPush, // MDM
+        OnDamagedByAllyPush, //PMD
+        OnDamageEnemyByPush, // MMD
         OnDamagedUnknown_2, // Dr
         OnDamagedUnknown_3, // DTB
         OnDamagedUnknown_4, // DTE

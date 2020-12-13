@@ -271,7 +271,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
-            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(5);
+            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(1);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 
         }

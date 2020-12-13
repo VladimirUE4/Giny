@@ -14,5 +14,7 @@ namespace Giny.World.Records.Spells
         Healing = 2,
         Teleport = 4,
         Buff = 8,
+        Summon = 16,
+        Mark = 32,
     }
 }

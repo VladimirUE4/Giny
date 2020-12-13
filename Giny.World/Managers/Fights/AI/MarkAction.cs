@@ -9,31 +9,28 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.AI
 {
-    public class CastOnEnemyAction : AIAction
+    public class MarkAction : AIAction
     {
-        public CastOnEnemyAction(AIFighter fighter) : base(fighter)
+        public MarkAction(AIFighter fighter) : base(fighter)
         {
         }
 
-
         public override double ComputePriority()
         {
-            return 1d;
+            return 0.9d;
         }
 
         public override void Execute()
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
-            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Damages).Shuffle())
+            var targetPoint = target.Cell.Point.GetNearPoints().FirstOrDefault(x => Fighter.Fight.IsCellFree(x.CellId));
+
+            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Mark).Shuffle())
             {
-                if (spellRecord.Levels.All(x => x.MaxRange == 0))
+                if (targetPoint != null)
                 {
-                    Fighter.CastSpell(spellRecord.Id, Fighter.Cell.Id);
-                }
-                else
-                {
-                    Fighter.CastSpell(spellRecord.Id, target.Cell.Id);
+                    Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);
                 }
             }
         }
