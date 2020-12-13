@@ -265,6 +265,11 @@ namespace Giny.World.Managers.Effects
         {
             List<Trigger> results = new List<Trigger>();
 
+            if (RawTriggers == string.Empty)
+            {
+                return results;
+            }
+
             const char TriggerSplitter = '|';
 
             foreach (var rawTrigger in RawTriggers.Split(TriggerSplitter))

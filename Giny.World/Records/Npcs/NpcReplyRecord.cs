@@ -21,6 +21,11 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        public int ReplyId
+        {
+            get;
+            set;
+        }
         public int MessageId
         {
             get;

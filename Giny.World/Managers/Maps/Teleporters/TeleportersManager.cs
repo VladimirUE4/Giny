@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Maps.Teleporters
 
             foreach (var interactiveSkill in InteractiveSkillRecord.GetInteractiveSkills())
             {
-                if (interactiveSkill.ActionIdentifier == GenericActionEnum.ZAAP)
+                if (interactiveSkill.ActionIdentifier == GenericActionEnum.Zaap)
                 {
                     int zoneId = int.Parse(interactiveSkill.Param1);
 
@@ -40,7 +40,7 @@ namespace Giny.World.Managers.Maps.Teleporters
                         destinations[zoneId].Add(interactiveSkill.MapId);
                     }
                 }
-                else if (interactiveSkill.ActionIdentifier == GenericActionEnum.ZAAPI)
+                else if (interactiveSkill.ActionIdentifier == GenericActionEnum.Zaapi)
                 {
                     int zoneId = int.Parse(interactiveSkill.Param1);
 

@@ -163,7 +163,7 @@ namespace Giny.World.Managers.Chat
             TeleportersManager.Instance.AddDestination(
                 TeleporterTypeEnum.TELEPORTER_ZAAP,
                 InteractiveTypeEnum.ZAAP,
-                GenericActionEnum.ZAAP,
+                GenericActionEnum.Zaap,
                 client.Character.Map,
                 client.Character.Map.GetElementRecord(elementId),
                 zoneId);
@@ -174,7 +174,7 @@ namespace Giny.World.Managers.Chat
             TeleportersManager.Instance.AddDestination(
                 TeleporterTypeEnum.TELEPORTER_SUBWAY,
                 InteractiveTypeEnum.ZAAPI,
-                GenericActionEnum.ZAAPI,
+                GenericActionEnum.Zaapi,
                 client.Character.Map,
                 client.Character.Map.GetElementRecord(elementId),
                 zoneId);
@@ -271,7 +271,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
         public static void TestCommand(WorldClient client)
         {
-            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(1);
+            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 
         }

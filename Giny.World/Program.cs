@@ -34,9 +34,9 @@ namespace Giny.World
     {
         static void Main(string[] args)
         {
-          /*  WIPManager.Analyse(Assembly.GetExecutingAssembly());
-            Console.Read(); */
-            
+            /*  WIPManager.Analyse(Assembly.GetExecutingAssembly());
+              Console.Read(); */
+
             Logger.OnStartup();
             StartupManager.Instance.Initialize(Assembly.GetExecutingAssembly());
             IPCManager.Instance.ConnectToAuth();

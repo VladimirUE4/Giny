@@ -62,7 +62,7 @@ namespace Giny.World.Managers.Dialogs
         }
         public void DialogQuestion()
         {
-            Character.Client.Send(new NpcDialogQuestionMessage(MessageId, new string[] { "0" }, Replies.Select(x => (int)x.Id).Distinct().ToArray()));
+            Character.Client.Send(new NpcDialogQuestionMessage(MessageId, new string[] { "0" }, Replies.Select(x => (int)x.ReplyId).Distinct().ToArray()));
         }
         public override void Close()
         {
@@ -73,12 +73,14 @@ namespace Giny.World.Managers.Dialogs
         {
             this.Close();
 
-            IEnumerable<NpcReplyRecord> replies = Replies.Where(x => x.Id == replyId);
+            IEnumerable<NpcReplyRecord> replies = Replies.Where(x => x.ReplyId == replyId);
 
             foreach (var reply in replies)
             {
-                if (reply != null && reply.ActionIdentifier != GenericActionEnum.NONE)
+                if (reply != null && reply.ActionIdentifier != GenericActionEnum.None)
+                {
                     GenericActionsManager.Instance.Handle(Character, reply);
+                }
             }
 
         }
