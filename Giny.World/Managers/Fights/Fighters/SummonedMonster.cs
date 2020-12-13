@@ -32,7 +32,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override short Level => Grade.Level;
 
-
         public SummonedMonster(Fighter owner, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, summoningEffect, cell)
         {
             this.Record = record;
