@@ -33,7 +33,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
             if (target != null)
             {
-                target.Slide(Source, orientation, delta, false);
+                target.Slide(Source, orientation, delta, MovementType.Pull);
             }
         }
     }

@@ -119,6 +119,7 @@ namespace Giny.World.Managers.Fights.Triggers
         *tF=Tackled
         *tS=Tackle
         *X= Death
+        *CT = ?
         */
     }
 }

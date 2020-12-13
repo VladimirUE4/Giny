@@ -19,7 +19,7 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Source.Fight.Warn("No more effects...");
+            this.Source.Fight.Warn("No more effects...");
         }
     }
 }

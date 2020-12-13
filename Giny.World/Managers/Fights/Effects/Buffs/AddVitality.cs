@@ -1,4 +1,5 @@
 ﻿using Giny.Protocol.Enums;
+using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -13,6 +14,8 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
     [SpellEffectHandler(EffectsEnum.Effect_AddVitality)]
     public class AddVitality : SpellEffectHandler
     {
+        private const ActionsEnum ActionId = ActionsEnum.ACTION_CHARACTER_BOOST_VITALITY;
+
         public AddVitality(EffectDice effect, SpellCastHandler castHandler) :
             base(effect, castHandler)
         {
@@ -23,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
             foreach (var target in targets)
             {
                 short delta = (short)Effect.Min;
-                this.AddVitalityBuff(target, delta, FightDispellableEnum.DISPELLABLE);
+                this.AddVitalityBuff(target, delta, FightDispellableEnum.DISPELLABLE, ActionId);
             }
         }
     }

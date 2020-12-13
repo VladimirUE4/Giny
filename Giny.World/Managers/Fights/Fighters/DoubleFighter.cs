@@ -70,6 +70,9 @@ namespace Giny.World.Managers.Fights.Fighters
             return base.ToString() + " (Double)";
         }
 
-      
+        public override void OnSummoned()
+        {
+            
+        }
     }
 }

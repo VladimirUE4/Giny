@@ -20,8 +20,11 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            var fighter = CreateSummon((short)Effect.Min);
-            Source.Fight.AddSummon(Source, fighter);
+            if (this.IsValidTarget(Source) && Source.Fight.IsCellFree(TargetCell))
+            {
+                var fighter = CreateSummon((short)Effect.Min);
+                Source.Fight.AddSummon(Source, fighter);
+            }
         }
     }
 }

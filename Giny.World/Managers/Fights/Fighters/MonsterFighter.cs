@@ -178,5 +178,11 @@ namespace Giny.World.Managers.Fights.Fighters
         {
            
         }
+        public override void OnFightStarted()
+        {
+            base.OnFightStarted();
+
+            CastSpell(Grade.StartingSpellLevelId);
+        }
     }
 }

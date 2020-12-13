@@ -30,6 +30,7 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
+
         public CellRecord TargetCell
         {
             get;
@@ -94,7 +95,6 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-
         public SpellCast(Fighter source, Spell spell, CellRecord targetCell, SpellCast parent = null)
         {
             if (parent != null)
@@ -147,6 +147,14 @@ namespace Giny.World.Managers.Fights.Cast
             }
             return source;
         }
+
+       
+
+        public SpellCast GetParent()
+        {
+            return Parent;
+        }
+
         public override string ToString()
         {
             return Spell.Record.Name;

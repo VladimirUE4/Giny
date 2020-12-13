@@ -90,5 +90,18 @@ namespace Giny.World.Managers.Fights.Effects
         {
             look.AddSkin(1955);
         }
+
+        [SpellAppearance(667)]
+        public static void DrunkedPandawa(Fighter fighter,ref ServerEntityLook look)
+        {
+            if (look.IsRiding)
+            {
+                look.SetBones(1084);
+            }
+            else
+            {
+                look.SetBones(44);
+            }
+        }
     }
 }

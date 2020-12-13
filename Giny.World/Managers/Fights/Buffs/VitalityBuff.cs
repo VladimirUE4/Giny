@@ -14,32 +14,45 @@ namespace Giny.World.Managers.Fights.Buffs
 {
     public class VitalityBuff : Buff
     {
-        private const ActionsEnum ActionId = ActionsEnum.ACTION_CHARACTER_BOOST_VITALITY;
-
         private short Delta
         {
             get;
             set;
         }
-        public VitalityBuff(int id, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable) :
-            base(id, cast, target, effect, dispellable, (short)ActionId)
+        public VitalityBuff(int id, short delta, SpellCast cast, Fighter target, EffectDice effect, FightDispellableEnum dispellable,
+            ActionsEnum actionId) :
+            base(id, cast, target, effect, dispellable, (short)actionId)
         {
             this.Delta = delta;
         }
 
         public override void Apply()
         {
-            Target.Stats.AddVitality(Delta);
+            if (Delta < 0)
+            {
+                Target.Stats.RemoveVitality(Math.Abs(Delta));
+            }
+            else
+            {
+                Target.Stats.AddVitality(Delta);
+            }
         }
 
         public override void Dispell()
         {
-            Target.Stats.RemoveVitality(Delta);
+            if (Delta < 0)
+            {
+                Target.Stats.AddVitality(Delta);
+            }
+            else
+            {
+                Target.Stats.RemoveVitality(Math.Abs(Delta));
+            }
         }
 
         public override short GetDelta()
         {
-            return Delta;
+            return Math.Abs(Delta);
         }
     }
 }

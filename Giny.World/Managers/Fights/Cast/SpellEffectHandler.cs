@@ -19,6 +19,7 @@ using Giny.World.Managers.Stats;
 using Giny.Protocol.Enums;
 using Giny.World.Records.Monsters;
 using Giny.World.Managers.Fights.Triggers;
+using Giny.World.Managers.Actions;
 
 namespace Giny.World.Managers.Fights.Cast
 {
@@ -254,10 +255,10 @@ namespace Giny.World.Managers.Fights.Cast
             target.AddBuff(buff);
             return buff;
         }
-        public VitalityBuff AddVitalityBuff(Fighter target, short delta, FightDispellableEnum dispellable)
+        public VitalityBuff AddVitalityBuff(Fighter target, short delta, FightDispellableEnum dispellable, ActionsEnum actionId)
         {
             int id = target.BuffIdProvider.Pop();
-            VitalityBuff buff = new VitalityBuff(id, delta, CastHandler.Cast, target, Effect, dispellable);
+            VitalityBuff buff = new VitalityBuff(id, delta, CastHandler.Cast, target, Effect, dispellable, actionId);
             target.AddBuff(buff);
             return buff;
         }

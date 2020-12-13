@@ -90,6 +90,7 @@
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SkipTurnBuff.cs" />
     <Compile Include="Managers\Fights\Custom\Huppermage.cs" />
+    <Compile Include="Managers\Fights\Custom\Pandawa.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ArmorDamageReduction.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddRandModifier.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Managers\Fights\Effects\Damages\ReflectDamage.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\SubVitalityPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercentWhenAttack.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\HealWhenAttack.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
+    <Compile Include="Managers\Fights\Effects\Movements\MovementType.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\Double.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummon.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\KillAndSummonSlave.cs" />

@@ -1,6 +1,7 @@
 ﻿using Giny.Core.Extensions;
 using Giny.ORM;
 using Giny.ORM.IO;
+using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Effects;
 using Giny.World.Modules;
 using Giny.World.Records.Effects;
@@ -59,6 +60,21 @@ namespace Giny.SpellExplorer
                 });
 
             })).Start();
+
+            foreach (var spell in SpellRecord.GetSpellRecords())
+            {
+                foreach (var level in spell.Levels)
+                {
+                    foreach (var effect in level.Effects)
+                    {
+                        var test = (EffectDice)effect;
+                        if (test.Min == 13735 || test.Min == 13736)
+                        {
+
+                        }
+                    }
+                }
+            }
 
         }
 

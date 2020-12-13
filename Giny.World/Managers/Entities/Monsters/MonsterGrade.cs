@@ -138,5 +138,11 @@ namespace Giny.World.Managers.Monsters
             get;
             set;
         }
+        [ProtoMember(22)]
+        public int StartingSpellLevelId
+        {
+            get;
+            set;
+        }
     }
 }

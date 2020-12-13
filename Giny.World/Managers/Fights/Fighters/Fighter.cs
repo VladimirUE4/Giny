@@ -14,6 +14,7 @@ using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Effects.Damages;
+using Giny.World.Managers.Fights.Effects.Movements;
 using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Fights.Results;
@@ -393,7 +394,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                         this.MovementHistory.OnMove(path);
 
-                        OnMove(this, true);
+                        OnMove(this, MovementType.Walk);
 
                         this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
 
@@ -775,6 +776,22 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
+        public bool CastSpell(int levelId)
+        {
+            SpellLevelRecord level = SpellLevelRecord.GetSpellLevel(levelId);
+
+            if (level != null)
+            {
+                SpellRecord record = SpellRecord.GetSpellRecord(level.SpellId);
+                Spell spell = new Spell(record, level);
+                SpellCast cast = new SpellCast(this, spell, this.Cell);
+
+                cast.Force = true;
+                return this.CastSpell(cast);
+            }
+
+            return false;
+        }
         public virtual bool CastSpell(short spellId, short cellId)
         {
             Spell spell = GetSpell(spellId);
@@ -1090,7 +1107,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
-            OnMove(source, false);
+            OnMove(source, MovementType.Teleport);
 
             return null;
         }
@@ -1110,21 +1127,19 @@ namespace Giny.World.Managers.Fights.Fighters
                 direction = targetCell.Point.OrientationTo(Cell.Point, diagonal);
             }
 
-            Slide(source, direction, delta, true);
+            Slide(source, direction, delta, MovementType.Push);
         }
-        [WIP("useless. Put this in the Spell Effect handler.")]
         public void Advance(Fighter source, short delta, CellRecord targetCell)
         {
             bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
             DirectionsEnum direction = this.Cell.Point.OrientationTo(targetCell.Point, diagonal);
-            source.Slide(source, direction, delta, false);
+            source.Slide(source, direction, delta, MovementType.Pull);
         }
-        [WIP("useless. Put this in the Spell Effect handler.")]
         public void Retreat(Fighter source, short delta, CellRecord targetCell)
         {
             bool diagonal = this.Cell.Point.IsOnSameDiagonal(targetCell.Point);
             DirectionsEnum direction = targetCell.Point.OrientationTo(this.Cell.Point, diagonal);
-            source.Slide(source, direction, delta, true);
+            source.Slide(source, direction, delta, MovementType.Push);
         }
         public void PullForward(Fighter source, CellRecord castCell, short delta, CellRecord targetCell)
         {
@@ -1147,7 +1162,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 direction = Cell.Point.OrientationTo(targetCell.Point, diagonal);
             }
 
-            this.Slide(source, direction, delta, false);
+            this.Slide(source, direction, delta, MovementType.Pull);
         }
         private void InflictPushDamages(Fighter source, int n, bool headOn)
         {
@@ -1188,11 +1203,16 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = Id,
             });
         }
-        public void OnMove(Fighter source, bool isMapMovement)
+        public void OnMove(Fighter source, MovementType type)
         {
-            if (!isMapMovement) // not a teleportation / slide / swap
+            if (type != MovementType.Walk)
             {
                 this.TriggerBuffs(TriggerType.OnMoved, source);
+            }
+
+            if (type == MovementType.Push)
+            {
+                this.TriggerBuffs(TriggerType.OnPushed, source);
             }
 
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
@@ -1279,13 +1299,13 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
         }
-        public void Slide(Fighter source, DirectionsEnum direction, short delta, bool isPush)
+        public void Slide(Fighter source, DirectionsEnum direction, short delta, MovementType type)
         {
             if (!CanBeMoved())
             {
                 return;
             }
-            if (isPush && !CanBePushed())
+            if (type == MovementType.Push && !CanBePushed())
             {
                 return;
             }
@@ -1308,7 +1328,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
                 else
                 {
-                    if (isPush)
+                    if (type == MovementType.Push)
                     {
                         InflictPushDamages(source, delta - i, true);
                         MapPoint next = destinationPoint.GetNearestCellInDirection(direction);
@@ -1358,7 +1378,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.Cell = Fight.Map.GetCell(destinationPoint);
 
-            OnMove(source, false);
+            OnMove(source, type);
 
             MovementHistory.OnCellChanged(oldCell);
         }
@@ -1391,7 +1411,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 source.MovementHistory.RegisterEntry(this.Cell);
             }
 
-            OnMove(source, false);
+            OnMove(source, MovementType.SwitchPosition);
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)

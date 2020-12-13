@@ -224,6 +224,7 @@ namespace Giny.DatabaseSynchronizer
                     ActionPoints = (short)val.ActionPoints,
                     Agility = (short)val.agility,
                     AirResistance = (short)val.airResistance,
+                    StartingSpellLevelId = val.startingSpellId,
                     ApDodge = (short)val.paDodge,
                     Chance = (short)val.chance,
                     DamageReflect = (short)val.damageReflect,

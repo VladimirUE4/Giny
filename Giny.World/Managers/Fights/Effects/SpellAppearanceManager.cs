@@ -1,6 +1,7 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Modules;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,16 +21,20 @@ namespace Giny.World.Managers.Fights.Effects
         [StartupInvoke(StartupInvokePriority.FourthPass)]
         public void Initialize()
         {
-            foreach (var method in typeof(SpellAppearances).GetMethods())
+            foreach (var type in AssemblyCore.GetTypes())
             {
-                SpellAppearanceAttribute attribute = method.GetCustomAttribute<SpellAppearanceAttribute>();
-
-                if (attribute != null)
+                foreach (var method in type.GetMethods())
                 {
-                    SpellAppearanceDelegate @delegate = (SpellAppearanceDelegate)Delegate.CreateDelegate(typeof(SpellAppearanceDelegate), method);
-                    m_handlers.Add(attribute.AppearanceId, @delegate);
+                    SpellAppearanceAttribute attribute = method.GetCustomAttribute<SpellAppearanceAttribute>();
+
+                    if (attribute != null)
+                    {
+                        SpellAppearanceDelegate @delegate = (SpellAppearanceDelegate)Delegate.CreateDelegate(typeof(SpellAppearanceDelegate), method);
+                        m_handlers.Add(attribute.AppearanceId, @delegate);
+                    }
                 }
             }
+           
         }
         public ServerEntityLook Apply(Fighter fighter, int appearanceId)
         {

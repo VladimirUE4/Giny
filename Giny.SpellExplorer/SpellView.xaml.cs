@@ -50,7 +50,25 @@ namespace Giny.SpellExplorer
                 effectsList.Items.Add(effect);
             }
         }
+        private string TriggersToString(IEnumerable<World.Managers.Fights.Triggers.Trigger> triggers)
+        {
+            string result = string.Empty;
 
+            foreach (var trigger in triggers)
+            {
+                result += trigger.Type;
+
+                if (trigger.Value.HasValue)
+                {
+                    result += " (" + trigger.Value + ")";
+                }
+
+                if (trigger != triggers.Last())
+                    result += ",";
+            }
+
+            return result;
+        }
         private void EffectsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             effectInfo.Items.Clear();
@@ -80,7 +98,7 @@ namespace Giny.SpellExplorer
             }
             effectInfo.Items.Add("Targets : " + targets);
             effectInfo.Items.Add("Triggers : " + effect.RawTriggers);
-            effectInfo.Items.Add("Triggers Enum : " + effect.Triggers);
+            effectInfo.Items.Add("Triggers Enum : " + TriggersToString(effect.Triggers));
             effectInfo.Items.Add("Raw Zone : " + effect.RawZone);
             effectInfo.Items.Add("Order : " + effect.Order);
             effectInfo.Items.Add("Modificator : " + effect.Modificator);

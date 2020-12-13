@@ -205,6 +205,8 @@ namespace Giny.World.Managers.Effects
 
             switch (identifier)
             {
+                case "P":
+                    return new Trigger(TriggerType.OnPushed);
                 case "TE":
                     return new Trigger(TriggerType.OnTurnEnd);
                 case "TB":

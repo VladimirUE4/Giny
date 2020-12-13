@@ -210,6 +210,12 @@ namespace Giny.World.Records.Spells
         {
             return "Grade : (" + Grade + ")";
         }
+        public static SpellLevelRecord GetSpellLevel(long levelId)
+        {
+            SpellLevelRecord result = null;
+            SpellsLevels.TryGetValue(levelId, out result);
+            return result;
+        }
         public static IEnumerable<SpellLevelRecord> GetSpellLevels(short spellId)
         {
             return SpellsLevels.Values.Where(x => x.SpellId == spellId);

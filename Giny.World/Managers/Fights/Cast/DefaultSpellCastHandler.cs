@@ -111,7 +111,8 @@ namespace Giny.World.Managers.Fights.Cast
                 }
             }
 
-            IEnumerable<SpellEffectHandler> handlers = OrderHandlers();
+
+            SpellEffectHandler[] handlers = OrderHandlers().ToArray();
 
             foreach (var handler in handlers)
             {
