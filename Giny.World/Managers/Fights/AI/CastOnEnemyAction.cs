@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.AI
 {
-    public class AgressAction : AIAction
+    public class CastOnEnemyAction : AIAction
     {
-        public AgressAction(AIFighter fighter) : base(fighter)
+        public CastOnEnemyAction(AIFighter fighter) : base(fighter)
         {
         }
 
@@ -27,7 +27,14 @@ namespace Giny.World.Managers.Fights.AI
 
             foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Damages)).Shuffle())
             {
-                Fighter.CastSpell(spellRecord.Id, target.Cell.Id);
+                if (spellRecord.Levels.All(x => x.MaxRange == 0))
+                {
+                    Fighter.CastSpell(spellRecord.Id, Fighter.Cell.Id);
+                }
+                else
+                {
+                    Fighter.CastSpell(spellRecord.Id, target.Cell.Id);
+                }
             }
         }
     }

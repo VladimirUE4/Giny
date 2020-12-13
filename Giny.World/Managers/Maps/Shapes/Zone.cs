@@ -3,6 +3,8 @@ using System;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Records.Maps;
 using Giny.World.Managers.Fights.Cast;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Giny.World.Managers.Maps.Shapes
 {
@@ -13,10 +15,15 @@ namespace Giny.World.Managers.Maps.Shapes
 
         public const int UNLIMITED_ZONE_SIZE = 50;
 
-        private IShape m_shape;
-
         private SpellShapeEnum m_shapeType;
 
+        public Zone(IEnumerable<short> cells)
+        {
+            Radius = 0;
+            MinRadius = 0;
+            ShapeType = SpellShapeEnum.manual;
+            Shape = new Manual(cells);
+        }
         public Zone(SpellShapeEnum shape, byte radius)
         {
             Radius = radius;
@@ -52,14 +59,13 @@ namespace Giny.World.Managers.Maps.Shapes
 
         public IShape Shape
         {
-            get { return m_shape; }
+            get;
+            private set;
         }
-
-        #region IShape Members
 
         public uint Surface
         {
-            get { return m_shape.Surface; }
+            get { return Shape.Surface; }
         }
 
         public byte MinRadius
@@ -69,8 +75,8 @@ namespace Giny.World.Managers.Maps.Shapes
             {
                 m_minRadius = value;
 
-                if (m_shape != null)
-                    m_shape.MinRadius = value;
+                if (Shape != null)
+                    Shape.MinRadius = value;
             }
         }
 
@@ -95,8 +101,8 @@ namespace Giny.World.Managers.Maps.Shapes
             set
             {
                 m_direction = value;
-                if (m_shape != null)
-                    m_shape.Direction = value;
+                if (Shape != null)
+                    Shape.Direction = value;
             }
         }
 
@@ -110,105 +116,108 @@ namespace Giny.World.Managers.Maps.Shapes
             set
             {
                 m_radius = value;
-                if (m_shape != null)
-                    m_shape.Radius = value;
+                if (Shape != null)
+                    Shape.Radius = value;
             }
         }
 
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map) => m_shape.GetCells(centerCell, map);
-
-        #endregion
+        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map) => Shape.GetCells(centerCell, map);
 
         private void InitializeShape()
         {
+            if (ShapeType == SpellShapeEnum.manual)
+            {
+                return;
+            }
+
             switch (ShapeType)
             {
                 case SpellShapeEnum.X:
-                    m_shape = new Cross(MinRadius, Radius);
+                    Shape = new Cross(MinRadius, Radius);
                     break;
                 case SpellShapeEnum.L:
-                    m_shape = new Line(Radius, false);
+                    Shape = new Line(Radius, false);
                     break;
                 case SpellShapeEnum.l:
-                    m_shape = new Line(Radius, true);
+                    Shape = new Line(Radius, true);
                     break;
                 case SpellShapeEnum.T:
-                    m_shape = new Cross(0, Radius)
+                    Shape = new Cross(0, Radius)
                     {
                         OnlyPerpendicular = true
                     };
                     break;
                 case SpellShapeEnum.D:
-                    m_shape = new Cross(0, Radius);
+                    Shape = new Cross(0, Radius);
                     break;
                 case SpellShapeEnum.C:
-                    m_shape = new Lozenge(MinRadius, Radius);
+                    Shape = new Lozenge(MinRadius, Radius);
                     break;
                 case SpellShapeEnum.I:
-                    m_shape = new Lozenge(Radius, 63);
+                    Shape = new Lozenge(Radius, 63);
                     break;
                 case SpellShapeEnum.O:
-                    m_shape = new Lozenge(Radius, Radius);
+                    Shape = new Lozenge(Radius, Radius);
                     break;
                 case SpellShapeEnum.Q:
-                    m_shape = new Cross(MinRadius > 0 ? MinRadius : (byte)1, Radius);
+                    Shape = new Cross(MinRadius > 0 ? MinRadius : (byte)1, Radius);
                     break;
                 case SpellShapeEnum.G:
-                    m_shape = new Square(0, Radius);
+                    Shape = new Square(0, Radius);
                     break;
                 case SpellShapeEnum.V:
-                    m_shape = new Cone(0, Radius);
+                    Shape = new Cone(0, Radius);
                     break;
                 case SpellShapeEnum.W:
-                    m_shape = new Square(0, Radius)
+                    Shape = new Square(0, Radius)
                     {
                         DiagonalFree = true
                     };
                     break;
                 case SpellShapeEnum.plus:
-                    m_shape = new Cross(0, Radius)
+                    Shape = new Cross(0, Radius)
                     {
                         Diagonal = true
                     };
                     break;
                 case SpellShapeEnum.sharp:
-                    m_shape = new Cross(MinRadius > 0 ? MinRadius : (byte)1, Radius)
+                    Shape = new Cross(MinRadius > 0 ? MinRadius : (byte)1, Radius)
                     {
                         Diagonal = true
                     };
                     break;
                 case SpellShapeEnum.star:
-                    m_shape = new Cross(0, Radius)
+                    Shape = new Cross(0, Radius)
                     {
                         AllDirections = true
                     };
                     break;
                 case SpellShapeEnum.slash:
-                    m_shape = new Line(Radius, false);
+                    Shape = new Line(Radius, false);
                     break;
                 case SpellShapeEnum.U:
-                    m_shape = new HalfLozenge(0, Radius);
+                    Shape = new HalfLozenge(0, Radius);
                     break;
                 case SpellShapeEnum.A:
                 case SpellShapeEnum.a:
-                    m_shape = new Lozenge(0, 63);
+                    Shape = new Lozenge(0, 63);
                     break;
                 case SpellShapeEnum.P:
-                    m_shape = new Single();
+                    Shape = new Single();
                     break;
                 case SpellShapeEnum.minus:
-                    m_shape = new Cross(0, Radius)
+                    Shape = new Cross(0, Radius)
                     {
                         Diagonal = true,
                         OnlyPerpendicular = true
                     };
                     break;
                 default:
-                    m_shape = new Cross(MinRadius, Radius);
+                    Shape = new Cross(MinRadius, Radius);
                     break;
             }
 
-            m_shape.Direction = Direction;
+            Shape.Direction = Direction;
         }
         public double GetShapeEfficiency(CellRecord targetCell, CellRecord impactCell)
         {

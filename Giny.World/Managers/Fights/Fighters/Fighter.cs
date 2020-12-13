@@ -443,7 +443,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public void GainMp(Fighter source, short delta)
         {
             Stats.GainMp(delta);
-            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
+            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_WIN, delta);
         }
         public virtual void PassTurn()
         {
@@ -580,6 +580,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = buff.Target.Id,
                 verboseCast = true,
             });
+
             BuffIdProvider.Push(buff.Id);
         }
         public void AddBuff(Buff buff)
@@ -1053,7 +1054,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public bool HasState(int stateId)
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.Id == stateId);
+            bool hasState = GetBuffs<StateBuff>().Any(x => x.Record.Id == stateId);
+            bool isStateDisabled = GetBuffs<DisableStateBuff>().Any(x => x.StateId == stateId);
+            return hasState && !isStateDisabled;
         }
         public void OnStateRemoved(StateBuff buff)
         {
@@ -1497,43 +1500,43 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual bool CanTackle()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantTackle);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantTackle).Any(y => HasState(y.StateId));
         }
         public virtual bool CanBeTackled()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantBeTackled);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantBeTackled).Any(y => HasState(y.StateId));
         }
         public virtual bool CanDealDamages()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantDealDamage);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantDealDamage).Any(y => HasState(y.StateId));
         }
         public virtual bool IsInvulnerableMelee()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableMelee);
+            return GetBuffs<StateBuff>().Where(x => x.Record.InvulnerableMelee).Any(y => HasState(y.StateId));
         }
         public virtual bool IsInvulnerableRange()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.InvulnerableRange);
+            return GetBuffs<StateBuff>().Where(x => x.Record.InvulnerableRange).Any(y => HasState(y.StateId));
         }
         public virtual bool IsInvulnerable()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.Invulnerable);
+            return GetBuffs<StateBuff>().Where(x => x.Record.Invulnerable).Any(y => HasState(y.StateId));
         }
         public virtual bool CanBeMoved()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantBeMoved);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantBeMoved).Any(y => HasState(y.StateId));
         }
         public virtual bool CanSwitchPosition()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantSwitchPosition);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantSwitchPosition).Any(y => HasState(y.StateId));
         }
         public virtual bool CanBePushed()
         {
-            return GetBuffs<StateBuff>().All(x => !x.Record.CantBePushed);
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantBePushed).Any(y => HasState(y.StateId));
         }
         public virtual bool IsIncurable()
         {
-            return GetBuffs<StateBuff>().Any(x => x.Record.Incurable);
+            return GetBuffs<StateBuff>().Where(x => x.Record.Incurable).Any(y => HasState(y.StateId));
         }
         public void Heal(Healing healing)
         {
@@ -1996,7 +1999,11 @@ namespace Giny.World.Managers.Fights.Fighters
             return this;
         }
 
-
+        public bool HasDamageSharingBuff(DamageSharing effect)
+        {
+            return GetBuffs<TriggerBuff>().Any(x => x.Effect.EffectEnum == EffectsEnum.Effect_DamageSharing
+            && x.Cast == effect.CastHandler.Cast);
+        }
     }
 
 }

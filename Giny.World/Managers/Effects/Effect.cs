@@ -155,6 +155,12 @@ namespace Giny.World.Managers.Effects
                 return null;
             }
 
+            if (RawZone.StartsWith(";"))
+            {
+                string trimmed = RawZone.Replace(";", string.Empty);
+                return new Zone(trimmed.Split(',').Select(x => short.Parse(x)));
+            }
+
             var shape = (SpellShapeEnum)RawZone[0];
             byte size = 0;
             byte minSize = 0;
@@ -205,6 +211,8 @@ namespace Giny.World.Managers.Effects
 
             switch (identifier)
             {
+                case "CT":
+                    return new Trigger(TriggerType.OnTackle);
                 case "P":
                     return new Trigger(TriggerType.OnPushed);
                 case "TE":
@@ -248,7 +256,7 @@ namespace Giny.World.Managers.Effects
             return new Trigger(TriggerType.Unknown);
         }
 
-      
+
         private List<Trigger> ParseTriggers()
         {
             List<Trigger> results = new List<Trigger>();

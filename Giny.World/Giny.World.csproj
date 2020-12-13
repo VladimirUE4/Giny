@@ -85,6 +85,7 @@
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
+    <Compile Include="Managers\Fights\Buffs\DisableStateBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\GlobalDamageReductionBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RandModifierBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
@@ -102,7 +103,9 @@
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerCasterHpEroded.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerHpEroded.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerHpLost.cs" />
+    <Compile Include="Managers\Fights\Effects\Damages\DamageSharing.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\ReflectDamage.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\DisableState.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\SubVitalityPercent.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Managers\Fights\Marks\MarksManager.cs" />
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
     <Compile Include="Managers\Fights\Triggers\Trigger.cs" />
+    <Compile Include="Managers\Maps\Shapes\Manual.cs" />
     <Compile Include="Managers\Parties\Party.cs" />
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
     <Compile Include="Managers\Parties\PartyManager.cs" />
@@ -178,7 +182,7 @@
     <Compile Include="Managers\Effects\Targets\JustSummonedCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\SummonerCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\TelefragCriterion.cs" />
-    <Compile Include="Managers\Fights\AI\AgressAction.cs" />
+    <Compile Include="Managers\Fights\AI\CastOnEnemyAction.cs" />
     <Compile Include="Managers\Fights\AI\AIAction.cs" />
     <Compile Include="Managers\Fights\AI\BuffAction.cs" />
     <Compile Include="Managers\Fights\AI\FleeAction.cs" />
@@ -210,7 +214,6 @@
     <Compile Include="Managers\Fights\Effects\Damages\DamagePercent.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerMpUsed.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerRemainingMp.cs" />
-    <Compile Include="Managers\Fights\Effects\Debuffs\DispellState.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceFinalDamages.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\StatsDebuff.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\SubApRoll.cs" />

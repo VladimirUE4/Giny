@@ -40,9 +40,9 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         {
             short reflected = (short)Effect.Min;
 
-            Damage reflectDamage = new Damage(damage.Target, damage.Source, EffectSchoolEnum.Fix, reflected, reflected);
+            Damage reflectDamage = new Damage(damage.Target, damage.Source, damage.EffectSchool, reflected, reflected);
             reflectDamage.CannotTrigger = true;
-
+            damage.Computed = reflected;
             damage.Source.InflictDamage(reflectDamage);
             damage.Target.OnDamageReflected(damage.Source);
         }

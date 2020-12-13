@@ -330,6 +330,10 @@ namespace Giny.World.Managers.Fights.Cast.Units
             return (short)result;                        // (short)(result < jet ? jet : result);
         }
 
+        public SpellEffectHandler GetEffectHandler()
+        {
+            return EffectHandler;
+        }
         public Fighter GetSource()
         {
             return Source;

@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Fights.AI
             Actions.Add(new BuffAction(Fighter));
             Actions.Add(new HealAction(Fighter));
             Actions.Add(new MoveToTarget(Fighter));
-            Actions.Add(new AgressAction(Fighter));
+            Actions.Add(new CastOnEnemyAction(Fighter));
             Actions.Add(new FleeAction(Fighter));
         }
 

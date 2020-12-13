@@ -378,18 +378,25 @@ namespace Giny.World.Managers.Fights
 
             this.OnFightStarted();
 
+            Synchronizer = Synchronizer.RequestCheck(this, StartTurn, LagAndStartFight, SynchronizerTimout * 1000);
+
         }
-        public virtual void OnFightStarted()
+        public void OnFightStarted()
         {
             foreach (var fighter in GetFighters())
             {
                 fighter.OnFightStarted();
             }
+        }
+        private void LagAndStartFight(CharacterFighter[] laggers)
+        {
+            if (Synchronizer == null)
+                return;
+
+            OnLaggersSpotted(laggers);
 
             StartTurn();
-
         }
-
         private void StartTurn()
         {
             if (Started && !Ended && !CheckFightEnd())
