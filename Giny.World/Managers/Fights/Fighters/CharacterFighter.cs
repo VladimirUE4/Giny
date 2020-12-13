@@ -72,6 +72,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override bool Sex => Character.Record.Sex;
 
+        public override BreedEnum Breed => (BreedEnum)Character.Record.BreedId;
+
         public CharacterFighter(Character character, FightTeam team, CellRecord roleplayCell) : base(team, roleplayCell)
         {
             this.Character = character;

@@ -127,6 +127,11 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             get;
         }
+
+        public abstract BreedEnum Breed
+        {
+            get;
+        }
         public CellRecord FightStartCell
 
         {
@@ -1083,7 +1088,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             Fighter otherTarget = Fight.GetFighter(targetCell.Id);
 
-            if (otherTarget != null && otherTarget != this)
+            if (otherTarget != null && otherTarget != this && source.Breed == BreedEnum.Xelor)
             {
                 this.SwitchPosition(otherTarget, register, canTrigger);
                 return new Telefrag(this, otherTarget);

@@ -16,7 +16,7 @@ namespace Giny.Pokefus.Fight.Fighters
 {
     public class PokefusFighter : SummonedMonster
     {
-        public PokefusFighter(Fighter owner, MonsterRecord record, DefaultSpellCastHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
+        public PokefusFighter(Fighter owner, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
         {
 
         }

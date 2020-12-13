@@ -47,9 +47,6 @@ namespace Giny.World.Managers.Fights.Cast
                 return CastHandler.Cast.TargetCell;
             }
         }
-
-
-
         public EffectDice Effect
         {
             get;

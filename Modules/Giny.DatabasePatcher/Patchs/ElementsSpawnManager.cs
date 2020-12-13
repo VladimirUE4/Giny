@@ -29,7 +29,7 @@ namespace Giny.DatabasePatcher.Patchs
                         {
                             InteractiveSkillRecord interactiveSkillRecord = new InteractiveSkillRecord()
                             {
-                                ActionIdentifier = GenericActionEnum.COLLECT,
+                                ActionIdentifier = GenericActionEnum.Collect,
                                 Criteria = string.Empty,
                                 Id = InteractiveSkillRecord.PopNextId(),
                                 Identifier = element.Identifier,

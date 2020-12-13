@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Cast;
@@ -38,6 +39,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
         public override bool Sex => false;
+
+        public override BreedEnum Breed => BreedEnum.SUMMONED;
 
         public SummonedFighter(Fighter owner, SpellEffectHandler summoningEffect, CellRecord cell) :
             base(owner.Team, null)

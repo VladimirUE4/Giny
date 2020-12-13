@@ -152,25 +152,12 @@ namespace Giny.World.Managers.Items
         {
             List<Effect> results = new List<Effect>();
 
-            foreach (Effect effect in effects.FindAll(x => WeaponBoostableEffects.Contains(x.EffectEnum)))
+            foreach (EffectDice effect in effects.FindAll(x => WeaponBoostableEffects.Contains(x.EffectEnum)))
             {
-                if (effect is EffectDice)
-                {
-                    EffectDice newEffect = (EffectDice)effect.Clone();
-                    newEffect.Min += weapon.CriticalHitBonus;
-                    newEffect.Max += weapon.CriticalHitBonus;
-                    results.Add(newEffect);
-                }
-                else if (effect is EffectInteger)
-                {
-                    EffectInteger newEffect = (EffectInteger)effect.Clone();
-                    newEffect.Value += weapon.CriticalHitBonus;
-                    results.Add(newEffect);
-                }
-                else
-                {
-                    throw new Exception("Unhandled weapon effect...");
-                }
+                EffectDice newEffect = (EffectDice)effect.Clone();
+                newEffect.Min += weapon.CriticalHitBonus;
+                newEffect.Max += weapon.CriticalHitBonus;
+                results.Add(newEffect);
             }
             return results;
         }

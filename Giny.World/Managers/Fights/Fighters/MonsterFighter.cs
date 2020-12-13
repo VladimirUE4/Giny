@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Giny.Core.Extensions;
 using Giny.Core.Time;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Monsters;
 using Giny.World.Managers.Fights.Cast;
@@ -43,6 +44,8 @@ namespace Giny.World.Managers.Fights.Fighters
         public MonsterGrade Grade => Monster.Grade;
 
         public MonsterRecord Record => Monster.Record;
+
+        public override BreedEnum Breed => BreedEnum.MONSTER;
 
         public override void Initialize()
         {

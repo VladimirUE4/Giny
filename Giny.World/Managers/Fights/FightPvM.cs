@@ -101,22 +101,24 @@ namespace Giny.World.Managers.Fights
         }
         public override void OnFighterJoined(Fighter fighter)
         {
-            if (MonsterGroup is ModularMonsterGroup)
+            if (!Started)
             {
-                FightTeam monsterTeam = this.GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER);
-
-                FightTeam playerTeam = monsterTeam.EnemyTeam;
-
-                if (fighter.Team == playerTeam)
+                if (MonsterGroup is ModularMonsterGroup)
                 {
-                    var modularGroup = (ModularMonsterGroup)MonsterGroup;
+                    FightTeam monsterTeam = this.GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER);
 
-                    foreach (var monsterFighter in modularGroup.CreateFighters(monsterTeam, monsterTeam.GetFightersCount(), playerTeam.GetFightersCount()))
+                    FightTeam playerTeam = monsterTeam.EnemyTeam;
+
+                    if (fighter.Team == playerTeam)
                     {
-                        monsterTeam.AddFighter(monsterFighter);
+                        var modularGroup = (ModularMonsterGroup)MonsterGroup;
+
+                        foreach (var monsterFighter in modularGroup.CreateFighters(monsterTeam, monsterTeam.GetFightersCount(), playerTeam.GetFightersCount()))
+                        {
+                            monsterTeam.AddFighter(monsterFighter);
+                        }
                     }
                 }
-
             }
 
         }

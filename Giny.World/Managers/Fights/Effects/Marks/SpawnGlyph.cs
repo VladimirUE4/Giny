@@ -24,17 +24,14 @@ namespace Giny.World.Managers.Fights.Effects.Marks
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (!Source.Fight.MarkExist<Glyph>(x => x.CenterCell == TargetCell))
-            {
-                Zone zone = Effect.GetZone();
+            Zone zone = Effect.GetZone();
 
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
+            Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
 
-                Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
-                     zone, GetTriggerType(), color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
+            Glyph glyph = new Glyph(Source.Fight.PopNextMarkId(), Effect,
+                 zone, GetTriggerType(), color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
-                Source.Fight.AddMark(glyph);
-            }
+            Source.Fight.AddMark(glyph);
         }
 
         private MarkTriggerType GetTriggerType()

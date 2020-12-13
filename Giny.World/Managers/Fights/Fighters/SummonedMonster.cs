@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Stats;
@@ -30,6 +31,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public override string Name => Record.Name;
 
         public override short Level => Grade.Level;
+
 
         public SummonedMonster(Fighter owner, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, summoningEffect, cell)
         {
