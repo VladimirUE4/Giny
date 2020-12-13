@@ -84,6 +84,7 @@
     <Compile Include="Managers\Effects\EffectCustom.cs" />
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
+    <Compile Include="Managers\Effects\Targets\UnknownCriterionW.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
     <Compile Include="Managers\Fights\AI\MarkAction.cs" />
     <Compile Include="Managers\Fights\AI\SummonAction.cs" />

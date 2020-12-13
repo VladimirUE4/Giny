@@ -616,7 +616,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
 
             bool result = false;
-
+           
             foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay()).ToArray())
             {
                 if (buff.Apply(token))
@@ -1663,8 +1663,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 return DamageResult.Zero();
             }
 
-
-
             int lifeLoss = 0;
 
             int shieldLoss = 0;
@@ -1796,7 +1794,10 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private void TriggerBuffs(Damage damage)
         {
-
+            if (damage.GetEffectHandler() != null && damage.GetEffectHandler().Effect.Duration > 0)
+            {
+                return;
+            }
             TriggerBuffs(TriggerType.OnDamaged, damage);
 
             if (damage.Source.IsSummoned())

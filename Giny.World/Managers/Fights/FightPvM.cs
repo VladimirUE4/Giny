@@ -34,6 +34,11 @@ namespace Giny.World.Managers.Fights
             : base(id, map, blueTeam, redTeam, cell)
         {
             this.MonsterGroup = monsterGroup;
+
+            if (map.IsDungeonMap && MonsterGroup is ModularMonsterGroup)
+            {
+                this.TargetMapId = map.DungeonMap.NextMapId;
+            }
         }
 
         public override FightCommonInformations GetFightCommonInformations()

@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2794)] // cast spell from initial source ?
-    public class CastSpell2794 : SpellEffectHandler // mot air eau animé
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2794)]
+    public class CastSpell2794 : SpellEffectHandler 
     {
         public CastSpell2794(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
@@ -23,11 +23,9 @@ namespace Giny.World.Managers.Fights.Effects.Cast
         {
             Spell spell = CreateCastedSpell();
 
-            var targetCell = this.CastHandler.Cast.GetInitialSource().Cell ;
-            
-            foreach (var target in targets) // target cast or Source ? 
+            foreach (var target in targets) 
             {
-                SpellCast cast = new SpellCast(target, spell, TargetCell, CastHandler.Cast);
+                SpellCast cast = new SpellCast(target, spell, TargetCell, CastHandler.Cast);  // TargetCell, no doubts.
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 cast.Silent = true;

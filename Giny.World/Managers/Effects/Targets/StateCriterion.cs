@@ -58,7 +58,7 @@ namespace Giny.World.Managers.Effects.Targets
             {
                 return "Has not State (" + record.Name + ")";
             }
-          
+
         }
     }
 }

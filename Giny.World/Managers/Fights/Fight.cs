@@ -224,10 +224,7 @@ namespace Giny.World.Managers.Fights
             this.Synchronizer = null;
             this.Marks = new List<Mark>();
 
-            if (map.IsDungeonMap)
-            {
-                this.TargetMapId = map.DungeonMap.NextMapId;
-            }
+           
         }
 
 
@@ -520,10 +517,13 @@ namespace Giny.World.Managers.Fights
                 Synchronizer = null;
             }
 
+            
+
+            OnTurnStopped();
+
             if (CheckFightEnd())
                 return;
 
-            OnTurnStopped();
             Synchronizer = Synchronizer.RequestCheck(this, PassTurnAndCheck, LagAndPassTurn, SynchronizerTimout * 1000);
 
         }
@@ -675,11 +675,9 @@ namespace Giny.World.Managers.Fights
 
             CheckDeads();
 
-            if (CheckFightEnd())
-                return;
-
             if (SequenceManager.IsSequencing)
                 SequenceManager.EndAllSequences();
+           
 
             Send(new GameFightTurnEndMessage(FighterPlaying.Id));
         }

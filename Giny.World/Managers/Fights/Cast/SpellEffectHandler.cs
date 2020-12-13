@@ -101,23 +101,30 @@ namespace Giny.World.Managers.Fights.Cast
             this.CastHandler = castHandler;
             Effect = effect;
             Zone = Effect.GetZone(CastCell.Point.OrientationTo(TargetCell.Point));
+
             this.AffectedFighters = GetAffectedFighters();
+
         }
 
         [WIP("Dont like this post condition to fill cells (no genercity)")]
         private IEnumerable<Fighter> GetAffectedFighters()
         {
             List<CellRecord> affectedCells = GetAffectedCells();
-
-            /* foreach (var cell in affectedCells)
-            {
-                Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
-            } */
+            /*
+                foreach (var cell in affectedCells)
+                {
+                    Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
+                }
+            */
 
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
                 affectedCells.Add(Source.Cell);
 
-            return Source.Fight.GetFighters(affectedCells).Where(entry => entry.Alive && !entry.IsCarried() && IsValidTarget(entry)).ToArray();
+            var fighters = Source.Fight.GetFighters(affectedCells);
+
+            var results = fighters.Where(entry => entry.Alive && !entry.IsCarried() && IsValidTarget(entry)).ToArray();
+
+            return results;
         }
 
         public bool IsValidTarget(Fighter actor)
@@ -155,7 +162,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
-            if (RefreshTargets || Targets.Any(x => x.CheckWhenExecute))
+            if (Targets.Any(x => x.CheckWhenExecute) || CastHandler.GetEffectHandlers().All(x => x.RefreshTargets))
             {
                 AffectedFighters = GetAffectedFighters();
             }
