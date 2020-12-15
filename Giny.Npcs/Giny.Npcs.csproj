@@ -55,7 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BuySell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Editor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Loader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -67,8 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BuySell.xaml.cs">
+      <DependentUpon>BuySell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Loader.xaml.cs">
+      <DependentUpon>Loader.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -100,6 +114,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Giny.Core\Giny.Core.csproj">
+      <Project>{8AB2DC30-B9CC-4D45-8104-71B384BB5F57}</Project>
+      <Name>Giny.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giny.IO\Giny.IO.csproj">
+      <Project>{125FA15D-C012-4AF3-8A65-F6A104A67FC1}</Project>
+      <Name>Giny.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giny.ORM\Giny.ORM.csproj">
+      <Project>{C6182B67-9D36-4E64-8BA9-9E186F818667}</Project>
+      <Name>Giny.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giny.Protocol\Giny.Protocol.csproj">
+      <Project>{1EEA4E95-4EEF-444E-B261-5CB8AFE90040}</Project>
+      <Name>Giny.Protocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giny.World\Giny.World.csproj">
+      <Project>{3C81205A-634D-4AA9-B00A-5B31FAD1C5A3}</Project>
+      <Name>Giny.World</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

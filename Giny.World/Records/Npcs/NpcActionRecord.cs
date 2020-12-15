@@ -59,5 +59,10 @@ namespace Giny.World.Records.Npcs
         {
             return NpcsActions.Keys.OrderByDescending(x => x).First() + 1;
         }
+
+        public override string ToString()
+        {
+            return Action.ToString();
+        }
     }
 }

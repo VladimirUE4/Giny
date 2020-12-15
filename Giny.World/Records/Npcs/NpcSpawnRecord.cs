@@ -88,5 +88,10 @@ namespace Giny.World.Records.Npcs
         {
             return NpcSpawns[spawnId];
         }
+
+        public override string ToString()
+        {
+            return "(Id : " + Id + ") " + Template.Name + " (CellId : " + CellId + ")";
+        }
     }
 }

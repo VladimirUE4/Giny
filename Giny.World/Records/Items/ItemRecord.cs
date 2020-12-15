@@ -188,6 +188,10 @@ namespace Giny.World.Records.Items
             return Items[gid];
         }
 
+        public override string ToString()
+        {
+            return "(" + Id + ") " + Name;
+        }
 
     }
 }

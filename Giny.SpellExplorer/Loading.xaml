@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ProgressBar Foreground="Goldenrod" Name="progressBar" HorizontalAlignment="Left" Height="23" Margin="145,217,0,0" VerticalAlignment="Top" Width="399"/>
-        <Label Name="loadingLbl" Content="Loading Spells..." HorizontalAlignment="Left" Margin="286,186,0,0" VerticalAlignment="Top"/>
+        <Label Name="loadingLbl" Content="Loading ..." HorizontalAlignment="Left" Margin="286,186,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
