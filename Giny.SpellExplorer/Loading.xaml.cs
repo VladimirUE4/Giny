@@ -55,29 +55,6 @@ namespace Giny.SpellExplorer
 
                 DatabaseManager.Instance.LoadTable<SpellLevelRecord>();
 
-
-
-                List<string> triggers = new List<string>();
-
-                foreach (var level in SpellLevelRecord.GetSpellLevels())
-                {
-                    foreach (var effect in level.Effects)
-                    {
-                        foreach (var trigger in effect.RawTriggers.Split('|'))
-                        {
-                            string v = trigger.RemoveNumbers();
-
-                            if (!triggers.Contains(v))
-                            {
-                                triggers.Add(v);
-                            }
-                        }
-                    }
-                }
-
-                Notepad.Open(string.Join(",", triggers));
-
-
                 window.Dispatcher.Invoke(() =>
                 {
                     window.OnLoadingEnd();

@@ -21,7 +21,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                target.Teleport(Source, target.FightStartCell, CanTrigger());
+                target.Teleport(Source, target.FightStartCell);
             }
         }
     }

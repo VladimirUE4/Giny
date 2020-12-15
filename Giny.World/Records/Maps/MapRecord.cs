@@ -141,7 +141,10 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Ignore]
-        public bool CanSpawnMonsters => IsDungeonMap || Position.AllowMonsterRespawn && !HasZaap() && Cells.All(x => !x.FarmCell);
+        public bool CanSpawnMonsters => IsDungeonMap
+            || (Position.AllowMonsterRespawn && !HasZaap()
+            && Cells.All(x => !x.FarmCell) 
+            && BlueCells.Length > 0 && RedCells.Length > 0);
 
         [Ignore]
         public bool IsDungeonMap => DungeonMap != null;

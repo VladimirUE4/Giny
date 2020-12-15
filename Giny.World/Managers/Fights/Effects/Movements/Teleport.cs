@@ -20,7 +20,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Telefrag telefrag = Source.Teleport(Source, TargetCell,CanTrigger());
+            Telefrag telefrag = Source.Teleport(Source, TargetCell);
 
             if (telefrag != null)
             {

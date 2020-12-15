@@ -63,7 +63,7 @@ namespace Giny.World.Records.Spells
             set;
         }
         [Ignore]
-        public SpellLevelRecord[] Levels
+        public List<SpellLevelRecord> Levels
         {
             get;
             set;
@@ -87,13 +87,19 @@ namespace Giny.World.Records.Spells
         [StartupInvoke("Spells bindings", StartupInvokePriority.SixthPath)]
         public static void Initialize()
         {
-            foreach (var spell in Spells)
+            foreach (var spell in Spells.Values)
             {
-                var variantSpellId = SpellVariantRecord.GetVariant(spell.Value.Id);
+                var variantSpellId = SpellVariantRecord.GetVariant(spell.Id);
                 if (variantSpellId != -1)
-                    spell.Value.VariantRecord = GetSpellRecord(variantSpellId);
+                    spell.VariantRecord = GetSpellRecord(variantSpellId);
 
-                spell.Value.Levels = SpellLevelRecord.GetSpellLevels((short)spell.Key).ToArray();
+                spell.Levels = new List<SpellLevelRecord>();
+
+                foreach (var levelId in spell.SpellLevels)
+                {
+                    SpellLevelRecord level = SpellLevelRecord.GetSpellLevel(levelId);
+                    spell.Levels.Add(level);
+                }
             }
         }
         public override string ToString()
@@ -102,7 +108,7 @@ namespace Giny.World.Records.Spells
         }
         public SpellLevelRecord GetLevel(byte grade)
         {
-            if (Levels.Length >= grade)
+            if (Levels.Count >= grade)
             {
                 return Levels[grade - 1];
             }

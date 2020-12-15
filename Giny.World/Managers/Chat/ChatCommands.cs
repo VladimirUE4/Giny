@@ -62,7 +62,6 @@ namespace Giny.World.Managers.Chat
 
             client.Character.Map.ReloadMembers();
             client.Character.Map.Instance.Reload();
-
             client.Character.Reply("Dungeon map added.");
         }
         [ChatCommand("monsters", ServerRoleEnum.ADMINISTRATOR)]

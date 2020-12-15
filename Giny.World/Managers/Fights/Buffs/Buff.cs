@@ -60,8 +60,6 @@ namespace Giny.World.Managers.Fights.Buffs
             set;
         }
 
-        public bool CanTrigger => EffectHandler.CanTrigger();
-
         public Buff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null)
         {
             this.Id = id;

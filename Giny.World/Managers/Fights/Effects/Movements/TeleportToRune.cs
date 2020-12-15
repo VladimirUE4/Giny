@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
             if (rune != null)
             {
-                Telefrag telefrag = Source.Teleport(Source, rune.CenterCell, CanTrigger());
+                Telefrag telefrag = Source.Teleport(Source, rune.CenterCell);
 
                 if (telefrag != null)
                 {

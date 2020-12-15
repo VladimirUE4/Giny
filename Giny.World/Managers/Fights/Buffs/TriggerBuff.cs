@@ -41,7 +41,11 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             private set;
         }
-
+        public bool CanTrigger
+        {
+            get;
+            set;
+        }
 
         public TriggerBuff(int id, IEnumerable<Trigger> triggers, TriggerBuffApplyHandler applyTrigger,
             TriggerBuffRemoveHandler removeTrigger, int delay, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable)
@@ -51,7 +55,7 @@ namespace Giny.World.Managers.Fights.Buffs
             this.ApplyTrigger = applyTrigger;
             this.Delay = delay;
             this.RemoveTrigger = removeTrigger;
-
+            this.CanTrigger = true;
         }
 
         public bool DecrementDelay()

@@ -211,6 +211,8 @@ namespace Giny.World.Managers.Effects
 
             switch (identifier)
             {
+                case "H":
+                    return new Trigger(TriggerType.OnHealed);
                 case "CT":
                     return new Trigger(TriggerType.OnTackle);
                 case "P":
@@ -249,6 +251,8 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnDamagedByAlly);
                 case "M":
                     return new Trigger(TriggerType.OnMoved);
+                case "MPA":
+                    return new Trigger(TriggerType.OnMPLost);
                 case "X":
                     return new Trigger(TriggerType.OnDeath);
                 case "I":

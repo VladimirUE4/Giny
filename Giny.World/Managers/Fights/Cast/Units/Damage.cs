@@ -64,8 +64,6 @@ namespace Giny.World.Managers.Fights.Cast.Units
             set;
         }
 
-        public bool CanTrigger => EffectHandler != null && EffectHandler.CanTrigger();
-
         public Damage(Fighter source, Fighter target, EffectSchoolEnum school, short min, short max, SpellEffectHandler effectHandler = null)
         {
             this.Source = source;

@@ -27,9 +27,6 @@ namespace Giny.World.Managers.Fights.Cast.Units
             private set;
         }
 
-        [WIP]
-        public bool CanTrigger => true; // nop (spell effect handler)
-
         public Healing(Fighter source, Fighter target, short delta)
         {
             this.Source = source;

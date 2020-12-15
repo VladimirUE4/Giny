@@ -2,6 +2,9 @@
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Effects;
+using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Maps.Shapes.Sets;
+using Giny.World.Records.Maps;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -206,6 +209,7 @@ namespace Giny.World.Records.Spells
             get;
             set;
         }
+
         public override string ToString()
         {
             return "Grade : (" + Grade + ")";
@@ -215,10 +219,6 @@ namespace Giny.World.Records.Spells
             SpellLevelRecord result = null;
             SpellsLevels.TryGetValue(levelId, out result);
             return result;
-        }
-        public static IEnumerable<SpellLevelRecord> GetSpellLevels(short spellId)
-        {
-            return SpellsLevels.Values.Where(x => x.SpellId == spellId);
         }
         public static IEnumerable<SpellLevelRecord> GetSpellLevels()
         {

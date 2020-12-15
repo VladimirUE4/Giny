@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
             if (target != null)
             {
-                Source.Retreat(Source, (short)Effect.Min, target.Cell, CanTrigger());
+                Source.Retreat(Source, (short)Effect.Min, target.Cell);
             }
         }
     }

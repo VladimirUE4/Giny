@@ -50,6 +50,11 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Summoner = owner;
         }
 
+        public override void Initialize()
+        {
+            base.Initialize();
+            this.FightStartCell = this.Cell;
+        }
         public override FightTeamMemberInformations GetFightTeamMemberInformations()
         {
             throw new NotImplementedException();

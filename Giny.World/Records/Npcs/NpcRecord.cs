@@ -1,4 +1,5 @@
-﻿using Giny.IO.D2O;
+﻿using Giny.Core.DesignPattern;
+using Giny.IO.D2O;
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Entities.Look;
@@ -49,7 +50,18 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
-
+        [StartupInvoke(StartupInvokePriority.FourthPass)]
+        public static void Initialize()
+        {
+            foreach (var npc in Npcs.Values)
+            {
+                if (npc.Look.Colors.Count > 0)
+                {
+                    int[] colors = EntityLookManager.Instance.GetConvertedColors(npc.Look.Colors);
+                    npc.Look.SetColors(colors);
+                }
+            }
+        }
         public static bool NpcExist(short templateId)
         {
             return Npcs.ContainsKey(templateId);

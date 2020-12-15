@@ -15,15 +15,9 @@ namespace Giny.World.Managers.Fights.Triggers
             get;
             set;
         }
-        public bool CanTrigger
-        {
-            get;
-            private set;
-        }
-        public Death(Fighter source,bool canTrigger)
+        public Death(Fighter source)
         {
             this.Source = source;
-            this.CanTrigger = canTrigger;
         }
        
 

@@ -236,7 +236,9 @@ namespace Giny.World.Records.Maps
         }
         public static MapPositionRecord GetMapPosition(long mapId)
         {
-            return MapPositions.ContainsKey(mapId) ? MapPositions[mapId] : null;
+            MapPositionRecord result = null;
+            MapPositions.TryGetValue(mapId, out result);
+            return result;
         }
 
     }

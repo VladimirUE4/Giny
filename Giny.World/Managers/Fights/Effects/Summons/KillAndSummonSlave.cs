@@ -28,7 +28,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
             {
                 if (target.IsSummoned() && target.GetSummoner() == Source)
                 {
-                    target.Die(Source, CanTrigger());
+                    target.Die(Source);
 
                     SummonedMonster summon = CreateSummon((short)Effect.Min);
                     summon.SetController((CharacterFighter)Source);

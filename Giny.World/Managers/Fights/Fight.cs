@@ -483,7 +483,7 @@ namespace Giny.World.Managers.Fights
                 {
                     foreach (var fighter in deads)
                     {
-                        fighter.Die(fighter, true);
+                        fighter.Die(fighter);
 
                         if (fighter.IsFighterTurn)
                         {
@@ -839,6 +839,17 @@ namespace Giny.World.Managers.Fights
                     RedTeam.Options.GetFightOptionsInformations(),
                     BlueTeam.Options.GetFightOptionsInformations()
             };
+        }
+
+        public void ResetTriggers()
+        {
+            foreach (var fighter in GetFighters<Fighter>())
+            {
+                foreach (var buff in fighter.GetBuffs<TriggerBuff>())
+                {
+                    buff.CanTrigger = true;
+                }
+            }
         }
 
         private void DeterminsWinners()

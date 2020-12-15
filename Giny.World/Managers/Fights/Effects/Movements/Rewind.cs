@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Fights.Effects.Movements
         {
             foreach (var target in targets)
             {
-                var telefrag = target.Teleport(Source, target.TurnStartCell,CanTrigger());
+                var telefrag = target.Teleport(Source, target.TurnStartCell);
 
                 if (telefrag != null)
                 {

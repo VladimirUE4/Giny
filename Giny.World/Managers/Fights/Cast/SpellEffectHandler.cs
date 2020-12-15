@@ -136,14 +136,7 @@ namespace Giny.World.Managers.Fights.Cast
         {
             return Zone.GetCells(TargetCell, Source.Fight.Map).ToList();
         }
-        /// <summary>
-        /// prevent some stack overflow issues.
-        /// </summary>
-        /// <returns></returns>
-        public bool CanTrigger()
-        {
-            return GetTriggerToken<ITriggerToken>() == null;
-        }
+     
         [WIP("usage?")]
         public virtual bool CanApply()
         {

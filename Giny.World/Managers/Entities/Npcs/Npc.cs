@@ -132,7 +132,7 @@ namespace Giny.World.Managers.Entities.Npcs
         }
         public override string ToString()
         {
-            return "Npc (" + Name + ") (SpawnId:" + SpawnRecord.Id + ") (CellId:" + CellId + ")";
+            return "Npc (" + Name + ") (Id:" + SpawnRecord.Id + " Record Id:" + Template.Id + ") (CellId:" + CellId + ")";
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Giny.World.Managers.Spells
 
             for (byte i = 0; i < 3; i++)
             {
-                if (i >= (ActiveSpellRecord.Levels.Length - 1))
+                if (i >= (ActiveSpellRecord.Levels.Count - 1))
                 {
                     index = i;
                     break;
