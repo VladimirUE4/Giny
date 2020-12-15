@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterSelectedErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5817;
+        public new const ushort Id = 6248;
         public override ushort MessageId => Id;
 
 

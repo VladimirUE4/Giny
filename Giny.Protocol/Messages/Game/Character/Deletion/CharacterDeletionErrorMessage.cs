@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterDeletionErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6428;
+        public new const ushort Id = 765;
         public override ushort MessageId => Id;
 
         public byte reason;

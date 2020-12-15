@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildInformationsGeneralMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5234;
+        public new const ushort Id = 5262;
         public override ushort MessageId => Id;
 
         public bool abandonnedPaddock;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationFailedBannedMessage : IdentificationFailedMessage  
     { 
-        public new const ushort Id = 7380;
+        public new const ushort Id = 5973;
         public override ushort MessageId => Id;
 
         public double banEndDate;

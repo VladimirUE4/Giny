@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HouseOnMapInformations : HouseInformations  
     { 
-        public const ushort Id = 7732;
+        public const ushort Id = 4222;
         public override ushort TypeId => Id;
 
         public int[] doorsOnMap;

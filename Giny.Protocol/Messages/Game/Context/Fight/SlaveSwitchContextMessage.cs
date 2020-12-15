@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SlaveSwitchContextMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9736;
+        public new const ushort Id = 3689;
         public override ushort MessageId => Id;
 
         public double masterId;

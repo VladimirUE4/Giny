@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOptionFollowers : HumanOption  
     { 
-        public const ushort Id = 773;
+        public const ushort Id = 7484;
         public override ushort TypeId => Id;
 
         public IndexedEntityLook[] followingCharactersLook;

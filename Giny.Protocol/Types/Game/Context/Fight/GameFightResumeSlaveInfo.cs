@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightResumeSlaveInfo  
     { 
-        public const ushort Id = 1880;
+        public const ushort Id = 6229;
         public virtual ushort TypeId => Id;
 
         public double slaveId;

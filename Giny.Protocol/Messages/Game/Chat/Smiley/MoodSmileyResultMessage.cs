@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MoodSmileyResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3199;
+        public new const ushort Id = 9425;
         public override ushort MessageId => Id;
 
         public byte resultCode;

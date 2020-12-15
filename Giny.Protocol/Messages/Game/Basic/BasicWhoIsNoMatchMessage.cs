@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsNoMatchMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5493;
+        public new const ushort Id = 2998;
         public override ushort MessageId => Id;
 
         public string search;

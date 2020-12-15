@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeCrafterJobLevelupMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8633;
+        public new const ushort Id = 710;
         public override ushort MessageId => Id;
 
         public byte crafterJobLevel;

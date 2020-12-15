@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayNpcInformations : GameRolePlayActorInformations  
     { 
-        public const ushort Id = 6845;
+        public const ushort Id = 863;
         public override ushort TypeId => Id;
 
         public short npcId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CheckIntegrityMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8606;
+        public new const ushort Id = 2999;
         public override ushort MessageId => Id;
 
         public byte[] data;

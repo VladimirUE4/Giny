@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class QueueStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9955;
+        public new const ushort Id = 817;
         public override ushort MessageId => Id;
 
         public short position;

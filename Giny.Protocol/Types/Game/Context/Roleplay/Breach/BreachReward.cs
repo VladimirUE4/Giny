@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class BreachReward  
     { 
-        public const ushort Id = 9541;
+        public const ushort Id = 2906;
         public virtual ushort TypeId => Id;
 
         public int id;

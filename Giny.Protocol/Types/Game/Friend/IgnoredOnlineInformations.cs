@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class IgnoredOnlineInformations : IgnoredInformations  
     { 
-        public const ushort Id = 8684;
+        public const ushort Id = 8804;
         public override ushort TypeId => Id;
 
         public long playerId;

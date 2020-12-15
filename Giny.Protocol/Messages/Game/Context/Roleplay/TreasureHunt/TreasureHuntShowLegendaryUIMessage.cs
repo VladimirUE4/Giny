@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TreasureHuntShowLegendaryUIMessage : NetworkMessage  
     { 
-        public new const ushort Id = 207;
+        public new const ushort Id = 7328;
         public override ushort MessageId => Id;
 
         public short[] availableLegendaryIds;

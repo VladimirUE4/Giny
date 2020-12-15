@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightSpellCooldown  
     { 
-        public const ushort Id = 4872;
+        public const ushort Id = 5155;
         public virtual ushort TypeId => Id;
 
         public int spellId;

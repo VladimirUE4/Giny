@@ -12,7 +12,7 @@ namespace Giny.IO.D2OClasses
         public const string MODULE = "Hints";
 
         public int Id => (int)id;
-
+        
         public int id;
         public uint gfx;
         public uint nameId;

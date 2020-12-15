@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicAckMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4378;
+        public new const ushort Id = 1792;
         public override ushort MessageId => Id;
 
         public int seq;

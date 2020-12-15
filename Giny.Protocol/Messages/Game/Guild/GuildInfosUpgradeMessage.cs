@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildInfosUpgradeMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2143;
+        public new const ushort Id = 5735;
         public override ushort MessageId => Id;
 
         public byte maxTaxCollectorsCount;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Placements
+namespace Giny.DatabasePatcher.Patchs.Placements
 {
     public class PlacementComplexityCalculator
     {

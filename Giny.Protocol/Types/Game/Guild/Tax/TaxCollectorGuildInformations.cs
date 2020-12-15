@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TaxCollectorGuildInformations : TaxCollectorComplementaryInformations  
     { 
-        public const ushort Id = 904;
+        public const ushort Id = 1607;
         public override ushort TypeId => Id;
 
         public BasicGuildInformations guild;

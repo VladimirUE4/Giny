@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyInvitationMemberInformations : CharacterBaseInformations  
     { 
-        public const ushort Id = 5851;
+        public const ushort Id = 7121;
         public override ushort TypeId => Id;
 
         public short worldX;

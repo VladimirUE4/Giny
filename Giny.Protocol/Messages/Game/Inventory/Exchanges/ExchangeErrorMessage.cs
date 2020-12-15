@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3594;
+        public new const ushort Id = 5333;
         public override ushort MessageId => Id;
 
         public byte errorType;

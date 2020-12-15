@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayPrismInformations : GameRolePlayActorInformations  
     { 
-        public const ushort Id = 1573;
+        public const ushort Id = 4866;
         public override ushort TypeId => Id;
 
         public PrismInformation prism;

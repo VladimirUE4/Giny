@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightMinimalStats  
     { 
-        public const ushort Id = 8766;
+        public const ushort Id = 7930;
         public virtual ushort TypeId => Id;
 
         public int lifePoints;

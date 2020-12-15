@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayTaxCollectorInformations : GameRolePlayActorInformations  
     { 
-        public const ushort Id = 1546;
+        public const ushort Id = 487;
         public override ushort TypeId => Id;
 
         public TaxCollectorStaticInformations identification;

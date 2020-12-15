@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class UpdateLifePointsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8175;
+        public new const ushort Id = 3681;
         public override ushort MessageId => Id;
 
         public int lifePoints;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NumericWhoIsRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8770;
+        public new const ushort Id = 5142;
         public override ushort MessageId => Id;
 
         public long playerId;

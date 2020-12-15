@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class DungeonPartyFinderPlayer  
     { 
-        public const ushort Id = 6459;
+        public const ushort Id = 4840;
         public virtual ushort TypeId => Id;
 
         public long playerId;

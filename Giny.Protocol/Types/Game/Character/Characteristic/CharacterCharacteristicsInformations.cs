@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterCharacteristicsInformations  
     { 
-        public const ushort Id = 1165;
+        public const ushort Id = 322;
         public virtual ushort TypeId => Id;
 
         public long experience;

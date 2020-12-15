@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractContactInformations  
     { 
-        public const ushort Id = 9883;
+        public const ushort Id = 3761;
         public virtual ushort TypeId => Id;
 
         public int accountId;

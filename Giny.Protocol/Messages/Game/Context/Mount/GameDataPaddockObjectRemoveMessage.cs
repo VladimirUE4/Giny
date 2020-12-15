@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameDataPaddockObjectRemoveMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8782;
+        public new const ushort Id = 3122;
         public override ushort MessageId => Id;
 
         public short cellId;

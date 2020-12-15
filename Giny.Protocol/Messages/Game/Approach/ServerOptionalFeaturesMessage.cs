@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ServerOptionalFeaturesMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2305;
+        public new const ushort Id = 3844;
         public override ushort MessageId => Id;
 
         public byte[] features;

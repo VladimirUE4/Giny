@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TeleportDestination  
     { 
-        public const ushort Id = 979;
+        public const ushort Id = 3804;
         public virtual ushort TypeId => Id;
 
         public byte type;

@@ -19,6 +19,8 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
+            Logger.WriteColor1("Database Patcher > Computing Monsters kamas....");
+
             AsyncRandom random = new AsyncRandom();
 
             foreach (var monster in MonsterRecord.GetMonsterRecords())
@@ -46,8 +48,6 @@ namespace Giny.DatabasePatcher.Patchs
                 monster.MaxDroppedKamas = maxDroppedKamas / 2;
 
                 monster.UpdateInstantElement();
-
-                Logger.Write("Fixed : " + monster.Name);
             }
         }
     }

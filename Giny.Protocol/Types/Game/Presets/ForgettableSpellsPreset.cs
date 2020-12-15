@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ForgettableSpellsPreset : Preset  
     { 
-        public const ushort Id = 8993;
+        public const ushort Id = 7595;
         public override ushort TypeId => Id;
 
         public SpellsPreset baseSpellsPreset;

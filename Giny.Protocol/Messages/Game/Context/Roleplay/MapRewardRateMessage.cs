@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapRewardRateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9715;
+        public new const ushort Id = 3476;
         public override ushort MessageId => Id;
 
         public short mapRate;

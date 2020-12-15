@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyCannotJoinErrorMessage : AbstractPartyMessage  
     { 
-        public new const ushort Id = 4290;
+        public new const ushort Id = 232;
         public override ushort MessageId => Id;
 
         public byte reason;

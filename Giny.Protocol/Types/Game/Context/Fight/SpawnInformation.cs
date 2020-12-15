@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SpawnInformation  
     { 
-        public const ushort Id = 8258;
+        public const ushort Id = 259;
         public virtual ushort TypeId => Id;
 
 

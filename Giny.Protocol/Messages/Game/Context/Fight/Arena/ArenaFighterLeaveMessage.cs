@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ArenaFighterLeaveMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8113;
+        public new const ushort Id = 8348;
         public override ushort MessageId => Id;
 
         public CharacterBasicMinimalInformations leaver;

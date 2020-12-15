@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CurrentMapMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7422;
+        public new const ushort Id = 2889;
         public override ushort MessageId => Id;
 
         public double mapId;

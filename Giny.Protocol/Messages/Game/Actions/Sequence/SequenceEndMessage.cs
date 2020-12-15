@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SequenceEndMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8673;
+        public new const ushort Id = 2740;
         public override ushort MessageId => Id;
 
         public short actionId;

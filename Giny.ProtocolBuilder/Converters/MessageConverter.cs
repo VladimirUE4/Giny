@@ -35,7 +35,7 @@ namespace Giny.ProtocolBuilder.Converters
         {
             int protocolId = (int)File.GetField("protocolId").GetValue<ConstantExpression>().Value;
             StringBuilder sb = new StringBuilder();
-            string modifier = File.Extends == string.Empty ? string.Empty : "new";
+            string modifier = File.Extends != string.Empty ? string.Empty : "new";
             Append(string.Format("public {0} const ushort Id = {1};", modifier, protocolId), sb);
             Append("public override ushort MessageId => Id;", sb);
             return sb.ToString();

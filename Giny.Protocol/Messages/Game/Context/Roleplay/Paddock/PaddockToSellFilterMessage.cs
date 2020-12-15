@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PaddockToSellFilterMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1083;
+        public new const ushort Id = 5860;
         public override ushort MessageId => Id;
 
         public int areaId;

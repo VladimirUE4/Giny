@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TrustStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2030;
+        public new const ushort Id = 4536;
         public override ushort MessageId => Id;
 
         public bool trusted;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeCraftCountModifiedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3547;
+        public new const ushort Id = 6334;
         public override ushort MessageId => Id;
 
         public int count;

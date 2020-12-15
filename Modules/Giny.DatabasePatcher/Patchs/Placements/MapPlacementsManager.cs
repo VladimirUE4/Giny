@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Placements
+namespace Giny.DatabasePatcher.Patchs.Placements
 {
     public class MapPlacementsManager
     {
@@ -24,9 +24,10 @@ namespace Giny.World.Managers.Maps.Placements
 
         public static string PlacementPatternDirectory = "PlacementPatterns/";
 
-        [StartupInvoke("Map Placements", StartupInvokePriority.Disabled)]
         public static void Initialize()
         {
+            Logger.WriteColor1("Database Patcher > Fixing map placements....");
+
             IEnumerable<MapRecord> maps = MapRecord.GetMaps();
 
             int mapsCount = maps.Count();

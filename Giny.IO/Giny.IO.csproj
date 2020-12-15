@@ -160,6 +160,7 @@
     <Compile Include="D2OClasses\Items\Criterion\BonusSetItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\BreedItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\CommunityItemCriterion.cs" />
+    <Compile Include="D2OClasses\Items\Criterion\CriterionUtils.cs" />
     <Compile Include="D2OClasses\Items\Criterion\DayItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\EmoteItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\FriendlistItemCriterion.cs" />
@@ -257,6 +258,9 @@
     <Compile Include="D2OClasses\Npcs\TaxCollectorFirstname.cs" />
     <Compile Include="D2OClasses\Npcs\TaxCollectorName.cs" />
     <Compile Include="D2OClasses\Playlists\Playlist.cs" />
+    <Compile Include="D2OClasses\Popup\PopupButton.cs" />
+    <Compile Include="D2OClasses\Popup\PopupInformation.cs" />
+    <Compile Include="D2OClasses\Progression\FeatureDescription.cs" />
     <Compile Include="D2OClasses\Quest\Achievement.cs" />
     <Compile Include="D2OClasses\Quest\AchievementCategory.cs" />
     <Compile Include="D2OClasses\Quest\AchievementObjective.cs" />

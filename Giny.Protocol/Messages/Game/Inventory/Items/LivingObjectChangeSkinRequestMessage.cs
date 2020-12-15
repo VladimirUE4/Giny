@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LivingObjectChangeSkinRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1423;
+        public new const ushort Id = 7728;
         public override ushort MessageId => Id;
 
         public int livingUID;

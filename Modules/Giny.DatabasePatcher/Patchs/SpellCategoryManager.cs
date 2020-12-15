@@ -69,6 +69,8 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
+            Logger.WriteColor1("Database Patcher > Assigning spell categories....");
+
             foreach (var spell in SpellRecord.GetSpellRecords())
             {
                 AssignCategory(spell);
@@ -110,8 +112,7 @@ namespace Giny.DatabasePatcher.Patchs
             record.Category = category;
 
             record.UpdateInstantElement();
-
-            Logger.Write(record.Name + " assigned to category : " + category);
+             
         }
     }
 }

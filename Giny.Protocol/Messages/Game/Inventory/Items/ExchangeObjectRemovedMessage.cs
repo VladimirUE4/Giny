@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeObjectRemovedMessage : ExchangeObjectMessage  
     { 
-        public new const ushort Id = 1377;
+        public new const ushort Id = 4558;
         public override ushort MessageId => Id;
 
         public int objectUID;

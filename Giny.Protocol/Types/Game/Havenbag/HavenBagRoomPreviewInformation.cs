@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HavenBagRoomPreviewInformation  
     { 
-        public const ushort Id = 1987;
+        public const ushort Id = 6076;
         public virtual ushort TypeId => Id;
 
         public byte roomId;

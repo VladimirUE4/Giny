@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayNpcWithQuestInformations : GameRolePlayNpcInformations  
     { 
-        public const ushort Id = 784;
+        public const ushort Id = 3740;
         public override ushort TypeId => Id;
 
         public GameRolePlayNpcQuestFlag questFlag;

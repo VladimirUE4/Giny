@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChannelEnablingMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9158;
+        public new const ushort Id = 6237;
         public override ushort MessageId => Id;
 
         public byte channel;

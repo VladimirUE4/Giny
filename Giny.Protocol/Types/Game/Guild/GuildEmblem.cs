@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GuildEmblem  
     { 
-        public const ushort Id = 3367;
+        public const ushort Id = 1127;
         public virtual ushort TypeId => Id;
 
         public short symbolShape;

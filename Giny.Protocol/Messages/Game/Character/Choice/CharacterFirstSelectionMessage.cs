@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterFirstSelectionMessage : CharacterSelectionMessage  
     { 
-        public new const ushort Id = 1228;
+        public new const ushort Id = 3197;
         public override ushort MessageId => Id;
 
         public bool doTutorial;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountHarnessColorsUpdateRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5586;
+        public new const ushort Id = 3146;
         public override ushort MessageId => Id;
 
         public bool useHarnessColors;

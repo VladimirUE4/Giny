@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectDate : ObjectEffect  
     { 
-        public const ushort Id = 6666;
+        public const ushort Id = 5410;
         public override ushort TypeId => Id;
 
         public short year;

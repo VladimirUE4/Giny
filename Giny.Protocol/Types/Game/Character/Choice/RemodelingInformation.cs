@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class RemodelingInformation  
     { 
-        public const ushort Id = 8237;
+        public const ushort Id = 8502;
         public virtual ushort TypeId => Id;
 
         public string name;

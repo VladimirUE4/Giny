@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ServerSessionConstant  
     { 
-        public const ushort Id = 2481;
+        public const ushort Id = 8194;
         public virtual ushort TypeId => Id;
 
         public short id;

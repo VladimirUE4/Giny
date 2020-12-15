@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SocialNoticeSetRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7293;
+        public new const ushort Id = 723;
         public override ushort MessageId => Id;
 
 

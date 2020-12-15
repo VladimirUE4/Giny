@@ -31,6 +31,7 @@ namespace Giny.IO.D2OClasses
         public int bonusType;
         public bool useInFight;
         public uint effectPriority;
+        public double effectPowerRate;
         public int elementId;
 
         [D2OIgnore]
@@ -247,6 +248,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 effectPriority = value;
+            }
+        }
+        [D2OIgnore]
+        public double EffectPowerRate
+        {
+            get
+            {
+                return effectPowerRate;
+            }
+            set
+            {
+                effectPowerRate = value;
             }
         }
         [D2OIgnore]

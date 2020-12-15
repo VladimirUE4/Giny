@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendSetWarnOnLevelGainMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6883;
+        public new const ushort Id = 8698;
         public override ushort MessageId => Id;
 
         public bool enable;

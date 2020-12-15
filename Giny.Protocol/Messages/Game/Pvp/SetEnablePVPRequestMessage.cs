@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SetEnablePVPRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4606;
+        public new const ushort Id = 6792;
         public override ushort MessageId => Id;
 
         public bool enable;

@@ -395,9 +395,6 @@
     <Compile Include="Managers\Maps\MapsManager.cs" />
     <Compile Include="Managers\Maps\Npcs\NpcActions.cs" />
     <Compile Include="Managers\Maps\Npcs\NpcsManager.cs" />
-    <Compile Include="Managers\Maps\Placements\MapPlacementsManager.cs" />
-    <Compile Include="Managers\Maps\Placements\PlacementComplexityCalculator.cs" />
-    <Compile Include="Managers\Maps\Placements\PlacementPattern.cs" />
     <Compile Include="Managers\Maps\Shapes\All.cs" />
     <Compile Include="Managers\Maps\Shapes\Cone.cs" />
     <Compile Include="Managers\Maps\Shapes\Cross.cs" />

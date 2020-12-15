@@ -8,17 +8,17 @@ using Giny.Protocol.Enums;
 
 namespace Giny.Protocol.Messages
 { 
-    public class GameRolePlayArenaInvitationCandidatesAnswer : NetworkMessage  
+    public class GameRolePlayArenaInvitationCandidatesAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3459;
+        public new const ushort Id = 2383;
         public override ushort MessageId => Id;
 
         public LeagueFriendInformations[] candidates;
 
-        public GameRolePlayArenaInvitationCandidatesAnswer()
+        public GameRolePlayArenaInvitationCandidatesAnswerMessage()
         {
         }
-        public GameRolePlayArenaInvitationCandidatesAnswer(LeagueFriendInformations[] candidates)
+        public GameRolePlayArenaInvitationCandidatesAnswerMessage(LeagueFriendInformations[] candidates)
         {
             this.candidates = candidates;
         }

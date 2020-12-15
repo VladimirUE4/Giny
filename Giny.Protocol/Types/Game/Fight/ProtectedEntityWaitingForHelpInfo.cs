@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ProtectedEntityWaitingForHelpInfo  
     { 
-        public const ushort Id = 1550;
+        public const ushort Id = 2391;
         public virtual ushort TypeId => Id;
 
         public int timeLeftBeforeFight;

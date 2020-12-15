@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TaxCollectorDialogQuestionExtendedMessage : TaxCollectorDialogQuestionBasicMessage  
     { 
-        public new const ushort Id = 5380;
+        public new const ushort Id = 9386;
         public override ushort MessageId => Id;
 
         public short maxPods;

@@ -235,7 +235,7 @@ namespace Giny.IO.D2OClasses
                 bonusAirDamage = value;
             }
         }
-      
+     
 
     }
 }

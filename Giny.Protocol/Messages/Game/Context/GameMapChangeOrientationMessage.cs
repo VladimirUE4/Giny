@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameMapChangeOrientationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8450;
+        public new const ushort Id = 3503;
         public override ushort MessageId => Id;
 
         public ActorOrientation orientation;

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ServerSessionConstantLong : ServerSessionConstant  
     { 
-        public const ushort Id = 2359;
+        public const ushort Id = 9780;
         public override ushort TypeId => Id;
 
         public double value;

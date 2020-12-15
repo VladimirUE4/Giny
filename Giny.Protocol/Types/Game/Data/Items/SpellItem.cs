@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SpellItem : Item  
     { 
-        public const ushort Id = 333;
+        public const ushort Id = 7456;
         public override ushort TypeId => Id;
 
         public int spellId;

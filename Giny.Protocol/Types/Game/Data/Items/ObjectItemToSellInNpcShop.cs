@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemToSellInNpcShop : ObjectItemMinimalInformation  
     { 
-        public const ushort Id = 915;
+        public const ushort Id = 4751;
         public override ushort TypeId => Id;
 
         public long objectPrice;

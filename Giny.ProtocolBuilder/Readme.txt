@@ -8,7 +8,7 @@ com.ankamagames.dofus.network.types
 
 Patch : https://www.youtube.com/watch?v=iYpeW4VqFw0
 
-------------------Kernel.as------------------
+------------------Kernel.as------------------ // optionel
 if(buildType != -1 && buildType > -1)
 {
     BuildInfos.VERSION.buildType = buildType;
@@ -36,8 +36,7 @@ AuthentificationManager.as
          return this._AESKey;
       }
 
-      Fucking raw data message Id is now 1528
-
+Verifier l'id du raw data message dans MessageReceiver.
 
 
 CharacterCreationRequestMessage

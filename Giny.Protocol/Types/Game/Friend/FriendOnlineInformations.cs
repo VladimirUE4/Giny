@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FriendOnlineInformations : FriendInformations  
     { 
-        public const ushort Id = 782;
+        public const ushort Id = 5289;
         public override ushort TypeId => Id;
 
         public long playerId;

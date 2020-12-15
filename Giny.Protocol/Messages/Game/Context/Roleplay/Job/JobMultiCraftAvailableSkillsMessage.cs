@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobMultiCraftAvailableSkillsMessage : JobAllowMultiCraftRequestMessage  
     { 
-        public new const ushort Id = 834;
+        public new const ushort Id = 619;
         public override ushort MessageId => Id;
 
         public long playerId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MimicryObjectPreviewMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1082;
+        public new const ushort Id = 4707;
         public override ushort MessageId => Id;
 
         public ObjectItem result;

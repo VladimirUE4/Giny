@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TeleportHavenBagAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7757;
+        public new const ushort Id = 3367;
         public override ushort MessageId => Id;
 
         public bool accept;

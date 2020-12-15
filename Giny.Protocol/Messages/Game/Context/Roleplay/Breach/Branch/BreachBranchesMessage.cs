@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachBranchesMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1352;
+        public new const ushort Id = 2174;
         public override ushort MessageId => Id;
 
         public ExtendedBreachBranch[] branches;

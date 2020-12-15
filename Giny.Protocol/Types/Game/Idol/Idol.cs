@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class Idol  
     { 
-        public const ushort Id = 2559;
+        public const ushort Id = 2929;
         public virtual ushort TypeId => Id;
 
         public short id;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ConsoleCommandsListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1923;
+        public new const ushort Id = 9434;
         public override ushort MessageId => Id;
 
         public string[] aliases;

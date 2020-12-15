@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AccountInformationsUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4873;
+        public new const ushort Id = 8834;
         public override ushort MessageId => Id;
 
         public double subscriptionEndDate;

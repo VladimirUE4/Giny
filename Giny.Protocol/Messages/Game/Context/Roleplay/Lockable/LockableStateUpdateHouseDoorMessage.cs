@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LockableStateUpdateHouseDoorMessage : LockableStateUpdateAbstractMessage  
     { 
-        public new const ushort Id = 3227;
+        public new const ushort Id = 6331;
         public override ushort MessageId => Id;
 
         public int houseId;

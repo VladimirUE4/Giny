@@ -26,6 +26,7 @@ namespace Giny.IO.D2OClasses
         public int totalWidth;
         public int totalHeight;
         public List<string> zoom;
+        public bool visibleOnMap;
 
         [D2OIgnore]
         public int Id_
@@ -181,6 +182,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 zoom = value;
+            }
+        }
+        [D2OIgnore]
+        public bool VisibleOnMap
+        {
+            get
+            {
+                return visibleOnMap;
+            }
+            set
+            {
+                visibleOnMap = value;
             }
         }
 

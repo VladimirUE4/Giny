@@ -8,11 +8,10 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations  
     { 
-        public const ushort Id = 9493;
+        public const ushort Id = 9292;
         public override ushort TypeId => Id;
 
         public GroupMonsterStaticInformations staticInfos;
-
         public byte lootShare;
         public byte alignmentSide;
         public bool keyRingBonus;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TeleportOnSameMapMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7423;
+        public new const ushort Id = 9981;
         public override ushort MessageId => Id;
 
         public double targetId;

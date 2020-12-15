@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class IconNamedPreset : PresetsContainerPreset  
     { 
-        public const ushort Id = 7810;
+        public const ushort Id = 7815;
         public override ushort TypeId => Id;
 
         public short iconId;

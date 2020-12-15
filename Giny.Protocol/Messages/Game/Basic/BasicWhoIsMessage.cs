@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6352;
+        public new const ushort Id = 2658;
         public override ushort MessageId => Id;
 
         public bool self;

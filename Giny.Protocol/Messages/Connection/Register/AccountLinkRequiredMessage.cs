@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AccountLinkRequiredMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5001;
+        public new const ushort Id = 7001;
         public override ushort MessageId => Id;
 
 

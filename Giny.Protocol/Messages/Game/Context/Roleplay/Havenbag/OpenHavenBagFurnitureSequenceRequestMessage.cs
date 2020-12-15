@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class OpenHavenBagFurnitureSequenceRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1365;
+        public new const ushort Id = 1528;
         public override ushort MessageId => Id;
 
 

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffect  
     { 
-        public const ushort Id = 5208;
+        public const ushort Id = 6605;
         public virtual ushort TypeId => Id;
 
         public short actionId;

@@ -210,6 +210,8 @@
     <Compile Include="Messages\Debug\DebugClearHighlightCellsMessage.cs" />
     <Compile Include="Messages\Debug\DebugHighlightCellsMessage.cs" />
     <Compile Include="Messages\Debug\DebugInClientMessage.cs" />
+    <Compile Include="Messages\Game\Achievement\AchievementAlmostFinishedDetailedListMessage.cs" />
+    <Compile Include="Messages\Game\Achievement\AchievementAlmostFinishedDetailedListRequestMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementDetailedListMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementDetailedListRequestMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementDetailsMessage.cs" />
@@ -578,7 +580,7 @@
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaFightAnswerMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaFighterStatusMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaFightPropositionMessage.cs" />
-    <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaInvitationCandidatesAnswer.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaInvitationCandidatesAnswerMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaLeagueRewardsMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaRegisterMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaRegistrationStatusMessage.cs" />
@@ -681,7 +683,7 @@
     <Compile Include="Messages\Game\Context\Roleplay\Npc\AlliancePrismDialogQuestionMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Npc\AllianceTaxCollectorDialogQuestionExtendedMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Npc\EntityTalkMessage.cs" />
-    <Compile Include="Messages\Game\Context\Roleplay\Npc\MapNpcsQuestStatusUpdateMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Npc\ListMapNpcsQuestStatusUpdateMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Npc\NpcDialogCreationMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Npc\NpcDialogQuestionMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Npc\NpcDialogReplyMessage.cs" />
@@ -971,7 +973,6 @@
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftCountModifiedMessage.cs" />
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftCountRequestMessage.cs" />
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCrafterJobLevelupMessage.cs" />
-    <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftInformationObjectMessage.cs" />
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftPaymentModificationRequestMessage.cs" />
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftPaymentModifiedMessage.cs" />
     <Compile Include="Messages\Game\Inventory\Exchanges\ExchangeCraftResultMagicWithObjectDescMessage.cs" />
@@ -1171,7 +1172,6 @@
     <Compile Include="Messages\Game\Pvp\UpdateMapPlayersAgressableStatusMessage.cs" />
     <Compile Include="Messages\Game\Pvp\UpdateSelfAgressableStatusMessage.cs" />
     <Compile Include="Messages\Game\Script\CinematicMessage.cs" />
-    <Compile Include="Messages\Game\Script\URLOpenMessage.cs" />
     <Compile Include="Messages\Game\Shortcut\ShortcutBarAddErrorMessage.cs" />
     <Compile Include="Messages\Game\Shortcut\ShortcutBarAddRequestMessage.cs" />
     <Compile Include="Messages\Game\Shortcut\ShortcutBarContentMessage.cs" />
@@ -1224,8 +1224,6 @@
     <Compile Include="Messages\Security\RawDataMessage.cs" />
     <Compile Include="Messages\Server\Basic\SystemMessageDisplayMessage.cs" />
     <Compile Include="Messages\Subscription\AccountInformationsUpdateMessage.cs" />
-    <Compile Include="Messages\Web\Ankabox\MailStatusMessage.cs" />
-    <Compile Include="Messages\Web\Ankabox\NewMailMessage.cs" />
     <Compile Include="Messages\Web\Haapi\HaapiApiKeyMessage.cs" />
     <Compile Include="Messages\Web\Haapi\HaapiApiKeyRequestMessage.cs" />
     <Compile Include="Messages\Web\Haapi\HaapiAuthErrorMessage.cs" />
@@ -1411,6 +1409,7 @@
     <Compile Include="Types\Game\Context\Roleplay\MonsterBoosts.cs" />
     <Compile Include="Types\Game\Context\Roleplay\MonsterInGroupInformations.cs" />
     <Compile Include="Types\Game\Context\Roleplay\MonsterInGroupLightInformations.cs" />
+    <Compile Include="Types\Game\Context\Roleplay\Npc\MapNpcQuestInfo.cs" />
     <Compile Include="Types\Game\Context\Roleplay\ObjectItemInRolePlay.cs" />
     <Compile Include="Types\Game\Context\Roleplay\Party\DungeonPartyFinderPlayer.cs" />
     <Compile Include="Types\Game\Context\Roleplay\Party\Entity\PartyEntityBaseInformation.cs" />

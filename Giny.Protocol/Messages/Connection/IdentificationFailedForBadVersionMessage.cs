@@ -11,7 +11,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationFailedForBadVersionMessage : IdentificationFailedMessage  
     { 
-        public new const ushort Id = 8091;
+        public new const ushort Id = 550;
         public override ushort MessageId => Id;
 
         public Version requiredVersion;

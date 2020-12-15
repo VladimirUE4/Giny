@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalInformations : CharacterBasicMinimalInformations  
     { 
-        public const ushort Id = 577;
+        public const ushort Id = 393;
         public override ushort TypeId => Id;
 
         public short level;

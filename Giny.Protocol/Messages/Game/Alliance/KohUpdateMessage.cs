@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class KohUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6840;
+        public new const ushort Id = 7944;
         public override ushort MessageId => Id;
 
         public AllianceInformations[] alliances;

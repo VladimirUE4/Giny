@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightMonsterWithAlignmentInformations : GameFightMonsterInformations  
     { 
-        public const ushort Id = 2259;
+        public const ushort Id = 4758;
         public override ushort TypeId => Id;
 
         public ActorAlignmentInformations alignmentInfos;

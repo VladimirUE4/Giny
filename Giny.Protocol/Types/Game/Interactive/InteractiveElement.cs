@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class InteractiveElement  
     { 
-        public const ushort Id = 9391;
+        public const ushort Id = 4976;
         public virtual ushort TypeId => Id;
 
         public int elementId;

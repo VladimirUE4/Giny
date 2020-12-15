@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ShowCellRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7647;
+        public new const ushort Id = 7669;
         public override ushort MessageId => Id;
 
         public short cellId;

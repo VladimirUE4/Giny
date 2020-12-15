@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AbstractGameActionWithAckMessage : AbstractGameActionMessage  
     { 
-        public new const ushort Id = 1777;
+        public new const ushort Id = 4204;
         public override ushort MessageId => Id;
 
         public short waitAckId;

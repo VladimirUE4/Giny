@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SkillActionDescriptionCraft : SkillActionDescription  
     { 
-        public const ushort Id = 6486;
+        public const ushort Id = 8200;
         public override ushort TypeId => Id;
 
         public byte probability;

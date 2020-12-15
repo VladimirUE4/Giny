@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class StartupActionAddObject  
     { 
-        public const ushort Id = 9194;
+        public const ushort Id = 7942;
         public virtual ushort TypeId => Id;
 
         public int uid;

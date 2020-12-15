@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class EntityLook  
     { 
-        public const ushort Id = 4983;
+        public const ushort Id = 2438;
         public virtual ushort TypeId => Id;
 
         public short bonesId;

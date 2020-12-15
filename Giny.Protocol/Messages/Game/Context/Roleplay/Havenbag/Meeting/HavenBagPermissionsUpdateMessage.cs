@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HavenBagPermissionsUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1176;
+        public new const ushort Id = 2326;
         public override ushort MessageId => Id;
 
         public int permissions;

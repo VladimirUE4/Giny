@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterHardcoreOrEpicInformations : CharacterBaseInformations  
     { 
-        public const ushort Id = 2827;
+        public const ushort Id = 5330;
         public override ushort TypeId => Id;
 
         public byte deathState;

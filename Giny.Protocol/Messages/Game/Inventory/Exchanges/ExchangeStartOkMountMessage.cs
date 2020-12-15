@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartOkMountMessage : ExchangeStartOkMountWithOutPaddockMessage  
     { 
-        public new const ushort Id = 1272;
+        public new const ushort Id = 6769;
         public override ushort MessageId => Id;
 
         public MountClientData[] paddockedMountsDescription;

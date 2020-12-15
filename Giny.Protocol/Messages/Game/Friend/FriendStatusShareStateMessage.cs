@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendStatusShareStateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9081;
+        public new const ushort Id = 9665;
         public override ushort MessageId => Id;
 
         public bool share;

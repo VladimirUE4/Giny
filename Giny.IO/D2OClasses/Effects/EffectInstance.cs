@@ -78,18 +78,6 @@ namespace Giny.IO.D2OClasses
             }
         }
         [D2OIgnore]
-        public string RawZone
-        {
-            get
-            {
-                return rawZone;
-            }
-            set
-            {
-                rawZone = value;
-            }
-        }
-        [D2OIgnore]
         public int Order
         {
             get

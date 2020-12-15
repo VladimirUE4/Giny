@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MimicryObjectEraseRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1801;
+        public new const ushort Id = 7469;
         public override ushort MessageId => Id;
 
         public int hostUID;

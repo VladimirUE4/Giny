@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeCraftResultMagicWithObjectDescMessage : ExchangeCraftResultWithObjectDescMessage  
     { 
-        public new const ushort Id = 819;
+        public new const ushort Id = 84;
         public override ushort MessageId => Id;
 
         public byte magicPoolStatus;

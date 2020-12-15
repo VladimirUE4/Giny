@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ServerSessionConstantsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9947;
+        public new const ushort Id = 4947;
         public override ushort MessageId => Id;
 
         public ServerSessionConstant[] variables;

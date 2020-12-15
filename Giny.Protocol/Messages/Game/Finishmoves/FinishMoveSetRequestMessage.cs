@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FinishMoveSetRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8541;
+        public new const ushort Id = 394;
         public override ushort MessageId => Id;
 
         public int finishMoveId;

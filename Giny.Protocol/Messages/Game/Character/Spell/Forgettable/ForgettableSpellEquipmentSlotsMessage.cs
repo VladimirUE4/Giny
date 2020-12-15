@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ForgettableSpellEquipmentSlotsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 600;
+        public new const ushort Id = 1387;
         public override ushort MessageId => Id;
 
         public short quantity;

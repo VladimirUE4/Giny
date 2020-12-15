@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectDice : ObjectEffect  
     { 
-        public const ushort Id = 3270;
+        public const ushort Id = 1846;
         public override ushort TypeId => Id;
 
         public int diceNum;

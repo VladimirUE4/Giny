@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PresetUseResultWithMissingIdsMessage : PresetUseResultMessage  
     { 
-        public new const ushort Id = 1400;
+        public new const ushort Id = 5674;
         public override ushort MessageId => Id;
 
         public short[] missingIds;

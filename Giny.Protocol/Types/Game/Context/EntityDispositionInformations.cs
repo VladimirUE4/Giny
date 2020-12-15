@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class EntityDispositionInformations  
     { 
-        public const ushort Id = 4880;
+        public const ushort Id = 3023;
         public virtual ushort TypeId => Id;
 
         public short cellId;

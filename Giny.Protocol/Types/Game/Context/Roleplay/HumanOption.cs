@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOption  
     { 
-        public const ushort Id = 2965;
+        public const ushort Id = 4884;
         public virtual ushort TypeId => Id;
 
 

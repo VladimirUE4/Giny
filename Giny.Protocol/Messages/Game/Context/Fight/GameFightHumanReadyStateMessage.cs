@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightHumanReadyStateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 386;
+        public new const ushort Id = 884;
         public override ushort MessageId => Id;
 
         public long characterId;

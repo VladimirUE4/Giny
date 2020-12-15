@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ShortcutEmote : Shortcut  
     { 
-        public const ushort Id = 7079;
+        public const ushort Id = 3412;
         public override ushort TypeId => Id;
 
         public byte emoteId;

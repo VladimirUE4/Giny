@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PresetDeleteRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7425;
+        public new const ushort Id = 3361;
         public override ushort MessageId => Id;
 
         public short presetId;

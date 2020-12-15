@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class KamaDebtInformation : DebtInformation  
     { 
-        public const ushort Id = 859;
+        public const ushort Id = 6089;
         public override ushort TypeId => Id;
 
         public long kamas;

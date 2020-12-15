@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObtainedItemWithBonusMessage : ObtainedItemMessage  
     { 
-        public new const ushort Id = 2422;
+        public new const ushort Id = 2289;
         public override ushort MessageId => Id;
 
         public int bonusQuantity;

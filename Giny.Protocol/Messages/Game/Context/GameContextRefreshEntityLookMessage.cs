@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameContextRefreshEntityLookMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5695;
+        public new const ushort Id = 5844;
         public override ushort MessageId => Id;
 
         public double id;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TreasureHuntDigRequestAnswerFailedMessage : TreasureHuntDigRequestAnswerMessage  
     { 
-        public new const ushort Id = 5389;
+        public new const ushort Id = 7642;
         public override ushort MessageId => Id;
 
         public byte wrongFlagCount;

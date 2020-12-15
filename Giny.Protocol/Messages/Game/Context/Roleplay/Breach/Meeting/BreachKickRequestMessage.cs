@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachKickRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8280;
+        public new const ushort Id = 6032;
         public override ushort MessageId => Id;
 
         public long target;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobAllowMultiCraftRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3569;
+        public new const ushort Id = 3238;
         public override ushort MessageId => Id;
 
         public bool enabled;

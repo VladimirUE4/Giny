@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectUseOnCharacterMessage : ObjectUseMessage  
     { 
-        public new const ushort Id = 1575;
+        public new const ushort Id = 7740;
         public override ushort MessageId => Id;
 
         public long characterId;

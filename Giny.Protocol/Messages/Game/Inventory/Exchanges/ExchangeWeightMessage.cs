@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeWeightMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6558;
+        public new const ushort Id = 3261;
         public override ushort MessageId => Id;
 
         public int currentWeight;

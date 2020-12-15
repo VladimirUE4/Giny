@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AchievementAchievedRewardable : AchievementAchieved  
     { 
-        public const ushort Id = 7853;
+        public const ushort Id = 5008;
         public override ushort TypeId => Id;
 
         public short finishedlevel;

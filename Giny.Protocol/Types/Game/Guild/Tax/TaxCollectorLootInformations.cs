@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TaxCollectorLootInformations : TaxCollectorComplementaryInformations  
     { 
-        public const ushort Id = 5810;
+        public const ushort Id = 2162;
         public override ushort TypeId => Id;
 
         public long kamas;

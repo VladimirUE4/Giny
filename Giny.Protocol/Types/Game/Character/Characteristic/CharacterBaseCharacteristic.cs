@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterBaseCharacteristic  
     { 
-        public const ushort Id = 4795;
+        public const ushort Id = 5795;
         public virtual ushort TypeId => Id;
 
         public short @base;
@@ -20,7 +20,7 @@ namespace Giny.Protocol.Types
         public CharacterBaseCharacteristic()
         {
         }
-        public CharacterBaseCharacteristic(short @base,short additionnal,short objectsAndMountBonus,short alignGiftBonus,short contextModif)
+        public CharacterBaseCharacteristic(short @base, short additionnal,short objectsAndMountBonus,short alignGiftBonus,short contextModif)
         {
             this.@base = @base;
             this.additionnal = additionnal;

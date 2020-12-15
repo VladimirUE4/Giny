@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7214;
+        public new const ushort Id = 5985;
         public override ushort MessageId => Id;
 
         public bool verbose;

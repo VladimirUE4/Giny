@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterLevelUpMessage : NetworkMessage  
     { 
-        public new const ushort Id = 366;
+        public new const ushort Id = 828;
         public override ushort MessageId => Id;
 
         public short newLevel;

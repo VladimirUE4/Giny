@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HaapiApiKeyMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1489;
+        public new const ushort Id = 3912;
         public override ushort MessageId => Id;
 
         public string token;

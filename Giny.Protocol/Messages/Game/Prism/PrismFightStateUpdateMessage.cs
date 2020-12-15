@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PrismFightStateUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1999;
+        public new const ushort Id = 7820;
         public override ushort MessageId => Id;
 
         public byte state;

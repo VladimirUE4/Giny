@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ActorExtendedAlignmentInformations : ActorAlignmentInformations  
     { 
-        public const ushort Id = 6556;
+        public const ushort Id = 6118;
         public override ushort TypeId => Id;
 
         public short honor;

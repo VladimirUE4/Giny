@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ActorRestrictionsInformations  
     { 
-        public const ushort Id = 3559;
+        public const ushort Id = 9470;
         public virtual ushort TypeId => Id;
 
         public bool cantBeAggressed;

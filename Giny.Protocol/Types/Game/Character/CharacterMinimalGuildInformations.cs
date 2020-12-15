@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalGuildInformations : CharacterMinimalPlusLookInformations  
     { 
-        public const ushort Id = 5177;
+        public const ushort Id = 3916;
         public override ushort TypeId => Id;
 
         public BasicGuildInformations guild;

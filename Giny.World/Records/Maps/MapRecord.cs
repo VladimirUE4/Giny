@@ -171,6 +171,10 @@ namespace Giny.World.Records.Maps
         }
         public bool IsValidFightCell(int x, int y)
         {
+            if (!MapPoint.IsInMap(x,y))
+            {
+                return false;
+            }
             return IsValidFightCell(MapPoint.CoordToCellId(x, y));
         }
         public CellRecord RandomWalkableCell()

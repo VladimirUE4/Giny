@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobCrafterDirectoryDefineSettingsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 832;
+        public new const ushort Id = 356;
         public override ushort MessageId => Id;
 
         public JobCrafterDirectorySettings settings;

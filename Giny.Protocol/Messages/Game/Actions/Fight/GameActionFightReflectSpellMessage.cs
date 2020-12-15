@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightReflectSpellMessage : AbstractGameActionMessage  
     { 
-        public new const ushort Id = 7706;
+        public new const ushort Id = 9574;
         public override ushort MessageId => Id;
 
         public double targetId;

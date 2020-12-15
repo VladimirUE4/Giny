@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyMemberGeoPosition  
     { 
-        public const ushort Id = 8754;
+        public const ushort Id = 6125;
         public virtual ushort TypeId => Id;
 
         public int memberId;

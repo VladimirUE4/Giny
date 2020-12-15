@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ContactLookRequestByNameMessage : ContactLookRequestMessage  
     { 
-        public new const ushort Id = 2201;
+        public new const ushort Id = 9255;
         public override ushort MessageId => Id;
 
         public string playerName;

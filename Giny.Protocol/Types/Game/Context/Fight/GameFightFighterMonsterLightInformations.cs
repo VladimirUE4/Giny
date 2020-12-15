@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightFighterMonsterLightInformations : GameFightFighterLightInformations  
     { 
-        public const ushort Id = 1104;
+        public const ushort Id = 873;
         public override ushort TypeId => Id;
 
         public short creatureGenericId;

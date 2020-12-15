@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMountStableErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3820;
+        public new const ushort Id = 2798;
         public override ushort MessageId => Id;
 
 

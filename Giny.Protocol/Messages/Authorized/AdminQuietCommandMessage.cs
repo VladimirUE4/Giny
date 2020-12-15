@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AdminQuietCommandMessage : AdminCommandMessage  
     { 
-        public new const ushort Id = 1379;
+        public new const ushort Id = 1938;
         public override ushort MessageId => Id;
 
 

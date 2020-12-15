@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyEntityBaseInformation  
     { 
-        public const ushort Id = 8629;
+        public const ushort Id = 869;
         public virtual ushort TypeId => Id;
 
         public byte indexId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartedBidBuyerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6668;
+        public new const ushort Id = 2974;
         public override ushort MessageId => Id;
 
         public SellerBuyerDescriptor buyerDescriptor;

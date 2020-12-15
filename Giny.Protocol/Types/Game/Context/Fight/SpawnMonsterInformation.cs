@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SpawnMonsterInformation : BaseSpawnMonsterInformation  
     { 
-        public const ushort Id = 8512;
+        public const ushort Id = 5401;
         public override ushort TypeId => Id;
 
         public byte creatureGrade;

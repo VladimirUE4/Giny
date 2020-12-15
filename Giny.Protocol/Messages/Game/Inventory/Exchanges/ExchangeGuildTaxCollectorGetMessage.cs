@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeGuildTaxCollectorGetMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2767;
+        public new const ushort Id = 6899;
         public override ushort MessageId => Id;
 
         public string collectorName;

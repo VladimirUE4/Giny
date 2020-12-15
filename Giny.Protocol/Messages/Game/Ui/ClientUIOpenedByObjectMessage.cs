@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ClientUIOpenedByObjectMessage : ClientUIOpenedMessage  
     { 
-        public new const ushort Id = 2095;
+        public new const ushort Id = 307;
         public override ushort MessageId => Id;
 
         public int uid;

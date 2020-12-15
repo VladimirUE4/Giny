@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DungeonKeyRingMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6151;
+        public new const ushort Id = 5267;
         public override ushort MessageId => Id;
 
         public short[] availables;

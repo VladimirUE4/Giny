@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemQuantityPriceDateEffects : ObjectItemGenericQuantity  
     { 
-        public const ushort Id = 9305;
+        public const ushort Id = 6993;
         public override ushort TypeId => Id;
 
         public long price;

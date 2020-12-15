@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Giny.Core.IO.Interfaces;
 using Giny.IO.D2O;
 using Giny.IO.D2OTypes;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Giny.IO.D2OClasses
 {
     [D2OClass("Url", "com.ankamagames.dofus.datacenter.misc")]
-    public class Url : IDataObject , IIndexedData
+    public class Url : IDataObject, IIndexedData
     {
         public const string MODULE = "Url";
 

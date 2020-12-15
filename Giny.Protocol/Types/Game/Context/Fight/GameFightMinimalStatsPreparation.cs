@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightMinimalStatsPreparation : GameFightMinimalStats  
     { 
-        public const ushort Id = 5419;
+        public const ushort Id = 4441;
         public override ushort TypeId => Id;
 
         public int initiative;

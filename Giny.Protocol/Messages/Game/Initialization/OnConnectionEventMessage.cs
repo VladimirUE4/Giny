@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class OnConnectionEventMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2093;
+        public new const ushort Id = 5230;
         public override ushort MessageId => Id;
 
         public byte eventType;

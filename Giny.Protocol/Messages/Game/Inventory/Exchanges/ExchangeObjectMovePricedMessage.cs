@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeObjectMovePricedMessage : ExchangeObjectMoveMessage  
     { 
-        public new const ushort Id = 763;
+        public new const ushort Id = 9236;
         public override ushort MessageId => Id;
 
         public long price;

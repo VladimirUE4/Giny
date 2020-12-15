@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SpouseGetInformationsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 299;
+        public new const ushort Id = 1388;
         public override ushort MessageId => Id;
 
 

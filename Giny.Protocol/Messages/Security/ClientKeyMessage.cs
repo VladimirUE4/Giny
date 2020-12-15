@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ClientKeyMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6268;
+        public new const ushort Id = 3071;
         public override ushort MessageId => Id;
 
         public string key;

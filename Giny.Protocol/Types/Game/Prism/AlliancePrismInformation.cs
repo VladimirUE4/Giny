@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AlliancePrismInformation : PrismInformation  
     { 
-        public const ushort Id = 2626;
+        public const ushort Id = 1451;
         public override ushort TypeId => Id;
 
         public AllianceInformations alliance;

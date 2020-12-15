@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AreaFightModificatorUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4723;
+        public new const ushort Id = 9358;
         public override ushort MessageId => Id;
 
         public int spellPairId;

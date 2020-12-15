@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GoldItem : Item  
     { 
-        public const ushort Id = 8785;
+        public const ushort Id = 39;
         public override ushort TypeId => Id;
 
         public long sum;

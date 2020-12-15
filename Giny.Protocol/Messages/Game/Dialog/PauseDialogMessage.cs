@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PauseDialogMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6004;
+        public new const ushort Id = 415;
         public override ushort MessageId => Id;
 
         public byte dialogType;

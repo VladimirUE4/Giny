@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuestLimitationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2462;
+        public new const ushort Id = 5914;
         public override ushort MessageId => Id;
 
         public byte reason;

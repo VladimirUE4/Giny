@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AllianceFactSheetInformations : AllianceInformations  
     { 
-        public const ushort Id = 4179;
+        public const ushort Id = 1553;
         public override ushort TypeId => Id;
 
         public int creationDate;

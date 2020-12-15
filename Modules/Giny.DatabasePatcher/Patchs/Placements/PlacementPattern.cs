@@ -1,4 +1,5 @@
-﻿using Giny.World.Records.Maps;
+﻿using Giny.World.Managers.Maps;
+using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Giny.World.Managers.Maps.Placements
+namespace Giny.DatabasePatcher.Patchs.Placements
 {
     public class PlacementPattern
     {

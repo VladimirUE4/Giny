@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendGuildSetWarnOnAchievementCompleteMessage : NetworkMessage  
     { 
-        public new const ushort Id = 822;
+        public new const ushort Id = 5946;
         public override ushort MessageId => Id;
 
         public bool enable;

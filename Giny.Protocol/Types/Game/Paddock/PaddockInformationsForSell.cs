@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockInformationsForSell  
     { 
-        public const ushort Id = 9857;
+        public const ushort Id = 9040;
         public virtual ushort TypeId => Id;
 
         public string guildOwner;

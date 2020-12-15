@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOptionSkillUse : HumanOption  
     { 
-        public const ushort Id = 371;
+        public const ushort Id = 1429;
         public override ushort TypeId => Id;
 
         public int elementId;

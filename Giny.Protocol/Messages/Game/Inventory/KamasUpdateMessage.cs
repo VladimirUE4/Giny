@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class KamasUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2022;
+        public new const ushort Id = 6196;
         public override ushort MessageId => Id;
 
         public long kamasTotal;

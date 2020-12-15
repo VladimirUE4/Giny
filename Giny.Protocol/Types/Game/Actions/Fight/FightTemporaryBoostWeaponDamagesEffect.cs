@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTemporaryBoostWeaponDamagesEffect : FightTemporaryBoostEffect  
     { 
-        public const ushort Id = 3021;
+        public const ushort Id = 6312;
         public override ushort TypeId => Id;
 
         public short weaponTypeId;

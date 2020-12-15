@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdolsPresetSaveRequestMessage : IconPresetSaveRequestMessage  
     { 
-        public new const ushort Id = 1043;
+        public new const ushort Id = 7365;
         public override ushort MessageId => Id;
 
 

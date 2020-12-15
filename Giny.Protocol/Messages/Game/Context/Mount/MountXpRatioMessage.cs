@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountXpRatioMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9818;
+        public new const ushort Id = 8967;
         public override ushort MessageId => Id;
 
         public byte ratio;

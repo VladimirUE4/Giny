@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceModificationEmblemValidMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2632;
+        public new const ushort Id = 4828;
         public override ushort MessageId => Id;
 
         public GuildEmblem Alliancemblem;

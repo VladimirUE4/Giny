@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class StatsUpgradeRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2014;
+        public new const ushort Id = 4902;
         public override ushort MessageId => Id;
 
         public bool useAdditionnal;

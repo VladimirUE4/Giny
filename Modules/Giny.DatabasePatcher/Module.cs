@@ -1,4 +1,6 @@
-﻿using Giny.DatabasePatcher.Patchs;
+﻿using Giny.Core;
+using Giny.DatabasePatcher.Patchs;
+using Giny.DatabasePatcher.Patchs.Placements;
 using Giny.World.Modules;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Giny.DatabasePatcher
 {
-    [Module("Data patcher")]
+    [Module("Database patcher")]
     public class Module : IModule
     {
         public void CreateHooks()
@@ -28,8 +30,9 @@ namespace Giny.DatabasePatcher
             MA3Manager.Initialize();
             MonsterKamasDropManager.Initialize();
             SpellCategoryManager.Initialize();
+            MapPlacementsManager.Initialize();
         }
 
-
+        
     }
 }

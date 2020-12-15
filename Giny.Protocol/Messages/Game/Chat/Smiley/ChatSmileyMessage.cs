@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatSmileyMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2519;
+        public new const ushort Id = 6349;
         public override ushort MessageId => Id;
 
         public double entityId;

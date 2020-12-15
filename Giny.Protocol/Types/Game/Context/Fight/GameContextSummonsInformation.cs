@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameContextSummonsInformation  
     { 
-        public const ushort Id = 8757;
+        public const ushort Id = 3995;
         public virtual ushort TypeId => Id;
 
         public SpawnInformation spawnInformation;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayDelayedActionFinishedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1897;
+        public new const ushort Id = 6398;
         public override ushort MessageId => Id;
 
         public double delayedCharacterId;

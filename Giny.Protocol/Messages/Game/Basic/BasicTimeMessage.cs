@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicTimeMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1002;
+        public new const ushort Id = 7605;
         public override ushort MessageId => Id;
 
         public double timestamp;

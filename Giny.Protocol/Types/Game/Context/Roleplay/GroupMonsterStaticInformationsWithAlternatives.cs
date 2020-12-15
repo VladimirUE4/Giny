@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GroupMonsterStaticInformationsWithAlternatives : GroupMonsterStaticInformations  
     { 
-        public const ushort Id = 5848;
+        public const ushort Id = 7681;
         public override ushort TypeId => Id;
 
         public AlternativeMonstersInGroupLightInformations[] alternatives;

@@ -1,34 +1,30 @@
 using System;
 using System.Collections.Generic;
-using Giny.Core.Network.Messages;
-using Giny.Protocol.Types;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
 using Giny.Protocol.Enums;
 
-namespace Giny.Protocol.Messages
+namespace Giny.Protocol.Types
 { 
-    public class MapNpcsQuestStatusUpdateMessage : NetworkMessage  
+    public class MapNpcQuestInfo  
     { 
-        public new const ushort Id = 1168;
-        public override ushort MessageId => Id;
+        public const ushort Id = 3117;
+        public virtual ushort TypeId => Id;
 
         public double mapId;
         public int[] npcsIdsWithQuest;
         public GameRolePlayNpcQuestFlag[] questFlags;
-        public int[] npcsIdsWithoutQuest;
 
-        public MapNpcsQuestStatusUpdateMessage()
+        public MapNpcQuestInfo()
         {
         }
-        public MapNpcsQuestStatusUpdateMessage(double mapId,int[] npcsIdsWithQuest,GameRolePlayNpcQuestFlag[] questFlags,int[] npcsIdsWithoutQuest)
+        public MapNpcQuestInfo(double mapId,int[] npcsIdsWithQuest,GameRolePlayNpcQuestFlag[] questFlags)
         {
             this.mapId = mapId;
             this.npcsIdsWithQuest = npcsIdsWithQuest;
             this.questFlags = questFlags;
-            this.npcsIdsWithoutQuest = npcsIdsWithoutQuest;
         }
-        public override void Serialize(IDataWriter writer)
+        public virtual void Serialize(IDataWriter writer)
         {
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
@@ -48,22 +44,15 @@ namespace Giny.Protocol.Messages
                 (questFlags[_i3] as GameRolePlayNpcQuestFlag).Serialize(writer);
             }
 
-            writer.WriteShort((short)npcsIdsWithoutQuest.Length);
-            for (uint _i4 = 0;_i4 < npcsIdsWithoutQuest.Length;_i4++)
-            {
-                writer.WriteInt((int)npcsIdsWithoutQuest[_i4]);
-            }
-
         }
-        public override void Deserialize(IDataReader reader)
+        public virtual void Deserialize(IDataReader reader)
         {
             int _val2 = 0;
             GameRolePlayNpcQuestFlag _item3 = null;
-            int _val4 = 0;
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of MapNpcsQuestStatusUpdateMessage.mapId.");
+                throw new Exception("Forbidden value (" + mapId + ") on element of MapNpcQuestInfo.mapId.");
             }
 
             uint _npcsIdsWithQuestLen = (uint)reader.ReadUShort();
@@ -80,14 +69,6 @@ namespace Giny.Protocol.Messages
                 _item3 = new GameRolePlayNpcQuestFlag();
                 _item3.Deserialize(reader);
                 questFlags[_i3] = _item3;
-            }
-
-            uint _npcsIdsWithoutQuestLen = (uint)reader.ReadUShort();
-            npcsIdsWithoutQuest = new int[_npcsIdsWithoutQuestLen];
-            for (uint _i4 = 0;_i4 < _npcsIdsWithoutQuestLen;_i4++)
-            {
-                _val4 = (int)reader.ReadInt();
-                npcsIdsWithoutQuest[_i4] = (int)_val4;
             }
 
         }

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ShortcutBarSwapErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8919;
+        public new const ushort Id = 5982;
         public override ushort MessageId => Id;
 
         public byte error;

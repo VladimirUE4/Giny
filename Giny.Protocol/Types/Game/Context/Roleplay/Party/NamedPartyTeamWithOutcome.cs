@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class NamedPartyTeamWithOutcome  
     { 
-        public const ushort Id = 8522;
+        public const ushort Id = 9333;
         public virtual ushort TypeId => Id;
 
         public NamedPartyTeam team;

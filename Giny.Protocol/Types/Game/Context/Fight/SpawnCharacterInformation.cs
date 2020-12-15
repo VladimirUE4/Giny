@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SpawnCharacterInformation : SpawnInformation  
     { 
-        public const ushort Id = 9236;
+        public const ushort Id = 5264;
         public override ushort TypeId => Id;
 
         public string name;

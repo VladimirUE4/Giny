@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameContextActorInformations : GameContextActorPositionInformations  
     { 
-        public const ushort Id = 1950;
+        public const ushort Id = 6228;
         public override ushort TypeId => Id;
 
         public EntityLook look;

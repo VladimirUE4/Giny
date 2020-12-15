@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 
 namespace Giny.DatabasePatcher.Patchs
 {
-    public class ElementsSpawnManager 
+    public class ElementsSpawnManager
     {
         public static void SynchronizeElements()
         {
+            Logger.WriteColor1("Database Patcher > Synchronize interactives elements....");
+
             int count = 0;
             foreach (SkillRecord skillRecord in SkillRecord.GetSkills())
             {

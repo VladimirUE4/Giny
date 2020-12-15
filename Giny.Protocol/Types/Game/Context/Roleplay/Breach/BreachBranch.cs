@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class BreachBranch  
     { 
-        public const ushort Id = 2941;
+        public const ushort Id = 1023;
         public virtual ushort TypeId => Id;
 
         public byte room;

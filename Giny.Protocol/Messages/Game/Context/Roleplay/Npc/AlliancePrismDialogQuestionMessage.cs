@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlliancePrismDialogQuestionMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7491;
+        public new const ushort Id = 3007;
         public override ushort MessageId => Id;
 
 

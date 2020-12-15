@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DisplayNumericalValuePaddockMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5107;
+        public new const ushort Id = 4192;
         public override ushort MessageId => Id;
 
         public int rideId;

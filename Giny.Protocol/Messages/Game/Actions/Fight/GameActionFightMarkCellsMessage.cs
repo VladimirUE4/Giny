@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightMarkCellsMessage : AbstractGameActionMessage  
     { 
-        public new const ushort Id = 7743;
+        public new const ushort Id = 4659;
         public override ushort MessageId => Id;
 
         public GameActionMark mark;

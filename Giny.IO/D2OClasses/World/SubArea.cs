@@ -20,6 +20,7 @@ namespace Giny.IO.D2OClasses
         public List<double> mapIds;
         public Rectangle bounds;
         public List<int> shape;
+        public int worldmapId;
         public List<uint> customWorldMap;
         public int packId;
         public uint level;
@@ -122,6 +123,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 shape = value;
+            }
+        }
+        [D2OIgnore]
+        public int WorldmapId
+        {
+            get
+            {
+                return worldmapId;
+            }
+            set
+            {
+                worldmapId = value;
             }
         }
         [D2OIgnore]

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalAllianceInformations : CharacterMinimalGuildInformations  
     { 
-        public const ushort Id = 4067;
+        public const ushort Id = 300;
         public override ushort TypeId => Id;
 
         public BasicAllianceInformations alliance;

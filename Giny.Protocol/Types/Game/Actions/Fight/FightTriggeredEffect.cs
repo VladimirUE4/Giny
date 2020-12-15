@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTriggeredEffect : AbstractFightDispellableEffect  
     { 
-        public const ushort Id = 7166;
+        public const ushort Id = 7490;
         public override ushort TypeId => Id;
 
         public int param1;

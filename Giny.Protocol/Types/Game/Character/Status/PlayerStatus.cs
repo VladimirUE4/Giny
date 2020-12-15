@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PlayerStatus  
     { 
-        public const ushort Id = 2234;
+        public const ushort Id = 6393;
         public virtual ushort TypeId => Id;
 
         public byte statusId;

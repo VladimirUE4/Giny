@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartedWithStorageMessage : ExchangeStartedMessage  
     { 
-        public new const ushort Id = 8605;
+        public new const ushort Id = 7677;
         public override ushort MessageId => Id;
 
         public int storageMaxSlot;

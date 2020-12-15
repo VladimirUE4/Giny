@@ -11,7 +11,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5833;
+        public new const ushort Id = 5667;
         public override ushort MessageId => Id;
 
         public Version version;
@@ -23,12 +23,11 @@ namespace Giny.Protocol.Messages
         public bool useLoginToken;
         public long sessionOptionalSalt;
         public short[] failedAttempts;
+
         public IdentificationMessage()
         {
         }
-        public IdentificationMessage(Version version,string lang,
-            byte[] credentials,short serverId,bool autoconnect,
-            bool useCertificate,bool useLoginToken,long sessionOptionalSalt,short[] failedAttempts)
+        public IdentificationMessage(Version version,string lang,byte[] credentials,short serverId,bool autoconnect,bool useCertificate,bool useLoginToken,long sessionOptionalSalt,short[] failedAttempts)
         {
             this.version = version;
             this.lang = lang;

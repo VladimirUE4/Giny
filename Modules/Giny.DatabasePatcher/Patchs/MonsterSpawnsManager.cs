@@ -22,13 +22,14 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
+            Logger.WriteColor1("Database Patcher > Spawning Monsters....");
+
             long id = 1;
 
             MonsterSpawnRecord.GetMonsterSpawnRecords().ToArray().RemoveInstantElements(typeof(MonsterSpawnRecord));
 
             foreach (var subArea in SubareaRecord.GetSubareas())
             {
-
                 if (subArea.MonsterIds.Length > 0)
                 {
                     foreach (var monsterId in subArea.MonsterIds)
@@ -48,7 +49,6 @@ namespace Giny.DatabasePatcher.Patchs
                             };
                             id++;
                             record.AddInstantElement();
-                            Logger.Write(string.Format("{0} was spawned on subarea {1}", monsterRecord.Name, subArea.Name), MessageState.INFO2);
                         }
                     }
                 }
@@ -411,8 +411,7 @@ namespace Giny.DatabasePatcher.Patchs
                     break;
                 case MonsterRacesEnum.CLASS_SUMMONS_CRA:
                     break;
-                default:
-                    break;
+
             }
             return 1d;
         }

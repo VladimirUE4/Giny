@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightResumeWithSlavesMessage : GameFightResumeMessage  
     { 
-        public new const ushort Id = 1238;
+        public new const ushort Id = 6337;
         public override ushort MessageId => Id;
 
         public GameFightResumeSlaveInfo[] slavesInfo;

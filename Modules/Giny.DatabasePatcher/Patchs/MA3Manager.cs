@@ -22,6 +22,8 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
+            Logger.WriteColor1("Database Patcher > Fixing item appeareances....");
+
             Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, MessageState.INFO2);
 
             try
@@ -60,13 +62,13 @@ namespace Giny.DatabasePatcher.Patchs
                             itemRecord.AppearenceId = (short)item.Skin;
                             itemRecord.UpdateInstantElement();
                         }
-                        Logger.Write(string.Format("({0}) apparenceId updated.", itemRecord.Name), MessageState.INFO2);
+                        
                     }
                     else if (item.Look != string.Empty && item.Look != itemRecord.Look)
                     {
                         itemRecord.Look = item.Look;
                         itemRecord.UpdateInstantElement();
-                        Logger.Write(string.Format("({0}) look updated.", itemRecord.Name), MessageState.INFO2);
+                  
                     }
                 }
             }

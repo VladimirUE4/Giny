@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TreasureHuntStepFight : TreasureHuntStep  
     { 
-        public const ushort Id = 5856;
+        public const ushort Id = 7770;
         public override ushort TypeId => Id;
 
 

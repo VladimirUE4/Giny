@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTeamLightInformations : AbstractFightTeamInformations  
     { 
-        public const ushort Id = 166;
+        public const ushort Id = 8492;
         public override ushort TypeId => Id;
 
         public byte teamMembersCount;

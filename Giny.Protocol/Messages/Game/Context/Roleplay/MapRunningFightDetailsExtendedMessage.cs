@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapRunningFightDetailsExtendedMessage : MapRunningFightDetailsMessage  
     { 
-        public new const ushort Id = 8300;
+        public new const ushort Id = 9731;
         public override ushort MessageId => Id;
 
         public NamedPartyTeam[] namedPartyTeams;

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TreasureHuntFlag  
     { 
-        public const ushort Id = 8939;
+        public const ushort Id = 5692;
         public virtual ushort TypeId => Id;
 
         public double mapId;

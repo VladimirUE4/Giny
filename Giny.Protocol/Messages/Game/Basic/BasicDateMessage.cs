@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicDateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4547;
+        public new const ushort Id = 6738;
         public override ushort MessageId => Id;
 
         public byte day;
