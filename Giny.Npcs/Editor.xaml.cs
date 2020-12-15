@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,7 @@ namespace Giny.Npcs
         public Editor()
         {
             InitializeComponent();
+            SearchNpcs();
         }
 
         private NpcSpawnRecord CurrentNpc
@@ -43,15 +45,27 @@ namespace Giny.Npcs
             }
         }
 
-        private void MapIdTextChanged(object sender, TextChangedEventArgs e)
+        private void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            DisplayNpcs(int.Parse(mapId.Text));
+            SearchNpcs();
         }
-        private void DisplayNpcs(int mapId)
+        private void SearchNpcs()
+        {
+            if (searchText.Text != string.Empty)
+            {
+                var npcs = NpcSpawnRecord.GetNpcSpawns().Where(x => x.ToString().ToLower().Contains(searchText.Text));
+                DisplayNpcs(npcs);
+            }
+            else
+            {
+                DisplayNpcs(NpcSpawnRecord.GetNpcSpawns());
+            }
+        }
+        private void DisplayNpcs(IEnumerable<NpcSpawnRecord> records)
         {
             npcs.Items.Clear();
 
-            foreach (var npc in NpcSpawnRecord.GetNpcsOnMap(mapId))
+            foreach (var npc in records)
             {
                 npcs.Items.Add(npc);
             }
@@ -59,8 +73,26 @@ namespace Giny.Npcs
 
         private void NpcSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayActions(CurrentNpc);
-            templateId.Text = CurrentNpc.TemplateId.ToString();
+            if (CurrentNpc != null)
+            {
+                actions.Items.Clear();
+                actionsContent.Content = null;
+                DisplayActions(CurrentNpc);
+                templateId.Text = CurrentNpc.TemplateId.ToString();
+                mapId.Text = CurrentNpc.MapId.ToString();
+                cellId.Text = CurrentNpc.CellId.ToString();
+
+                direction.Items.Clear();
+
+                npcName.Text = CurrentNpc.Template.Name;
+
+                foreach (var value in Enum.GetValues(typeof(DirectionsEnum)))
+                {
+                    direction.Items.Add(value);
+                }
+
+                direction.SelectedItem = CurrentNpc.Direction;
+            }
         }
 
         public void DisplayActions(NpcSpawnRecord record)
@@ -76,13 +108,6 @@ namespace Giny.Npcs
         private void SaveClick(object sender, RoutedEventArgs e)
         {
             CurrentNpc.TemplateId = short.Parse(templateId.Text);
-
-            CurrentNpc.UpdateInstantElement();
-
-            foreach (var action in CurrentNpc.Actions)
-            {
-                action.UpdateInstantElement();
-            }
         }
 
         private void ActionsSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,7 +122,15 @@ namespace Giny.Npcs
                 case NpcActionsEnum.BUY_SELL:
                     actionsContent.Content = new BuySell(CurrentAction);
                     break;
+                case NpcActionsEnum.TALK:
+                    actionsContent.Content = new Talk(CurrentNpc, CurrentAction);
+                    break;
             }
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

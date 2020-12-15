@@ -332,6 +332,7 @@
     <Compile Include="D2O\D2OFieldDefinition.cs" />
     <Compile Include="D2O\D2OFieldType.cs" />
     <Compile Include="D2O\D2OIgnore.cs" />
+    <Compile Include="D2O\D2OManager.cs" />
     <Compile Include="D2O\D2OReader.cs" />
     <Compile Include="D2O\D2OSearchEntry.cs" />
     <Compile Include="D2O\D2OWriter.cs" />

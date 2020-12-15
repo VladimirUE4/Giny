@@ -1,4 +1,6 @@
-﻿using Giny.World.Records.Items;
+﻿using Giny.IO.D2O;
+using Giny.IO.D2OClasses;
+using Giny.World.Records.Items;
 using Giny.World.Records.Npcs;
 using System;
 using System.Collections.Generic;
@@ -39,16 +41,43 @@ namespace Giny.Npcs
 
         private void DisplayItems()
         {
+
             items.Items.Clear();
 
             foreach (var itemStr in Action.Param1.Split(','))
             {
                 short itemId = short.Parse(itemStr);
 
-                ItemRecord item = ItemRecord.GetItem(itemId);
-
-                items.Items.Add(item);
+                Item item = D2OManager.GetObject<Item>("Items.d2o", itemId);
+                string name = Loader.D2IFile.GetText((int)item.NameId);
+                items.Items.Add(new ExchangeItem(itemId, name));
             }
+
+            tokenId.Text = Action.Param2;
+        }
+
+    }
+    public class ExchangeItem
+    {
+        private string Name
+        {
+            get;
+            set;
+        }
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public ExchangeItem(int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
+        public override string ToString()
+        {
+            return "(" + Id + ") " + Name;
         }
     }
 }

@@ -61,6 +61,10 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        public static IEnumerable<NpcSpawnRecord> GetNpcSpawns()
+        {
+            return NpcSpawns.Values;
+        }
         public static IEnumerable<NpcSpawnRecord> GetNpcsOnMap(int mapId)
         {
             return NpcSpawns.Values.Where(x => x.MapId == mapId);
@@ -91,7 +95,7 @@ namespace Giny.World.Records.Npcs
 
         public override string ToString()
         {
-            return "(Id : " + Id + ") " + Template.Name + " (CellId : " + CellId + ")";
+            return "(Id : " + Id + ") " + Template.Name + " (MapId : " + MapId + ")";
         }
     }
 }

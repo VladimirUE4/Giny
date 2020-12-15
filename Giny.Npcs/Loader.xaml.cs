@@ -1,4 +1,5 @@
 ﻿using Giny.Core.Extensions;
+using Giny.IO.D2I;
 using Giny.IO.D2O;
 using Giny.IO.D2OClasses;
 using Giny.ORM;
@@ -31,12 +32,21 @@ namespace Giny.Npcs
     /// </summary>
     public partial class Loader : UserControl
     {
+        public static D2IFile D2IFile
+        {
+            get;
+            set;
+        }
         public Loader(MainWindow window)
         {
             InitializeComponent();
 
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "127.0.0.1",
          "giny_world", "root", "");
+
+            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny 2.58\Dofus\data\common");
+            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny 2.58\Dofus\data\i18n\i18n_fr.d2i");
+
 
 
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
@@ -49,6 +59,8 @@ namespace Giny.Npcs
                 DatabaseManager.Instance.LoadTable<NpcRecord>();
 
                 DatabaseManager.Instance.LoadTable<NpcSpawnRecord>();
+
+                DatabaseManager.Instance.LoadTable<NpcReplyRecord>();
 
                 DatabaseManager.Instance.LoadTable<NpcActionRecord>();
 
