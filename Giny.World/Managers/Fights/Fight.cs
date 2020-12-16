@@ -746,7 +746,11 @@ namespace Giny.World.Managers.Fights
             foreach (var summon in summons)
             {
                 source.Team.AddFighter(summon);
-                Timeline.InsertFighter(summon, Timeline.Index + 1);
+
+                if (summon.InsertInTimeline())
+                {
+                    Timeline.InsertFighter(summon, Timeline.Index + 1);
+                }
                 summon.Initialize();
             }
 

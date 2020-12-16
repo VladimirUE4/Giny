@@ -185,7 +185,9 @@ namespace Giny.World.Records.Items
         }
         public static ItemRecord GetItem(int gid)
         {
-            return Items[gid];
+            ItemRecord result = null;
+            Items.TryGetValue(gid, out result);
+            return result;
         }
 
         public override string ToString()

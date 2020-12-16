@@ -230,11 +230,11 @@ namespace Giny.World.Managers.Effects
                 case "D":
                     return new Trigger(TriggerType.OnDamaged);
                 case "DR":
-                    return new Trigger(TriggerType.OnDamagedInLongRange);
+                    return new Trigger(TriggerType.OnDamagedRange);
                 case "DS":
                     return new Trigger(TriggerType.OnDamagedBySpell);
                 case "DM":
-                    return new Trigger(TriggerType.OnDamagedInCloseRange);
+                    return new Trigger(TriggerType.OnDamagedMelee);
                 case "DA":
                     return new Trigger(TriggerType.OnDamagedAir);
                 case "DF":
@@ -253,6 +253,10 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnDamagedByEnemy);
                 case "DBA":
                     return new Trigger(TriggerType.OnDamagedByAlly);
+                case "CDM":
+                    return new Trigger(TriggerType.OnInflictDamageMelee);
+                case "CDR":
+                    return new Trigger(TriggerType.OnInflictDamageRange);
                 case "M":
                     return new Trigger(TriggerType.OnMoved);
                 case "MPA":

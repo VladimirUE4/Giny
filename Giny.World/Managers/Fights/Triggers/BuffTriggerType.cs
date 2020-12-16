@@ -10,6 +10,9 @@ namespace Giny.World.Managers.Fights.Triggers
     {
         Instant, // I
 
+        OnInflictDamageMelee, // CDM
+        OnInflictDamageRange, // CDR
+
         OnDamaged, // D
         OnDamagedAir, // DA
         OnDamagedEarth, // DE
@@ -23,8 +26,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedBySpell, // DS
         OnDamagedByGlyph, // DG
         OnDamagedByTrap, //DP
-        OnDamagedInCloseRange, //DM
-        OnDamagedInLongRange, //DR
+        OnDamagedMelee, //DM
+        OnDamagedRange, //DR
         OnDamagedByPush, // MD-->PD
         OnDamagedByAllyPush, //PMD
         OnDamageEnemyByPush, // MMD

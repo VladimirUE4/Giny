@@ -438,11 +438,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
             }
-
-
         }
-
-
 
         public bool IsFriendlyWith(Fighter actor)
         {
@@ -1299,7 +1295,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = Id,
             });
         }
-        public void OnMove(Movement movement)
+        public virtual void OnMove(Movement movement)
         {
             if (movement.Type != MovementType.Walk)
             {
@@ -1577,6 +1573,11 @@ namespace Giny.World.Managers.Fights.Fighters
         public short[] GetPreviousPositions()
         {
             return MovementHistory.GetEntries(2).Select(x => (short)x.Cell.Id).ToArray();
+        }
+
+        public virtual bool InsertInTimeline()
+        {
+            return true;
         }
 
         public void DispelState(Fighter source, int stateId)
@@ -1899,11 +1900,13 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             if (damage.Source.IsMeleeWith(this))
             {
-                TriggerBuffs(TriggerType.OnDamagedInCloseRange, damage);
+                damage.Source.TriggerBuffs(TriggerType.OnInflictDamageMelee, damage);
+                TriggerBuffs(TriggerType.OnDamagedMelee, damage);
             }
             else
             {
-                TriggerBuffs(TriggerType.OnDamagedInLongRange, damage);
+                damage.Source.TriggerBuffs(TriggerType.OnInflictDamageRange, damage);
+                TriggerBuffs(TriggerType.OnDamagedRange, damage);
             }
 
             if (damage.IsSpellDamage())
@@ -1919,6 +1922,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
+
 
 
         }
@@ -1985,6 +1989,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 Fight.RemoveMark(mark);
             }
         }
+        public virtual void OnDie(Fighter killedBy)
+        {
+            TriggerBuffs(TriggerType.OnDeath, new Death(killedBy));
+        }
 
         [WIP("null token?")]
         public void Die(Fighter killedBy)
@@ -2006,7 +2014,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 this.Alive = false;
 
-                TriggerBuffs(TriggerType.OnDeath, new Death(killedBy)); // null?
+                this.OnDie(killedBy);
+
             }
             else
             {

@@ -100,6 +100,7 @@
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\SkipTurn.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell1018.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1019.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamageIntercept.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerApUsed.cs" />
@@ -121,7 +122,10 @@
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\TeleportPortal.cs" />
+    <Compile Include="Managers\Fights\Effects\Summons\SummonBomb.cs" />
+    <Compile Include="Managers\Fights\Fighters\SummonedBomb.cs" />
     <Compile Include="Managers\Fights\Marks\PortalManager.cs" />
+    <Compile Include="Managers\Fights\Marks\Wall.cs" />
     <Compile Include="Managers\Fights\Movements\Movement.cs" />
     <Compile Include="Managers\Fights\Movements\MovementType.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\ReturnToOriginalPosition.cs" />
