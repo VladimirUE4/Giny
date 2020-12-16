@@ -28,9 +28,6 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedByPush, // MD-->PD
         OnDamagedByAllyPush, //PMD
         OnDamageEnemyByPush, // MMD
-        OnDamagedUnknown_2, // Dr
-        OnDamagedUnknown_3, // DTB
-        OnDamagedUnknown_4, // DTE
 
         OnSummon, // CI
 
@@ -58,11 +55,20 @@ namespace Giny.World.Managers.Fights.Triggers
         OnTackled, //tF
         OnTackle, //tS
 
-        /* CUSTOM */
+        OnTeleportPortal, // PT
 
+        /*
+         * Custom
+         */
         AfterDamaged,
         Delayed,
         Unknown,
+
+
+
+
+
+
         /*
         *A=lose AP (101)
         *CC=on critical hit

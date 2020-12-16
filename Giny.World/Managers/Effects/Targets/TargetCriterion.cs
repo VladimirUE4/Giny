@@ -89,6 +89,10 @@ namespace Giny.World.Managers.Effects.Targets
                         return new LastAttackerCriterion(false);
                     case 'W':
                         return new InvalidTeleportCriterion();
+                    case 'r':
+                        return new ThroughPortalCriterion(false);
+                    case 'R':
+                        return new ThroughPortalCriterion(true);
                 }
 
                 return new UnknownCriterion(str);

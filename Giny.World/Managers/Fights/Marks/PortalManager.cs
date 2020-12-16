@@ -11,17 +11,18 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Marks
 {
+    [WIP]
     public class PortalManager : Singleton<PortalManager>
     {
-        private const int SAME = 0;
+        private const int Same = 0;
 
-        private const int OPPOSITE = 1;
+        private const int Opposite = 1;
 
-        private const int TRIGONOMETRIC = 2;
+        private const int Trigonometric = 2;
 
-        private const int COUNTER_TRIGONOMETRIC = 3;
+        private const int CounterTrigonometric = 3;
 
-        private const int BEST_DIST = 63;
+        private const int BestDistance = 63;
 
         public const short PortalTeleportSpellId = 14573;
 
@@ -143,7 +144,7 @@ namespace Giny.World.Managers.Fights.Marks
         {
             int dist = 0;
             List<MapPoint> closests = new List<MapPoint>();
-            int bestDist = BEST_DIST;
+            int bestDist = BestDistance;
             foreach (var portal in portals)
             {
                 dist = refMapPoint.ManhattanDistanceTo(portal);
@@ -204,13 +205,13 @@ namespace Giny.World.Managers.Fights.Marks
             {
                 switch (compareAngles(refCell.Coordinates, prev.Coordinates, portal.Coordinates))
                 {
-                    case OPPOSITE:
+                    case Opposite:
                         if (sortedClosests.Count <= 2)
                         {
                             return null;
                         }
                         break;
-                    case COUNTER_TRIGONOMETRIC:
+                    case CounterTrigonometric:
                         return prev;
                     default:
                         prev = portal;
@@ -224,13 +225,13 @@ namespace Giny.World.Managers.Fights.Marks
         {
             switch (compareAngles(refCell, cellA, cellB))
             {
-                case SAME:
+                case Same:
                     return 0;
-                case OPPOSITE:
+                case Opposite:
                     return Math.PI;
-                case TRIGONOMETRIC:
+                case Trigonometric:
                     return GetAngle(refCell, cellA, cellB);
-                case COUNTER_TRIGONOMETRIC:
+                case CounterTrigonometric:
                     return 2 * Math.PI - GetAngle(refCell, cellA, cellB);
                 default:
                     return 0;
@@ -257,9 +258,9 @@ namespace Giny.World.Managers.Fights.Marks
             int det = GetDeterminant(aVec, bVec);
             if (det != 0)
             {
-                return det > 0 ? TRIGONOMETRIC : COUNTER_TRIGONOMETRIC;
+                return det > 0 ? Trigonometric : CounterTrigonometric;
             }
-            return aVec.X >= 0 == bVec.X >= 0 && aVec.Y >= 0 == bVec.Y >= 0 ? SAME : OPPOSITE;
+            return aVec.X >= 0 == bVec.X >= 0 && aVec.Y >= 0 == bVec.Y >= 0 ? Same : Opposite;
         }
 
         private int GetDeterminant(Point aVec, Point bVec)

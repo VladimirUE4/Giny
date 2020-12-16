@@ -211,6 +211,8 @@ namespace Giny.World.Managers.Effects
 
             switch (identifier)
             {
+                case "PT":
+                    return new Trigger(TriggerType.OnTeleportPortal);
                 case "CT":
                     return new Trigger(TriggerType.OnTackle);
                 case "CI":

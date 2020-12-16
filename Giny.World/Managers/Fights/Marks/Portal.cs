@@ -1,4 +1,6 @@
 ﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Messages;
+using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -16,7 +18,7 @@ namespace Giny.World.Managers.Fights.Marks
 {
     public class Portal : Mark
     {
-        public override bool StopMovement => true;
+        public override bool StopMovement => Active;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.PORTAL;
 
@@ -41,12 +43,33 @@ namespace Giny.World.Managers.Fights.Marks
 
         public override void OnAdded()
         {
-            this.Active = true;
+            Enable();
         }
 
+        public void Enable()
+        {
+            this.Active = true;
+            OnStateChanged();
+        }
+        public void Disable()
+        {
+            this.Active = false;
+            OnStateChanged();
+        }
+
+        public void OnStateChanged()
+        {
+            Source.Fight.Send(new GameActionFightActivateGlyphTrapMessage()
+            {
+                actionId = (short)ActionsEnum.ACTION_FIGHT_DISABLE_PORTAL,
+                active = Active,
+                markId = (short)Id,
+                sourceId = Source.Id,
+            });
+        }
         public override void OnRemoved()
         {
-
+           
         }
 
         public override void Trigger(Fighter target, MarkTriggerType triggerType)

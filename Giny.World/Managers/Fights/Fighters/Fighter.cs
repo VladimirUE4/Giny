@@ -361,6 +361,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public virtual void Move(List<CellRecord> path)
         {
+            Fight.ResetTriggers();
+
             path.Insert(0, this.Cell);
 
             if (path.Count <= 1)
@@ -635,7 +637,9 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
-            foreach (var buff in GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger).ToArray())
+            IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger).ToArray();
+
+            foreach (var buff in buffs)
             {
                 buff.CanTrigger = false;
 
@@ -1126,7 +1130,21 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             TriggerBuffs(TriggerType.OnSpecificStateAdded, buff, (short)buff.Record.Id);
         }
-        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true, bool triggerMarks = true)
+        [WIP("remove this tuple")]
+        public void TeleportToPortal(Fighter source)
+        {
+            Tuple<Portal, Portal> pair = PortalManager.Instance.GetPortalsTuple(Fight, this.Cell.Id);
+
+            pair.Item1.Disable();
+            pair.Item2.Disable();
+
+            CellRecord cell = source.Fight.Map.GetCell(pair.Item2.CenterCell.Id);
+
+            this.Teleport(source, cell);
+
+            this.TriggerBuffs(TriggerType.OnTeleportPortal, null);
+        }
+        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
         {
             if (!CanBeMoved())
             {
@@ -1177,7 +1195,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
-            OnMove(new Movement(MovementType.Teleport, source, triggerMarks));
+            OnMove(new Movement(MovementType.Teleport, source));
 
             return null;
         }
@@ -1293,10 +1311,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 this.TriggerBuffs(TriggerType.OnPushed, movement);
             }
 
-            if (movement.TriggerMarks)
-            {
-                Fight.TriggerMarks(this, MarkTriggerType.OnMove);
-            }
+            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+
             Moved?.Invoke(this);
         }
         public void SetSpellCooldown(Fighter source, short spellId, short value)
@@ -2084,6 +2100,8 @@ namespace Giny.World.Managers.Fights.Fighters
             return GetBuffs<TriggerBuff>().Any(x => x.Effect.EffectEnum == EffectsEnum.Effect_DamageSharing
             && x.Cast == effect.CastHandler.Cast);
         }
+
+
     }
 
 }

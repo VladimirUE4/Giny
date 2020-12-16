@@ -85,6 +85,7 @@
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
+    <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
     <Compile Include="Managers\Fights\AI\MarkAction.cs" />
     <Compile Include="Managers\Fights\AI\SummonAction.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercentWhenAttack.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\HealWhenAttack.cs" />
+    <Compile Include="Managers\Fights\Effects\Marks\DisablePortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyph.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />

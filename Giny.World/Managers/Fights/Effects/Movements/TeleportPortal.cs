@@ -21,19 +21,14 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-
-            if (this.Source.Team.GetPortals().Count() < 2)
+            if (this.Source.Team.GetPortals().Where(x => x.Active).Count() < 2)
             {
                 return;
             }
 
             foreach (var target in targets)
             {
-                Tuple<Portal, Portal> pair = PortalManager.Instance.GetPortalsTuple(Source.Fight, target.Cell.Id);
-
-                CellRecord cell = Source.Fight.Map.GetCell(pair.Item2.CenterCell.Id);
-
-                target.Teleport(Source, cell, true, false);
+                target.TeleportToPortal(Source);
             }
         }
     }
