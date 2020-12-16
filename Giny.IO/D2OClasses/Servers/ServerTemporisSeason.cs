@@ -11,7 +11,7 @@ namespace Giny.IO.D2OClasses
     {
         public const string MODULE = "ServerTemporisSeasons";
 
-        public int Id => throw new NotImplementedException();
+        public int Id => uid;
 
         public int uid;
         public uint seasonNumber;

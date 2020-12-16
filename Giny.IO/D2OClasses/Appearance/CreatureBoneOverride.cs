@@ -11,7 +11,7 @@ namespace Giny.IO.D2OClasses
     {
         public const string MODULE = "CreatureBonesOverrides";
 
-        public int Id => throw new NotImplementedException();
+        public int Id => 0;
 
         public int boneId;
         public int creatureBoneId;
