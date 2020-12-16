@@ -194,6 +194,16 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             set;
         }
+        /// <summary>
+        /// (From client SpellManager.as:352)
+        /// True if the player was teleported in invalid cell during his turn.
+        /// (Pendule xelor)
+        /// </summary>
+        public bool WasTeleportedInInvalidCell
+        {
+            get;
+            private set;
+        }
 
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
@@ -205,6 +215,7 @@ namespace Giny.World.Managers.Fights.Fighters
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
             this.m_spellsCosts = new Dictionary<short, short>();
+            this.WasTeleportedInInvalidCell = false;
         }
 
         public bool IsCarried()
@@ -766,9 +777,12 @@ namespace Giny.World.Managers.Fights.Fighters
                 {
                     Fight.TriggerMarks(this, MarkTriggerType.OnTurnEnd);
                     TriggerBuffs(TriggerType.OnTurnEnd, null);
+
+                    OnTurnEnded();
+
+                    this.WasTeleportedInInvalidCell = false;
                 }
 
-                OnTurnEnded();
             }
         }
 
@@ -877,7 +891,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        private bool WontReveals()
+        private bool CanBeReveals()
         {
             IEnumerable<Glyph> effectiveGlyphs = GetEffectiveGlyphs().OfType<GlyphAura>();
 
@@ -925,7 +939,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             if (IsInvisible() && !handler.Cast.Force)
             {
-                if (handler.RevealsInvisible() && !WontReveals())
+                if (handler.RevealsInvisible() && !CanBeReveals())
                 {
                     Reveals();
                 }
@@ -1117,6 +1131,14 @@ namespace Giny.World.Managers.Fights.Fighters
                 return new Telefrag(this, otherTarget);
             }
 
+            if (!targetCell.Walkable || targetCell.NonWalkableDuringFight || !targetCell.Point.IsInMap())
+            {
+                if (IsFighterTurn)
+                {
+                    this.WasTeleportedInInvalidCell = true;
+                }
+                return null;
+            }
             if (!Fight.IsCellFree(targetCell))
             {
                 return null;
@@ -1467,6 +1489,8 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Stats.InvisibilityState = state;
             OnInvisibilityStateChanged(state, oldState, source);
         }
+
+        [WIP("show fighter, invalid")]
         private void OnInvisibilityStateChanged(GameActionFightInvisibilityStateEnum state, GameActionFightInvisibilityStateEnum oldState, Fighter source)
         {
             foreach (var fighter in Fight.GetFighters<CharacterFighter>(false))
@@ -1482,7 +1506,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (oldState == GameActionFightInvisibilityStateEnum.INVISIBLE && state == GameActionFightInvisibilityStateEnum.VISIBLE)
             {
-                ShowFighter();
+                ShowFighter(); 
             }
         }
         public GameActionFightInvisibilityStateEnum GetInvisibilityStateFor(Fighter fighter)

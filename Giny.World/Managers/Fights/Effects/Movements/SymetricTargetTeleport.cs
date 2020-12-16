@@ -31,20 +31,17 @@ namespace Giny.World.Managers.Fights.Effects.Movements
 
             var targetPoint = new MapPoint((2 * target.Cell.Point.X - Source.Cell.Point.X), (2 * target.Cell.Point.Y - Source.Cell.Point.Y));
 
-            if (MapPoint.IsInMap(targetPoint.X, targetPoint.Y))
-            {
-                var telefrag = Source.Teleport(Source, Source.Fight.Map.GetCell(targetPoint));
+            var telefrag = Source.Teleport(Source, Source.Fight.Map.GetCell(targetPoint));
 
-                if (telefrag != null)
-                {
-                    this.CastHandler.AddTelefrag(telefrag);
-                }
+            if (telefrag != null)
+            {
+                this.CastHandler.AddTelefrag(telefrag);
             }
 
-           /* foreach (var target in targets)
-            {
-                unused ?
-            } */
+            /* foreach (var target in targets)
+             {
+                 unused ?
+             } */
         }
     }
 }

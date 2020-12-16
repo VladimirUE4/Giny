@@ -96,6 +96,11 @@ namespace Giny.World.Managers.Fights.Cast
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
             Targets = effect.GetTargets();
+
+            if (Targets.Any(x => x is UnknownCriterion))
+            {
+                Source.Fight.Warn("Unknown Target Mask : " + Effect.TargetMask);
+            }
             this.CastHandler = castHandler;
             Effect = effect;
             Zone = Effect.GetZone(CastCell.Point.OrientationTo(TargetCell.Point));
@@ -134,7 +139,7 @@ namespace Giny.World.Managers.Fights.Cast
         {
             return Zone.GetCells(TargetCell, Source.Fight.Map).ToList();
         }
-     
+
         [WIP("usage?")]
         public virtual bool CanApply()
         {

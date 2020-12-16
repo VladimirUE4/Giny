@@ -55,7 +55,6 @@ namespace Giny.World.Managers.Fights.Buffs
         }
         public override AbstractFightDispellableEffect GetAbstractFightDispellableEffect()
         {
-            Target.Fight.Warn(SpellId.ToString());
             return new FightTemporarySpellBoostEffect()
             {
                 boostedSpellId = SpellId,

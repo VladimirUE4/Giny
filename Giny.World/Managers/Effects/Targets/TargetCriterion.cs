@@ -88,7 +88,7 @@ namespace Giny.World.Managers.Effects.Targets
                     case 'o':
                         return new LastAttackerCriterion(false);
                     case 'W':
-                        return new UnknownCriterionW();
+                        return new InvalidTeleportCriterion();
                 }
 
                 return new UnknownCriterion(str);

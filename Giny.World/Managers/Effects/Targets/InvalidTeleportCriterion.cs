@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Effects.Targets
 {
     /// <summary>
-    /// wasTeleportedInInvalidCellThisTurn
+    /// SpellManager.as:352
     /// </summary>
-    public class UnknownCriterionW : TargetCriterion
+    public class InvalidTeleportCriterion : TargetCriterion
     {
+        public override bool RefreshTargets => true;
+
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
-            return false;
+            return actor.WasTeleportedInInvalidCell;
         }
     }
 }
