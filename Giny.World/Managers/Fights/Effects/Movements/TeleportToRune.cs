@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Movements
 {
-    [WIP]
-    [SpellEffectHandler(EffectsEnum.Effect_1101)]
+    [SpellEffectHandler(EffectsEnum.Effect_TeleportToRune)]
     public class TeleportToRune : SpellEffectHandler
     {
         public TeleportToRune(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
+
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            var rune = Source.GetMarks<Rune>().LastOrDefault();
+            Rune rune = Source.GetMarks<Rune>().LastOrDefault();
 
             if (rune != null)
             {

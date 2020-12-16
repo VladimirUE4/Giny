@@ -1990,7 +1990,7 @@
         /// <summary>
         /// 
         /// </summary>
-        Effect_1101 = 1101,
+        Effect_TeleportToRune = 1101,
         /// <summary>
         /// 
         /// </summary>

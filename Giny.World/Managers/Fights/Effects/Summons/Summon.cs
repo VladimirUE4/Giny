@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -18,13 +19,15 @@ namespace Giny.World.Managers.Fights.Effects.Summons
         {
         }
 
+        [WIP("some stuff concerning targets i dont understand...")]
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (Source.Fight.IsCellFree(TargetCell))
             {
                 var fighter = CreateSummon((short)Effect.Min);
-                    Source.Fight.AddSummon(Source, fighter);
+                Source.Fight.AddSummon(Source, fighter);
             }
+
         }
     }
 }
