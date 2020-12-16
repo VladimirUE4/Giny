@@ -30,6 +30,7 @@ namespace Giny.DatabasePatcher
             MA3Manager.Initialize();
             MonsterKamasDropManager.Initialize();
             SpellCategoryManager.Initialize();
+            MonsterSpawnsManager.Initialize();
             MapPlacementsManager.Initialize();
         }
 

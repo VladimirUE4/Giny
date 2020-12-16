@@ -1,5 +1,6 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
+using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
@@ -27,7 +28,9 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
             foreach (var target in targets.OfType<SummonedFighter>())
             {
-                target.SetController((CharacterFighter)Source);
+                int id = target.BuffIdProvider.Pop();
+                TakeControlBuff buff = new TakeControlBuff(id, target, this, FightDispellableEnum.DISPELLABLE);
+                target.AddBuff(buff);
             }
         }
     }

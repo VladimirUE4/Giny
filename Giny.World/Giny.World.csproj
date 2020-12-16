@@ -93,8 +93,7 @@
     <Compile Include="Managers\Fights\Buffs\RandModifierBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SkipTurnBuff.cs" />
-    <Compile Include="Managers\Fights\Custom\Huppermage.cs" />
-    <Compile Include="Managers\Fights\Custom\Pandawa.cs" />
+    <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ArmorDamageReduction.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddRandModifier.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
@@ -204,8 +203,6 @@
     <Compile Include="Managers\Fights\Cast\Spell.cs" />
     <Compile Include="Managers\Fights\Cast\SpellCastHandlerAttribute.cs" />
     <Compile Include="Managers\Fights\Cast\Telefrag.cs" />
-    <Compile Include="Managers\Fights\Custom\Iop.cs" />
-    <Compile Include="Managers\Fights\Custom\Zobal.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddErosion.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddShield.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddVitality.cs" />

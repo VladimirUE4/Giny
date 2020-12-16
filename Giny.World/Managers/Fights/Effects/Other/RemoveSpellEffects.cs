@@ -14,8 +14,6 @@ namespace Giny.World.Managers.Fights.Effects.Other
     [SpellEffectHandler(EffectsEnum.Effect_RemoveSpellEffects)]
     public class RemoveSpellEffects : SpellEffectHandler
     {
-        public override bool RefreshTargets => base.RefreshTargets;
-
         public RemoveSpellEffects(EffectDice effect, SpellCastHandler castHandler) : base(effect,  castHandler)
         {
 

@@ -80,7 +80,7 @@ namespace Giny.SpellExplorer
 
                 foreach (var spell in spellRecords)
                 {
-                    foreach (var level in SpellLevelRecord.GetSpellLevels(spell.Id))
+                    foreach (var level in spell.Levels)
                     {
                         foreach (var effect in level.Effects)
                         {

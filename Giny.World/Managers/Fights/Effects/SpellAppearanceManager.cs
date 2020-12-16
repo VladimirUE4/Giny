@@ -40,7 +40,7 @@ namespace Giny.World.Managers.Fights.Effects
         {
             if (m_handlers.ContainsKey(appearanceId))
             {
-                var look = fighter.Look.Clone();
+                var look = fighter.BaseLook.Clone();
                 m_handlers[appearanceId](fighter, ref look);
                 return look;
             }

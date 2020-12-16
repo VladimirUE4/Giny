@@ -10,8 +10,6 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class TargetTypeCriterion : TargetCriterion
     {
-        public override bool CheckWhenExecute => TargetType.HasFlag(SpellTargetType.SELF_ONLY);
-
         public TargetTypeCriterion(SpellTargetType type, bool caster)
         {
             TargetType = type;

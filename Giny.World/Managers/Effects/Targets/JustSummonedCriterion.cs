@@ -6,7 +6,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class JustSummonedCriterion : TargetCriterion
     {
-        public override bool CheckWhenExecute => true;
+        public override bool RefreshTargets => true;
 
         /// <summary>
         /// handler.CastHandler.Initialized because we CheckWhenExecute. We dont want to check it before a summoned fighter can be created.

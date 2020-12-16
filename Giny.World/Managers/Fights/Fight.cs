@@ -763,6 +763,9 @@ namespace Giny.World.Managers.Fights
             {
                 summon.OnSummoned();
             }
+
+            source.TriggerBuffs(TriggerType.OnSummon, null);
+
         }
 
         public void UpdateRound()

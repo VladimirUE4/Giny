@@ -13,8 +13,6 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     [SpellEffectHandler(EffectsEnum.Effect_Retreat)]
     public class Retreat : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         public Retreat(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }

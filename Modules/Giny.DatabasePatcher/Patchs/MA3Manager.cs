@@ -22,7 +22,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor1("Database Patcher > Fixing item appeareances....");
+            Logger.WriteColor2("Database Patcher > Fixing item appeareances....");
 
             Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, MessageState.INFO2);
 
@@ -30,7 +30,7 @@ namespace Giny.DatabasePatcher.Patchs
             {
                 ProcessMA3();
             }
-            catch (Exception ex)
+            catch
             {
                 Logger.Write("Unable to download Items.ma3 from " + ITEMS_URL, MessageState.WARNING);
             }

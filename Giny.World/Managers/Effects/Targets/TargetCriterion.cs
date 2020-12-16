@@ -41,7 +41,7 @@ namespace Giny.World.Managers.Effects.Targets
 
         public virtual bool IsDisjonction => true;
 
-        public virtual bool CheckWhenExecute => false;
+        public virtual bool RefreshTargets => false;
 
         public static TargetCriterion ParseCriterion(string str)
         {

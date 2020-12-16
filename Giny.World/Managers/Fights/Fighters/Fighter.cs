@@ -1792,9 +1792,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
             TriggerBuffs(TriggerType.AfterDamaged, damage);
 
-
-
-
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
         }
 

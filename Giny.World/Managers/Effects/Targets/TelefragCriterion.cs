@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class TelefragCriterion : TargetCriterion
     {
-        public override bool CheckWhenExecute => true;
+        public override bool RefreshTargets => true;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler) => handler.CastHandler.IsTelefraged(actor);
 

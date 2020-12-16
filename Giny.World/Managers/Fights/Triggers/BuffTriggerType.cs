@@ -10,7 +10,6 @@ namespace Giny.World.Managers.Fights.Triggers
     {
         Instant, // I
 
-        /* DAMAGE TRIGGER */
         OnDamaged, // D
         OnDamagedAir, // DA
         OnDamagedEarth, // DE
@@ -33,42 +32,31 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedUnknown_3, // DTB
         OnDamagedUnknown_4, // DTE
 
-        /* TURN */
+        OnSummon, // CI
+
         OnTurnBegin, // TB
         OnTurnEnd, // TE
 
-        /* AP, MP, PO */
-        OnMPLost, // m
+        OnMPLost, // m , MPA (effective loss? attempt? )
         OnAPLost, // A
         OnRangeLost, // R
 
-        /* HEAL */
         OnHealed, //H
 
-        /* STATE */
         OnStateAdded, // EO
         OnSpecificStateAdded, //EO#
         OnStateRemoved, //Eo
         OnSpecificStateRemoved, //Eo#
 
-        /* BUFF */
         OnDispelled, //d
 
-        /* OTHERS */
         OnCriticalHit, //CC
         OnDeath, //X
 
-        /* MOVEMENT */
-        OnPushed, //MP
+        OnPushed, //MP , P
         OnMoved, //M
         OnTackled, //tF
         OnTackle, //tS
-
-        /* UNKNOWN */
-        Unknown_3, //mA
-        Unknown_4, //ML
-        Unknown_6, //MS
-        UsedPortal, //P
 
         /* CUSTOM */
 
@@ -120,6 +108,7 @@ namespace Giny.World.Managers.Fights.Triggers
         *tS=Tackle
         *X= Death
         *CT =tackle enemy?
+        *CI = Summoned
         */
     }
 }

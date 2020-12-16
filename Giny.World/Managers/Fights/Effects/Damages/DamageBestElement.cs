@@ -22,8 +22,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     [SpellEffectHandler(EffectsEnum.Effect_DamageBestElement)] // Intimidation
     public class DamageBestElement : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         protected override bool Reveals => true;
 
         public DamageBestElement(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)

@@ -22,7 +22,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor1("Database Patcher > Spawning Monsters....");
+            Logger.WriteColor2("Database Patcher > Spawning Monsters....");
 
             long id = 1;
 
@@ -51,11 +51,10 @@ namespace Giny.DatabasePatcher.Patchs
                             record.AddInstantElement();
                         }
                     }
+                   
                 }
             }
 
-            Logger.Write("Monster spawn fixed. Press a key to exit", MessageState.IMPORTANT_INFO);
-            Environment.Exit(0);
         }
 
         private static double ComputeMonsterSpawnProbability(MonsterRecord record)

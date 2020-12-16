@@ -75,8 +75,6 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         } = false;
 
-        public virtual bool RefreshTargets => true;
-
         protected virtual bool Reveals => false;
 
         public Zone Zone
@@ -155,7 +153,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
-            if (Targets.Any(x => x.CheckWhenExecute) || CastHandler.GetEffectHandlers().All(x => x.RefreshTargets))
+            if (Targets.Any(x => x.RefreshTargets))
             {
                 AffectedFighters = GetAffectedFighters();
             }

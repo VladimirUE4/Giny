@@ -26,7 +26,7 @@ namespace Giny.DatabasePatcher.Patchs.Placements
 
         public static void Initialize()
         {
-            Logger.WriteColor1("Database Patcher > Fixing map placements....");
+            Logger.WriteColor2("Database Patcher > Fixing map placements....");
 
             IEnumerable<MapRecord> maps = MapRecord.GetMaps();
 

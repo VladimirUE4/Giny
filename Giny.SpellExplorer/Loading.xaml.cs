@@ -55,6 +55,8 @@ namespace Giny.SpellExplorer
 
                 DatabaseManager.Instance.LoadTable<SpellLevelRecord>();
 
+                SpellRecord.Initialize();
+
                 window.Dispatcher.Invoke(() =>
                 {
                     window.OnLoadingEnd();

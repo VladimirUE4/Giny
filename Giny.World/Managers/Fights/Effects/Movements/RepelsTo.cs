@@ -16,8 +16,6 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     [SpellEffectHandler(EffectsEnum.Effect_RepelsTo)]
     public class RepelsTo : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         public RepelsTo(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }

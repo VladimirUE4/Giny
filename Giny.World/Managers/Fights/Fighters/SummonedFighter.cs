@@ -74,6 +74,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 base.OnTurnBegin();
             }
         }
+        [WIP("can controller be different of summoner?")]
         public void SetController(CharacterFighter controller)
         {
             this.Controller = controller;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Effects.Targets
 {
     /// <summary>
-    /// Pendule ... Maybe something like 'Will return to last position ? '
+    /// wasTeleportedInInvalidCellThisTurn
     /// </summary>
     public class UnknownCriterionW : TargetCriterion
     {

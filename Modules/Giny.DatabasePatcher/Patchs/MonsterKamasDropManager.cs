@@ -19,7 +19,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor1("Database Patcher > Computing Monsters kamas....");
+            Logger.WriteColor2("Database Patcher > Computing Monsters kamas....");
 
             AsyncRandom random = new AsyncRandom();
 

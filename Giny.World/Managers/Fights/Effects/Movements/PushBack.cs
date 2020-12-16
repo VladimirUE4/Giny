@@ -15,8 +15,6 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     [SpellEffectHandler(EffectsEnum.Effect_PushBack_1103)]
     public class PushBack : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         public PushBack(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 

@@ -69,7 +69,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor1("Database Patcher > Assigning spell categories....");
+            Logger.WriteColor2("Database Patcher > Assigning spell categories....");
 
             foreach (var spell in SpellRecord.GetSpellRecords())
             {

@@ -16,7 +16,7 @@ namespace Giny.DatabasePatcher.Patchs
     {
         public static void SynchronizeElements()
         {
-            Logger.WriteColor1("Database Patcher > Synchronize interactives elements....");
+            Logger.WriteColor2("Database Patcher > Synchronize interactives elements....");
 
             int count = 0;
             foreach (SkillRecord skillRecord in SkillRecord.GetSkills())

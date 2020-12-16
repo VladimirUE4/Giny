@@ -103,7 +103,11 @@ namespace Giny.SpellExplorer
             effectInfo.Items.Add("Order : " + effect.Order);
             effectInfo.Items.Add("Modificator : " + effect.Modificator);
             effectInfo.Items.Add("Record Priority : " + effectRecord.Priority);
-
+            effectInfo.Items.Add("Group : " + effect.Group);
+            effectInfo.Items.Add("TargetId : " + effect.TargetId);
+            effectInfo.Items.Add("Dispellable : " + (FightDispellableEnum)effect.Dispellable);
+            effectInfo.Items.Add("Trigger : " + effect.Trigger);
+            effectInfo.Items.Add("Random : " + effect.Random);
 
             switch (effect.EffectEnum)
             {
@@ -164,11 +168,9 @@ namespace Giny.SpellExplorer
 
             spellInfo.Items.Add("Name : " + Spell.Name);
 
-            var levels = SpellLevelRecord.GetSpellLevels(Spell.Id);
-
             levelsList.Items.Clear();
 
-            foreach (var level in levels)
+            foreach (var level in Spell.Levels)
             {
                 levelsList.Items.Add(level);
             }

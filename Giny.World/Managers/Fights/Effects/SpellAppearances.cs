@@ -10,6 +10,11 @@ namespace Giny.World.Managers.Fights.Effects
 {
     public class SpellAppearances
     {
+        [SpellAppearance(0)]
+        public static void DefaultAppearence(Fighter fighter,ref ServerEntityLook look)
+        {
+            look = fighter.BaseLook.Clone();
+        }
         [SpellAppearance(729)]
         public static void MomificationLook(Fighter fighter, ref ServerEntityLook look)
         {

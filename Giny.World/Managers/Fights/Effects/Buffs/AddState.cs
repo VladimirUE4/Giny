@@ -15,8 +15,6 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
     [SpellEffectHandler(EffectsEnum.Effect_AddState)]
     public class AddState : SpellEffectHandler
     {
-        public override bool RefreshTargets => base.RefreshTargets;
-
         public AddState(EffectDice effect, SpellCastHandler castHandler) :
             base(effect, castHandler)
         {

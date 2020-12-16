@@ -23,8 +23,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         {
         }
 
-        public override bool RefreshTargets => false;
-
         protected override bool Reveals => true;
 
         protected override void Apply(IEnumerable<Fighter> targets)

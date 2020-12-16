@@ -118,6 +118,7 @@ namespace Giny.World.Records.Spells
             }
            
         }
+
         public static IEnumerable<SpellRecord> GetSpellRecords()
         {
             return Spells.Values;
@@ -128,5 +129,6 @@ namespace Giny.World.Records.Spells
             Spells.TryGetValue(spellId, out result);
             return result;
         }
+
     }
 }

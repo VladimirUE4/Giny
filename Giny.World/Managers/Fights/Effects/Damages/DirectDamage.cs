@@ -21,8 +21,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     [SpellEffectHandler(EffectsEnum.Effect_DamageNeutral)]
     public class DirectDamage : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         protected override bool Reveals => true;
 
         public DirectDamage(EffectDice effect, SpellCastHandler castHandler) :

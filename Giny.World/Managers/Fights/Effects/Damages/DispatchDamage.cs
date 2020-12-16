@@ -15,8 +15,6 @@ namespace Giny.World.Managers.Fights.Effects.Damages
     [SpellEffectHandler(EffectsEnum.Effect_DispatchDamages)]
     public class DispatchDamage : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         public DispatchDamage(EffectDice effect, SpellCastHandler castHandler) :
             base(effect, castHandler)
         {

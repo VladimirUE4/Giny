@@ -13318,6 +13318,7 @@ namespace Giny.Protocol.Custom.Enums
         Unknown17614 = 17614,
         Unknown17623 = 17623,
         Unknown17625 = 17625,
+        MaitriseInvo = 18646,
 
     }
 }

@@ -14,8 +14,6 @@ namespace Giny.World.Managers.Fights.Effects.Movements
     [SpellEffectHandler(EffectsEnum.Effect_Advance)]
     public class Advance : SpellEffectHandler
     {
-        public override bool RefreshTargets => false;
-
         public Advance(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
         }
