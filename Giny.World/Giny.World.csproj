@@ -118,6 +118,8 @@
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
+    <Compile Include="Managers\Fights\Effects\Movements\TeleportPortal.cs" />
+    <Compile Include="Managers\Fights\Marks\PortalManager.cs" />
     <Compile Include="Managers\Fights\Movements\Movement.cs" />
     <Compile Include="Managers\Fights\Movements\MovementType.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\ReturnToOriginalPosition.cs" />
@@ -233,7 +235,7 @@
     <Compile Include="Managers\Fights\Effects\Movements\SymetricCasterTeleport.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\SymetricPointTeleport.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\SymetricTargetTeleport.cs" />
-    <Compile Include="Managers\Fights\Effects\Movements\TeleportToRune.cs" />
+    <Compile Include="Managers\Fights\Effects\Movements\TeleportRune.cs" />
     <Compile Include="Managers\Fights\Effects\Other\DamageMultiplier.cs" />
     <Compile Include="Managers\Fights\Effects\Other\DisableLOS.cs" />
     <Compile Include="Managers\Fights\Buffs\LookBuff.cs" />

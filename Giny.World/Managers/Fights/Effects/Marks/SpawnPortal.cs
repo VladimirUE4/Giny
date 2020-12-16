@@ -27,14 +27,16 @@ namespace Giny.World.Managers.Fights.Effects.Marks
             {
                 Zone zone = Effect.GetZone();
 
-                Color color = MarksManager.Instance.GetMarkColorFromSpellId(CastHandler.Cast.Spell.GetSpellEnum());
+                Color color = PortalManager.Instance.GetPortalColor(Source.Team.TeamId);
 
-                Portal portal = new Portal(Source.Fight.PopNextMarkId(), Effect,
-                     zone, MarkTriggerType.None, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
+                Portal portal = new Portal(Source.Fight.PopNextMarkId(), (short)Effect.Value, Effect,
+                     zone, MarkTriggerType.OnMove, color, Source, TargetCell, CastHandler.Cast.Spell.Record, CastHandler.Cast.Spell.Level);
 
                 Source.Fight.AddMark(portal);
             }
         }
+
+
 
     }
 }

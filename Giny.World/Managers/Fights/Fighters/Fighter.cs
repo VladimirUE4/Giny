@@ -280,6 +280,15 @@ namespace Giny.World.Managers.Fights.Fighters
 
             this.LooseAp(this, looseAp, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST);
             this.LooseMp(this, looseMp, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST);
+
+            foreach (var tackler in tacklers)
+            {
+                /*
+                 * Only tacklers that really tackle should trigger buffs? (not sure) *
+                 * Also we should pass Tackle.cs as token
+                 */
+                tackler.TriggerBuffs(TriggerType.OnTackle, null);
+            }
         }
         private List<CellRecord> ApplyTackle(List<CellRecord> path)
         {
@@ -1117,7 +1126,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             TriggerBuffs(TriggerType.OnSpecificStateAdded, buff, (short)buff.Record.Id);
         }
-        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
+        public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true, bool triggerMarks = true)
         {
             if (!CanBeMoved())
             {
@@ -1168,7 +1177,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (register)
                 MovementHistory.OnCellChanged(oldCell);
 
-            OnMove(new Movement(MovementType.Teleport, source));
+            OnMove(new Movement(MovementType.Teleport, source, triggerMarks));
 
             return null;
         }
@@ -1284,7 +1293,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 this.TriggerBuffs(TriggerType.OnPushed, movement);
             }
 
-            Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+            if (movement.TriggerMarks)
+            {
+                Fight.TriggerMarks(this, MarkTriggerType.OnMove);
+            }
             Moved?.Invoke(this);
         }
         public void SetSpellCooldown(Fighter source, short spellId, short value)
@@ -1506,7 +1518,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (oldState == GameActionFightInvisibilityStateEnum.INVISIBLE && state == GameActionFightInvisibilityStateEnum.VISIBLE)
             {
-                ShowFighter(); 
+                ShowFighter();
             }
         }
         public GameActionFightInvisibilityStateEnum GetInvisibilityStateFor(Fighter fighter)

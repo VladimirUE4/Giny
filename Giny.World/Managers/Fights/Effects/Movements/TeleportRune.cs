@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Fights.Effects.Movements
 {
     [SpellEffectHandler(EffectsEnum.Effect_TeleportToRune)]
-    public class TeleportToRune : SpellEffectHandler
+    public class TeleportRune : SpellEffectHandler
     {
-        public TeleportToRune(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public TeleportRune(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 
         }

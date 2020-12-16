@@ -99,7 +99,7 @@ namespace Giny.World.Managers.Fights.Cast
 
             if (Targets.Any(x => x is UnknownCriterion))
             {
-                Source.Fight.Warn("Unknown Target Mask : " + Effect.TargetMask);
+                castHandler.Cast.Source.Fight.Warn("Unknown Target Mask : " + effect.TargetMask);
             }
             this.CastHandler = castHandler;
             Effect = effect;

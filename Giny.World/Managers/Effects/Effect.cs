@@ -211,6 +211,8 @@ namespace Giny.World.Managers.Effects
 
             switch (identifier)
             {
+                case "CT":
+                    return new Trigger(TriggerType.OnTackle);
                 case "CI":
                     return new Trigger(TriggerType.OnSummon);
                 case "H":

@@ -1,5 +1,6 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +12,7 @@ namespace Giny.World.Managers.Fights.Marks
 {
     public class MarksManager : Singleton<MarksManager>
     {
-        public Color GetMarkColorFromSpellId(SpellEnum spellId)
+        public Color GetMarkColor(SpellEnum spellId)
         {
             switch (spellId)
             {

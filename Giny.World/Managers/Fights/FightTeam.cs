@@ -5,6 +5,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
@@ -126,6 +127,10 @@ namespace Giny.World.Managers.Fights
         public Fighter[] GetLeavers()
         {
             return Leavers.ToArray();
+        }
+        public IEnumerable<Portal> GetPortals()
+        {
+            return Fight.GetMarks<Portal>().Where(x => x.Source.Team == this);
         }
         public Fighter[] GetAllFightersWithLeavers()
         {

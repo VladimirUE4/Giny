@@ -20,11 +20,16 @@ namespace Giny.World.Managers.Fights.Movements
             get;
             set;
         }
-
-        public Movement(MovementType type, Fighter source)
+        public bool TriggerMarks
+        {
+            get;
+            set;
+        }
+        public Movement(MovementType type, Fighter source,bool triggerMarks = true)
         {
             this.Type = type;
             this.Source = source;
+            this.TriggerMarks = triggerMarks;
         }
 
         public Fighter GetSource()

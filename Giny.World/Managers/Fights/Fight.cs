@@ -627,6 +627,10 @@ namespace Giny.World.Managers.Fights
                 }
             }
         }
+        public IEnumerable<T> GetMarks<T>() where T : Mark
+        {
+            return GetMarks().OfType<T>();
+        }
         public IEnumerable<Mark> GetMarks()
         {
             return this.Marks;

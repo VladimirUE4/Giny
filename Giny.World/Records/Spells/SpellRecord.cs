@@ -108,7 +108,11 @@ namespace Giny.World.Records.Spells
         }
         public SpellLevelRecord GetLevel(byte grade)
         {
-            if (Levels.Count >= grade)
+            if (grade == 0)
+            {
+                return Levels.Last();
+            }
+            if (grade <= Levels.Count)
             {
                 return Levels[grade - 1];
             }
@@ -116,7 +120,6 @@ namespace Giny.World.Records.Spells
             {
                 return Levels.Last();
             }
-           
         }
 
         public static IEnumerable<SpellRecord> GetSpellRecords()
