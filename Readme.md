@@ -34,7 +34,7 @@
 | Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
+| Tempête de puissance| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tumulte| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Epée celeste| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Zénith| ![alt text](https://img.shields.io/badge/Done-green) | 
