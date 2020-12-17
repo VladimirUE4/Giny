@@ -75,16 +75,16 @@
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Double | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Comploteur|![alt text](https://img.shields.io/badge/Done-green) |
-| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Comploteur | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) |  
 | Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Cruauté | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Guet-apens | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
-| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Fourberie | ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fausse commune | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -96,16 +96,16 @@
 | Méprise | ![alt text](https://img.shields.io/badge/Done-green) |
 | Concentration de Chakra| ![alt text](https://img.shields.io/badge/Done-green) |
 | Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
-| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
-| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Attaque Mortelle| ![alt text](https://img.shields.io/badge/Done-green) |
 | Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Dérobade| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
+| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Done-green) |
 </p>
 </details>
 
