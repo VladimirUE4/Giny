@@ -141,7 +141,7 @@
 | Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fleche du Jugement  | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir Puissant | ![alt text](https://img.shields.io/badge/Done-green) |
-| Balise Tactique | ![alt text](https://img.shields.io/badge/Bug-red) | Subit 2x moins de dégats alliés
+| Balise Tactique | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Harcelante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Massacrante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Empoisonnée | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -151,7 +151,7 @@
 | Flèche Destructrice | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir de Barrage | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Absorbante | ![alt text](https://img.shields.io/badge/Done-green) |
-| Flèche Dévorante | ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets
+| Flèche Dévorante |![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Cinglante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche de Repli | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Ralentissante | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -159,7 +159,7 @@
 | Flèche Complice | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche D'Abolition | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Explosive | ![alt text](https://img.shields.io/badge/Done-green) |
-| Flèche Fulminante |![alt text](https://img.shields.io/badge/Bug-red) | Ne boost pas le sort
+| Flèche Fulminante |![alt text](https://img.shields.io/badge/Done-green) | 
 | Maîtrise de l'Arc | ![alt text](https://img.shields.io/badge/Done-green) |
 | Sentinelle | ![alt text](https://img.shields.io/badge/Done-green) |
 </p>
