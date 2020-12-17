@@ -30,8 +30,8 @@
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Friction| ![alt text](https://img.shields.io/badge/Done-green) | Last Atk criterion (interactions menace)
-| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
+| Friction| ![alt text](https://img.shields.io/badge/Done-green) | (interactions menace)
+| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | 
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tempête de puissance| ![alt text](https://img.shields.io/badge/Done-green) | 
