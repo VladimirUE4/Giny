@@ -24,10 +24,9 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-
             foreach (var target in targets)
             {
-                if (!Source.IsCarrying() && target.CanBeCarried())
+                if (!Source.IsCarrying() && target.CanBeCarried() && target != Source)
                 {
                     Source.Carry(target);
 

@@ -130,6 +130,7 @@ namespace Giny.World.Managers.Effects
                 return ParseTriggers(); // m_triggers
             }
         }
+
         public Effect()
         {
 

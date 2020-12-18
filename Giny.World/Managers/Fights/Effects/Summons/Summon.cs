@@ -1,6 +1,7 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
+
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Records.Monsters;
@@ -17,6 +18,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
     {
         public Summon(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
+
         }
 
         [WIP("some stuff concerning targets i dont understand...")]
@@ -24,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
         {
             if (Source.Fight.IsCellFree(TargetCell))
             {
-                var fighter = CreateSummon((short)Effect.Min,(byte)Effect.Max);
+                var fighter = CreateSummon((short)Effect.Min, (byte)Effect.Max);
                 Source.Fight.AddSummon(Source, fighter);
             }
 

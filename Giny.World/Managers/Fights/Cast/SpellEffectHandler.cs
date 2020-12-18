@@ -92,7 +92,12 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-
+        [WIP]
+        protected bool IsCasterValid
+        {
+            get;
+            private set;
+        }
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
             Targets = effect.GetTargets();
@@ -107,9 +112,24 @@ namespace Giny.World.Managers.Fights.Cast
 
             this.AffectedFighters = GetAffectedFighters();
 
+            this.IsCasterValid = CasterValid();
+
+
+        }
+        [WIP]
+        private bool CasterValid()
+        {
+            if (!Targets.OfType<StateCriterion>().Where(x => x.Caster).Any())
+            {
+                return true;
+            }
+            else
+            {
+                var target = Targets.OfType<StateCriterion>().FirstOrDefault(x => x.Caster);
+                return target.IsTargetValid(Source, this);
+            }
         }
 
-        [WIP("Dont like this post condition to fill cells (no genercity)")]
         private IEnumerable<Fighter> GetAffectedFighters()
         {
             List<CellRecord> affectedCells = GetAffectedCells();
@@ -132,7 +152,9 @@ namespace Giny.World.Managers.Fights.Cast
 
         public bool IsValidTarget(Fighter actor)
         {
-            return Targets.ToLookup(x => x.GetType()).All(x => x.First().IsDisjonction ?
+            var targets = Targets.ToLookup(x => x.GetType());
+
+            return targets.All(x => x.First().IsDisjonction ?
                x.Any(y => y.IsTargetValid(actor, this)) : x.All(y => y.IsTargetValid(actor, this)));
         }
         protected List<CellRecord> GetAffectedCells()
@@ -158,6 +180,11 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
+            if (!IsCasterValid)
+            {
+                return;
+            }
+
             if (Targets.Any(x => x.RefreshTargets))
             {
                 AffectedFighters = GetAffectedFighters();
