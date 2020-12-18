@@ -13,6 +13,11 @@ namespace Giny.World.Managers.Effects.Targets
     /// </summary>
     public class InvalidTeleportCriterion : TargetCriterion
     {
+        public InvalidTeleportCriterion(bool caster) : base(caster)
+        {
+
+        }
+
         public override bool RefreshTargets => true;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)

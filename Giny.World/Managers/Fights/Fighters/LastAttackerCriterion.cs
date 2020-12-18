@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public class LastAttackerCriterion : TargetCriterion
     {
-        public LastAttackerCriterion(bool required)
+        public LastAttackerCriterion(bool caster, bool required) : base(caster)
         {
             Required = required;
         }

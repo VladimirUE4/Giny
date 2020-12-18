@@ -1,4 +1,4 @@
-﻿ using Giny.World.Managers.Fights.Cast;
+﻿using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
 using System.Collections.Generic;
@@ -43,6 +43,17 @@ namespace Giny.World.Managers.Effects.Targets
 
         public virtual bool RefreshTargets => false;
 
+        public bool Caster
+        {
+            get;
+            private set;
+        }
+
+        public TargetCriterion(bool caster)
+        {
+            this.Caster = caster;
+        }
+
         public static TargetCriterion ParseCriterion(string str)
         {
             try
@@ -60,44 +71,44 @@ namespace Giny.World.Managers.Effects.Targets
                 switch (str[0])
                 {
                     case 'e':
-                        return new StateCriterion(int.Parse(str.Remove(0, 1)), caster, false);
+                        return new StateCriterion(caster, int.Parse(str.Remove(0, 1)), false);
                     case 'E':
-                        return new StateCriterion(int.Parse(str.Remove(0, 1)), caster, true);
+                        return new StateCriterion(caster, int.Parse(str.Remove(0, 1)), true);
                     case 'f':
-                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), false);
+                        return new MonsterCriterion(caster, int.Parse(str.Remove(0, 1)), false);
                     case 'F':
-                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), true);
+                        return new MonsterCriterion(caster, int.Parse(str.Remove(0, 1)), true); ;
                     case 'v':
-                        return new LifeCriterion(int.Parse(str.Remove(0, 1)), true);
+                        return new LifeCriterion(caster, int.Parse(str.Remove(0, 1)), true);
                     case 'V':
-                        return new LifeCriterion(int.Parse(str.Remove(0, 1)), false);
+                        return new LifeCriterion(caster, int.Parse(str.Remove(0, 1)), false);
                     case 'T':
-                        return new TelefragCriterion();
+                        return new TelefragCriterion(caster);
                     case 'U':
-                        return new JustSummonedCriterion();
+                        return new JustSummonedCriterion(caster);
                     case 'P':
-                        return new SummonerCriterion(true);
+                        return new SummonerCriterion(caster, true);
                     case 'p':
-                        return new SummonerCriterion(false);
+                        return new SummonerCriterion(caster, false);
                     case 'b':
-                        return new BreedCriterion(int.Parse(str.Remove(0, 1)), caster, false);
+                        return new BreedCriterion(caster, int.Parse(str.Remove(0, 1)), false);
                     case 'B':
-                        return new BreedCriterion(int.Parse(str.Remove(0, 1)), caster, true);
+                        return new BreedCriterion(caster, int.Parse(str.Remove(0, 1)), true);
                     case 'O':
-                        return new LastAttackerCriterion(true);
+                        return new LastAttackerCriterion(caster, true);
                     case 'o':
-                        return new LastAttackerCriterion(false);
+                        return new LastAttackerCriterion(caster, false);
                     case 'W':
-                        return new InvalidTeleportCriterion();
+                        return new InvalidTeleportCriterion(caster);
                     case 'r':
-                        return new ThroughPortalCriterion(false);
+                        return new ThroughPortalCriterion(caster, false);
                     case 'R':
-                        return new ThroughPortalCriterion(true);
+                        return new ThroughPortalCriterion(caster, true);
                     case 'K':
-                        return new CarriedCriterion();
+                        return new CarriedCriterion(caster);
                 }
 
-                return new UnknownCriterion(str);
+                return new UnknownCriterion(caster, str);
             }
             catch (Exception ex)
             {

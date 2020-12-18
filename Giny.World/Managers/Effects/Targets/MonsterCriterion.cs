@@ -12,7 +12,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class MonsterCriterion : TargetCriterion
     {
-        public MonsterCriterion(int monsterId, bool required)
+        public MonsterCriterion(bool caster, int monsterId, bool required):base(caster)
         {
             MonsterId = monsterId;
             Required = required;
@@ -33,8 +33,10 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsDisjonction => Required;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
-            => Required ? ((actor is IMonster) && (actor as IMonster).Record.Id == MonsterId) :
+        {
+            return Required ? ((actor is IMonster) && (actor as IMonster).Record.Id == MonsterId) :
                 (!(actor is IMonster) || (actor as IMonster).Record.Id != MonsterId);
+        }
 
         public override string ToString()
         {

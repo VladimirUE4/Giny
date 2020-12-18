@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Effects.Targets
 {
-    public class CarriedCriterion : TargetCriterion
+    /// <summary>
+    /// Q
+    /// </summary>
+    public class SummonCountCriterion : TargetCriterion
     {
-        public CarriedCriterion(bool caster) : base(caster)
+        public SummonCountCriterion(bool caster) : base(caster)
         {
-
         }
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
-            return actor.IsCarried();
+            return true;
         }
     }
 }

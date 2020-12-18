@@ -86,6 +86,7 @@
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
     <Compile Include="Managers\Effects\Targets\CarriedCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
+    <Compile Include="Managers\Effects\Targets\SummonCountCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
     <Compile Include="Managers\Fights\AI\MarkAction.cs" />

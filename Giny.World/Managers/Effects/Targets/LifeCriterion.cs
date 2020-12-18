@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class LifeCriterion : TargetCriterion
     {
-        public LifeCriterion(int lifePercent, bool mustBeGreater)
+        public LifeCriterion(bool caster, int lifePercent, bool mustBeGreater) : base(caster)
         {
             LifePercent = lifePercent;
             MustBeGreater = mustBeGreater;
@@ -27,6 +27,7 @@ namespace Giny.World.Managers.Effects.Targets
             get;
             set;
         }
+        public override bool IsDisjonction => false;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {

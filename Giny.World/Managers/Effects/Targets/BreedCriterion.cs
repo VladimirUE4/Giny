@@ -11,20 +11,13 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class BreedCriterion : TargetCriterion
     {
-        public BreedCriterion(int breed, bool caster, bool required)
+        public BreedCriterion(bool caster, int breed, bool required) : base(caster)
         {
             Breed = breed;
-            Caster = caster;
             Required = required;
         }
 
         public int Breed
-        {
-            get;
-            set;
-        }
-
-        public bool Caster
         {
             get;
             set;
