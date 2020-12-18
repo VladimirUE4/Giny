@@ -21,7 +21,7 @@
 | Epée destructrice | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Accumulation | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Intimidiation| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Conquête | ![alt text](https://img.shields.io/badge/Bug-red) | Buffs de la conquête (dispatch)
+| Conquête | ![alt text](https://img.shields.io/badge/Done-green) |
 | Souffle| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Violence| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Massacre |![alt text](https://img.shields.io/badge/Done-green) | 
@@ -30,11 +30,11 @@
 | Epée du jugement| ![alt text](https://img.shields.io/badge/Done-green) |
 | Ferveur| ![alt text](https://img.shields.io/badge/Done-green) |
 | Menace| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Friction| ![alt text](https://img.shields.io/badge/Done-green) | Last Atk criterion (interactions menace)
-| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | Attention Modif CastSpell_1017
+| Friction| ![alt text](https://img.shields.io/badge/Done-green) | (interactions menace)
+| Coup pour coup|![alt text](https://img.shields.io/badge/Done-green) | 
 | Duel| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Emprise| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Tempête de puissance| ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets 
+| Tempête de puissance| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Tumulte| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Epée celeste| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Zénith| ![alt text](https://img.shields.io/badge/Done-green) | 
@@ -75,16 +75,16 @@
 | Coup Sournois | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Coupe Gorge | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Double | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Comploteur|![alt text](https://img.shields.io/badge/Done-green) |
-| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Comploteur | ![alt text](https://img.shields.io/badge/Done-green) |
+| Piège Fangeux|![alt text](https://img.shields.io/badge/Done-green) |  
 | Larcin | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Piège de masse | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Extorsion | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Cruauté | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Guet-apens | ![alt text](https://img.shields.io/badge/Done-green) | 
-| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  A vérifier
+| Piège Funeste | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Epidémie | ![alt text](https://img.shields.io/badge/Bug-red) | Pas loin (problème zone)
-| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Piège à Fragmentation | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Fourberie | ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège d'imobilisation | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fausse commune | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -96,16 +96,16 @@
 | Méprise | ![alt text](https://img.shields.io/badge/Done-green) |
 | Concentration de Chakra| ![alt text](https://img.shields.io/badge/Done-green) |
 | Manigance| ![alt text](https://img.shields.io/badge/Done-green) |
-| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) |  
 | Calamité| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Scélérat| ![alt text](https://img.shields.io/badge/Done-green) |
-| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | Heal & Dispatch bizzarement codé...
+| Perquisition | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Attaque Mortelle| ![alt text](https://img.shields.io/badge/Done-green) |
 | Effraction| ![alt text](https://img.shields.io/badge/Done-green) |
 | Piège Mortel| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | A vérifier
+| Perfidie| ![alt text](https://img.shields.io/badge/Done-green) | 
 | Dérobade| ![alt text](https://img.shields.io/badge/Done-green) | 
-| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Bug-red) |
+| Marque Mortuaire| ![alt text](https://img.shields.io/badge/Done-green) |
 </p>
 </details>
 
@@ -141,7 +141,7 @@
 | Flèche Punitive | ![alt text](https://img.shields.io/badge/Done-green) |
 | Fleche du Jugement  | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir Puissant | ![alt text](https://img.shields.io/badge/Done-green) |
-| Balise Tactique | ![alt text](https://img.shields.io/badge/Bug-red) | Subit 2x moins de dégats alliés
+| Balise Tactique | ![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Harcelante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Massacrante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Empoisonnée | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -151,7 +151,7 @@
 | Flèche Destructrice | ![alt text](https://img.shields.io/badge/Done-green) |
 | Tir de Barrage | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Absorbante | ![alt text](https://img.shields.io/badge/Done-green) |
-| Flèche Dévorante | ![alt text](https://img.shields.io/badge/Bug-red) | Ordre des effets
+| Flèche Dévorante |![alt text](https://img.shields.io/badge/Done-green) | 
 | Flèche Cinglante | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche de Repli | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Ralentissante | ![alt text](https://img.shields.io/badge/Done-green) |
@@ -159,7 +159,7 @@
 | Flèche Complice | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche D'Abolition | ![alt text](https://img.shields.io/badge/Done-green) |
 | Flèche Explosive | ![alt text](https://img.shields.io/badge/Done-green) |
-| Flèche Fulminante |![alt text](https://img.shields.io/badge/Bug-red) | Ne boost pas le sort
+| Flèche Fulminante |![alt text](https://img.shields.io/badge/Done-green) | 
 | Maîtrise de l'Arc | ![alt text](https://img.shields.io/badge/Done-green) |
 | Sentinelle | ![alt text](https://img.shields.io/badge/Done-green) |
 </p>
