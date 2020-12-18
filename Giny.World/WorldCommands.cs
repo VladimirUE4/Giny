@@ -54,6 +54,7 @@ namespace Giny.World
                Logger.Write("AuthServer is unable to validate world reset. timeout", MessageState.WARNING);
            });
         }
+
         [ConsoleCommand("save")]
         public static void SaveCommand()
         {

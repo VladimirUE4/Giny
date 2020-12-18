@@ -84,6 +84,7 @@
     <Compile Include="Managers\Effects\EffectCustom.cs" />
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
+    <Compile Include="Managers\Effects\Targets\CarriedCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
@@ -122,6 +123,8 @@
     <Compile Include="Managers\Fights\Effects\Marks\SpawnPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\TriggerGlyphs.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\TeleportPortal.cs" />
+    <Compile Include="Managers\Fights\Effects\Other\Carry.cs" />
+    <Compile Include="Managers\Fights\Effects\Other\Throw.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\SummonBomb.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedBomb.cs" />
     <Compile Include="Managers\Fights\Marks\PortalManager.cs" />

@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
         {
             if (Source.Fight.IsCellFree(TargetCell))
             {
-                var fighter = CreateSummon((short)Effect.Min);
+                var fighter = CreateSummon((short)Effect.Min,(byte)Effect.Max);
                 Source.Fight.AddSummon(Source, fighter);
             }
 

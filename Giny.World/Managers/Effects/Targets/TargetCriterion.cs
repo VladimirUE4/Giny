@@ -93,6 +93,8 @@ namespace Giny.World.Managers.Effects.Targets
                         return new ThroughPortalCriterion(false);
                     case 'R':
                         return new ThroughPortalCriterion(true);
+                    case 'K':
+                        return new CarriedCriterion();
                 }
 
                 return new UnknownCriterion(str);
@@ -102,5 +104,7 @@ namespace Giny.World.Managers.Effects.Targets
                 throw new Exception("Invalid target criterion : " + str, ex);
             }
         }
+
+
     }
 }

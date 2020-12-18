@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
                 {
                     target.Die(Source);
 
-                    SummonedMonster summon = CreateSummon((short)Effect.Min);
+                    SummonedMonster summon = CreateSummon((short)Effect.Min, (byte)Effect.Max);
                     Source.Fight.AddSummon(Source, summon);
                 }
             }

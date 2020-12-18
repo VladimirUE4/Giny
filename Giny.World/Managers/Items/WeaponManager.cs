@@ -59,6 +59,7 @@ namespace Giny.World.Managers.Items
             { ItemTypeEnum.HAMMER, "C1" },
             { ItemTypeEnum.SHOVEL, "L1" },
             { ItemTypeEnum.AXE, "P1" },
+            { ItemTypeEnum.SCYTHE, "U1" },
 
         };
         public const short PunchSpellId = 0;

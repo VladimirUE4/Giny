@@ -215,10 +215,10 @@ namespace Giny.World.Managers.Fights.Cast
         }
         protected abstract void Apply(IEnumerable<Fighter> targets);
 
-        protected SummonedMonster CreateSummon(short monsterId)
+        protected SummonedMonster CreateSummon(short monsterId, byte grade)
         {
             MonsterRecord record = MonsterRecord.GetMonsterRecord(monsterId);
-            SummonedMonster fighter = new SummonedMonster(Source, record, this, CastHandler.Cast.Spell.Level.Grade, TargetCell);
+            SummonedMonster fighter = new SummonedMonster(Source, record, this, grade, TargetCell);
             return fighter;
         }
 
@@ -262,6 +262,14 @@ namespace Giny.World.Managers.Fights.Cast
         {
             int id = target.BuffIdProvider.Pop();
             StateBuff buff = new StateBuff(id, record, target, this, dispellable);
+            target.AddBuff(buff);
+            return buff;
+        }
+        public StateBuff AddStateBuff(Fighter target, SpellStateRecord record, FightDispellableEnum dispellable, short duration)
+        {
+            int id = target.BuffIdProvider.Pop();
+            StateBuff buff = new StateBuff(id, record, target, this, dispellable);
+            buff.Duration = duration;
             target.AddBuff(buff);
             return buff;
         }

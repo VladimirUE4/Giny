@@ -65,3 +65,8 @@ Sort conquête : 9676 + dommage subis 50%
 > Méprise
 > Fosse commune
 > Funeste.
+
+Carry
+Throw
+Portails
+Bombes

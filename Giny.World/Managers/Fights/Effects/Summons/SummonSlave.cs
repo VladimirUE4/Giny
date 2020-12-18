@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
                 return;
             }
 
-            SummonedMonster fighter = CreateSummon((short)Effect.Min);
+            SummonedMonster fighter = CreateSummon((short)Effect.Min, (byte)Effect.Max);
             fighter.SetController((CharacterFighter)Source);
             Source.Fight.AddSummon(Source, fighter);
         }

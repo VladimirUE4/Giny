@@ -167,6 +167,12 @@ namespace Giny.World.Managers.Fights.Fighters
             private set;
         }
 
+        public Fighter Carried
+        {
+            get;
+            private set;
+        }
+
         public virtual bool CanDrop => false;
 
         public SpellHistory SpellHistory
@@ -216,11 +222,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.SpellHistory = new SpellHistory(this);
             this.m_spellsCosts = new Dictionary<short, short>();
             this.WasTeleportedInInvalidCell = false;
-        }
-
-        public bool IsCarried()
-        {
-            return false;
         }
 
         public virtual void Initialize()
@@ -369,6 +370,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return;
             }
+
             if (Fight.Ended || !Fight.Started)
                 return;
 
@@ -1297,6 +1299,10 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual void OnMove(Movement movement)
         {
+            if (movement.Type == MovementType.Walk && Carried != null)
+            {
+                Carried.Cell = this.Cell;
+            }
             if (movement.Type != MovementType.Walk)
             {
                 this.TriggerBuffs(TriggerType.OnMoved, movement);
@@ -1310,6 +1316,7 @@ namespace Giny.World.Managers.Fights.Fighters
             Fight.TriggerMarks(this, MarkTriggerType.OnMove);
 
             Moved?.Invoke(this);
+
         }
         public void SetSpellCooldown(Fighter source, short spellId, short value)
         {
@@ -1597,7 +1604,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual bool CanTackle()
         {
-            return !GetBuffs<StateBuff>().Where(x => x.Record.CantTackle).Any(y => HasState(y.StateId));
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantTackle).Any(y => HasState(y.StateId)) && !IsCarried();
         }
         public virtual bool CanBeTackled()
         {
@@ -1993,7 +2000,49 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             TriggerBuffs(TriggerType.OnDeath, new Death(killedBy));
         }
+        public bool IsCarrying()
+        {
+            return Carried != null;
+        }
+        public bool IsCarried()
+        {
+            return GetCarrier() != null;
+        }
+        public Fighter GetCarrier()
+        {
+            return Fight.GetFighters<Fighter>().FirstOrDefault(x => x.Carried == this);
+        }
+        public void Carry(Fighter target)
+        {
+            target.Cell = this.Cell;
 
+            Carried = target;
+
+            Fight.Send(new GameActionFightCarryCharacterMessage()
+            {
+                actionId = (short)ActionsEnum.ACTION_CARRY_CHARACTER,
+                cellId = target.Cell.Id,
+                sourceId = Id,
+                targetId = target.Id
+            });
+        }
+        public void Throw(CellRecord cell)
+        {
+            if (IsCarrying())
+            {
+                Carried.Cell = cell;
+
+                Fight.Send(new GameActionFightThrowCharacterMessage()
+                {
+                    actionId = (short)ActionsEnum.ACTION_THROW_CARRIED_CHARACTER,
+                    cellId = cell.Id,
+                    sourceId = Id,
+                    targetId = Carried.Id,
+                });
+
+                Carried = null;
+            }
+        }
         [WIP("null token?")]
         public void Die(Fighter killedBy)
         {

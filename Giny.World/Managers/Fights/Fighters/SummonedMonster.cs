@@ -59,11 +59,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override bool CanBeCarried()
         {
-            return Record.CanBeCarried;
+            return base.CanBeCarried() && Record.CanBeCarried;
         }
         public override bool CanUsePortal()
         {
-            return Record.CanUsePortal;
+            return base.CanUsePortal() && Record.CanUsePortal;
         }
         public override bool MustSkipTurn()
         {
