@@ -63,7 +63,11 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             set;
         }
-
+        public bool WontTriggerBuffs
+        {
+            get;
+            set;
+        }
         public Damage(Fighter source, Fighter target, EffectSchoolEnum school, short min, short max, SpellEffectHandler effectHandler = null)
         {
             this.Source = source;
@@ -74,6 +78,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
             this.EffectHandler = effectHandler;
             this.IgnoreBoost = false;
             this.IgnoreResistances = false;
+            this.WontTriggerBuffs = false;
         }
         public void Compute()
         {

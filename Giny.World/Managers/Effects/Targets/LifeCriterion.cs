@@ -28,6 +28,8 @@ namespace Giny.World.Managers.Effects.Targets
             set;
         }
 
+        public override bool IsDisjonction => false;
+
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
             bool result = MustBeGreater ? actor.Stats.LifePercentage > LifePercent :

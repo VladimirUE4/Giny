@@ -21,7 +21,6 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         }
 
-        [WIP("some stuff concerning targets i dont understand...")]
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (Source.Fight.IsCellFree(TargetCell))

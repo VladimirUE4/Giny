@@ -1850,7 +1850,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 OnDamageReflected(damage.Source);
             }
 
-            TriggerBuffs(TriggerType.AfterDamaged, damage);
+            if (damage.EffectSchool != EffectSchoolEnum.Fix)
+            {
+                TriggerBuffs(TriggerType.AfterDamaged, damage);
+            }
 
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
         }
@@ -1867,6 +1870,10 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private void TriggerBuffs(Damage damage)
         {
+            if (damage.EffectSchool == EffectSchoolEnum.Fix)
+            {
+                return;
+            }
             if (damage.GetEffectHandler() != null && damage.GetEffectHandler().Effect.Duration > 0)
             {
                 return;
