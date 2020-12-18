@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class UnknownCriterion : TargetCriterion
     {
-        public UnknownCriterion(bool caster, string criterion) : base(caster)
+        public UnknownCriterion(string criterion)
         {
             Criterion = criterion;
         }

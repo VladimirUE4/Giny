@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class SummonerCriterion : TargetCriterion
     {
-        public SummonerCriterion(bool caster, bool required) : base(caster)
+        public SummonerCriterion(bool required)
         {
             Required = required;
         }

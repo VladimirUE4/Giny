@@ -11,13 +11,20 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class StateCriterion : TargetCriterion
     {
-        public StateCriterion(bool caster, int state, bool required) : base(caster)
+        public StateCriterion(int state, bool caster, bool required)
         {
             State = state;
+            Caster = caster;
             Required = required;
         }
 
         public int State
+        {
+            get;
+            set;
+        }
+
+        public bool Caster
         {
             get;
             set;

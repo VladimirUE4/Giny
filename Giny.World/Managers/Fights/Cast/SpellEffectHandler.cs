@@ -92,7 +92,8 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-        protected bool CasterCriterionsSatisfied
+        [WIP]
+        protected bool CasterCriterionSatisfied
         {
             get;
             private set;
@@ -111,8 +112,13 @@ namespace Giny.World.Managers.Fights.Cast
 
             this.AffectedFighters = GetAffectedFighters();
 
-            this.CasterCriterionsSatisfied = Targets.Where(x => x.Caster).All(x => x.IsTargetValid(Source, this));
+            this.CasterCriterionSatisfied = ComputeCasterCriterion();
 
+        }
+        private bool ComputeCasterCriterion()
+        {
+            bool result = Targets.OfType<StateCriterion>().Where(x => x.Caster).All(x => x.IsTargetValid(Source, this));
+            return result;
         }
 
         private IEnumerable<Fighter> GetAffectedFighters()
@@ -165,7 +171,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
-            if (!CasterCriterionsSatisfied)
+            if (!CasterCriterionSatisfied)
             {
                 return;
             }

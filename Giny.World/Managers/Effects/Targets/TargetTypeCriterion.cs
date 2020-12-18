@@ -10,12 +10,19 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class TargetTypeCriterion : TargetCriterion
     {
-        public TargetTypeCriterion(SpellTargetType type, bool caster) : base(caster)
+        public TargetTypeCriterion(SpellTargetType type, bool caster)
         {
             TargetType = type;
+            Caster = caster;
         }
 
         public SpellTargetType TargetType
+        {
+            get;
+            set;
+        }
+
+        public bool Caster
         {
             get;
             set;

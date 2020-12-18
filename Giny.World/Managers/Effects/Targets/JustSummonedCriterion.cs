@@ -6,10 +6,6 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class JustSummonedCriterion : TargetCriterion
     {
-        public JustSummonedCriterion(bool caster) : base(caster)
-        {
-        }
-
         public override bool RefreshTargets => true;
 
         /// <summary>

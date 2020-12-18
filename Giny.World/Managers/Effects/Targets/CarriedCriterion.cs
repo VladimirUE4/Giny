@@ -10,7 +10,7 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class CarriedCriterion : TargetCriterion
     {
-        public CarriedCriterion(bool caster) : base(caster)
+        public CarriedCriterion()
         {
 
         }

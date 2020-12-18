@@ -16,7 +16,7 @@ namespace Giny.World.Managers.Effects.Targets
             get;
             set;
         }
-        public ThroughPortalCriterion(bool caster, bool required) : base(caster)
+        public ThroughPortalCriterion(bool required)
         {
             this.Required = required;
         }
