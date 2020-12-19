@@ -1,5 +1,7 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.Network.Messages;
+using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
@@ -374,7 +376,6 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
-
         public void OnPlayerReadyToLeave()
         {
             this.PersonalSynchronizer = null;
@@ -432,17 +433,22 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        [WIP("end this. (care about sending message to disconnected clients)")]
+        [WIP("Handle the void loop ? No character in fight... Such cancer")]
         public void OnDisconnected()
         {
             Character.Record.FightId = this.Fight.Id;
 
             this.EnterDisconnectedState();
 
+            this.Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 182, this.Name, Fight.TurnBeforeDisconnection);
+            /*
+            if (Fight.GetAllConnectedFighters().Count() == 0)
+            {
+                Fight.EndFight();
+                return;
+            } */
             if (!Fight.CheckFightEnd() && IsFighterTurn)
                 Fight.StopTurn();
-
-            this.Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 182, this.Name, Fight.TurnBeforeDisconnection);
         }
 
         private void EnterDisconnectedState()
@@ -536,7 +542,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 bombCount = (byte)GetSummons().OfType<SummonedBomb>().Count(),
                 effects = GetBuffs<Buff>().Select(x => x.GetFightDispellableEffectExtendedInformations()).ToArray(),
-                fightStart = Fight.Started ? 1 : 0,
+                fightStart = !Fight.Started ? 0 : Fight.StartTime.Value.GetUnixTimeStamp(),
                 fxTriggerCounts = new GameFightEffectTriggerCount[0],
                 gameTurn = (short)Fight.RoundNumber,
                 idols = Fight.GetIdols(),
@@ -545,7 +551,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 summonCount = (byte)GetSummons().Count(),
             });
         }
-      
+
         [WIP]
         public void OnReconnect(Character character)
         {
@@ -561,15 +567,23 @@ namespace Giny.World.Managers.Fights.Fighters
                 fighter.ShowFighter(this);
             }
 
+
             Fight.UpdateEntitiesPositions();
 
+            if (Fight.Started)
+            {
+
+            }
             SendFightResume();
 
             Fight.UpdateTimeLine(this);
 
             Fight.Synchronize(this);
 
-            SendTurnResume();
+            if (Fight.FighterPlaying != null)
+            {
+                SendTurnResume();
+            }
 
             Character.RefreshStats();
 
@@ -577,7 +591,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
             Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 184, this.Name);
 
-            this.Send(new GameFightOptionStateUpdateMessage((short)Fight.Id, (byte)Team.TeamId, 1, true));
         }
     }
 }

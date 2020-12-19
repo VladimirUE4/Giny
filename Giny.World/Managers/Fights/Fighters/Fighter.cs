@@ -15,7 +15,6 @@ using Giny.World.Managers.Fights.Buffs.SpellBoost;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Effects.Damages;
-using Giny.World.Managers.Fights.Effects.Movements;
 using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Fights.Movements;
@@ -30,10 +29,7 @@ using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Fighters
 {

@@ -118,11 +118,20 @@ namespace Giny.World.Managers.Fights
         {
             return Fighters.FindAll(x => !x.Alive).ToArray();
         }
+        public void KillTeam()
+        {
+            foreach (var target in GetFighters<Fighter>())
+            {
+                target.Stats.LifePoints = 0;
+            }
+
+            Fight.CheckDeads();
+        }
         public IEnumerable<Portal> GetPortals()
         {
             return Fight.GetMarks<Portal>().Where(x => x.Source.Team == this);
         }
-        
+
         public void AddFighter(Fighter fighter)
         {
             fighter.Fight = Fight;

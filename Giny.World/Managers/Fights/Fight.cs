@@ -105,6 +105,8 @@ namespace Giny.World.Managers.Fights
             private set;
         }
 
+      
+
         public DateTime? StartTime
         {
             get;
@@ -293,6 +295,10 @@ namespace Giny.World.Managers.Fights
         }
         public short GetPlacementTimeLeft()
         {
+            if (Started)
+            {
+                return 0;
+            }
             double num = GetPlacementDelay() - (DateTime.Now - this.CreationTime).TotalSeconds;
             if (num < 0.0)
             {
@@ -364,6 +370,7 @@ namespace Giny.World.Managers.Fights
         }
         public bool IsCellFree(CellRecord cell)
         {
+            var test = GetFighter(cell.Id);
             return cell.Walkable && !cell.NonWalkableDuringFight && GetFighter(cell.Id) == null;
         }
         public bool IsCellFree(short cellId)
@@ -994,6 +1001,10 @@ namespace Giny.World.Managers.Fights
 
         public abstract void OnFightEnded();
 
+        public void OnTimeout()
+        {
+            GetTeam(TeamTypeEnum.TEAM_TYPE_PLAYER).KillTeam();
+        }
         public void Dispose()
         {
             if (m_placementTimer != null)

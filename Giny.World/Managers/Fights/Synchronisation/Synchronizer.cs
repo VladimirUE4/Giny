@@ -1,4 +1,7 @@
-﻿using Giny.Core.Time;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
+using Giny.Core.Time;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Fights.Fighters;
 using System;
@@ -12,12 +15,25 @@ namespace Giny.World.Managers.Fights.Synchronisation
     public class Synchronizer
     {
         private int timeout;
-        private readonly List<CharacterFighter> m_fighters;
+        private List<CharacterFighter> m_fighters;
         private readonly Fight m_fight;
         private bool m_started;
         private ActionTimer m_timer;
         public event System.Action<Synchronizer> Success;
         public event Action<Synchronizer, CharacterFighter[]> Timeout;
+
+        /*
+        * Maximum time the fight can live without players.
+        * 5 minutes timeout
+        */
+        public const int VoidTimeout = 5 * 60;
+        /*
+         * 5 seconds
+         */
+        public const int VoidRefreshDelay = 5;
+
+        private int voidTimeout;
+        private ActionTimer voidTimer;
 
         public SynchronizerRole Role
         {
@@ -40,14 +56,47 @@ namespace Giny.World.Managers.Fights.Synchronisation
             this.m_fighters = actors.ToList<CharacterFighter>();
             this.timeout = timeout;
         }
+        private void VoidFight()
+        {
+            this.voidTimer = new ActionTimer(VoidRefreshDelay * 1000, VoidLoop, true);
+            voidTimer.Start();
+        }
+        private void VoidLoop()
+        {
+            if (m_fight.GetAllConnectedFighters().Count() > 0)
+            {
+                voidTimer.Dispose();
+                m_fighters = m_fight.GetAllConnectedFighters().ToList();
+                Start();
+                return;
+            }
+
+            voidTimeout += VoidRefreshDelay;
+
+            if (voidTimeout >= VoidTimeout)
+            {
+                voidTimer.Dispose();
+                m_fight.GetTeam(TeamTypeEnum.TEAM_TYPE_PLAYER).KillTeam();
+                m_fight.EndFight();
+                return;
+            }
+        }
+
         public void Start()
         {
             if (!this.m_started)
             {
-                this.m_started = true;
-                if (this.m_fighters.Count <= 0)
+                if (m_fighters.Count == 0)
                 {
-                    this.NotifySuccess();
+                    VoidFight();
+                    return;
+                }
+
+                this.m_started = true;
+
+                if (this.m_fighters.Count == 0)
+                {
+                    NotifySuccess();
                 }
                 else
                 {

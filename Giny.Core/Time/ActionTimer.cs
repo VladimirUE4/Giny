@@ -48,6 +48,9 @@ namespace Giny.Core.Time
             }
         }
 
+        /*
+         * Start on the thread pool.
+         */
         public void Start()
         {
             if (m_action == null)
@@ -66,6 +69,7 @@ namespace Giny.Core.Time
         public void Dispose()
         {
             Started = false;
+            m_timer?.Stop();
             m_timer?.Dispose();
             m_timer = null;
             m_action = null;

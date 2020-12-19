@@ -111,10 +111,19 @@ namespace Giny.Core.Network
         {
             if (m_socket != null && m_socket.Connected)
             {
-                using (var writer = new BigEndianWriter())
+                try
                 {
-                    message.Pack(writer);
-                    m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+
+                    using (var writer = new BigEndianWriter())
+                    {
+                        message.Pack(writer);
+                        m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+                    }
+                }
+                catch
+                {
+                    Logger.Write("Unable to send message to " + Ip + ".", MessageState.WARNING);
+                    Disconnect();
                 }
             }
             else
@@ -145,7 +154,15 @@ namespace Giny.Core.Network
         }
         private void BeginReceive()
         {
-            m_socket?.BeginReceive(m_buffer, 0, m_buffer.Length, SocketFlags.None, OnReceived, null);
+            try
+            {
+                m_socket?.BeginReceive(m_buffer, 0, m_buffer.Length, SocketFlags.None, OnReceived, null);
+            }
+            catch
+            {
+                Logger.Write("Unable to receive from " + Ip, MessageState.WARNING);
+                Disconnect();
+            }
         }
         public void OnReceived(IAsyncResult result)
         {
@@ -179,8 +196,11 @@ namespace Giny.Core.Network
         }
         public void Disconnect()
         {
-            Dispose();
-            OnDisconnected();
+            if (m_socket != null)
+            {
+                Dispose();
+                OnDisconnected();
+            }
         }
 
         private void Dispose()
