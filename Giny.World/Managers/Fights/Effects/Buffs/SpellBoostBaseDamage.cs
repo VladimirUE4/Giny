@@ -1,6 +1,7 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Buffs;
+using Giny.World.Managers.Fights.Buffs.SpellBoost;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Records.Maps;
@@ -12,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Buffs
 {
-    [SpellEffectHandler(EffectsEnum.Effect_SpellBoost)]
-    public class SpellBoost : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_SpellBoostBaseDamage)]
+    public class SpellBoostBaseDamage : SpellEffectHandler
     {
-        public SpellBoost(EffectDice effect, SpellCastHandler castHandler) :
+        public SpellBoostBaseDamage(EffectDice effect, SpellCastHandler castHandler) :
             base(effect, castHandler)
         {
 
@@ -25,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
         {
             foreach (var target in targets)
             {
-                SpellBoostBuff buff = new SpellBoostBuff(target.BuffIdProvider.Pop(), (short)Effect.Min, (short)Effect.Value, target, this, FightDispellableEnum.DISPELLABLE);
+                Buff buff = new SpellBoostBaseDamageBuff(target.BuffIdProvider.Pop(), (short)Effect.Min, (short)Effect.Value, target, this, FightDispellableEnum.DISPELLABLE);
                 target.AddBuff(buff);
             }
         }

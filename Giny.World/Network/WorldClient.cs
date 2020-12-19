@@ -160,6 +160,11 @@ namespace Giny.World.Network
                 BreedManager.Instance.AvailableBreedsFlags, 0, true));
 
             Send(new TrustStatusMessage(true, true));
+
+            if (Characters.Any(x => x.Connected))
+            {
+                this.Disconnect();
+            }
             // client.Send(new HaapiSessionMessage());
         }
 

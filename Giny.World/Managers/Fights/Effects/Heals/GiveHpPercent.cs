@@ -29,7 +29,10 @@ namespace Giny.World.Managers.Fights.Effects.Heals
 
             foreach (var target in targets)
             {
-                target.Heal(new Healing(Source, target, delta));
+                if (target != Source)
+                {
+                    target.Heal(new Healing(Source, target, delta));
+                }
             }
         }
     }

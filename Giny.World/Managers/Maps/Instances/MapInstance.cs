@@ -20,6 +20,7 @@ using Giny.World.Managers.Generic;
 using Giny.World.Managers.Entities.Merchants;
 using Giny.Core.Time;
 using Giny.Core.Extensions;
+using System.Collections.Concurrent;
 
 namespace Giny.World.Managers.Maps.Instances
 {
@@ -44,11 +45,11 @@ namespace Giny.World.Managers.Maps.Instances
 
         private List<MapElement> m_elements = new List<MapElement>();
 
-        private Dictionary<long, Entity> m_entities = new Dictionary<long, Entity>();
+        private ConcurrentDictionary<long, Entity> m_entities = new ConcurrentDictionary<long, Entity>();
 
         private ActionTimer m_monsterSpawner;
 
-        private Dictionary<int, Fight> m_fights = new Dictionary<int, Fight>();
+        private ConcurrentDictionary<int, Fight> m_fights = new ConcurrentDictionary<int, Fight>();
 
         private ReversedUniqueIdProvider m_npIdPopper = new ReversedUniqueIdProvider(0);
 
@@ -128,16 +129,13 @@ namespace Giny.World.Managers.Maps.Instances
 
         public void AddEntity(Entity entity)
         {
-            lock (this)
+            if (!m_entities.ContainsKey(entity.Id))
             {
-                if (!m_entities.ContainsKey(entity.Id))
-                {
-                    var informations = entity.GetActorInformations();
-                    Send(new GameRolePlayShowActorMessage(informations));
+                var informations = entity.GetActorInformations();
+                Send(new GameRolePlayShowActorMessage(informations));
 
-                    m_entities.Add(entity.Id, entity);
-                    OnEntitiesUpdated();
-                }
+                m_entities.TryAdd(entity.Id, entity);
+                OnEntitiesUpdated();
             }
         }
         private void OnEntitiesUpdated()
@@ -154,10 +152,11 @@ namespace Giny.World.Managers.Maps.Instances
         }
         public void RemoveEntity(long entityId)
         {
-            lock (this)
+            Entity result = null;
+
+            if (m_entities.TryRemove(entityId, out result))
             {
-                m_entities.Remove(entityId);
-                this.Send(new GameContextRemoveElementMessage(entityId));
+                this.Send(new GameContextRemoveElementMessage(result.Id));
                 OnEntitiesUpdated();
             }
         }
@@ -180,12 +179,14 @@ namespace Giny.World.Managers.Maps.Instances
 
         public void AddFight(Fight fight)
         {
-            m_fights.Add(fight.Id, fight);
+            if (m_fights.TryAdd(fight.Id, fight))
+            {
 
-            if (fight.ShowBlades)
-                Send(new GameRolePlayShowChallengeMessage(fight.GetFightCommonInformations()));
+                if (fight.ShowBlades)
+                    Send(new GameRolePlayShowChallengeMessage(fight.GetFightCommonInformations()));
 
-            SendMapFightCount();
+                SendMapFightCount();
+            }
         }
 
         public Fight GetFight(short fightId)
@@ -197,7 +198,9 @@ namespace Giny.World.Managers.Maps.Instances
 
         public void RemoveFight(Fight fight)
         {
-            m_fights.Remove(fight.Id);
+            Fight result = null;
+
+            m_fights.TryRemove(fight.Id, out result);
 
             RemoveBlades(fight);
 
@@ -298,12 +301,9 @@ namespace Giny.World.Managers.Maps.Instances
 
         public void Send(NetworkMessage message)
         {
-            lock (this)
+            foreach (var character in GetEntities<Character>())
             {
-                foreach (var character in GetEntities<Character>())
-                {
-                    character.Client.Send(message);
-                }
+                character.Client.Send(message);
             }
         }
         public void ToggleMute()

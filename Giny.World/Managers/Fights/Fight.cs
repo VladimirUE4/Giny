@@ -1,4 +1,5 @@
 ﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.Core.Network.Messages;
 using Giny.Core.Pool;
 using Giny.Core.Time;
@@ -32,7 +33,7 @@ namespace Giny.World.Managers.Fights
     {
         public const int TurnTime = 30;
 
-        public const int SynchronizerTimout = 8;
+        public const int SynchronizerTimout = 10;
 
         public const int TurnBeforeDisconnection = 20;
 
@@ -69,7 +70,21 @@ namespace Giny.World.Managers.Fights
             get;
             private set;
         }
+        /*
+         * Fight will begin shortly.
+         * (We casted initial spells, waiting 
+         * for client ack.)
+         */
         public bool Started
+        {
+            get;
+            private set;
+        }
+        /*
+         * Fight Started and 
+         * server acknoledged it.
+         */
+        public bool StartAcknowledged
         {
             get;
             private set;
@@ -154,6 +169,12 @@ namespace Giny.World.Managers.Fights
             get;
             set;
         }
+        public DateTime TurnStartTime
+        {
+            get;
+            private set;
+        }
+
         #region Events
 
         public event Action<Fight, Fighter> TurnStarted;
@@ -179,7 +200,7 @@ namespace Giny.World.Managers.Fights
             Fighter target = BlueTeam.GetFighter<Fighter>(x => x.Cell.Id == cellId);
             return target == null ? RedTeam.GetFighter<Fighter>(x => x.Cell.Id == cellId) : target;
         }
-        public Fighter GetFighter<T>(Func<T, bool> predicate) where T : Fighter
+        public T GetFighter<T>(Func<T, bool> predicate) where T : Fighter
         {
             T result = BlueTeam.GetFighter(predicate);
 
@@ -204,9 +225,17 @@ namespace Giny.World.Managers.Fights
         {
             return GetFighters(aliveOnly).OfType<T>();
         }
+        public IEnumerable<CharacterFighter> GetAllConnectedFighters()
+        {
+            return GetFighters<CharacterFighter>(false).Where(x => !x.Disconnected);
+        }
         public IEnumerable<T> GetFighters<T>(Func<T, bool> predicate, bool aliveOnly = true)
         {
             return GetFighters<T>(aliveOnly).Where(predicate);
+        }
+        public Idol[] GetIdols()
+        {
+            return new Idol[0];
         }
         public Fight(int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
         {
@@ -219,12 +248,11 @@ namespace Giny.World.Managers.Fights
             this.Timeline = new FightTimeline(this);
             this.Cell = cell;
             this.Started = false;
+            this.StartAcknowledged = false;
             this.CreationTime = DateTime.Now;
             this.SequenceManager = new SequenceManager(this);
             this.Synchronizer = null;
             this.Marks = new List<Mark>();
-
-           
         }
 
 
@@ -298,10 +326,11 @@ namespace Giny.World.Managers.Fights
             if (ShowBlades)
             {
                 ShowBladesOnMap();
-                this.Send(new IdolFightPreparationUpdateMessage(0, new Idol[0]));
+                this.Send(new IdolFightPreparationUpdateMessage(0, GetIdols()));
             }
 
             FightApi.PlacementStarted(this);
+
         }
         private void ShowBladesOnMap()
         {
@@ -375,7 +404,7 @@ namespace Giny.World.Managers.Fights
 
             this.OnFightStarted();
 
-            Synchronizer = Synchronizer.RequestCheck(this, StartFight, LagAndStartFight, SynchronizerTimout * 1000);
+            Synchronizer = Synchronizer.RequestCheck(SynchronizerRole.StartFight, this, StartFight, LagAndStartFight, SynchronizerTimout * 1000);
 
         }
         public void OnFightStarted()
@@ -387,6 +416,7 @@ namespace Giny.World.Managers.Fights
         }
         private void StartFight()
         {
+            this.StartAcknowledged = true;
             Synchronizer = null;
             StartTurn();
         }
@@ -401,7 +431,7 @@ namespace Giny.World.Managers.Fights
         }
         private void StartTurn()
         {
-            if (Started && !Ended && !CheckFightEnd())
+            if (StartAcknowledged && !Ended && !CheckFightEnd())
             {
                 this.OnTurnStarted();
             }
@@ -425,6 +455,7 @@ namespace Giny.World.Managers.Fights
                 if (!FighterPlaying.IsSummoned() && RoundNumber > 1)
                 {
                     FighterPlaying.DecrementAllCastedBuffsDuration();
+
                     FighterPlaying.DecrementSummonsCastedBuffsDuration();
                     FighterPlaying.DecrementSummonsCastedBuffsDelays();
                     FighterPlaying.DecrementAllCastedBuffsDelay();
@@ -432,10 +463,10 @@ namespace Giny.World.Managers.Fights
 
                 this.DecrementGlyphDuration(FighterPlaying);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
+
                 FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
 
             }
-
             CheckDeads();
 
             Synchronize();
@@ -451,6 +482,8 @@ namespace Giny.World.Managers.Fights
             }
 
             this.Send(new GameFightTurnStartMessage(this.FighterPlaying.Id, Fight.TurnTime * 10));
+
+            TurnStartTime = DateTime.Now;
 
             this.m_turnTimer = new ActionTimer((int)Fight.TurnTime * 1000, StopTurn, false);
             this.m_turnTimer.Start();
@@ -494,7 +527,7 @@ namespace Giny.World.Managers.Fights
 
                 }
 
-                if (current != null)
+                if (current != null && StartAcknowledged)
                 {
                     FighterPlaying.PassTurn();
                 }
@@ -504,6 +537,15 @@ namespace Giny.World.Managers.Fights
 
         public void StopTurn()
         {
+            if (Synchronizer != null && Synchronizer.Role == SynchronizerRole.EndTurn)
+            {
+                /*
+                 * Pass Turn multiple times 
+                 * Chill out ! :D
+                 */
+                return;
+            }
+
             if (Ended)
                 return;
 
@@ -512,24 +554,21 @@ namespace Giny.World.Managers.Fights
 
             if (Synchronizer != null)
             {
-                this.Reply("Last ReadyChecker was not disposed. (Stop Turn)", Color.Red);
+                this.Reply("Last ReadyChecker was not disposed. (" + Synchronizer.Role + ")", Color.Red);
                 Synchronizer.Cancel();
                 Synchronizer = null;
             }
-
-            
 
             OnTurnStopped();
 
             if (CheckFightEnd())
                 return;
 
-            Synchronizer = Synchronizer.RequestCheck(this, PassTurnAndCheck, LagAndPassTurn, SynchronizerTimout * 1000);
+            Synchronizer = Synchronizer.RequestCheck(SynchronizerRole.EndTurn, this, PassTurnAndCheck, LagAndPassTurn, SynchronizerTimout * 1000);
 
         }
         protected void PassTurnAndCheck()
         {
-
             if (Synchronizer == null)
                 return;
 
@@ -538,20 +577,29 @@ namespace Giny.World.Managers.Fights
             FighterPlaying.Stats.ResetUsedPoints();
             PassTurn();
         }
+        public TimeSpan GetTurnTimeLeft()
+        {
+            if (Timeline.Current == null)
+                return TimeSpan.Zero;
+
+            var time = (DateTime.Now - TurnStartTime).TotalMilliseconds;
+
+            return TimeSpan.FromMilliseconds(time > 0 ? ((TurnTime * 1000) - (int)time) : 0);
+        }
         public void Warn(string message)
         {
             Reply(message, Color.Orange);
         }
         public void Reply(string message, Color color)
         {
-            foreach (var fighter in GetFighters<CharacterFighter>(false))
+            foreach (var fighter in GetAllConnectedFighters())
             {
                 fighter.Character.Reply(message, color);
             }
         }
         public void TextInformation(TextInformationTypeEnum type, short messageId, params object[] parameters)
         {
-            foreach (var fighter in GetFighters<CharacterFighter>(false))
+            foreach (var fighter in GetAllConnectedFighters())
             {
                 fighter.Character.TextInformation(type, messageId, parameters);
             }
@@ -575,48 +623,11 @@ namespace Giny.World.Managers.Fights
                 return;
             }
 
-            // player left but is disconnected
-            // pass turn is there are others players
-            /*    if (FighterPlaying.HasLeft() && FighterPlaying is CharacterFighter)
-                {
-                    var leaver = (CharacterFighter)FighterPlaying;
-                    if (leaver.IsDisconnected &&
-                        leaver.LeftRound + FightConfiguration.TurnsBeforeDisconnection <= TimeLine.RoundNumber)
-                    {
-                        leaver.Die();
-
-                        if (CheckFightEnd())
-                            return;
-
-                        var results = GenerateLeaverResults(leaver, out var leaverResult);
-
-                        leaverResult.Apply();
-
-                        ContextHandler.SendGameFightLeaveMessage(Clients, leaver);
-
-                        leaver.ResetFightProperties();
-
-                        leaver.Team.AddLeaver(leaver);
-                        m_leavers.Add(leaver);
-                        leaver.Team.RemoveFighter(leaver);
-
-                        leaver.LeaveDisconnectedState(false);
-
-                        leaver.Character.RejoinMap();
-                        leaver.Character.SaveLater();
-
-                        goto redo;
-                    }
-
-                    // <b>%1</b> vient d'être déconnecté, il quittera la partie dans <b>%2</b> tour(s) s'il ne se reconnecte pas avant.
-                    BasicHandler.SendTextInformationMessage(Clients, TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 182,
-                        FighterPlaying.GetMapRunningFighterName(), leaver.LeftRound + FightConfiguration.TurnsBeforeDisconnection - TimeLine.RoundNumber);
-                } */
-
             OnTurnPassed();
 
             StartTurn();
         }
+
         public void TriggerMarks(Fighter target, MarkTriggerType triggerType)
         {
             foreach (var mark in Marks.Where(x => x.Triggers.HasFlag(triggerType) && x.ContainsCell(target.Cell.Id)).ToArray())
@@ -681,27 +692,33 @@ namespace Giny.World.Managers.Fights
 
             if (SequenceManager.IsSequencing)
                 SequenceManager.EndAllSequences();
-           
+
 
             Send(new GameFightTurnEndMessage(FighterPlaying.Id));
         }
 
+        public GameActionMark GetGameActionMark(CharacterFighter fighter, Mark mark)
+        {
+            GameActionMark gameActionMark = null;
+
+            if (mark.IsVisibleFor(fighter))
+            {
+                gameActionMark = mark.GetGameActionMark();
+            }
+            else
+            {
+                gameActionMark = mark.GetHiddenGameActionMark();
+            }
+            return gameActionMark;
+        }
         public void AddMark(Mark mark)
         {
             this.Marks.Add(mark);
 
-            foreach (var fighter in GetFighters<CharacterFighter>())
+            foreach (var fighter in GetAllConnectedFighters())
             {
-                GameActionMark gameActionMark = null;
+                var gameActionMark = GetGameActionMark(fighter, mark);
 
-                if (mark.IsVisibleFor(fighter))
-                {
-                    gameActionMark = mark.GetGameActionMark();
-                }
-                else
-                {
-                    gameActionMark = mark.GetHiddenGameActionMark();
-                }
                 fighter.Send(new GameActionFightMarkCellsMessage()
                 {
                     actionId = 0,
@@ -754,7 +771,7 @@ namespace Giny.World.Managers.Fights
                 summon.Initialize();
             }
 
-            foreach (var target in GetFighters<CharacterFighter>())
+            foreach (var target in GetAllConnectedFighters())
             {
                 target.Send(new GameActionFightSummonMessage()
                 {
@@ -782,21 +799,35 @@ namespace Giny.World.Managers.Fights
         }
         public void Synchronize()
         {
-            foreach (var fighter in GetFighters<CharacterFighter>())
+            foreach (var fighter in GetAllConnectedFighters())
             {
-                fighter.Send(new GameFightSynchronizeMessage(GetFighters().Select(x => x.GetFightFighterInformations(fighter)).ToArray()));
+                Synchronize(fighter);
             }
+        }
+        public void Synchronize(CharacterFighter fighter)
+        {
+            fighter.Send(new GameFightSynchronizeMessage(GetFighters().Select(x => x.GetFightFighterInformations(fighter)).ToArray()));
         }
         public virtual GameFightStartMessage GetGameFightStartMessage()
         {
-            return new GameFightStartMessage(new Idol[0]);
+            return new GameFightStartMessage(GetIdols());
         }
 
         public void UpdateTimeLine()
         {
-            double[] ids = this.Timeline.GetIds();
-            this.Send(new GameFightTurnListMessage(ids, new double[0]));
+            foreach (var fighter in GetAllConnectedFighters())
+            {
+                UpdateTimeLine(fighter);
+
+            }
         }
+        public void UpdateTimeLine(CharacterFighter fighter)
+        {
+            double[] ids = this.Timeline.GetAliveIds();
+            double[] deads = this.Timeline.GetDeadsIds();
+            fighter.Send(new GameFightTurnListMessage(ids, deads));
+        }
+
         public void CheckFightStart()
         {
             if (this.RedTeam.AreAllReady() && this.BlueTeam.AreAllReady())
@@ -812,17 +843,19 @@ namespace Giny.World.Managers.Fights
 
                 if (Started)
                 {
-
                     if (Synchronizer != null)
+                    {
                         Synchronizer.Cancel();
+                        Synchronizer = null;
+                    }
 
                     if (SequenceManager.IsSequencing)
                         SequenceManager.EndAllSequences();
 
-                    Synchronizer = Synchronizer.RequestCheck(this, EndFight, delegate (CharacterFighter[] actors)
-                    {
-                        EndFight();
-                    }, Fight.SynchronizerTimout * 1000);
+                    Synchronizer = Synchronizer.RequestCheck(SynchronizerRole.EndFight, this, EndFight, delegate (CharacterFighter[] actors)
+                     {
+                         EndFight();
+                     }, Fight.SynchronizerTimout * 1000);
 
                 }
                 else
@@ -897,6 +930,9 @@ namespace Giny.World.Managers.Fights
             foreach (CharacterFighter current in this.GetFighters<CharacterFighter>(false))
             {
                 bool winner = current.Team == Winners ? true : false;
+
+                current.Character.Record.FightId = null;
+
                 current.Character.RejoinMap(targetMapId, FightType, winner, SpawnJoin);
             }
 
@@ -916,7 +952,7 @@ namespace Giny.World.Managers.Fights
         }
         public int GetFightDuration()
         {
-            return (!this.Started) ? 0 : ((int)(System.DateTime.Now - this.StartTime.Value).TotalMilliseconds);
+            return (!this.StartAcknowledged) ? 0 : ((int)(System.DateTime.Now - this.StartTime.Value).TotalMilliseconds);
         }
 
         public void Join(Character character, double leaderId)
@@ -983,6 +1019,7 @@ namespace Giny.World.Managers.Fights
             Map.Instance.RemoveFight(this);
             FightManager.Instance.RemoveFight(this);
         }
+
 
     }
 }

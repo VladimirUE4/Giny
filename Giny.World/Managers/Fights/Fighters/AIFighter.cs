@@ -59,8 +59,6 @@ namespace Giny.World.Managers.Fights.Fighters
             return cells.ToList();
         }
 
-        public abstract IEnumerable<SpellRecord> GetSpells();
-
         public List<CellRecord> FindPath(Fighter target)
         {
             Pathfinding pathfinding = new Pathfinding(Fight.Map);

@@ -38,8 +38,6 @@ namespace Giny.World.Managers.Fights
 
         private List<Fighter> Fighters = new List<Fighter>();
 
-        private List<Fighter> Leavers = new List<Fighter>();
-
         public Fighter Leader => Fighters.Count > 0 ? Fighters.First() : null;
 
         public FightTeam EnemyTeam => this == Fight.RedTeam ? Fight.BlueTeam : Fight.RedTeam;
@@ -93,7 +91,7 @@ namespace Giny.World.Managers.Fights
         }
         public void Send(NetworkMessage message)
         {
-            foreach (var fighter in GetFighters<CharacterFighter>(false))
+            foreach (var fighter in GetFighters<CharacterFighter>(false).Where(x => !x.Disconnected))
             {
                 fighter.Character.Client.Send(message);
             }
@@ -120,25 +118,11 @@ namespace Giny.World.Managers.Fights
         {
             return Fighters.FindAll(x => !x.Alive).ToArray();
         }
-        public void AddLeaver(Fighter fighter)
-        {
-            Leavers.Add(fighter);
-        }
-        public Fighter[] GetLeavers()
-        {
-            return Leavers.ToArray();
-        }
         public IEnumerable<Portal> GetPortals()
         {
             return Fight.GetMarks<Portal>().Where(x => x.Source.Team == this);
         }
-        public Fighter[] GetAllFightersWithLeavers()
-        {
-            List<Fighter> results = new List<Fighter>();
-            results.AddRange(Leavers);
-            results.AddRange(GetFighters<Fighter>(false));
-            return results.Distinct().ToArray();
-        }
+        
         public void AddFighter(Fighter fighter)
         {
             fighter.Fight = Fight;

@@ -1,9 +1,11 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Monsters;
 using Giny.World.Records.Maps;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ namespace Giny.World.Managers.Fights
 {
     public class FightManager : Singleton<FightManager>
     {
-        private Dictionary<int, Fight> Fights = new Dictionary<int, Fight>();
+        private ConcurrentDictionary<int, Fight> Fights = new ConcurrentDictionary<int, Fight>();
 
         public Fight GetFight(int id)
         {
@@ -29,8 +31,21 @@ namespace Giny.World.Managers.Fights
 
         public void RemoveFight(Fight fight)
         {
-            Fights.Remove(fight.Id);
+            Fight result = null;
+            Fights.TryRemove(fight.Id, out result);
         }
+
+        public CharacterFighter GetConnectedFighter(Character character)
+        {
+            if (!Fights.ContainsKey(character.Record.FightId.Value))
+            {
+                return null;
+            }
+
+            Fight fight = Fights[character.Record.FightId.Value];
+            return fight.GetFighter<CharacterFighter>(x => x.Id == character.Id);
+        }
+
         public int PopId()
         {
             lock (this)
@@ -45,7 +60,7 @@ namespace Giny.World.Managers.Fights
             FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
             var fight = new FightPvM(PopId(), map, blueTeam, redTeam, cell, group);
-            Fights.Add(fight.Id, fight);
+            Fights.TryAdd(fight.Id, fight);
             return fight;
         }
 
@@ -55,7 +70,8 @@ namespace Giny.World.Managers.Fights
             FightTeam redteam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
             var fight = new FightDual(PopId(), source.Map, blueteam, redteam, cell);
-            Fights.Add(fight.Id, fight);
+
+            Fights.TryAdd(fight.Id, fight);
             return fight;
         }
     }

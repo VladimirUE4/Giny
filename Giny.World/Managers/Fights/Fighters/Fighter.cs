@@ -11,6 +11,7 @@ using Giny.World.Handlers.Roleplay.Maps.Paths;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights.Buffs;
+using Giny.World.Managers.Fights.Buffs.SpellBoost;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Effects.Damages;
@@ -38,6 +39,10 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public abstract class Fighter
     {
+        public const short CarrySpellState = 3;
+
+        public const short CarriedSpellState = 8;
+
         public event Action<Fighter> Moved;
 
         public int Id
@@ -195,11 +200,6 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
         }
 
-        private Dictionary<short, short> m_spellsCosts
-        {
-            get;
-            set;
-        }
         /// <summary>
         /// (From client SpellManager.as:352)
         /// True if the player was teleported in invalid cell during his turn.
@@ -220,7 +220,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Buffs = new List<Buff>();
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
-            this.m_spellsCosts = new Dictionary<short, short>();
             this.WasTeleportedInInvalidCell = false;
         }
 
@@ -260,7 +259,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-
+       
         public virtual IEnumerable<DroppedItem> RollLoot(IFightResult looter)
         {
             return new DroppedItem[0];
@@ -371,13 +370,24 @@ namespace Giny.World.Managers.Fights.Fighters
                 return;
             }
 
-            if (Fight.Ended || !Fight.Started)
+            if (Fight.Ended || !Fight.StartAcknowledged)
                 return;
+
 
             if (!path.Skip(1).All(x => Fight.IsCellFree(x)))
             {
                 this.OnMoveFailed(MovementFailedReason.Obstacle);
                 return;
+            }
+
+            if (IsCarried())
+            {
+                using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TRIGGERED))
+                {
+                    GetCarrier().Throw(path[1], true);
+                    path.Remove(path[0]);
+
+                }
             }
 
             for (int i = 1; i < path.Count; i++)
@@ -499,9 +509,9 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
         }
-        public short GetSpellBoost(short spellId)
+        public short GetSpellBoost<T>(short spellId) where T : SpellBoostBuff
         {
-            return (short)GetBuffs<SpellBoostBuff>().Where(x => x.BoostedSpellId == spellId).Sum(x => x.Delta); // Sum, or we pick first one ?
+            return (short)GetBuffs<SpellBoostBuff>().Where(x => x.SpellId == spellId).Sum(x => x.GetDelta());
         }
         public void DecrementAllCastedBuffsDuration()
         {
@@ -526,9 +536,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 summon.DecrementAllCastedBuffsDelay();
             }
         }
-        private IEnumerable<Fighter> GetSummons()
+
+        protected IEnumerable<SummonedFighter> GetSummons()
         {
-            return Fight.GetFighters<Fighter>(x => x.IsSummoned() && x.GetSummoner() == this);
+            return Fight.GetFighters<SummonedFighter>(x => x.IsSummoned() && x.GetSummoner() == this);
         }
 
 
@@ -580,12 +591,18 @@ namespace Giny.World.Managers.Fights.Fighters
                 RemoveAndDispellBuff(buff);
             }
         }
+        [WIP("not sure about spell child.")]
         public void RemoveSpellEffects(Fighter source, short spellId)
         {
             IEnumerable<Buff> buffs = this.Buffs.Where(x => x.Cast.SpellId == spellId);
 
             foreach (var buff in buffs.ToArray())
             {
+                foreach (var spellCast in buff.Cast.GetAllChilds())
+                {
+                    RemoveSpellEffects(source, spellCast.SpellId);
+                }
+
                 RemoveAndDispellBuff(buff);
             }
 
@@ -757,7 +774,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void ShowFighter()
         {
-            foreach (var characterFighter in Fight.GetFighters<CharacterFighter>())
+            foreach (var characterFighter in Fight.GetAllConnectedFighters())
             {
                 ShowFighter(characterFighter);
             }
@@ -1063,12 +1080,18 @@ namespace Giny.World.Managers.Fights.Fighters
             }
 
             if (!cast.IsConditionBypassed(SpellCastResult.NO_LOS) &&
-                (cast.Spell.Level.CastTestLos && !Fight.CanBeSeen(cast.Source.Cell.Point, cast.TargetCell.Point)))
+                (cast.Spell.Level.CastTestLos && !Fight.CanBeSeen(cast.Source.Cell.Point, cast.TargetCell.Point))
+                && !CanCastNoLOS(spellLevel.SpellId))
             {
                 return SpellCastResult.NO_LOS;
             }
 
             return SpellCastResult.OK;
+        }
+
+        public bool CanCastNoLOS(short spellId)
+        {
+            return GetBuffs<SpellBoostRemoveLOS>().Any(x => x.SpellId == spellId && x.GetDelta() == 1);
         }
 
         public bool IsInCastZone(SpellLevelRecord spellLevel, MapPoint castPoint, MapPoint cell)
@@ -1081,6 +1104,9 @@ namespace Giny.World.Managers.Fights.Fighters
         public Set GetSpellZone(SpellLevelRecord spellLevel, MapPoint point)
         {
             var range = (int)spellLevel.MaxRange;
+
+            range += GetSpellBoost<SpellBoostRangeBuff>(spellLevel.SpellId);
+
             Set set;
 
             if (spellLevel.RangeCanBeBoosted)
@@ -1336,6 +1362,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public abstract Spell GetSpell(short spellId);
 
+        public abstract IEnumerable<SpellRecord> GetSpells();
+
         public void ReduceSpellCooldown(Fighter source, short spellId, short delta)
         {
             var newCooldown = SpellHistory.ReduceSpellCooldown(spellId, delta);
@@ -1362,42 +1390,15 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public short GetApCost(SpellLevelRecord level)
         {
-            if (m_spellsCosts.ContainsKey(level.SpellId))
-            {
-                return m_spellsCosts[level.SpellId];
-            }
-            else
-            {
-                return level.ApCost;
-            }
-        }
-        public void ReduceApCost(SpellLevelRecord spellLevel, short delta)
-        {
-            int newCost = 0;
+            short apCost = level.ApCost;
 
-            if (this.m_spellsCosts.ContainsKey(spellLevel.SpellId))
+            apCost -= GetSpellBoost<SpellBoostReduceApCostBuff>(level.SpellId);
+
+            if (apCost < 0)
             {
-                newCost = m_spellsCosts[spellLevel.SpellId] - delta;
-
-                if (newCost >= 0 && newCost != spellLevel.ApCost)
-                {
-                    m_spellsCosts[spellLevel.SpellId] = (short)newCost;
-                }
-                else
-                {
-                    m_spellsCosts.Remove(spellLevel.SpellId);
-                }
-
+                apCost = 0;
             }
-            else
-            {
-                newCost = spellLevel.ApCost - delta;
-
-                if (newCost >= 0 && newCost != spellLevel.ApCost)
-                {
-                    m_spellsCosts.Add(spellLevel.SpellId, (short)newCost);
-                }
-            }
+            return apCost;
         }
         public void Slide(Fighter source, DirectionsEnum direction, short delta, MovementType type)
         {
@@ -1524,7 +1525,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("show fighter, invalid")]
         private void OnInvisibilityStateChanged(GameActionFightInvisibilityStateEnum state, GameActionFightInvisibilityStateEnum oldState, Fighter source)
         {
-            foreach (var fighter in Fight.GetFighters<CharacterFighter>(false))
+            foreach (var fighter in Fight.GetAllConnectedFighters())
             {
                 fighter.Send(new GameActionFightInvisibilityMessage()
                 {
@@ -1964,7 +1965,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void KillAllSummons()
         {
-            foreach (var summon in Fight.GetFighters<Fighter>().Where(x => x.IsSummoned() && x.GetSummoner() == this).ToArray())
+            foreach (var summon in GetSummons().ToArray())
             {
                 summon.Die(this);
             }
@@ -2019,8 +2020,11 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Fight.GetFighters<Fighter>().FirstOrDefault(x => x.Carried == this);
         }
-        public void Carry(Fighter target)
+        public void Carry(Fighter target, SpellEffectHandler effectHandler)
         {
+            effectHandler.AddStateBuff(this, SpellStateRecord.GetSpellStateRecord(CarrySpellState), FightDispellableEnum.REALLY_NOT_DISPELLABLE, -1);
+            effectHandler.AddStateBuff(target, SpellStateRecord.GetSpellStateRecord(CarriedSpellState), FightDispellableEnum.REALLY_NOT_DISPELLABLE, -1);
+
             target.Cell = this.Cell;
 
             Carried = target;
@@ -2033,19 +2037,38 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = target.Id
             });
         }
-        public void Throw(CellRecord cell)
+        public void Throw(CellRecord cell, bool drop)
         {
             if (IsCarrying())
             {
                 Carried.Cell = cell;
 
-                Fight.Send(new GameActionFightThrowCharacterMessage()
+                StateBuff buff = this.GetBuffs<StateBuff>().Where(x => x.StateId == CarrySpellState).FirstOrDefault();
+
+                RemoveSpellEffects(this, buff.Cast.SpellId);
+                Carried.RemoveSpellEffects(this, buff.Cast.SpellId);
+
+
+                if (!drop)
                 {
-                    actionId = (short)ActionsEnum.ACTION_THROW_CARRIED_CHARACTER,
-                    cellId = cell.Id,
-                    sourceId = Id,
-                    targetId = Carried.Id,
-                });
+                    Fight.Send(new GameActionFightThrowCharacterMessage()
+                    {
+                        actionId = (short)ActionsEnum.ACTION_THROW_CARRIED_CHARACTER,
+                        cellId = cell.Id,
+                        sourceId = Id,
+                        targetId = Carried.Id,
+                    });
+                }
+                else
+                {
+                    Fight.Send(new GameActionFightDropCharacterMessage()
+                    {
+                        actionId = (short)ActionsEnum.ACTION_NO_MORE_CARRIED,
+                        cellId = cell.Id,
+                        sourceId = Id,
+                        targetId = Carried.Id
+                    });
+                }
 
                 Carried = null;
             }

@@ -1,6 +1,5 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
-using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
@@ -9,55 +8,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Buffs
+namespace Giny.World.Managers.Fights.Buffs.SpellBoost
 {
-    public class SpellBoostBuff : Buff
+    public abstract class SpellBoostBuff : Buff
     {
-        public short Delta
+        protected SpellBoostBuff(int id, short spellId, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null) : base(id, target, effectHandler, dispellable, customActionId)
         {
-            get;
-            set;
-        }
-        public short BoostedSpellId
-        {
-            get;
-            set;
-        }
-        public SpellBoostBuff(int id, short boostedSpellId, short delta, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) : base(id, target, effectHandler, dispellable)
-        {
-            this.BoostedSpellId = boostedSpellId;
+            this.SpellId = spellId;
             this.Delta = delta;
         }
 
+        public short SpellId
+        {
+            get;
+            private set;
+        }
+        private short Delta
+        {
+            get;
+            set;
+        }
         public override void Apply()
         {
 
         }
-
         public override void Dispell()
         {
 
         }
-
         public override AbstractFightDispellableEffect GetAbstractFightDispellableEffect()
         {
             return new FightTemporarySpellBoostEffect()
             {
-                effectId = Effect.EffectId,
+                boostedSpellId = SpellId,
                 delta = Delta,
-                boostedSpellId = BoostedSpellId,
                 dispelable = (byte)Dispellable,
+                effectId =  Effect.EffectId,
                 parentBoostUid = 0,
-                spellId = BoostedSpellId, // Cast.SpellId
+                spellId = Cast.SpellId,
                 targetId = Target.Id,
-                turnDuration = (short)(Duration == -1 ? -1000 : Duration),//(short)Duration,
+                turnDuration = (short)(Duration == -1 ? -1000 : Duration),
                 uid = Id,
             };
         }
-
         public override short GetDelta()
         {
-            throw new InvalidOperationException();
+            return Delta;
         }
+
     }
 }

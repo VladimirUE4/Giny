@@ -95,10 +95,14 @@
     <Compile Include="Managers\Fights\Buffs\RandModifierBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SkipTurnBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRangeBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOS.cs" />
     <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ArmorDamageReduction.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddRandModifier.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
+    <Compile Include="Managers\Fights\Effects\Buffs\SpellBoostRange.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\SkipTurn.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1018.cs" />
@@ -210,7 +214,7 @@
     <Compile Include="Managers\Fights\Buffs\InvisibilityBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\ResistanceBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellDamageBuff.cs" />
-    <Compile Include="Managers\Fights\Buffs\SpellReduceApCostBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostReduceApCostBuff.cs" />
     <Compile Include="Managers\Fights\Cast\Spell.cs" />
     <Compile Include="Managers\Fights\Cast\SpellCastHandlerAttribute.cs" />
     <Compile Include="Managers\Fights\Cast\Telefrag.cs" />
@@ -283,7 +287,7 @@
     <Compile Include="Managers\Effects\EffectString.cs" />
     <Compile Include="Managers\Fights\Buffs\Buff.cs" />
     <Compile Include="Managers\Fights\Triggers\BuffTriggerType.cs" />
-    <Compile Include="Managers\Fights\Buffs\SpellBoostBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBaseDamageBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StatBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StateBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\TriggerBuff.cs" />
@@ -330,7 +334,7 @@
     <Compile Include="Managers\Fights\Cast\SpellCastHandler.cs" />
     <Compile Include="Managers\Fights\Cast\SpellCastResult.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ApBuff.cs" />
-    <Compile Include="Managers\Fights\Effects\Buffs\SpellBoost.cs" />
+    <Compile Include="Managers\Fights\Effects\Buffs\SpellBoostBaseDamage.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\StatsBuff.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ApDebuff.cs" />
     <Compile Include="Managers\Fights\Effects\Movements\PushBack.cs" />

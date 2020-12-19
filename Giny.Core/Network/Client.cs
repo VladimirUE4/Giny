@@ -117,6 +117,10 @@ namespace Giny.Core.Network
                     m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
                 }
             }
+            else
+            {
+                Logger.Write("Attempt was made to send data to disconnect socket.", MessageState.WARNING);
+            }
 
         }
         public abstract void OnSended(IAsyncResult result);

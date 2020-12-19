@@ -17,7 +17,6 @@ namespace Giny.World.Managers.Fights.History
 
         private readonly LimitedStack<SpellHistoryEntry> m_underlyingStack = new LimitedStack<SpellHistoryEntry>(HistoryEntriesLimit);
 
-        
         public Fighter Owner
         {
             get;
@@ -115,7 +114,7 @@ namespace Giny.World.Managers.Fights.History
             }
             return result;
         }
-  
+
         public int ReduceSpellCooldown(short spellId, short delta)
         {
             SpellHistoryEntry spellHistoryEntry = this.m_underlyingStack.LastOrDefault((SpellHistoryEntry entry) => entry.Spell.SpellId == spellId);
@@ -138,6 +137,27 @@ namespace Giny.World.Managers.Fights.History
                     return 0;
                 }
             }
+        }
+
+        public GameFightSpellCooldown[] GetSpellCooldowns()
+        {
+            List<GameFightSpellCooldown> result = new List<GameFightSpellCooldown>();
+
+            foreach (var entry in this.m_underlyingStack.Reverse())
+            {
+                byte cooldown = (byte)entry.GetCooldown();
+
+                if (!result.Any(x => x.spellId == entry.Spell.SpellId) && cooldown > 0)
+                {
+                    result.Add(new GameFightSpellCooldown()
+                    {
+                        cooldown = cooldown,
+                        spellId = entry.Spell.SpellId,
+                    });
+                }
+            }
+
+            return result.ToArray();
         }
 
         public void SetSpellCooldown(short spellId, short value)

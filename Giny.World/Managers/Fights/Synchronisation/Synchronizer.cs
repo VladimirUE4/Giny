@@ -19,6 +19,12 @@ namespace Giny.World.Managers.Fights.Synchronisation
         public event System.Action<Synchronizer> Success;
         public event Action<Synchronizer, CharacterFighter[]> Timeout;
 
+        public SynchronizerRole Role
+        {
+            get;
+            private set;
+        }
+
         private void NotifySuccess()
         {
             this.Success?.Invoke(this);
@@ -27,8 +33,9 @@ namespace Giny.World.Managers.Fights.Synchronisation
         {
             this.Timeout?.Invoke(this, laggers);
         }
-        public Synchronizer(Fight fight, IEnumerable<CharacterFighter> actors, int timeout)
+        public Synchronizer(SynchronizerRole role, Fight fight, IEnumerable<CharacterFighter> actors, int timeout)
         {
+            this.Role = role;
             this.m_fight = fight;
             this.m_fighters = actors.ToList<CharacterFighter>();
             this.timeout = timeout;
@@ -97,16 +104,16 @@ namespace Giny.World.Managers.Fights.Synchronisation
                 this.NotifyTimeout(this.m_fighters.ToArray());
             }
         }
-        public static Synchronizer RequestCheck(Fight fight, Action success, System.Action<CharacterFighter[]> fail, int timeout)
+        public static Synchronizer RequestCheck(SynchronizerRole role, Fight fight, Action success, System.Action<CharacterFighter[]> fail, int timeout)
         {
-            IEnumerable<CharacterFighter> fighters = fight.GetFighters<CharacterFighter>(false);
+            IEnumerable<CharacterFighter> fighters = fight.GetAllConnectedFighters();
 
-            return RequestCheck(fight, success, fighters, fail, timeout);
+            return RequestCheck(role, fight, success, fighters, fail, timeout);
 
         }
-        public static Synchronizer RequestCheck(Fight fight, Action success, IEnumerable<CharacterFighter> fighters, System.Action<CharacterFighter[]> fail, int timeout)
+        public static Synchronizer RequestCheck(SynchronizerRole role, Fight fight, Action success, IEnumerable<CharacterFighter> fighters, System.Action<CharacterFighter[]> fail, int timeout)
         {
-            Synchronizer readyChecker = new Synchronizer(fight, fighters, timeout);
+            Synchronizer readyChecker = new Synchronizer(role, fight, fighters, timeout);
             readyChecker.Success += delegate (Synchronizer chk)
             {
                 success();
@@ -118,5 +125,12 @@ namespace Giny.World.Managers.Fights.Synchronisation
             readyChecker.Start();
             return readyChecker;
         }
+    }
+    public enum SynchronizerRole
+    {
+        CharacterLeave,
+        EndTurn,
+        EndFight,
+        StartFight,
     }
 }

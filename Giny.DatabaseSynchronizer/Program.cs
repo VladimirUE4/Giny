@@ -29,11 +29,11 @@ namespace Giny.DatabaseSynchronizer
 {
     class Program
     {
-        public const bool BUILD_MISC = false;
+        public const bool BUILD_MISC = true;
 
-        public const bool BUILD_D2O_TABLES = true;
+        public const bool BUILD_D2O_TABLES = false;
 
-        public const bool BUILD_MAPS = true;
+        public const bool BUILD_MAPS = false;
 
         public const string D2I_FILE_PATH_FR = "i18n_fr.d2i";
         public const string D2I_FILE_PATH_EN = "i18n_en.d2i";

@@ -991,10 +991,13 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void OnDisconnected()
         {
+            Record.Connected = false;
+
             Record.UpdateElement();
 
             if (Dialog != null)
                 Dialog.Close();
+
             if (IsInRequest())
                 CancelRequest();
 
@@ -1002,9 +1005,13 @@ namespace Giny.World.Managers.Entities.Characters
                 Party.Leave(this);
 
             if (Fighting)
+            {
                 Fighter.OnDisconnected();
-
-            Map?.Instance?.RemoveEntity(this.Id);
+            }
+            else
+            {
+                Map?.Instance?.RemoveEntity(this.Id);
+            }
         }
         object ApplyPolice(object value, bool bold, bool underline)
         {
@@ -1470,7 +1477,26 @@ namespace Giny.World.Managers.Entities.Characters
             }
         }
 
+        public void ReconnectToFight()
+        {
+            this.Map = MapRecord.GetMap(Record.MapId);
 
+            this.CurrentMapMessage(Map.Id);
+
+            Fighter = FightManager.Instance.GetConnectedFighter(this);
+          
+            if (this.Fighter == null)
+            {
+                return;
+            }
+
+            SendGameFightStartingMessage(Fighter.Fight);
+
+            Fighter.OnReconnect(this);
+
+            this.Map.Instance.SendMapComplementary(Client);
+
+        }
     }
 
 }

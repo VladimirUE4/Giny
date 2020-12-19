@@ -73,6 +73,13 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 base.OnTurnBegin();
             }
+            else
+            {
+                if (Controller.Disconnected)
+                {
+                    PassTurn();
+                }
+            }
         }
         [WIP("can controller be different of summoner?")]
         public void SetController(CharacterFighter controller)

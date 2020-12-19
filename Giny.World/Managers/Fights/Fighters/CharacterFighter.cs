@@ -6,6 +6,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.History;
 using Giny.World.Managers.Fights.Results;
@@ -17,6 +18,7 @@ using Giny.World.Managers.Spells;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,15 +34,12 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override short Level => Character.SafeLevel;
 
-
-        private bool Disconnected
+        public bool Disconnected
         {
             get;
-            set;
+            private set;
         }
-
-
-        private int LeftRound
+        private int? LeftRound
         {
             get;
             set;
@@ -97,7 +96,25 @@ namespace Giny.World.Managers.Fights.Fighters
         public void NoMove()
         {
             this.Send(new GameMapNoMovementMessage((short)Cell.Point.X, (short)Cell.Point.Y));
+        }
+        public override IEnumerable<SpellRecord> GetSpells()
+        {
+            return Character.Record.Spells.Select(x => x.ActiveSpellRecord);
+        }
+        public override Spell GetSpell(short spellId)
+        {
+            CharacterSpell characterSpell = Character.GetSpell(spellId);
 
+            if (characterSpell != null)
+            {
+                SpellRecord record = characterSpell.ActiveSpellRecord;
+                SpellLevelRecord level = record.GetLevel(characterSpell.GetGrade(Character));
+                return new Spell(record, level);
+            }
+            else
+            {
+                return null;
+            }
         }
         public override void OnFightStarted()
         {
@@ -332,7 +349,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                     if (!Fight.Ended)
                     {
-                        Synchronizer sync = new Synchronizer(this.Fight, new CharacterFighter[]
+                        Synchronizer sync = new Synchronizer(SynchronizerRole.CharacterLeave, this.Fight, new CharacterFighter[]
                     {
                            this
                     }, Fight.SynchronizerTimout * 1000);
@@ -365,9 +382,6 @@ namespace Giny.World.Managers.Fights.Fighters
             if (this.Fight != null && !this.Fight.CheckFightEnd())
             {
                 this.Team.RemoveFighter(this);
-                this.Team.AddLeaver(this);
-                if (IsFighterTurn)
-                    this.PassTurn();
 
                 this.Character.RejoinMap(Character.Record.MapId, Fight.FightType, false, Fight.SpawnJoin);
             }
@@ -383,7 +397,20 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override void OnTurnBegin()
         {
-            // nothing todo
+            if (Disconnected)
+            {
+                int turnDelta = Fight.RoundNumber - LeftRound.Value;
+
+                if (turnDelta >= Fight.TurnBeforeDisconnection)
+                {
+                    Leave(true);
+                }
+                else
+                {
+                    this.Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 162, new object[] { Name, Fight.TurnBeforeDisconnection - turnDelta });
+                    PassTurn();
+                }
+            }
         }
         public override void OnTurnEnded()
         {
@@ -415,8 +442,6 @@ namespace Giny.World.Managers.Fights.Fighters
             if (!Fight.CheckFightEnd() && IsFighterTurn)
                 Fight.StopTurn();
 
-            this.Team.AddLeaver(this);
-
             this.Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 182, this.Name, Fight.TurnBeforeDisconnection);
         }
 
@@ -428,7 +453,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override bool MustSkipTurn()
         {
-            return base.MustSkipTurn() || Disconnected;
+            return base.MustSkipTurn();
         }
         public override IFightResult GetFightResult()
         {
@@ -448,7 +473,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
-                 if (fighter.GetController() == this && fighter.Alive)
+                if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;
                 }
@@ -457,7 +482,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
-                
+
                 if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;
@@ -488,21 +513,71 @@ namespace Giny.World.Managers.Fights.Fighters
                 base.Move(path);
             }
         }
-
-        public override Spell GetSpell(short spellId)
+        private void SendTurnResume()
         {
-            CharacterSpell characterSpell = Character.GetSpell(spellId);
+            int remaining = (int)(Fight.GetTurnTimeLeft().TotalMilliseconds / 100);
+            int total = Fight.TurnTime * 10;
 
-            if (characterSpell != null)
+            if (remaining <= 0)
             {
-                SpellRecord record = characterSpell.ActiveSpellRecord;
-                SpellLevelRecord level = record.GetLevel(characterSpell.GetGrade(Character));
-                return new Spell(record, level);
+                remaining = 0;
             }
-            else
+            Send(new GameFightTurnResumeMessage()
             {
-                return null;
+                id = Fight.FighterPlaying.Id,
+                remainingTime = remaining,
+                waitTime = total,
+            });
+        }
+        [WIP]
+        private void SendFightResume()
+        {
+            Send(new GameFightResumeMessage()
+            {
+                bombCount = (byte)GetSummons().OfType<SummonedBomb>().Count(),
+                effects = GetBuffs<Buff>().Select(x => x.GetFightDispellableEffectExtendedInformations()).ToArray(),
+                fightStart = Fight.Started ? 1 : 0,
+                fxTriggerCounts = new GameFightEffectTriggerCount[0],
+                gameTurn = (short)Fight.RoundNumber,
+                idols = Fight.GetIdols(),
+                marks = Fight.GetMarks().Select(x => x.GetGameActionMark()).ToArray(),
+                spellCooldowns = SpellHistory.GetSpellCooldowns(),
+                summonCount = (byte)GetSummons().Count(),
+            });
+        }
+      
+        [WIP]
+        public void OnReconnect(Character character)
+        {
+            this.Character = character;
+
+            this.Disconnected = false;
+            this.LeftRound = null;
+
+            Fight.SendGameFightJoinMessage(this);
+
+            foreach (var fighter in Fight.GetFighters<Fighter>(false))
+            {
+                fighter.ShowFighter(this);
             }
+
+            Fight.UpdateEntitiesPositions();
+
+            SendFightResume();
+
+            Fight.UpdateTimeLine(this);
+
+            Fight.Synchronize(this);
+
+            SendTurnResume();
+
+            Character.RefreshStats();
+
+            Fight.UpdateRound();
+
+            Fight.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 184, this.Name);
+
+            this.Send(new GameFightOptionStateUpdateMessage((short)Fight.Id, (byte)Team.TeamId, 1, true));
         }
     }
 }

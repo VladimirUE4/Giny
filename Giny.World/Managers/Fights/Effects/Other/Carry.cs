@@ -14,9 +14,7 @@ namespace Giny.World.Managers.Fights.Effects.Other
     [SpellEffectHandler(EffectsEnum.Effect_Carry)]
     public class Carry : SpellEffectHandler
     {
-        public const short CarrySpellState = 3;
 
-        public const short CarriedSpellState = 8;
 
         public Carry(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
@@ -28,14 +26,13 @@ namespace Giny.World.Managers.Fights.Effects.Other
             {
                 if (!Source.IsCarrying() && target.CanBeCarried() && target != Source)
                 {
-                    Source.Carry(target);
+                    Source.Carry(target, this);
 
-                    AddStateBuff(Source, SpellStateRecord.GetSpellStateRecord(CarrySpellState), FightDispellableEnum.REALLY_NOT_DISPELLABLE, -1);
-                    AddStateBuff(target, SpellStateRecord.GetSpellStateRecord(CarriedSpellState), FightDispellableEnum.REALLY_NOT_DISPELLABLE, -1);
+                   
                 }
             }
 
-           
+
         }
     }
 }

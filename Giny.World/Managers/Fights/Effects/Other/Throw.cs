@@ -18,7 +18,7 @@ namespace Giny.World.Managers.Fights.Effects.Other
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
-        { 
+        {
             if (!Source.IsCarrying())
             {
                 return;
@@ -26,10 +26,9 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
             Fighter carried = Source.Carried;
 
-            Source.Throw(TargetCell);
+            Source.Throw(TargetCell, false);
 
-            Source.DispelState(Source, Carry.CarrySpellState);
-            carried.DispelState(Source, Carry.CarriedSpellState);
+
 
         }
     }

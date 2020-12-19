@@ -79,6 +79,12 @@ namespace Giny.World.Handlers.Approach
         public static void HandleCharacterListRequestMessage(CharactersListRequestMessage message, WorldClient client)
         {
             client.SendCharactersList();
+
+            if (client.Characters.Any(x => x.IsInFight))
+            {
+                client.Character = new Character(client, client.Characters.First(x => x.IsInFight));
+                ProcessSelection(client);
+            }
         }
         [MessageHandler]
         public static void HandleCharacterFirstSelectionMessage(CharacterFirstSelectionMessage message, WorldClient client) // TODO ADD TUTORIAL EFFECTS

@@ -148,6 +148,19 @@ namespace Giny.World.Managers.Fights.Cast
             return source;
         }
 
+        public IEnumerable<SpellCast> GetAllChilds()
+        {
+            List<SpellCast> childs = new List<SpellCast>();
+
+            foreach (var child in this.Childs)
+            {
+                childs.Add(child);
+
+                childs.AddRange(child.GetAllChilds());
+            }
+
+            return childs;
+        }
        
 
         public SpellCast GetParent()

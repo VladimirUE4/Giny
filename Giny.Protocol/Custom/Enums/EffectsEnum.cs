@@ -739,11 +739,11 @@
         /// <summary>
         /// Augmente la portée minimale du sort #1 de #3
         /// </summary>
-        Effect_IncreaseMinimalSpellRange = 280,
+        Effect_SpellBoostMinimalRange = 280,
         /// <summary>
         /// Augmente la PO du sort #1 de #3
         /// </summary>
-        Effect_IncreaseSpellRange = 281,
+        Effect_SpellBoostRange = 281,
         /// <summary>
         /// Rend la portée du sort #1 modifiable
         /// </summary>
@@ -791,7 +791,7 @@
         /// <summary>
         /// Augmente les dégâts de base du sort #1 de #3
         /// </summary>
-        Effect_SpellBoost = 293,
+        Effect_SpellBoostBaseDamage = 293,
         /// <summary>
         /// Diminue la portée maximale du sort #1 de #3
         /// </summary>

@@ -175,6 +175,16 @@ namespace Giny.World.Records.Characters
             set;
         }
 
+        [Ignore]
+        public bool IsInFight => FightId != null;
+    
+        [Ignore]
+        public bool Connected
+        {
+            get;
+            set;
+        }
+
         public CharacterRecord()
         {
 

@@ -68,7 +68,7 @@ namespace Giny.World.Handlers.Maps
         {
             if (client.Character.Fighting)
             {
-                if (client.Character.Fighter.Fight.Started)
+                if (client.Character.Fighter.Fight.StartAcknowledged)
                 {
                     List<short> path = PathReader.FightMove(PathReader.ReturnDispatchedCells(message.keyMovements)).Keys.ToList();
 

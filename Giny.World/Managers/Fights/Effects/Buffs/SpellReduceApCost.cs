@@ -1,6 +1,6 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
-using Giny.World.Managers.Fights.Buffs;
+using Giny.World.Managers.Fights.Buffs.SpellBoost;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
@@ -28,7 +28,7 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
                 if (target.HasSpell(spellId))
                 {
                     int id = target.BuffIdProvider.Pop();
-                    SpellReduceApCostBuff buff = new SpellReduceApCostBuff(id, spellId, delta,
+                    SpellBoostReduceApCostBuff buff = new SpellBoostReduceApCostBuff(id, spellId, delta,
                         target, this, FightDispellableEnum.DISPELLABLE);
                     target.AddBuff(buff);
                 }

@@ -184,9 +184,13 @@ namespace Giny.World.Managers.Fights.Timeline
             this.Fighters = list;
             this.Index = 0;
         }
-        public double[] GetIds()
+        public double[] GetAliveIds()
         {
-            return Fighters.FindAll(x => x.Alive).ConvertAll<double>(x => x.Id).ToArray();
+            return Fighters.FindAll(x => x.Alive).Select(x => (double)x.Id).ToArray();
+        }
+        public double[] GetDeadsIds()
+        {
+            return Fighters.FindAll(x => !x.Alive).Select(x => (double)x.Id).ToArray();
         }
     }
 }

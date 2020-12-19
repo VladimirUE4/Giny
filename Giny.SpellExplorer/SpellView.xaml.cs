@@ -145,7 +145,7 @@ namespace Giny.SpellExplorer
                 effectInfo.Items.Add("State : " + state.Name);
             }
 
-            if (effect.EffectEnum == EffectsEnum.Effect_SpellBoost)
+            if (effect.EffectEnum == EffectsEnum.Effect_SpellBoostBaseDamage)
             {
                 effectInfo.Items.Add("Boosted Spell : " + SpellRecord.GetSpellRecord((short)effect.Min).Name);
             }

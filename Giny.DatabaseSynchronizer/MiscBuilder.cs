@@ -14,9 +14,11 @@ namespace Giny.DatabaseSynchronizer
     {
         public static void Build(List<D2OReader> readers)
         {
-            BuildSpellEnum(readers);
-            return;
             BuildTextInformations(readers);
+
+            return;
+            BuildSpellEnum(readers);
+
             BuildJobType(readers);
             BuildSkillsType(readers);
             BuildInteractiveTypes(readers);

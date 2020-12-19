@@ -92,8 +92,12 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
+        /*
+         * Sorts d'invocations avec TargetMask
+         * Karcham & Chamrak
+         */
         [WIP]
-        protected bool CasterCriterionSatisfied
+        protected bool CasterCriterionSatisfied 
         {
             get;
             private set;
