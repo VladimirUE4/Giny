@@ -23,6 +23,10 @@ namespace Giny.World.Managers.Fights.Effects.Cast
         {
             Spell spell = CreateCastedSpell();
 
+            if (spell == null)
+            {
+                return;
+            }
             foreach (var target in targets)
             {
                 SpellCast cast = new SpellCast(Source, spell,target.Cell, CastHandler.Cast);

@@ -369,8 +369,6 @@ namespace Giny.World.Managers.Fights.Fighters
                     }
 
                     this.Left = true;
-
-
                 }
 
             }
@@ -447,8 +445,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 Fight.EndFight();
                 return;
             } */
-            if (!Fight.CheckFightEnd() && IsFighterTurn)
-                Fight.StopTurn();
         }
 
         private void EnterDisconnectedState()
@@ -541,7 +537,7 @@ namespace Giny.World.Managers.Fights.Fighters
             Send(new GameFightResumeMessage()
             {
                 bombCount = (byte)GetSummons().OfType<SummonedBomb>().Count(),
-                effects = GetBuffs<Buff>().Select(x => x.GetFightDispellableEffectExtendedInformations()).ToArray(),
+                effects = Fight.GetAllBuffs().Select(x => x.GetFightDispellableEffectExtendedInformations()).ToArray(),
                 fightStart = !Fight.Started ? 0 : Fight.StartTime.Value.GetUnixTimeStamp(),
                 fxTriggerCounts = new GameFightEffectTriggerCount[0],
                 gameTurn = (short)Fight.RoundNumber,
@@ -552,7 +548,7 @@ namespace Giny.World.Managers.Fights.Fighters
             });
         }
 
-        [WIP]
+        [WIP] // some synchronization problems
         public void OnReconnect(Character character)
         {
             this.Character = character;
@@ -567,14 +563,13 @@ namespace Giny.World.Managers.Fights.Fighters
                 fighter.ShowFighter(this);
             }
 
-
             Fight.UpdateEntitiesPositions();
 
-            if (Fight.Started)
+            if (!Fight.Started)
             {
-
+                ShowPlacementCells();
             }
-            SendFightResume();
+
 
             Fight.UpdateTimeLine(this);
 
@@ -584,6 +579,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 SendTurnResume();
             }
+                SendFightResume();
 
             Character.RefreshStats();
 

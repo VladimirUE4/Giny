@@ -234,7 +234,14 @@ namespace Giny.World.Records.Maps
         }
         public CellRecord GetCell(int id)
         {
-            return Cells[id];
+            if (id < Cells.Length - 1)
+            {
+                return Cells[id];
+            }
+            else
+            {
+                return null;
+            }
         }
         public CellRecord GetCell(int x, int y)
         {

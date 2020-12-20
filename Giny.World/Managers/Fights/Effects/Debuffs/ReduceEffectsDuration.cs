@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                     if (buff.Duration <= 0)
                         target.RemoveAndDispellBuff(buff);
                     else
-                        target.OnBuffDurationUpdated(Source, Effect.EffectId, buff, delta);
+                        target.Fight.OnBuffDurationUpdated(Source, Effect.EffectId, buff, delta);
                 }
             }
         }

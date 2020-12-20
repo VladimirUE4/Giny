@@ -124,8 +124,8 @@ namespace Giny.World.Handlers.Maps
 
                         fight.RedTeam.AddFighter(client.Character.CreateFighter(fight.RedTeam));
 
-
                         fight.StartPlacement();
+
                     }
                     else
                     {

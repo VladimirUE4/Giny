@@ -120,7 +120,7 @@ namespace Giny.Core.Network
                         m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     Logger.Write("Unable to send message to " + Ip + ".", MessageState.WARNING);
                     Disconnect();

@@ -166,6 +166,12 @@ namespace Giny.World.Managers.Fights.Cast
         protected Spell CreateCastedSpell()
         {
             SpellRecord spellRecord = SpellRecord.GetSpellRecord((short)Effect.Min);
+
+            if (spellRecord == null)
+            {
+                Source.Fight.Warn("Unable to create spell : " + Effect.Min + "...");
+                return null;
+            }
             SpellLevelRecord level = spellRecord.GetLevel((byte)Effect.Max);
             return new Spell(spellRecord, level);
         }

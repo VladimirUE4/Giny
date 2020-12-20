@@ -412,11 +412,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
                         mpCost = (short)(path.Count - 1);
 
-                        DirectionsEnum direction = (DirectionsEnum)PathReader.GetDirection(path.Last().Id);
-
                         this.Cell = Fight.Map.GetCell(path.Last().Id);
 
-                        this.Direction = direction;
+                        this.Direction = path[path.Count - 2].Point.OrientationTo(path[path.Count - 1].Point);
 
                         if (Stats.InvisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE)
                         {
@@ -596,7 +594,10 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 foreach (var spellCast in buff.Cast.GetAllChilds())
                 {
-                    RemoveSpellEffects(source, spellCast.SpellId);
+                    if (spellCast.SpellId != spellId)
+                    {
+                        RemoveSpellEffects(source, spellCast.SpellId);
+                    }
                 }
 
                 RemoveAndDispellBuff(buff);
@@ -642,7 +643,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 buff.Apply();
             }
 
-            OnBuffAdded(buff);
+            Fight.OnBuffAdded(buff);
         }
         public bool TriggerBuffs(TriggerType type, ITriggerToken token, int? triggerParam = null)
         {
@@ -662,27 +663,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             return result;
         }
-        private void OnBuffAdded(Buff buff)
-        {
-            var abstractFightDispellableEffect = buff.GetAbstractFightDispellableEffect();
-
-            Fight.Send(new GameActionFightDispellableEffectMessage()
-            {
-                actionId = buff.GetActionId(),
-                effect = abstractFightDispellableEffect,
-                sourceId = buff.Cast.Source.Id,
-            }); ;
-        }
-        public virtual void OnBuffDurationUpdated(Fighter source, short actionId, Buff buff, short delta)
-        {
-            Fight.Send(new GameActionFightModifyEffectsDurationMessage()
-            {
-                actionId = actionId,
-                delta = (short)(-delta),
-                sourceId = source.Id,
-                targetId = Id,
-            });
-        }
+        
         public IEnumerable<T> GetBuffs<T>() where T : Buff
         {
             return Buffs.OfType<T>();
@@ -973,7 +954,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
             }
-
             Fighter target = Fight.GetFighter(handler.Cast.TargetCell.Id);
 
             Fight.Send(new GameActionFightSpellCastMessage()
@@ -1166,6 +1146,10 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public Telefrag Teleport(Fighter source, CellRecord targetCell, bool register = true)
         {
+            if (targetCell == null)
+            {
+                return null;
+            }
             if (!CanBeMoved())
             {
                 return null;

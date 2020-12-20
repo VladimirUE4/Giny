@@ -105,7 +105,7 @@ namespace Giny.World.Managers.Fights
             private set;
         }
 
-      
+
 
         public DateTime? StartTime
         {
@@ -720,6 +720,10 @@ namespace Giny.World.Managers.Fights
         }
         public void AddMark(Mark mark)
         {
+            if (!mark.CenterCell.Walkable)
+            {
+                return;
+            }
             this.Marks.Add(mark);
 
             foreach (var fighter in GetAllConnectedFighters())
@@ -799,7 +803,38 @@ namespace Giny.World.Managers.Fights
             source.TriggerBuffs(TriggerType.OnSummon, null);
 
         }
+        public void OnBuffAdded(Buff buff)
+        {
+            var abstractFightDispellableEffect = buff.GetAbstractFightDispellableEffect();
 
+            Send(new GameActionFightDispellableEffectMessage()
+            {
+                actionId = buff.GetActionId(),
+                effect = abstractFightDispellableEffect,
+                sourceId = buff.Cast.Source.Id,
+            }); ;
+        }
+
+        public void OnBuffDurationUpdated(Fighter source, short actionId, Buff buff, short delta)
+        {
+            Send(new GameActionFightModifyEffectsDurationMessage()
+            {
+                actionId = actionId,
+                delta = (short)(-delta),
+                sourceId = source.Id,
+                targetId = Id,
+            });
+        }
+        public IEnumerable<Buff> GetAllBuffs()
+        {
+            foreach (var fighter in GetFighters<Fighter>())
+            {
+                foreach (var buff in fighter.GetBuffs())
+                {
+                    yield return buff;
+                }
+            }
+        }
         public void UpdateRound()
         {
             this.Send(new GameFightNewRoundMessage(Timeline.RoundNumber));
