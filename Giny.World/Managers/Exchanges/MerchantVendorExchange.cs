@@ -12,9 +12,9 @@ using Giny.World.Records.Items;
 
 namespace Giny.World.Managers.Exchanges
 {
-    public class MerchantExchange : Exchange
+    public class MerchantVendorExchange : Exchange
     {
-        public MerchantExchange(Character character) : base(character)
+        public MerchantVendorExchange(Character character) : base(character)
         {
 
         }

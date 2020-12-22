@@ -3,6 +3,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Dialogs.DialogBox;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Entities.Merchants;
 using Giny.World.Managers.Exchanges;
 using Giny.World.Network;
 using System;
@@ -16,7 +17,21 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
     class ExchangesHandler
     {
         [MessageHandler]
-        public static void HandleExchangeStartAsVendor(ExchangeStartAsVendorMessage message,WorldClient client)
+        public static void HandleExchangeOnHumanVendorRequest(ExchangeOnHumanVendorRequestMessage message, WorldClient client)
+        {
+            CharacterMerchant merchant = client.Character.Map.Instance.GetEntity<CharacterMerchant>(message.humanVendorId);
+
+            if (merchant != null && merchant.CellId == message.humanVendorCell)
+            {
+                client.Character.OpenMerchantAsSellerExchange(merchant);
+            }
+            else
+            {
+                client.Character.OnExchangeError(ExchangeErrorEnum.REQUEST_IMPOSSIBLE);
+            }
+        }
+        [MessageHandler]
+        public static void HandleExchangeStartAsVendor(ExchangeStartAsVendorMessage message, WorldClient client)
         {
             client.Character.EnterMerchantMode();
         }
@@ -44,7 +59,7 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
         [MessageHandler]
         public static void HandleExchangeRequestOnShopStock(ExchangeRequestOnShopStockMessage message, WorldClient client)
         {
-            client.Character.OpenMerchantExchange();
+            client.Character.OpenMerchantAsVendorExchange();
         }
         [MessageHandler]
         public static void HandleExchangeBuyMessage(ExchangeBuyMessage message, WorldClient client)
@@ -52,6 +67,10 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
             if (client.Character.IsInExchange(ExchangeTypeEnum.NPC_SHOP))
             {
                 client.Character.GetDialog<BuySellExchange>().Buy((short)message.objectToBuyId, message.quantity);
+            }
+            else if (client.Character.IsInExchange(ExchangeTypeEnum.DISCONNECTED_VENDOR))
+            {
+                client.Character.GetDialog<MerchantSellerExchange>().Buy((short)message.objectToBuyId, message.quantity);
             }
         }
         [MessageHandler]

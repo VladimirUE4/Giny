@@ -326,7 +326,7 @@ namespace Giny.World.Managers.Entities.Characters
             set;
         }
 
-        public Character(WorldClient client, CharacterRecord record)
+        public Character(WorldClient client, CharacterRecord record) : base(null)
         {
             this.Record = record;
             this.Client = client;
@@ -335,7 +335,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.Breed = BreedRecord.GetBreed(record.BreedId);
 
             this.Inventory = new Inventory(this, CharacterItemRecord.GetCharacterItems(Id));
-            this.MerchantBag = new MerchantBag(this, MerchantItemRecord.GetMerchantItems(Id));
+            this.MerchantBag = new MerchantBag(this, MerchantItemRecord.GetMerchantItems(Id, false));
 
             this.GuestedParties = new List<Party>();
             this.GeneralShortcutBar = new GeneralShortcutBar(this);
@@ -360,8 +360,9 @@ namespace Giny.World.Managers.Entities.Characters
         public void CheckSoldItems()
         {
             BidShopItemRecord[] bidHouseItems = BidshopsManager.Instance.GetSoldItem(this).ToArray();
+            IEnumerable<MerchantItemRecord> merchantItems = MerchantItemRecord.GetMerchantItems(this.Id, true);
 
-            if (bidHouseItems.Count() > 0)
+            if (bidHouseItems.Count() > 0 || merchantItems.Count() > 0)
             {
                 foreach (var item in bidHouseItems)
                 {
@@ -370,10 +371,16 @@ namespace Giny.World.Managers.Entities.Characters
                     BidshopsManager.Instance.RemoveItem(item.BidShopId, item);
                 }
 
+                foreach (var item in merchantItems.ToArray())
+                {
+                    this.AddKamas(item.Price * item.Quantity);
+                    item.RemoveElement();
+                }
 
-                var bidHouseItemGenerics = bidHouseItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray();
-                Client.Send(new ExchangeOfflineSoldItemsMessage(bidHouseItemGenerics, new ObjectItemQuantityPriceDateEffects[0]));
+                Client.Send(new ExchangeOfflineSoldItemsMessage(bidHouseItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray(),
+                    merchantItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray()));
             }
+
         }
 
         public void DestroyContext()
@@ -549,9 +556,13 @@ namespace Giny.World.Managers.Entities.Characters
             }
 
         }
-        public void OpenMerchantExchange()
+        public void OpenMerchantAsSellerExchange(CharacterMerchant merchant)
         {
-            this.OpenDialog(new MerchantExchange(this));
+            this.OpenDialog(new MerchantSellerExchange(this, merchant));
+        }
+        public void OpenMerchantAsVendorExchange()
+        {
+            this.OpenDialog(new MerchantVendorExchange(this));
         }
         public void OpenBuySellExchange(Npc npc, ItemRecord[] itemToSell, short tokenId)
         {
@@ -1484,7 +1495,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.CurrentMapMessage(Map.Id);
 
             Fighter = FightManager.Instance.GetConnectedFighter(this);
-          
+
             if (this.Fighter == null)
             {
                 return;

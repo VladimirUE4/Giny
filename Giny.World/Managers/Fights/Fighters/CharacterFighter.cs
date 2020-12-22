@@ -85,6 +85,7 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Id = (int)Character.Id;
             this.Look = Character.Look.Clone();
             this.Stats = new FighterStats(Character);
+
             if (Character.Inventory.HasWeaponEquiped)
             {
                 this.WeaponRecord = WeaponRecord.GetWeapon(Character.Inventory.GetWeapon().GId);
@@ -248,7 +249,6 @@ namespace Giny.World.Managers.Fights.Fighters
                     verboseCast = true,
                     weaponGenericId = weaponGenericId,
                 });
-
 
 
                 if (!cast.ApFree)
@@ -579,7 +579,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 SendTurnResume();
             }
-                SendFightResume();
+            SendFightResume();
 
             Character.RefreshStats();
 

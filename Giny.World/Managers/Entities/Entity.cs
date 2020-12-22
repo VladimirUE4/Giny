@@ -56,6 +56,11 @@ namespace Giny.World.Managers.Entities
             set;
         }
 
+        public Entity(MapRecord map)
+        {
+            this.Map = map;
+        }
+
         public abstract GameRolePlayActorInformations GetActorInformations();
 
         public void SendMap(NetworkMessage message)

@@ -86,10 +86,9 @@ namespace Giny.World.Managers.Entities.Npcs
             }
         }
 
-        public Npc(NpcSpawnRecord spawnRecord)
+        public Npc(NpcSpawnRecord spawnRecord, MapRecord map) : base(map)
         {
             this.SpawnRecord = spawnRecord;
-            this.Map = MapRecord.GetMap(spawnRecord.MapId);
             this.m_Id = this.Map.Instance.PopNextNPEntityId();
         }
 

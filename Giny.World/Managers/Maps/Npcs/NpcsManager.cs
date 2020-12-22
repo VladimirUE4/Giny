@@ -36,7 +36,7 @@ namespace Giny.World.Managers.Maps.Npcs
             {
                 foreach (var npcSpawnRecord in NpcSpawnRecord.GetNpcsOnMap((int)map.Id))
                 {
-                    map.Instance.AddEntity(new Npc(npcSpawnRecord));
+                    map.Instance.AddEntity(new Npc(npcSpawnRecord, map));
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace Giny.World.Managers.Maps.Npcs
 
             spawnRecord.AddInstantElement();
 
-            Npc npc = new Npc(spawnRecord);
+            Npc npc = new Npc(spawnRecord, targetMap);
 
             targetMap.Instance.AddEntity(npc);
         }
@@ -148,7 +148,7 @@ namespace Giny.World.Managers.Maps.Npcs
             spawnRecord.AddInstantElement();
             actionRecord.AddInstantElement();
 
-            Npc npc = new Npc(spawnRecord);
+            Npc npc = new Npc(spawnRecord, targetMap);
             targetMap.Instance.AddEntity(npc);
         }
     }

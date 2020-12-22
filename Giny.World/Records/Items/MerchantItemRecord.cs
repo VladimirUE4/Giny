@@ -1,4 +1,5 @@
-﻿using Giny.ORM;
+﻿using Giny.Core.DesignPattern;
+using Giny.ORM;
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.Protocol.Types;
@@ -30,6 +31,8 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+
+        [WIP] // what quantity was solded ?
         public bool Sold
         {
             get;
@@ -65,6 +68,18 @@ namespace Giny.World.Records.Items
                 UId = UId,
             };
         }
+        public ObjectItemToSellInHumanVendorShop GetObjectItemToSellInHumanVendorShop()
+        {
+            return new ObjectItemToSellInHumanVendorShop()
+            {
+                effects = Effects.Select(x => x.GetObjectEffect()).ToArray(),
+                objectGID = GId,
+                objectPrice = Price,
+                objectUID = UId,
+                publicPrice = Price,
+                quantity = Quantity,
+            };
+        }
 
         public ObjectItemToSell GetObjectItemToSell()
         {
@@ -77,13 +92,27 @@ namespace Giny.World.Records.Items
                 quantity = Quantity,
             };
         }
-
+        public ObjectItemQuantityPriceDateEffects GetObjectItemQuantityPriceDateEffects()
+        {
+            return new ObjectItemQuantityPriceDateEffects()
+            {
+                date = 0,
+                effects = new ObjectEffects(Effects.Select(x => x.GetObjectEffect()).ToArray()),
+                objectGID = GId,
+                price = Price,
+                quantity = Quantity,
+            };
+        }
         public static int GetLastItemUID()
         {
             return (int)MerchantItems.Keys.OrderByDescending(x => x).FirstOrDefault();
         }
 
-        public static IEnumerable<MerchantItemRecord> GetMerchantItems(long characterId)
+        public static IEnumerable<MerchantItemRecord> GetMerchantItems(long characterId, bool solded)
+        {
+            return GetAllMerchantItems(characterId).Where(x => x.Sold == solded);
+        }
+        public static IEnumerable<MerchantItemRecord> GetAllMerchantItems(long characterId)
         {
             return MerchantItems.Values.Where(x => x.CharacterId == characterId);
         }
@@ -95,7 +124,9 @@ namespace Giny.World.Records.Items
 
         public static void RemoveMerchantItems(long id)
         {
-            GetMerchantItems(id).RemoveInstantElements(typeof(MerchantItemRecord));
+            GetAllMerchantItems(id).RemoveInstantElements(typeof(MerchantItemRecord));
         }
+
+
     }
 }

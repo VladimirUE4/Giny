@@ -41,7 +41,7 @@ namespace Giny.World.Managers.Entities.Merchants
         }
         public void SpawnMerchant(MapInstance mapInstance, MerchantRecord merchantRecord)
         {
-            CharacterMerchant merchant = new CharacterMerchant(merchantRecord);
+            CharacterMerchant merchant = new CharacterMerchant(merchantRecord, mapInstance.Record);
             mapInstance.AddEntity(merchant);
         }
 

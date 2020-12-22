@@ -88,6 +88,7 @@
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
+    <Compile Include="Managers\Exchanges\MerchantSellerExchange.cs" />
     <Compile Include="Managers\Fights\AI\MarkAction.cs" />
     <Compile Include="Managers\Fights\AI\SummonAction.cs" />
     <Compile Include="Managers\Fights\Buffs\DisableStateBuff.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Managers\Fights\Marks\Portal.cs" />
     <Compile Include="Managers\Fights\Triggers\Death.cs" />
     <Compile Include="Managers\Fights\Triggers\Trigger.cs" />
+    <Compile Include="Managers\Items\MerchantSellerBag.cs" />
     <Compile Include="Managers\Maps\Shapes\Manual.cs" />
     <Compile Include="Managers\Parties\Party.cs" />
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
@@ -324,7 +326,7 @@
     <Compile Include="Managers\Exchanges\BuyExchange.cs" />
     <Compile Include="Managers\Exchanges\BuySellExchange.cs" />
     <Compile Include="Managers\Exchanges\Exchange.cs" />
-    <Compile Include="Managers\Exchanges\MerchantExchange.cs" />
+    <Compile Include="Managers\Exchanges\MerchantVendorExchange.cs" />
     <Compile Include="Managers\Exchanges\PlayerTradeExchange.cs" />
     <Compile Include="Managers\Exchanges\SellExchange.cs" />
     <Compile Include="Managers\Experiences\ExperienceManager.cs" />

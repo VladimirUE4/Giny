@@ -32,9 +32,8 @@ namespace Giny.World.Managers.Monsters
             }
         }
 
-        public MonsterGroup(MapRecord map, short cellId)
+        public MonsterGroup(MapRecord map, short cellId) : base(map)
         {
-            this.Map = map;
             this.CellId = cellId;
             this.m_UId = Map.Instance.PopNextNPEntityId();
             this.CreationDate = DateTime.Now;
