@@ -12,17 +12,17 @@
         <ListBox SelectionChanged="NpcSelectionChanged" Name="npcs" HorizontalAlignment="Left" Margin="10,47,0,19" Width="329"/>
         <ListBox SelectionChanged="ActionsSelectionChanged" Name="actions" HorizontalAlignment="Left" Height="113" Margin="358,70,0,0" VerticalAlignment="Top" Width="220"/>
         <TextBlock HorizontalAlignment="Left" Margin="358,48,0,0" TextWrapping="Wrap" Text="Actions :" VerticalAlignment="Top"/>
-        <TextBox  PreviewTextInput="NumberValidationTextBox" x:Name="templateId" HorizontalAlignment="Left" Height="24" Margin="668,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
+        <TextBox LostFocus="templateId_LostFocus"  PreviewTextInput="NumberValidationTextBox" x:Name="templateId" HorizontalAlignment="Left" Height="24" Margin="668,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
         <TextBlock HorizontalAlignment="Left" Margin="594,70,0,0" TextWrapping="Wrap" Text="Template Id :" VerticalAlignment="Top"/>
         <ContentControl Name="actionsContent" Margin="358,195,0,0" Height="455" VerticalAlignment="Top" HorizontalAlignment="Left" Width="900"/>
-        <TextBox Name="mapId"  PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="24" Margin="668,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
+        <TextBox LostFocus="mapId_LostFocus" Name="mapId"  PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="24" Margin="668,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
         <TextBlock  HorizontalAlignment="Left" Margin="594,100,0,0" TextWrapping="Wrap" Text="Map Id :" VerticalAlignment="Top"/>
-        <TextBox Name="cellId" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="24" Margin="668,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
+        <TextBox LostFocus="cellId_LostFocus" Name="cellId" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="24" Margin="668,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192"/>
         <TextBlock HorizontalAlignment="Left" Margin="594,132,0,0" TextWrapping="Wrap" Text="Cell Id :" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="594,161,0,0" TextWrapping="Wrap" Text="Direction :" VerticalAlignment="Top"/>
-        <ComboBox Name="direction" HorizontalAlignment="Left" Margin="668,161,0,0" VerticalAlignment="Top" Width="192"/>
+        <ComboBox LostFocus="direction_LostFocus" Name="direction" HorizontalAlignment="Left" Margin="668,161,0,0" VerticalAlignment="Top" Width="192"/>
         <TextBlock HorizontalAlignment="Left" Margin="358,14,0,0" TextWrapping="Wrap" Text="Npc : " VerticalAlignment="Top"/>
         <TextBlock Name="npcName" HorizontalAlignment="Left" Margin="394,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310"/>
-        <Button Content="Save" Click="SaveClick" Margin="0,0,57,25" Height="43" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="146"/>
+       
     </Grid>
 </UserControl>

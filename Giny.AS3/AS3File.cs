@@ -100,7 +100,7 @@ namespace Giny.AS3
         private void Open()
         {
             this.ClassName = GetMatch(@"(?<=\bclass\s)(\w+)", 0);
-            this.Package = GetMatch(@"(?<=package).*$", 0).Trim();
+           // this.Package = GetMatch(@"(?<=package).*$", 0).Trim();
             this.Imports = InitImports();
             this.Extends = GetMatch(@"(?<=\bextends\s)(\w+)", 0).Trim();
             this.ClassAccessor = InitClassAccessor();

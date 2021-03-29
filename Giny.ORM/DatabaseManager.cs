@@ -60,7 +60,18 @@ namespace Giny.ORM
 
             return connection;
         }
+        public void Reload<T>() where T : ITable
+        {
+            var type = typeof(T);
+            TableManager.Instance.ClearContainer(type);
+            DatabaseReader reader = new DatabaseReader(type);
+            reader.Read(UseProvider());
 
+            foreach (ITable element in reader.Elements.Values)
+            {
+                TableManager.Instance.AddToContainer(element);
+            }
+        }
         public void LoadTables()
         {
             var orderedTables = new Type[TableTypes.Length];

@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.Commands;
 using Giny.ORM;
+using Giny.Protocol.Enums;
 using Giny.Protocol.IPC.Messages;
 using Giny.World.Managers;
 using Giny.World.Managers.Entities.Characters;
@@ -9,6 +10,8 @@ using Giny.World.Records;
 using Giny.World.Records.Accounts;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Items;
+using Giny.World.Records.Maps;
+using Giny.World.Records.Npcs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +25,7 @@ namespace Giny.World
         [ConsoleCommand("reset")]
         public static void ResetCommand()
         {
-            Logger.Write("Reset world...",MessageState.IMPORTANT_INFO);
+            Logger.Write("Reset world...", MessageState.IMPORTANT_INFO);
 
             IPCManager.Instance.SendRequest(new ResetWorldRequestMessage(),
             delegate (ResetWorldResultMessage msg)
@@ -60,6 +63,32 @@ namespace Giny.World
         {
             WorldSaveManager.Instance.PerformSave();
             Logger.Write("Server saved.", MessageState.IMPORTANT_INFO);
+        }
+
+        [ConsoleCommand("npcs")]
+        public static void UpdateNpcsCommad()
+        {
+            if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
+            {
+                WorldServer.Instance.SetServerStatus(ServerStatusEnum.NOJOIN);
+
+                DatabaseManager.Instance.Reload<NpcSpawnRecord>();
+
+                NpcSpawnRecord.Initialize();
+
+                foreach (var map in MapRecord.GetMaps())
+                {
+                    map.Instance.Reload();
+                }
+
+                Logger.Write("Npc Reloaded.", MessageState.IMPORTANT_INFO);
+
+                WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+            }
+            else
+            {
+                Logger.Write("Unable to reload npcs... server is busy.", MessageState.WARNING);
+            }
         }
     }
 }

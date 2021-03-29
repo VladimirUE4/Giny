@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D121C26-818E-4402-AE64-8DD1245979B2}</ProjectGuid>
+    <ProjectGuid>{A4570734-BBAB-4B94-A4BA-4E4E92F98D4F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Giny.Npcs</RootNamespace>
-    <AssemblyName>Giny.Npcs</AssemblyName>
+    <RootNamespace>Giny.Maps</RootNamespace>
+    <AssemblyName>Giny.Maps</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,8 +36,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Audio.2.5.0\lib\netstandard2.0\SFML.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Graphics.2.5.0\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.System.2.5.0\lib\netstandard2.0\SFML.System.dll</HintPath>
+    </Reference>
+    <Reference Include="SFML.Window, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFML.Window.2.5.0\lib\netstandard2.0\SFML.Window.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -49,34 +63,32 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Actions\AddReply.xaml.cs">
-      <DependentUpon>AddReply.xaml</DependentUpon>
+    <Compile Include="Maps\Cell.cs" />
+    <Compile Include="Maps\Elements\Element.cs" />
+    <Compile Include="Maps\Elements\GraphicalElement.cs" />
+    <Compile Include="Maps\Layer.cs" />
+    <Compile Include="Maps\LayerEnum.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Renderers\EditorRenderer.cs" />
+    <Compile Include="SFML\DrawingSurface.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Actions\Talk.xaml.cs">
-      <DependentUpon>Talk.xaml</DependentUpon>
+    <Compile Include="SFML\IDrawable.cs" />
+    <Compile Include="SFML\Renderer.cs" />
+    <Compile Include="WPF\GfxManager.cs" />
+    <Compile Include="Textures\TextureManager.cs" />
+    <Compile Include="Textures\TextureRecord.cs" />
+    <Compile Include="WPF\Editor.xaml.cs">
+      <DependentUpon>Editor.xaml</DependentUpon>
     </Compile>
-    <Page Include="Actions\AddReply.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Actions\BuySell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Editor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Loader.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="WPF\WpfUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,20 +97,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Actions\BuySell.xaml.cs">
-      <DependentUpon>BuySell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Editor.xaml.cs">
-      <DependentUpon>Editor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Loader.xaml.cs">
-      <DependentUpon>Loader.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Actions\Talk.xaml">
+    <Page Include="WPF\Editor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,20 +139,8 @@
       <Name>Giny.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Giny.IO\Giny.IO.csproj">
-      <Project>{125FA15D-C012-4AF3-8A65-F6A104A67FC1}</Project>
+      <Project>{125fa15d-c012-4af3-8a65-f6a104a67fc1}</Project>
       <Name>Giny.IO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Giny.ORM\Giny.ORM.csproj">
-      <Project>{C6182B67-9D36-4E64-8BA9-9E186F818667}</Project>
-      <Name>Giny.ORM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Giny.Protocol\Giny.Protocol.csproj">
-      <Project>{1EEA4E95-4EEF-444E-B261-5CB8AFE90040}</Project>
-      <Name>Giny.Protocol</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Giny.World\Giny.World.csproj">
-      <Project>{3C81205A-634D-4AA9-B00A-5B31FAD1C5A3}</Project>
-      <Name>Giny.World</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

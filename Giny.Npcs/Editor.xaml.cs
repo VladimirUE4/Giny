@@ -1,5 +1,6 @@
 ﻿using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,7 @@ namespace Giny.Npcs
         {
             if (CurrentNpc != null)
             {
+                
                 actions.Items.Clear();
                 actionsContent.Content = null;
                 DisplayActions(CurrentNpc);
@@ -105,10 +107,6 @@ namespace Giny.Npcs
             }
         }
 
-        private void SaveClick(object sender, RoutedEventArgs e)
-        {
-            CurrentNpc.TemplateId = short.Parse(templateId.Text);
-        }
 
         private void ActionsSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -131,6 +129,51 @@ namespace Giny.Npcs
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void UpdateRecord()
+        {
+            CurrentNpc.TemplateId = short.Parse(templateId.Text);
+            CurrentNpc.Template = NpcRecord.GetNpcRecord(CurrentNpc.TemplateId);
+            CurrentNpc.MapId = int.Parse(mapId.Text);
+            CurrentNpc.CellId = short.Parse(cellId.Text);
+            CurrentNpc.Direction = (DirectionsEnum)direction.SelectedItem;
+            CurrentNpc.UpdateInstantElement();
+        }
+        private void RefreshNpcList()
+        {
+            var current = CurrentNpc;
+            DisplayNpcs(NpcSpawnRecord.GetNpcSpawns());
+            npcs.SelectedItem = current;
+        }
+        private void templateId_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (NpcRecord.NpcExist(short.Parse(templateId.Text)))
+            {
+                UpdateRecord();
+            }
+            else
+            {
+                templateId.Text = CurrentNpc.TemplateId.ToString();
+            }
+
+            RefreshNpcList();
+        }
+       
+        private void mapId_LostFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateRecord();
+            RefreshNpcList();
+        }
+
+        private void cellId_LostFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateRecord();
+        }
+
+        private void direction_LostFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateRecord();
         }
     }
 }

@@ -31,26 +31,31 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        [Update]
         public GenericActionEnum ActionIdentifier
         {
             get;
             set;
         }
+        [Update]
         public string Param1
         {
             get;
             set;
         }
+        [Update]
         public string Param2
         {
             get;
             set;
         }
+        [Update]
         public string Param3
         {
             get;
             set;
         }
+        [Update]
         public string Criteria
         {
             get;

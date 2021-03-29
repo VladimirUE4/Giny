@@ -125,6 +125,11 @@ namespace Giny.ORM
                 }
             }
         }
+        public void ClearContainer(Type tableType)
+        {
+            var container = m_TableDefinitions[tableType].ContainerValue;
+            container.Clear();
+        }
         public void RemoveFromContainer(ITable element)
         {
             var tableDefinition = m_TableDefinitions[element.GetType()];

@@ -23,6 +23,7 @@ namespace Giny.World.Records.Npcs
             set;
         }
 
+        [Update]
         public short TemplateId
         {
             get;

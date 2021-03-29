@@ -1,4 +1,5 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
 using Giny.ORM;
 using Giny.ORM.Cyclic;
@@ -30,21 +31,29 @@ namespace Giny.World.Managers
 
         public void PerformSave()
         {
-            WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
-
-            WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
-
-            foreach (var client in WorldServer.Instance.GetConnectedClients())
+            if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
             {
-                client.Character.Record.UpdateElement();
+                WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
+
+                WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
+
+                foreach (var client in WorldServer.Instance.GetConnectedClients())
+                {
+                    client.Character.Record.UpdateElement();
+                }
+
+                CyclicSaveTask.Instance.Save();
+
+                WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
+
+                WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+                CreateNextTask();
             }
-
-            CyclicSaveTask.Instance.Save();
-
-            WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
-
-            WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
-            CreateNextTask();
+            else
+            {
+                Logger.Write("Unable to save world server, server is busy...", MessageState.WARNING);
+                CreateNextTask();
+            }
         }
 
     }

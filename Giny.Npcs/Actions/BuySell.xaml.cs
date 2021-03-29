@@ -56,6 +56,7 @@ namespace Giny.Npcs
             tokenId.Text = Action.Param2;
         }
 
+       
     }
     public class ExchangeItem
     {
