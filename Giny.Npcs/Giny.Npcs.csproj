@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,17 +56,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Actions\AddAction.xaml.cs">
+      <DependentUpon>AddAction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Actions\AddReply.xaml.cs">
       <DependentUpon>AddReply.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\SelectMessage.xaml.cs">
+      <DependentUpon>SelectMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\Talk.xaml.cs">
       <DependentUpon>Talk.xaml</DependentUpon>
     </Compile>
+    <Page Include="Actions\AddAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Actions\AddReply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Actions\BuySell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Actions\SelectMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

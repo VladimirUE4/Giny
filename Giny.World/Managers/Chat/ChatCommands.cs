@@ -49,6 +49,44 @@ namespace Giny.World.Managers.Chat
 
             client.Character.ReplyWarning(sb.ToString());
         }
+        [ChatCommand("sun", ServerRoleEnum.ADMINISTRATOR)]
+        public static void AddSunCommand(WorldClient client, int mapId, short cellId)
+        {
+            var elements = client.Character.Map.Elements.Where(x => x.CellId == client.Character.CellId);
+
+            if (elements.Count() > 1 || elements.Count() == 0)
+            {
+                client.Character.ReplyWarning("Invalid cell " + client.Character.CellId);
+                return;
+            }
+
+            var element = elements.First();
+
+            const SkillTypeEnum skillType = SkillTypeEnum.USE114;
+
+            InteractiveSkillRecord skillRecord = new InteractiveSkillRecord()
+            {
+                ActionIdentifier = GenericActionEnum.Teleport,
+                Criteria = string.Empty,
+                Id = TableManager.Instance.PopId<InteractiveSkillRecord>(),
+                Identifier = element.Identifier,
+                MapId = client.Character.Map.Id,
+                Param1 = mapId.ToString(),
+                Param2 = cellId.ToString(),
+                SkillId = skillType,
+                Type = 0,
+                SkillRecord = SkillRecord.GetSkill(skillType),
+            };
+
+            element.Skill = skillRecord;
+
+            skillRecord.AddInstantElement();
+
+            client.Character.Map.Instance.Reload();
+
+            client.Character.Reply("Sun added on element " + element.Identifier);
+
+        }
         [ChatCommand("donjon", ServerRoleEnum.ADMINISTRATOR)]
         public static void SpawnDungeonMonsterCommand(WorldClient client, string monsters, int nextMapId)
         {
@@ -65,31 +103,32 @@ namespace Giny.World.Managers.Chat
             client.Character.Reply("Dungeon map added.");
         }
         [ChatCommand("monsters", ServerRoleEnum.ADMINISTRATOR)]
-        public static void SpawnMonstersCommand(WorldClient client, string monsters)
+        public static void SpawnMonstersCommand(WorldClient source, string monsters)
         {
             IEnumerable<MonsterRecord> records = monsters.Split(',').Select(x => MonsterRecord.GetMonsterRecord(short.Parse(x)));
-            MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
+            MonstersManager.Instance.AddFixedMonsterGroup(source.Character.Map.Instance, source.Character.CellId, records.ToArray());
+            source.Character.Reply("Monsters spawned.");
         }
         [ChatCommand("elements", ServerRoleEnum.ADMINISTRATOR)]
-        public static void ElementsCommand(WorldClient client)
+        public static void ElementsCommand(WorldClient source)
         {
-            InteractiveElementRecord[] elements = client.Character.Map.Elements;
+            InteractiveElementRecord[] elements = source.Character.Map.Elements.Where(x => !x.Stated).ToArray();
 
             if (elements.Count() == 0)
             {
-                client.Character.Reply("No Elements on Map...");
+                source.Character.Reply("No Elements on Map...");
                 return;
             }
 
             var colors = CollectionsExtensions.RandomColors(elements.Count());
 
-            client.Character.DebugClearHighlightCells();
+            source.Character.DebugClearHighlightCells();
 
             for (int i = 0; i < elements.Count(); i++)
             {
                 var ele = elements[i];
-                client.Character.DebugHighlightCells(colors[i], new CellRecord[] { client.Character.Map.GetCell(ele.CellId) });
-                client.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
+                source.Character.DebugHighlightCells(colors[i], new CellRecord[] { source.Character.Map.GetCell(ele.CellId) });
+                source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
             }
         }
         [ChatCommand("rdmap", ServerRoleEnum.ADMINISTRATOR)]

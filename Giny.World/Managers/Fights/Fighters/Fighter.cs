@@ -2078,7 +2078,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             else
             {
-                Logger.Write("Cannot kill " + this + ", he is already dead!", MessageState.WARNING);
+                Logger.Write("Cannot kill " + this + ", he is already dead!", Channels.Warning);
             }
 
         }

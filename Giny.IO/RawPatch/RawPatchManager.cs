@@ -36,7 +36,7 @@ namespace Giny.IO.RawPatch
                 }
                 else
                 {
-                    Logger.Write("Unknown raw patch :" + file, MessageState.WARNING);
+                    Logger.Write("Unknown raw patch :" + file, Channels.Warning);
                 }
             }
         }

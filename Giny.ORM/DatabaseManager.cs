@@ -64,13 +64,9 @@ namespace Giny.ORM
         {
             var type = typeof(T);
             TableManager.Instance.ClearContainer(type);
+
             DatabaseReader reader = new DatabaseReader(type);
             reader.Read(UseProvider());
-
-            foreach (ITable element in reader.Elements.Values)
-            {
-                TableManager.Instance.AddToContainer(element);
-            }
         }
         public void LoadTables()
         {
@@ -162,7 +158,7 @@ namespace Giny.ORM
                     }
                     catch (Exception ex)
                     {
-                        Logger.Write("Unable to query (" + query + ")" + ex, MessageState.ERROR);
+                        Logger.Write("Unable to query (" + query + ")" + ex, Channels.Critical);
                     }
                 }
             }

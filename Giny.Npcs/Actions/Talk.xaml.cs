@@ -1,5 +1,6 @@
 ﻿using Giny.IO.D2O;
 using Giny.IO.D2OClasses;
+using Giny.Npcs.Actions;
 using Giny.ORM;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Generic;
@@ -38,7 +39,7 @@ namespace Giny.Npcs
 
             InitializeComponent();
 
-            DisplayMessages();
+            DisplayMessage();
             DisplayReplies();
 
             replyCanvas.Visibility = Visibility.Hidden;
@@ -47,11 +48,22 @@ namespace Giny.Npcs
             {
                 actions.Items.Add(action);
             }
+
+            if (ActionRecord.Param1 == string.Empty)
+            {
+                OpenMessageSelectionDialog();
+            }
         }
 
 
-        public void DisplayMessages()
+        public void DisplayMessage()
         {
+            messageText.Document.Blocks.Clear();
+
+            if (ActionRecord.Param1 == string.Empty)
+            {
+                return;
+            }
             var messageId = int.Parse(ActionRecord.Param1);
 
             var npcMessage = D2OManager.GetObject<NpcMessage>("NpcMessages.d2o", messageId);
@@ -61,11 +73,15 @@ namespace Giny.Npcs
         }
         public void DisplayReplies()
         {
+            if (ActionRecord.Param1 == string.Empty)
+            {
+                return;
+            }
             var messageId = int.Parse(ActionRecord.Param1);
 
             Npc npc = D2OManager.GetObject<Npc>("Npcs.d2o", SpawnRecord.TemplateId);
 
-            foreach (var replyRecord in NpcReplyRecord.GetNpcReplies((short)messageId))
+            foreach (var replyRecord in NpcReplyRecord.GetNpcReplies(SpawnRecord.Id,messageId))
             {
                 var test = npc.dialogReplies.FirstOrDefault(x => x[0] == replyRecord.ReplyId);
 
@@ -80,8 +96,9 @@ namespace Giny.Npcs
             NpcReplyRecord replyRecord = new NpcReplyRecord()
             {
                 ReplyId = reply.ReplyId,
+                NpcSpawnId = SpawnRecord.Id,
                 ActionIdentifier = GenericActionEnum.None,
-                Id = 0,
+                Id = TableManager.Instance.PopId<NpcReplyRecord>(), // TODO
                 MessageId = int.Parse(ActionRecord.Param1),
             };
 
@@ -124,14 +141,20 @@ namespace Giny.Npcs
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var replyDialog = new AddReply(this, SpawnRecord.TemplateId);
-            replyDialog.Show();
+            if (ActionRecord.Param1 != string.Empty)
+            {
+                var replyDialog = new AddReply(this, SpawnRecord.TemplateId);
+                replyDialog.Show();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ((NpcReply)replies.SelectedItem).Record.RemoveInstantElement();
-            replies.Items.Remove(replies.SelectedItem);
+            if (replies.SelectedItem != null)
+            {
+                ((NpcReply)replies.SelectedItem).Record.RemoveInstantElement();
+                replies.Items.Remove(replies.SelectedItem);
+            }
 
         }
 
@@ -168,6 +191,22 @@ namespace Giny.Npcs
         private void criterias_LostFocus(object sender, RoutedEventArgs e)
         {
             UpdateReply();
+        }
+
+        public void OpenMessageSelectionDialog()
+        {
+            SelectMessage message = new SelectMessage(this, SpawnRecord.TemplateId);
+            message.Show();
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            OpenMessageSelectionDialog();
+        }
+        public void SelectMessage(int messageId)
+        {
+            ActionRecord.Param1 = messageId.ToString();
+            ActionRecord.UpdateInstantElement();
+            DisplayMessage();
         }
     }
     public class NpcReply

@@ -43,7 +43,7 @@ namespace Giny.Auth.Network.IPC
 
             if (client == null)
             {
-                Logger.Write("Unable to send " + message + " to server " + serverId + ". The server is not connected", MessageState.WARNING);
+                Logger.Write("Unable to send " + message + " to server " + serverId + ". The server is not connected", Channels.Warning);
                 return;
             }
             SendRequest<T>(client, message, sucess, error);
@@ -72,7 +72,7 @@ namespace Giny.Auth.Network.IPC
         {
             if (Clients.ContainsKey(serverId))
             {
-                Logger.Write("A server try to connect but he is already registred", MessageState.WARNING);
+                Logger.Write("A server try to connect but he is already registred", Channels.Warning);
                 return false;
             }
             else
@@ -88,11 +88,11 @@ namespace Giny.Auth.Network.IPC
         }
         private void OnServerStarted()
         {
-            Logger.Write("(IPC) Server started", MessageState.INFO2);
+            Logger.Write("(IPC) Server started", Channels.Log);
         }
         private void OnServerFailedToStart(Exception obj)
         {
-            Logger.Write("(IPC) Unable to start server : " + obj, MessageState.ERROR_FATAL);
+            Logger.Write("(IPC) Unable to start server : " + obj, Channels.Critical_FATAL);
         }
     }
 }

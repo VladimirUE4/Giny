@@ -37,7 +37,7 @@ namespace Giny.World.Managers.Chat
         {
             if (message.StartsWith(ChatCommandsManager.COMMANDS_PREFIX))
             {
-                ChatCommandsManager.Instance.Handle(message, client);
+                ChatCommandsManager.Instance.Handle(message.Remove(0, 1), client, client);
                 return;
             }
 

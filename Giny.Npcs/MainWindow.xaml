@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Giny.Npcs"
         mc:Ignorable="d"
-        Title="Giny.Npcs" Height="730" Width="1252" ResizeMode="NoResize">
+        Title="Giny.Npcs" Height="730" Width="1252" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
 </Window>

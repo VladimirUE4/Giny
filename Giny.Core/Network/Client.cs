@@ -91,7 +91,7 @@ namespace Giny.Core.Network
                 }
                 else
                 {
-                    Logger.Write("Received Unknown Data", MessageState.WARNING);
+                    Logger.Write("Received Unknown Data", Channels.Warning);
                     m_bufferEndPosition = 0;
                 }
 
@@ -122,13 +122,13 @@ namespace Giny.Core.Network
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write("Unable to send message to " + Ip + ".", MessageState.WARNING);
+                    Logger.Write("Unable to send message to " + Ip + ".", Channels.Warning);
                     Disconnect();
                 }
             }
             else
             {
-                Logger.Write("Attempt was made to send data to disconnect socket.", MessageState.WARNING);
+                Logger.Write("Attempt was made to send data to disconnect socket.", Channels.Warning);
             }
 
         }
@@ -160,7 +160,7 @@ namespace Giny.Core.Network
             }
             catch
             {
-                Logger.Write("Unable to receive from " + Ip, MessageState.WARNING);
+                Logger.Write("Unable to receive from " + Ip, Channels.Warning);
                 Disconnect();
             }
         }

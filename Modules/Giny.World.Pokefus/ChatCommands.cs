@@ -19,6 +19,7 @@ namespace Giny.Pokefus
             MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(monsterId);
             CharacterItemRecord item = PokefusManager.Instance.CreatePokefusItem(client.Character.Id, monsterRecord, 1);
             client.Character.Inventory.AddItem(item);
+            client.Character.Reply("Pokefus " + monsterRecord.Name + " added.");
         }
     }
 }

@@ -53,11 +53,11 @@ namespace Giny.Auth.Network
         }
         private void OnServerFailedToStart(Exception obj)
         {
-            Logger.Write("(Auth) Unable to start started : " + obj, MessageState.ERROR_FATAL);
+            Logger.Write("(Auth) Unable to start started : " + obj, Channels.Critical_FATAL);
         }
         private void OnServerStarted()
         {
-            Logger.Write("(Auth) Server started", MessageState.INFO2);
+            Logger.Write("(Auth) Server started", Channels.Log);
         }
         public AuthClient GetClient(int accountId)
         {

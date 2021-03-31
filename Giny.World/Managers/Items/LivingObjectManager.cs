@@ -65,7 +65,7 @@ namespace Giny.World.Managers.Items
             }
             else
             {
-                Logger.Write("Unable to associate living object. Unknown LivingObjectRecord.", MessageState.WARNING);
+                Logger.Write("Unable to associate living object. Unknown LivingObjectRecord.", Channels.Warning);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Giny.World.Managers.Items
             }
             else
             {
-                Logger.Write("unable to modify item skin..its not a valid living object.", MessageState.WARNING);
+                Logger.Write("unable to modify item skin..its not a valid living object.", Channels.Warning);
             }
         }
 

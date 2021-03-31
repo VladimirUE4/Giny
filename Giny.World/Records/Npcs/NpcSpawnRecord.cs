@@ -57,7 +57,7 @@ namespace Giny.World.Records.Npcs
             set;
         }
         [Ignore]
-        public NpcActionRecord[] Actions
+        public List<NpcActionRecord> Actions
         {
             get;
             set;
@@ -74,14 +74,13 @@ namespace Giny.World.Records.Npcs
         {
             return NpcSpawns[npcSpawnId].MapId;
         }
-
         [StartupInvoke("Npcs Bidings", StartupInvokePriority.SixthPath)]
         public static void Initialize()
         {
             foreach (var npc in NpcSpawns)
             {
                 npc.Value.Template = NpcRecord.GetNpcRecord(npc.Value.TemplateId);
-                npc.Value.Actions = NpcActionRecord.GetNpcActions(npc.Key);
+                npc.Value.Actions = NpcActionRecord.GetNpcActions(npc.Key).ToList();
             }
         }
 

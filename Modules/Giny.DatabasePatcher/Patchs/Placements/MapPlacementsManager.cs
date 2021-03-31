@@ -50,7 +50,7 @@ namespace Giny.DatabasePatcher.Patchs.Placements
                 }
                 catch
                 {
-                    Logger.Write("Unable to load pattern " + Path.GetFileNameWithoutExtension(file), MessageState.ERROR);
+                    Logger.Write("Unable to load pattern " + Path.GetFileNameWithoutExtension(file), Channels.Critical);
                     Console.Read();
                 }
             }

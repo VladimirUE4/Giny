@@ -24,7 +24,7 @@ namespace Giny.DatabasePatcher.Patchs
         {
             Logger.WriteColor2("Database Patcher > Fixing item appeareances....");
 
-            Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, MessageState.INFO2);
+            Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, Channels.Log);
 
             try
             {
@@ -32,7 +32,7 @@ namespace Giny.DatabasePatcher.Patchs
             }
             catch
             {
-                Logger.Write("Unable to download Items.ma3 from " + ITEMS_URL, MessageState.WARNING);
+                Logger.Write("Unable to download Items.ma3 from " + ITEMS_URL, Channels.Warning);
             }
 
         }

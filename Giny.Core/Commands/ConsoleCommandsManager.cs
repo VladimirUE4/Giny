@@ -82,7 +82,7 @@ namespace Giny.Core.Commands
 
                 if (methodParameters.Length != parameters.Length)
                 {
-                    Logger.Write("Command " + command.Key + " required " + methodParameters.Length + " parameters. (" + string.Join(",", methodParameters.Select(x => x.ParameterType.Name + " " + x.Name)) + ")", MessageState.WARNING);
+                    Logger.Write("Command " + command.Key + " required " + methodParameters.Length + " parameters. (" + string.Join(",", methodParameters.Select(x => x.ParameterType.Name + " " + x.Name)) + ")", Channels.Warning);
                     return;
                 }
 
@@ -96,7 +96,7 @@ namespace Giny.Core.Commands
 
                 catch
                 {
-                    Logger.Write("Invalid parameters for command " + command.Key + " (" + string.Join(",", methodParameters.Select(x => x.ParameterType.Name + " " + x.Name)) + ")", MessageState.WARNING);
+                    Logger.Write("Invalid parameters for command " + command.Key + " (" + string.Join(",", methodParameters.Select(x => x.ParameterType.Name + " " + x.Name)) + ")", Channels.Warning);
                     return;
                 }
                 try
@@ -105,7 +105,7 @@ namespace Giny.Core.Commands
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write(ex, MessageState.WARNING);
+                    Logger.Write(ex, Channels.Warning);
                 }
             }
             else

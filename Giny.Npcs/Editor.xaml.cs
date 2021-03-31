@@ -1,5 +1,7 @@
-﻿using Giny.ORM;
+﻿using Giny.Npcs.Actions;
+using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Entities.Look;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
 using System;
@@ -29,6 +31,7 @@ namespace Giny.Npcs
         {
             InitializeComponent();
             SearchNpcs();
+            editorCanvas.Visibility = Visibility.Hidden;
         }
 
         private NpcSpawnRecord CurrentNpc
@@ -76,7 +79,7 @@ namespace Giny.Npcs
         {
             if (CurrentNpc != null)
             {
-                
+                editorCanvas.Visibility = Visibility.Visible;
                 actions.Items.Clear();
                 actionsContent.Content = null;
                 DisplayActions(CurrentNpc);
@@ -94,8 +97,27 @@ namespace Giny.Npcs
                 }
 
                 direction.SelectedItem = CurrentNpc.Direction;
+
             }
         }
+
+        public static BitmapSource Convert(System.Drawing.Bitmap bitmap)
+        {
+            var bitmapData = bitmap.LockBits(
+                new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+            var bitmapSource = BitmapSource.Create(
+                bitmapData.Width, bitmapData.Height,
+                bitmap.HorizontalResolution, bitmap.VerticalResolution,
+                PixelFormats.Bgr24, null,
+                bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
+
+            bitmap.UnlockBits(bitmapData);
+
+            return bitmapSource;
+        }
+
 
         public void DisplayActions(NpcSpawnRecord record)
         {
@@ -159,7 +181,7 @@ namespace Giny.Npcs
 
             RefreshNpcList();
         }
-       
+
         private void mapId_LostFocus(object sender, RoutedEventArgs e)
         {
             UpdateRecord();
@@ -175,5 +197,73 @@ namespace Giny.Npcs
         {
             UpdateRecord();
         }
+
+        public void AddAction(NpcActionsEnum action)
+        {
+            NpcActionRecord record = new NpcActionRecord()
+            {
+                Action = action,
+                Id = TableManager.Instance.PopId<NpcActionRecord>(),
+                NpcSpawnId = CurrentNpc.Id,
+                Param1 = string.Empty,
+                Param2 = string.Empty,
+                Param3 = string.Empty,
+            };
+
+            record.AddInstantElement();
+            CurrentNpc.Actions.Add(record);
+            actions.Items.Add(record);
+
+            actions.SelectedItem = record;
+        }
+
+        private void AddActionClick(object sender, RoutedEventArgs e)
+        {
+            if (CurrentNpc.Actions.Count < CurrentNpc.Template.Actions.Count)
+            {
+                AddAction window = new AddAction(this, CurrentNpc.Template, CurrentNpc.Actions.Select(x => x.Action));
+                window.Show();
+            }
+        }
+
+        private void RemoveCurrentActionClick(object sender, RoutedEventArgs e)
+        {
+            if (actions.SelectedItem == null)
+                return;
+
+            var npcAction = (NpcActionRecord)actions.SelectedItem;
+            RemoveNpcAction(npcAction);
+            CurrentNpc.Actions.Remove(npcAction);
+            actions.Items.Remove(npcAction);
+            actionsContent.Content = string.Empty;
+        }
+
+        private void RemoveNpcClick(object sender, RoutedEventArgs e)
+        {
+            CurrentNpc.RemoveInstantElement();
+
+            foreach (var action in CurrentNpc.Actions)
+            {
+                RemoveNpcAction(action);
+            }
+
+            RefreshNpcList();
+        }
+
+
+        public static void RemoveNpcAction(NpcActionRecord actionRecord)
+        {
+            if (actionRecord.Action == NpcActionsEnum.TALK)
+            {
+                if (actionRecord.Param1 != string.Empty)
+                {
+                    var replies = NpcReplyRecord.GetNpcReplies(actionRecord.NpcSpawnId, int.Parse(actionRecord.Param1));
+                    replies.RemoveInstantElements(typeof(NpcReplyRecord));
+                }
+            }
+            actionRecord.RemoveInstantElement();
+        }
+
+
     }
 }

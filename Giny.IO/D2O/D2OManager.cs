@@ -22,7 +22,7 @@ namespace Giny.IO.D2O
             }
         }
 
-        public static IEnumerable<object> GetObjects(string filename) 
+        public static IEnumerable<object> GetObjects(string filename)
         {
             return m_readers[filename].ReadObjects().Values;
         }
@@ -30,6 +30,10 @@ namespace Giny.IO.D2O
         public static IEnumerable<string> GetFilenames()
         {
             return m_readers.Keys;
+        }
+        public static bool ObjectExists(string filename, int id)
+        {
+            return m_readers[filename].ObjectExists(id);
         }
         public static T GetObject<T>(string fileName, int id) where T : IDataObject
         {

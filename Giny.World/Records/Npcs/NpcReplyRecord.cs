@@ -26,6 +26,11 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        public long NpcSpawnId
+        {
+            get;
+            set;
+        }
         public int MessageId
         {
             get;
@@ -62,9 +67,9 @@ namespace Giny.World.Records.Npcs
             set;
         }
 
-        public static IEnumerable<NpcReplyRecord> GetNpcReplies(short messageId)
+        public static IEnumerable<NpcReplyRecord> GetNpcReplies(long spawnId, int messageId)
         {
-            return NpcReplies.Values.Where(x => x.MessageId == messageId);
+            return NpcReplies.Values.Where(x => x.NpcSpawnId == spawnId && x.MessageId == messageId);
         }
     }
 }

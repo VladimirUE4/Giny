@@ -42,8 +42,7 @@ namespace Giny.Core.Network.IPC
                 }
                 else
                 {
-                    Logger.Write("(IPC) Received IPCMessage with unknown request id :" + ipcMessage, MessageState
-                        .WARNING);
+                    Logger.Write("(IPC) Received IPCMessage with unknown request id :" + ipcMessage, Channels.Warning);
                 }
             }
         }

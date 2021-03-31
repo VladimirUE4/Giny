@@ -220,5 +220,10 @@ namespace Giny.World.Records.Monsters
         {
             return Monsters.Values;
         }
+
+        public override string ToString()
+        {
+            return "{" + Id + "} " + Name;
+        }
     }
 }

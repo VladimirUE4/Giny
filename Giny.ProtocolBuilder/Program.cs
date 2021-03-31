@@ -45,7 +45,7 @@ namespace Giny.ProtocolBuilder
 
             foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
             {
-                Logger.Write("Writting enum : " + Path.GetFileNameWithoutExtension(file), MessageState.INFO2);
+                Logger.Write("Writting enum : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
                 EnumProfile @enum = new EnumProfile(file);
                 @enum.ProcessTemplate();
             }
@@ -61,7 +61,7 @@ namespace Giny.ProtocolBuilder
 
             foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
             {
-                Logger.Write("Writting message : " + Path.GetFileNameWithoutExtension(file), MessageState.INFO2);
+                Logger.Write("Writting message : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
                 MessageProfile message = new MessageProfile(file);
                 message.ProcessTemplate();
             }
@@ -75,7 +75,7 @@ namespace Giny.ProtocolBuilder
 
             foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
             {
-                Logger.Write("Writting type : " + Path.GetFileNameWithoutExtension(file), MessageState.INFO2);
+                Logger.Write("Writting type : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
                 TypeProfile type = new TypeProfile(file);
                 type.ProcessTemplate();
 
@@ -92,7 +92,7 @@ namespace Giny.ProtocolBuilder
 
             foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
             {
-                Logger.Write("Writting datacenter : " + Path.GetFileNameWithoutExtension(file), MessageState.INFO2);
+                Logger.Write("Writting datacenter : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
                 DatacenterProfile datacenter = new DatacenterProfile(file);
                 datacenter.ProcessTemplate();
             }

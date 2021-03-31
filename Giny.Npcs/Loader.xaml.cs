@@ -48,7 +48,6 @@ namespace Giny.Npcs
             D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny 2.58\Dofus\data\i18n\i18n_fr.d2i");
 
 
-
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
 

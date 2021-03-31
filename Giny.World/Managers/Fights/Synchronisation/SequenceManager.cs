@@ -60,7 +60,7 @@ namespace Giny.World.Managers.Fights.Synchronisation
             {
                 if (sequence.Parent != null)
                 {
-                    Logger.Write($"Sequence {sequence.Type} is a root and cannot have a parent", MessageState.WARNING);
+                    Logger.Write($"Sequence {sequence.Type} is a root and cannot have a parent", Channels.Warning);
                 }
 
                 m_sequencesRoot.Add(sequence);
@@ -86,7 +86,7 @@ namespace Giny.World.Managers.Fights.Synchronisation
         {
             if (CurrentSequence != sequence)
             {
-                Logger.Write($"Sequence incoherence {sequence} instead of {CurrentSequence}", MessageState.ERROR);
+                Logger.Write($"Sequence incoherence {sequence} instead of {CurrentSequence}", Channels.Critical);
             }
 
             CurrentSequence = sequence.Parent;

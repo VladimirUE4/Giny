@@ -423,6 +423,10 @@ namespace Giny.IO.D2O
             }
         }
 
+        public bool ObjectExists(int index)
+        {
+            return m_indextable.ContainsKey(index);
+        }
         private object ReadObject(int index, IDataReader reader)
         {
             int offset = m_indextable[index];

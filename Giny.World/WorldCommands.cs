@@ -5,6 +5,8 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.IPC.Messages;
 using Giny.World.Managers;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Entities.Npcs;
+using Giny.World.Managers.Maps.Npcs;
 using Giny.World.Network;
 using Giny.World.Records;
 using Giny.World.Records.Accounts;
@@ -25,7 +27,7 @@ namespace Giny.World
         [ConsoleCommand("reset")]
         public static void ResetCommand()
         {
-            Logger.Write("Reset world...", MessageState.IMPORTANT_INFO);
+            Logger.Write("Reset world...", Channels.Log);
 
             IPCManager.Instance.SendRequest(new ResetWorldRequestMessage(),
             delegate (ResetWorldResultMessage msg)
@@ -49,12 +51,12 @@ namespace Giny.World
                 }
                 else
                 {
-                    Logger.Write("AuthServer is unable to validate world reset.", MessageState.WARNING);
+                    Logger.Write("AuthServer is unable to validate world reset.", Channels.Warning);
                 }
             },
            delegate ()
            {
-               Logger.Write("AuthServer is unable to validate world reset. timeout", MessageState.WARNING);
+               Logger.Write("AuthServer is unable to validate world reset. timeout", Channels.Warning);
            });
         }
 
@@ -62,33 +64,30 @@ namespace Giny.World
         public static void SaveCommand()
         {
             WorldSaveManager.Instance.PerformSave();
-            Logger.Write("Server saved.", MessageState.IMPORTANT_INFO);
+            Logger.Write("Server saved.", Channels.Log);
         }
 
         [ConsoleCommand("npcs")]
         public static void UpdateNpcsCommad()
         {
-            if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
+            DatabaseManager.Instance.Reload<NpcSpawnRecord>();
+            DatabaseManager.Instance.Reload<NpcReplyRecord>();
+            DatabaseManager.Instance.Reload<NpcActionRecord>();
+
+            NpcSpawnRecord.Initialize();
+
+            foreach (var map in MapRecord.GetMaps())
             {
-                WorldServer.Instance.SetServerStatus(ServerStatusEnum.NOJOIN);
-
-                DatabaseManager.Instance.Reload<NpcSpawnRecord>();
-
-                NpcSpawnRecord.Initialize();
-
-                foreach (var map in MapRecord.GetMaps())
+                foreach (var npc in map.Instance.GetEntities<Npc>())
                 {
-                    map.Instance.Reload();
+                    map.Instance.RemoveEntity(npc.Id);
                 }
-
-                Logger.Write("Npc Reloaded.", MessageState.IMPORTANT_INFO);
-
-                WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+                map.Instance.Reload();
             }
-            else
-            {
-                Logger.Write("Unable to reload npcs... server is busy.", MessageState.WARNING);
-            }
+
+            NpcsManager.Instance.SpawnNpcs();
+
+            Logger.Write("Npc Reloaded.", Channels.Log);
         }
     }
 }

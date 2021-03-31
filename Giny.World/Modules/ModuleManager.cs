@@ -80,7 +80,7 @@ namespace Giny.World.Modules
         {
             string moduleName = type.GetCustomAttribute<ModuleAttribute>().ModuleName;
             IModule module = (IModule)Activator.CreateInstance(type);
-            Logger.Write("Module '" + moduleName + "' loaded", MessageState.INFO2);
+            Logger.Write("Module '" + moduleName + "' loaded", Channels.Log);
             m_modules.Add(moduleName, module);
         }
     }

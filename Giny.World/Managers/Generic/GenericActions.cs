@@ -79,5 +79,15 @@ namespace Giny.World.Managers.Generic
         {
             character.OpenZaapi((MapElement)parameter);
         }
+        [GenericActionHandler(GenericActionEnum.LearnOrnament, 1)]
+        public static void HandleLearnOrnament(Character character, IGenericActionParameter parameter)
+        {
+            character.LearnOrnament(short.Parse(parameter.Param1), true);
+        }
+        [GenericActionHandler(GenericActionEnum.LearnTitle, 1)]
+        public static void HandleLearnTitle(Character character, IGenericActionParameter parameter)
+        {
+            character.LearnTitle(short.Parse(parameter.Param1));
+        }
     }
 }

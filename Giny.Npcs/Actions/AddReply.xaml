@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Giny.Npcs"
         mc:Ignorable="d"
-        Title="AddReply" Height="357.38" Width="800" ResizeMode="NoResize">
+        Title="AddReply" Height="429.38" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox Name="replies" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="774"/>
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="316,286,0,0" VerticalAlignment="Top" Width="160" Height="30" Click="Button_Click"/>
+        <ListBox Name="replies" HorizontalAlignment="Left" Height="334" Margin="10,10,0,0" VerticalAlignment="Top" Width="774"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="317,360,0,0" VerticalAlignment="Top" Width="160" Height="30" Click="Button_Click"/>
     </Grid>
 </Window>

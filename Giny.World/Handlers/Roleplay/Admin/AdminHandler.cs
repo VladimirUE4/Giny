@@ -1,5 +1,8 @@
 ﻿using Giny.Core.Network.Messages;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Messages;
+using Giny.World.Managers;
+using Giny.World.Managers.Chat;
 using Giny.World.Network;
 using System;
 using System.Collections.Generic;
@@ -12,8 +15,17 @@ namespace Giny.World.Handlers.Admin
     class AdminHandler
     {
         [MessageHandler]
-        public static void HandleAdminQuietCommandMessage(AdminQuietCommandMessage message,WorldClient client)
+        public static void HandleAdminCommandMessage(AdminCommandMessage message, WorldClient client)
         {
+            client.Character.ReplyWarning("Unhandled.");
+
+        }
+        [MessageHandler]
+        public static void HandleAdminQuietCommandMessage(AdminQuietCommandMessage message, WorldClient client)
+        {
+            if (client.Account.Role < ServerRoleEnum.ADMINISTRATOR)
+                return;
+
             try
             {
                 var c = message.content.Split(null)[1];

@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -174,6 +175,23 @@ namespace Giny.ORM
             MethodInfo result = null;
             m_serializationMethods.TryGetValue(type, out result);
             return result;
+        }
+        /// <summary>
+        /// Use Id provider for better performances.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        [PerformanceIssue]
+        public long PopId<T>()
+        {
+            var definition = m_TableDefinitions[typeof(T)];
+            var ids = (ReadOnlyCollection<long>)definition.ContainerValue.Keys;
+
+            if (ids.Count == 0)
+            {
+                return 1;
+            }
+            return ids.OrderByDescending(x => x).First() + 1;
         }
     }
 }

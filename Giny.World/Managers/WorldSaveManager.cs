@@ -51,7 +51,7 @@ namespace Giny.World.Managers
             }
             else
             {
-                Logger.Write("Unable to save world server, server is busy...", MessageState.WARNING);
+                Logger.Write("Unable to save world server, server is busy...", Channels.Warning);
                 CreateNextTask();
             }
         }

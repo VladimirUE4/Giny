@@ -95,7 +95,7 @@ namespace Giny.Auth.Handlers
             }
             catch (Exception ex)
             {
-                Logger.Write("Unable to set Nickname to " + client.Account.Username + ": " + ex, MessageState.ERROR);
+                Logger.Write("Unable to set Nickname to " + client.Account.Username + ": " + ex, Channels.Critical);
                 client.OnNicknameRefusedMessage(NicknameRefusedReasonEnum.UNKNOWN_NICK_ERROR);
                 return;
             }

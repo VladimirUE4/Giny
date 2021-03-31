@@ -75,7 +75,7 @@ namespace Giny.Core.Network.Messages
 
                 }
             }
-            Logger.Write(Messages.Count + " Message(s) Loaded | " + Handlers.Count + " Handler(s) Loaded", MessageState.INFO2);
+            Logger.Write(Messages.Count + " Message(s) Loaded | " + Handlers.Count + " Handler(s) Loaded", Channels.Log);
         }
         /// <summary>
         /// Care about reader position!
@@ -118,7 +118,7 @@ namespace Giny.Core.Network.Messages
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write("Unable to build message : " + ex.Message, MessageState.WARNING);
+                    Logger.Write("Unable to build message : " + ex.Message, Channels.Warning);
                     return null;
                 }
             }
@@ -138,7 +138,7 @@ namespace Giny.Core.Network.Messages
         {
             if (message == null)
             {
-                Logger.Write("Cannot build datas from client " + client.Ip, MessageState.WARNING);
+                Logger.Write("Cannot build datas from client " + client.Ip, Channels.Warning);
                 client.Disconnect();
                 return false;
             }
@@ -156,14 +156,14 @@ namespace Giny.Core.Network.Messages
                     }
                     catch (Exception ex)
                     {
-                        Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Value.Method.Name, ex.InnerException.ToString()), MessageState.WARNING);
+                        Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Value.Method.Name, ex.InnerException.ToString()), Channels.Warning);
                         return false;
                     }
                 }
             }
             else
             {
-                Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), MessageState.WARNING);
+                Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), Channels.Warning);
                 return true;
             }
         }

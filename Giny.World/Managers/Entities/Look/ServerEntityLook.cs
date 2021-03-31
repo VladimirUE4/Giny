@@ -102,7 +102,7 @@ namespace Giny.World.Managers.Entities.Look
         {
             if (!this.IsRiding)
             {
-                Logger.Write("Unable to retreive mount driver look. The entity is not riding.", MessageState.WARNING);
+                Logger.Write("Unable to retreive mount driver look. The entity is not riding.", Channels.Warning);
                 return null;
             }
             return this.GetSubEntity(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER).SubActorLook;
@@ -117,7 +117,7 @@ namespace Giny.World.Managers.Entities.Look
             if (!look.Skins.Contains(skinId))
                 look.Skins.Add(skinId);
             else
-                Logger.Write("Unable to add skin to entity, already exists.", MessageState.WARNING);
+                Logger.Write("Unable to add skin to entity, already exists.", Channels.Warning);
         }
         public void RemoveSubEntities()
         {
@@ -137,7 +137,7 @@ namespace Giny.World.Managers.Entities.Look
         {
             var look = ActorLook;
             if (!look.Skins.Contains(skinId))
-                Logger.Write("Unable to remove skin to entity, dosent exists.", MessageState.WARNING);
+                Logger.Write("Unable to remove skin to entity, dosent exists.", Channels.Warning);
             else
                 look.Skins.Remove(skinId);
         }

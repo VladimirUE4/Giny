@@ -80,13 +80,13 @@ namespace Giny.World.Network
         }
         public override void OnMessageReceived(NetworkMessage message)
         {
-            Logger.Write("(World) Received " + message);
+            Logger.Write("(World) Received " + message, Channels.Info);
             ProtocolMessageManager.HandleMessage(message, this);
         }
 
         public override void OnSended(IAsyncResult result)
         {
-            Logger.Write("(World) Send " + result.AsyncState, MessageState.INFO2);
+            Logger.Write("(World) Send " + result.AsyncState);
         }
 
         public void SendCharactersList()

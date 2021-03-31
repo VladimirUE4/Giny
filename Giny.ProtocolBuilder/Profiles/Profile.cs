@@ -76,7 +76,7 @@ namespace Giny.ProtocolBuilder.Profiles
         {
             if (Skip())
             {
-                Logger.Write(AS3File.FileName + " skipped.", MessageState.WARNING);
+                Logger.Write(AS3File.FileName + " skipped.", Channels.Warning);
                 return string.Empty;
             }
             var directoryPath = Path.Combine(OutputDirectory, GetRelativeOutputPath());
@@ -91,7 +91,7 @@ namespace Giny.ProtocolBuilder.Profiles
 
             foreach (CompilerError error in host.Errors)
             {
-                Logger.Write(error.ErrorText + " line (" + error.Line + ")", MessageState.ERROR);
+                Logger.Write(error.ErrorText + " line (" + error.Line + ")", Channels.Critical);
             }
 
 

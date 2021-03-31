@@ -91,7 +91,7 @@ namespace Giny.Core.DesignPattern
                     {
                         if (!data.Key.Hided)
                         {
-                            Logger.Write("(" + pass + ") Loading " + data.Key.Name + " ...", MessageState.INFO);
+                            Logger.Write("(" + pass + ") Loading " + data.Key.Name + " ...", Channels.Info);
                         }
 
                         Delegate del = null;
@@ -112,7 +112,7 @@ namespace Giny.Core.DesignPattern
                         }
                         catch (Exception ex)
                         {
-                            Logger.Write(ex.ToString(), MessageState.ERROR);
+                            Logger.Write(ex.ToString(), Channels.Critical);
                             Console.ReadKey();
                             Environment.Exit(0);
                             return;

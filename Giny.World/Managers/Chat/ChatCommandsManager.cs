@@ -53,24 +53,24 @@ namespace Giny.World.Managers.Chat
             }
             Logger.Write(m_commands.Count + " command(s) registered");
         }
-      
+
         private void OnCommandError(WorldClient client, ParameterInfo[] parameters, ChatCommandAttribute chatCommandAttribute)
         {
             client.Character.ReplyWarning("Command <b>" + chatCommandAttribute.Name + "</b>(" + string.Join(",", parameters.Select(x => x.ParameterType.Name + " " + x.Name)) + ")");
         }
-        public void Handle(string input, WorldClient client)
+        public void Handle(string input, WorldClient source, WorldClient target)
         {
             var split = input.Split(null);
 
-            string commandName = split.First().ToLower().Remove(0, 1);
+            string commandName = split.First().ToLower();
 
             var command = m_commands.FirstOrDefault(x => x.Key.Name == commandName);
 
             if (command.Value != null)
             {
-                if (client.Account.Role < command.Key.RequiredRole)
+                if (source.Account.Role < command.Key.RequiredRole)
                 {
-                    client.Character.ReplyWarning("Vous n'avez pas les droits pour executer cette commande.");
+                    source.Character.ReplyWarning("Vous n'avez pas les droits pour executer cette commande.");
                     return;
                 }
 
@@ -82,7 +82,7 @@ namespace Giny.World.Managers.Chat
 
                 if ((methodParameters.Length) != parameters.Length)
                 {
-                    OnCommandError(client, methodParameters, command.Key);
+                    OnCommandError(source, methodParameters, command.Key);
                     return;
                 }
 
@@ -96,21 +96,21 @@ namespace Giny.World.Managers.Chat
 
                 catch
                 {
-                    OnCommandError(client, methodParameters, command.Key);
+                    OnCommandError(source, methodParameters, command.Key);
                     return;
                 }
                 try
                 {
-                    command.Value.Invoke(null, new object[] { client }.Concat(parameters).ToArray());
+                    command.Value.Invoke(null, new object[] { target }.Concat(parameters).ToArray());
                 }
                 catch (Exception ex)
                 {
-                    client.Character.ReplyError(ex);
+                    source.Character.ReplyError(ex);
                 }
             }
             else
             {
-                client.Character.ReplyWarning(string.Format("{0} is not a valid command. ('help' to get a list of commands)", commandName));
+                source.Character.ReplyWarning(string.Format("{0} is not a valid command. ('help' to get a list of commands)", commandName));
             }
         }
         public IEnumerable<ChatCommandAttribute> GetCommandsAttribute()

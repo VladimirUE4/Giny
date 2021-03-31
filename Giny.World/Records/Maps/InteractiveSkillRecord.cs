@@ -90,12 +90,6 @@ namespace Giny.World.Records.Maps
             set;
         }
        
-
-        private void BindSkillRecord()
-        {
-            this.SkillRecord = SkillRecord.GetSkill(this.SkillId);
-        }
-
         public static bool Exist(int identifier)
         {
             return InteractiveSkills.Any(x => x.Value.Identifier == identifier);
@@ -110,7 +104,7 @@ namespace Giny.World.Records.Maps
         {
             foreach (var skill in InteractiveSkills.Values)
             {
-                skill.BindSkillRecord();
+                skill.SkillRecord = SkillRecord.GetSkill(skill.SkillId);
             }
         }
         public static IEnumerable<InteractiveSkillRecord> GetInteractiveSkills()

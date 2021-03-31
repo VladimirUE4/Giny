@@ -96,7 +96,7 @@ namespace Giny.ORM.Cyclic
                     }
                     catch (Exception e)
                     {
-                        Logger.Write(e.Message, MessageState.ERROR);
+                        Logger.Write(e.Message, Channels.Critical);
                     }
                 }
 
@@ -119,7 +119,7 @@ namespace Giny.ORM.Cyclic
                     }
                     catch (Exception e)
                     {
-                        Logger.Write(e.Message, MessageState.ERROR);
+                        Logger.Write(e.Message, Channels.Critical);
                     }
                 }
 
@@ -143,7 +143,7 @@ namespace Giny.ORM.Cyclic
                     }
                     catch (Exception e)
                     {
-                        Logger.Write(e.Message, MessageState.ERROR);
+                        Logger.Write(e.Message, Channels.Critical);
                     }
                 }
 

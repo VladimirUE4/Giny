@@ -1114,6 +1114,13 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public bool ActiveOrnament(short id)
         {
+            if (id == 0)
+            {
+                RemoveAllHumanOption<CharacterHumanOptionOrnament>(false);
+                Record.ActiveOrnamentId = 0;
+                RefreshActorOnMap();
+                return true;
+            }
             if (Record.KnownOrnaments.Contains(id))
             {
                 RemoveAllHumanOption<CharacterHumanOptionOrnament>(false);

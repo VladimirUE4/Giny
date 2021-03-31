@@ -135,7 +135,7 @@ namespace Giny.World
         {
             Instance = Default();
             Save();
-            Logger.Write("Configuration file created!", MessageState.SUCCES);
+            Logger.Write("Configuration file created!");
         }
         public static void Save()
         {

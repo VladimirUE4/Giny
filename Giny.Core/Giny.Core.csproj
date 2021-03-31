@@ -63,8 +63,10 @@
     <Compile Include="Collections\LimitedStack.cs" />
     <Compile Include="Commands\ConsoleCommandsManager.cs" />
     <Compile Include="Cryptography\AES.cs" />
+    <Compile Include="DesignPattern\PerformanceIssueAttribute.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />
     <Compile Include="DesignPattern\StartupInvoker.cs" />
+    <Compile Include="DesignPattern\UselessAttribute.cs" />
     <Compile Include="DesignPattern\WIPManager.cs" />
     <Compile Include="Extensions\CollectionsExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />

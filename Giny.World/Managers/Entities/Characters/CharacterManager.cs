@@ -110,7 +110,7 @@ namespace Giny.World.Managers.Entities.Characters
             BreedRecord breedRecord = BreedRecord.GetBreed(breedId);
             ServerEntityLook look = BreedManager.Instance.GetBreedLook(breedRecord, sex, cosmeticId, colors);
             CharacterRecord record = CharacterRecord.Create(id, name, accountId, look, breedId, cosmeticId, sex);
-            Logger.Write("Character " + record.Name + " created", MessageState.IMPORTANT_INFO);
+            Logger.Write("Character " + record.Name + " created", Channels.Log);
             return record;
 
 

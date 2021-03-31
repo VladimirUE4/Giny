@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -8,32 +7,79 @@ using System.Threading.Tasks;
 
 namespace Giny.Core
 {
-    public enum MessageState
+    [Flags]
+    public enum Channels
     {
-        INFO = 0,
-        INFO2 = 1,
-        IMPORTANT_INFO = 2,
-        WARNING = 3,
-        ERROR = 4,
-        ERROR_FATAL = 5,
-        SUCCES = 6,
+        Info = 1,
+        Warning = 2,
+        Critical = 4,
+        Log = 8,
     }
     public class Logger
     {
-        private const ConsoleColor COLOR_1 = ConsoleColor.Magenta;
-        private const ConsoleColor COLOR_2 = ConsoleColor.DarkMagenta;
+        public static readonly Channels DefaultChannels = Channels.Info | Channels.Warning | Channels.Critical | Channels.Log;
 
-        private static Dictionary<MessageState, ConsoleColor> Colors = new Dictionary<MessageState, ConsoleColor>()
+        private static Channels Channels = DefaultChannels;
+
+        private const ConsoleColor Color1 = ConsoleColor.Cyan;
+        private const ConsoleColor Color2 = ConsoleColor.DarkCyan;
+
+        private static Dictionary<Channels, ConsoleColor> ChannelsColors = new Dictionary<Channels, ConsoleColor>()
         {
-            { MessageState.INFO,            ConsoleColor.Gray },
-            { MessageState.INFO2,           ConsoleColor.DarkGray },
-            { MessageState.IMPORTANT_INFO,  ConsoleColor.White },
-            { MessageState.SUCCES,          ConsoleColor.Green },
-            { MessageState.WARNING,         ConsoleColor.Yellow },
-            { MessageState.ERROR ,          ConsoleColor.DarkRed},
-            { MessageState.ERROR_FATAL,     ConsoleColor.Red }
+            { Channels.Info,     ConsoleColor.Gray },
+            { Channels.Log,     ConsoleColor.DarkGray },
+            { Channels.Warning,  ConsoleColor.Yellow },
+            { Channels.Critical, ConsoleColor.Red },
         };
 
+        public static void SetChannels(Channels channels)
+        {
+            Channels = channels;
+        }
+        public static void EnableChannel(Channels channels)
+        {
+            Channels |= channels;
+        }
+        public static void Enable()
+        {
+            Channels = DefaultChannels;
+        }
+        public static void Disable()
+        {
+            Channels = 0x00;
+        }
+        public static void DisableChannel(Channels channels)
+        {
+            Channels &= ~channels;
+        }
+
+        public static void Write(object value, Channels state = Channels.Log)
+        {
+            if (Channels.HasFlag(state))
+            {
+                WriteColored(value, ChannelsColors[state]);
+            }
+        }
+        public static void WriteColor1(object value)
+        {
+            WriteColored(value, Color1);
+        }
+        public static void WriteColor2(object value)
+        {
+            WriteColored(value, Color2);
+        }
+        private static void WriteColored(object value, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(value);
+        }
+        public static void NewLine()
+        {
+            if (Channels != 0x00)
+            {
+                Console.WriteLine(Environment.NewLine);
+            }
+        }
         private static void Logo()
         {
             WriteColor1(@"   ______   _                     ");
@@ -44,27 +90,6 @@ namespace Giny.Core
             WriteColor2(@" `._____.'[___][___||__][\_:  /   ");
             WriteColor2(@"     written by Skinz    \__.'    ");
 
-        }
-        public static void Write(object value, MessageState state = MessageState.INFO)
-        {
-            WriteColored(value, Colors[state]);
-        }
-        public static void WriteColor1(object value)
-        {
-            WriteColored(value, COLOR_1);
-        }
-        public static void WriteColor2(object value)
-        {
-            WriteColored(value, COLOR_2);
-        }
-        private static void WriteColored(object value, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(value);
-        }
-        public static void NewLine()
-        {
-            Console.WriteLine(Environment.NewLine);
         }
         public static void OnStartup()
         {

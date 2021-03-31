@@ -45,7 +45,7 @@ namespace Giny.Core.Network.IPC
 
         void TimeoutTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Logger.Write("(IPC) Message " + typeof(T).Name + " timeout..", MessageState.WARNING);
+            Logger.Write("(IPC) Message " + typeof(T).Name + " timeout..", Channels.Warning);
             TimeoutTimer.Stop();
             ErrorCallback?.Invoke();
         }

@@ -30,6 +30,7 @@ namespace Giny.World.Records.Maps
             set;
         }
 
+        [Update]
         public List<short> Monsters
         {
             get;
@@ -52,7 +53,7 @@ namespace Giny.World.Records.Maps
         {
             DungeonMapRecord result = null;
 
-            if (Dungeons.TryGetValue(id,out result))
+            if (Dungeons.TryGetValue(id, out result))
             {
                 return result;
             }
@@ -60,6 +61,16 @@ namespace Giny.World.Records.Maps
             {
                 return null;
             }
+        }
+
+        public static IEnumerable<DungeonMapRecord> GetDungeonMaps()
+        {
+            return Dungeons.Values;
+        }
+
+        public override string ToString()
+        {
+            return MapId + " -> " + NextMapId;
         }
     }
 }

@@ -32,6 +32,11 @@ namespace Giny.World.Managers.Maps.Npcs
                     m_actionsHandlers.Add(attribute.Action, method);
                 }
             }
+            SpawnNpcs();
+        }
+
+        public void SpawnNpcs()
+        {
             foreach (var map in MapRecord.GetMaps())
             {
                 foreach (var npcSpawnRecord in NpcSpawnRecord.GetNpcsOnMap((int)map.Id))
@@ -40,7 +45,6 @@ namespace Giny.World.Managers.Maps.Npcs
                 }
             }
         }
-
         public void HandleNpcAction(Character character, Npc npc, NpcActionRecord actionRecord)
         {
             if (m_actionsHandlers.ContainsKey(actionRecord.Action))
@@ -75,7 +79,7 @@ namespace Giny.World.Managers.Maps.Npcs
         public void RemoveNpc(long spawnRecordId)
         {
             NpcSpawnRecord spawnRecord = NpcSpawnRecord.GetNpcSpawnRecord(spawnRecordId);
-            NpcActionRecord[] npcActions = NpcActionRecord.GetNpcActions(spawnRecord.Id);
+            IEnumerable<NpcActionRecord> npcActions = NpcActionRecord.GetNpcActions(spawnRecord.Id);
 
             spawnRecord.RemoveInstantElement();
             npcActions.RemoveInstantElements(typeof(NpcActionRecord));
@@ -102,7 +106,7 @@ namespace Giny.World.Managers.Maps.Npcs
                 MapId = mapId,
                 TemplateId = templateId,
                 Template = record,
-                Actions = new NpcActionRecord[0],
+                Actions = new List<NpcActionRecord>(),
             };
 
             spawnRecord.AddInstantElement();
@@ -112,6 +116,7 @@ namespace Giny.World.Managers.Maps.Npcs
             targetMap.Instance.AddEntity(npc);
         }
 
+        [Useless]
         public void AddNpcShop(int mapId, short cellId, DirectionsEnum direction, short templateId, int itemType)
         {
             var targetMap = MapRecord.GetMap(mapId);
@@ -120,7 +125,7 @@ namespace Giny.World.Managers.Maps.Npcs
 
             if (!record.Actions.Contains((byte)(NpcActionsEnum.BUY_SELL)))
             {
-                Logger.Write("Unable to create vendor with a non vendor npc.", MessageState.WARNING);
+                Logger.Write("Unable to create vendor with a non vendor npc.", Channels.Warning);
                 return;
             }
             string itemList = string.Join(",", ItemRecord.GetItems().Where(x => x.TypeId == itemType).Select(x => x.Id));
@@ -142,7 +147,7 @@ namespace Giny.World.Managers.Maps.Npcs
                 MapId = mapId,
                 TemplateId = templateId,
                 Template = record,
-                Actions = new NpcActionRecord[] { actionRecord },
+                Actions = new List<NpcActionRecord>() { actionRecord },
             };
 
             spawnRecord.AddInstantElement();

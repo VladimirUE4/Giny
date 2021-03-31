@@ -91,7 +91,7 @@ namespace Giny.World.Network
         }
         private void OnServerFailedToStart(Exception ex)
         {
-            Logger.Write("(World) Unable to start WorldServer : " + ex, MessageState.ERROR_FATAL);
+            Logger.Write("(World) Unable to start WorldServer : " + ex, Channels.Critical);
             SetServerStatus(ServerStatusEnum.OFFLINE);
         }
         public void SendServerStatusToAuth()
@@ -116,7 +116,7 @@ namespace Giny.World.Network
         }
         private void OnServerStarted()
         {
-            Logger.Write("(World) World Server started", MessageState.INFO2);
+            Logger.Write("(World) World Server started", Channels.Log);
             SetServerStatus(ServerStatusEnum.ONLINE);
         }
         public WorldClient GetWorldClient(int accountId)

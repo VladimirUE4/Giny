@@ -46,7 +46,7 @@ namespace Giny.World.Network
             Client = null;
 
 
-            Logger.Write("Lost connection to IPC Server. Trying again in 2s", MessageState.WARNING);
+            Logger.Write("Lost connection to IPC Server. Trying again in 2s", Channels.Warning);
            
             Thread.Sleep(2000);
 
@@ -71,7 +71,7 @@ namespace Giny.World.Network
 
         public void OnFailToConnect()
         {
-            Logger.Write("Unable to connect to IPC Server. Trying again in 2s", MessageState.WARNING);
+            Logger.Write("Unable to connect to IPC Server. Trying again in 2s", Channels.Warning);
             Thread.Sleep(2000);
             ConnectToAuth();
         }

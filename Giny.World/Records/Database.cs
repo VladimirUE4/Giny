@@ -30,7 +30,7 @@ namespace Giny.World.Records
 
         private void OnStartLoad(Type type, string tableName)
         {
-            Logger.Write("Loading " + tableName.FirstCharToUpper() + " ...", MessageState.INFO2);
+            Logger.Write("Loading " + tableName.FirstCharToUpper() + " ...", Channels.Log);
             m_logger = new UpdateLogger();
         }
 

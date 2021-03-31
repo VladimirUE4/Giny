@@ -31,18 +31,21 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        [Update]
         [TypeOverride("mediumtext")]
         public string Param1
         {
             get;
             set;
         }
+        [Update]
         [TypeOverride("mediumtext")]
         public string Param2
         {
             get;
             set;
         }
+
         [TypeOverride("mediumtext")]
         public string Param3
         {
@@ -50,9 +53,9 @@ namespace Giny.World.Records.Npcs
             set;
         }
 
-        public static NpcActionRecord[] GetNpcActions(long npcSpawnId)
+        public static IEnumerable<NpcActionRecord> GetNpcActions(long npcSpawnId)
         {
-            return NpcsActions.Values.Where(x => x.NpcSpawnId == npcSpawnId).ToArray();
+            return NpcsActions.Values.Where(x => x.NpcSpawnId == npcSpawnId);
         }
 
         public static long PopNextId()

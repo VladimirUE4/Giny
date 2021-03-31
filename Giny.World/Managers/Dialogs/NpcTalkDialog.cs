@@ -53,7 +53,7 @@ namespace Giny.World.Managers.Dialogs
             this.Npc = npc;
             this.Action = action;
             this.MessageId = short.Parse(Action.Param1);
-            this.Replies = GetValidReply(NpcReplyRecord.GetNpcReplies(this.MessageId));
+            this.Replies = GetValidReply(NpcReplyRecord.GetNpcReplies(npc.SpawnRecord.Id, this.MessageId));
         }
         public override void Open()
         {
@@ -87,7 +87,7 @@ namespace Giny.World.Managers.Dialogs
         private IEnumerable<NpcReplyRecord> GetValidReply(IEnumerable<NpcReplyRecord> replies)
         {
             return replies.Where(entry => CriteriaManager.Instance.EvaluateCriterias(Character.Client, entry.Criteria));
-           
+
         }
     }
 }

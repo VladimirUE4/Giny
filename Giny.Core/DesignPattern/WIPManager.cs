@@ -59,7 +59,7 @@ namespace Giny.Core.DesignPattern
                 }
             }
 
-            Logger.Write("Analysis executed in " + stopwatch.ElapsedMilliseconds + "ms", MessageState.INFO);
+            Logger.Write("Analysis executed in " + stopwatch.ElapsedMilliseconds + "ms",  Channels.Info);
 
         }
         private static void Print(string formatter, string name, string type, string comment)
