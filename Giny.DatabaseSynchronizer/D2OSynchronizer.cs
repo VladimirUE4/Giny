@@ -120,9 +120,9 @@ namespace Giny.DatabaseSynchronizer
                             {
                                 value = ConvertToObjectMapPosition(value);
                             }
-                            else if (property.PropertyType == typeof(Effect[]))
+                            else if (property.PropertyType == typeof(EffectCollection))
                             {
-                                value = ConvertToServerEffectInstance(((IEnumerable)value).Cast<EffectInstance>());
+                                value = ConvertToServerEffects(((IEnumerable)value).Cast<EffectInstance>());
                             }
                             else if (property.PropertyType == typeof(ServerEntityLook))
                             {
@@ -139,6 +139,10 @@ namespace Giny.DatabaseSynchronizer
                             else if (property.PropertyType == typeof(Giny.World.Managers.Entities.Monsters.MonsterDrop[]))
                             {
                                 value = ConvertToMonsterDrop((List<MonsterDrop>)value);
+                            }
+                            else if (property.PropertyType == typeof(List<EffectCollection>))
+                            {
+                                value = ConvertItemSetEffects((List<List<EffectInstance>>)value);
                             }
                             else if (value.GetType().IsGenericType)
                             {
@@ -186,6 +190,19 @@ namespace Giny.DatabaseSynchronizer
                 }
                 TableManager.Instance.GetWriter(tableType).Use(new ITable[] { table }, DatabaseAction.Add);
             }
+        }
+
+        private static List<EffectCollection> ConvertItemSetEffects(List<List<EffectInstance>> value)
+        {
+            List<EffectCollection> results = new List<EffectCollection>();
+
+            foreach (var list in value)
+            {
+                EffectCollection effects = ConvertToServerEffects(list);
+                results.Add(effects);
+            }
+
+            return results;
         }
 
         private static object ConvertToMonsterDrop(List<MonsterDrop> value)
@@ -247,16 +264,23 @@ namespace Giny.DatabaseSynchronizer
             return grades.ToArray();
         }
 
-        private static Effect[] ConvertToServerEffectInstance(IEnumerable<EffectInstance> effectInstances)
+        private static EffectCollection ConvertToServerEffects(IEnumerable<EffectInstance> effectInstances)
         {
-            List<Effect> results = new List<Effect>();
+            EffectCollection results = new EffectCollection();
 
             foreach (var effectInstance in effectInstances)
             {
-                if (!effectInstance.ForClientOnly)
-                    results.Add(BuildEffect(effectInstance));
+                if (effectInstance == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    if (!effectInstance.ForClientOnly)
+                        results.Add(BuildEffect(effectInstance));
+                }
             }
-            return results.ToArray();
+            return results;
         }
         private static Effect BuildEffect(EffectInstance effectInstance)
         {

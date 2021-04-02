@@ -19,7 +19,7 @@ namespace Giny.World.Handlers.Roleplay.Spells
 
             if (spell != null)
             {
-                if (!client.Character.Fighting || client.Account.Role == ServerRoleEnum.ADMINISTRATOR)
+                if (!client.Character.Fighting || client.Account.Role == ServerRoleEnum.Administrator)
                 {
                     client.Character.SpellShortcutBar.UpdateVariantShortcut(spell.ActiveSpellRecord.Id, spell.ActiveSpellRecord.VariantRecord.Id);
                     spell.Variant = !spell.Variant;

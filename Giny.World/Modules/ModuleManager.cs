@@ -20,7 +20,7 @@ namespace Giny.World.Modules
 
         private readonly List<Type> m_modulesTypes = new List<Type>();
 
-        [StartupInvoke(StartupInvokePriority.Initial)]
+        [StartupInvoke("Modules", StartupInvokePriority.Initial)]
         public void Initialize()
         {
             string path = Path.Combine(Environment.CurrentDirectory, ModulesPath);
@@ -35,7 +35,7 @@ namespace Giny.World.Modules
                 if (Path.GetExtension(file).ToLower() == Extension)
                 {
                     Assembly assembly = Assembly.LoadFile(file);
-                    
+
                     IEnumerable<Type> types = assembly.GetTypes();
 
                     m_modulesTypes.AddRange(types);
@@ -58,10 +58,11 @@ namespace Giny.World.Modules
         [StartupInvoke("Modules", StartupInvokePriority.Modules)]
         public void LoadModules()
         {
-            foreach (var module in m_modules.Values)
+            foreach (var module in m_modules)
             {
-                module.Initialize();
-                module.CreateHooks();
+                Logger.WriteColor2("Applying '" + module.Key + "'");
+                module.Value.Initialize();
+                module.Value.CreateHooks();
             }
         }
         public void UnloadModules()

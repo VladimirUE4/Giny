@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Chat
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_ADMIN)]
         public static void Admin(WorldClient client, string message)
         {
-            if (client.Account.Role == ServerRoleEnum.ADMINISTRATOR)
+            if (client.Account.Role == ServerRoleEnum.Administrator)
             {
                 WorldServer.Instance.Send(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_ADMIN, message, client));
             }
@@ -36,7 +36,7 @@ namespace Giny.World.Managers.Chat
             {
                 if (client.Character.Map != null)
                 {
-                    if (client.Character.Map.Instance.Mute && client.Account.Role == ServerRoleEnum.PLAYER)
+                    if (client.Character.Map.Instance.Mute && client.Account.Role == ServerRoleEnum.Player)
                     {
                         client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 113);
                         return;

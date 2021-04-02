@@ -32,7 +32,7 @@ namespace Giny.World.Managers.Chat
 {
     class ChatCommands
     {
-        [ChatCommand("help", ServerRoleEnum.PLAYER)]
+        [ChatCommand("help", ServerRoleEnum.Player)]
         public static void HelpCommand(WorldClient client)
         {
             StringBuilder sb = new StringBuilder();
@@ -49,7 +49,7 @@ namespace Giny.World.Managers.Chat
 
             client.Character.ReplyWarning(sb.ToString());
         }
-        [ChatCommand("sun", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("sun", ServerRoleEnum.Administrator)]
         public static void AddSunCommand(WorldClient client, int mapId, short cellId)
         {
             var elements = client.Character.Map.Elements.Where(x => x.CellId == client.Character.CellId);
@@ -87,7 +87,7 @@ namespace Giny.World.Managers.Chat
             client.Character.Reply("Sun added on element " + element.Identifier);
 
         }
-        [ChatCommand("donjon", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("donjon", ServerRoleEnum.Administrator)]
         public static void SpawnDungeonMonsterCommand(WorldClient client, string monsters, int nextMapId)
         {
             DungeonMapRecord dungeonMap = new DungeonMapRecord();
@@ -102,14 +102,14 @@ namespace Giny.World.Managers.Chat
             client.Character.Map.Instance.Reload();
             client.Character.Reply("Dungeon map added.");
         }
-        [ChatCommand("monsters", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("monsters", ServerRoleEnum.Administrator)]
         public static void SpawnMonstersCommand(WorldClient source, string monsters)
         {
             IEnumerable<MonsterRecord> records = monsters.Split(',').Select(x => MonsterRecord.GetMonsterRecord(short.Parse(x)));
             MonstersManager.Instance.AddFixedMonsterGroup(source.Character.Map.Instance, source.Character.CellId, records.ToArray());
             source.Character.Reply("Monsters spawned.");
         }
-        [ChatCommand("elements", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("elements", ServerRoleEnum.Administrator)]
         public static void ElementsCommand(WorldClient source)
         {
             InteractiveElementRecord[] elements = source.Character.Map.Elements.Where(x => !x.Stated).ToArray();
@@ -131,49 +131,49 @@ namespace Giny.World.Managers.Chat
                 source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
             }
         }
-        [ChatCommand("rdmap", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("rdmap", ServerRoleEnum.Administrator)]
         public static void TeleportToRandomMapInSubarea(WorldClient client, short subareaId)
         {
             client.Character.Teleport(MapRecord.GetMaps().Where(x => x.Subarea.Id == subareaId).Random());
         }
-        [ChatCommand("map", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("map", ServerRoleEnum.Administrator)]
         public static void MapCommand(WorldClient client)
         {
             client.Character.Reply(client.Character.Map.Instance.ToString(), Color.CornflowerBlue);
         }
-        [ChatCommand("addnpcshop", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("addnpcshop", ServerRoleEnum.Administrator)]
         public static void AddNpcCommand(WorldClient client, short templateId, int itemType)
         {
             NpcsManager.Instance.AddNpcShop((int)client.Character.Map.Id, client.Character.CellId, client.Character.Direction, templateId, itemType);
         }
-        [ChatCommand("addnpc", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("addnpc", ServerRoleEnum.Administrator)]
         public static void AddNpcCommand(WorldClient client, short templateId)
         {
             NpcsManager.Instance.AddNpc((int)client.Character.Map.Id, client.Character.CellId, client.Character.Direction, templateId);
         }
-        [ChatCommand("mvnpc", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("mvnpc", ServerRoleEnum.Administrator)]
         public static void MoveNpcCommand(WorldClient client, long spawnId)
         {
             NpcsManager.Instance.MoveNpc(spawnId, (int)client.Character.Map.Id, client.Character.CellId, client.Character.Direction);
         }
-        [ChatCommand("rmnpc", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("rmnpc", ServerRoleEnum.Administrator)]
         public static void RemoveNpcCommand(WorldClient client, long spawnId)
         {
             NpcsManager.Instance.RemoveNpc(spawnId);
         }
-        [ChatCommand("start", ServerRoleEnum.PLAYER)]
+        [ChatCommand("start", ServerRoleEnum.Player)]
         public static void StartCommand(WorldClient client)
         {
             client.Character.Teleport(ConfigFile.Instance.SpawnMapId, ConfigFile.Instance.SpawnCellId);
         }
-        [ChatCommand("itemlist", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("itemlist", ServerRoleEnum.Administrator)]
         public static void ItemListCommand(WorldClient client, short id)
         {
             var items = ItemRecord.GetItems().Where(x => x.TypeId == id).OrderBy(x => x.Level);
 
             client.Character.Reply(string.Join(",", items.Select(x => x.Id.ToString())));
         }
-        [ChatCommand("title", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("title", ServerRoleEnum.GamemasterPadawan)]
         public static void AddTitleCommand(WorldClient client, short id)
         {
             if (TitleRecord.Exists(id))
@@ -185,7 +185,7 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("This title do not exists.");
             }
         }
-        [ChatCommand("ornament", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("ornament", ServerRoleEnum.GamemasterPadawan)]
         public static void AddOrnamentCommand(WorldClient client, short id)
         {
             if (OrnamentRecord.Exists(id))
@@ -197,7 +197,7 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("This ornament do not exists.");
             }
         }
-        [ChatCommand("addzaap", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("addzaap", ServerRoleEnum.Administrator)]
         public static void AddZaapCommand(WorldClient client, int elementId, int zoneId)
         {
             TeleportersManager.Instance.AddDestination(
@@ -208,7 +208,7 @@ namespace Giny.World.Managers.Chat
                 client.Character.Map.GetElementRecord(elementId),
                 zoneId);
         }
-        [ChatCommand("addzaapi", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("addzaapi", ServerRoleEnum.Administrator)]
         public static void AddZaapiCommand(WorldClient client, int elementId, int zoneId)
         {
             TeleportersManager.Instance.AddDestination(
@@ -219,7 +219,7 @@ namespace Giny.World.Managers.Chat
                 client.Character.Map.GetElementRecord(elementId),
                 zoneId);
         }
-        [ChatCommand("nocollide", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("nocollide", ServerRoleEnum.GamemasterPadawan)]
         public static void NoCollideCommand(WorldClient client)
         {
             List<MapObstacle> obstacles = new List<MapObstacle>();
@@ -231,7 +231,7 @@ namespace Giny.World.Managers.Chat
             client.Send(new MapObstacleUpdateMessage(obstacles.ToArray()));
             client.Character.Reply("No collide.", true);
         }
-        [ChatCommand("level", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("level", ServerRoleEnum.GamemasterPadawan)]
         public static void LevelCommand(WorldClient client, short newLevel)
         {
             if (newLevel <= client.Character.Level)
@@ -241,23 +241,23 @@ namespace Giny.World.Managers.Chat
             }
             client.Character.SetExperience(ExperienceManager.Instance.GetCharacterXPForLevel(newLevel));
         }
-        [ChatCommand("exp", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("exp", ServerRoleEnum.GamemasterPadawan)]
         public static void AddExpCommand(WorldClient client, long amount)
         {
             client.Character.AddExperience(amount);
         }
-        [ChatCommand("go", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("go", ServerRoleEnum.GamemasterPadawan)]
         public static void TeleportCommand(WorldClient client, int mapId)
         {
             client.Character.Teleport(mapId);
         }
-        [ChatCommand("item", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("item", ServerRoleEnum.Administrator)]
         public static void AddItemCommand(WorldClient client, short itemId, int quantity)
         {
             client.Character.Inventory.AddItem(itemId, quantity, true);
             client.Character.OnItemGained(itemId, quantity);
         }
-        [ChatCommand("relative", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("relative", ServerRoleEnum.Administrator)]
         public static void RelativeMapCommand(WorldClient client)
         {
             var maps = MapRecord.GetMaps(client.Character.Map.Position.Point).ToList();
@@ -269,7 +269,7 @@ namespace Giny.World.Managers.Chat
             else
                 client.Character.Teleport((int)maps[0].Id);
         }
-        [ChatCommand("goto", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("goto", ServerRoleEnum.GamemasterPadawan)]
         public static void GotoCommand(WorldClient client, string targetName)
         {
             var target = WorldServer.Instance.GetConnectedClient(targetName);
@@ -283,18 +283,18 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("<b>" + targetName + "</b> is not connected.");
             }
         }
-        [ChatCommand("spell", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("spell", ServerRoleEnum.Administrator)]
         public static void LearnSpell(WorldClient client, short spellId)
         {
             client.Character.LearnSpell(spellId, true);
         }
-        [ChatCommand("kamas", ServerRoleEnum.GAMEMASTER_PADAWAN)]
+        [ChatCommand("kamas", ServerRoleEnum.GamemasterPadawan)]
         public static void AddKamas(WorldClient client, long amount)
         {
             client.Character.AddKamas(amount);
             client.Character.OnKamasGained(amount);
         }
-        [ChatCommand("doom", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("doom", ServerRoleEnum.Administrator)]
         public static void LeafCommand(WorldClient client)
         {
             if (client.Character.Fighting)
@@ -304,7 +304,27 @@ namespace Giny.World.Managers.Chat
 
             client.Character.Fighter.Fight.CheckFightEnd();
         }
-        [ChatCommand("test", ServerRoleEnum.ADMINISTRATOR)]
+
+        [ChatCommand("itemset", ServerRoleEnum.Administrator)]
+        public static void ItemSetCommand(WorldClient client, int id)
+        {
+            ItemSetRecord set = ItemSetRecord.GetItemSet(id);
+
+            if (set == null)
+            {
+                client.Character.ReplyWarning("Unable to find set : " + id);
+            }
+            else
+            {
+                foreach (var itemId in set.Items)
+                {
+                    client.Character.Inventory.AddItem(itemId, 1);
+                }
+
+                client.Character.Reply("Item set added.");
+            }
+        }
+        [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);

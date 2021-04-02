@@ -109,7 +109,6 @@ namespace Giny.ORM
             {
                 foreach (var property in tableType.GetProperties())
                 {
-
                     foreach (var method in property.PropertyType.GetMethods(BindingFlags.NonPublic | BindingFlags.Static))
                     {
                         if (!m_serializationMethods.ContainsKey(property.PropertyType) && method.GetCustomAttribute<CustomSerializeAttribute>() != null)

@@ -64,7 +64,7 @@ namespace Giny.World.Managers.Chat
 
             string commandName = split.First().ToLower();
 
-            var command = m_commands.FirstOrDefault(x => x.Key.Name == commandName);
+            var command = m_commands.FirstOrDefault(x => x.Key.Name.ToLower() == commandName);
 
             if (command.Value != null)
             {

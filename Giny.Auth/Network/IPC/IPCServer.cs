@@ -92,7 +92,7 @@ namespace Giny.Auth.Network.IPC
         }
         private void OnServerFailedToStart(Exception obj)
         {
-            Logger.Write("(IPC) Unable to start server : " + obj, Channels.Critical_FATAL);
+            Logger.Write("(IPC) Unable to start server : " + obj, Channels.Critical);
         }
     }
 }

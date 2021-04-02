@@ -3,20 +3,16 @@
 -----------> Roleplay <-----------
 
 -Mimibiotes
--Mounts
--Achievements
--Quests
--Interactives
--Item drop
--Npc Dialogs
--Parties
--Pokéfus
--Idols
+-Dragodindes
+-Succès
+-Quêtes
+-PNJ Talk Talk
+-Finir Pokéfus
+-Idoles
 -Guilds Alliances?
 -Anomalies?
 -Portals
--Tackle multiple target in fight (turn around the target)
--Effets d'item en combats (dofus etc)
+-Kolizeum
 -Panoplies !
 -Almanach
 sushivan ordre living object record 

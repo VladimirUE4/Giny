@@ -22,7 +22,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor2("Database Patcher > Fixing item appeareances....");
+            Logger.Write("Fixing item appeareances ...");
 
             Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, Channels.Log);
 

@@ -75,7 +75,7 @@ namespace Giny.World.Records.Items
         }
 
         [ProtoSerialize, Update]
-        public List<Effect> Effects
+        public EffectCollection Effects
         {
             get;
             set;
@@ -94,82 +94,16 @@ namespace Giny.World.Records.Items
             set;
         }
 
-        [Ignore]
-        public bool IsAssociated
-        {
-            get
-            {
-                return HasEffect(EffectsEnum.Effect_LivingObjectId) || HasEffect(EffectsEnum.Effect_Apparence_Wrapper)
-                    || HasEffect(EffectsEnum.Effect_Appearance);
-            }
-        }
-
+     
         public ObjectItem GetObjectItem()
         {
-            return new ObjectItem(Position, GId, GetObjectEffects(), UId, Quantity);
+            return new ObjectItem(Position, GId, Effects.GetObjectEffects(), UId, Quantity);
         }
         public ObjectItemQuantity GetObjectItemQuantity()
         {
             return new ObjectItemQuantity(UId, Quantity);
         }
-        public ObjectEffect[] GetObjectEffects()
-        {
-            ObjectEffect[] effects = new ObjectEffect[Effects.Count];
-            for (int i = 0; i < Effects.Count; i++)
-            {
-                effects[i] = Effects[i].GetObjectEffect();
-            }
-            return effects;
-        }
-
-        public T GetFirstEffect<T>() where T : Effect
-        {
-            return Effects.OfType<T>().FirstOrDefault();
-        }
-        public T GetEffect<T>(Predicate<Effect> predicate) where T : Effect
-        {
-            return (T)Effects.Find(predicate);
-        }
-        public T GetEffect<T>(EffectsEnum effectEnum) where T : Effect
-        {
-            return (T)Effects.FirstOrDefault(x => x.EffectEnum == effectEnum);
-        }
-        public IEnumerable<T> GetEffects<T>() where T : Effect
-        {
-            return Effects.OfType<T>();
-        }
-        public void AddEffect(Effect effect) 
-        {
-            Effects.Add(effect);
-        }
-        public bool HasEffect(EffectsEnum effect)
-        {
-            return Effects.Any(x => x.EffectEnum == effect);
-        }
-        public bool HasEffect<T>() where T : Effect
-        {
-            return Effects.OfType<T>().Count() > 0;
-        }
-        public void RemoveEffects()
-        {
-            Effects.Clear();
-        }
-        public void RemoveEffects(EffectsEnum effectsEnum)
-        {
-            Effects.RemoveAll(x => x.EffectEnum == effectsEnum);
-        }
-        protected List<Effect> CloneEffects()
-        {
-            List<Effect> results = new List<Effect>();
-
-            foreach (var effect in this.Effects)
-            {
-                results.Add((Effect)effect.Clone());
-            }
-            return results;
-        }
        
-
         public abstract AbstractItem CloneWithUID();
 
         public abstract AbstractItem CloneWithoutUID();
@@ -183,7 +117,7 @@ namespace Giny.World.Records.Items
                 CharacterId = characterId,
                 UId = UId,
                 AppearanceId = AppearanceId,
-                Effects = new List<Effect>(Effects), /* Clone each effects */
+                Effects = Effects.Clone(), /* Clone each effects */
                 GId = GId,
                 Look = Look,
                 Position = Position,
@@ -199,7 +133,7 @@ namespace Giny.World.Records.Items
                 CharacterId = characterId,
                 UId = UId,
                 AppearanceId = AppearanceId,
-                Effects = new List<Effect>(Effects), /* Clone each effects */
+                Effects = Effects.Clone(), /* Clone each effects */
                 GId = GId,
                 Look = Look,
                 Position = Position,
@@ -213,7 +147,7 @@ namespace Giny.World.Records.Items
                 AccountId = accountId,
                 UId = UId,
                 AppearanceId = AppearanceId,
-                Effects = new List<Effect>(Effects),
+                Effects = Effects.Clone(),
                 GId = GId,
                 Look = Look,
                 Position = Position,
@@ -227,7 +161,7 @@ namespace Giny.World.Records.Items
                 AccountId = accountId,
                 AppearanceId = AppearanceId,
                 BidShopId = bidshopId,
-                Effects = new List<Effect>(Effects),
+                Effects = Effects.Clone(),
                 GId = GId,
                 Look = Look,
                 Position = Position,

@@ -60,7 +60,7 @@ namespace Giny.World.Managers.Fights
         public bool CanJoin(Character character)
         {
             if (Team.Type == TeamTypeEnum.TEAM_TYPE_MONSTER &&
-               character.Client.Account.Role <= ServerRoleEnum.GAMEMASTER_PADAWAN) // é_é anarchie?
+               character.Client.Account.Role <= ServerRoleEnum.GamemasterPadawan) // é_é anarchie?
             {
                 return false;
             }

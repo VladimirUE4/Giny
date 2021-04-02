@@ -24,23 +24,7 @@ namespace Giny.World.Managers.Items
             EffectsEnum.Effect_Exchangeable,
         };
 
-        private static EffectsEnum[] DICE_EFFECTS = new EffectsEnum[]
-        {
-            EffectsEnum.Effect_CastSpell_1175,
-            EffectsEnum.Effect_DamageNeutral,
-            EffectsEnum.Effect_DamageFire,
-            EffectsEnum.Effect_DamageAir,
-            EffectsEnum.Effect_DamageEarth,
-            EffectsEnum.Effect_StealHPWater,
-            EffectsEnum.Effect_StealHPEarth,
-            EffectsEnum.Effect_StealHPAir,
-            EffectsEnum.Effect_StealHPFire,
-            EffectsEnum.Effect_StealHPNeutral,
-            EffectsEnum.Effect_RemoveAP,
-            EffectsEnum.Effect_RemainingFights,
-            EffectsEnum.Effect_StealKamas,
-            EffectsEnum.Effect_HealHP_108,
-        };
+
 
         private UniqueIdProvider m_idprovider;
 
@@ -68,7 +52,7 @@ namespace Giny.World.Managers.Items
 
             foreach (var item in ItemRecord.GetItems())
             {
-                item.Effects = item.Effects.Where(x => !IGNORED_EFFECTS.Contains(x.EffectEnum)).ToArray();
+                item.Effects = new EffectCollection(item.Effects.Where(x => !IGNORED_EFFECTS.Contains(x.EffectEnum)));
             }
         }
 
@@ -92,29 +76,10 @@ namespace Giny.World.Managers.Items
 
         public CharacterItemRecord CreateCharacterItem(ItemRecord record, long characterId, int quantity, bool perfect = false)
         {
-            return new CharacterItemRecord(characterId, 0, (short)record.Id, (byte)CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, quantity, GenerateItemEffects(record, perfect),
+            return new CharacterItemRecord(characterId, 0, (short)record.Id, (byte)CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, quantity, record.Effects.Generate(perfect),
                 record.AppearenceId, record.Look);
         }
-        private List<Effect> GenerateItemEffects(ItemRecord record, bool perfect = false)
-        {
-            List<Effect> result = new List<Effect>();
 
-            AsyncRandom random = new AsyncRandom();
-
-            foreach (var effect in record.Effects.OfType<EffectDice>())
-            {
-                if (DICE_EFFECTS.Contains(effect.EffectEnum))
-                {
-                    result.Add((EffectDice)effect.Clone());
-                }
-                else
-                {
-                    result.Add(effect.Generate(random, perfect));
-                }
-            }
-
-            return result;
-        }
 
         public bool UseItem(Character character, CharacterItemRecord item)
         {
@@ -138,7 +103,7 @@ namespace Giny.World.Managers.Items
                     return (bool)function.Value.Invoke(null, new object[] { character, item });
 
                 }
-                foreach (var effect in item.GetEffects<Effect>())
+                foreach (var effect in item.Effects.OfType<Effect>())
                 {
                     function = m_usageHandlers.FirstOrDefault(x => x.Key.Effect == effect.EffectEnum);
                     if (function.Value != null)

@@ -8,11 +8,11 @@ namespace Giny.Protocol.Custom.Enums
 {
     public enum ServerRoleEnum
     {
-        NONE = 0,
-        PLAYER = 1,
-        MODERATOR = 2,
-        GAMEMASTER_PADAWAN = 3,
-        GAMEMASTER = 4,
-        ADMINISTRATOR = 5
+        None = 0,
+        Player = 1,
+        Moderator = 2,
+        GamemasterPadawan = 3,
+        Gamemaster = 4,
+        Administrator = 5
     }
 }

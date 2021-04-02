@@ -89,7 +89,7 @@ namespace Giny.Auth
         {
             Instance = Default();
             Save();
-            Logger.Write("Configuration file created!", MessageState.SUCCES);
+            Logger.Write("Configuration file created!", Channels.Info);
         }
         public static void Save()
         {

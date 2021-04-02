@@ -131,7 +131,7 @@ namespace Giny.World.Records.Items
         }
         [ProtoSerialize]
         [D2OField("possibleEffects")]
-        public Effect[] Effects
+        public EffectCollection Effects
         {
             get;
             set;

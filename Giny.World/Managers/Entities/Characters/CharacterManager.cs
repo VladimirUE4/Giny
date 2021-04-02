@@ -73,7 +73,7 @@ namespace Giny.World.Managers.Entities.Characters
                 client.Send(new CharacterCreationResultMessage((byte)CharacterCreationResultEnum.ERR_NAME_ALREADY_EXISTS));
                 return CharacterCreationResultEnum.ERR_NAME_ALREADY_EXISTS;
             }
-            if (client.Account.Role < ServerRoleEnum.MODERATOR)
+            if (client.Account.Role < ServerRoleEnum.Moderator)
             {
                 foreach (var value in message.name)
                 {

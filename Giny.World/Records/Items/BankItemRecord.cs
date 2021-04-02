@@ -31,7 +31,7 @@ namespace Giny.World.Records.Items
             {
                 AccountId = this.AccountId,
                 AppearanceId = this.AppearanceId,
-                Effects = this.CloneEffects(),
+                Effects = this.Effects.Clone(),
                 GId = GId,
                 Look = Look,
                 Position = this.Position,
@@ -47,7 +47,7 @@ namespace Giny.World.Records.Items
             {
                 AccountId = this.AccountId,
                 AppearanceId = this.AppearanceId,
-                Effects = this.CloneEffects(),
+                Effects = this.Effects.Clone(),
                 GId = GId,
                 Look = Look,
                 Position = this.Position,

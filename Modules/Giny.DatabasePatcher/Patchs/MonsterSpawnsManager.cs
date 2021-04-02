@@ -22,7 +22,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         public static void Initialize()
         {
-            Logger.WriteColor2("Database Patcher > Spawning Monsters....");
+            Logger.Write("Spawning Monsters ...");
 
             long id = 1;
 

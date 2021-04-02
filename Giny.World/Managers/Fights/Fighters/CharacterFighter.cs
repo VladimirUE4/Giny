@@ -132,7 +132,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var item in Character.Inventory.GetSpellCastItems())
             {
-                EffectDice effect = item.GetEffect<EffectDice>(Inventory.ItemCastEffect);
+                EffectDice effect = item.Effects.Get<EffectDice>(Inventory.ItemCastEffect);
                 SpellRecord record = SpellRecord.GetSpellRecord((short)effect.Min);
                 Spell spell = new Spell(record, record.GetLevel((byte)effect.Max));
                 SpellCast cast = new SpellCast(this, spell, this.Cell);

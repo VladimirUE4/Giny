@@ -46,7 +46,7 @@ namespace Giny.Pokefus
         {
             foreach (var item in GetPokefusItems(character.Inventory))
             {
-                EffectPokefus pokefusEffect = item.GetFirstEffect<EffectPokefus>();
+                EffectPokefus pokefusEffect = item.Effects.Get<EffectPokefus>();
                 MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(pokefusEffect.MonsterId);
                 character.AddFollower(monsterRecord.Look);
             }
@@ -121,7 +121,7 @@ namespace Giny.Pokefus
 
             foreach (var pokefusItem in GetPokefusItems(characterFighter.Character.Inventory))
             {
-                EffectPokefus effect = pokefusItem.GetFirstEffect<EffectPokefus>();
+                EffectPokefus effect = pokefusItem.Effects.Get<EffectPokefus>();
                 MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(effect.MonsterId);
 
                 CellRecord cell = fighter.Team.GetPlacementCell();
@@ -138,7 +138,7 @@ namespace Giny.Pokefus
         }
         private bool IsPokefusItem(CharacterItemRecord item)
         {
-            return item.HasEffect<EffectPokefus>();
+            return item.Effects.Exists<EffectPokefus>();
         }
         public CharacterItemRecord CreatePokefusItem(long characterId, MonsterRecord monster, byte monsterGradeId)
         {
@@ -159,11 +159,11 @@ namespace Giny.Pokefus
 
             CharacterItemRecord item = ItemManager.Instance.CreateCharacterItem(itemRecord, characterId, 1);
 
-            item.RemoveEffects();
+            item.Effects.Clear();
 
-            item.AddEffect(new EffectPokefus((short)monster.Id, monster.Name, monsterGradeId));
-            item.AddEffect(new EffectPokefusLevel(0));
-            item.AddEffect(new EffectInteger(EffectsEnum.Effect_Followed, (int)monster.Id));
+            item.Effects.Add(new EffectPokefus((short)monster.Id, monster.Name, monsterGradeId));
+            item.Effects.Add(new EffectPokefusLevel(0));
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_Followed, (int)monster.Id));
 
             return item;
         }

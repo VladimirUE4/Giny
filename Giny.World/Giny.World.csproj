@@ -81,6 +81,7 @@
     <Compile Include="Managers\Criterias\SubscribedCriteria.cs" />
     <Compile Include="Managers\Criterias\VitalityCriteria.cs" />
     <Compile Include="Managers\Criterias\WisdomCriteria.cs" />
+    <Compile Include="Managers\Effects\EffectCollection.cs" />
     <Compile Include="Managers\Effects\EffectCustom.cs" />
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
@@ -473,6 +474,7 @@
     <Compile Include="Records\Effects\EffectRecord.cs" />
     <Compile Include="Records\Items\BankItemRecord.cs" />
     <Compile Include="Records\Items\BidShopItemRecord.cs" />
+    <Compile Include="Records\Items\ItemSetRecord.cs" />
     <Compile Include="Records\Items\MerchantItemRecord.cs" />
     <Compile Include="Records\Items\WeaponRecord.cs" />
     <Compile Include="Records\Maps\DungeonMapRecord.cs" />

@@ -13,7 +13,7 @@ namespace Giny.World.Managers.Criterias
     {
         public override bool Eval(WorldClient client)
         {
-            return client.Account.Role == ServerRoleEnum.ADMINISTRATOR;
+            return client.Account.Role == ServerRoleEnum.Administrator;
         }
     }
 }

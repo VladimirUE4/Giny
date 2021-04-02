@@ -90,6 +90,12 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+        [Ignore]
+        public ItemSetRecord ItemSet
+        {
+            get;
+            private set;
+        }
         [D2OField("criteria")]
         public string Criteria
         {
@@ -125,7 +131,7 @@ namespace Giny.World.Records.Items
         }
         [ProtoSerialize]
         [D2OField("possibleEffects")]
-        public Effect[] Effects
+        public EffectCollection Effects
         {
             get;
             set;
@@ -148,14 +154,12 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+
         [Ignore]
-        public ItemTypeEnum TypeEnum
-        {
-            get
-            {
-                return (ItemTypeEnum)TypeId;
-            }
-        }
+        public ItemTypeEnum TypeEnum => (ItemTypeEnum)TypeId;
+
+        [Ignore]
+        public bool HasSet => ItemSetId != -1;
 
         public ObjectItemToSellInNpcShop GetObjectItemToSellInNpcShop()
         {
@@ -167,7 +171,17 @@ namespace Giny.World.Records.Items
                 objectPrice = (long)Price,
             };
         }
-       
+        [StartupInvoke("Items Bindings", StartupInvokePriority.SixthPath)]
+        public static void Initialize()
+        {
+            foreach (var item in Items.Values)
+            {
+                if (item.HasSet)
+                {
+                    item.ItemSet = ItemSetRecord.GetItemSet(item.ItemSetId);
+                }
+            }
+        }
         public static IEnumerable<ItemRecord> GetItems()
         {
             return Items.Values;

@@ -53,7 +53,7 @@ namespace Giny.Auth.Network
         }
         private void OnServerFailedToStart(Exception obj)
         {
-            Logger.Write("(Auth) Unable to start started : " + obj, Channels.Critical_FATAL);
+            Logger.Write("(Auth) Unable to start started : " + obj, Channels.Critical);
         }
         private void OnServerStarted()
         {

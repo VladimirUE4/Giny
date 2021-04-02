@@ -95,7 +95,7 @@ namespace Giny.World.Managers.Items
         {
             foreach (var item in GetEquipedItems())
             {
-                if (item.HasEffect(ItemCastEffect))
+                if (item.Effects.Exists(ItemCastEffect))
                 {
                     yield return item;
                 }
@@ -214,10 +214,10 @@ namespace Giny.World.Managers.Items
         {
             Character.Client.Send(new KamasUpdateMessage(Character.Record.Kamas));
         }
-        protected override CharacterItemRecord GetSameItem(short gid, List<Effect> effects)
+        protected override CharacterItemRecord GetSameItem(short gid, EffectCollection effects)
         {
             var items = GetItems();
-            return items.FirstOrDefault(x => x.GId == gid && SameEffects(effects, x.Effects) && x.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+            return items.FirstOrDefault(x => x.GId == gid && effects.SequenceEqual(x.Effects) && x.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
         }
         public CharacterItemRecord GetWeapon()
         {
@@ -230,25 +230,25 @@ namespace Giny.World.Managers.Items
 
 
             if (flag2 && !flag)
-                ItemEffectsManager.Instance.AddEffects(Character, item.Effects.ToArray());
+                ItemEffectsManager.Instance.AddEffects(Character, item.Effects);
 
             if (!flag2 && flag)
-                ItemEffectsManager.Instance.RemoveEffects(Character, item.Effects.ToArray());
+                ItemEffectsManager.Instance.RemoveEffects(Character, item.Effects);
 
             UpdateLook(item, flag2);
 
-            //  if (item.Template.HasSet) // Si il y a une panoplie
-            //  {
-            //   int num = CountItemSetEquiped(item.Template.ItemSet);
-
-            //  if (flag2)  //Si on vient d'équiper l'objet
+            if (item.Record.HasSet)
             {
-                //    ApplyItemSetEffects(item.Template.ItemSet, num, flag2);
-                // }
-                //     else
-                //     {
-                //   ApplyItemSetEffects(item.Template.ItemSet, num, flag2);
-                //   }
+                int num = CountItemSetEquiped(item.Record.ItemSet);
+
+                if (flag2)
+                {
+                    ApplyItemSetEffects(item.Record.ItemSet, num, flag2);
+                }
+                else
+                {
+                    ApplyItemSetEffects(item.Record.ItemSet, num, flag2);
+                }
             }
         }
         /// <summary>
@@ -314,40 +314,46 @@ namespace Giny.World.Managers.Items
         {
             Character.Client.Send(new ObjectModifiedMessage(item.GetObjectItem()));
         }
-        //  private void ApplyItemSetEffects(ItemSetRecord itemSet, int count, bool equiped)
-        //  {
-        //      if (equiped)
-        //     {
-        //         if (count >= 2)
-        //        {
-        //           if (count >= 3)
-        //          {
-        // ItemEffectsProvider.RemoveEffects(Character, itemSet.GetSetEffects(count - 2));
-        //}
-        //ItemEffectsProvider.AddEffects(Character, itemSet.GetSetEffects(count - 1));
-        //OnSetUpdated(itemSet, count - 1);
-        //}
-        //}
-        //    else
-        //    {
-        //      if (count >= 1)
-        //    {
-        //       if (count >= 2)
-        //     {
-        //  ItemEffectsProvider.AddEffects(Character, itemSet.GetSetEffects(count - 1));
-        //}
-        //  ItemEffectsProvider.RemoveEffects(Character, itemSet.GetSetEffects(count));
-        // OnSetUpdated(itemSet, count);
-        //}
+        private void ApplyItemSetEffects(ItemSetRecord itemSet, int count, bool equiped)
+        {
+            if (equiped)
+            {
+                if (count >= 2)
+                {
+                    if (count >= 3)
+                    {
+                        ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetSetEffects(count - 2));
+                    }
 
-        //}
-        //}
+                    ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetSetEffects(count - 1));
 
-        //private void OnSetUpdated(ItemSetRecord set, int num)
-        //    {
-        //  Character.Client.Send(new SetUpdateMessage((ushort)set.Id, set.Items.ToArray(),
-        //  set.GetSetEffects(num).ConvertAll<ObjectEffectInteger>(x => (ObjectEffectInteger)x.GetObjectEffect()).ToArray()));
-        //}
+                    OnSetUpdated(itemSet, count - 1);
+                }
+            }
+            else
+            {
+                if (count >= 1)
+                {
+                    if (count >= 2)
+                    {
+                        ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetSetEffects(count - 1));
+                    }
+                    ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetSetEffects(count));
+                    OnSetUpdated(itemSet, count);
+                }
+
+            }
+        }
+
+        private void OnSetUpdated(ItemSetRecord set, int num)
+        {
+            Character.Client.Send(new SetUpdateMessage()
+            {
+                setEffects = set.GetSetEffects(num).GetObjectEffects(),
+                setId = (short)set.Id,
+                setObjects = set.Items.ToArray(),
+            });
+        }
         private void EquipItem(CharacterItemRecord item, CharacterInventoryPositionEnum position, int quantity)
         {
             CharacterItemRecord equiped = GetEquipedItem(position);
@@ -430,30 +436,31 @@ namespace Giny.World.Managers.Items
             return false;
         }
 
-        /*
-                private int CountItemSetEquiped(ItemSetRecord itemSet)
+
+        private int CountItemSetEquiped(ItemSetRecord itemSet)
+        {
+            return this.GetEquipedItems().Count((CharacterItemRecord entry) => entry.Record.HasSet && entry.Record.ItemSetId == itemSet.Id);
+        }
+        public int MaximumItemSetCount()
+        {
+            int max = 0;
+
+            foreach (var item in GetEquipedItems())
+            {
+                ItemSetRecord itemSet = item.Record.ItemSet;
+
+                if (itemSet != null)
                 {
-                    return this.GetEquipedItems().Count((CharacterItemRecord entry) => itemSet.Items.Contains(entry.GId));
-                }
-                public int MaximumItemSetCount()
-                {
-                    int max = 0;
-                    foreach (var item in GetEquipedItems())
+                    int current = CountItemSetEquiped(itemSet);
+
+                    if (current > max)
                     {
-                        var itemSet = ItemSetRecord.GetItemSet(item.GId);
-
-                        if (itemSet != null)
-                        {
-                            int current = CountItemSetEquiped(itemSet);
-
-                            if (current > max)
-                            {
-                                max = current;
-                            }
-                        }
+                        max = current;
                     }
-                    return max - 1;
-                } */
+                }
+            }
+            return max - 1;
+        }
         public CharacterItemRecord[] GetEquipedItems()
         {
             return GetItems().Where(x => x.IsEquiped()).ToArray();
@@ -523,7 +530,7 @@ namespace Giny.World.Managers.Items
 
                     if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT)
                     {
-                        ItemTypeEnum livingObjectCategory = (ItemTypeEnum)(item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value);
+                        ItemTypeEnum livingObjectCategory = (ItemTypeEnum)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value;
 
                         var targeted = GetEquipedItem(position);
 
@@ -537,7 +544,7 @@ namespace Giny.World.Managers.Items
                             OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
                             return;
                         }
-                        if (targeted.IsAssociated)
+                        if (targeted.Effects.IsAssociated)
                         {
                             OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
                             return;
@@ -564,11 +571,11 @@ namespace Giny.World.Managers.Items
                             OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
                             return;
                         }
-                        if (targeted.Record.TypeId != item.GetEffect<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
+                        if (targeted.Record.TypeId != item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
                         {
                             return;
                         }
-                        if (targeted.IsAssociated)
+                        if (targeted.Effects.IsAssociated)
                         {
                             OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
                             return;
@@ -622,7 +629,7 @@ namespace Giny.World.Managers.Items
             {
                 UpdateItemAppearence(targeted, item.AppearanceId);
             }
-            targeted.AddEffect(new EffectInteger(EffectsEnum.Effect_Apparence_Wrapper, (short)item.Record.Id));
+            targeted.Effects.Add(new EffectInteger(EffectsEnum.Effect_Apparence_Wrapper, (short)item.Record.Id));
             targeted.UpdateElement();
             OnItemModified(targeted);
             RefreshWeight();
@@ -636,7 +643,7 @@ namespace Giny.World.Managers.Items
         }
         public void Dissociate(CharacterItemRecord item, CharacterInventoryPositionEnum pos)
         {
-            EffectInteger effect = item.GetEffect<EffectInteger>(EffectsEnum.Effect_Apparence_Wrapper);
+            EffectInteger effect = item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Apparence_Wrapper);
 
             if (effect != null)
             {
@@ -665,7 +672,7 @@ namespace Giny.World.Managers.Items
                     }
                 }
 
-                item.RemoveEffects(EffectsEnum.Effect_Apparence_Wrapper);
+                item.Effects.RemoveAll(EffectsEnum.Effect_Apparence_Wrapper);
 
                 if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
                 {
@@ -699,7 +706,7 @@ namespace Giny.World.Managers.Items
         }
         public bool CheckPassiveStacking(CharacterItemRecord item)
         {
-            var item2 = GetItems().FirstOrDefault(x => x.UId != item.UId && x.GId == item.GId && SameEffects(item.Effects, x.Effects) && x.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+            var item2 = GetItems().FirstOrDefault(x => x.UId != item.UId && x.GId == item.GId && item.Effects.SequenceEqual(x.Effects) && x.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
 
             if (item2 != null)
             {

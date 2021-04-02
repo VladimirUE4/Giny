@@ -29,10 +29,10 @@ namespace Giny.World.Managers.Items
     }
     public class ItemEffectsManager : Singleton<ItemEffectsManager>
     {
-        public static readonly Dictionary<EffectsEnum, MethodInfo> Handlers = new Dictionary<EffectsEnum, MethodInfo>();
+        private readonly Dictionary<EffectsEnum, MethodInfo> Handlers = new Dictionary<EffectsEnum, MethodInfo>();
 
         [StartupInvoke("Item effects", StartupInvokePriority.FourthPass)]
-        public static void Initialize()
+        public void Initialize()
         {
             foreach (var type in AssemblyCore.GetTypes())
             {
@@ -46,10 +46,10 @@ namespace Giny.World.Managers.Items
                     }
                 }
             }
-            
+
         }
 
-        public void AddEffects(Character character, Effect[] effects)
+        public void AddEffects(Character character, EffectCollection effects)
         {
             foreach (var effect in effects.OfType<EffectInteger>())
             {
@@ -59,13 +59,13 @@ namespace Giny.World.Managers.Items
                 }
                 else
                 {
-                    if (character.Client.Account.Role == ServerRoleEnum.ADMINISTRATOR)
+                    if (character.Client.Account.Role == ServerRoleEnum.Administrator)
                         character.ReplyWarning("Unknown item effect handler :" + effect.EffectEnum);
                 }
             }
         }
 
-        public void RemoveEffects(Character character, Effect[] effects)
+        public void RemoveEffects(Character character, EffectCollection effects)
         {
             foreach (var effect in effects.OfType<EffectInteger>())
             {

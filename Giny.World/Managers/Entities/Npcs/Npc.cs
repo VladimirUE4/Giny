@@ -103,7 +103,7 @@ namespace Giny.World.Managers.Entities.Npcs
             {
                 NpcsManager.Instance.HandleNpcAction(character, this, action);
             }
-            else if (character.Client.Account.Role > ServerRoleEnum.PLAYER)
+            else if (character.Client.Account.Role > ServerRoleEnum.Player)
             {
                 character.ReplyWarning("No (" + actionType + ") action linked to this npc...(" + SpawnRecord.Id + ")");
             }

@@ -13,7 +13,7 @@ namespace Giny.Pokefus
 {
     class ChatCommands
     {
-        [ChatCommand("pokefus", ServerRoleEnum.ADMINISTRATOR)]
+        [ChatCommand("pokefus", ServerRoleEnum.Administrator)]
         public static void PokefusCommand(WorldClient client, short monsterId)
         {
             MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(monsterId);

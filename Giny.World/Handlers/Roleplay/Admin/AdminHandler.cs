@@ -23,7 +23,7 @@ namespace Giny.World.Handlers.Admin
         [MessageHandler]
         public static void HandleAdminQuietCommandMessage(AdminQuietCommandMessage message, WorldClient client)
         {
-            if (client.Account.Role < ServerRoleEnum.ADMINISTRATOR)
+            if (client.Account.Role < ServerRoleEnum.Administrator)
                 return;
 
             try

@@ -93,7 +93,7 @@ namespace Giny.MapEditor
             };
 
             Save();
-            Logger.Write("Configuration file created!", MessageState.SUCCES);
+            Logger.Write("Configuration file created!", Channels.Log);
         }
         public static void Save()
         {

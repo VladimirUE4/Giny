@@ -58,7 +58,7 @@ namespace Giny.Auth.Network
         {
             get
             {
-                return Account.Role > ServerRoleEnum.PLAYER;
+                return Account.Role > ServerRoleEnum.Player;
             }
         }
 

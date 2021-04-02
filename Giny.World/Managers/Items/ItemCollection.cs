@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Effects;
 using Giny.World.Records.Items;
@@ -219,26 +220,25 @@ namespace Giny.World.Managers.Items
         {
             return m_items.Contains(item);
         }
-        protected virtual T GetSameItem(short gid, List<Effect> effects)
+        protected virtual T GetSameItem(short gid, EffectCollection effects)
         {
-            return GetItems().FirstOrDefault(x => x.GId == gid && SameEffects(effects, x.Effects));
+            return GetItems().FirstOrDefault(x => x.GId == gid && effects.SequenceEqual(effects));
         }
+        /*
+         * We could have use a Dictionary<int uid,Item item> instead.
+         */
+        [PerformanceIssue]
         public T GetItem(int uid)
         {
-            return m_items.FirstOrDefault(x => x.UId == uid); // erf
+            return m_items.FirstOrDefault(x => x.UId == uid); 
         }
-        public T GetItem(short gid, List<Effect> effects)
+        public T GetItem(short gid, EffectCollection effects)
         {
             return GetSameItem(gid, effects);
         }
-        public static bool SameEffects(List<Effect> e1, List<Effect> e2)
-        {
-            return e1.SequenceEqual(e2);
-        }
         public ObjectItem[] GetObjectsItems()
         {
-            var array = Array.ConvertAll<T, ObjectItem>(this.GetItems(), x => x.GetObjectItem());
-            return array;
+            return Array.ConvertAll(this.GetItems(), x => x.GetObjectItem());
         }
         public bool Exist(short gid, int minimumQuantity)
         {
@@ -248,12 +248,12 @@ namespace Giny.World.Managers.Items
         {
             return m_items.FirstOrDefault(x => x.GId == gId) != null;
         }
-        public static Dictionary<List<T>, List<Effect>> SortByEffects(IEnumerable<T> items)
+        public static Dictionary<List<T>, EffectCollection> SortByEffects(IEnumerable<T> items)
         {
-            Dictionary<List<T>, List<Effect>> results = new Dictionary<List<T>, List<Effect>>();
+            Dictionary<List<T>, EffectCollection> results = new Dictionary<List<T>, EffectCollection>();
             foreach (var item in items)
             {
-                var same = results.FirstOrDefault(x => SameEffects(x.Value, item.Effects));
+                var same = results.FirstOrDefault(x => x.Value.SequenceEqual(item.Effects));
 
                 if (same.Key == null)
                     results.Add(new List<T>() { item }, item.Effects);

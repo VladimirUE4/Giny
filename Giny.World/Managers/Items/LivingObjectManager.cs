@@ -19,17 +19,17 @@ namespace Giny.World.Managers.Items
     {
         public void InitializeLivingObject(CharacterItemRecord item)
         {
-            if (!item.HasEffect(EffectsEnum.Effect_LastMealDate)) // déja init.
+            if (!item.Effects.Exists(EffectsEnum.Effect_LastMealDate)) 
             {
                 return;
             }
             LivingObjectRecord record = LivingObjectRecord.GetLivingObjectRecord(item.GId);
 
-            item.RemoveEffects();
-            item.AddEffect(new EffectInteger(EffectsEnum.Effect_LivingObjectCategory, (int)record.Type));
-            item.AddEffect(new EffectInteger(EffectsEnum.Effect_LivingObjectLevel, 0));
-            item.AddEffect(new EffectInteger(EffectsEnum.Effect_LivingObjectMood, 0));
-            item.AddEffect(new EffectInteger(EffectsEnum.Effect_LivingObjectSkin, 1));
+            item.Effects.Clear();
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_LivingObjectCategory, (int)record.Type));
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_LivingObjectLevel, 0));
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_LivingObjectMood, 0));
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_LivingObjectSkin, 1));
 
             if (record.Skinnable)
                 item.AppearanceId = record.SkinIds[0];
@@ -43,11 +43,11 @@ namespace Giny.World.Managers.Items
             {
                 if (record.Type == targeted.Record.TypeEnum)
                 {
-                    targeted.AddEffect(new EffectInteger(EffectsEnum.Effect_LivingObjectId, (short)livingObject.Record.Id));
+                    targeted.Effects.Add(new EffectInteger(EffectsEnum.Effect_LivingObjectId, (short)livingObject.Record.Id));
 
                     foreach (var effect in livingObject.Effects)
                     {
-                        targeted.AddEffect(effect);
+                        targeted.Effects.Add(effect);
                     }
 
                     character.Inventory.OnItemModified(targeted);
@@ -76,11 +76,11 @@ namespace Giny.World.Managers.Items
                 return;
             }
 
-            EffectInteger effect = item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectSkin);
+            EffectInteger effect = item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectSkin);
 
             if (effect != null)
             {
-                LivingObjectRecord record = LivingObjectRecord.IsLivingObject(item.GId) ? LivingObjectRecord.GetLivingObjectRecord(item.GId) : LivingObjectRecord.GetLivingObjectRecord((short)item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectId).Value);
+                LivingObjectRecord record = LivingObjectRecord.IsLivingObject(item.GId) ? LivingObjectRecord.GetLivingObjectRecord(item.GId) : LivingObjectRecord.GetLivingObjectRecord((short)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectId).Value);
 
                 short skin = record.GetSkin(skinIndex);
 
@@ -111,28 +111,28 @@ namespace Giny.World.Managers.Items
 
         public void DissociateLivingObject(Character character, CharacterItemRecord item)
         {
-            EffectInteger effect = item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectId);
+            EffectInteger effect = item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectId);
 
             if (effect != null)
             {
-                var levelEffect = item.GetEffect<Effect>(EffectsEnum.Effect_LivingObjectLevel);
-                var categoryEffect = item.GetEffect<Effect>(EffectsEnum.Effect_LivingObjectCategory);
-                var moodEffect = item.GetEffect<Effect>(EffectsEnum.Effect_LivingObjectMood);
-                var skinEffect = item.GetEffect<Effect>(EffectsEnum.Effect_LivingObjectSkin);
+                var levelEffect = item.Effects.Get<Effect>(EffectsEnum.Effect_LivingObjectLevel);
+                var categoryEffect = item.Effects.Get<Effect>(EffectsEnum.Effect_LivingObjectCategory);
+                var moodEffect = item.Effects.Get<Effect>(EffectsEnum.Effect_LivingObjectMood);
+                var skinEffect = item.Effects.Get<Effect>(EffectsEnum.Effect_LivingObjectSkin);
 
                 var newItem = ItemManager.Instance.CreateCharacterItem(ItemRecord.GetItem(effect.Value), character.Id, item.Quantity);
-                newItem.RemoveEffects();
-                newItem.AddEffect(levelEffect);
-                newItem.AddEffect(categoryEffect);
-                newItem.AddEffect(moodEffect);
-                newItem.AddEffect(skinEffect);
+                newItem.Effects.Clear();
+                newItem.Effects.Add(levelEffect);
+                newItem.Effects.Add(categoryEffect);
+                newItem.Effects.Add(moodEffect);
+                newItem.Effects.Add(skinEffect);
                 newItem.AppearanceId = item.AppearanceId;
 
-                item.RemoveEffects(EffectsEnum.Effect_LivingObjectId);
-                item.RemoveEffects(EffectsEnum.Effect_LivingObjectLevel);
-                item.RemoveEffects(EffectsEnum.Effect_LivingObjectCategory);
-                item.RemoveEffects(EffectsEnum.Effect_LivingObjectMood);
-                item.RemoveEffects(EffectsEnum.Effect_LivingObjectSkin);
+                item.Effects.RemoveAll(EffectsEnum.Effect_LivingObjectId);
+                item.Effects.RemoveAll(EffectsEnum.Effect_LivingObjectLevel);
+                item.Effects.RemoveAll(EffectsEnum.Effect_LivingObjectCategory);
+                item.Effects.RemoveAll(EffectsEnum.Effect_LivingObjectMood);
+                item.Effects.RemoveAll(EffectsEnum.Effect_LivingObjectSkin);
 
                 character.Inventory.AddItem(newItem);
 
@@ -166,11 +166,11 @@ namespace Giny.World.Managers.Items
 
         public void FeedLivingObject(Character character, CharacterItemRecord item, ObjectItemQuantity[] meal)
         {
-            var record = LivingObjectRecord.GetLivingObjectRecord((short)item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectId).Value);
+            var record = LivingObjectRecord.GetLivingObjectRecord((short)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectId).Value);
 
             foreach (var mealInfo in meal)
             {
-                var experienceEffect = item.GetEffect<EffectInteger>(EffectsEnum.Effect_LivingObjectLevel);
+                var experienceEffect = item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectLevel);
                 var mealItem = character.Inventory.GetItem(mealInfo.objectUID);
 
                 if (experienceEffect.Value + mealItem.Record.Level > record.MaximumExp)

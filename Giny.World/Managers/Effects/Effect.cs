@@ -314,5 +314,6 @@ namespace Giny.World.Managers.Effects
         public abstract ObjectEffect GetObjectEffect();
 
         public abstract object Clone();
+
     }
 }

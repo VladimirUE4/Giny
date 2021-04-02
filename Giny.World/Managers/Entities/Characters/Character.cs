@@ -1314,7 +1314,7 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (spawnJoin && !winner)
             {
-                if (Client.Account.Role >= ServerRoleEnum.ADMINISTRATOR)
+                if (Client.Account.Role >= ServerRoleEnum.Administrator)
                 {
                     CurrentMapMessage(Record.MapId);
                 }

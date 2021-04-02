@@ -29,9 +29,9 @@ namespace Giny.DatabaseSynchronizer
 {
     class Program
     {
-        public const bool BUILD_MISC = true;
+        public const bool BUILD_MISC = false;
 
-        public const bool BUILD_D2O_TABLES = false;
+        public const bool BUILD_D2O_TABLES = true;
 
         public const bool BUILD_MAPS = false;
 
@@ -57,6 +57,7 @@ namespace Giny.DatabaseSynchronizer
             if (BUILD_D2O_TABLES)
             {
                 DatabaseManager.Instance.DropTableIfExists<SubareaRecord>();
+                DatabaseManager.Instance.DropTableIfExists<ItemSetRecord>();
                 DatabaseManager.Instance.DropTableIfExists<BreedRecord>();
                 DatabaseManager.Instance.DropTableIfExists<ExperienceRecord>();
                 DatabaseManager.Instance.DropTableIfExists<HeadRecord>();
