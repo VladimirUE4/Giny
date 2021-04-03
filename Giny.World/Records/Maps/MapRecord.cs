@@ -110,7 +110,7 @@ namespace Giny.World.Records.Maps
             set;
         }
 
-     
+
         [Ignore]
         public CellRecord[] TopChange
         {
@@ -142,17 +142,25 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Ignore]
-        public bool CanSpawnMonsters => IsDungeonMap
-            || (Position.AllowMonsterRespawn && !HasZaap()
-            && Cells.All(x => !x.FarmCell) 
-            && BlueCells.Length > 0 && RedCells.Length > 0);
+        public bool CanSpawnMonsters =>
+            !IsDungeonEntrance 
+            && (Position.AllowMonsterRespawn || IsDungeonMap)
+            && !HasZaap()
+            && Cells.All(x => !x.FarmCell)
+            && (BlueCells.Length > 0 && RedCells.Length > 0);
 
         [Ignore]
         public bool IsDungeonMap => Dungeon != null;
 
         [Ignore]
         public MonsterRoom MonsterRoom => Dungeon.Rooms[Id];
-     
+
+        [Ignore]
+        public bool IsDungeonEntrance
+        {
+            get;
+            set;
+        }
         [StartupInvoke("Maps Bindings", StartupInvokePriority.SecondPass)]
         public static void Initialize()
         {
@@ -161,11 +169,11 @@ namespace Giny.World.Records.Maps
                 map.ReloadMembers();
             }
         }
-        
+
 
         public long? GetNextRoomMapId()
         {
-           return Dungeon.GetNextMapId(Id);
+            return Dungeon.GetNextMapId(Id);
         }
         public bool IsCellWalkable(short cellId)
         {
@@ -181,7 +189,7 @@ namespace Giny.World.Records.Maps
         }
         public bool IsValidFightCell(int x, int y)
         {
-            if (!MapPoint.IsInMap(x,y))
+            if (!MapPoint.IsInMap(x, y))
             {
                 return false;
             }
@@ -224,6 +232,8 @@ namespace Giny.World.Records.Maps
                 element.MapId = this.Id;
                 element.Skill = InteractiveSkillRecord.GetInteractiveSkill(element.Identifier);
             }
+
+            this.IsDungeonEntrance = DungeonRecord.IsDungeonEntrance(Id);
 
             this.Dungeon = DungeonRecord.GetDungeonRecord(Id);
         }

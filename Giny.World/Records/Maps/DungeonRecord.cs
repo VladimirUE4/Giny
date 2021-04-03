@@ -80,13 +80,16 @@ namespace Giny.World.Records.Maps
         {
             return Dungeons.Values.FirstOrDefault(x => x.Rooms.ContainsKey(mapId));
         }
-
+        public static bool IsDungeonEntrance(long id)
+        {
+            return Dungeons.Values.Any(x => x.EntranceMapId == id);
+        }
         public override string ToString()
         {
             return "{" + Id + "} " + Name;
         }
 
-
+        
     }
 
     [ProtoContract]

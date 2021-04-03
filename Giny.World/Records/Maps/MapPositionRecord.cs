@@ -240,6 +240,10 @@ namespace Giny.World.Records.Maps
             MapPositions.TryGetValue(mapId, out result);
             return result;
         }
+        public static IEnumerable<MapPositionRecord> GetMapPositions()
+        {
+            return MapPositions.Values;
+        }
 
     }
 }
