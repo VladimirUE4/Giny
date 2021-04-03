@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Records.Maps
 {
-    [WIP]
+    [Table("dungeons")]
     public class DungeonRecord : ITable
     {
+        private static Dictionary<long, DungeonRecord> Dungeons = new Dictionary<long, DungeonRecord>();
+
         [Primary]
         public long Id
         {
@@ -26,13 +28,13 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Update]
-        public int EntranceMapId
+        public long EntranceMapId
         {
             get;
             set;
         }
         [Update]
-        public int ExitMapId
+        public long ExitMapId
         {
             get;
             set;
@@ -40,20 +42,51 @@ namespace Giny.World.Records.Maps
 
         [ProtoSerialize]
         [Update]
-        public List<int> Maps
+        public Dictionary<long, MonsterRoom> Rooms
         {
             get;
             set;
         }
 
-        [ProtoSerialize]
-        [Update]
-        public List<MonsterRoom> Monsters
+        public long? GetNextMapId(long currentMapId)
         {
-            get;
-            set;
+            int index = 0;
+
+            foreach (var mapId in Rooms.Keys)
+            {
+                if (mapId == currentMapId)
+                {
+                    if (index >= Rooms.Keys.Count-1)
+                    {
+                        return ExitMapId;
+                    }
+                    return Rooms.Keys.ElementAt(index + 1);
+                }
+
+                index++;
+
+            }
+
+
+            return null;
         }
-        
+
+        public static IEnumerable<DungeonRecord> GetDungeonRecords()
+        {
+            return Dungeons.Values;
+        }
+
+        public static DungeonRecord GetDungeonRecord(long mapId)
+        {
+            return Dungeons.Values.FirstOrDefault(x => x.Rooms.ContainsKey(mapId));
+        }
+
+        public override string ToString()
+        {
+            return "{" + Id + "} " + Name;
+        }
+
+
     }
 
     [ProtoContract]
@@ -64,6 +97,31 @@ namespace Giny.World.Records.Maps
         {
             get;
             set;
+        }
+        [ProtoMember(2)]
+        public float RespawnDelay
+        {
+            get;
+            set;
+        }
+        public MonsterRoom()
+        {
+            this.MonsterIds = new List<short>();
+        }
+        public MonsterRoom(float respawnDelay)
+        {
+            this.RespawnDelay = respawnDelay;
+            this.MonsterIds = new List<short>();
+        }
+        public MonsterRoom(float respawnDelay, params short[] monsters)
+        {
+            this.RespawnDelay = respawnDelay;
+            this.MonsterIds = monsters.ToList();
+        }
+
+        public int GetRespawnInterval()
+        {
+            return (int)(RespawnDelay * 1000);
         }
     }
 }

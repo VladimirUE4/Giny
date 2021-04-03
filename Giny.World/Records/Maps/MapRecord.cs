@@ -110,6 +110,7 @@ namespace Giny.World.Records.Maps
             set;
         }
 
+     
         [Ignore]
         public CellRecord[] TopChange
         {
@@ -135,7 +136,7 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Ignore]
-        public DungeonMapRecord DungeonMap
+        public DungeonRecord Dungeon
         {
             get;
             set;
@@ -147,8 +148,11 @@ namespace Giny.World.Records.Maps
             && BlueCells.Length > 0 && RedCells.Length > 0);
 
         [Ignore]
-        public bool IsDungeonMap => DungeonMap != null;
+        public bool IsDungeonMap => Dungeon != null;
 
+        [Ignore]
+        public MonsterRoom MonsterRoom => Dungeon.Rooms[Id];
+     
         [StartupInvoke("Maps Bindings", StartupInvokePriority.SecondPass)]
         public static void Initialize()
         {
@@ -156,6 +160,12 @@ namespace Giny.World.Records.Maps
             {
                 map.ReloadMembers();
             }
+        }
+        
+
+        public long? GetNextRoomMapId()
+        {
+           return Dungeon.GetNextMapId(Id);
         }
         public bool IsCellWalkable(short cellId)
         {
@@ -215,7 +225,7 @@ namespace Giny.World.Records.Maps
                 element.Skill = InteractiveSkillRecord.GetInteractiveSkill(element.Identifier);
             }
 
-            this.DungeonMap = DungeonMapRecord.GetDungeonMap(Id);
+            this.Dungeon = DungeonRecord.GetDungeonRecord(Id);
         }
         public CellRecord[] GetMapChangeCells(MapScrollEnum scrollType)
         {

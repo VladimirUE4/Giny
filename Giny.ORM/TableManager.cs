@@ -184,9 +184,9 @@ namespace Giny.ORM
         public long PopId<T>()
         {
             var definition = m_TableDefinitions[typeof(T)];
-            var ids = (ReadOnlyCollection<long>)definition.ContainerValue.Keys;
+            var ids = (IEnumerable<long>)definition.ContainerValue.Keys;
 
-            if (ids.Count == 0)
+            if (ids.Count() == 0)
             {
                 return 1;
             }

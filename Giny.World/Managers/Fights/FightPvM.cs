@@ -37,7 +37,12 @@ namespace Giny.World.Managers.Fights
 
             if (map.IsDungeonMap && MonsterGroup is ModularMonsterGroup)
             {
-                this.TargetMapId = map.DungeonMap.NextMapId;
+                var nextMapId = map.GetNextRoomMapId();
+
+                if (nextMapId.HasValue)
+                {
+                    this.TargetMapId = nextMapId;
+                }
             }
         }
 

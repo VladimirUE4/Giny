@@ -477,7 +477,7 @@
     <Compile Include="Records\Items\ItemSetRecord.cs" />
     <Compile Include="Records\Items\MerchantItemRecord.cs" />
     <Compile Include="Records\Items\WeaponRecord.cs" />
-    <Compile Include="Records\Maps\DungeonMapRecord.cs" />
+    <Compile Include="Records\Maps\DungeonRecord.cs" />
     <Compile Include="Records\Maps\InteractiveSkillRecord.cs" />
     <Compile Include="Records\Maps\SkillRecord.cs" />
     <Compile Include="Records\Monsters\MonsterRecord.cs" />

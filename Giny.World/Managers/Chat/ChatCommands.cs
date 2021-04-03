@@ -87,21 +87,7 @@ namespace Giny.World.Managers.Chat
             client.Character.Reply("Sun added on element " + element.Identifier);
 
         }
-        [ChatCommand("donjon", ServerRoleEnum.Administrator)]
-        public static void SpawnDungeonMonsterCommand(WorldClient client, string monsters, int nextMapId)
-        {
-            DungeonMapRecord dungeonMap = new DungeonMapRecord();
-            dungeonMap.Id = client.Character.Map.Id;
-            dungeonMap.Monsters = monsters.Split(',').Select(x => short.Parse(x)).ToList();
-            dungeonMap.RespawnDelay = 10f;
-            dungeonMap.NextMapId = nextMapId;
-
-            dungeonMap.AddInstantElement();
-
-            client.Character.Map.ReloadMembers();
-            client.Character.Map.Instance.Reload();
-            client.Character.Reply("Dungeon map added.");
-        }
+       
         [ChatCommand("monsters", ServerRoleEnum.Administrator)]
         public static void SpawnMonstersCommand(WorldClient source, string monsters)
         {

@@ -89,5 +89,27 @@ namespace Giny.World
 
             Logger.Write("Npc Reloaded.", Channels.Log);
         }
+
+        [ConsoleCommand("test")]
+        public static void TestCommand()
+        {
+            DungeonRecord record = new DungeonRecord();
+
+            record.Id = 1;
+            record.Name = "Cour du Bouftou Royal";
+
+            record.EntranceMapId = 120063489;
+            record.ExitMapId = 120063489;
+
+            record.Rooms = new Dictionary<long, MonsterRoom>();
+
+            record.Rooms.Add(121373185, new MonsterRoom(10f, 134, 101, 148, 149, 148, 101, 134, 149));
+            record.Rooms.Add(121374209, new MonsterRoom(10f, 134, 148, 4822, 149, 149, 4822, 148, 134));
+            record.Rooms.Add(121375233, new MonsterRoom(10f, 134, 101, 4822, 149, 134, 149, 4822, 101));
+            record.Rooms.Add(121373187, new MonsterRoom(10f, 134, 101, 148, 149, 101, 134, 149, 148));
+            record.Rooms.Add(121374211, new MonsterRoom(10f, 147, 4822, 148, 101, 4822, 4822, 148, 101));
+
+            record.AddInstantElement();
+        }
     }
 }

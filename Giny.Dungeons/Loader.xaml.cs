@@ -57,7 +57,9 @@ namespace Giny.Dungeons
             {
                 AssemblyCore.OnAssembliesLoaded();
 
-                DatabaseManager.Instance.LoadTable<DungeonMapRecord>();
+                DatabaseManager.Instance.LoadTable<MapPositionRecord>();
+
+                DatabaseManager.Instance.LoadTable<DungeonRecord>();
 
                 DatabaseManager.Instance.LoadTable<MonsterRecord>();
 

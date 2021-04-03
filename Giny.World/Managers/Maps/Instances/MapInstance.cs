@@ -78,7 +78,7 @@ namespace Giny.World.Managers.Maps.Instances
         {
             if (Record.IsDungeonMap)
             {
-                this.m_monsterSpawner = new ActionTimer(Record.DungeonMap.GetRespawnInterval(), SpawnDungeonGroup, true);
+                this.m_monsterSpawner = new ActionTimer(Record.MonsterRoom.GetRespawnInterval(), SpawnDungeonGroup, true);
             }
             else
             {

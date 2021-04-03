@@ -197,6 +197,10 @@ namespace Giny.ORM.IO
             }
             else if (property.CustomAttributes.Count() > 0 && property.GetCustomAttribute<ProtoSerializeAttribute>() != null)
             {
+                if (obj is DBNull)
+                {
+                    return null;
+                }
                 return Protobuf.Deserialize((byte[])obj, property.PropertyType);
             }
             else if (deserializationMethod != null)

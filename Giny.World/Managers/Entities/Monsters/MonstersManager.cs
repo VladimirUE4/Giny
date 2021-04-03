@@ -78,9 +78,14 @@ namespace Giny.World.Managers.Monsters
 
         public void SpawnDungeonGroup(MapRecord map)
         {
+            if (map.MonsterRoom.MonsterIds.Count == 0)
+            {
+                return;
+            }
+
             ModularMonsterGroup group = new ModularMonsterGroup(map, map.Instance.FindMonsterGroupCell().Id);
 
-            foreach (var monsterId in map.DungeonMap.Monsters)
+            foreach (var monsterId in map.MonsterRoom.MonsterIds)
             {
                 MonsterRecord template = MonsterRecord.GetMonsterRecord(monsterId);
                 Monster monster = new Monster(template, group);

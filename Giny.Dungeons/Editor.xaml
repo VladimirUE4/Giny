@@ -7,23 +7,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="730" Width="1282">
     <Grid>
-        <ListBox SelectionChanged="dungeonMaps_SelectionChanged" Name="dungeonMaps" HorizontalAlignment="Left" Height="444" Margin="19,41,0,0" VerticalAlignment="Top" Width="245"/>
-        <ListBox Name="monsters" HorizontalAlignment="Left" Height="444" Margin="284,41,0,0" VerticalAlignment="Top" Width="283"/>
-        <Button Content="Remove Selected" HorizontalAlignment="Left" Margin="19,501,0,0" VerticalAlignment="Top" Width="245" Height="32" Click="Button_Click_3"/>
-
-
-        <Canvas Name="monsterCanvas" HorizontalAlignment="Left" Height="342" Margin="585,41,0,0" VerticalAlignment="Top" Width="499">
-            <ListBox  x:Name="searchMonsters" HorizontalAlignment="Left" Height="186" VerticalAlignment="Top" Width="335" Canvas.Left="23" Canvas.Top="61"/>
-            <TextBox TextChanged="searchText_TextChanged" x:Name="searchText" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" Canvas.Left="115" Canvas.Top="22"/>
-            <Label Content="Search monster : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="14" Canvas.Top="19"/>
-            <Button Content="Replace Selected" HorizontalAlignment="Left" VerticalAlignment="Top" Width="335" Height="37" Canvas.Left="23" Canvas.Top="295" Click="ReplaceSelectedClick" />
-            <Button Content="Insert" HorizontalAlignment="Left" VerticalAlignment="Top" Width="335" Height="37" Canvas.Left="23" Canvas.Top="253" Click="Button_Click_1"/>
+        <ListBox SelectionChanged="dungeons_SelectionChanged"  Name="dungeons" HorizontalAlignment="Left" Height="444" Margin="19,41,0,0" VerticalAlignment="Top" Width="245"/>
+        <Button Content="Remove " HorizontalAlignment="Left" Margin="19,527,0,0" VerticalAlignment="Top" Width="245" Height="32" Click="Button_Click_3" />
+        <Label Content="Dungeons" HorizontalAlignment="Left" Margin="95,15,0,0" VerticalAlignment="Top"/>
+        <Button Name="addDungeon" Content="Add" HorizontalAlignment="Left" Margin="195,490,0,0" VerticalAlignment="Top" Width="69" Height="23" Click="addDungeon_Click" />
+        <TextBox x:Name="djName" HorizontalAlignment="Left" Height="22" Margin="70,491,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name :" HorizontalAlignment="Left" Margin="17,491,0,0" VerticalAlignment="Top" Height="31"/>
+        <Canvas Name="mapsCanvas" HorizontalAlignment="Left" Height="651" Margin="281,15,0,0" VerticalAlignment="Top" Width="247">
+            <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="32" Canvas.Left="4" Canvas.Top="542" Click="Button_Click_1"/>
+            <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="58" Height="22" Canvas.Left="179" Canvas.Top="506" Click="Button_Click" />
+            <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="mapId" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Canvas.Left="54" Canvas.Top="506"/>
+            <Label Content="MapId :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" RenderTransformOrigin="0.46,0.387" Canvas.Left="3" Canvas.Top="505"/>
+            <ListBox SelectionChanged="maps_SelectionChanged" x:Name="maps" HorizontalAlignment="Left" Height="352" VerticalAlignment="Top" Width="234" Canvas.Left="4" Canvas.Top="118"/>
+            <Label Content="Rooms" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Canvas.Left="92" Canvas.Top="88"/>
+            <Label Content="Entrance Map : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="26"/>
+            <Label Content="Exit Map : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="57"/>
+            <TextBox LostFocus="entrance_LostFocus" x:Name="entrance" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" Canvas.Left="101" Canvas.Top="30"/>
+            <TextBox LostFocus="exit_LostFocus" x:Name="exit" PreviewTextInput="NumberValidationTextBox"  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" Canvas.Left="101" Canvas.Top="57"/>
+            <Label Name="mapName" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="475" Width="227"/>
         </Canvas>
-        <Button Content="Remove Selected" HorizontalAlignment="Left" Margin="284,501,0,0" VerticalAlignment="Top" Width="283" Height="32" Click="Button_Click_2"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" Name="sourceMap" HorizontalAlignment="Left" Height="23" Margin="99,555,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" Name="targetMap" HorizontalAlignment="Left" Height="23" Margin="99,593,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>
-        <TextBlock HorizontalAlignment="Left" Margin="19,555,0,0" TextWrapping="Wrap" Text="Source Map :" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="19,593,0,0" TextWrapping="Wrap" Text="Target Map :" VerticalAlignment="Top"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="19,631,0,0" VerticalAlignment="Top" Width="245" Height="32" Click="Button_Click"/>
+        <Canvas Name="monsterCanvas" HorizontalAlignment="Left" Height="519" Margin="528,15,0,0" VerticalAlignment="Top" Width="627">
+            <ListBox SelectionChanged="monsters_SelectionChanged" x:Name="monsters" HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="234" Canvas.Left="4" Canvas.Top="119"/>
+            <Label Content="Monsters" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="77" Canvas.Top="88"/>
+            <Button Content="Remove " HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="32" Canvas.Left="6" Canvas.Top="476"/>
+            <ListBox  x:Name="searchMonsters" HorizontalAlignment="Left" Height="186" VerticalAlignment="Top" Width="335" Canvas.Left="268" Canvas.Top="133"/>
+            <TextBox TextChanged="searchText_TextChanged" x:Name="searchText" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" Canvas.Left="360" Canvas.Top="94"/>
+            <Label Content="Search monster : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="259" Canvas.Top="91"/>
+            <Button Content="Replace Selected" HorizontalAlignment="Left" VerticalAlignment="Top" Width="335" Height="37" Canvas.Left="268" Canvas.Top="367"  />
+            <Button Content="Insert" HorizontalAlignment="Left" VerticalAlignment="Top" Width="335" Height="37" Canvas.Left="268" Canvas.Top="325" Click="Button_Click_2" />
+        </Canvas>
     </Grid>
 </UserControl>
