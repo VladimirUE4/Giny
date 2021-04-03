@@ -23,6 +23,12 @@ namespace Giny.Core.Extensions
             }
             return colors;
         }
+        public static void Swap<T>(this IList<T> list, int indexA, int indexB)
+        {
+            T tmp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = tmp;
+        }
         public static T[] ParseCollection<T>(this string str, Func<string, T> converter)
         {
             T[] result;

@@ -1,4 +1,5 @@
-﻿using Giny.IO.D2O;
+﻿using Giny.Core.Extensions;
+using Giny.IO.D2O;
 using Giny.IO.D2OClasses;
 using Giny.ORM;
 using Giny.World.Records.Maps;
@@ -68,23 +69,28 @@ namespace Giny.Dungeons
 
         private void dungeons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            mapName.Content = string.Empty;
+
             if (SelectedDungeon != null)
             {
-                mapsCanvas.Visibility = Visibility.Visible;
-                monsterCanvas.Visibility = Visibility.Hidden;
-
-                maps.Items.Clear();
-
-                foreach (var mapId in SelectedDungeon.Rooms.Keys)
-                {
-                    maps.Items.Add(mapId);
-                }
-
-                entrance.Text = SelectedDungeon.EntranceMapId.ToString();
-                exit.Text = SelectedDungeon.ExitMapId.ToString();
+                DisplayDungeonMaps();
             }
         }
+        private void DisplayDungeonMaps()
+        {
+            mapsCanvas.Visibility = Visibility.Visible;
+            monsterCanvas.Visibility = Visibility.Hidden;
 
+            maps.Items.Clear();
+
+            foreach (var mapId in SelectedDungeon.Rooms.Keys)
+            {
+                maps.Items.Add(mapId);
+            }
+
+            entrance.Text = SelectedDungeon.EntranceMapId.ToString();
+            exit.Text = SelectedDungeon.ExitMapId.ToString();
+        }
         private void maps_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (maps.SelectedItem != null)
@@ -156,6 +162,8 @@ namespace Giny.Dungeons
             SelectedDungeon.UpdateInstantElement();
             maps.Items.Add(id);
 
+            mapId.Text = string.Empty;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -167,20 +175,23 @@ namespace Giny.Dungeons
                 maps.Items.Remove(maps.SelectedItem);
                 SelectedDungeon.UpdateInstantElement();
             }
-        
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (SearchedMonster != null)
             {
-                long mapId = (long)maps.SelectedItem;
-                SelectedDungeon.Rooms[mapId].MonsterIds.Add((short)SearchedMonster.Id);
-                SelectedDungeon.UpdateInstantElement();
-                monsters.Items.Add(SearchedMonster);
+                InsertMonster(SearchedMonster);
             }
         }
-
+        private void InsertMonster(MonsterRecord record)
+        {
+            long mapId = (long)maps.SelectedItem;
+            SelectedDungeon.Rooms[mapId].MonsterIds.Add((short)record.Id);
+            SelectedDungeon.UpdateInstantElement();
+            monsters.Items.Add(record);
+        }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             if (SelectedDungeon != null)
@@ -200,6 +211,85 @@ namespace Giny.Dungeons
         {
             SelectedDungeon.ExitMapId = long.Parse(exit.Text);
             SelectedDungeon.UpdateInstantElement();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var monsters = idList.Text.Split(',');
+
+            foreach (var monsterId in monsters)
+            {
+                InsertMonster(MonsterRecord.GetMonsterRecord(short.Parse(monsterId)));
+            }
+
+            idList.Text = string.Empty;
+        }
+
+        private void MoveUpClick(object sender, RoutedEventArgs e)
+        {
+            int index = maps.SelectedIndex;
+
+            if (index == 0)
+            {
+                return;
+            }
+
+            var list = SelectedDungeon.Rooms.ToList();
+            list.Swap(index, index - 1);
+            SelectedDungeon.Rooms = list.ToDictionary(obj => obj.Key, obj => obj.Value);
+            SelectedDungeon.UpdateInstantElement();
+            DisplayDungeonMaps();
+
+
+            maps.SelectedIndex = index - 1;
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            int index = maps.SelectedIndex;
+
+            if (index == maps.Items.Count - 1)
+            {
+                return;
+            }
+
+            var list = SelectedDungeon.Rooms.ToList();
+            list.Swap(index, index + 1);
+            SelectedDungeon.Rooms = list.ToDictionary(obj => obj.Key, obj => obj.Value);
+            SelectedDungeon.UpdateInstantElement();
+            DisplayDungeonMaps();
+
+            maps.SelectedIndex = index + 1;
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            string search = (SelectedDungeon.Name + " - Sortie").ToLower();
+
+            var exit = MapPositionRecord.GetMapPositions().FirstOrDefault(x => x.Name.ToLower() == search);
+
+            if (exit != null && !SelectedDungeon.Rooms.ContainsKey(exit.Id))
+            {
+                SelectedDungeon.Rooms.Add(exit.Id, new MonsterRoom());
+                SelectedDungeon.UpdateInstantElement();
+                DisplayDungeonMaps();
+                maps.SelectedItem = exit.Id;
+            }
+
+        }
+
+        private void searchName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dungeons.Items.Clear();
+
+            var search = searchName.Text.ToLower();
+
+            var results = DungeonRecord.GetDungeonRecords().Where(x => x.Name.ToLower().Contains(search));
+
+            foreach (var result in results)
+            {
+                dungeons.Items.Add(result);
+            }
         }
     }
 }

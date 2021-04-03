@@ -3,7 +3,9 @@ using Giny.World;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Items;
 using Giny.World.Records.Characters;
+using Giny.World.Records.Donjon;
 using Giny.World.Records.Items;
+using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,47 +22,36 @@ namespace Giny.Tests
         {
 
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(CharacterRecord)), "127.0.0.1",
-           "giny_tests", "root", "");
-
-
-            DatabaseManager.Instance.DeleteTable<CharacterItemRecord>();
+           "giny_world", "root", "");
 
 
             DatabaseManager.Instance.LoadTables();
 
-            TestThreadSafeness();
+            Console.WriteLine("Tables loaded");
 
+            foreach (var donjon in DonjonRecord.GetDonjons())
+            {
+                DungeonRecord newRecord = new DungeonRecord();
+
+                newRecord.Id = donjon.Id;
+                newRecord.Name = donjon.Name;
+                newRecord.EntranceMapId = donjon.EntranceMap;
+                newRecord.ExitMapId = donjon.ExitMap;
+                newRecord.Rooms = new Dictionary<long, MonsterRoom>();
+
+                foreach (var map in donjon.Maps)
+                {
+                    newRecord.Rooms.Add(map, new MonsterRoom());
+                }
+
+                newRecord.AddInstantElement();
+            }
+
+            Console.WriteLine("Finished");
             Console.Read();
 
 
         }
-        private static void TestThreadSafeness()
-        {
-            ItemManager.Instance.Initialize();
 
-            int iterations = 100;
-
-            for (int i = 0; i < 100; i++)
-            {
-                Thread thread3 = new Thread(new ThreadStart(delegate ()
-                {
-                    for (int w = 0; w < iterations; w++)
-                    {
-                        InsertItem(); // call unsafe code
-                    }
-                }));
-
-                thread3.Start();
-            }
-        
-            
-        }
-
-        private static void InsertItem()
-        {
-            int id = ItemManager.Instance.PopItemUID();
-            CharacterItemRecord item = new CharacterItemRecord(1, id, 2469, 1, 1, new EffectCollection(), 1, "");
-            item.AddInstantElement();
-        }
     }
 }
