@@ -29,6 +29,7 @@ namespace Giny.World.Managers.Fights.AI
                     Fighter.CastSpell(spellRecord.Id, ally.Cell.Id);
                 }
             }
+
         }
     }
 }

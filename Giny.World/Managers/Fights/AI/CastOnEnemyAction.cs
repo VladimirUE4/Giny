@@ -25,6 +25,10 @@ namespace Giny.World.Managers.Fights.AI
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
+            if (target == null)
+            {
+                return;
+            }
             foreach (var spellRecord in GetSpells(SpellCategoryEnum.Damages).Shuffle())
             {
                 if (spellRecord.Levels.All(x => x.MaxRange == 0))

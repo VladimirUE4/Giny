@@ -95,6 +95,8 @@ namespace Giny.World.Records.Maps
     [ProtoContract]
     public class MonsterRoom
     {
+        public const float DefaultRespawnDelay = 10f;
+
         [ProtoMember(1)]
         public List<short> MonsterIds
         {
@@ -109,11 +111,7 @@ namespace Giny.World.Records.Maps
         }
         public MonsterRoom()
         {
-            this.MonsterIds = new List<short>();
-        }
-        public MonsterRoom(float respawnDelay)
-        {
-            this.RespawnDelay = respawnDelay;
+            RespawnDelay = DefaultRespawnDelay;
             this.MonsterIds = new List<short>();
         }
         public MonsterRoom(float respawnDelay, params short[] monsters)

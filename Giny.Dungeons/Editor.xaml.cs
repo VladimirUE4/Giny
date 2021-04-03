@@ -28,8 +28,6 @@ namespace Giny.Dungeons
     /// </summary>
     public partial class Editor : UserControl
     {
-        public const float RespawnDelay = 10f;
-
         private DungeonRecord SelectedDungeon
         {
             get
@@ -109,6 +107,8 @@ namespace Giny.Dungeons
                 MapPositionRecord positionRecord = MapPositionRecord.GetMapPosition(mapId);
 
                 mapName.Content = positionRecord.Name;
+
+                respawnDelay.Text = SelectedDungeon.Rooms[mapId].RespawnDelay.ToString();
             }
         }
 
@@ -158,7 +158,7 @@ namespace Giny.Dungeons
             {
                 return;
             }
-            SelectedDungeon.Rooms.Add(id, new MonsterRoom(RespawnDelay));
+            SelectedDungeon.Rooms.Add(id, new MonsterRoom());
             SelectedDungeon.UpdateInstantElement();
             maps.Items.Add(id);
 
@@ -290,6 +290,13 @@ namespace Giny.Dungeons
             {
                 dungeons.Items.Add(result);
             }
+        }
+
+        private void respawnDelay_LostFocus(object sender, RoutedEventArgs e)
+        {
+            long mapId = (long)maps.SelectedItem;
+            SelectedDungeon.Rooms[mapId].RespawnDelay = int.Parse(respawnDelay.Text);
+            SelectedDungeon.UpdateInstantElement();
         }
     }
 }

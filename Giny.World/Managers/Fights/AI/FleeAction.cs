@@ -38,6 +38,7 @@ namespace Giny.World.Managers.Fights.AI
 
                 Fighter.Move(path);
             }
+
         }
     }
 }

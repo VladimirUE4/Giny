@@ -29,7 +29,6 @@
         </Canvas>
         <Canvas Name="monsterCanvas" HorizontalAlignment="Left" Height="519" Margin="528,15,0,0" VerticalAlignment="Top" Width="627">
             <ListBox SelectionChanged="monsters_SelectionChanged" x:Name="monsters" HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="234" Canvas.Left="4" Canvas.Top="119"/>
-            <Label Content="Monsters" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="77" Canvas.Top="88"/>
             <Button Content="Remove " HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="32" Canvas.Left="6" Canvas.Top="476"/>
             <ListBox  x:Name="searchMonsters" HorizontalAlignment="Left" Height="186" VerticalAlignment="Top" Width="335" Canvas.Left="268" Canvas.Top="133"/>
             <TextBox TextChanged="searchText_TextChanged" x:Name="searchText" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="243" Canvas.Left="360" Canvas.Top="94"/>
@@ -38,6 +37,8 @@
             <Button Content="Insert" HorizontalAlignment="Left" VerticalAlignment="Top" Width="335" Height="37" Canvas.Left="268" Canvas.Top="325" Click="Button_Click_2" />
             <Button Content="Insert from id list" Canvas.Left="268" Canvas.Top="437" Width="335" Height="33" Click="Button_Click_4"/>
             <TextBox Name="idList" Height="23" Canvas.Left="268" TextWrapping="Wrap" Text="" Canvas.Top="409" Width="335"/>
+            <TextBox LostFocus="respawnDelay_LostFocus" x:Name="respawnDelay" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" Canvas.Left="103" Canvas.Top="91"/>
+            <Label Content="Respawn Delay : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="88" Canvas.Left="4"/>
         </Canvas>
         <Label Content="Search : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,41,0,0"/>
         <TextBox Name="searchName" TextChanged="searchName_TextChanged"  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" Margin="78,45,0,0"/>

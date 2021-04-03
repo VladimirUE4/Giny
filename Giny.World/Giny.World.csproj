@@ -471,7 +471,6 @@
     <Compile Include="Managers\Shortcuts\ShortcutBar.cs" />
     <Compile Include="Records\Characters\MerchantRecord.cs" />
     <Compile Include="Records\Database.cs" />
-    <Compile Include="Records\Donjon\DonjonRecord.cs" />
     <Compile Include="Records\Effects\EffectRecord.cs" />
     <Compile Include="Records\Items\BankItemRecord.cs" />
     <Compile Include="Records\Items\BidShopItemRecord.cs" />

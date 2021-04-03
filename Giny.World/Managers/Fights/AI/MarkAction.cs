@@ -24,6 +24,10 @@ namespace Giny.World.Managers.Fights.AI
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
+            if (target == null)
+            {
+                return;
+            }
             foreach (var spellRecord in GetSpells(SpellCategoryEnum.Mark).Shuffle())
             {
                 var targetPoint = GetTargetPoint(spellRecord.Id, x => Fighter.Fight.IsCellFree(x.CellId));
@@ -33,6 +37,8 @@ namespace Giny.World.Managers.Fights.AI
                     Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);
                 }
             }
+
+            return;
         }
     }
 }
