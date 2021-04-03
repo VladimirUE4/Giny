@@ -25,16 +25,19 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+        [Update]
         public ItemTypeEnum Type
         {
             get;
             set;
         }
+        [Update]
         public List<short> SkinIds
         {
             get;
             set;
         }
+        [Update]
         public short MaximumLevel
         {
             get;

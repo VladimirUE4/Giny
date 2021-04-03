@@ -9,16 +9,33 @@
 -PNJ Talk Talk
 -Finir Pokéfus
 -Idoles
--Guilds Alliances?
--Anomalies?
+-Guildes Alliances?
+-Anomalies
 -Portals
 -Kolizeum
--Panoplies !
 -Almanach
+-Havre sac
+-Alignement
+-Compagnons
+-Energie ? Phoenix
+-Pain et vie
+-Tutoriel ?
+-Maisons
+-Poubelles
+-Mariages
+-Songes infinies
+-Npc action EXCHANGE
+-Craft
+-FM
+-Tests unitaires
+-Challenges
+
 sushivan ordre living object record 
 jobtypeenum en anglais miscbuilder
 rework bank system
-
+Criterias (OR AND)
+weapons GetCriticalEffects( gérer dommage dice.
+Parchemin caracteristique wtf effets.
 Invisibility
 Poison damage client display
 Sort air en ligne iop (prob zone)

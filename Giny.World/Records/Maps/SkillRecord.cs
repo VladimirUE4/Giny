@@ -38,6 +38,7 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
+        [Update]
         public int ParentBonesId
         {
             get;

@@ -32,6 +32,7 @@ namespace Giny.World.Records.Characters
             get;
             set;
         }
+        [Update]
         public long ExperienceJob
         {
             get;
