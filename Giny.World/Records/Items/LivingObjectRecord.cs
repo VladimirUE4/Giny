@@ -86,5 +86,9 @@ namespace Giny.World.Records.Items
             return LivingObjects.ContainsKey(gid);
         }
 
+        public static IEnumerable<LivingObjectRecord> GetLivingObjectRecords()
+        {
+            return LivingObjects.Values;
+        }
     }
 }

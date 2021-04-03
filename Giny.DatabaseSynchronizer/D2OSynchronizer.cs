@@ -176,18 +176,7 @@ namespace Giny.DatabaseSynchronizer
                         }
                     }
                 }
-                if (table is SkillRecord)
-                {
-                    SelfMadeSkillRecord.Apply(table as SkillRecord);
-                }
-                if (table is LivingObjectRecord)
-                {
-                    SelfMadeLivingObjects.Apply(table as LivingObjectRecord);
-                }
-                if (table is ExperienceRecord)
-                {
-                    SelfMadeExperienceRecord.Apply(table as ExperienceRecord);
-                }
+
                 TableManager.Instance.GetWriter(tableType).Use(new ITable[] { table }, DatabaseAction.Add);
             }
         }

@@ -1,4 +1,5 @@
-﻿using Giny.IO.D2O;
+﻿using Giny.Core.DesignPattern;
+using Giny.IO.D2O;
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Effects;
@@ -48,7 +49,19 @@ namespace Giny.World.Records.Items
             set;
         }
 
-        public EffectCollection GetSetEffects(int itemCount)
+        [StartupInvoke("Item sets", StartupInvokePriority.SixthPath)]
+        public static void Initialize()
+        {
+            foreach (ItemSetRecord itemSet in ItemSets.Values)
+            {
+                for (int i = 0; i < itemSet.Effects.Count; i++)
+                {
+                    itemSet.Effects[i] = itemSet.Effects[i].Generate();
+                }
+            }
+        }
+
+        public EffectCollection GetEffects(int itemCount)
         {
             if (Effects.Count >= itemCount)
                 return Effects[itemCount - 1];
@@ -63,6 +76,6 @@ namespace Giny.World.Records.Items
             return result;
         }
 
-      
+
     }
 }

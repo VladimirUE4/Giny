@@ -1,4 +1,5 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
@@ -251,11 +252,6 @@ namespace Giny.World.Managers.Items
                 }
             }
         }
-        /// <summary>
-        /// Met a jour le look du joueur ayant équipé un objet possédant une AppearenceId.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="equiped"></param>
         private void UpdateLook(CharacterItemRecord item, bool equiped)
         {
             switch (item.Record.TypeEnum)
@@ -306,7 +302,7 @@ namespace Giny.World.Managers.Items
                 }
                 else
                 {
-                    throw new Exception("err");
+                    Logger.Write("Unable to remove pet mount look of player " + Character.Name, Channels.Warning);
                 }
             }
         }
@@ -322,23 +318,25 @@ namespace Giny.World.Managers.Items
                 {
                     if (count >= 3)
                     {
-                        ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetSetEffects(count - 2));
+                        ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetEffects(count - 1));
                     }
 
-                    ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetSetEffects(count - 1));
+                    ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetEffects(count));
 
-                    OnSetUpdated(itemSet, count - 1);
+                    OnSetUpdated(itemSet, count);
                 }
             }
             else
             {
                 if (count >= 1)
                 {
+                    ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetEffects(count + 1));
+
                     if (count >= 2)
                     {
-                        ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetSetEffects(count - 1));
+                        ItemEffectsManager.Instance.AddEffects(Character, itemSet.GetEffects(count));
                     }
-                    ItemEffectsManager.Instance.RemoveEffects(Character, itemSet.GetSetEffects(count));
+
                     OnSetUpdated(itemSet, count);
                 }
 
@@ -349,7 +347,7 @@ namespace Giny.World.Managers.Items
         {
             Character.Client.Send(new SetUpdateMessage()
             {
-                setEffects = set.GetSetEffects(num).GetObjectEffects(),
+                setEffects = set.GetEffects(num).GetObjectEffects(),
                 setId = (short)set.Id,
                 setObjects = set.Items.ToArray(),
             });
@@ -481,17 +479,6 @@ namespace Giny.World.Managers.Items
         {
             Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 161);
         }
-
-        /*    public ushort GetCumulatedIntegerEffect(EffectsEnum effect)
-            {
-                ushort result = 0;
-                foreach (var item in GetEquipedItems())
-                {
-                    result += item.FirstEffect<EffectInteger>(effect).Value;
-                }
-                return result;
-            } */
-
         public void SetItemPosition(int uid, CharacterInventoryPositionEnum position, int quantity)
         {
             var item = GetItem(uid);
@@ -512,11 +499,11 @@ namespace Giny.World.Managers.Items
                     if (DofusPositions.Contains((CharacterInventoryPositionEnum)item.Position) && DofusPositions.Contains((CharacterInventoryPositionEnum)position))
                         return;
 
-                    /* if (CheckStacks(item, position, RingPositions) && item.Template.HasSet)
-                     {
-                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
-                         return;
-                     } */
+                    if (CheckStacks(item, position, RingPositions) && item.Record.HasSet)
+                    {
+                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                        return;
+                    }
                     if (CheckStacks(item, position, DofusPositions))
                     {
                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
@@ -724,29 +711,7 @@ namespace Giny.World.Managers.Items
         {
             Character.Client.Send(new ObjectMovementMessage(item.UId, (byte)newPosition));
         }
-        /*  public void DecrementEtherals()
-          {
-              foreach (var item in GetEquipedItems())
-              {
-                  EffectDice effect = item.FirstEffect<EffectDice>(EffectsEnum.Effect_RemainingEtheral);
-
-                  if (effect != null)
-                  {
-                      effect.Min--;
-
-                      if ((effect.Max -= 1) == 0)
-                      {
-                          SetItemPosition(item.UId, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, item.Quantity);
-                          RemoveItem(item, item.Quantity);
-                      }
-                      else
-                      {
-                          this.OnItemModified(item);
-                          item.UpdateElement();
-                      }
-                  }
-              }
-          } 
+        
         /*  public void DropItem(uint uid, uint quantity)
           {
 

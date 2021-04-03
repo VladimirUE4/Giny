@@ -14,9 +14,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs.Placements
+namespace Giny.DatabasePatcher.Maps
 {
-    public class MapPlacementsManager
+    public class MapPlacements
     {
         public static bool SortByComplexity = true;
 
@@ -24,9 +24,9 @@ namespace Giny.DatabasePatcher.Patchs.Placements
 
         public static string PlacementPatternDirectory = "PlacementPatterns/";
 
-        public static void Initialize()
+        public static void Patch()
         {
-            Logger.Write("Fixing map placements ...");
+            Logger.Write("Building map placements ...");
 
             IEnumerable<MapRecord> maps = MapRecord.GetMaps();
 

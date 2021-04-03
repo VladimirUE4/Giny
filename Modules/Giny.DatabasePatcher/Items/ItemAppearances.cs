@@ -12,19 +12,19 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs
+namespace Giny.DatabasePatcher.Items
 {
-    public class MA3Manager
+    public class ItemAppearances
     {
         public const string ITEMS_URL = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";
 
         public const string MOUNTS_URL = "http://www.dofus.tools/myAvatar3/assets/data/Mounts.ma3";
 
-        public static void Initialize()
+        public static void Patch()
         {
             Logger.Write("Fixing item appeareances ...");
 
-            Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, Channels.Log);
+            Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, Channels.Info);
 
             try
             {

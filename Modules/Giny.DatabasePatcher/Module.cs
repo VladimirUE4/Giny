@@ -1,6 +1,10 @@
 ﻿using Giny.Core;
-using Giny.DatabasePatcher.Patchs;
-using Giny.DatabasePatcher.Patchs.Placements;
+using Giny.DatabasePatcher.Experience;
+using Giny.DatabasePatcher.Items;
+using Giny.DatabasePatcher.Maps;
+using Giny.DatabasePatcher.Monsters;
+using Giny.DatabasePatcher.Skills;
+using Giny.DatabasePatcher.Spells;
 using Giny.World.Modules;
 using System;
 using System.Collections.Generic;
@@ -26,14 +30,17 @@ namespace Giny.DatabasePatcher
 
         public void Initialize()
         {
-            ElementsSpawnManager.SynchronizeElements();
-            MA3Manager.Initialize();
-            MonsterKamasDropManager.Initialize();
-            SpellCategoryManager.Initialize();
-            MonsterSpawnsManager.Initialize();
-            MapPlacementsManager.Initialize();
+            JobExperience.Patch();
+            ItemAppearances.Patch();
+            LivingObjects.Patch();
+            MapPlacements.Patch();
+            StatedElements.Patch();
+            MonsterKamas.Patch();
+            MonsterSpawns.Patch();
+            SkillBones.Patch();
+            SpellCategories.Patch();
         }
 
-        
+
     }
 }

@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs
+namespace Giny.DatabasePatcher.Spells
 {
-    public class SpellCategoryManager
+    public class SpellCategories
     {
         private static readonly EffectsEnum[] DamageEffects = new EffectsEnum[]
         {
@@ -67,7 +67,7 @@ namespace Giny.DatabasePatcher.Patchs
             EffectsEnum.Effect_Teleport,
         };
 
-        public static void Initialize()
+        public static void Patch()
         {
             Logger.Write("Assigning spell categories ...");
 

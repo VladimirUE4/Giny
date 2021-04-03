@@ -1,5 +1,6 @@
 ﻿using Giny.ORM;
 using Giny.World;
+using Giny.World.Managers.Effects;
 using Giny.World.Managers.Items;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Items;
@@ -58,7 +59,7 @@ namespace Giny.Tests
         private static void InsertItem()
         {
             int id = ItemManager.Instance.PopItemUID();
-            CharacterItemRecord item = new CharacterItemRecord(1, id, 2469, 1, 1, new List<World.Managers.Effects.Effect>(), 1, "");
+            CharacterItemRecord item = new CharacterItemRecord(1, id, 2469, 1, 1, new EffectCollection(), 1, "");
             item.AddInstantElement();
         }
     }

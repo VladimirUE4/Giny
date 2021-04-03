@@ -10,11 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs
+namespace Giny.DatabasePatcher.Maps
 {
-    public class ElementsSpawnManager
+    public class StatedElements
     {
-        public static void SynchronizeElements()
+        public static void Patch()
         {
             Logger.Write("Synchronize interactives elements ...");
 

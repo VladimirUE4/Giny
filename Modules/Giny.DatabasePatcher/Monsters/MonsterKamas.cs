@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs
+namespace Giny.DatabasePatcher.Monsters
 {
-    public class MonsterKamasDropManager 
+    public class MonsterKamas 
     {
-        public const int BOSS_MULTIPLICATOR = 4;
+        public const int BossMultiplicator = 4;
 
-        public const int DROPPED_KAMAS_RATIO = 3;
+        public const int DroppedKamasRatio = 3;
 
-        public static void Initialize()
+        public static void Patch()
         {
             Logger.Write("Computing monsters kamas ...");
 
@@ -29,7 +29,7 @@ namespace Giny.DatabasePatcher.Patchs
                 int maxDroppedKamas = 0;
                 int level = monster.GetGrade(1).Level;
 
-                minDroppedKamas = random.Next(level * DROPPED_KAMAS_RATIO, level * (DROPPED_KAMAS_RATIO * 2));
+                minDroppedKamas = random.Next(level * DroppedKamasRatio, level * (DroppedKamasRatio * 2));
 
                 maxDroppedKamas = minDroppedKamas + level * 2;
 
@@ -40,8 +40,8 @@ namespace Giny.DatabasePatcher.Patchs
 
                 if (monster.IsBoss)
                 {
-                    minDroppedKamas *= BOSS_MULTIPLICATOR;
-                    maxDroppedKamas *= BOSS_MULTIPLICATOR;
+                    minDroppedKamas *= BossMultiplicator;
+                    maxDroppedKamas *= BossMultiplicator;
                 }
 
                 monster.MinDroppedKamas = minDroppedKamas / 2;

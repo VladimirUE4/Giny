@@ -10,17 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.DatabasePatcher.Patchs
+namespace Giny.DatabasePatcher.Monsters
 {
-    public class MonsterSpawnsManager 
+    public class MonsterSpawns 
     {
-        private static long[] NotSpawn = new long[]
+        private static long[] NotSpawned = new long[]
         {
             1247, // Leprechaun
             793, // Bouftou d'Hallouine
         };
 
-        public static void Initialize()
+        public static void Patch()
         {
             Logger.Write("Spawning Monsters ...");
 
@@ -59,7 +59,7 @@ namespace Giny.DatabasePatcher.Patchs
 
         private static double ComputeMonsterSpawnProbability(MonsterRecord record)
         {
-            if (NotSpawn.Contains(record.Id))
+            if (NotSpawned.Contains(record.Id))
             {
                 return 0d;
             }

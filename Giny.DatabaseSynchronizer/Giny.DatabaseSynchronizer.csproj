@@ -49,8 +49,6 @@
   <ItemGroup>
     <Compile Include="ConfigFile.cs" />
     <Compile Include="MiscBuilder.cs" />
-    <Compile Include="SelfMadeExperienceRecord.cs" />
-    <Compile Include="SelfMadeLivingObjects.cs" />
     <Compile Include="D2OSynchronizer.cs" />
     <Compile Include="MapSynchronizer.cs" />
     <Compile Include="Program.cs" />

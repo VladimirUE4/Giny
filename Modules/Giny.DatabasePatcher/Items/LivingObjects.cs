@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Giny.Core;
+using Giny.ORM;
+using Giny.Protocol.Custom.Enums;
+using Giny.World.Records.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Giny.Protocol.Custom.Enums;
-using Giny.World.Records.Items;
 
-namespace Giny.DatabaseSynchronizer
+namespace Giny.DatabasePatcher.Items
 {
-    class SelfMadeLivingObjects
+    public class LivingObjects
     {
         static Dictionary<int, short> LivingObjectsMaxiumLevels = new Dictionary<int, short>()
         {
@@ -71,20 +73,28 @@ namespace Giny.DatabaseSynchronizer
             { 19526 , 16 },
         };
 
-        public static void Apply(LivingObjectRecord livingObjectRecord)
+        public static void Patch()
         {
-            if (LivingObjectsSkins.ContainsKey((int)livingObjectRecord.Id))
+            Logger.Write("Fixing living objects ...");
+
+            foreach (var record in LivingObjectRecord.GetLivingObjectRecords())
             {
-                livingObjectRecord.SkinIds = LivingObjectsSkins[(int)livingObjectRecord.Id].ToList();
-            }
-            if (LivingObjectsTypes.ContainsKey((int)livingObjectRecord.Id))
-            {
-                livingObjectRecord.Type = (ItemTypeEnum)LivingObjectsTypes[(int)livingObjectRecord.Id];
-            }
-            if (LivingObjectsMaxiumLevels.ContainsKey((int)livingObjectRecord.Id))
-            {
-                livingObjectRecord.MaximumLevel = LivingObjectsMaxiumLevels[(int)livingObjectRecord.Id];
+                if (LivingObjectsSkins.ContainsKey((int)record.Id))
+                {
+                    record.SkinIds = LivingObjectsSkins[(int)record.Id].ToList();
+                }
+                if (LivingObjectsTypes.ContainsKey((int)record.Id))
+                {
+                    record.Type = (ItemTypeEnum)LivingObjectsTypes[(int)record.Id];
+                }
+                if (LivingObjectsMaxiumLevels.ContainsKey((int)record.Id))
+                {
+                    record.MaximumLevel = LivingObjectsMaxiumLevels[(int)record.Id];
+                }
+
+                record.UpdateInstantElement();
             }
         }
+
     }
 }

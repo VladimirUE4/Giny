@@ -42,16 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patchs\ElementsSpawnManager.cs" />
-    <Compile Include="Patchs\MA3Manager.cs" />
+    <Compile Include="Experience\JobExperience.cs" />
+    <Compile Include="Items\LivingObjects.cs" />
+    <Compile Include="Maps\StatedElements.cs" />
+    <Compile Include="Items\ItemAppearances.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="Patchs\MonsterKamasDropManager.cs" />
-    <Compile Include="Patchs\MonsterSpawnsManager.cs" />
-    <Compile Include="Patchs\Placements\MapPlacementsManager.cs" />
-    <Compile Include="Patchs\Placements\PlacementComplexityCalculator.cs" />
-    <Compile Include="Patchs\Placements\PlacementPattern.cs" />
+    <Compile Include="Monsters\MonsterKamas.cs" />
+    <Compile Include="Monsters\MonsterSpawns.cs" />
+    <Compile Include="Maps\MapPlacements.cs" />
+    <Compile Include="Maps\PlacementComplexityCalculator.cs" />
+    <Compile Include="Maps\PlacementPattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Patchs\SpellCategoryManager.cs" />
+    <Compile Include="Skills\SkillBones.cs" />
+    <Compile Include="Spells\SpellCategories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Giny.Core\Giny.Core.csproj">

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Giny.DatabasePatcher.Patchs.Placements
+namespace Giny.DatabasePatcher.Maps
 {
     public class PlacementPattern
     {
