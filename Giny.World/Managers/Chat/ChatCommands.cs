@@ -87,7 +87,7 @@ namespace Giny.World.Managers.Chat
             client.Character.Reply("Sun added on element " + element.Identifier);
 
         }
-       
+
         [ChatCommand("monsters", ServerRoleEnum.Administrator)]
         public static void SpawnMonstersCommand(WorldClient source, string monsters)
         {
@@ -113,8 +113,13 @@ namespace Giny.World.Managers.Chat
             for (int i = 0; i < elements.Count(); i++)
             {
                 var ele = elements[i];
-                source.Character.DebugHighlightCells(colors[i], new CellRecord[] { source.Character.Map.GetCell(ele.CellId) });
-                source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
+                var cell = source.Character.Map.GetCell(ele.CellId);
+
+                if (cell != null)
+                {
+                    source.Character.DebugHighlightCells(colors[i], new CellRecord[] { cell });
+                    source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
+                }
             }
         }
         [ChatCommand("rdmap", ServerRoleEnum.Administrator)]
@@ -313,11 +318,19 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-            client.Character.Reply(client.Character.Map.CanSpawnMonsters);
+            client.Send(new GameRolePlayArenaUpdatePlayerInfosMessage()
+            {
+                solo = new ArenaRankInfos(new ArenaRanking(1, 1), new ArenaLeagueRanking(1, 2,1,2, 1), 1, 1, 2),
+        });
+
+            client.Send(new GameRolePlayArenaRegisterMessage()
+            {
+                battleMode = 0
+            });
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
-            MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
+        MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 
         }
-    }
+}
 }

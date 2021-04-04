@@ -135,7 +135,9 @@ namespace Giny.World.Network
             SendBasicTime();
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
             Send(new ServerSettingsMessage("fr", 0, 0, false, 0, 200, true));
-            SendServerOptionalFeatures(OptionalFeaturesEnum.PvpArena);
+
+            SendServerOptionalFeatures(OptionalFeaturesEnum.Pvpkis, OptionalFeaturesEnum.Mount,
+                OptionalFeaturesEnum.Itemidols, OptionalFeaturesEnum.MaptacticMode);
 
             Send(new ServerSessionConstantsMessage(new ServerSessionConstant[]
            {

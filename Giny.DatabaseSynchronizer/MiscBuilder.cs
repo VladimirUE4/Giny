@@ -1,4 +1,5 @@
-﻿using Giny.Core.Misc;
+﻿using Giny.Core.Extensions;
+using Giny.Core.Misc;
 using Giny.IO.D2O;
 using System;
 using System.Collections;
@@ -14,9 +15,11 @@ namespace Giny.DatabaseSynchronizer
     {
         public static void Build(List<D2OReader> readers)
         {
+            BuildOptionalFeatures(readers);
+            return;
+
             BuildTextInformations(readers);
 
-            return;
             BuildSpellEnum(readers);
 
             BuildJobType(readers);
@@ -26,6 +29,24 @@ namespace Giny.DatabaseSynchronizer
             BuildMonsterRaces(readers);
             BuildNpcActions(readers);
             BuildNpcsDialogs(readers);
+        }
+        private static void BuildOptionalFeatures(List<D2OReader> readers)
+        {
+            var opts = readers.FirstOrDefault(x => x.Classes.Any(w => w.Value.Name == "OptionalFeature")).EnumerateObjects().Cast<Giny.IO.D2OClasses.OptionalFeature>();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("*Optional Featuers*");
+
+            foreach (var opt in opts)
+            {
+
+                string keyword = opt.keyword.Replace(".", "").Replace("-", "").FirstCharToUpper();
+
+                sb.AppendLine(keyword + "=" + opt.id + ",");
+            }
+
+            Notepad.Open(sb.ToString());
         }
         private static void BuildSpellEnum(List<D2OReader> readers)
         {
