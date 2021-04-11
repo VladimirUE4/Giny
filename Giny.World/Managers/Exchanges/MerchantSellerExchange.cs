@@ -82,9 +82,7 @@ namespace Giny.World.Managers.Exchanges
                 return;
             }
 
-
-
-            item.Sold = true;
+            item.Sold = true; // non, ça dépend de si l'item est coupé ?
 
             Character.OnKamasLost(cost);
 
@@ -94,7 +92,7 @@ namespace Giny.World.Managers.Exchanges
 
             Character.OnItemGained(item.GId, quantity);
 
-            if (item.Quantity == quantity)
+            if (item.Quantity == quantity) // nope, 
             {
                 this.Character.Client.Send(new ExchangeShopStockMovementRemovedMessage()
                 {

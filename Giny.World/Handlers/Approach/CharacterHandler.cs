@@ -166,7 +166,6 @@ namespace Giny.World.Handlers.Approach
             client.Character.Inventory.Refresh();
             client.Character.RefreshShortcuts();
             client.Character.CreateHumanOptions();
-            client.Character.CheckSoldItems();
             client.Character.CheckMerchantState();
             client.Character.OnCharacterLoadingComplete();
         }
