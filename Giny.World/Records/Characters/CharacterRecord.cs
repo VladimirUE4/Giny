@@ -258,6 +258,10 @@ namespace Giny.World.Records.Characters
                
             };
         }
+        public static CharacterRecord GetCharacterRecord(long id)
+        {
+            return Characters[id];
+        }
         public static IEnumerable<CharacterRecord> GetCharacterRecords()
         {
             return Characters.Values;

@@ -173,7 +173,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             get
             {
-                return Level > ExperienceManager.MAX_LEVEL ? ExperienceManager.MAX_LEVEL : Level;
+                return Level > ExperienceManager.MaxLevel ? ExperienceManager.MaxLevel : Level;
             }
         }
         public override DirectionsEnum Direction
@@ -217,7 +217,7 @@ namespace Giny.World.Managers.Entities.Characters
             {
                 this.Record.Experience = value;
 
-                if (value >= this.UpperBoundExperience && this.Level < ExperienceManager.MAX_LEVEL_OMEGA || value < this.LowerBoundExperience)
+                if (value >= this.UpperBoundExperience && this.Level < ExperienceManager.MaxLevelOmega || value < this.LowerBoundExperience)
                 {
                     short level = this.Level;
                     this.Level = ExperienceManager.Instance.GetCharacterLevel(Record.Experience);
@@ -553,6 +553,13 @@ namespace Giny.World.Managers.Entities.Characters
             {
                 Guild = GuildsManager.Instance.GetGuild(Record.GuildId);
                 GuildMember = Guild.Record.GetMember(Id);
+
+                Client.Send(new GuildMembershipMessage()
+                {
+                    guildInfo = Guild.GetGuildInformations(),
+                    memberRights = (int)GuildMember.Rights,
+                });
+
             }
         }
         public CharacterJob GetJob(JobsTypeEnum jobType)
@@ -567,7 +574,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             CharacterJob job = GetJob(jobType);
             short currentLevel = job.Level;
-            long highest = ExperienceManager.Instance.GetCharacterXPForLevel(ExperienceManager.MAX_LEVEL);
+            long highest = ExperienceManager.Instance.GetCharacterXPForLevel(ExperienceManager.MaxLevel);
 
             if (job.Experience + amount > highest)
                 job.Experience = highest;
@@ -952,11 +959,11 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (Level > oldLevel)
             {
-                if (oldLevel <= ExperienceManager.MAX_LEVEL)
+                if (oldLevel <= ExperienceManager.MaxLevel)
                 {
-                    if (Level > ExperienceManager.MAX_LEVEL)
+                    if (Level > ExperienceManager.MaxLevel)
                     {
-                        amount = (short)(ExperienceManager.MAX_LEVEL - oldLevel);
+                        amount = (short)(ExperienceManager.MaxLevel - oldLevel);
                     }
 
                     Record.Stats.LifePoints += (5 * amount);
@@ -988,10 +995,10 @@ namespace Giny.World.Managers.Entities.Characters
         }
         private void OnConnected()
         {
-            Guild?.OnConnected(this);
             this.Client.Send(new AlmanachCalendarDateMessage(1)); // for monsters!
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 89, new string[0]);
             this.Reply(ConfigFile.Instance.WelcomeMessage, Color.CornflowerBlue);
+            Guild?.OnConnected(this);
         }
         public void NoMove()
         {
@@ -1012,7 +1019,7 @@ namespace Giny.World.Managers.Entities.Characters
                 this.Map.Instance.AddEntity(this);
 
                 this.Map.Instance.SendMapComplementary(Client);
-                // this.Map.Instance.MapFightCount(Client);
+                this.Map.Instance.SendMapFightCount(Client);
 
                 foreach (Character current in this.Map.Instance.GetEntities<Character>())
                 {
@@ -1227,7 +1234,7 @@ namespace Giny.World.Managers.Entities.Characters
 
         public void SetExperience(long value)
         {
-            if (this.Level >= ExperienceManager.MAX_LEVEL_OMEGA)
+            if (this.Level >= ExperienceManager.MaxLevelOmega)
             {
                 return;
             }
@@ -1566,10 +1573,14 @@ namespace Giny.World.Managers.Entities.Characters
             });
         }
 
-        public void OnGuildCreated(GuildCreationResultEnum result)
+        public void OnGuildCreate(GuildCreationResultEnum result)
         {
             Client.Send(new GuildCreationResultMessage((byte)result));
-            Dialog.Close();
+
+            if (result == GuildCreationResultEnum.GUILD_CREATE_OK)
+            {
+                Dialog.Close();
+            }
         }
     }
 

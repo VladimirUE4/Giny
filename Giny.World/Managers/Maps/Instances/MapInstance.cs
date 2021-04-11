@@ -42,7 +42,6 @@ namespace Giny.World.Managers.Maps.Instances
             }
         }
 
-
         private List<MapElement> m_elements = new List<MapElement>();
 
         private ConcurrentDictionary<long, Entity> m_entities = new ConcurrentDictionary<long, Entity>();
@@ -211,9 +210,18 @@ namespace Giny.World.Managers.Maps.Instances
             if (fight.ShowBlades)
                 Send(new GameRolePlayRemoveChallengeMessage((short)fight.Id));
         }
+
         public void SendMapFightCount()
         {
-            Send(new MapFightCountMessage((short)m_fights.Count));
+            foreach (var character in GetEntities<Character>())
+            {
+                SendMapFightCount(character.Client);
+            }
+
+        }
+        public void SendMapFightCount(WorldClient client)
+        {
+            client.Send(new MapFightCountMessage((short)m_fights.Count));
         }
 
         public bool IsCellFree(short cellId, short exclude)

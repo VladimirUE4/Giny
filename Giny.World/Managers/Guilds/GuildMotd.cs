@@ -29,5 +29,11 @@ namespace Giny.World.Managers.Guilds
             get;
             set;
         }
+        [ProtoMember(4)]
+        public string MemberName
+        {
+            get;
+            set;
+        }
     }
 }

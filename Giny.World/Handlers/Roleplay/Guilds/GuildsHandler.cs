@@ -18,7 +18,15 @@ namespace Giny.World.Handlers.Roleplay.Guilds
         public static void HandleGuildCreationRequest(GuildCreationValidMessage message, WorldClient client)
         {
             GuildCreationResultEnum result = GuildsManager.Instance.CreateGuild(client.Character, message.guildName, message.guildEmblem);
-            client.Character.OnGuildCreated(result);
+            client.Character.OnGuildCreate(result);
+        }
+        [MessageHandler]
+        public static void HandleGuildMotdSetRequestMessage(GuildMotdSetRequestMessage message, WorldClient client)
+        {
+            if (client.Character.HasGuild)
+            {
+                client.Character.Guild.SetMotd(client.Character, message.content);
+            }
         }
 
         [MessageHandler]
@@ -47,17 +55,6 @@ namespace Giny.World.Handlers.Roleplay.Guilds
                 default:
                     break;
             }
-            client.Send(new GuildInformationsGeneralMessage()
-            {
-                abandonnedPaddock = false,
-                creationDate = 0,
-                experience = 0,
-                expLevelFloor = 0,
-                expNextLevelFloor = 0,
-                level = 1,
-                nbConnectedMembers = 0,
-                nbTotalMembers = 1,
-            });
         }
     }
 }

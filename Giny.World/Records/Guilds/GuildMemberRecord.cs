@@ -1,6 +1,10 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
+using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Experiences;
 using Giny.World.Network;
+using Giny.World.Records.Characters;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -64,6 +68,37 @@ namespace Giny.World.Records.Guilds
             MoodSmileyId = 0;
             Rank = (short)(owner ? 1 : 0);
             Rights = owner ? GuildRightsBitEnum.GUILD_RIGHT_BOSS : GuildRightsBitEnum.GUILD_RIGHT_NONE;
+        }
+
+        [WIP]
+        public GuildMember ToGuildMember()
+        {
+            bool connected = this.Connected;
+
+            CharacterRecord record = CharacterRecord.GetCharacterRecord(CharacterId);
+
+            WorldClient client = WorldServer.Instance.GetConnectedClient(record.Name);
+
+            return new GuildMember()
+            {
+                accountId = connected ? client.Account.Id : 0,
+                achievementPoints = 0,
+                alignmentSide = 0,
+                breed = record.BreedId,
+                connected = (byte)(Connected ? 1 : 0),
+                experienceGivenPercent = ExperienceGivenPercent,
+                givenExperience = GivenExperience,
+                havenBagShared = false,
+                hoursSinceLastConnection = 0,
+                id = CharacterId,
+                level = ExperienceManager.Instance.GetCharacterLevel(record.Experience),
+                moodSmileyId = MoodSmileyId,
+                name = record.Name,
+                rank = Rank,
+                rights = (int)Rights,
+                sex = record.Sex,
+                status = connected ? client.Character.GetPlayerStatus() : new PlayerStatus()
+            };
         }
     }
 }

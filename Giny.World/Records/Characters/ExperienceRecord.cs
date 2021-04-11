@@ -32,13 +32,7 @@ namespace Giny.World.Records.Characters
             get;
             set;
         }
-
-        [D2OField]
-        public long ExperienceGuild
-        {
-            get;
-            set;
-        }
+       
         [Update]
         public long ExperienceJob
         {
@@ -46,6 +40,12 @@ namespace Giny.World.Records.Characters
             set;
         }
 
+        [Update]
+        public long ExperienceGuild
+        {
+            get;
+            set;
+        }
         public static IEnumerable<ExperienceRecord> GetExperiences()
         {
             return Experiences.Values;

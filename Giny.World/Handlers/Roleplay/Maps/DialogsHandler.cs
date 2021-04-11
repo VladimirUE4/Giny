@@ -15,7 +15,7 @@ namespace Giny.World.Handlers.Roleplay.Maps
         [MessageHandler]
         public static void HandleLeaveDialogRequest(LeaveDialogRequestMessage message, WorldClient client)
         {
-            client.Send(new LeaveDialogMessage((byte)DialogTypeEnum.DIALOG_DIALOG));
+            client.Send(new LeaveDialogMessage((byte)client.Character.Dialog.DialogType));
             client.Character.LeaveDialog();
         }
     }

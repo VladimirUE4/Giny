@@ -15,7 +15,9 @@ namespace Giny.World.Managers.Guilds
 {
     public class GuildsManager : Singleton<GuildsManager>
     {
-        public const int MaxMemberCount = 100;
+        public const int MaxMemberCount = 240;
+
+        public const int MotdMaxLength = 255;
 
         private readonly Dictionary<long, Guild> Guilds = new Dictionary<long, Guild>();
 
@@ -46,7 +48,7 @@ namespace Giny.World.Managers.Guilds
         {
             if (owner.HasGuild)
             {
-                return GuildCreationResultEnum.GUILD_CREATE_ERROR_LEAVE;
+                return GuildCreationResultEnum.GUILD_CREATE_ERROR_ALREADY_IN_GUILD;
             }
 
             GuildEmblemRecord emblem = new GuildEmblemRecord(guildEmblem.symbolShape, guildEmblem.symbolColor, guildEmblem.backgroundShape,
