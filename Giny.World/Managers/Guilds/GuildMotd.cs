@@ -35,5 +35,11 @@ namespace Giny.World.Managers.Guilds
             get;
             set;
         }
+
+        public GuildMotd()
+        {
+            this.Content = string.Empty;
+            this.MemberName = string.Empty;
+        }
     }
 }

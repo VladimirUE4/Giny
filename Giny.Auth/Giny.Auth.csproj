@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFile.cs" />
+    <Compile Include="Handlers\BasicHandler.cs" />
     <Compile Include="Handlers\ConnectionHandler.cs" />
     <Compile Include="Handlers\IPCHandler.cs" />
     <Compile Include="Managers\TicketsManager.cs" />
