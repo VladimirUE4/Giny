@@ -67,6 +67,7 @@ namespace Giny.World.Managers.Guilds
             GuildMemberRecord memberRecord = new GuildMemberRecord(character, owner);
             Record.Members.Add(memberRecord);
             Record.UpdateElement();
+            OnlineMembers.Add(character);
             character.OnGuildJoined(this, memberRecord);
             return true;
         }

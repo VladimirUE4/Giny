@@ -58,6 +58,7 @@ namespace Giny.World.Network
             Logger.Write("Connected to IPCServer");
             Client.Send(new HandshakeMessage(ConfigFile.Instance.ServerId));
             Connected = true;
+
             if (!WorldServer.Instance.Started)
             {
                 WorldServer.Instance.Start(ConfigFile.Instance.Host, ConfigFile.Instance.Port);

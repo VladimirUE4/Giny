@@ -25,7 +25,8 @@ namespace Giny.World.Network
         {
             get;
             private set;
-        }
+        } = ServerStatusEnum.STARTING;
+
         private Server Server
         {
             get;
@@ -41,7 +42,6 @@ namespace Giny.World.Network
         public WorldServer()
         {
             this.Clients = new SynchronizedCollection<WorldClient>();
-            SetServerStatus(ServerStatusEnum.OFFLINE);
             this.Started = false;
         }
 

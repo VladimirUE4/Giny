@@ -8,6 +8,7 @@ using Giny.Protocol.Messages;
 using Giny.World.Managers.Breeds;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Entities.Merchants;
+using Giny.World.Managers.Guilds;
 using Giny.World.Network;
 using Giny.World.Records;
 using Giny.World.Records.Breeds;
@@ -104,6 +105,11 @@ namespace Giny.World.Managers.Entities.Characters
 
             MerchantItemRecord.RemoveMerchantItems(character.Id);
             CharacterItemRecord.RemoveCharacterItems(character.Id);
+
+            if (character.GuildId != 0)
+            {
+                GuildsManager.Instance.OnCharacterDeleted(character);
+            }
         }
         public CharacterRecord CreateCharacter(long id, string name, int accountId, byte breedId, bool sex, short cosmeticId, int[] colors)
         {

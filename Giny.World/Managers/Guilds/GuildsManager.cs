@@ -4,6 +4,7 @@ using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Records.Characters;
 using Giny.World.Records.Guilds;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,13 @@ namespace Giny.World.Managers.Guilds
         public Guild GetGuild(long guildId)
         {
             return Guilds[guildId];
+        }
+        [WIP]
+        public void OnCharacterDeleted(CharacterRecord character)
+        {
+            Guild guild = GetGuild(character.GuildId);
+
+           
         }
     }
 }
