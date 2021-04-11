@@ -30,7 +30,7 @@ namespace Giny.DatabasePatcher
 
         public void Initialize()
         {
-            JobExperience.Patch();
+            Experiences.Patch();
             ItemAppearances.Patch();
             LivingObjects.Patch();
             MapPlacements.Patch();

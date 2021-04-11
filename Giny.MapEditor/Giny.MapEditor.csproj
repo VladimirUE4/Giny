@@ -186,10 +186,6 @@
       <Project>{8AB2DC30-B9CC-4D45-8104-71B384BB5F57}</Project>
       <Name>Giny.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Giny.Graphics\Giny.Graphics.csproj">
-      <Project>{2c244c11-c940-4a21-baef-7d1e18dff67d}</Project>
-      <Name>Giny.Graphics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Giny.IO\Giny.IO.csproj">
       <Project>{125FA15D-C012-4AF3-8A65-F6A104A67FC1}</Project>
       <Name>Giny.IO</Name>
@@ -197,6 +193,10 @@
     <ProjectReference Include="..\Giny.ORM\Giny.ORM.csproj">
       <Project>{c6182b67-9d36-4e64-8ba9-9e186f818667}</Project>
       <Name>Giny.ORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giny.Wpf\Giny.Wpf.csproj">
+      <Project>{2c244c11-c940-4a21-baef-7d1e18dff67d}</Project>
+      <Name>Giny.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

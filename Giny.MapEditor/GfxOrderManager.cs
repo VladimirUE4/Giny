@@ -1,5 +1,4 @@
 ﻿using Giny.Core;
-using Giny.Graphics.Gfx;
 using Giny.IO.D2I;
 using Giny.IO.D2O;
 using Giny.IO.D2OClasses;
@@ -13,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Giny.Graphics.Gfx;
 
 namespace Giny.MapEditor
 {

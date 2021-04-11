@@ -20,6 +20,7 @@ using Giny.World.Managers.Exchanges;
 using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Guilds;
 using Giny.World.Managers.Items;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Elements;
@@ -33,6 +34,7 @@ using Giny.World.Records;
 using Giny.World.Records.Bidshops;
 using Giny.World.Records.Breeds;
 using Giny.World.Records.Characters;
+using Giny.World.Records.Guilds;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
@@ -112,6 +114,19 @@ namespace Giny.World.Managers.Entities.Characters
             get;
             private set;
         }
+        public Guild Guild
+        {
+            get;
+            private set;
+        }
+        [WIP("useless?")]
+        public GuildMemberRecord GuildMember
+        {
+            get;
+            private set;
+        }
+        public bool HasGuild => Record.GuildId != 0;
+
         public WorldClient Client
         {
             get;
@@ -152,7 +167,6 @@ namespace Giny.World.Managers.Entities.Characters
                 this.UpperBoundExperience = ExperienceManager.Instance.GetCharacterXPForNextLevel(Level);
             }
         }
-
 
 
         public short SafeLevel
@@ -422,6 +436,11 @@ namespace Giny.World.Managers.Entities.Characters
                 HumanOptions.Add(HumanOptionsManager.Instance.CreateHumanOptionTitle(this));
             }
 
+            if (Guild != null)
+            {
+                HumanOptions.Add(HumanOptionsManager.Instance.CreateHumanOptionGuild());
+            }
+
             CharacterApi.HumanOptionsCreated(this);
 
         }
@@ -528,6 +547,14 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new JobDescriptionMessage(Record.Jobs.Select(x => x.GetJobDescription()).ToArray()));
             Client.Send(new JobExperienceMultiUpdateMessage(Record.Jobs.Select(x => x.GetJobExperience()).ToArray()));
         }
+        public void RefreshGuild()
+        {
+            if (HasGuild)
+            {
+                Guild = GuildsManager.Instance.GetGuild(Record.GuildId);
+                GuildMember = Guild.Record.GetMember(Id);
+            }
+        }
         public CharacterJob GetJob(JobsTypeEnum jobType)
         {
             return Record.Jobs.FirstOrDefault(x => x.JobId == (byte)jobType);
@@ -583,6 +610,10 @@ namespace Giny.World.Managers.Entities.Characters
         public void OpenZaap(MapElement element)
         {
             this.OpenDialog(new ZaapDialog(this, element));
+        }
+        public void OpenGuildCreationDialog()
+        {
+            this.OpenDialog(new GuildCreationDialog(this));
         }
         public void OpenZaapi(MapElement element)
         {
@@ -957,8 +988,8 @@ namespace Giny.World.Managers.Entities.Characters
         }
         private void OnConnected()
         {
+            Guild?.OnConnected(this);
             this.Client.Send(new AlmanachCalendarDateMessage(1)); // for monsters!
-
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 89, new string[0]);
             this.Reply(ConfigFile.Instance.WelcomeMessage, Color.CornflowerBlue);
         }
@@ -1002,8 +1033,8 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void OnDisconnected()
         {
-            Record.Connected = false;
-
+            Record.InGameContext = false;
+            Guild?.OnDisconnected(this);
             Record.UpdateElement();
 
             if (Dialog != null)
@@ -1346,6 +1377,10 @@ namespace Giny.World.Managers.Entities.Characters
             });
 
         }
+        public void DisplayNotification(string message)
+        {
+            Client.Send(new NotificationByServerMessage(24, new string[] { message }, true));
+        }
         public void DisplaySystemMessage(bool hangUp, short msgId, params string[] parameters)
         {
             Client.Send(new SystemMessageDisplayMessage(hangUp, msgId, parameters));
@@ -1514,6 +1549,27 @@ namespace Giny.World.Managers.Entities.Characters
 
             this.Map.Instance.SendMapComplementary(Client);
 
+        }
+
+        public void OnGuildJoined(Guild guild, GuildMemberRecord memberRecord)
+        {
+            this.Guild = guild;
+            this.GuildMember = memberRecord;
+            this.Record.GuildId = Guild.Id;
+
+            this.AddHumanOption(HumanOptionsManager.Instance.CreateHumanOptionGuild(), true);
+
+            Client.Send(new GuildJoinedMessage()
+            {
+                guildInfo = Guild.GetGuildInformations(),
+                memberRights = memberRecord.Rank
+            });
+        }
+
+        public void OnGuildCreated(GuildCreationResultEnum result)
+        {
+            Client.Send(new GuildCreationResultMessage((byte)result));
+            Dialog.Close();
         }
     }
 

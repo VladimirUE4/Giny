@@ -11,19 +11,21 @@ namespace Giny.World.Managers.Criterias
     [Criteria("Pw")]
     public class HasGuildCriteria : Criteria
     {
-        [WIP]
         public override bool Eval(WorldClient client)
         {
-            return false;
+            return client.Character.HasGuild;
         }
     }
     [Criteria("Py")]
     public class GuildLevelCriteria : Criteria
     {
-        [WIP]
         public override bool Eval(WorldClient client)
         {
-            return false;
+            if (!client.Character.HasGuild)
+            {
+                return false;
+            }
+            return BasicEval(CriteriaValue, ComparaisonSymbol, client.Character.Guild.Level);
         }
     }
 }

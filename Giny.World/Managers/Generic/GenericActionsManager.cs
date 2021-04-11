@@ -46,7 +46,6 @@ namespace Giny.World.Managers.Generic
                     return false;
                 }
 
-
                 handler.Method.Invoke(null, new object[] { character, parameter });
                 return true;
             }

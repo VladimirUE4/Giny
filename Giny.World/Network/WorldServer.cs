@@ -45,6 +45,7 @@ namespace Giny.World.Network
             this.Started = false;
         }
 
+      
         public void Start(string ip, int port)
         {
             this.Server = new Server(ip, port);
@@ -64,6 +65,11 @@ namespace Giny.World.Network
         {
             Clients.Add(client);
         }
+        public bool IsOnline(long characterId)
+        {
+            return GetConnectedClients().Any(x => x.Character.Id == characterId);
+        }
+
         public void OnConnectedClients(Action<WorldClient> action)
         {
             foreach (var client in Clients.Where(x => x.InGame))

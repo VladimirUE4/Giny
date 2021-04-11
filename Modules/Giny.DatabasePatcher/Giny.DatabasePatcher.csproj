@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Experience\JobExperience.cs" />
+    <Compile Include="Experience\Experiences.cs" />
     <Compile Include="Items\LivingObjects.cs" />
     <Compile Include="Maps\StatedElements.cs" />
     <Compile Include="Items\ItemAppearances.cs" />
@@ -83,6 +83,8 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

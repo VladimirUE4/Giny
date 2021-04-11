@@ -28,31 +28,27 @@ namespace Giny.World.Managers.Experiences
 
         public short GetCharacterLevel(long experience)
         {
-            try
-            {
-                if (experience >= HighestExperienceOmega.ExperienceCharacter)
-                    return MAX_LEVEL_OMEGA;
+            if (experience >= HighestExperienceOmega.ExperienceCharacter)
+                return MAX_LEVEL_OMEGA;
 
-                return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceCharacter > experience).Level - 1);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new Exception(string.Format("Experience {0} isn't bind to a character level", experience), ex);
-            }
+            return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceCharacter > experience).Level - 1);
         }
+
+
         public short GetJobLevel(long experience)
         {
-            try
-            {
-                if (experience >= HighestExperience.ExperienceJob)
-                    return MAX_LEVEL;
+            if (experience >= HighestExperience.ExperienceJob)
+                return MAX_LEVEL;
 
-                return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceJob > experience).Level - 1);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new Exception(string.Format("Experience {0} isn't bind to a character level", experience), ex);
-            }
+            return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceJob > experience).Level - 1);
+        }
+
+        public byte GetGuildLevel(long experience)
+        {
+            if (experience >= HighestExperience.ExperienceGuild)
+                return (byte)MAX_LEVEL;
+
+            return (byte)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceGuild > experience).Level - 1);
         }
 
         public long GetJobXPForLevel(short level)
@@ -66,6 +62,18 @@ namespace Giny.World.Managers.Experiences
 
             return GetJobXPForLevel((short)(level + 1));
         }
+        public long GetGuildXPForLevel(byte level)
+        {
+            return ExperienceRecord.GetExperienceForLevel(level).ExperienceGuild;
+        }
+        public long GetGuildXPForNextLevel(byte level)
+        {
+            if (level >= MAX_LEVEL)
+                return HighestExperience.ExperienceGuild;
+
+            return GetGuildXPForLevel((byte)(level + 1));
+        }
+
         public long GetCharacterXPForLevel(short level)
         {
             return ExperienceRecord.GetExperienceForLevel(level).ExperienceCharacter;

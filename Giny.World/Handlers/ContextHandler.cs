@@ -17,7 +17,7 @@ namespace Giny.World.Handlers
         [MessageHandler]
         public static void HandleGameContextCreateRequestMessage(GameContextCreateRequestMessage message, WorldClient client)
         {
-            client.Character.Record.Connected = true;
+            client.Character.Record.InGameContext = true;
 
             if (client.Character.Record.IsInFight)
             {

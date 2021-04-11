@@ -19,6 +19,8 @@ namespace Giny.ORM.IO
 {
     public class DatabaseWriter
     {
+        private const string SqlDateFormat = "yyyy-MM-dd HH:mm:ss";
+
         private string TableName
         {
             get;
@@ -190,9 +192,9 @@ namespace Giny.ORM.IO
 
             if (property.PropertyType == typeof(DateTime))
             {
-                value = ((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss");
+                value = ((DateTime)value).ToString(SqlDateFormat);
             }
-            else if (property.PropertyType == typeof(Boolean))
+            else if (property.PropertyType == typeof(bool))
             {
                 value = Convert.ToByte(value);
             }

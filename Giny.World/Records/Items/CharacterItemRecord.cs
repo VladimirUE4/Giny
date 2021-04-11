@@ -63,6 +63,10 @@ namespace Giny.World.Records.Items
         {
             return CharactersItems.Values.Where(x => x.CharacterId == characterId);
         }
+        public static long GetCharactersItemsCount()
+        {
+            return CharactersItems.Count;
+        }
 
         public override string ToString()
         {

@@ -11,6 +11,7 @@ using Giny.World.Network;
 using Giny.World.Records;
 using Giny.World.Records.Accounts;
 using Giny.World.Records.Characters;
+using Giny.World.Records.Guilds;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
@@ -46,6 +47,7 @@ namespace Giny.World
                     DatabaseManager.Instance.DeleteTable<BidShopItemRecord>();
                     DatabaseManager.Instance.DeleteTable<CharacterItemRecord>();
                     DatabaseManager.Instance.DeleteTable<BidShopItemRecord>();
+                    DatabaseManager.Instance.DeleteTable<GuildRecord>();
 
                     Environment.Exit(0);
                 }

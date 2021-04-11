@@ -48,6 +48,7 @@
     <Compile Include="Custom\Enums\EffectSchoolEnum.cs" />
     <Compile Include="Custom\Enums\EffectsEnum.cs" />
     <Compile Include="Custom\Enums\GameActionMarkTypeEnum.cs" />
+    <Compile Include="Custom\Enums\GuildCreationResultEnum.cs" />
     <Compile Include="Custom\Enums\JobTypeEnum.cs" />
     <Compile Include="Custom\Enums\SkillTypeEnum.cs" />
     <Compile Include="Custom\Enums\InteractiveTypeEnum.cs" />

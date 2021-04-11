@@ -156,8 +156,12 @@ namespace Giny.World.Handlers.Approach
             client.Send(new CharacterCapabilitiesMessage(4095));
             client.Send(new SequenceNumberRequestMessage());
 
+            /*
+             * -- Do not change order --
+             */
             client.Character.RefreshJobs();
             client.Character.RefreshSpells();
+            client.Character.RefreshGuild();
             client.Character.RefreshEmotes();
             client.Character.Inventory.Refresh();
             client.Character.RefreshShortcuts();

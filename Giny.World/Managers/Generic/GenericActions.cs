@@ -89,5 +89,11 @@ namespace Giny.World.Managers.Generic
         {
             character.LearnTitle(short.Parse(parameter.Param1));
         }
+
+        [GenericActionHandler(GenericActionEnum.CreateGuild, 0)]
+        public static void HandleCreateGuild(Character character, IGenericActionParameter parameter)
+        {
+            character.OpenGuildCreationDialog();
+        }
     }
 }

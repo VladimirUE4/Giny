@@ -225,7 +225,7 @@ namespace Giny.ORM.IO
             }
             else if (property.PropertyType == typeof(bool))
             {
-                return Convert.ToBoolean(Convert.ToInt16(obj));
+                return Convert.ToBoolean(Convert.ToByte(obj));
             }
             try
             {

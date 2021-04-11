@@ -18,5 +18,6 @@ namespace Giny.World.Managers.Generic
         Bidshop,
         Zaap,
         Zaapi,
+        CreateGuild,
     }
 }

@@ -32,6 +32,13 @@ namespace Giny.World.Records.Characters
             get;
             set;
         }
+
+        [D2OField]
+        public long ExperienceGuild
+        {
+            get;
+            set;
+        }
         [Update]
         public long ExperienceJob
         {

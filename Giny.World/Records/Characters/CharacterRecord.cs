@@ -168,6 +168,13 @@ namespace Giny.World.Records.Characters
             get;
             set;
         }
+
+        [Update]
+        public long GuildId
+        {
+            get;
+            set;
+        }
         [Ignore]
         public int? FightId
         {
@@ -179,11 +186,12 @@ namespace Giny.World.Records.Characters
         public bool IsInFight => FightId != null;
     
         [Ignore]
-        public bool Connected
+        public bool InGameContext
         {
             get;
             set;
         }
+
 
         public CharacterRecord()
         {
@@ -246,6 +254,8 @@ namespace Giny.World.Records.Characters
                 ActiveTitleId = 0,
                 KnownTitles = new List<short>(),
                 Jobs = CharacterJob.New().ToArray(),
+                GuildId = 0,
+               
             };
         }
         public static IEnumerable<CharacterRecord> GetCharacterRecords()

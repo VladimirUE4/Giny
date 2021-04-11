@@ -17,5 +17,9 @@ namespace Giny.World.Managers.Entities.Characters.HumanOptions
         {
             return new CharacterHumanOptionTitle(character.Record.ActiveTitleId, string.Empty);
         }
+        public CharacterHumanOptionGuild CreateHumanOptionGuild()
+        {
+            return new CharacterHumanOptionGuild();
+        }
     }
 }

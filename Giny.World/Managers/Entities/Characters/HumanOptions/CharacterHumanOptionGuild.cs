@@ -15,7 +15,10 @@ namespace Giny.World.Managers.Entities.Characters.HumanOptions
         }
         public override HumanOption GetHumanOption(Character character)
         {
-            throw new NotImplementedException();
+            return new HumanOptionGuild()
+            {
+                guildInformations = character.Guild.GetGuildInformations(),
+            };
         }
     }
 }

@@ -106,9 +106,18 @@ namespace Giny.Dungeons
 
                 MapPositionRecord positionRecord = MapPositionRecord.GetMapPosition(mapId);
 
-                mapName.Content = positionRecord.Name;
+                if (positionRecord != null)
+                {
+                    mapName.Content = positionRecord.Name;
+
+                }
+                else
+                {
+                    mapName.Content = "None";
+                }
 
                 respawnDelay.Text = SelectedDungeon.Rooms[mapId].RespawnDelay.ToString();
+
             }
         }
 

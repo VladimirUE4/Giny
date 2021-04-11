@@ -163,7 +163,7 @@ namespace Giny.World.Network
 
             Send(new TrustStatusMessage(true, true));
 
-            if (Characters.Any(x => x.Connected))
+            if (Characters.Any(x => x.InGameContext))
             {
                 this.Disconnect();
             }
