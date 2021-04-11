@@ -17,7 +17,7 @@ namespace Giny.World.Web
 
         public bool AddGift(int accountId, int tokenId, int tokenCount)
         {
-            WorldClient client = WorldServer.Instance.GetConnectedClients().FirstOrDefault(x => x.Account.Id == accountId);
+            WorldClient client = WorldServer.Instance.GetOnlineClients().FirstOrDefault(x => x.Account.Id == accountId);
 
             if (client != null)
             {

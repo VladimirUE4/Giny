@@ -88,7 +88,7 @@ namespace Giny.World.Managers.Exchanges
                 {
                     if (Character.RemoveKamas(price))
                     {
-                        
+
                         bought = true;
                         Character.Inventory.AddItem(item.ToCharacterItemRecord(Character.Id));
                         this.OnItemBuy(item);
@@ -197,7 +197,7 @@ namespace Giny.World.Managers.Exchanges
         }
         public void OnItemBuy(BidShopItemRecord item)
         {
-            var client = WorldServer.Instance.GetConnectedClient(item.AccountId);
+            var client = WorldServer.Instance.GetOnlineClient(x => x.Account.Id == item.AccountId);
 
             if (client != null)
             {

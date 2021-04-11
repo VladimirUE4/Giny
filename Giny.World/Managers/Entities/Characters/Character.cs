@@ -133,6 +133,7 @@ namespace Giny.World.Managers.Entities.Characters
             private set;
         }
 
+   
         public bool ChangeMap
         {
             get;
@@ -998,6 +999,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.Client.Send(new AlmanachCalendarDateMessage(1)); // for monsters!
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 89, new string[0]);
             this.Reply(ConfigFile.Instance.WelcomeMessage, Color.CornflowerBlue);
+            CheckSoldItems();
             Guild?.OnConnected(this);
         }
         public void NoMove()
@@ -1558,6 +1560,15 @@ namespace Giny.World.Managers.Entities.Characters
 
         }
 
+        public void OnGuildCreate(GuildCreationResultEnum result)
+        {
+            Client.Send(new GuildCreationResultMessage((byte)result));
+
+            if (result == GuildCreationResultEnum.GUILD_CREATE_OK)
+            {
+                Dialog.Close();
+            }
+        }
         public void OnGuildJoined(Guild guild, GuildMemberRecord memberRecord)
         {
             this.Guild = guild;
@@ -1572,16 +1583,15 @@ namespace Giny.World.Managers.Entities.Characters
                 memberRights = memberRecord.Rank
             });
         }
-
-        public void OnGuildCreate(GuildCreationResultEnum result)
+        public void OnGuildKick(Guild guild)
         {
-            Client.Send(new GuildCreationResultMessage((byte)result));
-
-            if (result == GuildCreationResultEnum.GUILD_CREATE_OK)
-            {
-                Dialog.Close();
-            }
+            Guild = null;
+            GuildMember = null;
+            Record.GuildId = 0;
+            RemoveAllHumanOption<CharacterHumanOptionGuild>(true);
+            Client.Send(new GuildLeftMessage());
         }
+
     }
 
 }

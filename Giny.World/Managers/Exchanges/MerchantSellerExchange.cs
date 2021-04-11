@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Custom.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Entities.Characters;
@@ -62,6 +63,7 @@ namespace Giny.World.Managers.Exchanges
 
         }
 
+        [WIP("probleme quantité.")]
         public void Buy(int uid, int quantity)
         {
             MerchantItemRecord item = Merchant.GetItem(uid);
@@ -80,10 +82,7 @@ namespace Giny.World.Managers.Exchanges
                 return;
             }
 
-            this.Character.Client.Send(new ExchangeShopStockMovementRemovedMessage()
-            {
-                objectId = item.UId,
-            });
+
 
             item.Sold = true;
 
@@ -94,6 +93,21 @@ namespace Giny.World.Managers.Exchanges
             Merchant.RemoveItem(item, quantity);
 
             Character.OnItemGained(item.GId, quantity);
+
+            if (item.Quantity == quantity)
+            {
+                this.Character.Client.Send(new ExchangeShopStockMovementRemovedMessage()
+                {
+                    objectId = item.UId,
+                });
+            }
+            else
+            {
+                this.Character.Client.Send(new ExchangeShopStockMovementUpdatedMessage()
+                {
+                    objectInfo = item.GetObjectItemToSell(),
+                });
+            }
 
             Character.Client.Send(new ExchangeBuyOkMessage());
 

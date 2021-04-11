@@ -28,7 +28,7 @@ namespace Giny.World.Network
         public void ConnectToAuth()
         {
             Client = new IPCClient();
-            Client.Connect("127.0.0.1", 800);
+            Client.Connect(ConfigFile.Instance.IPCHost, ConfigFile.Instance.IPCPort);
         }
 
         public void SendRequest<T>(IPCMessage message, IPCRequestManager.RequestCallbackDelegate<T> sucess, IPCRequestManager.RequestCallbackErrorDelegate error) where T : IPCMessage
@@ -47,7 +47,7 @@ namespace Giny.World.Network
 
 
             Logger.Write("Lost connection to IPC Server. Trying again in 2s", Channels.Warning);
-           
+
             Thread.Sleep(2000);
 
             ConnectToAuth();

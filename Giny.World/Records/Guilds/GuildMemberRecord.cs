@@ -3,6 +3,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Experiences;
+using Giny.World.Managers.Guilds;
 using Giny.World.Network;
 using Giny.World.Records.Characters;
 using ProtoBuf;
@@ -17,8 +18,6 @@ namespace Giny.World.Records.Guilds
     [ProtoContract]
     public class GuildMemberRecord
     {
-        public bool Connected => WorldServer.Instance.IsOnline(CharacterId);
-
         [ProtoMember(1)]
         public long CharacterId
         {
@@ -71,13 +70,13 @@ namespace Giny.World.Records.Guilds
         }
 
         [WIP]
-        public GuildMember ToGuildMember()
+        public GuildMember ToGuildMember(Guild guild)
         {
-            bool connected = this.Connected;
+            bool connected = guild.IsMemberConnected(CharacterId);
 
             CharacterRecord record = CharacterRecord.GetCharacterRecord(CharacterId);
 
-            WorldClient client = WorldServer.Instance.GetConnectedClient(record.Name);
+            WorldClient client = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == record.Name);
 
             return new GuildMember()
             {
@@ -85,7 +84,7 @@ namespace Giny.World.Records.Guilds
                 achievementPoints = 0,
                 alignmentSide = 0,
                 breed = record.BreedId,
-                connected = (byte)(Connected ? 1 : 0),
+                connected = (byte)(connected ? 1 : 0),
                 experienceGivenPercent = ExperienceGivenPercent,
                 givenExperience = GivenExperience,
                 havenBagShared = false,
@@ -99,6 +98,11 @@ namespace Giny.World.Records.Guilds
                 sex = record.Sex,
                 status = connected ? client.Character.GetPlayerStatus() : new PlayerStatus()
             };
+        }
+
+        public bool HasRight(GuildRightsBitEnum rights)
+        {
+            return Rights.HasFlag(rights) || Rights.HasFlag(GuildRightsBitEnum.GUILD_RIGHT_BOSS);
         }
     }
 }

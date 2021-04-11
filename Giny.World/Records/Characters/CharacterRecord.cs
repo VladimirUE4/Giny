@@ -184,7 +184,13 @@ namespace Giny.World.Records.Characters
 
         [Ignore]
         public bool IsInFight => FightId != null;
-    
+
+        /*
+         * If the client has selected a character and 
+         * a context (roleplay or fight) has been created
+         * 
+         * Do not use it if not necessary. Use WorldClient.InGame() instead
+         */
         [Ignore]
         public bool InGameContext
         {

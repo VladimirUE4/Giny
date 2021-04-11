@@ -13,6 +13,14 @@ namespace Giny.World.Managers.Chat
     [WIP("Muted")]
     class ChatChannels
     {
+        [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_GUILD)]
+        public static void HandleChatGuild(WorldClient client, string message)
+        {
+            if (client.Character.HasGuild)
+            {
+                client.Character.Guild.Send(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.CHANNEL_GUILD, message, client));
+            }
+        }
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_PARTY)]
         public static void HandleChatParty(WorldClient client, string message)
         {

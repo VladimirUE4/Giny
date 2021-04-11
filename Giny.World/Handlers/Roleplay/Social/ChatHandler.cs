@@ -34,7 +34,7 @@ namespace Giny.World.Handlers.Roleplay.Social
                 return;
             }
 
-            WorldClient target = WorldServer.Instance.GetConnectedClient(message.receiver);
+            WorldClient target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.receiver);
 
             if (target != null)
             {

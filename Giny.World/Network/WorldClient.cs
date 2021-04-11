@@ -51,9 +51,12 @@ namespace Giny.World.Network
         {
             get
             {
-                return Character != null;
+                return CharacterSelected && Character.Record.InGameContext;
             }
         }
+
+        public bool CharacterSelected => Character != null;
+
         public Character Character
         {
             get;

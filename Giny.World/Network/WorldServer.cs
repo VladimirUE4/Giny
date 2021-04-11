@@ -21,6 +21,9 @@ namespace Giny.World.Network
             get;
             private set;
         }
+
+      
+
         public ServerStatusEnum Status
         {
             get;
@@ -45,7 +48,7 @@ namespace Giny.World.Network
             this.Started = false;
         }
 
-      
+
         public void Start(string ip, int port)
         {
             this.Server = new Server(ip, port);
@@ -65,29 +68,36 @@ namespace Giny.World.Network
         {
             Clients.Add(client);
         }
+
         public bool IsOnline(long characterId)
         {
-            return GetConnectedClients().Any(x => x.Character.Id == characterId);
+            return GetOnlineClients().Any(x => x.Character.Id == characterId);
         }
 
-        public void OnConnectedClients(Action<WorldClient> action)
+        public void Foreach(Action<WorldClient> action)
         {
-            foreach (var client in Clients.Where(x => x.InGame))
+            foreach (var client in GetOnlineClients())
             {
                 action(client);
             }
         }
-        public IEnumerable<WorldClient> GetConnectedClients()
+        public IEnumerable<WorldClient> GetOnlineClients()
         {
             return Clients.Where(x => x.InGame);
         }
-        public WorldClient GetConnectedClient(string name)
+        /// <summary>
+        /// Returns a client who is not necessarily connected in game 
+        /// </summary>
+        public WorldClient GetClient(Func<WorldClient, bool> predicate)
         {
-            return Clients.FirstOrDefault(x => x.Character.Name == name);
+            return Clients.FirstOrDefault(predicate);
         }
-        public WorldClient GetConnectedClient(int accountId)
+        /// <summary>
+        /// Returns a client who is connected in game 
+        /// </summary>
+        public WorldClient GetOnlineClient(Func<WorldClient, bool> predicate)
         {
-            return Clients.FirstOrDefault(x => x.InGame && x.Account.Id == accountId);
+            return Clients.Where(x => x.InGame).FirstOrDefault(predicate);
         }
         private void OnClientConnected(Socket acceptSocket)
         {
@@ -124,10 +134,6 @@ namespace Giny.World.Network
         {
             Logger.Write("(World) World Server started", Channels.Log);
             SetServerStatus(ServerStatusEnum.ONLINE);
-        }
-        public WorldClient GetWorldClient(int accountId)
-        {
-            return Clients.FirstOrDefault(x => x.Account.Id == accountId);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using Giny.Core.Time;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,6 +12,22 @@ namespace Giny.Core.Extensions
 {
     public static class CollectionsExtensions
     {
+        public static T2 TryGetValue<T1, T2>(this ConcurrentDictionary<T1, T2> dictionary, T1 key) where T2 : class
+        {
+            T2 result;
+
+            if (!dictionary.TryGetValue(key, out result))
+            {
+                return null;
+            }
+
+            return result;
+        }
+        public static bool TryRemove<T1, T2>(this ConcurrentDictionary<T1, T2> dictionnary, T1 key)
+        {
+            T2 result;
+            return dictionnary.TryRemove(key, out result);
+        }
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
             HashSet<TKey> seenKeys = new HashSet<TKey>();

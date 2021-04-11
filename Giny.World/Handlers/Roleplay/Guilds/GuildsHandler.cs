@@ -2,8 +2,11 @@
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
+using Giny.World.Managers.Dialogs;
+using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Guilds;
 using Giny.World.Network;
+using Giny.World.Records.Guilds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +57,59 @@ namespace Giny.World.Handlers.Roleplay.Guilds
                     break;
                 default:
                     break;
+            }
+        }
+        [MessageHandler]
+        public static void GuildChangeMemberParameters(GuildChangeMemberParametersMessage message, WorldClient client)
+        {
+
+        }
+
+        [MessageHandler]
+        public static void HandleGuildKickRequestMessage(GuildKickRequestMessage message, WorldClient client)
+        {
+            if (!client.Character.HasGuild)
+            {
+                return;
+            }
+
+            GuildMemberRecord member = client.Character.Guild.Record.GetMember(message.kickedId);
+
+            if (member != null)
+            {
+                client.Character.Guild.Leave(client.Character, member);
+            }
+        }
+        [MessageHandler]
+        public static void HandleGuildInvitationAnswer(GuildInvitationAnswerMessage message, WorldClient client)
+        {
+            if (!client.Character.HasGuild && client.Character.HasRequestBoxOpen<GuildInvitationRequest>())
+            {
+                if (message.accept)
+                    client.Character.RequestBox.Accept();
+                else
+                    client.Character.RequestBox.Deny();
+            }
+        }
+        [MessageHandler]
+        public static void HandleGuildInvitation(GuildInvitationMessage message, WorldClient client)
+        {
+            if (client.Character.GuildMember.HasRight(GuildRightsBitEnum.GUILD_RIGHT_INVITE_NEW_MEMBERS))
+            {
+                var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Id == message.targetId);
+
+                if (target == null)
+                    client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 208);
+                else if (target.Character.HasGuild)
+                    client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 206);
+                else if (target.Character.Busy)
+                    client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 209);
+                else if (!client.Character.Guild.CanAddMember())
+                    client.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 55, GuildsManager.MaxMemberCount);
+                else
+                {
+                    target.Character.OpenRequestBox(new GuildInvitationRequest(client.Character, target.Character));
+                }
             }
         }
     }

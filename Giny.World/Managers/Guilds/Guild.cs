@@ -1,6 +1,9 @@
-﻿using Giny.Core.Extensions;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.Network.Messages;
 using Giny.ORM;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
@@ -9,6 +12,7 @@ using Giny.World.Network;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Guilds;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +29,7 @@ namespace Giny.World.Managers.Guilds
             get;
             private set;
         }
-        private SynchronizedCollection<Character> OnlineMembers
+        private ConcurrentDictionary<long, Character> OnlineMembers
         {
             get;
             set;
@@ -36,8 +40,6 @@ namespace Giny.World.Managers.Guilds
         public long ExperienceLowerBound => ExperienceManager.Instance.GetGuildXPForLevel(Level);
 
         public long ExperienceUpperBound => ExperienceManager.Instance.GetGuildXPForNextLevel(Level);
-
-
 
         public long Experience
         {
@@ -54,7 +56,7 @@ namespace Giny.World.Managers.Guilds
         public Guild(GuildRecord record)
         {
             this.Record = record;
-            this.OnlineMembers = new SynchronizedCollection<Character>();
+            this.OnlineMembers = new ConcurrentDictionary<long, Character>();
         }
 
         public bool Join(Character character, bool owner)
@@ -67,24 +69,76 @@ namespace Giny.World.Managers.Guilds
             GuildMemberRecord memberRecord = new GuildMemberRecord(character, owner);
             Record.Members.Add(memberRecord);
             Record.UpdateElement();
-            OnlineMembers.Add(character);
+            OnlineMembers.TryAdd(character.Id, character);
             character.OnGuildJoined(this, memberRecord);
             return true;
         }
 
+        /*
+         * If the member is connected from the guild point of view (when character loading is complete)
+         */
+        public bool IsMemberConnected(long characterId)
+        {
+            return OnlineMembers.ContainsKey(characterId);
+        }
+
         public void OnConnected(Character character)
         {
-            OnlineMembers.Add(character);
+            OnlineMembers.TryAdd(character.Id, character);
             RefreshMotd(character);
         }
         public void OnDisconnected(Character character)
         {
-            OnlineMembers.Remove(character);
+            OnlineMembers.TryRemove(character.Id);
         }
 
+        public void Leave(Character source, GuildMemberRecord member)
+        {
+            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS || source.Guild != this)
+            {
+                return;
+            }
+
+            bool kicked = source.Id != member.CharacterId;
+
+            if (IsMemberConnected(member.CharacterId))
+            {
+                Character target = GetOnlineMember(member.CharacterId);
+
+                if (member == null)
+                {
+                    Logger.Write("Unable to kick member from guild " + Id + ". The player is not yet connected.", Channels.Warning);
+                    return;
+                }
+
+                OnlineMembers.TryRemove(target.Id);
+
+                target.OnGuildKick(this);
+            }
+            else
+            {
+                CharacterRecord characterRecord = CharacterRecord.GetCharacterRecord(member.CharacterId);
+                characterRecord.GuildId = 0;
+            }
+
+
+            Record.Members.Remove(member);
+
+            Record.UpdateElement();
+
+            Send(new GuildMemberLeavingMessage()
+            {
+                kicked = kicked,
+                memberId = member.CharacterId
+            });
+        }
+        public Character GetOnlineMember(long id)
+        {
+            return OnlineMembers.TryGetValue(id);
+        }
         public void SetMotd(Character source, string content)
         {
-            if (content.Length > GuildsManager.MotdMaxLength)
+            if (content.Length > GuildsManager.MotdMaxLength || content == string.Empty)
             {
                 return;
             }
@@ -104,13 +158,17 @@ namespace Giny.World.Managers.Guilds
         }
         public void RefreshMotd()
         {
-            foreach (var character in OnlineMembers)
+            foreach (var character in OnlineMembers.Values)
             {
                 RefreshMotd(character);
             }
         }
         public void RefreshMotd(Character member)
         {
+            if (Record.Motd.Content == string.Empty)
+            {
+                return;
+            }
             member.Client.Send(new GuildMotdMessage()
             {
                 content = Record.Motd.Content,
@@ -118,6 +176,15 @@ namespace Giny.World.Managers.Guilds
                 memberName = Record.Motd.MemberName,
                 timestamp = Record.Motd.Timestamp,
             });
+        }
+        public BasicGuildInformations GetBasicGuildInformations()
+        {
+            return new BasicGuildInformations()
+            {
+                guildId = (int)Id,
+                guildLevel = Level,
+                guildName = Record.Name,
+            };
         }
         public GuildInformations GetGuildInformations()
         {
@@ -129,13 +196,20 @@ namespace Giny.World.Managers.Guilds
                 guildName = Record.Name,
             };
         }
+
+        public bool CanAddMember()
+        {
+            return Record.Members.Count < GuildsManager.MaxMemberCount;
+        }
+
         public void Send(NetworkMessage message)
         {
-            foreach (var character in OnlineMembers)
+            foreach (var character in OnlineMembers.Values)
             {
                 character.Client.Send(message);
             }
         }
+        [WIP("paddocks?")]
         public GuildInformationsGeneralMessage GetGuildInformationsGeneralMessage()
         {
             return new GuildInformationsGeneralMessage()
@@ -154,7 +228,7 @@ namespace Giny.World.Managers.Guilds
         {
             return new GuildInformationsMembersMessage()
             {
-                members = Record.Members.Select(x => x.ToGuildMember()).ToArray(),
+                members = Record.Members.Select(x => x.ToGuildMember(this)).ToArray(),
             };
         }
     }

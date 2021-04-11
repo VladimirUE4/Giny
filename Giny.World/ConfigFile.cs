@@ -24,92 +24,107 @@ namespace Giny.World
         {
             get;
             set;
-        }
+        } = 1;
         public string Host
         {
             get;
             set;
-        }
+        } = "127.0.0.1";
+
         public int Port
         {
             get;
             set;
-        }
+        } = 5555;
         public string SQLHost
         {
             get;
             set;
-        }
+        } = "127.0.0.1";
+
         public string SQLUser
         {
             get;
             set;
-        }
+        } = "root";
+
         public string SQLPassword
         {
             get;
             set;
-        }
+        } = string.Empty;
+
         public string SQLDBName
         {
             get;
             set;
-        }
+        } = "giny_world";
+
         public string IPCHost
         {
             get;
             set;
-        }
+        } = "127.0.0.1";
+
         public int IPCPort
         {
             get;
             set;
-        }
+        } = 800;
+
         public long SpawnMapId
         {
             get;
             set;
-        }
+        } = 154010883;
+
         public short SpawnCellId
         {
             get;
             set;
-        }
+        } = 400;
+
         public short MaxMerchantPerMap
         {
             get;
             set;
-        }
+        } = 5;
+
         public short ApLimit
         {
             get;
             set;
-        }
+        } = 12;
+
         public short MpLimit
         {
             get;
             set;
-        }
+        } = 6;
+
         public short StartLevel
         {
             get;
             set;
-        }
+        } = 100;
+
         public short StartAp
         {
             get;
             set;
-        }
+        } = 6;
+
         public short StartMp
         {
             get;
             set;
-        }
+        } = 3;
+
         public string WelcomeMessage
         {
             get;
             set;
-        }
+        } = "Wecome to <b>Giny</b> server.";
 
         [StartupInvoke("Config", StartupInvokePriority.Initial)]
         public static void Initialize()
@@ -133,7 +148,7 @@ namespace Giny.World
         }
         public static void CreateConfig()
         {
-            Instance = Default();
+            Instance = new ConfigFile();
             Save();
             Logger.Write("Configuration file created!");
         }
@@ -142,29 +157,5 @@ namespace Giny.World
             File.WriteAllText(CONFIG_PATH, Json.Serialize(Instance));
         }
 
-        public static ConfigFile Default()
-        {
-            return new ConfigFile()
-            {
-                ServerId = 1,
-                Host = "127.0.0.1",
-                Port = 5555,
-                SQLHost = "127.0.0.1",
-                SQLDBName = "giny_world",
-                SQLPassword = "",
-                SQLUser = "root",
-                IPCHost = "127.0.0.1",
-                IPCPort = 800,
-                SpawnMapId = 154010883,
-                SpawnCellId = 400,
-                ApLimit = 12,
-                MpLimit = 6,
-                StartLevel = 5,
-                StartAp = 6,
-                StartMp = 3,
-                WelcomeMessage = "-> Pandala Alpha <-",
-                MaxMerchantPerMap = 5,
-            };
-        }
     }
 }

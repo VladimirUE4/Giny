@@ -45,6 +45,11 @@ namespace Giny.World.Managers.Guilds
 
             UniqueIdProvider = new UniqueIdProvider(lastId);
         }
+
+        public void RemoveGuild(Guild guild)
+        {
+
+        }
         public GuildCreationResultEnum CreateGuild(Character owner, string guildName, GuildEmblem guildEmblem)
         {
             if (owner.HasGuild)

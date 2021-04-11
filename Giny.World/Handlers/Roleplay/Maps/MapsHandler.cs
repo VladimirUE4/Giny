@@ -25,7 +25,7 @@ namespace Giny.World.Handlers.Maps
         [MessageHandler]
         public static void HandleFriendJoinRequestMessage(FriendJoinRequestMessage message, WorldClient client)
         {
-            var target = WorldServer.Instance.GetConnectedClient(message.name);
+            var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.name);
 
             if (target != null)
             {

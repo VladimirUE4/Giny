@@ -57,8 +57,6 @@ namespace Giny.Auth.Records
             get;
             set;
         }
-
-
         public WorldServerRecord()
         {
             this.Status = ServerStatusEnum.OFFLINE;

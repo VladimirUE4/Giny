@@ -35,18 +35,19 @@ namespace Giny.World.Managers
             {
                 WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
 
-                WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
+                WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
 
-                foreach (var client in WorldServer.Instance.GetConnectedClients())
+                foreach (var client in WorldServer.Instance.GetOnlineClients())
                 {
                     client.Character.Record.UpdateElement();
                 }
 
                 CyclicSaveTask.Instance.Save();
 
-                WorldServer.Instance.OnConnectedClients(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
+                WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
 
                 WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+
                 CreateNextTask();
             }
             else

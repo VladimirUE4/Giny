@@ -263,7 +263,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("goto", ServerRoleEnum.GamemasterPadawan)]
         public static void GotoCommand(WorldClient client, string targetName)
         {
-            var target = WorldServer.Instance.GetConnectedClient(targetName);
+            var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == targetName);
 
             if (target != null)
             {
@@ -320,8 +320,8 @@ namespace Giny.World.Managers.Chat
         {
             client.Send(new GameRolePlayArenaUpdatePlayerInfosMessage()
             {
-                solo = new ArenaRankInfos(new ArenaRanking(1, 1), new ArenaLeagueRanking(1, 2,1,2, 1), 1, 1, 2),
-        });
+                solo = new ArenaRankInfos(new ArenaRanking(1, 1), new ArenaLeagueRanking(1, 2, 1, 2, 1), 1, 1, 2),
+            });
 
             client.Send(new GameRolePlayArenaRegisterMessage()
             {
@@ -329,8 +329,8 @@ namespace Giny.World.Managers.Chat
             });
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
-        MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
+            MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 
         }
-}
+    }
 }
