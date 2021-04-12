@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Items.Collections
             get;
             set;
         }
-        public BankItemCollection(Character character, IEnumerable<BankItemRecord> items)
+        public BankItemCollection(Character character, IEnumerable<BankItemRecord> items) : base(items)
         {
             this.Character = character;
         }

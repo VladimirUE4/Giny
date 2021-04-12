@@ -358,6 +358,7 @@ namespace Giny.World.Managers.Entities.Characters
 
             this.Inventory = new Inventory(this, CharacterItemRecord.GetCharacterItems(Id));
             this.MerchantItems = new MerchantItemCollection(this, MerchantItemRecord.GetAllMerchantItems(Id));
+            this.BankItems = new BankItemCollection(this, BankItemRecord.GetBankItems(Client.Account.Id));
             this.GuestedParties = new List<Party>();
             this.GeneralShortcutBar = new GeneralShortcutBar(this);
             this.SpellShortcutBar = new SpellShortcutBar(this);
