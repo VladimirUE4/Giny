@@ -9,11 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Items
+namespace Giny.World.Managers.Items.Collections
 {
-    public class ItemCollection<T> where T : AbstractItem
+    public abstract class ItemCollection<T> where T : AbstractItem
     {
-        private List<T> m_items = new List<T>(); /* Should be Dictionary<UId,Item> */
+        private IList<T> m_items;
 
         public int Count
         {
@@ -24,14 +24,17 @@ namespace Giny.World.Managers.Items
         }
         public ItemCollection(IEnumerable<T> items)
         {
+            this.m_items = CreateContainer();
+
             foreach (var item in items)
             {
                 m_items.Add(item);
             }
+
         }
         public ItemCollection()
         {
-
+            this.m_items = CreateContainer();
         }
         public T[] GetItems()
         {
@@ -42,25 +45,25 @@ namespace Giny.World.Managers.Items
             return this.m_items.Where(predicate).ToArray();
         }
 
-        public event Action<T> OnItemAdded;
+        public virtual void OnItemAdded(T item) { }
 
-        public event Action<T, int> OnItemStacked;
+        public virtual void OnItemStacked(T item, int quantity) { }
 
-        public event Action<T> OnItemRemoved;
+        public virtual void OnItemRemoved(T item) { }
 
-        public event Action<T, int> OnItemUnstacked;
+        public virtual void OnItemUnstacked(T item, int quantity) { }
 
-        public event Action<IEnumerable<T>> OnItemsAdded;
+        public virtual void OnItemsAdded(IEnumerable<T> items) { }
 
-        public event Action<IEnumerable<T>> OnItemsStackeds;
+        public virtual void OnItemsStackeds(IEnumerable<T> items) { }
 
-        public event Action<IEnumerable<T>> OnItemsRemoved;
+        public virtual void OnItemsRemoved(IEnumerable<T> items) { }
 
-        public event Action<IEnumerable<T>> OnItemsUnstackeds;
+        public virtual void OnItemsUnstackeds(IEnumerable<T> items) { }
 
-        public event Action<T, int> OnItemQuantityChanged;
+        public virtual void OnItemQuantityChanged(T item, int quantity) { }
 
-        public event Action<IEnumerable<T>> OnItemsQuantityChanged;
+        public virtual void OnItemsQuantityChanged(IEnumerable<T> items) { }
 
         public virtual void AddItems(IEnumerable<T> items)
         {
@@ -86,16 +89,15 @@ namespace Giny.World.Managers.Items
                 }
             }
 
-            if (OnItemAdded != null)
-                OnItemsAdded(addedItems);
+            OnItemsAdded(addedItems);
 
-            if (OnItemStacked != null)
-                OnItemsStackeds(stackedItems);
+            OnItemsStackeds(stackedItems);
 
-            if (OnItemsQuantityChanged != null)
-                OnItemsQuantityChanged(stackedItems);
+            OnItemsQuantityChanged(stackedItems);
 
         }
+
+
         public virtual void RemoveItems(Dictionary<int, int> pairs)
         {
             List<T> removedItems = new List<T>();
@@ -120,14 +122,11 @@ namespace Giny.World.Managers.Items
                 }
             }
 
-            if (OnItemsRemoved != null)
-                OnItemsRemoved(removedItems);
+            OnItemsRemoved(removedItems);
 
-            if (OnItemsUnstackeds != null)
-                OnItemsUnstackeds(unstackedItems);
+            OnItemsUnstackeds(unstackedItems);
 
-            if (OnItemsQuantityChanged != null)
-                OnItemsQuantityChanged(unstackedItems);
+            OnItemsQuantityChanged(unstackedItems);
 
         }
         public virtual void AddItem(T item)
@@ -139,17 +138,14 @@ namespace Giny.World.Managers.Items
             if (sameItem != null)
             {
                 sameItem.Quantity += item.Quantity;
-                if (OnItemStacked != null)
-                    OnItemStacked(sameItem, item.Quantity);
+                OnItemStacked(sameItem, item.Quantity);
 
-                if (OnItemQuantityChanged != null)
-                    OnItemQuantityChanged(sameItem, item.Quantity);
+                OnItemQuantityChanged(sameItem, item.Quantity);
             }
             else
             {
                 m_items.Add(item);
-                if (OnItemAdded != null)
-                    OnItemAdded(item);
+                OnItemAdded(item);
             }
         }
 
@@ -162,20 +158,15 @@ namespace Giny.World.Managers.Items
             if (sameItem != null)
             {
                 sameItem.Quantity += quantity;
-                if (OnItemStacked != null)
-                    OnItemStacked(sameItem, quantity);
-
-                if (OnItemQuantityChanged != null)
-                    OnItemQuantityChanged(sameItem, quantity);
+                OnItemStacked(sameItem, quantity);
+                OnItemQuantityChanged(sameItem, quantity);
             }
             else
             {
                 item = (T)item.CloneWithUID();
                 item.Quantity = quantity;
                 m_items.Add(item);
-
-                if (OnItemAdded != null)
-                    OnItemAdded(item);
+                OnItemAdded(item);
             }
         }
         public virtual void RemoveItem(T item, int quantity)
@@ -190,17 +181,13 @@ namespace Giny.World.Managers.Items
                     if (item.Quantity == quantity)
                     {
                         m_items.Remove(item);
-                        if (OnItemRemoved != null)
-                            OnItemRemoved(item);
+                        OnItemRemoved(item);
                     }
                     else
                     {
                         item.Quantity -= quantity;
-                        if (OnItemUnstacked != null)
-                            OnItemUnstacked(item, quantity);
-
-                        if (OnItemQuantityChanged != null)
-                            OnItemQuantityChanged(item, quantity);
+                        OnItemUnstacked(item, quantity);
+                        OnItemQuantityChanged(item, quantity);
                     }
                 }
             }
@@ -230,7 +217,7 @@ namespace Giny.World.Managers.Items
         [PerformanceIssue]
         public T GetItem(int uid)
         {
-            return m_items.FirstOrDefault(x => x.UId == uid); 
+            return m_items.FirstOrDefault(x => x.UId == uid);
         }
         public T GetItem(short gid, EffectCollection effects)
         {
@@ -248,6 +235,12 @@ namespace Giny.World.Managers.Items
         {
             return m_items.FirstOrDefault(x => x.GId == gId) != null;
         }
+
+        protected virtual IList<T> CreateContainer()
+        {
+            return new List<T>();
+        }
+
         public static Dictionary<List<T>, EffectCollection> SortByEffects(IEnumerable<T> items)
         {
             Dictionary<List<T>, EffectCollection> results = new Dictionary<List<T>, EffectCollection>();

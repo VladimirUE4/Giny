@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.Pool;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
@@ -7,6 +8,7 @@ using Giny.World.Managers.Entities.Characters;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Guilds;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +22,7 @@ namespace Giny.World.Managers.Guilds
 
         public const int MotdMaxLength = 255;
 
-        private readonly Dictionary<long, Guild> Guilds = new Dictionary<long, Guild>();
+        private readonly ConcurrentDictionary<long, Guild> Guilds = new ConcurrentDictionary<long, Guild>();
 
         private UniqueIdProvider UniqueIdProvider
         {
@@ -33,7 +35,7 @@ namespace Giny.World.Managers.Guilds
         {
             foreach (var guildRecord in GuildRecord.GetGuilds())
             {
-                Guilds.Add(guildRecord.Id, new Guild(guildRecord));
+                Guilds.TryAdd(guildRecord.Id, new Guild(guildRecord));
             }
 
             int lastId = 0;
@@ -45,10 +47,11 @@ namespace Giny.World.Managers.Guilds
 
             UniqueIdProvider = new UniqueIdProvider(lastId);
         }
-
+        [WIP]
         public void RemoveGuild(Guild guild)
         {
-
+            guild.Record.RemoveElement();
+            Guilds.TryRemove(guild.Id);
         }
         public GuildCreationResultEnum CreateGuild(Character owner, string guildName, GuildEmblem guildEmblem)
         {
@@ -85,7 +88,8 @@ namespace Giny.World.Managers.Guilds
 
             if (instance.Join(owner, true))
             {
-                Guilds.Add(record.Id, instance);
+                Guilds.TryAdd(record.Id, instance);
+
                 record.AddElement();
                 return GuildCreationResultEnum.GUILD_CREATE_OK;
             }

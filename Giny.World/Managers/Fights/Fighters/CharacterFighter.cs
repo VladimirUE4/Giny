@@ -16,6 +16,7 @@ using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Fights.Synchronisation;
 using Giny.World.Managers.Items;
+using Giny.World.Managers.Items.Collections;
 using Giny.World.Managers.Spells;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;

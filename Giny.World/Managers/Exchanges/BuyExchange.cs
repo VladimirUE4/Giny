@@ -13,6 +13,7 @@ using Giny.World.Managers.Bidshops;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Npcs;
 using Giny.World.Managers.Items;
+using Giny.World.Managers.Items.Collections;
 using Giny.World.Network;
 using Giny.World.Records.Bidshops;
 using Giny.World.Records.Items;
@@ -75,7 +76,7 @@ namespace Giny.World.Managers.Exchanges
             });
 
         }
-        [WIP("Some bug concerning UID ?")]
+        [WIP("Some bug concerning UID Quantities ...?")]
         public void Buy(int uid, int quantity, long price)
         {
             bool bought = false;
@@ -84,11 +85,10 @@ namespace Giny.World.Managers.Exchanges
 
             if (item != null)
             {
-                if (item.Price == price)
+                if (item.Price == price) // todo
                 {
-                    if (Character.RemoveKamas(price))
+                    if (Character.RemoveKamas(price * quantity))
                     {
-
                         bought = true;
                         Character.Inventory.AddItem(item.ToCharacterItemRecord(Character.Id));
                         this.OnItemBuy(item);
@@ -208,7 +208,7 @@ namespace Giny.World.Managers.Exchanges
             }
             else
             {
-                item.Sold = true;
+               // item.Sold = true;
                 item.UpdateElement();
             }
         }

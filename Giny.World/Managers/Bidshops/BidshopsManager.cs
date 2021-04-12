@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Bidshops
 {
-    public class BidshopsManager : Singleton<BidshopsManager>
+    public class BidshopsManager : Singleton<BidshopsManager> // create BidShop instances, containing dialogs.
     {
         private Dictionary<long, Dictionary<long, BidShopItemRecord>> m_bidshopItems = new Dictionary<long, Dictionary<long, BidShopItemRecord>>();
 

@@ -22,6 +22,7 @@ using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Guilds;
 using Giny.World.Managers.Items;
+using Giny.World.Managers.Items.Collections;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Elements;
 using Giny.World.Managers.Parties;
@@ -133,7 +134,7 @@ namespace Giny.World.Managers.Entities.Characters
             private set;
         }
 
-   
+
         public bool ChangeMap
         {
             get;
@@ -293,7 +294,12 @@ namespace Giny.World.Managers.Entities.Characters
             return result;
         }
 
-        public MerchantBag MerchantBag
+        public MerchantItemCollection MerchantItems
+        {
+            get;
+            private set;
+        }
+        public BankItemCollection BankItems
         {
             get;
             private set;
@@ -308,7 +314,6 @@ namespace Giny.World.Managers.Entities.Characters
             get;
             set;
         }
-        public int FighterCount => 1; // todo
 
         public bool Collecting
         {
@@ -340,6 +345,8 @@ namespace Giny.World.Managers.Entities.Characters
             get;
             set;
         }
+        [WIP("pokefus , companions (verification cellule)")]
+        public int FighterCount => 1; 
 
         public Character(WorldClient client, CharacterRecord record) : base(null)
         {
@@ -350,8 +357,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.Breed = BreedRecord.GetBreed(record.BreedId);
 
             this.Inventory = new Inventory(this, CharacterItemRecord.GetCharacterItems(Id));
-            this.MerchantBag = new MerchantBag(this, MerchantItemRecord.GetMerchantItems(Id, false));
-
+            this.MerchantItems = new MerchantItemCollection(this, MerchantItemRecord.GetAllMerchantItems(Id));
             this.GuestedParties = new List<Party>();
             this.GeneralShortcutBar = new GeneralShortcutBar(this);
             this.SpellShortcutBar = new SpellShortcutBar(this);
@@ -372,24 +378,32 @@ namespace Giny.World.Managers.Entities.Characters
 
         }
 
-        public void CheckSoldItems()
+        private void CheckSoldItems()
         {
             BidShopItemRecord[] bidHouseItems = BidshopsManager.Instance.GetSoldItem(this).ToArray();
-            IEnumerable<MerchantItemRecord> merchantItems = MerchantItemRecord.GetMerchantItems(this.Id, true);
+            IEnumerable<MerchantItemRecord> merchantItems = MerchantItemRecord.GetMerchantItemsSolded(this.Id);
 
             if (bidHouseItems.Count() > 0 || merchantItems.Count() > 0)
             {
                 foreach (var item in bidHouseItems)
                 {
-                    Client.WorldAccount.BankKamas += item.Price;
+                    Client.WorldAccount.BankKamas += item.Price * item.Quantity;
                     Client.WorldAccount.UpdateElement();
                     BidshopsManager.Instance.RemoveItem(item.BidShopId, item);
                 }
 
                 foreach (var item in merchantItems.ToArray())
                 {
-                    this.AddKamas(item.Price * item.Quantity);
-                    item.RemoveElement();
+                    this.AddKamas(item.Price * item.QuantitySold);
+
+                    if (item.Sold)
+                    {
+                        item.RemoveElement();
+                    }
+
+                    item.QuantitySold = 0;
+
+                    item.UpdateElement();
                 }
 
                 Client.Send(new ExchangeOfflineSoldItemsMessage(bidHouseItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray(),
@@ -505,12 +519,13 @@ namespace Giny.World.Managers.Entities.Characters
         {
             if (value <= long.MaxValue)
             {
-                if (Record.Kamas + value >= Inventory.MAXIMUM_KAMAS)
+                if (Record.Kamas + value >= Inventory.MaximumKamas)
                 {
-                    Record.Kamas = Inventory.MAXIMUM_KAMAS;
+                    Record.Kamas = Inventory.MaximumKamas;
                 }
                 else
                     Record.Kamas += value;
+
                 Inventory.RefreshKamas();
                 return true;
             }
@@ -613,7 +628,7 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void OpenBank()
         {
-            this.OpenDialog(new BankExchange(this, Client.BankItems));
+            this.OpenDialog(new BankExchange(this, BankItems));
         }
         public void OpenZaap(MapElement element)
         {
@@ -684,6 +699,10 @@ namespace Giny.World.Managers.Entities.Characters
                     }
                 }
             }
+        }
+        public bool IsInDialog()
+        {
+            return Dialog != null;
         }
         public bool IsInDialog<T>() where T : Dialog
         {
@@ -1404,7 +1423,7 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public bool CanEnableMerchantMode()
         {
-            if (MerchantBag.Count == 0)
+            if (MerchantItems.Count == 0)
             {
                 TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 23);
                 return false;
@@ -1428,7 +1447,7 @@ namespace Giny.World.Managers.Entities.Characters
                 return false;
             }
 
-            if (Record.Kamas < MerchantBag.GetMerchantTax())
+            if (Record.Kamas < MerchantItems.GetMerchantTax())
             {
                 TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 76);
             }
@@ -1442,7 +1461,7 @@ namespace Giny.World.Managers.Entities.Characters
                 return;
             }
 
-            RemoveKamas(MerchantBag.GetMerchantTax());
+            RemoveKamas(MerchantItems.GetMerchantTax());
             Client.Disconnect();
             MerchantsManager.Instance.AddMerchant(this);
         }

@@ -8,32 +8,29 @@ using System.Text;
 using Giny.ORM;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Items
+namespace Giny.World.Managers.Items.Collections
 {
-    public class MerchantBag : ItemCollection<MerchantItemRecord>
+    public class MerchantItemCollection : ItemCollection<MerchantItemRecord>
     {
         private Character Character
         {
             get;
             set;
         }
-        public MerchantBag(Character character, IEnumerable<MerchantItemRecord> items) : base(items)
+        public MerchantItemCollection(Character character, IEnumerable<MerchantItemRecord> items) : base(items)
         {
             this.Character = character;
-            this.OnItemAdded += MerchantBag_OnItemAdded;
-            this.OnItemRemoved += MerchantBag_OnItemRemoved;
-            this.OnItemQuantityChanged += MerchantBag_OnItemQuantityChanged;
         }
 
         public void ModifyItemPriced(int objectUID, int quantity, long price)
         {
-            MerchantItemRecord item = Character.MerchantBag.GetItem(objectUID);
+            MerchantItemRecord item = Character.MerchantItems.GetItem(objectUID);
 
             if (item != null)
             {
                 if (price > 0)
                 {
-                    if (price > Inventory.MAXIMUM_KAMAS)
+                    if (price > Inventory.MaximumKamas)
                     {
                         return;
                     }
@@ -66,7 +63,7 @@ namespace Giny.World.Managers.Items
                         }
                     }
 
-                    MerchantBag_OnItemQuantityChanged(item, quantity);
+                    OnItemQuantityChanged(item, quantity);
                 }
 
                 item.UpdateElement();
@@ -96,24 +93,24 @@ namespace Giny.World.Managers.Items
 
             if (item != null && item.Quantity >= quantity && price > 0 && item.CanBeExchanged())
             {
-                if (price > Inventory.MAXIMUM_KAMAS)
+                if (price > Inventory.MaximumKamas)
                 {
                     return;
                 }
                 MerchantItemRecord selledItem = item.ToMerchantItemRecord(Character.Id, price, quantity);
                 selledItem.Quantity = quantity;
                 Character.Inventory.RemoveItem(item.UId, quantity);
-                Character.MerchantBag.AddItem(selledItem);
+                Character.MerchantItems.AddItem(selledItem);
             }
         }
         public void TakeBack(int uid, int quantity)
         {
-            MerchantItemRecord merchantItem = Character.MerchantBag.GetItem(uid);
+            MerchantItemRecord merchantItem = Character.MerchantItems.GetItem(uid);
 
             if (quantity < 0 && merchantItem != null && merchantItem.Quantity >= Math.Abs(quantity))
             {
                 Character.Inventory.AddItem(merchantItem.ToCharacterItemRecord(Character.Id));
-                Character.MerchantBag.RemoveItem(merchantItem, -quantity);
+                Character.MerchantItems.RemoveItem(merchantItem, -quantity);
             }
             else
             {
@@ -122,22 +119,21 @@ namespace Giny.World.Managers.Items
 
         }
 
-        private void MerchantBag_OnItemQuantityChanged(MerchantItemRecord item, int quantity)
+        public override void OnItemAdded(MerchantItemRecord item)
+        {
+            item.AddElement();
+            Character.Client.Send(new ExchangeShopStockMovementUpdatedMessage(item.GetObjectItemToSell()));
+        }
+        public override void OnItemQuantityChanged(MerchantItemRecord item, int quantity)
         {
             item.UpdateElement();
             Character.Client.Send(new ExchangeShopStockMovementUpdatedMessage(item.GetObjectItemToSell()));
         }
-
-        private void MerchantBag_OnItemRemoved(MerchantItemRecord item)
+        public override void OnItemRemoved(MerchantItemRecord item)
         {
             item.RemoveElement();
             Character.Client.Send(new ExchangeShopStockMovementRemovedMessage(item.UId));
         }
 
-        private void MerchantBag_OnItemAdded(MerchantItemRecord item)
-        {
-            item.AddElement();
-            Character.Client.Send(new ExchangeShopStockMovementUpdatedMessage(item.GetObjectItemToSell()));
-        }
     }
 }

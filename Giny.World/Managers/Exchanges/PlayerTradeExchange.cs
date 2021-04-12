@@ -4,6 +4,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Items;
+using Giny.World.Managers.Items.Collections;
 using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
@@ -23,78 +24,28 @@ namespace Giny.World.Managers.Exchanges
             }
         }
 
-        private ItemCollection<CharacterItemRecord> ExchangedItems = new ItemCollection<CharacterItemRecord>();
-
-        private bool IsReady = false;
-
-        private long MovedKamas = 0;
-
-        public Character SecondCharacter
+        private TradeItemCollection Items
         {
             get;
             set;
         }
 
-        public PlayerTradeExchange(Character character, Character secondCharacter)
+        private bool IsReady = false;
+
+        private long MovedKamas = 0;
+
+        public Character Target
+        {
+            get;
+            set;
+        }
+
+        public PlayerTradeExchange(Character character, Character target)
             : base(character)
         {
-            this.SecondCharacter = secondCharacter;
-
-            ExchangedItems.OnItemAdded += ExchangedItems_OnItemAdded;
-            ExchangedItems.OnItemRemoved += ExchangedItems_OnItemRemoved;
-            ExchangedItems.OnItemStacked += ExchangedItems_OnItemStacked;
-            ExchangedItems.OnItemUnstacked += ExchangedItems_OnItemUnstacked;
+            this.Items = new TradeItemCollection(character, target); 
+            this.Target = target;
         }
-
-        void ExchangedItems_OnItemUnstacked(CharacterItemRecord arg1, int arg2)
-        {
-            OnObjectModified(arg1);
-        }
-        void ExchangedItems_OnItemStacked(CharacterItemRecord arg1, int arg2)
-        {
-            OnObjectModified(arg1);
-        }
-        void ExchangedItems_OnItemRemoved(CharacterItemRecord obj)
-        {
-            Character.Client.Send(new ExchangeObjectRemovedMessage()
-            {
-                remote = false,
-                objectUID = obj.UId
-            });
-            SecondCharacter.Client.Send(new ExchangeObjectRemovedMessage
-            {
-                remote = true,
-                objectUID = obj.UId
-            });
-        }
-
-        void ExchangedItems_OnItemAdded(CharacterItemRecord obj)
-        {
-            Character.Client.Send(new ExchangeObjectAddedMessage()
-            {
-                remote = false,
-                @object = obj.GetObjectItem()
-            });
-            SecondCharacter.Client.Send(new ExchangeObjectAddedMessage()
-            {
-                remote = true,
-                @object = obj.GetObjectItem()
-            });
-        }
-        private void OnObjectModified(CharacterItemRecord obj)
-        {
-            Character.Client.Send(new ExchangeObjectModifiedMessage()
-            {
-                remote = false,
-                @object = obj.GetObjectItem(),
-            });
-            SecondCharacter.Client.Send(new ExchangeObjectModifiedMessage()
-            {
-                remote = true,
-                @object = obj.GetObjectItem(),
-            });
-        }
-
 
         public override void Open()
         {
@@ -104,26 +55,26 @@ namespace Giny.World.Managers.Exchanges
                 firstCharacterId = Character.Id,
                 firstCharacterCurrentWeight = Character.Inventory.CurrentWeight,
                 firstCharacterMaxWeight = Character.Inventory.TotalWeight,
-                secondCharacterId = SecondCharacter.Id,
-                secondCharacterCurrentWeight = SecondCharacter.Inventory.CurrentWeight,
-                secondCharacterMaxWeight = SecondCharacter.Inventory.TotalWeight,
+                secondCharacterId = Target.Id,
+                secondCharacterCurrentWeight = Target.Inventory.CurrentWeight,
+                secondCharacterMaxWeight = Target.Inventory.TotalWeight,
             });
         }
 
         public void Send(NetworkMessage message)
         {
             Character.Client.Send(message);
-            SecondCharacter.Client.Send(message);
+            Target.Client.Send(message);
         }
         public override void Close()
         {
-            SecondCharacter.Client.Send(new ExchangeLeaveMessage()
+            Target.Client.Send(new ExchangeLeaveMessage()
             {
                 dialogType = (byte)DialogType,
                 success = Succes
             });
 
-            SecondCharacter.Dialog = null;
+            Target.Dialog = null;
 
             Character.Client.Send(new ExchangeLeaveMessage()
             {
@@ -140,12 +91,12 @@ namespace Giny.World.Managers.Exchanges
 
             CharacterItemRecord exchanged = null;
 
-            exchanged = ExchangedItems.GetItem(item.GId, item.Effects);
+            exchanged = Items.GetItem(item.GId, item.Effects);
 
             if (exchanged != null && exchanged.UId != item.UId)
                 return false;
 
-            exchanged = ExchangedItems.GetItem(item.UId);
+            exchanged = Items.GetItem(item.UId);
 
             if (exchanged == null)
             {
@@ -165,20 +116,20 @@ namespace Giny.World.Managers.Exchanges
 
                 if (item != null && CanMoveItem(item, quantity))
                 {
-                    if (SecondCharacter.GetDialog<PlayerTradeExchange>().IsReady)
+                    if (Target.GetDialog<PlayerTradeExchange>().IsReady)
                     {
-                        SecondCharacter.GetDialog<PlayerTradeExchange>().Ready(false, 0);
+                        Target.GetDialog<PlayerTradeExchange>().Ready(false, 0);
                     }
                     if (quantity > 0)
                     {
                         if (item.Quantity >= quantity)
                         {
-                            ExchangedItems.AddItem(item, quantity);
+                            Items.AddItem(item, quantity);
                         }
                     }
                     else
                     {
-                        ExchangedItems.RemoveItem(item.UId, Math.Abs(quantity));
+                        Items.RemoveItem(item.UId, Math.Abs(quantity));
                     }
                 }
             }
@@ -190,27 +141,27 @@ namespace Giny.World.Managers.Exchanges
 
             Send(new ExchangeIsReadyMessage(Character.Id, this.IsReady));
 
-            if (this.IsReady && SecondCharacter.GetDialog<PlayerTradeExchange>().IsReady)
+            if (this.IsReady && Target.GetDialog<PlayerTradeExchange>().IsReady)
             {
-                foreach (var item in ExchangedItems.GetItems())
+                foreach (var item in Items.GetItems())
                 {
-                    item.CharacterId = SecondCharacter.Id;
-                    SecondCharacter.Inventory.AddItem((CharacterItemRecord)item.CloneWithoutUID());
+                    item.CharacterId = Target.Id;
+                    Target.Inventory.AddItem((CharacterItemRecord)item.CloneWithoutUID());
                     Character.Inventory.RemoveItem(item.UId, item.Quantity);
                 }
 
-                foreach (var item in SecondCharacter.GetDialog<PlayerTradeExchange>().ExchangedItems.GetItems())
+                foreach (var item in Target.GetDialog<PlayerTradeExchange>().Items.GetItems())
                 {
                     item.CharacterId = Character.Id;
                     Character.Inventory.AddItem((CharacterItemRecord)item.CloneWithoutUID());
-                    SecondCharacter.Inventory.RemoveItem(item.UId, item.Quantity);
+                    Target.Inventory.RemoveItem(item.UId, item.Quantity);
                 }
 
-                SecondCharacter.AddKamas(MovedKamas);
+                Target.AddKamas(MovedKamas);
                 Character.RemoveKamas(MovedKamas);
 
-                Character.AddKamas(SecondCharacter.GetDialog<PlayerTradeExchange>().MovedKamas);
-                SecondCharacter.RemoveKamas(SecondCharacter.GetDialog<PlayerTradeExchange>().MovedKamas);
+                Character.AddKamas(Target.GetDialog<PlayerTradeExchange>().MovedKamas);
+                Target.RemoveKamas(Target.GetDialog<PlayerTradeExchange>().MovedKamas);
 
                 this.Succes = true;
                 this.Close();
@@ -225,9 +176,9 @@ namespace Giny.World.Managers.Exchanges
                 {
                     Ready(false, 0);
                 }
-                if (SecondCharacter.GetDialog<PlayerTradeExchange>().IsReady)
+                if (Target.GetDialog<PlayerTradeExchange>().IsReady)
                 {
-                    SecondCharacter.GetDialog<PlayerTradeExchange>().Ready(false, 0);
+                    Target.GetDialog<PlayerTradeExchange>().Ready(false, 0);
                 }
 
                 Character.Client.Send(new ExchangeKamaModifiedMessage()
@@ -235,7 +186,7 @@ namespace Giny.World.Managers.Exchanges
                     remote = false,
                     quantity = quantity
                 });
-                SecondCharacter.Client.Send(new ExchangeKamaModifiedMessage()
+                Target.Client.Send(new ExchangeKamaModifiedMessage()
                 {
                     remote = true,
                     quantity = quantity

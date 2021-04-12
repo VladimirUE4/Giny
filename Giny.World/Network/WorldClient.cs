@@ -22,6 +22,7 @@ using Giny.World.Records.Accounts;
 using Giny.ORM;
 using Giny.World.Managers.Items;
 using Giny.World.Records.Items;
+using Giny.World.Managers.Items.Collections;
 
 namespace Giny.World.Network
 {
@@ -37,11 +38,7 @@ namespace Giny.World.Network
             get;
             set;
         }
-        public ItemCollection<BankItemRecord> BankItems
-        {
-            get;
-            private set;
-        }
+      
         public List<CharacterRecord> Characters
         {
             get;
@@ -129,8 +126,6 @@ namespace Giny.World.Network
                 this.WorldAccount = WorldAccountRecord.Create(this.Account.Id);
                 this.WorldAccount.AddElement();
             }
-
-            this.BankItems = new ItemCollection<BankItemRecord>(BankItemRecord.GetBankItems(Account.Id));
         }
         public void OnAccountReceived()
         {

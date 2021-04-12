@@ -26,18 +26,22 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+        [Update]
         public long Price
         {
             get;
             set;
         }
 
-        [WIP] // what quantity was solded ?
-        public bool Sold
+        [Update]
+        public int QuantitySold
         {
             get;
             set;
         }
+
+        [Ignore]
+        public bool Sold => Quantity == 0;
 
         public override AbstractItem CloneWithoutUID()
         {
@@ -99,8 +103,8 @@ namespace Giny.World.Records.Items
                 date = 0,
                 effects = new ObjectEffects(Effects.Select(x => x.GetObjectEffect()).ToArray()),
                 objectGID = GId,
-                price = Price,
-                quantity = Quantity,
+                price = Price * QuantitySold,
+                quantity = QuantitySold,
             };
         }
         public static int GetLastItemUID()
@@ -108,9 +112,9 @@ namespace Giny.World.Records.Items
             return (int)MerchantItems.Keys.OrderByDescending(x => x).FirstOrDefault();
         }
 
-        public static IEnumerable<MerchantItemRecord> GetMerchantItems(long characterId, bool solded)
+        public static IEnumerable<MerchantItemRecord> GetMerchantItemsSolded(long characterId)
         {
-            return GetAllMerchantItems(characterId).Where(x => x.Sold == solded);
+            return GetAllMerchantItems(characterId).Where(x => x.QuantitySold > 0);
         }
         public static IEnumerable<MerchantItemRecord> GetAllMerchantItems(long characterId)
         {

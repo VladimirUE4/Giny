@@ -123,7 +123,7 @@ namespace Giny.World.Records.Items
                 Position = Position,
                 Quantity = quantity,
                 Price = price,
-                Sold = false,
+                QuantitySold = 0,
             };
         }
         public CharacterItemRecord ToCharacterItemRecord(long characterId)
@@ -168,8 +168,7 @@ namespace Giny.World.Records.Items
                 Price = price,
                 Quantity = Quantity,
                 UId = ItemManager.Instance.PopItemUID(),
-                Sold = false,
-
+                QuantitySold = 0,
             };
         }
 

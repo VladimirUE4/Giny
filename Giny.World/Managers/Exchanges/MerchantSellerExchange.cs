@@ -25,6 +25,7 @@ namespace Giny.World.Managers.Exchanges
         public MerchantSellerExchange(Character character, CharacterMerchant merchant) : base(character)
         {
             this.Merchant = merchant;
+            this.Merchant.AddExchange(this);
         }
 
 
@@ -58,7 +59,7 @@ namespace Giny.World.Managers.Exchanges
             Character.Client.Send(new ExchangeStartOkHumanVendorMessage()
             {
                 sellerId = Merchant.Id,
-                objectsInfos = Merchant.GetItems().Select(x => x.GetObjectItemToSellInHumanVendorShop()).ToArray(),
+                objectsInfos = Merchant.Items.GetItems().Select(x => x.GetObjectItemToSellInHumanVendorShop()).ToArray(),
             });
 
         }
@@ -66,7 +67,7 @@ namespace Giny.World.Managers.Exchanges
         [WIP("probleme quantité.")]
         public void Buy(int uid, int quantity)
         {
-            MerchantItemRecord item = Merchant.GetItem(uid);
+            MerchantItemRecord item = Merchant.Items.GetItem(uid);
 
             if (item == null || item.Quantity < quantity)
             {
@@ -82,35 +83,19 @@ namespace Giny.World.Managers.Exchanges
                 return;
             }
 
-            item.Sold = true; // non, ça dépend de si l'item est coupé ?
-
             Character.OnKamasLost(cost);
 
             Character.Inventory.AddItem(item.ToCharacterItemRecord(Character.Id), quantity);
 
-            Merchant.RemoveItem(item, quantity);
+            Merchant.Items.RemoveItem(item, quantity);
 
             Character.OnItemGained(item.GId, quantity);
-
-            if (item.Quantity == quantity) // nope, 
-            {
-                this.Character.Client.Send(new ExchangeShopStockMovementRemovedMessage()
-                {
-                    objectId = item.UId,
-                });
-            }
-            else
-            {
-                this.Character.Client.Send(new ExchangeShopStockMovementUpdatedMessage()
-                {
-                    objectInfo = item.GetObjectItemToSell(),
-                });
-            }
-
+ 
             Character.Client.Send(new ExchangeBuyOkMessage());
 
-            if (Merchant.GetItems().Count() == 0)
+            if (Merchant.Items.GetItems().Count() == 0)
             {
+                this.Close();
                 Merchant.Remove();
             }
         }
@@ -118,6 +103,11 @@ namespace Giny.World.Managers.Exchanges
         public override void Ready(bool ready, short step)
         {
             throw new NotImplementedException();
+        }
+        public override void Close()
+        {
+            Merchant.RemoveExchange(this);
+            base.Close();
         }
     }
 }

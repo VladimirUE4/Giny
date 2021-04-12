@@ -38,7 +38,7 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
         [MessageHandler]
         public static void HandleExchangeShowVendorTax(ExchangeShowVendorTaxMessage message, WorldClient client)
         {
-            client.Send(new ExchangeReplyTaxVendorMessage(0, client.Character.MerchantBag.GetMerchantTax()));
+            client.Send(new ExchangeReplyTaxVendorMessage(0, client.Character.MerchantItems.GetMerchantTax()));
         }
         [MessageHandler]
         public static void HandleExchangeObjectMovePriced(ExchangeObjectMovePricedMessage message, WorldClient client)

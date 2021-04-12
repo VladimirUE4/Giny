@@ -23,17 +23,17 @@ namespace Giny.World.Managers.Exchanges
 
         public override void ModifyItemPriced(int objectUID, int quantity, long price)
         {
-            Character.MerchantBag.ModifyItemPriced(objectUID, quantity, price);
+            Character.MerchantItems.ModifyItemPriced(objectUID, quantity, price);
         }
 
         public override void MoveItem(int uid, int quantity)
         {
-            Character.MerchantBag.TakeBack(uid, quantity);
+            Character.MerchantItems.TakeBack(uid, quantity);
         }
 
         public override void MoveItemPriced(int objectUID, int quantity, long price)
         {
-            Character.MerchantBag.Store(objectUID, quantity, price);
+            Character.MerchantItems.Store(objectUID, quantity, price);
         }
 
         public override void MoveKamas(long quantity)
@@ -48,7 +48,7 @@ namespace Giny.World.Managers.Exchanges
 
         public override void Open()
         {
-            Character.Client.Send(new ExchangeShopStockStartedMessage(Character.MerchantBag.GetItems().Select(x => x.GetObjectItemToSell()).ToArray()));
+            Character.Client.Send(new ExchangeShopStockStartedMessage(Character.MerchantItems.GetItems().Select(x => x.GetObjectItemToSell()).ToArray()));
         }
 
         public override void Ready(bool ready, short step)

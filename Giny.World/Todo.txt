@@ -30,6 +30,32 @@
 -Tests unitaires
 -Challenges
 
+
+----------- avant ouverture -----------
+Guildes
+Bug fix item.Sold hdv & merchant (quantity)
+Percepteurs
+Kolizeum 1vs2 3vs3
+Micro quêtes (kamas) 
+Pokefus équilibré
+Mimibiotes
+Challenges
+HDV
+Craft
+FM
+Pain et vie
+Récompenses dj
+Idoles
+Stated éléments
+Dofus drop
+Nouveaux donjons
+Réfléchir évents
+Vendeur d'item jusqu'au niveau 60 
+Tester rates
+Fixer living objets
+
+----------- avant ouverture -----------
+
 sushivan ordre living object record 
 jobtypeenum en anglais miscbuilder
 rework bank system

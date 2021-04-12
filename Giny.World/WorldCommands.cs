@@ -70,7 +70,7 @@ namespace Giny.World
         }
 
         [ConsoleCommand("npcs")]
-        public static void UpdateNpcsCommad()
+        public static void UpdateNpcsCommand()
         {
             DatabaseManager.Instance.Reload<NpcSpawnRecord>();
             DatabaseManager.Instance.Reload<NpcReplyRecord>();

@@ -5,6 +5,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Items;
+using Giny.World.Managers.Items.Collections;
 using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Giny.World.Managers.Exchanges
 {
     public class BankExchange : Exchange
     {
-        public const int STORAGE_MAX_SLOTS = 300;
+        public const int StorageMaxSlots = 300;
 
         public override ExchangeTypeEnum ExchangeType
         {
@@ -25,53 +26,31 @@ namespace Giny.World.Managers.Exchanges
                 return ExchangeTypeEnum.BANK;
             }
         }
-        private ItemCollection<BankItemRecord> m_items; /* put this in Character. Create another ItemCollection */
 
-        public BankExchange(Character character, ItemCollection<BankItemRecord> bankItems)
+        private BankItemCollection Items
+        {
+            get;
+            set;
+        }
+
+        public BankExchange(Character character, BankItemCollection bankItems)
             : base(character)
         {
-            m_items = bankItems;
-            m_items.OnItemAdded += m_items_OnItemAdded;
-            m_items.OnItemRemoved += m_items_OnItemRemoved;
-            m_items.OnItemStacked += m_items_OnItemStacked;
-            m_items.OnItemUnstacked += m_items_OnItemUnstacked;
+            this.Items = bankItems;
         }
 
-        void m_items_OnItemUnstacked(BankItemRecord arg1, int arg2)
-        {
-            arg1.UpdateElement();
-            Character.Client.Send(new StorageObjectUpdateMessage(arg1.GetObjectItem()));
-        }
-
-        void m_items_OnItemStacked(BankItemRecord arg1, int arg2)
-        {
-            arg1.UpdateElement();
-            Character.Client.Send(new StorageObjectUpdateMessage(arg1.GetObjectItem()));
-        }
-
-        void m_items_OnItemRemoved(BankItemRecord obj)
-        {
-            obj.RemoveElement();
-            Character.Client.Send(new StorageObjectRemoveMessage(obj.UId));
-        }
-
-        void m_items_OnItemAdded(BankItemRecord obj)
-        {
-            obj.AddElement();
-            Character.Client.Send(new StorageObjectUpdateMessage(obj.GetObjectItem()));
-        }
         public override void Open()
         {
             Character.Client.Send(new ExchangeStartedWithStorageMessage()
             {
                 exchangeType = (byte)ExchangeType,
-                storageMaxSlot = STORAGE_MAX_SLOTS,
+                storageMaxSlot = StorageMaxSlots,
 
             });
             Character.Client.Send(new StorageInventoryContentMessage()
             {
                 kamas = Character.Client.WorldAccount.BankKamas,
-                objects = m_items.GetObjectsItems(),
+                objects = this.Items.GetObjectsItems(),
             });
         }
         public override void MoveItem(int uid, int quantity)
@@ -85,19 +64,19 @@ namespace Giny.World.Managers.Exchanges
                     var bankItem = item.ToBankItemRecord(Character.Client.Account.Id);
                     bankItem.Quantity = quantity;
                     Character.Inventory.RemoveItem(item.UId, quantity);
-                    m_items.AddItem(bankItem);
+                    this.Items.AddItem(bankItem);
                 }
             }
             else
             {
-                BankItemRecord item = m_items.GetItem(uid);
+                BankItemRecord item = Items.GetItem(uid);
                 int removedQuantity = Math.Abs(quantity);
 
                 if (item != null && item.Quantity >= removedQuantity)
                 {
                     var characterItemRecord = item.ToCharacterItemRecord(Character.Id);
                     characterItemRecord.Quantity = removedQuantity;
-                    m_items.RemoveItem(uid, removedQuantity);
+                    Items.RemoveItem(uid, removedQuantity);
                     Character.Inventory.AddItem(characterItemRecord);
 
                 }

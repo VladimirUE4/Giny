@@ -1,4 +1,5 @@
-﻿using Giny.ORM.Attributes;
+﻿using Giny.Core.DesignPattern;
+using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.Protocol.Types;
 using System;
@@ -36,11 +37,15 @@ namespace Giny.World.Records.Items
             set;
         }
         [Update]
-        public bool Sold
+        public int QuantitySold
         {
             get;
             set;
         }
+
+        [Ignore]
+        public bool Sold => Quantity == QuantitySold;
+
         public override AbstractItem CloneWithoutUID()
         {
             return new BidShopItemRecord()
@@ -55,6 +60,7 @@ namespace Giny.World.Records.Items
                 Position = this.Position,
                 Quantity = this.Quantity,
                 UId = this.UId,
+                QuantitySold = QuantitySold,
             };
         }
 
@@ -72,6 +78,7 @@ namespace Giny.World.Records.Items
                 Position = this.Position,
                 Quantity = this.Quantity,
                 UId = this.UId,
+                QuantitySold = QuantitySold,
             };
 
         }
@@ -92,6 +99,7 @@ namespace Giny.World.Records.Items
                 objectType = (int)Record.TypeEnum,
             };
         }
+        [WIP("date")]
         public ObjectItemQuantityPriceDateEffects GetObjectItemQuantityPriceDateEffects()
         {
             return new ObjectItemQuantityPriceDateEffects()
@@ -107,7 +115,7 @@ namespace Giny.World.Records.Items
         {
             return BidshopItems.Values;
         }
-
+        [WIP("unsoldDelay")]
         public ObjectItemToSellInBid GetObjectItemToSellInBid()
         {
             return new ObjectItemToSellInBid()

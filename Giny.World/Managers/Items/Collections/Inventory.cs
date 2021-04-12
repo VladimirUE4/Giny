@@ -17,11 +17,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Items
+namespace Giny.World.Managers.Items.Collections
 {
     public class Inventory : ItemCollection<CharacterItemRecord>
     {
-        public const long MAXIMUM_KAMAS = 2000000000;
+        public const long MaximumKamas = 2000000000;
 
         public const EffectsEnum ItemCastEffect = EffectsEnum.Effect_CastSpell_1175;
 
@@ -81,15 +81,6 @@ namespace Giny.World.Managers.Items
             : base(items)
         {
             this.Character = character;
-            this.OnItemAdded += Inventory_OnItemAdded;
-            this.OnItemRemoved += Inventory_OnItemRemoved;
-
-            this.OnItemsAdded += Inventory_OnItemsAdded;
-            this.OnItemsRemoved += Inventory_OnItemsRemoved;
-
-            this.OnItemQuantityChanged += Inventory_OnItemQuantityChanged;
-            this.OnItemsQuantityChanged += Inventory_OnItemsQuantityChanged;
-
         }
 
         public IEnumerable<CharacterItemRecord> GetSpellCastItems()
@@ -103,60 +94,65 @@ namespace Giny.World.Managers.Items
             }
         }
 
-        void Inventory_OnItemsQuantityChanged(IEnumerable<CharacterItemRecord> obj)
+        public override void OnItemsQuantityChanged(IEnumerable<CharacterItemRecord> items)
         {
-            foreach (var item in obj)
+            foreach (var item in items)
             {
                 item.UpdateElement();
             }
 
-            Character.Client.Send(new ObjectsQuantityMessage(Array.ConvertAll(obj.ToArray(), x => x.GetObjectItemQuantity())));
+            Character.Client.Send(new ObjectsQuantityMessage(Array.ConvertAll(items.ToArray(), x => x.GetObjectItemQuantity())));
             RefreshWeight();
         }
 
-        private void Inventory_OnItemQuantityChanged(CharacterItemRecord arg1, int arg2)
+        public override void OnItemQuantityChanged(CharacterItemRecord item, int quantity)
         {
-            arg1.UpdateElement();
-            UpdateItemQuantity(arg1);
+            item.UpdateElement();
+            UpdateItemQuantity(item);
             RefreshWeight();
         }
-        void Inventory_OnItemsRemoved(IEnumerable<CharacterItemRecord> obj)
+
+        public override void OnItemsRemoved(IEnumerable<CharacterItemRecord> items)
         {
-            foreach (var item in obj)
+            foreach (var item in items)
             {
                 item.RemoveElement();
                 Character.GeneralShortcutBar.OnItemRemoved(item);
             }
-            Character.Client.Send(new ObjectsDeletedMessage(Array.ConvertAll(obj.ToArray(), x => x.UId)));
+            Character.Client.Send(new ObjectsDeletedMessage(Array.ConvertAll(items.ToArray(), x => x.UId)));
             RefreshWeight();
             Character.RefreshShortcuts();
         }
-        void Inventory_OnItemsAdded(IEnumerable<CharacterItemRecord> obj)
+
+        public override void OnItemsAdded(IEnumerable<CharacterItemRecord> items)
         {
-            foreach (var item in obj)
+            foreach (var item in items)
             {
                 item.UId = ItemManager.Instance.PopItemUID();
                 item.AddElement();
             }
-            Character.Client.Send(new ObjectsAddedMessage(Array.ConvertAll(obj.ToArray(), x => x.GetObjectItem())));
+            Character.Client.Send(new ObjectsAddedMessage(Array.ConvertAll(items.ToArray(), x => x.GetObjectItem())));
             RefreshWeight();
+        }
 
-        }
-        void Inventory_OnItemRemoved(CharacterItemRecord obj)
+        public override void OnItemRemoved(CharacterItemRecord item)
         {
-            obj.RemoveElement();
-            Character.Client.Send(new ObjectDeletedMessage(obj.UId));
-            Character.GeneralShortcutBar.OnItemRemoved(obj);
+            item.RemoveElement();
+            Character.Client.Send(new ObjectDeletedMessage(item.UId));
+            Character.GeneralShortcutBar.OnItemRemoved(item);
             RefreshWeight();
         }
+
         [WIP]
-        void Inventory_OnItemAdded(CharacterItemRecord item)
+        public override void OnItemAdded(CharacterItemRecord item)
         {
             item.UId = ItemManager.Instance.PopItemUID();
             item.AddElement();
             Character.Client.Send(new ObjectAddedMessage(item.GetObjectItem(), 0)); // 0??????
             RefreshWeight();
         }
+        
+        
         public void UnequipAll()
         {
             foreach (var item in GetEquipedItems())
