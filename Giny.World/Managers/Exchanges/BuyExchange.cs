@@ -20,7 +20,6 @@ using Giny.World.Records.Items;
 
 namespace Giny.World.Managers.Exchanges
 {
-    [WIP("thats shit, rename methods, fix logic etc...")]
     public class BuyExchange : Exchange
     {
         public override ExchangeTypeEnum ExchangeType => ExchangeTypeEnum.BIDHOUSE_BUY;
@@ -157,28 +156,28 @@ namespace Giny.World.Managers.Exchanges
 
             foreach (var itemsData in ItemCollection<BidShopItemRecord>.SortByEffects(items).Keys)
             {
-                BidShopItemRecord sample = null;
-
-                long[] prices = new long[3];
-
                 for (int i = 0; i < BidShop.Quantities.Count; i++)
                 {
-                    int quantityPrice = 0;
+                    BidShopItemRecord item = itemsData.Where(x => x.Quantity == BidShop.Quantities[i]).OrderBy(x => x.Price).ToList().FirstOrDefault();
 
-                    List<BidShopItemRecord> sortedItems = itemsData.FindAll(x => x.Quantity == BidShop.Quantities[i]).OrderBy(x => x.Price).ToList();
+                    result.Add(item.GetBidExchangerObjectInfo(BuildPrices(item, i)));
 
-                    if (sortedItems.Count > 0)
-                    {
-                        quantityPrice = (int)sortedItems[0].Price;
-                        sample = sortedItems[0];
-                    }
-                    prices[i] = quantityPrice;
                 }
-
-                result.Add(sample.GetBidExchangerObjectInfo(prices.ToArray()));
-
             }
             return result.ToArray();
+        }
+        private long[] BuildPrices(BidShopItemRecord item, int quantityIndex)
+        {
+            List<long> prices = new List<long>();
+
+            for (int i = 0; i < quantityIndex; i++)
+            {
+                prices.Add(0);
+            }
+
+            prices.Add(item.Price);
+
+            return prices.ToArray();
         }
         private int[] GetGIDs(ItemTypeEnum type)
         {
