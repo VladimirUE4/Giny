@@ -37,14 +37,11 @@ namespace Giny.World.Records.Items
             set;
         }
         [Update]
-        public int QuantitySold
+        public bool Sold
         {
             get;
             set;
         }
-
-        [Ignore]
-        public bool Sold => Quantity == QuantitySold;
 
         public override AbstractItem CloneWithoutUID()
         {
@@ -60,7 +57,7 @@ namespace Giny.World.Records.Items
                 Position = this.Position,
                 Quantity = this.Quantity,
                 UId = this.UId,
-                QuantitySold = QuantitySold,
+                Sold = Sold,
             };
         }
 
@@ -78,7 +75,7 @@ namespace Giny.World.Records.Items
                 Position = this.Position,
                 Quantity = this.Quantity,
                 UId = this.UId,
-                QuantitySold = QuantitySold,
+                Sold = Sold,
             };
 
         }

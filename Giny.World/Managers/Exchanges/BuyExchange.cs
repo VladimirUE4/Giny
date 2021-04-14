@@ -85,9 +85,9 @@ namespace Giny.World.Managers.Exchanges
 
             if (item != null)
             {
-                if (item.Price == price) // todo
+                if (item.Price == price)
                 {
-                    if (Character.RemoveKamas(price * quantity))
+                    if (Character.RemoveKamas(price))
                     {
                         bought = true;
                         Character.Inventory.AddItem(item.ToCharacterItemRecord(Character.Id));
@@ -208,7 +208,7 @@ namespace Giny.World.Managers.Exchanges
             }
             else
             {
-               // item.Sold = true;
+                item.Sold = true;
                 item.UpdateElement();
             }
         }

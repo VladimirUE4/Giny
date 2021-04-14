@@ -46,6 +46,7 @@
     <Compile Include="Items\LivingObjects.cs" />
     <Compile Include="Maps\StatedElements.cs" />
     <Compile Include="Items\ItemAppearances.cs" />
+    <Compile Include="Maps\Teleporters.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Monsters\MonsterKamas.cs" />
     <Compile Include="Monsters\MonsterSpawns.cs" />

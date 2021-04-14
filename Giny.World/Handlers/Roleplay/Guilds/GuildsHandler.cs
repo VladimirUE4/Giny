@@ -62,7 +62,15 @@ namespace Giny.World.Handlers.Roleplay.Guilds
         [MessageHandler]
         public static void GuildChangeMemberParameters(GuildChangeMemberParametersMessage message, WorldClient client)
         {
+            if (client.Character.HasGuild)
+            {
+                GuildMemberRecord member = client.Character.Guild.Record.GetMember((long)message.memberId);
 
+                if (member != null)
+                {
+                    client.Character.Guild.ChangeParameters(member, message.experienceGivenPercent, message.rank, message.rights);
+                }
+            }
         }
 
         [MessageHandler]

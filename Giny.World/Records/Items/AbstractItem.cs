@@ -94,7 +94,7 @@ namespace Giny.World.Records.Items
             set;
         }
 
-     
+
         public ObjectItem GetObjectItem()
         {
             return new ObjectItem(Position, GId, Effects.GetObjectEffects(), UId, Quantity);
@@ -103,7 +103,7 @@ namespace Giny.World.Records.Items
         {
             return new ObjectItemQuantity(UId, Quantity);
         }
-       
+
         public abstract AbstractItem CloneWithUID();
 
         public abstract AbstractItem CloneWithoutUID();
@@ -168,7 +168,7 @@ namespace Giny.World.Records.Items
                 Price = price,
                 Quantity = Quantity,
                 UId = ItemManager.Instance.PopItemUID(),
-                QuantitySold = 0,
+                Sold = false,
             };
         }
 

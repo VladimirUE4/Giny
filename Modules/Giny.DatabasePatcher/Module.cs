@@ -39,6 +39,7 @@ namespace Giny.DatabasePatcher
             MonsterSpawns.Patch();
             SkillBones.Patch();
             SpellCategories.Patch();
+            Teleporters.Patch();
         }
 
 

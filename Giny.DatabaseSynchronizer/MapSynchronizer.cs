@@ -59,8 +59,6 @@ namespace Giny.DatabaseSynchronizer
 
                         for (short i = 0; i < record.Cells.Length; i++)
                         {
-
-
                             var cell = map.Cells[i];
 
                             record.Cells[i] = new CellRecord()
@@ -85,34 +83,37 @@ namespace Giny.DatabaseSynchronizer
                                 {
                                     if (graphicalElement.Identifier != 0)
                                     {
+                                        InteractiveElementRecord interactiveRecord = new InteractiveElementRecord();
+
+                                        
                                         var gfxElement = Elements[(int)graphicalElement.ElementId];
 
+                                        interactiveRecord.OffsetX = graphicalElement.OffsetX;
+                                        interactiveRecord.OffsetY = graphicalElement.OffsetY;
+                                        interactiveRecord.Identifier = (int)graphicalElement.Identifier;
+                                        interactiveRecord.CellId = layerCell.CellId;
+                                     
+                                      
                                         if (gfxElement.Type != EleGraphicalElementTypes.ENTITY)
                                         {
                                             NormalGraphicalElementData normalElement = gfxElement as NormalGraphicalElementData;
-                                            InteractiveElementRecord interactiveRecord = new InteractiveElementRecord();
-
-                                            interactiveRecord.Identifier = (int)graphicalElement.Identifier;
-                                            interactiveRecord.CellId = layerCell.CellId;
 
                                             if (normalElement != null)
                                                 interactiveRecord.GfxId = normalElement.Gfx;
-                                         
+
                                             interactiveRecord.BonesId = -1;
-                                            elements.Add(interactiveRecord);
 
                                         }
                                         else
                                         {
                                             EntityGraphicalElementData entityElement = gfxElement as EntityGraphicalElementData;
-                                            InteractiveElementRecord interactiveTable = new InteractiveElementRecord();
-                                            interactiveTable.Identifier = (int)graphicalElement.Identifier;
-                                            interactiveTable.CellId = layerCell.CellId;
-                                            interactiveTable.BonesId = ushort.Parse(entityElement.EntityLook.Replace("{", "").Replace("}", ""));
-                                            interactiveTable.GfxId = -1;
-                                            elements.Add(interactiveTable);
+
+                                            interactiveRecord.BonesId = ushort.Parse(entityElement.EntityLook.Replace("{", "").Replace("}", ""));
+                                            interactiveRecord.GfxId = -1;
 
                                         }
+                                        elements.Add(interactiveRecord);
+
 
                                     }
                                 }

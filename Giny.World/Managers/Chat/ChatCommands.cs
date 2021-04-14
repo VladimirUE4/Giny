@@ -98,7 +98,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("elements", ServerRoleEnum.Administrator)]
         public static void ElementsCommand(WorldClient source)
         {
-            InteractiveElementRecord[] elements = source.Character.Map.Elements.Where(x => !x.Stated).ToArray();
+            InteractiveElementRecord[] elements = source.Character.Map.Elements.ToArray();
 
             if (elements.Count() == 0)
             {
@@ -118,7 +118,7 @@ namespace Giny.World.Managers.Chat
                 if (cell != null)
                 {
                     source.Character.DebugHighlightCells(colors[i], new CellRecord[] { cell });
-                    source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId, colors[i]);
+                    source.Character.Reply("Id: " + ele.Identifier + " Cell:" + ele.CellId + " Bones:" + ele.BonesId + " Gfx:" + ele.GfxId, colors[i]);
                 }
             }
         }
@@ -196,19 +196,21 @@ namespace Giny.World.Managers.Chat
                 InteractiveTypeEnum.ZAAP,
                 GenericActionEnum.Zaap,
                 client.Character.Map,
-                client.Character.Map.GetElementRecord(elementId),
+               client.Character.Map.GetElementRecord(elementId),
                 zoneId);
         }
         [ChatCommand("addzaapi", ServerRoleEnum.Administrator)]
-        public static void AddZaapiCommand(WorldClient client, int elementId, int zoneId)
+        public static void AddZaapiCommand(WorldClient client, int elementId)
         {
             TeleportersManager.Instance.AddDestination(
                 TeleporterTypeEnum.TELEPORTER_SUBWAY,
                 InteractiveTypeEnum.ZAAPI,
                 GenericActionEnum.Zaapi,
                 client.Character.Map,
-                client.Character.Map.GetElementRecord(elementId),
-                zoneId);
+               client.Character.Map.GetElementRecord(elementId),
+                client.Character.Map.Subarea.AreaId);
+
+            client.Character.Reply("Zaapi added.");
         }
         [ChatCommand("nocollide", ServerRoleEnum.GamemasterPadawan)]
         public static void NoCollideCommand(WorldClient client)
@@ -318,16 +320,6 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-            client.Send(new GameRolePlayArenaUpdatePlayerInfosMessage()
-            {
-                solo = new ArenaRankInfos(new ArenaRanking(1, 1), new ArenaLeagueRanking(1, 2, 1, 2, 1), 1, 1, 2),
-            });
-
-            client.Send(new GameRolePlayArenaRegisterMessage()
-            {
-                battleMode = 0
-            });
-            return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 

@@ -254,7 +254,7 @@ namespace Giny.World.Records.Maps
         }
         public CellRecord GetCell(int id)
         {
-            if (id < Cells.Length - 1)
+            if (id <= Cells.Length - 1)
             {
                 return Cells[id];
             }
@@ -341,6 +341,18 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
+        [ProtoMember(5)]
+        public int OffsetX
+        {
+            get;
+            set;
+        }
+        [ProtoMember(6)]
+        public int OffsetY
+        {
+            get;
+            set;
+        }
         public InteractiveSkillRecord Skill // this should be an array if we follow official
         {
             get;
@@ -379,6 +391,11 @@ namespace Giny.World.Records.Maps
             }
         }
 
+        [WIP("not working properly.")]
+        public bool IsInMap()
+        {
+            return OffsetX == 0 && OffsetY == 0;
+        }
     }
     [ProtoContract]
     public class CellRecord

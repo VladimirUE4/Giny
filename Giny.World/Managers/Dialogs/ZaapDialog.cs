@@ -36,6 +36,10 @@ namespace Giny.World.Managers.Dialogs
 
         public override void Teleport(MapRecord map)
         {
+            if (!Destinations.ContainsKey(map.Id) || map.Id == Character.Map.Id)
+            {
+                return;
+            }
             var destination = Destinations[map.Id];
 
             var zaapElement = map.GetFirstElementRecord(InteractiveTypeEnum.ZAAP);
@@ -56,7 +60,7 @@ namespace Giny.World.Managers.Dialogs
             }
         }
 
-       
+
 
         public override short GetCost(MapRecord teleporterMap, MapRecord currentMap)
         {

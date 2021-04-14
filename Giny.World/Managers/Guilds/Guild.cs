@@ -132,6 +132,28 @@ namespace Giny.World.Managers.Guilds
                 memberId = member.CharacterId
             });
         }
+
+        /*
+         * 1 meneur
+         * 2 bras droit
+         */
+        //[WIP]
+        public void ChangeParameters(GuildMemberRecord member, byte experienceGivenPercent, short rank, int rights)
+        {
+            member.Rights = (GuildRightsBitEnum)rights;
+            member.ExperienceGivenPercent = experienceGivenPercent;
+            member.Rank = rank;
+            Record.UpdateElement();
+
+            Character character = GetOnlineMember(member.CharacterId);
+
+            if (character != null)
+            {
+        
+                character.SendGuildMembership();
+            }
+        }
+
         public Character GetOnlineMember(long id)
         {
             return OnlineMembers.TryGetValue(id);
@@ -169,6 +191,7 @@ namespace Giny.World.Managers.Guilds
             {
                 return;
             }
+
             member.Client.Send(new GuildMotdMessage()
             {
                 content = Record.Motd.Content,
@@ -176,6 +199,8 @@ namespace Giny.World.Managers.Guilds
                 memberName = Record.Motd.MemberName,
                 timestamp = Record.Motd.Timestamp,
             });
+
+
         }
         public BasicGuildInformations GetBasicGuildInformations()
         {

@@ -388,7 +388,7 @@ namespace Giny.World.Managers.Entities.Characters
             {
                 foreach (var item in bidHouseItems)
                 {
-                    Client.WorldAccount.BankKamas += item.Price * item.Quantity;
+                    Client.WorldAccount.BankKamas += item.Price;
                     Client.WorldAccount.UpdateElement();
                     BidshopsManager.Instance.RemoveItem(item.BidShopId, item);
                 }
@@ -570,14 +570,16 @@ namespace Giny.World.Managers.Entities.Characters
             {
                 Guild = GuildsManager.Instance.GetGuild(Record.GuildId);
                 GuildMember = Guild.Record.GetMember(Id);
-
-                Client.Send(new GuildMembershipMessage()
-                {
-                    guildInfo = Guild.GetGuildInformations(),
-                    memberRights = (int)GuildMember.Rights,
-                });
-
+                SendGuildMembership();
             }
+        }
+        public void SendGuildMembership()
+        {
+            Client.Send(new GuildMembershipMessage()
+            {
+                guildInfo = Guild.GetGuildInformations(),
+                memberRights = (int)GuildMember.Rights,
+            });
         }
         public CharacterJob GetJob(JobsTypeEnum jobType)
         {
