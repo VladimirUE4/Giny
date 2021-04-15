@@ -134,7 +134,7 @@ namespace Giny.World.Managers.Guilds
 
             if (Record.Members.Count == 0)
             {
-
+                GuildsManager.Instance.RemoveGuild(this);
             }
         }
 

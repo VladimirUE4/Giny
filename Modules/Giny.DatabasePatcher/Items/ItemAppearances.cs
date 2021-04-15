@@ -2,9 +2,12 @@
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
 using Giny.Core.IO;
+using Giny.Core.Network;
 using Giny.IO.MA3;
 using Giny.ORM;
+using Giny.Protocol.Custom.Enums;
 using Giny.World.Records.Items;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +19,34 @@ namespace Giny.DatabasePatcher.Items
 {
     public class ItemAppearances
     {
-        public const string ITEMS_URL = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";
+        private static ItemTypeEnum[] ItemTypes = new ItemTypeEnum[]
+        {
+            ItemTypeEnum.HAT,
+            ItemTypeEnum.SWORD,
+            ItemTypeEnum.BOW,
+            ItemTypeEnum.CLOAK,
+            ItemTypeEnum.WAND,
+            ItemTypeEnum.STAFF,
+            ItemTypeEnum.HAMMER,
+            ItemTypeEnum.SHOVEL,
+            ItemTypeEnum.AXE,
+            ItemTypeEnum.TOOL,
+            ItemTypeEnum.PICKAXE,
+            ItemTypeEnum.SCYTHE,
+            ItemTypeEnum.DAGGER,
+        };
 
-        public const string MOUNTS_URL = "http://www.dofus.tools/myAvatar3/assets/data/Mounts.ma3";
+        public const string ItemsUrl = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";
+
+        public const string MountsUrl = "http://www.dofus.tools/myAvatar3/assets/data/Mounts.ma3";
+
+        public const string DofusBookUrl = "https://www.dofusbook.net/items/dofus/skinator/category/{0}";
 
         public static void Patch()
         {
             Logger.Write("Fixing item appeareances ...");
 
-            Logger.Write("Downloading Items.ma3 from " + ITEMS_URL, Channels.Info);
+            Logger.Write("Downloading Items.ma3 from " + ItemsUrl, Channels.Info);
 
             try
             {
@@ -32,45 +54,87 @@ namespace Giny.DatabasePatcher.Items
             }
             catch
             {
-                Logger.Write("Unable to download Items.ma3 from " + ITEMS_URL, Channels.Warning);
+                Logger.Write("Unable to download Items.ma3 from " + ItemsUrl, Channels.Warning);
             }
 
+            Logger.Write("Downloading appearences from Dofus Book", Channels.Info);
+
+            try
+            {
+                ProcessFromDofusBook();
+            }
+            catch
+            {
+                Logger.Write("Unable to download appearance from Dofus Book", Channels.Warning);
+            }
+
+        }
+        private static void ProcessFromDofusBook()
+        {
+            foreach (var itemType in ItemTypes)
+            {
+                string url = string.Format(DofusBookUrl, (int)itemType);
+                var jsonStr = Http.Get(url);
+                dynamic json = JsonConvert.DeserializeObject(jsonStr);
+
+                Logger.Write("Patching : " + itemType);
+
+                foreach (var jsonItem in json.data)
+                {
+                    if (jsonItem.official != null && jsonItem.swf != null)
+                    {
+                        int itemId = jsonItem.official;
+                        int appearenceId = jsonItem.swf;
+
+                        if (ItemRecord.ItemExists(itemId))
+                        {
+                            ItemRecord itemRecord = ItemRecord.GetItem(itemId);
+                            ModifyItemAppearence(itemRecord, appearenceId);
+                        }
+                    }
+                }
+            }
         }
 
         private static void ProcessMA3()
         {
-            MA3ItemFile itemFile = new MA3ItemFile(Web.DownloadData(ITEMS_URL));
+            MA3ItemFile itemFile = new MA3ItemFile(Giny.Core.IO.Web.DownloadData(ItemsUrl));
 
             foreach (var item in itemFile.Items)
             {
                 if (ItemRecord.ItemExists(item.Id))
                 {
-                    var itemRecord = ItemRecord.GetItem(item.Id);
+                    ItemRecord itemRecord = ItemRecord.GetItem(item.Id);
 
+                    ModifyItemAppearence(itemRecord, item.Skin);
 
-                    if (item.Skin != 0 && itemRecord.AppearenceId != item.Skin)
-                    {
-                        WeaponRecord weapon = WeaponRecord.GetWeapon(item.Id);
-
-                        if (weapon != null)
-                        {
-                            weapon.AppearenceId = (short)item.Skin;
-                            weapon.UpdateInstantElement();
-                        }
-                        else
-                        {
-                            itemRecord.AppearenceId = (short)item.Skin;
-                            itemRecord.UpdateInstantElement();
-                        }
-                        
-                    }
-                    else if (item.Look != string.Empty && item.Look != itemRecord.Look)
+                    if (item.Look != string.Empty && item.Look != itemRecord.Look)
                     {
                         itemRecord.Look = item.Look;
                         itemRecord.UpdateInstantElement();
-                  
                     }
                 }
+            }
+        }
+
+
+        private static void ModifyItemAppearence(ItemRecord itemRecord, int appearenceId)
+        {
+            if (appearenceId != 0 && itemRecord.AppearenceId != appearenceId)
+            {
+                WeaponRecord weapon = WeaponRecord.GetWeapon(itemRecord.Id);
+
+                if (weapon != null)
+                {
+                    weapon.AppearenceId = (short)appearenceId;
+                    weapon.UpdateInstantElement();
+                }
+                else
+                {
+                    itemRecord.AppearenceId = (short)appearenceId;
+                    itemRecord.UpdateInstantElement();
+                }
+
             }
         }
     }

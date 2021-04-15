@@ -22,6 +22,7 @@ namespace Giny.World.Managers.Effects
             EffectsEnum.Effect_DamageFire,
             EffectsEnum.Effect_DamageAir,
             EffectsEnum.Effect_DamageEarth,
+            EffectsEnum.Effect_DamageWater,
             EffectsEnum.Effect_StealHPWater,
             EffectsEnum.Effect_StealHPEarth,
             EffectsEnum.Effect_StealHPAir,
