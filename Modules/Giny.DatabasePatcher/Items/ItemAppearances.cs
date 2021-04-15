@@ -22,18 +22,7 @@ namespace Giny.DatabasePatcher.Items
         private static ItemTypeEnum[] ItemTypes = new ItemTypeEnum[]
         {
             ItemTypeEnum.HAT,
-            ItemTypeEnum.SWORD,
-            ItemTypeEnum.BOW,
             ItemTypeEnum.CLOAK,
-            ItemTypeEnum.WAND,
-            ItemTypeEnum.STAFF,
-            ItemTypeEnum.HAMMER,
-            ItemTypeEnum.SHOVEL,
-            ItemTypeEnum.AXE,
-            ItemTypeEnum.TOOL,
-            ItemTypeEnum.PICKAXE,
-            ItemTypeEnum.SCYTHE,
-            ItemTypeEnum.DAGGER,
         };
 
         public const string ItemsUrl = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";

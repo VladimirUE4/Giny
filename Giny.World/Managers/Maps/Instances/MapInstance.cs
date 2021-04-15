@@ -139,7 +139,7 @@ namespace Giny.World.Managers.Maps.Instances
         }
         private void OnEntitiesUpdated()
         {
-            if (Record.CanSpawnMonsters)
+            if (Record.CanSpawnMonsters || Record.IsDungeonMap)
             {
                 if (CharactersCount == 0)
                     this.m_monsterSpawner.Pause();
