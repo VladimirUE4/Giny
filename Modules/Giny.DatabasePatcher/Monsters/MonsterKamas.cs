@@ -33,9 +33,9 @@ namespace Giny.DatabasePatcher.Monsters
 
                 maxDroppedKamas = minDroppedKamas + level * 2;
 
-                if (maxDroppedKamas < 50)
+                if (maxDroppedKamas < 20)
                 {
-                    maxDroppedKamas = 50;
+                    maxDroppedKamas = 20;
                 }
 
                 if (monster.IsBoss)

@@ -102,7 +102,7 @@ namespace Giny.Auth
             {
                 Host = "127.0.0.1",
                 Port = 443,
-                Version = "1.0.1-0b7cff8",
+                Version = "1.0.3-7b16e7c",
                 SQLHost = "127.0.0.1",
                 SQLDBName = "giny_auth",
                 SQLPassword = "",

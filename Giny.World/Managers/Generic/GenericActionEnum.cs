@@ -19,5 +19,7 @@ namespace Giny.World.Managers.Generic
         Zaap,
         Zaapi,
         CreateGuild,
+        LearnSpell,
+        AddKamas,
     }
 }

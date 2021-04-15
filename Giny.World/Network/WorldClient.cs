@@ -23,6 +23,7 @@ using Giny.ORM;
 using Giny.World.Managers.Items;
 using Giny.World.Records.Items;
 using Giny.World.Managers.Items.Collections;
+using Giny.Core.DesignPattern;
 
 namespace Giny.World.Network
 {
@@ -38,7 +39,7 @@ namespace Giny.World.Network
             get;
             set;
         }
-      
+
         public List<CharacterRecord> Characters
         {
             get;
@@ -127,6 +128,7 @@ namespace Giny.World.Network
                 this.WorldAccount.AddElement();
             }
         }
+        [WIP]
         public void OnAccountReceived()
         {
             LoadWorldAccount();
@@ -134,8 +136,8 @@ namespace Giny.World.Network
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
             Send(new ServerSettingsMessage("fr", 0, 0, false, 0, 200, true));
 
-            SendServerOptionalFeatures(OptionalFeaturesEnum.Pvpkis, OptionalFeaturesEnum.Mount,
-                OptionalFeaturesEnum.Itemidols, OptionalFeaturesEnum.MaptacticMode);
+            SendServerOptionalFeatures(OptionalFeaturesEnum.PvpKis, OptionalFeaturesEnum.Mount,
+                OptionalFeaturesEnum.ItemIdols, OptionalFeaturesEnum.MapTacticMode, OptionalFeaturesEnum.TradeAveragePricesAutoUpdate);
 
             Send(new ServerSessionConstantsMessage(new ServerSessionConstant[]
            {

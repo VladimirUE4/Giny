@@ -16,12 +16,12 @@ namespace Giny.Auth.Network
         private static SynchronizedCollection<AuthClient> Queue = new SynchronizedCollection<AuthClient>();
         private static Task m_queueRefresherTask;
 
-        public const double QUEUE_REFRESH_DELAY_SECONDS = 0.2f;
+        public const double QueueRefreshDelaySeconds = 0.2f;
 
         [StartupInvoke("Connection Queue", StartupInvokePriority.Last)]
         public static void CreateTask()
         {
-            m_queueRefresherTask = Task.Factory.StartNewDelayed((int)(QUEUE_REFRESH_DELAY_SECONDS * 1000), RefreshQueue);
+            m_queueRefresherTask = Task.Factory.StartNewDelayed((int)(QueueRefreshDelaySeconds * 1000), RefreshQueue);
         }
         private static void RefreshQueue()
         {
@@ -51,7 +51,7 @@ namespace Giny.Auth.Network
                             toRemove.Add(authClient);
                         }
 
-                        if (DateTime.Now - authClient.InQueueUntil <= TimeSpan.FromSeconds(QUEUE_REFRESH_DELAY_SECONDS))
+                        if (DateTime.Now - authClient.InQueueUntil <= TimeSpan.FromSeconds(QueueRefreshDelaySeconds))
                             continue;
 
 

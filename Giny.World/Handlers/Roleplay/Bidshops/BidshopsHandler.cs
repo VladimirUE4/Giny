@@ -1,6 +1,7 @@
 ﻿using Giny.Core.Network.Messages;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
+using Giny.World.Managers.Bidshops;
 using Giny.World.Managers.Exchanges;
 using Giny.World.Network;
 using System;
@@ -37,8 +38,8 @@ namespace Giny.World.Handlers.Roleplay.Bidshops
                 client.Character.GetDialog<BuyExchange>().Buy(message.uid, message.qty, message.price);
             }
         }
-        
-      
+
+
         [MessageHandler]
         public static void HandleBidHouseSearch(ExchangeBidHouseSearchMessage message, WorldClient client)
         {
@@ -48,10 +49,16 @@ namespace Giny.World.Handlers.Roleplay.Bidshops
             }
         }
 
-        [MessageHandler] 
-        public static void HandleExchangeBidHousePrice(ExchangeBidHousePriceMessage message,WorldClient client)
+        [MessageHandler]
+        public static void HandleExchangeBidHousePrice(ExchangeBidHousePriceMessage message, WorldClient client)
         {
-            /* todo ? seems cancer */
+            long price = BidshopsManager.Instance.GetAveragePrice(message.genId);
+
+            client.Send(new ObjectAveragePricesMessage()
+            {
+                ids = new short[] { message.genId },
+                avgPrices = new long[] { price },
+            });
         }
     }
 }

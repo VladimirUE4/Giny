@@ -160,7 +160,10 @@ namespace Giny.World.Managers.Exchanges
                 {
                     BidShopItemRecord item = itemsData.Where(x => x.Quantity == BidShop.Quantities[i]).OrderBy(x => x.Price).ToList().FirstOrDefault();
 
-                    result.Add(item.GetBidExchangerObjectInfo(BuildPrices(item, i)));
+                    if (item != null)
+                    {
+                        result.Add(item.GetBidExchangerObjectInfo(BuildPrices(item, i)));
+                    }
 
                 }
             }

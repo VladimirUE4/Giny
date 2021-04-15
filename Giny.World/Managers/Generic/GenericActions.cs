@@ -95,5 +95,17 @@ namespace Giny.World.Managers.Generic
         {
             character.OpenGuildCreationDialog();
         }
+        [GenericActionHandler(GenericActionEnum.LearnSpell, 1)]
+        public static void HandleLearnSpell(Character character, IGenericActionParameter parameter)
+        {
+            character.LearnSpell(short.Parse(parameter.Param1), true);
+        }
+        [GenericActionHandler(GenericActionEnum.AddKamas,1)]
+        public static void HandleAddKamas(Character character,IGenericActionParameter parameter)
+        {
+            long amount = long.Parse(parameter.Param1);
+            character.AddKamas(amount);
+            character.OnKamasGained(amount);
+        }
     }
 }

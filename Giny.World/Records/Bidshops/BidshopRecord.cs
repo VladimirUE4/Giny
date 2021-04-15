@@ -39,7 +39,7 @@ namespace Giny.World.Records.Bidshops
             get;
             set;
         }
-   
+
 
         public static BidShopRecord GetBidShop(int id)
         {
@@ -48,7 +48,7 @@ namespace Giny.World.Records.Bidshops
         public SellerBuyerDescriptor GetBuyerDescriptor()
         {
             return new SellerBuyerDescriptor(Quantities.ToArray(), ItemTypes.ToArray(), 0, 0,
-                200, MaxItemPerAccount, -1, 50);
+                200, MaxItemPerAccount, 0, 50);
         }
         public static IEnumerable<BidShopRecord> GetBidShops()
         {
