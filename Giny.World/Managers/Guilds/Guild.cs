@@ -131,6 +131,11 @@ namespace Giny.World.Managers.Guilds
                 kicked = kicked,
                 memberId = member.CharacterId
             });
+
+            if (Record.Members.Count == 0)
+            {
+
+            }
         }
 
         /*
@@ -149,7 +154,7 @@ namespace Giny.World.Managers.Guilds
 
             if (character != null)
             {
-        
+
                 character.SendGuildMembership();
             }
         }
