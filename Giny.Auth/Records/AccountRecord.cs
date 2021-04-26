@@ -15,12 +15,10 @@ using System.Threading.Tasks;
 
 namespace Giny.Auth.Records
 {
-    [Table("accounts")]
+    [Table("accounts", -1, false)]
     public class AccountRecord : ITable
     {
         public const int DefaultCharacterSlots = 5;
-
-        private static ConcurrentDictionary<long, AccountRecord> Accounts = new ConcurrentDictionary<long, AccountRecord>();
 
         long ITable.Id => Id;
 
@@ -91,26 +89,26 @@ namespace Giny.Auth.Records
 
         public Account ToAccount()
         {
-            return new Account(Id, Username, Nickname, Banned, CharacterSlots, Role, LastSelectedServerId);
+            return new Account(Id, Username, Nickname, CharacterSlots, Role);
         }
 
-        public static IEnumerable<AccountRecord> GetAccountRecords()
-        {
-            return Accounts.Values;
-        }
 
-        public static AccountRecord GetAccount(int accountId)
+        public static IEnumerable<AccountRecord> ReadAccountRecords()
         {
-            return Accounts.TryGetValue(accountId);
+            return DatabaseReader.Read<AccountRecord>();
         }
-        public static AccountRecord GetAccount(string username)
+        public static AccountRecord ReadAccount(int accountId)
         {
-            return Accounts.Values.FirstOrDefault(x => x.Username == username);
+            return DatabaseReader.ReadFirst<AccountRecord>("Id", accountId.ToString());
+        }
+        public static AccountRecord ReadAccount(string username)
+        {
+            return DatabaseReader.ReadFirst<AccountRecord>("Username", username);
         }
 
         public static bool NicknameExist(string nickname)
         {
-            return Accounts.Values.Any(x => x.Nickname == nickname);
+            return DatabaseReader.ReadFirst<AccountRecord>("Nickname", nickname) != null;
         }
 
     }

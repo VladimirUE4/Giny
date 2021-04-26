@@ -121,7 +121,7 @@ namespace Giny.Auth.Handlers
                 client.AesKey = reader.ReadBytes(32);
             }
 
-            AccountRecord account = AccountRecord.GetAccount(username);
+            AccountRecord account = AccountRecord.ReadAccount(username);
 
             if (account == null || account.Password != password)
             {

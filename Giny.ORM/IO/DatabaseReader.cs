@@ -48,7 +48,7 @@ namespace Giny.ORM.IO
             var definition = TableManager.Instance.GetDefinition(type);
             this.Properties = definition.Properties;
             this.TableName = definition.TableAttribute.TableName;
-            this.Elements = definition.ContainerValue;
+            this.Elements = definition.TableAttribute.Load ? definition.ContainerValue : new Dictionary<long, ITable>();
         }
         public ITable ReadFirst(MySqlConnection connection, string where)
         {
@@ -237,14 +237,16 @@ namespace Giny.ORM.IO
                 throw new Exception(exception);
             }
         }
-        public static IDictionary Read(Type type, string condition)
+        private static IDictionary Read(Type type, string condition)
         {
             DatabaseReader reader = new DatabaseReader(type);
             reader.ReadTable(DatabaseManager.Instance.UseProvider(), string.Format(QueryConstants.SELECT, reader.TableName, condition));
             return reader.Elements;
-
         }
-
+        public static IEnumerable<T> Read<T>() where T : ITable
+        {
+            return Read(typeof(T), string.Empty).Values.Cast<T>();
+        }
         public static T ReadFirst<T>(string fieldName, string fieldValue) where T : ITable
         {
             DatabaseReader reader = new DatabaseReader(typeof(T));

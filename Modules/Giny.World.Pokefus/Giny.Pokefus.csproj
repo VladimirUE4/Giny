@@ -59,6 +59,10 @@
       <Name>Giny.Core</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Giny.ORM\Giny.ORM.csproj">
+      <Project>{c6182b67-9d36-4e64-8ba9-9e186f818667}</Project>
+      <Name>Giny.ORM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Giny.Protocol\Giny.Protocol.csproj">
       <Project>{1EEA4E95-4EEF-444E-B261-5CB8AFE90040}</Project>
       <Name>Giny.Protocol</Name>

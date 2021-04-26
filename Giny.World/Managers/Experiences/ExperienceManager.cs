@@ -34,6 +34,14 @@ namespace Giny.World.Managers.Experiences
             return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceCharacter > experience).Level - 1);
         }
 
+        public short GetCharacterLevelRegular(long experience)
+        {
+            if (experience >= HighestExperience.ExperienceCharacter)
+                return MaxLevel;
+
+            return (short)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceCharacter > experience).Level - 1);
+        }
+
 
         public short GetJobLevel(long experience)
         {

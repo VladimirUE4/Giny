@@ -22,8 +22,6 @@ namespace Giny.World.Network
             private set;
         }
 
-      
-
         public ServerStatusEnum Status
         {
             get;
@@ -36,6 +34,12 @@ namespace Giny.World.Network
             set;
         }
         public bool Started
+        {
+            get;
+            private set;
+        }
+
+        public int MaximumClients
         {
             get;
             private set;
@@ -67,6 +71,11 @@ namespace Giny.World.Network
         public void AddClient(WorldClient client)
         {
             Clients.Add(client);
+
+            if (Clients.Count > MaximumClients)
+            {
+                MaximumClients = Clients.Count;
+            }
         }
 
         public bool IsOnline(long characterId)

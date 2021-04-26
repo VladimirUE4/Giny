@@ -1420,6 +1420,10 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new SystemMessageDisplayMessage(hangUp, msgId, parameters));
         }
+        public void DisplayPopup(byte lockDuration, string author, string content)
+        {
+            Client.Send(new PopupWarningMessage(lockDuration, author, content));
+        }
         public PlayerStatus GetPlayerStatus()
         {
             return new PlayerStatus((byte)PlayerStatusEnum.PLAYER_STATUS_AVAILABLE);

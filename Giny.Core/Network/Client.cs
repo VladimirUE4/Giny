@@ -121,7 +121,7 @@ namespace Giny.Core.Network
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write("Unable to send message to " + Ip + " : "+ ex, Channels.Warning);
+                    Logger.Write("Unable to send message to client : " + ex, Channels.Warning);
                     Disconnect();
                 }
             }
@@ -157,9 +157,9 @@ namespace Giny.Core.Network
             {
                 m_socket?.BeginReceive(m_buffer, 0, m_buffer.Length, SocketFlags.None, OnReceived, null);
             }
-            catch
+            catch (Exception ex)
             {
-                Logger.Write("Unable to receive from " + Ip, Channels.Warning);
+                Logger.Write("Unable to receive from client " + ex, Channels.Warning);
                 Disconnect();
             }
         }
@@ -183,7 +183,7 @@ namespace Giny.Core.Network
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 Dispose();
                 OnConnectionClosed();

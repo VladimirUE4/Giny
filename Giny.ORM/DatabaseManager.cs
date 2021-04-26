@@ -52,13 +52,16 @@ namespace Giny.ORM
 
         private MySqlConnection UseProvider(MySqlConnection connection)
         {
-            if (!connection.Ping())
+            lock (SyncRoot)
             {
-                connection.Close();
-                connection.Open();
-            }
+                if (!connection.Ping())
+                {
+                    connection.Close();
+                    connection.Open();
+                }
 
-            return connection;
+                return connection;
+            }
         }
         public void Reload<T>() where T : ITable
         {

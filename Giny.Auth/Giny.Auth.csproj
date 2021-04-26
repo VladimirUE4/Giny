@@ -96,9 +96,6 @@
     <Compile Include="Records\AccountRecord.cs" />
     <Compile Include="Records\WorldCharacterRecord.cs" />
     <Compile Include="Records\WorldServerRecord.cs" />
-    <Compile Include="Web\Controllers\AccountsController.cs" />
-    <Compile Include="Web\Startup.cs" />
-    <Compile Include="Web\WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

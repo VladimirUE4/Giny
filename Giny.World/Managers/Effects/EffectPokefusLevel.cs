@@ -14,7 +14,7 @@ namespace Giny.Pokefus.Effects
     [ProtoContract]
     public class EffectPokefusLevel : EffectCustom
     {
-        private const string Description = "Niveau {0}";
+        private const string Description = "Niveau {0} ({1}%)";
 
         [ProtoMember(21)]
         public long Exp
@@ -26,7 +26,7 @@ namespace Giny.Pokefus.Effects
         {
             get
             {
-                return ExperienceManager.Instance.GetCharacterLevel(Exp);
+                return ExperienceManager.Instance.GetCharacterLevelRegular(Exp);
             }
         }
         public long LowerBoundExperience
@@ -60,7 +60,9 @@ namespace Giny.Pokefus.Effects
 
         protected override string GetEffectDescription()
         {
-            return string.Format(Description, Level);
+            double ratio = LowerBoundExperience / (double)UpperBoundExperience;
+            int percentage = (int)(ratio * 100d);
+            return string.Format(Description, Level, percentage);
         }
 
         public override bool Equals(object obj)

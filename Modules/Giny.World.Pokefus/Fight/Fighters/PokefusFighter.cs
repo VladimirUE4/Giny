@@ -1,9 +1,11 @@
-﻿using Giny.Protocol.Types;
+﻿using Giny.Pokefus.Effects;
+using Giny.Protocol.Types;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Monsters;
+using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using System;
@@ -16,10 +18,17 @@ namespace Giny.Pokefus.Fight.Fighters
 {
     public class PokefusFighter : SummonedMonster
     {
-        public PokefusFighter(Fighter owner, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
+        private CharacterItemRecord PokefusItem
         {
-
+            get;
+            set;
         }
+        public PokefusFighter(Fighter owner, CharacterItemRecord pokefusItem, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
+        {
+            this.PokefusItem = pokefusItem;
+        }
+
+        public override short Level => PokefusItem.Effects.Get<EffectPokefusLevel>().Level;
 
         public override bool CanDrop => true;
 
@@ -28,11 +37,15 @@ namespace Giny.Pokefus.Fight.Fighters
         public override void Initialize()
         {
             this.Look = Record.Look.Clone();
-            this.Stats = new FighterStats(Grade);
+            this.Stats = new FighterStats(Grade, ComputeStatsCoeff());
             this.SetController((CharacterFighter)Summoner);
             base.Initialize();
         }
 
+        private double ComputeStatsCoeff()
+        {
+            return (Level * 2 / 200) + 0.1d;
+        }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()
