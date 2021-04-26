@@ -346,7 +346,7 @@ namespace Giny.World.Managers.Entities.Characters
             set;
         }
         [WIP("pokefus , companions (verification cellule)")]
-        public int FighterCount => 1; 
+        public int FighterCount => 1;
 
         public Character(WorldClient client, CharacterRecord record) : base(null)
         {
@@ -616,6 +616,10 @@ namespace Giny.World.Managers.Entities.Characters
         public void OpenMerchantAsVendorExchange()
         {
             this.OpenDialog(new MerchantVendorExchange(this));
+        }
+        public void OpenCraftExchange(SkillRecord skill)
+        {
+            this.OpenDialog(new CraftExchange(this, skill));
         }
         public void OpenBuySellExchange(Npc npc, ItemRecord[] itemToSell, short tokenId)
         {

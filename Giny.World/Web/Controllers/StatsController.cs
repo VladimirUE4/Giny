@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Giny.World.Web.Controllers
 {
+    [EnableCors("http://localhost:3000", "*", "*")]
     [RoutePrefix("api/stats")]
     public class StatsController : ApiController
     {

@@ -65,6 +65,17 @@ namespace Giny.Auth
             get;
             set;
         }
+        public string APIHost
+        {
+            get;
+            set;
+        }
+        public int APIPort
+        {
+            get;
+            set;
+        }
+
         [StartupInvoke("Config", StartupInvokePriority.Initial)]
         public static void Initialize()
         {
@@ -108,7 +119,9 @@ namespace Giny.Auth
                 SQLPassword = "",
                 SQLUser = "root",
                 IPCHost = "127.0.0.1",
-                IPCPort = 800
+                IPCPort = 800,
+                APIPort = 9001,
+                APIHost = "127.0.0.1",
             };
         }
     }

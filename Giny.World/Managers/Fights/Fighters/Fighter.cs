@@ -56,8 +56,6 @@ namespace Giny.World.Managers.Fights.Fighters
             set;
         } = true;
 
-
-
         public Fight Fight
         {
             get;

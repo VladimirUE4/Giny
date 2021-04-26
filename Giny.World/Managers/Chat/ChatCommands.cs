@@ -73,9 +73,9 @@ namespace Giny.World.Managers.Chat
                 MapId = client.Character.Map.Id,
                 Param1 = mapId.ToString(),
                 Param2 = cellId.ToString(),
-                SkillId = skillType,
+                SkillEnum = skillType,
                 Type = 0,
-                SkillRecord = SkillRecord.GetSkill(skillType),
+                Record = SkillRecord.GetSkill(skillType),
             };
 
             element.Skill = skillRecord;
@@ -320,7 +320,13 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-            client.Character.Reply(client.Character.Map.CanSpawnMonsters);
+            for (int i = 0; i < 300; i++)
+            {
+                client.Character.Reply(i);
+                client.Character.DisplaySystemMessage(true, (short)i);
+                System.Threading.Thread.Sleep(500);
+
+            }
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());

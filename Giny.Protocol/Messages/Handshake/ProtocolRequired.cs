@@ -17,6 +17,7 @@ namespace Giny.Protocol.Messages
 
         public ProtocolRequired()
         {
+
         }
         public ProtocolRequired(string version)
         {

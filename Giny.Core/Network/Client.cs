@@ -113,7 +113,6 @@ namespace Giny.Core.Network
             {
                 try
                 {
-
                     using (var writer = new BigEndianWriter())
                     {
                         message.Pack(writer);
@@ -122,7 +121,7 @@ namespace Giny.Core.Network
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write("Unable to send message to " + Ip + ".", Channels.Warning);
+                    Logger.Write("Unable to send message to " + Ip + " : "+ ex, Channels.Warning);
                     Disconnect();
                 }
             }

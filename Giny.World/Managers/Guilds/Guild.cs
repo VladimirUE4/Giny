@@ -94,7 +94,11 @@ namespace Giny.World.Managers.Guilds
 
         public void Leave(Character source, GuildMemberRecord member)
         {
-            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS || source.Guild != this)
+            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS)
+            {
+                return;
+            }
+            if (source.Guild != this)
             {
                 return;
             }
@@ -145,6 +149,10 @@ namespace Giny.World.Managers.Guilds
         //[WIP]
         public void ChangeParameters(GuildMemberRecord member, byte experienceGivenPercent, short rank, int rights)
         {
+            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS)
+            {
+                return;
+            }
             member.Rights = (GuildRightsBitEnum)rights;
             member.ExperienceGivenPercent = experienceGivenPercent;
             member.Rank = rank;

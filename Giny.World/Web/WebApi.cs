@@ -11,7 +11,7 @@ namespace Giny.World.Web
 {
     public class WebApi : Singleton<WebApi>
     {
-        public const string Address = "http://localhost:9000/";
+        public static string Address = "http://" + ConfigFile.Instance.APIHost + ":" + ConfigFile.Instance.APIPort + "/";
 
         private IDisposable WebServer
         {

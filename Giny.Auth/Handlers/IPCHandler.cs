@@ -56,7 +56,7 @@ namespace Giny.Auth.Handlers
             }
             else
             {
-                resultMessage = new AccountMessage(accountRecord.GetAccount());
+                resultMessage = new AccountMessage(accountRecord.ToAccount());
             }
 
             client.SendIPCAnswer(resultMessage, message);

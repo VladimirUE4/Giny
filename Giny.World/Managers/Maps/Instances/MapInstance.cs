@@ -21,6 +21,7 @@ using Giny.World.Managers.Entities.Merchants;
 using Giny.Core.Time;
 using Giny.Core.Extensions;
 using System.Collections.Concurrent;
+using Giny.Core.DesignPattern;
 
 namespace Giny.World.Managers.Maps.Instances
 {
@@ -42,6 +43,7 @@ namespace Giny.World.Managers.Maps.Instances
             }
         }
 
+        [WIP("thread safe..")]
         private List<MapElement> m_elements = new List<MapElement>();
 
         private ConcurrentDictionary<long, Entity> m_entities = new ConcurrentDictionary<long, Entity>();
@@ -51,7 +53,6 @@ namespace Giny.World.Managers.Maps.Instances
         private ConcurrentDictionary<int, Fight> m_fights = new ConcurrentDictionary<int, Fight>();
 
         private ReversedUniqueIdProvider m_npIdPopper = new ReversedUniqueIdProvider(0);
-
 
         private UniqueIdProvider m_dropItemIdPopper = new UniqueIdProvider(0);
 
@@ -70,7 +71,7 @@ namespace Giny.World.Managers.Maps.Instances
         public MapInstance(MapRecord record)
         {
             this.Record = record;
-            this.m_elements = Record.Elements.Where(x => x.Skill != null).Select(x => x.GetMapElement(this)).ToList();
+            this.m_elements = new List<MapElement>(Record.Elements.Where(x => x.Skill != null).Select(x => x.GetMapElement(this)).ToList());
             InitializeSpawnCycle();
         }
         private void InitializeSpawnCycle()
@@ -116,7 +117,7 @@ namespace Giny.World.Managers.Maps.Instances
 
         public void Reload()
         {
-            this.m_elements = Record.Elements.Where(x => x.Skill != null).Select(x => x.GetMapElement(this)).ToList();
+            this.m_elements = new List<MapElement>(Record.Elements.Where(x => x.Skill != null).Select(x => x.GetMapElement(this)).ToList());
 
             foreach (var character in GetEntities<Character>())
             {
@@ -362,11 +363,11 @@ namespace Giny.World.Managers.Maps.Instances
                 {
                     if (GenericActionsManager.Instance.IsHandled(element))
                     {
-                        bool canMove = element.Record.Skill.SkillRecord.ParentJobId == 1; /* Should be working */
+                        bool canMove = element.Record.Skill.Record.ParentJobId == 1; /* Should be working */
 
                         short duration = canMove ? (short)0 : SkillsManager.SKILL_DURATION; /* Duration should be related to job level (its not a const) */
 
-                        character.SendMap(new InteractiveUsedMessage(character.Id, elemId, (short)element.Record.Skill.SkillId, duration, canMove));
+                        character.SendMap(new InteractiveUsedMessage(character.Id, elemId, (short)element.Record.Skill.SkillEnum, duration, canMove));
                         GenericActionsManager.Instance.Handle(character, element);
                     }
                     else

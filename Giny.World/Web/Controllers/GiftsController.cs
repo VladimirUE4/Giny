@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 
 namespace Giny.World.Web.Controllers
 {
@@ -17,7 +19,7 @@ namespace Giny.World.Web.Controllers
             return new string[] { "gifts" };
         }
 
-        public string Post([FromBody] Dictionary<string, int> value)
+        public StatusCodeResult Post([FromBody] Dictionary<string, int> value)
         {
             int accountId = value["accountId"];
             int tokenId = value["tokenId"];
@@ -25,11 +27,11 @@ namespace Giny.World.Web.Controllers
 
             if (WebGiftManager.Instance.AddGift(accountId, tokenId, tokenCount))
             {
-                return "OK";
+                return StatusCode(HttpStatusCode.OK);
             }
             else
             {
-                return "NOT FOUND";
+                return StatusCode(HttpStatusCode.NotFound);
             }
         }
     }

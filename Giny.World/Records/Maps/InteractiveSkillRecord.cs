@@ -45,13 +45,13 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
-        public SkillTypeEnum SkillId
+        public SkillTypeEnum SkillEnum
         {
             get;
             set;
         }
         [Ignore]
-        public SkillRecord SkillRecord
+        public SkillRecord Record
         {
             get;
             set;
@@ -104,7 +104,7 @@ namespace Giny.World.Records.Maps
         {
             foreach (var skill in InteractiveSkills.Values)
             {
-                skill.SkillRecord = SkillRecord.GetSkill(skill.SkillId);
+                skill.Record = SkillRecord.GetSkill(skill.SkillEnum);
             }
         }
         public static IEnumerable<InteractiveSkillRecord> GetInteractiveSkills()

@@ -20,7 +20,7 @@ namespace Giny.Protocol.IPC.Types
 
         public ServerRoleEnum Role;
 
-        public Account(int id, string username, string nickname, bool banned, byte characterSlots, ServerRoleEnum role, short lastSelectedServerId)
+        public Account(int id, string username, string nickname, byte characterSlots, ServerRoleEnum role)
         {
             this.Id = id;
             this.Username = username;

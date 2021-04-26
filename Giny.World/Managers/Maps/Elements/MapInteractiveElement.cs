@@ -16,10 +16,10 @@ namespace Giny.World.Managers.Maps.Elements
         {
             InteractiveElementSkill[] skills = new InteractiveElementSkill[]
             {
-                new InteractiveElementSkill((int)Record.Skill.SkillId, (int)Record.Skill.Id)
+                new InteractiveElementSkill((int)Record.Skill.SkillEnum, (int)Record.Skill.Id)
             };
 
-            if (character.SkillsAllowed.Contains(Record.Skill.SkillRecord))
+            if (character.SkillsAllowed.Contains(Record.Skill.Record))
             {
                 return new InteractiveElement((int)Record.Identifier, (int)Record.Skill.Type, skills, new InteractiveElementSkill[0], true);
             }

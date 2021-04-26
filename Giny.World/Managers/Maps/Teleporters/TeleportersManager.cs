@@ -75,8 +75,8 @@ namespace Giny.World.Managers.Maps.Teleporters
                 Param1 = zoneId.ToString(),
                 Param2 = string.Empty,
                 Param3 = string.Empty,
-                SkillId = SkillTypeEnum.USE114,
-                SkillRecord = SkillRecord.GetSkill(SkillTypeEnum.USE114),
+                SkillEnum = SkillTypeEnum.USE114,
+                Record = SkillRecord.GetSkill(SkillTypeEnum.USE114),
                 Type = interactiveType,
             };
 

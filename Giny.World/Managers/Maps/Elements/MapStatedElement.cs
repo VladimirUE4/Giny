@@ -87,9 +87,9 @@ namespace Giny.World.Managers.Maps.Elements
         {
             this.Character = character;
 
-            CharacterJob job = Character.GetJob(Skill.SkillRecord.ParentJobId);
+            CharacterJob job = Character.GetJob(Skill.Record.ParentJobId);
 
-            if (job != null && job.Level < Skill.SkillRecord.MinLevel)
+            if (job != null && job.Level < Skill.Record.MinLevel)
             {
                 return;
             }
@@ -117,16 +117,16 @@ namespace Giny.World.Managers.Maps.Elements
         {
             if (State == StatedElementState.Used)
             {
-                CharacterJob job = Character.GetJob(Skill.SkillRecord.ParentJobId);
+                CharacterJob job = Character.GetJob(Skill.Record.ParentJobId);
 
-                int quantity = JobFormulas.Instance.GetCollectedItemQuantity(job != null ? job.Level : 1, Skill.SkillRecord) ;
+                int quantity = JobFormulas.Instance.GetCollectedItemQuantity(job != null ? job.Level : 1, Skill.Record) ;
 
-                this.Character.Inventory.AddItem(Skill.SkillRecord.GatheredRessourceItem, quantity);
-                this.Character.Client.Send(new ObtainedItemMessage(Skill.SkillRecord.GatheredRessourceItem, quantity));
+                this.Character.Inventory.AddItem(Skill.Record.GatheredRessourceItem, quantity);
+                this.Character.Client.Send(new ObtainedItemMessage(Skill.Record.GatheredRessourceItem, quantity));
 
                 if (job != null)
                 {
-                    this.Character.AddJobExp(Skill.SkillRecord.ParentJobId, 5 * Skill.SkillRecord.MinLevel);
+                    this.Character.AddJobExp(Skill.Record.ParentJobId, 5 * Skill.Record.MinLevel);
                 }
                 this.Character.Collecting = false;
                 this.Character = null;

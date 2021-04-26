@@ -72,6 +72,18 @@ namespace Giny.World
             set;
         } = 800;
 
+        public string APIHost
+        {
+            get;
+            set;
+        } = "127.0.0.1";
+
+        public int APIPort
+        {
+            get;
+            set;
+        } = 9000;
+
         public long SpawnMapId
         {
             get;

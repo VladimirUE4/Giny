@@ -21,5 +21,6 @@ namespace Giny.World.Managers.Generic
         CreateGuild,
         LearnSpell,
         AddKamas,
+        Craft,
     }
 }

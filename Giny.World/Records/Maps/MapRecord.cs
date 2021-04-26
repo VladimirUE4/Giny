@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace Giny.World.Records.Maps
 {
     [Table("maps")]
-    public class MapRecord : ITable
+    public class MapRecord : ITable 
     {
         private static ConcurrentDictionary<long, MapRecord> Maps = new ConcurrentDictionary<long, MapRecord>();
 
@@ -36,6 +36,7 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
+
         [Ignore]
         public SubareaRecord Subarea
         {
@@ -170,8 +171,6 @@ namespace Giny.World.Records.Maps
                 map.ReloadMembers();
             }
         }
-
-
         public long? GetNextRoomMapId()
         {
             return Dungeon.GetNextMapId(Id);

@@ -58,10 +58,7 @@ namespace Giny.World.Managers.Generic
                 throw new Exception("Unable to collect. Invalid interactive element.");
             }
 
-            lock (element)
-            {
-                element.Use(character);
-            }
+            element.Use(character);
         }
         [GenericActionHandler(GenericActionEnum.Bidshop, 1)]
         public static void HandleBidshop(Character character, IGenericActionParameter parameter)
@@ -100,12 +97,25 @@ namespace Giny.World.Managers.Generic
         {
             character.LearnSpell(short.Parse(parameter.Param1), true);
         }
-        [GenericActionHandler(GenericActionEnum.AddKamas,1)]
-        public static void HandleAddKamas(Character character,IGenericActionParameter parameter)
+        [GenericActionHandler(GenericActionEnum.AddKamas, 1)]
+        public static void HandleAddKamas(Character character, IGenericActionParameter parameter)
         {
             long amount = long.Parse(parameter.Param1);
             character.AddKamas(amount);
             character.OnKamasGained(amount);
+        }
+
+        [GenericActionHandler(GenericActionEnum.Craft, 0)]
+        public static void HandleCraft(Character character, IGenericActionParameter parameter)
+        {
+            MapInteractiveElement element = parameter as MapInteractiveElement;
+
+            if (element == null)
+            {
+                throw new Exception("Unable to craft. Invalid generic parameter.");
+            }
+
+            character.OpenCraftExchange(element.Record.Skill.Record);
         }
     }
 }
