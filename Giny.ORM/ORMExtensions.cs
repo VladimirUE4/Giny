@@ -59,9 +59,9 @@ namespace Giny.ORM
             TableManager.Instance.RemoveFromContainer(table);
 
         }
-        public static void RemoveInstantElements(this IEnumerable<ITable> tables, Type type)
+        public static void RemoveInstantElements<T>(this IEnumerable<T> tables) where T : ITable
         {
-            TableManager.Instance.GetWriter(type).Use(tables.ToArray(), DatabaseAction.Remove);
+            TableManager.Instance.GetWriter(typeof(T)).Use(tables.Cast<ITable>().ToArray(), DatabaseAction.Remove);
 
             foreach (var table in tables)
             {

@@ -105,7 +105,7 @@ namespace Giny.World.Managers.Chat
                 }
                 catch (Exception ex)
                 {
-                    source.Character.ReplyError(ex);
+                    source.Character.ReplyError("Unable to execute command. Server side error");
                 }
             }
             else

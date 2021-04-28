@@ -6,6 +6,7 @@ using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
+using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Entities.Npcs;
 using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights.Fighters;
@@ -49,14 +50,21 @@ namespace Giny.World.Managers.Chat
 
             client.Character.ReplyWarning(sb.ToString());
         }
-        [ChatCommand("sun", ServerRoleEnum.Administrator)]
-        public static void AddSunCommand(WorldClient client, int mapId, short cellId)
+        [ChatCommand("look", ServerRoleEnum.Administrator)]
+        public static void LookCommand(WorldClient client, string lookStr)
         {
-            var elements = client.Character.Map.Elements.Where(x => x.CellId == client.Character.CellId);
+            var look = EntityLookManager.Instance.Parse(System.Web.HttpUtility.HtmlDecode(lookStr));
+            client.Character.Look = look;
+            client.Character.RefreshActorOnMap();
+        }
+        [ChatCommand("sun", ServerRoleEnum.Administrator)]
+        public static void AddSunCommand(WorldClient client, int elementId, int mapId, short cellId)
+        {
+            var elements = client.Character.Map.Elements.Where(x => x.Identifier == elementId);
 
-            if (elements.Count() > 1 || elements.Count() == 0)
+            if (elements.Count() == 0)
             {
-                client.Character.ReplyWarning("Invalid cell " + client.Character.CellId);
+                client.Character.ReplyWarning("Invalid element");
                 return;
             }
 
@@ -320,13 +328,8 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-            for (int i = 0; i < 300; i++)
-            {
-                client.Character.Reply(i);
-                client.Character.DisplaySystemMessage(true, (short)i);
-                System.Threading.Thread.Sleep(500);
+            client.Character.Record.DoneObjectives.Clear();
 
-            }
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());

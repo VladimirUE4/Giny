@@ -81,8 +81,10 @@ namespace Giny.World.Managers.Maps.Npcs
             NpcSpawnRecord spawnRecord = NpcSpawnRecord.GetNpcSpawnRecord(spawnRecordId);
             IEnumerable<NpcActionRecord> npcActions = NpcActionRecord.GetNpcActions(spawnRecord.Id);
 
+            NpcReplyRecord.GetNpcReplies().Where(x => x.NpcSpawnId == spawnRecordId).RemoveInstantElements();
+
             spawnRecord.RemoveInstantElement();
-            npcActions.RemoveInstantElements(typeof(NpcActionRecord));
+            npcActions.RemoveInstantElements();
 
             MapRecord map = MapRecord.GetMap(spawnRecord.MapId);
             Npc npc = map.Instance.GetEntity<Npc>(x => x.SpawnRecord.Id == spawnRecordId);

@@ -4,6 +4,7 @@ using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Monsters;
 using Giny.World.Records.Maps;
+using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -71,6 +72,16 @@ namespace Giny.World.Managers.Fights
 
             var fight = new FightDual(PopId(), source.Map, blueteam, redteam, cell);
 
+            Fights.TryAdd(fight.Id, fight);
+            return fight;
+        }
+
+        public FightContextual CreateFightContextual(Character source, short targetObjective)
+        {
+            FightTeam blueTeam = new FightTeam(TeamEnum.TEAM_DEFENDER, source.Map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_MONSTER);
+            FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
+
+            var fight = new FightContextual(PopId(), source, targetObjective, source.Map, blueTeam, redTeam, source.GetCell());
             Fights.TryAdd(fight.Id, fight);
             return fight;
         }

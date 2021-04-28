@@ -72,6 +72,7 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -114,6 +115,7 @@
     <Compile Include="Managers\Criterias\LevelCriteria.cs" />
     <Compile Include="Managers\Criterias\MovementPointsCriteria.cs" />
     <Compile Include="Managers\Criterias\NotEquipableCriteria.cs" />
+    <Compile Include="Managers\Criterias\ObjectiveCriteria.cs" />
     <Compile Include="Managers\Criterias\StrengthCriteria.cs" />
     <Compile Include="Managers\Criterias\SubscribedCriteria.cs" />
     <Compile Include="Managers\Criterias\VitalityCriteria.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Managers\Fights\Effects\Other\Throw.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\SummonBomb.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedBomb.cs" />
+    <Compile Include="Managers\Fights\FightContextual.cs" />
     <Compile Include="Managers\Fights\Marks\PortalManager.cs" />
     <Compile Include="Managers\Fights\Marks\Wall.cs" />
     <Compile Include="Managers\Fights\Movements\Movement.cs" />

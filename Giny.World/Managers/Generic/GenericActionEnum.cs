@@ -22,5 +22,9 @@ namespace Giny.World.Managers.Generic
         LearnSpell,
         AddKamas,
         Craft,
+        Reach,
+        AddItem,
+        AddExperience,
+        Fight,
     }
 }

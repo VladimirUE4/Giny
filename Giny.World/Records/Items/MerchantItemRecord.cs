@@ -128,7 +128,7 @@ namespace Giny.World.Records.Items
 
         public static void RemoveMerchantItems(long id)
         {
-            GetAllMerchantItems(id).RemoveInstantElements(typeof(MerchantItemRecord));
+            GetAllMerchantItems(id).RemoveInstantElements();
         }
 
 

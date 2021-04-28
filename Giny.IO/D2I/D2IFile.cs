@@ -141,14 +141,14 @@ namespace Giny.IO.D2I
             return m_textEntries.Remove(id);
         }
 
-        public Dictionary<int, string> GetAllText()
+        public IEnumerable<D2IEntry<int>> GetAllText()
         {
-            return m_entries.ToDictionary(x => x.Key, x => x.Value.Text);
+            return m_entries.Values;
         }
 
-        public Dictionary<string, string> GetAllUiText()
+        public IEnumerable<D2IEntry<string>> GetAllUiText()
         {
-            return m_textEntries.ToDictionary(x => x.Key, x => x.Value.Text);
+            return m_textEntries.Values;
         }
 
         public int FindFreeId()
@@ -222,7 +222,7 @@ namespace Giny.IO.D2I
             }
         }
     }
-    public class D2IEntry<T>
+    public class D2IEntry<T> : ID2IEntry
     {
 
         public D2IEntry(T key, string text)
@@ -245,11 +245,13 @@ namespace Giny.IO.D2I
             set;
         }
 
-        public bool UseUndiactricalText
+        public string Text
         {
             get;
             set;
         }
+
+        public bool UseUndiactricalText;
 
         public string UnDiactricialText
         {
@@ -257,10 +259,13 @@ namespace Giny.IO.D2I
             set;
         }
 
-        public string Text
+        public string GetText()
         {
-            get;
-            set;
+            return UseUndiactricalText ? UnDiactricialText : Text;
         }
+    }
+    public interface ID2IEntry
+    {
+        string GetText();
     }
 }

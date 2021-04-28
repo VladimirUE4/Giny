@@ -60,7 +60,7 @@ namespace Giny.World.Managers.Monsters
                 if (monsterSpawn.Probability > num)
                 {
                     MonsterRecord template = MonsterRecord.GetMonsterRecord(monsterSpawn.MonsterId);
-                    Monster monster = new Monster(template, group);
+                    Monster monster = new Monster(template, group.GetCell());
                     group.AddMonster(monster);
                     num2++;
                 }
@@ -69,7 +69,7 @@ namespace Giny.World.Managers.Monsters
             if (group.MonsterCount == 0)
             {
                 MonsterRecord template = MonsterRecord.GetMonsterRecord(shuffled.Random().MonsterId);
-                Monster monster = new Monster(template, group);
+                Monster monster = new Monster(template, group.GetCell());
                 group.AddMonster(monster);
             }
 
@@ -88,7 +88,7 @@ namespace Giny.World.Managers.Monsters
             foreach (var monsterId in map.MonsterRoom.MonsterIds)
             {
                 MonsterRecord template = MonsterRecord.GetMonsterRecord(monsterId);
-                Monster monster = new Monster(template, group);
+                Monster monster = new Monster(template, group.GetCell());
                 group.AddMonster(monster);
             }
 
@@ -101,7 +101,7 @@ namespace Giny.World.Managers.Monsters
 
             foreach (var template in monsterRecords)
             {
-                Monster monster = new Monster(template, group);
+                Monster monster = new Monster(template, group.GetCell());
                 group.AddMonster(monster);
             }
 
@@ -118,7 +118,7 @@ namespace Giny.World.Managers.Monsters
 
             for (int i = 0; i < monsterRecords.Length; i++)
             {
-                Monster monster = new Monster(monsterRecords[i], group, grades[i]);
+                Monster monster = new Monster(monsterRecords[i], group.GetCell(), grades[i]);
                 group.AddMonster(monster);
             }
 

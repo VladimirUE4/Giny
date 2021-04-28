@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Giny.Npcs"
              mc:Ignorable="d" 
               d:DesignHeight="455" d:DesignWidth="900">
-    <Grid>
+    <Grid Height="455" VerticalAlignment="Top">
         <ListBox SelectionChanged="RepliesSelectionChanged" x:Name="replies" HorizontalAlignment="Left" Height="309" Margin="322,10,0,0" VerticalAlignment="Top" Width="288"/>
         <RichTextBox  Name="messageText" HorizontalAlignment="Left" Height="305" Margin="10,14,0,0" VerticalAlignment="Top" Width="298" IsEnabled="False"/>
-        <Button Content="Select" HorizontalAlignment="Left" Margin="10,324,0,74" Width="298" Click="Button_Click_2"/>
+        <Button Content="Select" HorizontalAlignment="Left" Margin="10,324,0,94" Width="298" Click="Button_Click_2"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="322,324,0,74" Width="132" Click="Button_Click"/>
         <Button Content="Remove" HorizontalAlignment="Left" Margin="459,324,0,74" Width="151" Click="Button_Click_1"/>
         <Canvas Visibility="Visible" Name="replyCanvas" HorizontalAlignment="Left" Height="190" Margin="626,14,0,0" VerticalAlignment="Top" Width="208">
@@ -24,5 +24,7 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Criterias : " VerticalAlignment="Top" Canvas.Left="13" Canvas.Top="145"/>
             <TextBox LostFocus="criterias_LostFocus" x:Name="criterias" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Canvas.Left="67" Canvas.Top="144"/>
         </Canvas>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Message Criteria : " VerticalAlignment="Top" Margin="19,371,0,0"/>
+        <TextBox x:Name="messageCriteria" LostFocus="messageCriteria_LostFocus" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187" RenderTransformOrigin="0.5,0.5" Margin="121,366,0,0"/>
     </Grid>
 </UserControl>

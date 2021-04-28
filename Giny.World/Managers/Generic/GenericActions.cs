@@ -1,10 +1,14 @@
 ﻿using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Fights;
 using Giny.World.Managers.Maps.Elements;
+using Giny.World.Managers.Monsters;
 using Giny.World.Records.Bidshops;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
+using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +17,14 @@ namespace Giny.World.Managers.Generic
 {
     public class GenericActions
     {
+        [GenericActionHandler(GenericActionEnum.AddItem, 2)]
+        public static void HandleAddItem(Character character, IGenericActionParameter parameter)
+        {
+            short itemId = short.Parse(parameter.Param1);
+            int quantity = int.Parse(parameter.Param2);
+            character.Inventory.AddItem(itemId, quantity);
+            character.OnItemGained(itemId, quantity);
+        }
         [GenericActionHandler(GenericActionEnum.RemoveItem, 2)]
         public static void HandleRemoveItem(Character character, IGenericActionParameter parameter)
         {
@@ -55,7 +67,7 @@ namespace Giny.World.Managers.Generic
 
             if (element == null)
             {
-                throw new Exception("Unable to collect. Invalid interactive element.");
+                character.ReplyWarning("Unable to collect. Invalid interactive element.");
             }
 
             element.Use(character);
@@ -116,6 +128,52 @@ namespace Giny.World.Managers.Generic
             }
 
             character.OpenCraftExchange(element.Record.Skill.Record);
+        }
+
+        [GenericActionHandler(GenericActionEnum.Reach, 1)]
+        public static void HandleReach(Character character, IGenericActionParameter parameter)
+        {
+
+            character.ReachObjective(short.Parse(parameter.Param1));
+            string message = "Status de quête mis a jour : <b>" + parameter.Param2 + "</b>";
+
+            character.DisplayNotification(message);
+            character.Reply(message);
+        }
+        [GenericActionHandler(GenericActionEnum.AddExperience, 1)]
+        public static void HandleAddExperience(Character character, IGenericActionParameter parameter)
+        {
+            character.AddExperience(long.Parse(parameter.Param1), true);
+        }
+
+        [GenericActionHandler(GenericActionEnum.Fight, 2)]
+        public static void HandleFight(Character character, IGenericActionParameter parameter)
+        {
+            short targetObjective = short.Parse(parameter.Param2);
+            IEnumerable<MonsterRecord> records = parameter.Param1.Split(',').Select(x => MonsterRecord.GetMonsterRecord(short.Parse(x)));
+
+            if (records.Count() > 0)
+            {
+                FightContextual fight = FightManager.Instance.CreateFightContextual(character, targetObjective);
+
+                var cell = character.Map.RandomWalkableCell();
+
+                foreach (var record in records)
+                {
+                    Monster monster = new Monster(record, cell);
+
+                    fight.BlueTeam.AddFighter(monster.CreateFighter(fight.BlueTeam));
+                }
+
+                fight.RedTeam.AddFighter(character.CreateFighter(fight.RedTeam));
+
+                fight.StartPlacement();
+
+            }
+            else
+            {
+                character.ReplyWarning("Unable to create contextual fight. Empty monsters list.");
+            }
         }
     }
 }

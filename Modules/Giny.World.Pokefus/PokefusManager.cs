@@ -141,23 +141,23 @@ namespace Giny.Pokefus
         }
         private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
         {
-            double probability = 0d;
+            double probability = 0.05d;
 
             if (monster.Level >= 50)
             {
-                probability = 0.05;
+                probability = 0.04;
             }
             if (monster.Level >= 100)
             {
-                probability = 0.04;
+                probability = 0.03;
             }
             if (monster.Level >= 150)
             {
-                probability = 0.03;
+                probability = 0.02;
             }
             if (monster.Level >= 200)
             {
-                probability = 0.02;
+                probability = 0.01;
             }
             if (monster.Record.IsBoss)
             {

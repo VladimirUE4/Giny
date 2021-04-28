@@ -4,6 +4,7 @@ using Giny.Npcs.Actions;
 using Giny.ORM;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Generic;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
 using System;
 using System.Linq;
@@ -41,6 +42,8 @@ namespace Giny.Npcs
 
             DisplayMessage();
             DisplayReplies();
+
+            messageCriteria.Text = record.Criteria;
 
             replyCanvas.Visibility = Visibility.Hidden;
 
@@ -81,13 +84,13 @@ namespace Giny.Npcs
 
             Npc npc = D2OManager.GetObject<Npc>("Npcs.d2o", SpawnRecord.TemplateId);
 
-            foreach (var replyRecord in NpcReplyRecord.GetNpcReplies(SpawnRecord.Id,messageId))
+            foreach (var replyRecord in NpcReplyRecord.GetNpcReplies(SpawnRecord.Id, messageId))
             {
                 var test = npc.dialogReplies.FirstOrDefault(x => x[0] == replyRecord.ReplyId);
 
                 var text = Loader.D2IFile.GetText(test[1]);
 
-                replies.Items.Add(new NpcReply(text, replyRecord));
+                replies.Items.Add(new NpcReply(test[1], text, replyRecord));
             }
         }
 
@@ -104,7 +107,7 @@ namespace Giny.Npcs
 
             replyRecord.AddInstantElement();
 
-            replies.Items.Add(new NpcReply(reply.Text, replyRecord));
+            replies.Items.Add(new NpcReply(reply.TextId, reply.Text, replyRecord));
         }
 
         private void RepliesSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -136,7 +139,58 @@ namespace Giny.Npcs
             param2.Text = string.Empty;
             param3.Text = string.Empty;
             criterias.Text = string.Empty;
+
+            if ((GenericActionEnum)actions.SelectedItem == GenericActionEnum.Reach)
+            {
+                param1.Text = PopNextReachId().ToString();
+            }
+            else if ((GenericActionEnum)actions.SelectedItem == GenericActionEnum.Fight)
+            {
+                param2.Text = PopNextReachId().ToString();
+            }
+
             UpdateReply();
+        }
+        private int PopNextReachId()
+        {
+            short maxId = 0;
+
+            foreach (var reply in NpcReplyRecord.GetNpcReplies())
+            {
+                if (reply.ActionIdentifier == GenericActionEnum.Reach && reply.Param1 != string.Empty)
+                {
+                    short value = short.Parse(reply.Param1);
+
+                    if (value > maxId)
+                    {
+                        maxId = value;
+                    }
+                }
+                if (reply.ActionIdentifier == GenericActionEnum.Fight && reply.Param2 != string.Empty)
+                {
+                    short value = short.Parse(reply.Param2);
+
+                    if (value > maxId)
+                    {
+                        maxId = value;
+                    }
+                }
+            }
+
+            foreach (var interactiveSkill in InteractiveSkillRecord.GetInteractiveSkills())
+            {
+                if (interactiveSkill.ActionIdentifier == GenericActionEnum.Reach && interactiveSkill.Param1 != string.Empty)
+                {
+                    short value = short.Parse(interactiveSkill.Param1);
+
+                    if (value > maxId)
+                    {
+                        maxId = value;
+                    }
+                }
+            }
+
+            return maxId + 1;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -208,9 +262,20 @@ namespace Giny.Npcs
             ActionRecord.UpdateInstantElement();
             DisplayMessage();
         }
+
+        private void messageCriteria_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ActionRecord.Criteria = messageCriteria.Text;
+            ActionRecord.UpdateInstantElement();
+        }
     }
     public class NpcReply
     {
+        public int TextId
+        {
+            get;
+            set;
+        }
         public string Text
         {
             get;
@@ -222,14 +287,15 @@ namespace Giny.Npcs
             set;
         }
 
-        public NpcReply(string text, NpcReplyRecord record)
+        public NpcReply(int textId, string text, NpcReplyRecord record)
         {
+            this.TextId = textId;
             this.Text = text;
             this.Record = record;
         }
         public override string ToString()
         {
-            return Text;
+            return "{" + TextId + "} " + Text;
         }
     }
 }

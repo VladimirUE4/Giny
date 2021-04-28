@@ -1,4 +1,6 @@
-﻿using Giny.Npcs.Actions;
+﻿using Giny.IO.D2O;
+using Giny.IO.D2OClasses;
+using Giny.Npcs.Actions;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Entities.Look;
@@ -84,12 +86,13 @@ namespace Giny.Npcs
                 actionsContent.Content = null;
                 DisplayActions(CurrentNpc);
                 templateId.Text = CurrentNpc.TemplateId.ToString();
+              
                 mapId.Text = CurrentNpc.MapId.ToString();
                 cellId.Text = CurrentNpc.CellId.ToString();
 
                 direction.Items.Clear();
 
-                npcName.Text = CurrentNpc.Template.Name;
+                npcName.Text = Loader.D2IFile.GetText((int)D2OManager.GetObject<Npc>("Npcs.d2o", CurrentNpc.TemplateId).nameId);
 
                 foreach (var value in Enum.GetValues(typeof(DirectionsEnum)))
                 {
@@ -146,6 +149,7 @@ namespace Giny.Npcs
                     actionsContent.Content = new Talk(CurrentNpc, CurrentAction);
                     break;
             }
+
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -208,6 +212,7 @@ namespace Giny.Npcs
                 Param1 = string.Empty,
                 Param2 = string.Empty,
                 Param3 = string.Empty,
+                Criteria = string.Empty,
             };
 
             record.AddInstantElement();
@@ -219,11 +224,8 @@ namespace Giny.Npcs
 
         private void AddActionClick(object sender, RoutedEventArgs e)
         {
-            if (CurrentNpc.Actions.Count < CurrentNpc.Template.Actions.Count)
-            {
-                AddAction window = new AddAction(this, CurrentNpc.Template, CurrentNpc.Actions.Select(x => x.Action));
-                window.Show();
-            }
+            AddAction window = new AddAction(this, CurrentNpc.Template, CurrentNpc.Actions.Select(x => x.Action));
+            window.Show();
         }
 
         private void RemoveCurrentActionClick(object sender, RoutedEventArgs e)
@@ -258,12 +260,12 @@ namespace Giny.Npcs
                 if (actionRecord.Param1 != string.Empty)
                 {
                     var replies = NpcReplyRecord.GetNpcReplies(actionRecord.NpcSpawnId, int.Parse(actionRecord.Param1));
-                    replies.RemoveInstantElements(typeof(NpcReplyRecord));
+                    replies.RemoveInstantElements();
                 }
             }
             actionRecord.RemoveInstantElement();
         }
 
-
+      
     }
 }

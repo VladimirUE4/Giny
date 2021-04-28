@@ -22,7 +22,19 @@ namespace Giny.World.Managers.Criterias
                 quantity = int.Parse(criteria[1]);
             }
 
-            return client.Character.Inventory.Exist(gid, quantity);
+            if (ComparaisonSymbol == '=')
+            {
+                return client.Character.Inventory.Exist(gid, quantity);
+            }
+            else if (ComparaisonSymbol == '!')
+            {
+                return !client.Character.Inventory.Exist(gid, quantity);
+            }
+            else
+            {
+                throw new Exception("Invalid comparaison symbol. (HasItemCriteria)");
+            }
+            
         }
     }
     [Criteria("PT")]

@@ -71,5 +71,9 @@ namespace Giny.World.Records.Npcs
         {
             return NpcReplies.Values.Where(x => x.NpcSpawnId == spawnId && x.MessageId == messageId);
         }
+        public static IEnumerable<NpcReplyRecord> GetNpcReplies()
+        {
+            return NpcReplies.Values;
+        }
     }
 }

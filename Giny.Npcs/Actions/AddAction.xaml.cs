@@ -35,11 +35,7 @@ namespace Giny.Npcs.Actions
             foreach (var value in npcRecord.Actions)
             {
                 NpcActionsEnum actionEnum = (NpcActionsEnum)value;
-
-                if (!currentActions.Contains(actionEnum))
-                {
-                    actions.Items.Add(actionEnum);
-                }
+                actions.Items.Add(actionEnum);
             }
         }
 

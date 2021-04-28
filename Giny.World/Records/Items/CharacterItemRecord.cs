@@ -93,7 +93,7 @@ namespace Giny.World.Records.Items
         public static void RemoveCharacterItems(long characterId)
         {
             CharacterItemRecord[] items = CharactersItems.Values.Where(x => x.CharacterId == characterId).ToArray();
-            items.RemoveInstantElements(typeof(CharacterItemRecord));
+            items.RemoveInstantElements();
         }
 
         public override void Initialize()

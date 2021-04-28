@@ -35,7 +35,7 @@ namespace Giny.World.Managers.Dialogs
             set;
         }
 
-        private short MessageId
+        private int MessageId
         {
             get;
             set;
@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Dialogs
         {
             this.Npc = npc;
             this.Action = action;
-            this.MessageId = short.Parse(Action.Param1);
+            this.MessageId = int.Parse(Action.Param1);
             this.Replies = GetValidReply(NpcReplyRecord.GetNpcReplies(npc.SpawnRecord.Id, this.MessageId));
         }
         public override void Open()

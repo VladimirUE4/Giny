@@ -6,6 +6,7 @@ using Giny.ORM;
 using Giny.World.Managers.Fights.Effects;
 using Giny.World.Modules;
 using Giny.World.Records.Items;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
 using Giny.World.Records.Spells;
 using System;
@@ -54,6 +55,8 @@ namespace Giny.Npcs
             new Thread(new ThreadStart(() =>
             {
                 AssemblyCore.OnAssembliesLoaded();
+
+                DatabaseManager.Instance.LoadTable<InteractiveSkillRecord>();
 
                 DatabaseManager.Instance.LoadTable<NpcRecord>();
 

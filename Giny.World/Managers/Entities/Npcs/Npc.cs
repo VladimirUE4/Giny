@@ -1,6 +1,7 @@
 ﻿using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Types;
+using Giny.World.Managers.Criterias;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Maps.Npcs;
@@ -97,13 +98,21 @@ namespace Giny.World.Managers.Entities.Npcs
             if (character.Busy)
                 return;
 
-            NpcActionRecord action = GetAction(actionType);
+            var actions = SpawnRecord.Actions.Where(x => x.Action == actionType).Where(x => CriteriaManager.Instance.EvaluateCriterias(character.Client, x.Criteria));
+
+            if (actions.Count() > 1)
+            {
+                character.ReplyWarning("Multiple actions (" + actionType + ") for npc " + SpawnRecord.Id);
+                return;
+            }
+
+            NpcActionRecord action = actions.FirstOrDefault();
 
             if (action != null)
             {
                 NpcsManager.Instance.HandleNpcAction(character, this, action);
             }
-            else if (character.Client.Account.Role > ServerRoleEnum.Player)
+            else
             {
                 character.ReplyWarning("No (" + actionType + ") action linked to this npc...(" + SpawnRecord.Id + ")");
             }
@@ -125,10 +134,7 @@ namespace Giny.World.Managers.Entities.Npcs
         {
             m_Id = id;
         }
-        private NpcActionRecord GetAction(NpcActionsEnum actionsEnum)
-        {
-            return SpawnRecord.Actions.FirstOrDefault(x => x.Action == actionsEnum);
-        }
+
         public override string ToString()
         {
             return "Npc (" + Name + ") (Id:" + SpawnRecord.Id + " Record Id:" + Template.Id + ") (CellId:" + CellId + ")";

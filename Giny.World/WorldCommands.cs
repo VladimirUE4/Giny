@@ -1,5 +1,6 @@
 ﻿using Giny.Core;
 using Giny.Core.Commands;
+using Giny.Core.Extensions;
 using Giny.ORM;
 using Giny.Protocol.Enums;
 using Giny.Protocol.IPC.Messages;
@@ -62,6 +63,13 @@ namespace Giny.World
            });
         }
 
+        [ConsoleCommand("infos")]
+        public static void InfosCommand()
+        {
+            Logger.Write("Connected : " + WorldServer.Instance.Clients.Count);
+            Logger.Write("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip));
+            Logger.Write("Max Connected : " + WorldServer.Instance.MaximumClients);
+        }
         [ConsoleCommand("save")]
         public static void SaveCommand()
         {
@@ -92,6 +100,6 @@ namespace Giny.World
             Logger.Write("Npc Reloaded.", Channels.Log);
         }
 
-       
+
     }
 }

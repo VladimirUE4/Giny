@@ -165,6 +165,12 @@ namespace Giny.Npcs
             items.Items.Clear();
             UpdateItems();
         }
+
+        private void tokenId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Action.Param2 = tokenId.Text;
+            Action.UpdateInstantElement();
+        }
     }
     public class ExchangeItem
     {

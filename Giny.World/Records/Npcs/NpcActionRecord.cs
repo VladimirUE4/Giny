@@ -45,9 +45,17 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
-
+        [Update]
         [TypeOverride("mediumtext")]
         public string Param3
+        {
+            get;
+            set;
+        }
+
+        [Update]
+        [TypeOverride("mediumtext")]
+        public string Criteria
         {
             get;
             set;

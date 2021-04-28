@@ -100,7 +100,7 @@ namespace Giny.ORM.IO
             }
             catch (Exception ex)
             {
-                Logger.Write("Unable to read table " + TableName + " " + ex, Channels.Warning);
+                Logger.Write("Unable to read table " + TableName, Channels.Warning);
                 AskForStructureRebuild(connection, parameter);
             }
 
@@ -113,10 +113,10 @@ namespace Giny.ORM.IO
                     {
                         this.m_reader = command.ExecuteReader();
                     }
-                    catch (Exception ex)
+                    catch 
                     {
                         this.m_reader?.Close();
-                        Logger.Write("Unable to read table " + TableName + " " + ex, Channels.Warning);
+                        Logger.Write("Unable to read table " + TableName, Channels.Warning);
                         AskForStructureRebuild(connection, parameter);
                         return;
                     }
@@ -166,7 +166,7 @@ namespace Giny.ORM.IO
         }
         private void AskForStructureRebuild(MySqlConnection connection, string parameter)
         {
-            Logger.Write("Do you want to recreate table structure? (y/n)", Channels.Log);
+            Logger.Write("Do you want to recreate table structure? (y/n)", Channels.Warning);
 
             string result = Console.ReadLine();
 

@@ -3,6 +3,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Giny.World.Managers.Monsters
 {
     public class Monster
     {
-        public MonsterGroup Group
+        public CellRecord RoleplayCell
         {
             get;
             private set;
@@ -43,16 +44,16 @@ namespace Giny.World.Managers.Monsters
                 return Grade.GradeId;
             }
         }
-        public Monster(MonsterRecord template, MonsterGroup group, byte gradeId)
+        public Monster(MonsterRecord template, CellRecord roleplayCell, byte gradeId)
         {
             this.Record = template;
-            this.Group = group;
+            this.RoleplayCell = roleplayCell;
             this.Grade = template.GetGrade(gradeId);
         }
-        public Monster(MonsterRecord template, MonsterGroup group)
+        public Monster(MonsterRecord template, CellRecord roleplayCell)
         {
             this.Record = template;
-            this.Group = group;
+            this.RoleplayCell = roleplayCell;
             this.Grade = template.RandomGrade();
         }
 
@@ -81,7 +82,7 @@ namespace Giny.World.Managers.Monsters
         }
         public Fighter CreateFighter(FightTeam team)
         {
-            return new MonsterFighter(team, Group.GetCell(), this);
+            return new MonsterFighter(team, RoleplayCell, this);
         }
     }
 }

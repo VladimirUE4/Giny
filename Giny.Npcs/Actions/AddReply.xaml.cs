@@ -46,7 +46,7 @@ namespace Giny.Npcs
                 int messageId = reply[1];
 
                 var text = Loader.D2IFile.GetText(messageId);
-                replies.Items.Add(new NpcD2OReply(replyId, text));
+                replies.Items.Add(new NpcD2OReply(replyId, text, messageId));
             }
         }
 
@@ -68,10 +68,16 @@ namespace Giny.Npcs
             get;
             set;
         }
-        public NpcD2OReply(int replyId, string text)
+        public int TextId
+        {
+            get;
+            set;
+        }
+        public NpcD2OReply(int replyId, string text, int textId)
         {
             this.ReplyId = replyId;
             this.Text = text;
+            this.TextId = textId;
         }
         public override string ToString()
         {

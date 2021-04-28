@@ -382,7 +382,7 @@ namespace Giny.World.Managers.Entities.Characters
         private void CheckSoldItems()
         {
             BidShopItemRecord[] bidHouseItems = BidshopsManager.Instance.GetSoldItem(this).ToArray();
-            IEnumerable<MerchantItemRecord> merchantItems = MerchantItemRecord.GetMerchantItemsSolded(this.Id);
+            MerchantItemRecord[] merchantItems = MerchantItemRecord.GetMerchantItemsSolded(this.Id).ToArray();
 
             if (bidHouseItems.Count() > 0 || merchantItems.Count() > 0)
             {
@@ -393,7 +393,7 @@ namespace Giny.World.Managers.Entities.Characters
                     BidshopsManager.Instance.RemoveItem(item.BidShopId, item);
                 }
 
-                foreach (var item in merchantItems.ToArray())
+                foreach (var item in merchantItems)
                 {
                     this.AddKamas(item.Price * item.QuantitySold);
 
@@ -1416,6 +1416,10 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new NotificationByServerMessage(24, new string[] { message }, true));
         }
+        public void DisplayNotificationError(string message)
+        {
+            Client.Send(new NotificationByServerMessage(30, new string[] { message }, true));
+        }
         public void DisplaySystemMessage(bool hangUp, short msgId, params string[] parameters)
         {
             Client.Send(new SystemMessageDisplayMessage(hangUp, msgId, parameters));
@@ -1622,6 +1626,22 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new GuildLeftMessage());
         }
 
+        public bool HasReachObjective(short id)
+        {
+            return Record.DoneObjectives.Contains(id);
+        }
+
+        public void ReachObjective(short id)
+        {
+            if (!Record.DoneObjectives.Contains(id))
+            {
+                Record.DoneObjectives.Add(id);
+            }
+            else
+            {
+                DisplayNotificationError("Objective (" + id + ") already reached, skipping.");
+            }
+        }
     }
 
 }
