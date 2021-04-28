@@ -32,6 +32,8 @@
 
 
 ----------- avant ouverture -----------
+bug marchand
+site bug ogrines convert
 Guildes
 Bug fix item.Sold hdv & merchant (quantity)
 Percepteurs

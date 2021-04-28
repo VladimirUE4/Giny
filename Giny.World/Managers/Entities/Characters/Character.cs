@@ -393,12 +393,16 @@ namespace Giny.World.Managers.Entities.Characters
                     BidshopsManager.Instance.RemoveItem(item.BidShopId, item);
                 }
 
+                Client.Send(new ExchangeOfflineSoldItemsMessage(bidHouseItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray(),
+                  merchantItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray()));
+
                 foreach (var item in merchantItems)
                 {
                     this.AddKamas(item.Price * item.QuantitySold);
 
                     if (item.Sold)
                     {
+                        MerchantItems.RemoveItem(item.UId);
                         item.RemoveElement();
                     }
 
@@ -407,8 +411,7 @@ namespace Giny.World.Managers.Entities.Characters
                     item.UpdateElement();
                 }
 
-                Client.Send(new ExchangeOfflineSoldItemsMessage(bidHouseItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray(),
-                    merchantItems.Select(x => x.GetObjectItemQuantityPriceDateEffects()).ToArray()));
+              
             }
 
         }
