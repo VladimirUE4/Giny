@@ -15,6 +15,7 @@ namespace Giny.World.Records.Characters
     [Table("merchants")]
     public class MerchantRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, MerchantRecord> Merchants = new ConcurrentDictionary<long, MerchantRecord>();
 
         [Ignore]

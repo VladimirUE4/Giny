@@ -39,7 +39,7 @@ namespace Giny.DatabasePatcher.Maps
                                 Param1 = string.Empty,
                                 Param2 = string.Empty,
                                 Param3 = string.Empty,
-                                SkillId = (SkillTypeEnum)skillRecord.Id,
+                                SkillEnum = (SkillTypeEnum)skillRecord.Id,
                                 Type = (InteractiveTypeEnum)skillRecord.InteractiveTypeId,
                             };
                             element.Skill = interactiveSkillRecord;

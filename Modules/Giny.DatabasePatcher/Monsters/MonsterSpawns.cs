@@ -18,6 +18,7 @@ namespace Giny.DatabasePatcher.Monsters
         {
             1247, // Leprechaun
             793, // Bouftou d'Hallouine
+            494, // Poutch Ingball
         };
 
         public static void Patch()
@@ -26,7 +27,7 @@ namespace Giny.DatabasePatcher.Monsters
 
             long id = 1;
 
-            MonsterSpawnRecord.GetMonsterSpawnRecords().ToArray().RemoveInstantElements(typeof(MonsterSpawnRecord));
+            MonsterSpawnRecord.GetMonsterSpawnRecords().ToArray().RemoveInstantElements();
 
             foreach (var subArea in SubareaRecord.GetSubareas())
             {

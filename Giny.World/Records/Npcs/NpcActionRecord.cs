@@ -13,6 +13,7 @@ namespace Giny.World.Records.Npcs
     [Table("npcsactions")]
     public class NpcActionRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, NpcActionRecord> NpcsActions = new ConcurrentDictionary<long, NpcActionRecord>();
 
         [Primary]

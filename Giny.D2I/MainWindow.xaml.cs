@@ -53,9 +53,9 @@ namespace Giny.D2I
             if (data.CurrentItem != null)
             {
                 var value = (ID2IEntry)data.CurrentItem;
-                richTb.Document.Blocks.Clear();
+              
                 CurrentEntry = value;
-                richTb.AppendText(value.GetText());
+                textBox.Text = value.GetText();
             }
         }
 
@@ -121,9 +121,7 @@ namespace Giny.D2I
             if (data.CurrentItem != null)
             {
                 var value = (KeyValuePair<int, string>)data.CurrentItem;
-                richTb.Document.Blocks.Clear();
-
-                richTb.AppendText(value.Value);
+                textBox.Text = value.Value;
             }
 
         }
@@ -135,7 +133,7 @@ namespace Giny.D2I
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string content = StringFromRichTextBox(richTb);
+            string content = textBox.Text;
 
             if (CurrentEntry is D2IEntry<int>)
             {

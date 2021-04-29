@@ -20,6 +20,7 @@ namespace Giny.World.Records.Maps
     [Table("subareas")]
     public class SubareaRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, SubareaRecord> Subareas = new ConcurrentDictionary<long, SubareaRecord>();
 
         [D2OField("id")]

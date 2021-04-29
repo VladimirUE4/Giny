@@ -14,6 +14,7 @@ namespace Giny.World.Records.Items
     [Table("bankitems")]
     public class BankItemRecord : AbstractItem, ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, BankItemRecord> BankItems = new ConcurrentDictionary<long, BankItemRecord>();
 
         [Ignore]

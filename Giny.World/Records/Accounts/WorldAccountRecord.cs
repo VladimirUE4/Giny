@@ -12,6 +12,7 @@ namespace Giny.World.Records.Accounts
     [Table("worldaccounts")]
     public class WorldAccountRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, WorldAccountRecord> WorldAccounts = new ConcurrentDictionary<long, WorldAccountRecord>();
 
         [Ignore]

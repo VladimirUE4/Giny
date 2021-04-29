@@ -136,6 +136,9 @@ namespace Giny.Npcs
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            int maxLevel = int.Parse(maxLevelTb.Text);
+            int minLevel = int.Parse(minLevelTb.Text);
+
             var type = (ItemTypeEnum)itemTypes.SelectedItem;
 
             var objects = D2OManager.GetObjects("Items.d2o");
@@ -144,7 +147,7 @@ namespace Giny.Npcs
 
             foreach (Item item in objects)
             {
-                if (item.TypeId == (uint)type)
+                if (item.TypeId == (uint)type && item.Level <= maxLevel && item.level >= minLevel && !item.Etheral)
                 {
                     added.Add(item);
                 }

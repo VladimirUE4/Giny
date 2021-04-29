@@ -17,6 +17,7 @@ namespace Giny.World.Records.Maps
     [Table("interactiveskills")]
     public class InteractiveSkillRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, InteractiveSkillRecord> InteractiveSkills = new ConcurrentDictionary<long, InteractiveSkillRecord>();
 
         [Primary]

@@ -26,6 +26,11 @@ namespace Giny.DatabasePatcher.Skills
             {68,  3212 },
             {124, 1018 },
             {35,  659 },
+            {24,1081 },
+            {69,3213 },
+            {40,652 },
+            {39,651 },
+            {125 ,1019 },
         };
 
         public static void Patch()

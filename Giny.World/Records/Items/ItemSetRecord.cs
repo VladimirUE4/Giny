@@ -15,6 +15,7 @@ namespace Giny.World.Records.Items
     [Table("itemSets")]
     public class ItemSetRecord : ITable
     {
+        [Container]
         private static Dictionary<long, ItemSetRecord> ItemSets = new Dictionary<long, ItemSetRecord>();
 
         [Primary]

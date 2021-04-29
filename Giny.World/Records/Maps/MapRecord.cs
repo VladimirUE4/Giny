@@ -23,6 +23,7 @@ namespace Giny.World.Records.Maps
     [Table("maps")]
     public class MapRecord : ITable 
     {
+        [Container]
         private static ConcurrentDictionary<long, MapRecord> Maps = new ConcurrentDictionary<long, MapRecord>();
 
         [Primary]

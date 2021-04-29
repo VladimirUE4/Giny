@@ -19,6 +19,7 @@ namespace Giny.World.Records.Items
     [Table("items")]
     public class ItemRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, ItemRecord> Items = new ConcurrentDictionary<long, ItemRecord>();
 
         [D2OField("id")]

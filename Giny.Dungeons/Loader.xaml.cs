@@ -46,8 +46,8 @@ namespace Giny.Dungeons
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "127.0.0.1",
          "giny_world", "root", "");
 
-            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny 2.58\Dofus\data\common");
-            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny 2.58\Dofus\data\i18n\i18n_fr.d2i");
+            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Dofus\data\common");
+            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Dofus\data\i18n\i18n_fr.d2i");
 
 
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;

@@ -16,6 +16,7 @@ namespace Giny.World.Records.Npcs
     [Table("npcs")]
     public class NpcRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, NpcRecord> Npcs = new ConcurrentDictionary<long, NpcRecord>();
 
         [Primary]

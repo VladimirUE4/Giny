@@ -1468,6 +1468,7 @@ namespace Giny.World.Managers.Entities.Characters
             if (Record.Kamas < MerchantItems.GetMerchantTax())
             {
                 TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 76);
+                return false;
             }
 
             return true;
@@ -1479,7 +1480,10 @@ namespace Giny.World.Managers.Entities.Characters
                 return;
             }
 
-            RemoveKamas(MerchantItems.GetMerchantTax());
+            if (!RemoveKamas(MerchantItems.GetMerchantTax()))
+            {
+                return;
+            }
             Client.Disconnect();
             MerchantsManager.Instance.AddMerchant(this);
         }

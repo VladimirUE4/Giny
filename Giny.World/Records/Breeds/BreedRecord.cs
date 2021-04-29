@@ -19,6 +19,7 @@ namespace Giny.World.Records.Breeds
     [D2OClass("Breed")]
     public class BreedRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, BreedRecord> Breeds = new ConcurrentDictionary<long, BreedRecord>();
 
         long ITable.Id => Id;

@@ -20,6 +20,7 @@ namespace Giny.World.Records.Items
     [Table("CharactersItems")]
     public class CharacterItemRecord : AbstractItem, ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, CharacterItemRecord> CharactersItems = new ConcurrentDictionary<long, CharacterItemRecord>();
 
         [Update]

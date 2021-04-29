@@ -140,7 +140,7 @@ namespace Giny.World.Managers.Maps.Instances
         }
         private void OnEntitiesUpdated()
         {
-            if (Record.CanSpawnMonsters || Record.IsDungeonMap)
+            if (Record.CanSpawnMonsters || (Record.IsDungeonMap && Record.MonsterRoom.MonsterIds.Count > 0))
             {
                 if (CharactersCount == 0)
                     this.m_monsterSpawner.Pause();
@@ -363,7 +363,7 @@ namespace Giny.World.Managers.Maps.Instances
                 {
                     if (GenericActionsManager.Instance.IsHandled(element))
                     {
-                        bool canMove = element.Record.Skill.Record.ParentJobId == 1; /* Should be working */
+                        bool canMove = element.Record.Skill.Record.ParentBonesId == -1; /* Should be working */
 
                         short duration = canMove ? (short)0 : SkillsManager.SKILL_DURATION; /* Duration should be related to job level (its not a const) */
 

@@ -15,6 +15,7 @@ namespace Giny.World.Records.Items
     [Table("BidshopItems")]
     public class BidShopItemRecord : AbstractItem, ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, BidShopItemRecord> BidshopItems = new ConcurrentDictionary<long, BidShopItemRecord>();
 
         [Ignore]

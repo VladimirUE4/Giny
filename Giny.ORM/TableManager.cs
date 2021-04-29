@@ -1,4 +1,5 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.ORM.Attributes;
 using Giny.ORM.Expressions;
 using Giny.ORM.Interfaces;
@@ -46,12 +47,16 @@ namespace Giny.ORM
                 throw new Exception("Unable to find table attribute for table " + type.Name);
             }
 
-            var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.Name.ToLower() == attribute.TableName.ToLower());
+            var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.GetCustomAttribute<ContainerAttribute>() != null);
 
             if ((field == null || !field.FieldType.IsGenericType))
             {
                 if (attribute.Load)
-                    throw new Exception("Unable to find container for table : " + type.Name);
+                {
+                    Logger.Write("Unable to find container for table : " + type.Name, Channels.Critical);
+                    Console.ReadLine();
+                    Environment.Exit(0);
+                }
             }
             else
             {

@@ -14,6 +14,7 @@ namespace Giny.World.Records.Guilds
     [Table("guilds")]
     public class GuildRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, GuildRecord> Guilds = new ConcurrentDictionary<long, GuildRecord>();
 
         [Primary]

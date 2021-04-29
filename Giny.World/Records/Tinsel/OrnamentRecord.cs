@@ -14,6 +14,7 @@ namespace Giny.World.Records.Tinsel
     [Table("ornaments")]
     public class OrnamentRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, OrnamentRecord> Ornaments = new ConcurrentDictionary<long, OrnamentRecord>();
 
         [Primary]

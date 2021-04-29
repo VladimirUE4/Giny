@@ -14,6 +14,7 @@ namespace Giny.World.Records.Characters
     [Table("experiences")]
     public class ExperienceRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, ExperienceRecord> Experiences = new ConcurrentDictionary<long, ExperienceRecord>();
 
         [Ignore]

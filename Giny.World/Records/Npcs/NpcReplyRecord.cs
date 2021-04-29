@@ -13,6 +13,7 @@ namespace Giny.World.Records.Npcs
     [Table("npcreplies")]
     public class NpcReplyRecord : ITable, IGenericActionParameter
     {
+        [Container]
         private static ConcurrentDictionary<long, NpcReplyRecord> NpcReplies = new ConcurrentDictionary<long, NpcReplyRecord>();
 
         [Primary]

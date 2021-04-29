@@ -22,6 +22,7 @@ namespace Giny.World.Records.Monsters
     [Table("monsters")]
     public class MonsterRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, MonsterRecord> Monsters = new ConcurrentDictionary<long, MonsterRecord>();
 
         [Primary]

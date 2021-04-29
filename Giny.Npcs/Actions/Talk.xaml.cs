@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Giny.Npcs
 {
@@ -61,8 +62,6 @@ namespace Giny.Npcs
 
         public void DisplayMessage()
         {
-            messageText.Document.Blocks.Clear();
-
             if (ActionRecord.Param1 == string.Empty)
             {
                 return;
@@ -72,7 +71,7 @@ namespace Giny.Npcs
             var npcMessage = D2OManager.GetObject<NpcMessage>("NpcMessages.d2o", messageId);
             string text = Loader.D2IFile.GetText((int)npcMessage.MessageId);
 
-            messageText.AppendText(text);
+            messageText.Text = text;
         }
         public void DisplayReplies()
         {
@@ -80,6 +79,7 @@ namespace Giny.Npcs
             {
                 return;
             }
+            replies.Items.Clear();
             var messageId = int.Parse(ActionRecord.Param1);
 
             Npc npc = D2OManager.GetObject<Npc>("Npcs.d2o", SpawnRecord.TemplateId);
@@ -125,6 +125,7 @@ namespace Giny.Npcs
                 param2.Text = reply.Record.Param2;
                 param3.Text = reply.Record.Param3;
                 criterias.Text = reply.Record.Criteria;
+                replyText.Text = reply.Text;
                 ReplyLoaded = true;
             }
             else
@@ -267,6 +268,41 @@ namespace Giny.Npcs
         {
             ActionRecord.Criteria = messageCriteria.Text;
             ActionRecord.UpdateInstantElement();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var messageId = int.Parse(ActionRecord.Param1);
+                var npcMessage = D2OManager.GetObject<NpcMessage>("NpcMessages.d2o", messageId);
+                string text = messageText.Text;
+                Loader.D2IFile.SetText((int)npcMessage.MessageId, text);
+                Loader.D2IFile.Save();
+                MessageBox.Show("D2I file saved sucessfully !", "Informations", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch
+            {
+                MessageBox.Show("Unable to save file. Please very the file is not used by another process", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NpcReply reply = (NpcReply)replies.SelectedItem;
+                Loader.D2IFile.SetText((int)reply.TextId, replyText.Text);
+                Loader.D2IFile.Save();
+                DisplayReplies();
+
+                MessageBox.Show("D2I file saved sucessfully !", "Informations", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch
+            {
+                MessageBox.Show("Unable to save file. Please very the file is not used by another process", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
     public class NpcReply

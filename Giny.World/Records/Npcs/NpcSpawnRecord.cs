@@ -14,6 +14,7 @@ namespace Giny.World.Records.Npcs
     [Table("npcspawns")]
     public class NpcSpawnRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, NpcSpawnRecord> NpcSpawns = new ConcurrentDictionary<long, NpcSpawnRecord>();
 
         [Primary]

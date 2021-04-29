@@ -18,9 +18,7 @@ namespace Giny.World.Records.Spells
     [Table("spellslevels")]
     public class SpellLevelRecord : ITable
     {
-        /*
-         * ConcurrentDictionary<T1,T2> is not necessary here. This collection is safe.
-         */
+        [Container]
         private static Dictionary<long, SpellLevelRecord> SpellsLevels = new Dictionary<long, SpellLevelRecord>();
 
         [Primary]

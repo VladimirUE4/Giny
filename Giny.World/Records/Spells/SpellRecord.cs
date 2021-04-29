@@ -15,6 +15,7 @@ namespace Giny.World.Records.Spells
     [Table("spells")]
     public class SpellRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, SpellRecord> Spells = new ConcurrentDictionary<long, SpellRecord>();
 
         long ITable.Id => Id;

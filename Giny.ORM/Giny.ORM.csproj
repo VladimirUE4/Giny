@@ -73,6 +73,7 @@
     <Compile Include="Attributes\IgnoreAttribute.cs" />
     <Compile Include="Attributes\PrimaryAttribute.cs" />
     <Compile Include="Attributes\ProtoSerializeAttribute.cs" />
+    <Compile Include="Attributes\ContainerAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
     <Compile Include="Attributes\TypeOverrideAttribute.cs" />
     <Compile Include="Attributes\UpdateAttribute.cs" />

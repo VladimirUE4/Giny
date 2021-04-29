@@ -14,6 +14,7 @@ namespace Giny.World.Records.Spells
     [Table("spellvariants")]
     public class SpellVariantRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, SpellVariantRecord> SpellVariants = new ConcurrentDictionary<long, SpellVariantRecord>();
 
         [Primary]

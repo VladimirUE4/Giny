@@ -16,6 +16,7 @@ namespace Giny.World.Records.Items
     [Table("livingobjects")]
     public class LivingObjectRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, LivingObjectRecord> LivingObjects = new ConcurrentDictionary<long, LivingObjectRecord>();
 
         [Primary]

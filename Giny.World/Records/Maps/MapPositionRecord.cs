@@ -15,6 +15,7 @@ namespace Giny.World.Records.Maps
     [Table("mappositions")]
     public class MapPositionRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, MapPositionRecord> MapPositions = new ConcurrentDictionary<long, MapPositionRecord>();
 
         [Primary]

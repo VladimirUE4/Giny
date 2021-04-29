@@ -13,6 +13,7 @@ namespace Giny.World.Records.Bidshops
     [Table("Bidshops")]
     public class BidShopRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, BidShopRecord> Bidshops = new ConcurrentDictionary<long, BidShopRecord>();
 
         [Primary]

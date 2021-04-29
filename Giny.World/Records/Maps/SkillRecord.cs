@@ -15,6 +15,7 @@ namespace Giny.World.Records.Maps
     [D2OClass("Skill")]
     public class SkillRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, SkillRecord> Skills = new ConcurrentDictionary<long, SkillRecord>();
 
         [Primary]

@@ -34,10 +34,10 @@ namespace Giny.DatabasePatcher
             ItemAppearances.Patch();
             LivingObjects.Patch();
             MapPlacements.Patch();
+            SkillBones.Patch();
             StatedElements.Patch();
             MonsterKamas.Patch();
             MonsterSpawns.Patch();
-            SkillBones.Patch();
             SpellCategories.Patch();
             Teleporters.Patch();
         }

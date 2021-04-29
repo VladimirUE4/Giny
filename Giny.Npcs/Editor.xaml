@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="730" Width="1282">
     <Grid>
-        <TextBox  TextChanged="SearchTextChanged" Name="searchText" HorizontalAlignment="Left" Margin="58,10,0,0" TextWrapping="Wrap" Text="" Width="281" Height="23" VerticalAlignment="Top"/>
+        <TextBox  TextChanged="SearchTextChanged" Name="searchText" HorizontalAlignment="Left" Margin="58,10,0,0" TextWrapping="Wrap" Text="" Width="268" Height="23" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search :" VerticalAlignment="Top"/>
-        <ListBox SelectionChanged="NpcSelectionChanged" Name="npcs" HorizontalAlignment="Left" Margin="10,47,0,80" Width="329"/>
-        <ContentControl Name="actionsContent" Margin="358,195,0,37" HorizontalAlignment="Left" Width="900"/>
-        <Canvas Name="editorCanvas" HorizontalAlignment="Left" Height="180" Margin="368,10,0,0" VerticalAlignment="Top" Width="514">
+        <ListBox SelectionChanged="NpcSelectionChanged" Name="npcs" HorizontalAlignment="Left" Margin="10,47,0,65" Width="316"/>
+        <ContentControl Name="actionsContent" Margin="343,195,0,37" HorizontalAlignment="Left" Width="929"/>
+        <Canvas Name="editorCanvas" HorizontalAlignment="Left" Height="180" Margin="343,10,0,0" VerticalAlignment="Top" Width="514">
             <TextBox LostFocus="templateId_LostFocus"  PreviewTextInput="NumberValidationTextBox" x:Name="templateId" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Canvas.Left="303" Canvas.Top="39"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Template Id :" VerticalAlignment="Top" Canvas.Left="229" Canvas.Top="41"/>
             <TextBox LostFocus="mapId_LostFocus" x:Name="mapId"  PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Canvas.Left="303" Canvas.Top="69"/>
@@ -28,7 +28,7 @@
             <TextBlock x:Name="npcName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Canvas.Left="68" Canvas.Top="10"/>
         </Canvas>
         <Image Name="npcImage" HorizontalAlignment="Left" Height="150" Margin="872,40,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button Content="Remove Selected" HorizontalAlignment="Left" Margin="10,0,0,37" Width="329" Click="RemoveNpcClick" Height="35" VerticalAlignment="Bottom"/>
+        <Button Content="Remove Selected" HorizontalAlignment="Left" Margin="10,0,0,25" Width="316" Click="RemoveNpcClick" Height="35" VerticalAlignment="Bottom"/>
 
     </Grid>
 </UserControl>

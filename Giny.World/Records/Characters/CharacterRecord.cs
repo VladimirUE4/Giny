@@ -21,6 +21,7 @@ namespace Giny.World.Records.Characters
     [Table("characters")]
     public class CharacterRecord : ITable
     {
+        [Container]
         private static readonly ConcurrentDictionary<long, CharacterRecord> Characters = new ConcurrentDictionary<long, CharacterRecord>();
 
         private static UniqueLongIdProvider idProvider;

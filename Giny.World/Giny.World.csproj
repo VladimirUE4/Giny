@@ -198,6 +198,7 @@
     <Compile Include="Managers\Guilds\GuildMotd.cs" />
     <Compile Include="Managers\Guilds\GuildsManager.cs" />
     <Compile Include="Managers\Items\Collections\BankItemCollection.cs" />
+    <Compile Include="Managers\Items\Collections\CraftItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\TradeItemCollection.cs" />
     <Compile Include="Records\Guilds\GuildEmblemRecord.cs" />
     <Compile Include="Records\Guilds\GuildMemberRecord.cs" />

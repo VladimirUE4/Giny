@@ -53,7 +53,7 @@ namespace Giny.World.Managers.Dialogs
             this.Npc = npc;
             this.Action = action;
             this.MessageId = int.Parse(Action.Param1);
-            this.Replies = GetValidReply(NpcReplyRecord.GetNpcReplies(npc.SpawnRecord.Id, this.MessageId));
+            this.Replies = GetValidReply(NpcReplyRecord.GetNpcReplies(npc.SpawnRecord.Id, this.MessageId)).ToArray();
         }
         public override void Open()
         {

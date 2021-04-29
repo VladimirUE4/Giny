@@ -19,9 +19,9 @@
                 <DataGrid IsReadOnly="True" x:Name="data" HorizontalAlignment="Left" Width="1310" Height="876" Canvas.Left="10" Canvas.Top="70"/>
                 <TextBox x:Name="search" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="1185" Canvas.Left="66" Canvas.Top="10" TextChanged="search_TextChanged" />
                 <Label Content="Search :" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="10"/>
-                <RichTextBox x:Name="richTb" HorizontalAlignment="Left" Height="838" VerticalAlignment="Top" Width="523" IsDocumentEnabled="True" Canvas.Left="1347" Canvas.Top="40" SpellCheck.IsEnabled="True"/>
                 <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="523" Height="63" Click="Button_Click_1" Canvas.Left="1347" Canvas.Top="883"/>
                 <CheckBox x:Name="checkbox" Content="UI Text" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CheckBox_Click" Canvas.Left="1264" Canvas.Top="16"/>
+                <TextBox Name="textBox" SpellCheck.IsEnabled="True" Height="789" Canvas.Left="1347" TextWrapping="Wrap" Text="" Canvas.Top="70" Width="513"/>
             </Canvas>
         </Grid>
     </DockPanel>
