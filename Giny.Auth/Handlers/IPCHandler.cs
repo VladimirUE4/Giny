@@ -101,7 +101,7 @@ namespace Giny.Auth.Handlers
         {
             try
             {
-                WorldCharacterRecord.Get(client.WorldServerRecord.Id).RemoveInstantElements(typeof(WorldCharacterRecord));
+                WorldCharacterRecord.Get(client.WorldServerRecord.Id).RemoveInstantElements();
                 client.SendIPCAnswer(new ResetWorldResultMessage(true), message);
             }
             catch

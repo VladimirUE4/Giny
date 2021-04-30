@@ -45,5 +45,15 @@ namespace Giny.World.Managers.Items.Collections
                 remote = false,
             });
         }
+        public override void OnItemsRemoved(IEnumerable<CharacterItemRecord> items)
+        {
+            Character.Client.Send(new ExchangeObjectsRemovedMessage()
+            {
+                objectUID = items.Select(x => x.UId).ToArray(),
+                remote = false,
+            });
+        }
+
+
     }
 }

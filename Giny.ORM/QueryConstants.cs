@@ -11,52 +11,59 @@ namespace Giny.ORM
 {
     class QueryConstants
     {
-        public const string CREATE_TABLE = "CREATE TABLE if not exists {0} ({1})";
+        public const string Create = "CREATE TABLE if not exists {0} ({1})";
 
-        public const string DROP_TABLE = "DROP TABLE IF EXISTS {0}";
+        public const string Drop = "DROP TABLE IF EXISTS {0}";
 
-        public const string DELETE_TABLE = "DELETE FROM {0}";
+        public const string Delete = "DELETE FROM {0}";
 
-        public const string SELECT = "SELECT * FROM `{0}`";
+        public const string Select = "SELECT * FROM `{0}`";
 
-        public const string SELECT_WHERE = "SELECT * FROM `{0}` WHERE {1}";
+        public const string SelectWhere = "SELECT * FROM `{0}` WHERE {1}";
 
-        public const string COUNT_CONDITIONAL = "SELECT COUNT(*) FROM `{0}` WHERE {1}";
+        public const string CountWhere = "SELECT COUNT(*) FROM `{0}` WHERE {1}";
 
-        public const string COUNT = "SELECT COUNT(*) FROM `{0}`";
+        public const string Count = "SELECT COUNT(*) FROM `{0}`";
 
-        public const string INSERT = "INSERT INTO `{0}` VALUES {1}";
+        public const string Insert = "INSERT INTO `{0}` VALUES {1}";
 
-        public const string UPDATE = "UPDATE `{0}` SET {1} WHERE {2} = {3}";
+        public const string Update = "UPDATE `{0}` SET {1} WHERE {2} = {3}";
 
-        public const string REMOVE = "DELETE FROM `{0}` WHERE `{1}` = {2}";
+        public const string Remove = "DELETE FROM `{0}` WHERE `{1}` = {2}";
+
+        public const string PrimaryKey = "PRIMARY KEY ({0})";
+
+        private static Dictionary<string, string> TypeMapping = new Dictionary<string, string>()
+        {
+            { "String", "VARCHAR(255)" },
+            { "Int16", "SMALLINT" },
+            { "Int32", "BIGINT" },
+            { "Byte", "TINYINT" },
+        };
+
+        private const string BinaryType = "BLOB";
+
+        private const string DefaultType = "MEDIUMTEXT";
+
 
         public static string ConvertType(PropertyInfo property)
         {
             var attribute = property.GetCustomAttribute<TypeOverrideAttribute>();
+
             if (attribute != null)
             {
                 return attribute.NewType;
             }
-            if (property.GetCustomAttribute<ProtoSerializeAttribute>() != null)
+            else if (property.GetCustomAttribute<ProtoSerializeAttribute>() != null)
             {
-                return "BLOB";
+                return BinaryType;
             }
-            switch (property.PropertyType.Name)
+            else if (TypeMapping.ContainsKey(property.PropertyType.Name))
             {
-                case "String":
-                    return "VARCHAR(255)";
-                case "Int16":
-                    return "SMALLINT";
-                case "Int32":
-                    return "INT";
-                case "Int64":
-                    return "BIGINT";
-                case "Byte":
-                    return "TINYINT";
+                return TypeMapping[property.PropertyType.Name];
             }
 
-            return "mediumtext";
+            return DefaultType;
         }
     }
 }

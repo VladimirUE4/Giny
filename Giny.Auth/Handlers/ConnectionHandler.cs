@@ -46,12 +46,17 @@ namespace Giny.Auth.Handlers
             {
                 client.OnSelectedServerRefused(serverId, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                      ServerStatusEnum.OFFLINE);
+
+                client.SendServerList();
+
                 return;
             }
             else if (ipcClient.WorldServerRecord.Status != ServerStatusEnum.ONLINE)
             {
                 client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                        ipcClient.WorldServerRecord.Status);
+
+                client.SendServerList();
                 return;
 
             }

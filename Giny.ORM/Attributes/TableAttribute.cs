@@ -6,13 +6,11 @@ namespace Giny.ORM.Attributes
     {
         public string TableName;
         public bool Load;
-        public short ReadingOrder;
 
-        public TableAttribute(string tableName, short readingOrder = -1, bool load = true)
+        public TableAttribute(string tableName, bool load = true)
         {
             this.TableName = tableName;
             this.Load = load;
-            this.ReadingOrder = readingOrder;
         }
     }
 }

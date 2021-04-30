@@ -14,6 +14,7 @@ namespace Giny.Auth.Records
     [Table("worldcharacters")]
     public class WorldCharacterRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, WorldCharacterRecord> WorldCharacters = new ConcurrentDictionary<long, WorldCharacterRecord>();
 
         private static UniqueLongIdProvider idProvider;

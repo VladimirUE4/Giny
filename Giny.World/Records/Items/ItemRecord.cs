@@ -194,11 +194,11 @@ namespace Giny.World.Records.Items
                 Items[item.Id] = item;
             }
         }
-        public static bool ItemExists(int gid)
+        public static bool ItemExists(long gid)
         {
             return Items.ContainsKey(gid);
         }
-        public static ItemRecord GetItem(int gid)
+        public static ItemRecord GetItem(long gid)
         {
             ItemRecord result = null;
             Items.TryGetValue(gid, out result);

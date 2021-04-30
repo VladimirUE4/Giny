@@ -88,7 +88,7 @@ namespace Giny.Pokefus
                 {
                     if (ForbiddenMonsters.Contains((short)monster.Record.Id))
                     {
-                        result.Character.Reply(string.Format(UndroppableMessage, monster.Name), Color.CornflowerBlue);
+                        result.Character.Reply(string.Format(UndroppableMessage, monster.Name));
                         continue;
                     }
                     var chance = (random.Next(0, 100) + random.NextDouble());
@@ -171,7 +171,7 @@ namespace Giny.Pokefus
 
             var percentage = Math.Round(probability * 100d, 2);
 
-            fighter.Character.Reply(string.Format(DropInfoMessage, monster.Name, percentage), Color.CornflowerBlue);
+            fighter.Character.Reply(string.Format(DropInfoMessage, monster.Name, percentage));
 
             return percentage;
         }

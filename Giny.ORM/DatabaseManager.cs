@@ -73,10 +73,6 @@ namespace Giny.ORM
         }
         public void LoadTables()
         {
-            var orderedTables = new Type[TableTypes.Length];
-
-            var dontCatch = new List<Type>();
-
             foreach (var tableType in TableTypes)
             {
                 var definition = TableManager.Instance.GetDefinition(tableType);
@@ -84,30 +80,8 @@ namespace Giny.ORM
 
                 if (attribute.Load)
                 {
-                    if (attribute.ReadingOrder >= 0)
-                        orderedTables[attribute.ReadingOrder] = tableType;
+                    LoadTable(tableType);
                 }
-                else
-                    dontCatch.Add(tableType);
-            }
-            foreach (var table in TableTypes)
-            {
-                if (orderedTables.Contains(table) || dontCatch.Contains(table))
-                    continue;
-
-                for (var i = TableTypes.Length - 1; i >= 0; i--)
-                {
-                    if (orderedTables[i] == null)
-                    {
-                        orderedTables[i] = table;
-                        break;
-                    }
-                }
-            }
-            foreach (var type in orderedTables)
-            {
-                if (type != null)
-                    LoadTable(type);
             }
         }
         private void LoadTable(Type type)
@@ -138,7 +112,7 @@ namespace Giny.ORM
         }
         public void DropTableIfExists(string tableName)
         {
-            Query(string.Format(QueryConstants.DROP_TABLE, tableName), UseProvider());
+            Query(string.Format(QueryConstants.Drop, tableName), UseProvider());
         }
         public void DropTableIfExists(Type type)
         {
@@ -179,7 +153,7 @@ namespace Giny.ORM
         }
         public void DeleteTable(string tableName)
         {
-            Query(string.Format(QueryConstants.DELETE_TABLE, tableName), UseProvider());
+            Query(string.Format(QueryConstants.Delete, tableName), UseProvider());
         }
         public void CreateTableIfNotExists(Type type)
         {
@@ -198,11 +172,11 @@ namespace Giny.ORM
             }
 
             if (primaryProperty != null)
-                str += "PRIMARY KEY (" + primaryProperty.Name + ")";
+                str += string.Format(QueryConstants.PrimaryKey, primaryProperty.Name);
             else
                 str = str.Remove(str.Length - 1, 1);
 
-            this.Query(string.Format(QueryConstants.CREATE_TABLE, tableName, str), UseProvider());
+            this.Query(string.Format(QueryConstants.Create, tableName, str), UseProvider());
 
         }
         public void CreateAllTablesIfNotExists()

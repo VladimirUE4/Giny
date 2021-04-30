@@ -54,7 +54,7 @@ namespace Giny.ORM.IO
         {
             lock (DatabaseManager.SyncRoot)
             {
-                using (var command = new MySqlCommand(string.Format(QueryConstants.SELECT_WHERE, TableName, where), connection))
+                using (var command = new MySqlCommand(string.Format(QueryConstants.SelectWhere, TableName, where), connection))
                 {
                     try
                     {
@@ -148,17 +148,17 @@ namespace Giny.ORM.IO
         }
         public void Read(MySqlConnection connection)
         {
-            this.ReadTable(connection, string.Format(QueryConstants.SELECT, TableName));
+            this.ReadTable(connection, string.Format(QueryConstants.Select, TableName));
         }
         public void Read(MySqlConnection connection, string condition)
         {
-            this.ReadTable(connection, string.Format(QueryConstants.SELECT, TableName, condition));
+            this.ReadTable(connection, string.Format(QueryConstants.Select, TableName, condition));
         }
         public long Count(MySqlConnection connection)
         {
             lock (DatabaseManager.SyncRoot)
             {
-                using (MySqlCommand cmd = new MySqlCommand(string.Format(QueryConstants.COUNT, TableName), connection))
+                using (MySqlCommand cmd = new MySqlCommand(string.Format(QueryConstants.Count, TableName), connection))
                 {
                     return (long)cmd.ExecuteScalar();
                 }
@@ -240,7 +240,7 @@ namespace Giny.ORM.IO
         private static IDictionary Read(Type type, string condition)
         {
             DatabaseReader reader = new DatabaseReader(type);
-            reader.ReadTable(DatabaseManager.Instance.UseProvider(), string.Format(QueryConstants.SELECT, reader.TableName, condition));
+            reader.ReadTable(DatabaseManager.Instance.UseProvider(), string.Format(QueryConstants.Select, reader.TableName, condition));
             return reader.Elements;
         }
         public static IEnumerable<T> Read<T>() where T : ITable

@@ -16,6 +16,7 @@ namespace Giny.Auth.Records
     [Table("WorldServers")]
     public class WorldServerRecord : ITable
     {
+        [Container]
         private static ConcurrentDictionary<long, WorldServerRecord> WorldServers = new ConcurrentDictionary<long, WorldServerRecord>();
 
         long ITable.Id => Id;

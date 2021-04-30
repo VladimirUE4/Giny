@@ -96,6 +96,12 @@ namespace Giny.DatabaseSynchronizer
                     {
                         var d2oField = objectType.GetField(d2oFieldAttribute.FieldName);
 
+                        if (d2oField == null)
+                        {
+                            Logger.Write("Unknown D2O field : " + d2oFieldAttribute.FieldName + " in " + objectType.Name, Channels.Critical);
+                            Console.ReadLine();
+                            Environment.Exit(0);
+                        }
                         var i18nField = property.GetCustomAttribute<I18NFieldAttribute>();
 
                         if (i18nField != null)

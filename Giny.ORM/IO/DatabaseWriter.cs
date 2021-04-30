@@ -106,7 +106,7 @@ namespace Giny.ORM.IO
                 final.Add(sb.ToString());
             }
 
-            command.CommandText = string.Format(QueryConstants.INSERT, TableName, string.Format("{0}", string.Join(",", final)));
+            command.CommandText = string.Format(QueryConstants.Insert, TableName, string.Format("{0}", string.Join(",", final)));
 
             try
             {
@@ -129,8 +129,6 @@ namespace Giny.ORM.IO
 
             var command = new MySqlCommand(string.Empty, DatabaseManager.Instance.UseProvider());
 
-            List<string> final = new List<string>();
-
             for (int i = 0; i < elements.Length; i++)
             {
                 StringBuilder sb = new StringBuilder();
@@ -144,25 +142,22 @@ namespace Giny.ORM.IO
 
                 sb = sb.Remove(sb.Length - 1, 1);
 
-                final.Add(sb.ToString());
-
-                var finalText = string.Format("{0}", string.Join(",", final));
+                var text = string.Format("{0}", string.Join(",", sb.ToString()));
 
                 string arg1 = TableName;
-                string arg2 = finalText;
-                command.CommandText = string.Format(QueryConstants.UPDATE, arg1, arg2, PrimaryProperty.Name, elements[i].Id.ToString());
-               
-                try
-                {
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Unable update database element (" + TableName + ") " +
-                         ex.Message);
-                }
+                string arg2 = text;
+                command.CommandText += string.Format(QueryConstants.Update, arg1, arg2, PrimaryProperty.Name, elements[i].Id.ToString()) + ";";
             }
 
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable update database element (" + TableName + ") " +
+                     ex.Message);
+            }
 
 
         }
@@ -170,7 +165,7 @@ namespace Giny.ORM.IO
         {
             foreach (var element in elements)
             {
-                var commandString = string.Format(QueryConstants.REMOVE, TableName, PrimaryProperty.Name, PrimaryProperty.GetValue(element));
+                var commandString = string.Format(QueryConstants.Remove, TableName, PrimaryProperty.Name, PrimaryProperty.GetValue(element));
 
                 using (var command = new MySqlCommand(commandString, DatabaseManager.Instance.UseProvider()))
                 {

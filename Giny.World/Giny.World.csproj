@@ -208,6 +208,7 @@
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
     <Compile Include="Managers\Parties\PartyManager.cs" />
     <Compile Include="Records\Guilds\GuildRecord.cs" />
+    <Compile Include="Records\Jobs\RecipeRecord.cs" />
     <Compile Include="Web\WebGiftManager.cs" />
     <Compile Include="Modules\AssemblyCore.cs" />
     <Compile Include="ConfigFile.cs" />

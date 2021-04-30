@@ -41,13 +41,8 @@ namespace Giny.World.Records.Items
             set;
         }
         [Ignore]
-        public ItemTypeEnum TypeEnum
-        {
-            get
-            {
-                return (ItemTypeEnum)TypeId;
-            }
-        }
+        public ItemTypeEnum TypeEnum => (ItemTypeEnum)TypeId;
+
         [D2OField("level")]
         public short Level
         {

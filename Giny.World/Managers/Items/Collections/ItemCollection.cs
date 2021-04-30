@@ -79,7 +79,9 @@ namespace Giny.World.Managers.Items.Collections
                 if (sameItem != null)
                 {
                     sameItem.Quantity += item.Quantity;
-                    stackedItems.Add(item);
+
+                    if (!stackedItems.Contains(sameItem))
+                        stackedItems.Add(sameItem);
 
                 }
                 else
@@ -192,6 +194,12 @@ namespace Giny.World.Managers.Items.Collections
                 }
             }
 
+        }
+        public void Clear()
+        {
+            List<T> removedItems = m_items.ToList();
+            m_items.Clear();
+            OnItemsRemoved(removedItems);
         }
         public void RemoveItem(int uid)
         {

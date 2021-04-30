@@ -44,7 +44,7 @@ namespace Giny.Core.Network
             }
             Socket.Listen(100);
             StartAccept(null);
-            OnServerStarted();
+            OnServerStarted?.Invoke();
         }
         protected void StartAccept(SocketAsyncEventArgs args)
         {

@@ -16,6 +16,7 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
 {
     class ExchangesHandler
     {
+
         [MessageHandler]
         public static void HandleExchangeOnHumanVendorRequest(ExchangeOnHumanVendorRequestMessage message, WorldClient client)
         {
@@ -39,6 +40,22 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
         public static void HandleExchangeShowVendorTax(ExchangeShowVendorTaxMessage message, WorldClient client)
         {
             client.Send(new ExchangeReplyTaxVendorMessage(0, client.Character.MerchantItems.GetMerchantTax()));
+        }
+        [MessageHandler]
+        public static void HandleExchangeCraftCountRequest(ExchangeCraftCountRequestMessage message, WorldClient client)
+        {
+            if (client.Character.IsInDialog<CraftExchange>())
+            {
+                client.Character.GetDialog<CraftExchange>().SetCount(message.count);
+            }
+        }
+        [MessageHandler]
+        public static void HandleExchangeSetCraftRecipeMessage(ExchangeSetCraftRecipeMessage message, WorldClient client)
+        {
+            if (client.Character.IsInDialog<CraftExchange>())
+            {
+                client.Character.GetDialog<CraftExchange>().SetRecipe(message.objectGID);
+            }
         }
         [MessageHandler]
         public static void HandleExchangeObjectMovePriced(ExchangeObjectMovePricedMessage message, WorldClient client)

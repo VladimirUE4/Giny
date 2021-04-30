@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Giny.Auth.Records
 {
-    [Table("accounts", -1, false)]
+    [Table("accounts", false)]
     public class AccountRecord : ITable
     {
         public const int DefaultCharacterSlots = 5;

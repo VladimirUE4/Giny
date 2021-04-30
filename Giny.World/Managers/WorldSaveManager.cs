@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
+using Giny.Core.Time;
 using Giny.ORM;
 using Giny.ORM.Cyclic;
 using Giny.Protocol.Enums;
@@ -20,41 +21,53 @@ namespace Giny.World.Managers
     {
         public const double SAVE_INTERVAL_MINUTES = 30;
 
-        private Task m_queueRefresherTask;
+        private ActionTimer m_callback;
 
         [StartupInvoke("Save Task", StartupInvokePriority.Last)]
         public void CreateNextTask()
         {
-            m_queueRefresherTask = Task.Factory.StartNewDelayed((int)((SAVE_INTERVAL_MINUTES * 60) * 1000), PerformSave);
+            m_callback = new ActionTimer((int)((SAVE_INTERVAL_MINUTES * 60) * 1000), PerformSave, true);
+            m_callback.Start();
         }
 
 
         public void PerformSave()
         {
-            if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
+            Thread thread = new Thread(new ThreadStart(() =>
             {
-                WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
-
-                WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
-
-                foreach (var client in WorldServer.Instance.GetOnlineClients())
+                if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
                 {
-                    client.Character.Record.UpdateElement();
+                    Logger.Write("Saving server ...", Channels.Warning);
+
+                    WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
+
+                    WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
+
+                    foreach (var client in WorldServer.Instance.GetOnlineClients())
+                    {
+                        client.Character.Record.UpdateElement();
+                    }
+
+
+                    CyclicSaveTask.Instance.Save();
+
+
+                    WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
+
+                    WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+
+                    Logger.Write("Server saved ...", Channels.Warning);
+
+                    CreateNextTask();
                 }
+                else
+                {
+                    Logger.Write("Unable to save world server, server is busy...", Channels.Warning);
+                    CreateNextTask();
+                }
+            }));
 
-                CyclicSaveTask.Instance.Save();
-
-                WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
-
-                WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
-
-                CreateNextTask();
-            }
-            else
-            {
-                Logger.Write("Unable to save world server, server is busy...", Channels.Warning);
-                CreateNextTask();
-            }
+            thread.Start();
         }
 
     }

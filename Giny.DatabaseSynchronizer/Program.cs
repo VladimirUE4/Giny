@@ -11,6 +11,7 @@ using Giny.World.Records.Breeds;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Effects;
 using Giny.World.Records.Items;
+using Giny.World.Records.Jobs;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using Giny.World.Records.Npcs;
@@ -31,9 +32,9 @@ namespace Giny.DatabaseSynchronizer
     {
         public const bool BUILD_MISC = false;
 
-        public const bool BUILD_D2O_TABLES = false;
+        public const bool BUILD_D2O_TABLES = true;
 
-        public const bool BUILD_MAPS = true;
+        public const bool BUILD_MAPS = false;
 
         public const string D2I_FILE_PATH_FR = "i18n_fr.d2i";
         public const string D2I_FILE_PATH_EN = "i18n_en.d2i";
@@ -56,6 +57,7 @@ namespace Giny.DatabaseSynchronizer
 
             if (BUILD_D2O_TABLES)
             {
+                DatabaseManager.Instance.DropTableIfExists<RecipeRecord>();
                 DatabaseManager.Instance.DropTableIfExists<SubareaRecord>();
                 DatabaseManager.Instance.DropTableIfExists<ItemSetRecord>();
                 DatabaseManager.Instance.DropTableIfExists<BreedRecord>();

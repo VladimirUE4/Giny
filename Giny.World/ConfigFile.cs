@@ -138,6 +138,12 @@ namespace Giny.World
             set;
         } = "Wecome to <b>Giny</b> server.";
 
+        public int CraftXpRate
+        {
+            get;
+            set;
+        } = 1;
+
         [StartupInvoke("Config", StartupInvokePriority.Initial)]
         public static void Initialize()
         {
