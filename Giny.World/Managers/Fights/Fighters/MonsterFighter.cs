@@ -59,7 +59,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override bool CanTackle()
         {
-            return base.CanTackle() && Record.CanTackle; 
+            return base.CanTackle() && Record.CanTackle;
         }
         public override bool CanSwitchPosition()
         {
@@ -67,7 +67,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override bool CanBeCarried()
         {
-            return base.CanBeCarried() && Record.CanBeCarried; 
+            return base.CanBeCarried() && Record.CanBeCarried;
         }
         public override bool CanUsePortal()
         {
@@ -119,7 +119,7 @@ namespace Giny.World.Managers.Fights.Fighters
             return random.Next(Monster.Record.MinDroppedKamas, Monster.Record.MaxDroppedKamas + 1);
         }
 
-        public override IEnumerable<DroppedItem> RollLoot(IFightResult looter)
+        public override IEnumerable<DroppedItem> RollLoot(IFightResult looter, double bonusRatio)
         {
             // have to be dead before
             if (Alive)
@@ -138,7 +138,7 @@ namespace Giny.World.Managers.Fights.Fighters
                         break;
 
                     var chance = (random.Next(0, 100) + random.NextDouble());
-                    var dropRate = FightFormulas.Instance.AdjustDropChance(looter, droppableItem, Monster);
+                    var dropRate = FightFormulas.Instance.AdjustDropChance(looter, droppableItem, Monster, bonusRatio);
 
                     if (!(dropRate >= chance))
                         continue;
@@ -179,7 +179,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override void OnTurnEnded()
         {
-           
+
         }
         public override void OnFightStarted()
         {

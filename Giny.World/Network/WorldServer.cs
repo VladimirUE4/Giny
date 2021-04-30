@@ -92,7 +92,7 @@ namespace Giny.World.Network
         }
         public IEnumerable<WorldClient> GetOnlineClients()
         {
-            return Clients.Where(x => x.InGame);
+            return Clients.Where(x => x.InGame).ToArray();
         }
         /// <summary>
         /// Returns a client who is not necessarily connected in game 

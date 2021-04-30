@@ -102,7 +102,7 @@ namespace Giny.World.Managers.Fights.Results
         public void AddEarnedExperience(double bonusRatio)
         {
             FightXp fightXp = FightFormulas.Instance.GetExperiencePvM(Fighter, 0, 0, 0);
-            fightXp.ApplyBonus(ConfigFile.Instance.XpRate);
+            fightXp.ApplyMultiplicator(ConfigFile.Instance.XpRate);
             fightXp.ApplyBonus(bonusRatio);
 
             var experience = fightXp.Xp;

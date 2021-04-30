@@ -27,9 +27,13 @@ namespace Giny.World.Managers.Formulas
             this.IsSolo = isSolo;
             this.Xp = IsSolo ? XpSolo : XpGroup;
         }
+        public void ApplyMultiplicator(double ratio)
+        {
+            Xp = (long)(Xp * ratio);
+        }
         public void ApplyBonus(double ratio)
         {
-            Xp = (long)(Xp + Xp * ratio);
+            Xp = (long)(Xp + (Xp * ratio));
         }
     }
     public class FightFormulas : Singleton<FightFormulas>
@@ -175,26 +179,17 @@ namespace Giny.World.Managers.Formulas
             return new FightXp((long)_xpSolo, (long)_xpGroup, groupMembers.Count() == 1);
         }
 
-        [WIP("idols & chall")]
-        public int AdjustDroppedKamas(IFightResult looter, int teamPP, long baseKamas)
+        public int AdjustDroppedKamas(IFightResult looter, int teamPP, long baseKamas, double bonusRatio)
         {
-            var challengeBonus = 0;// looter.Fight.GetChallengesBonus();
-            var idolsBonus = 0;// looter.Fight.GetIdolsDropBonus();
-
-            var looterPP = looter.Prospecting + ((looter.Prospecting * (challengeBonus + idolsBonus)) / 100d);
-
-            var multiplicator = 1; // old age bonus
-            var kamas = (int)(baseKamas * (looterPP / teamPP) * multiplicator * KAMAS_RATE);
-
+            var additionalPP = (looter.Prospecting * bonusRatio);
+            var looterPP = looter.Prospecting + additionalPP;
+            var kamas = (int)(baseKamas * (looterPP / teamPP) * KAMAS_RATE);
             return kamas;
         }
-        [WIP("idols & chall")]
-        public double AdjustDropChance(IFightResult looter, MonsterDrop item, Monster dropper)
+        public double AdjustDropChance(IFightResult looter, MonsterDrop item, Monster dropper, double bonusRatio)
         {
-            var challengeBonus = 0;// looter.Fight.GetChallengesBonus();
-            var idolsBonus = 0;// looter.Fight.GetIdolsDropBonus();
-
-            var looterPP = looter.Prospecting + ((looter.Prospecting * (challengeBonus + idolsBonus)) / 100d);
+            var additionalPP = (looter.Prospecting * bonusRatio);
+            var looterPP = looter.Prospecting + additionalPP;
 
             var rate = item.GetDropRate((int)dropper.Grade.GradeId) * (looterPP / 100d) + 1 * DROP_RATE;
 

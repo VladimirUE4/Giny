@@ -294,6 +294,8 @@ namespace Giny.World.Managers.Entities.Characters
             return result;
         }
 
+
+
         public MerchantItemCollection MerchantItems
         {
             get;
@@ -421,8 +423,10 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new GameContextDestroyMessage());
             this.Context = null;
         }
-
-
+        public void SendServerExperienceModificator()
+        {
+            Client.Send(new ServerExperienceModificatorMessage((short)(ConfigFile.Instance.XpRate * 100d)));
+        }
         public void DebugHighlightCells(Color color, IEnumerable<CellRecord> cells)
         {
             Client.Send(new DebugHighlightCellsMessage(color.ToArgb(), cells.Select(x => x.Id).ToArray()));

@@ -366,19 +366,10 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-            var look = "{5455||1=16498321,2=16496983,3=2964557,4=2049133,5=14407378|}";
-
-            var entityLook = EntityLookManager.Instance.Parse(look);
-            var colors = EntityLookManager.Instance.GetConvertedColors(entityLook.Colors);
-            entityLook.SetColors(colors);
-
-            client.Character.Look = entityLook;
-            client.Character.RefreshActorOnMap();
-
-            return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
 
         }
+
     }
 }

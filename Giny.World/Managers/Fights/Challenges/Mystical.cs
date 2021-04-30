@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Challenges
 
         public override double XpBonusRatio => 0.70;
 
-        public override double DropBonusRatio => 0.70;
+        public override double DropBonusRatio => 0.30;
 
         public override void BindEvents()
         {

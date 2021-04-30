@@ -39,7 +39,7 @@ namespace Giny.Pokefus
 
         private const string PokefusLevelUpMessage = "Felicitation ! Votre Pokefus {0} passe niveau {1}";
 
-        private const string DropInfoMessage = "Chance de drop pour {0} : {1} %";
+        private const string DropInfoMessage = "Chance de drop pour {0} : <b>{1}</b> %";
 
         private const string UndroppableMessage = "Le monstre {0} n'a pas d'âme ...Il est impossible de drop son pokéfus !";
 
@@ -80,6 +80,8 @@ namespace Giny.Pokefus
         {
             AsyncRandom random = new AsyncRandom();
 
+            Dictionary<double, List<MonsterFighter>> droppers = new Dictionary<double, List<MonsterFighter>>();
+
             if (result.Fight.Winners == result.Fighter.Team)
             {
                 var monsters = result.Fighter.EnemyTeam.GetFighters<MonsterFighter>(false);
@@ -94,6 +96,17 @@ namespace Giny.Pokefus
                     var chance = (random.Next(0, 100) + random.NextDouble());
                     var dropRate = GetDropRate(monster, result.Fighter);
 
+                    if (droppers.ContainsKey(dropRate))
+                    {
+                        droppers[dropRate].Add(monster);
+                    }
+                    else
+                    {
+                        droppers.Add(dropRate, new List<MonsterFighter>() { monster });
+                    }
+
+
+
                     if (!(dropRate >= chance))
                         continue;
 
@@ -104,6 +117,11 @@ namespace Giny.Pokefus
 
                 AddPokefusExperience(result);
 
+                foreach (var dropData in droppers)
+                {
+                    string monsterNames = string.Join(",", dropData.Value.Select(x => x.Name));
+                    result.Character.Reply(string.Format(DropInfoMessage, monsterNames, dropData.Key));
+                }
 
 
             }
@@ -141,37 +159,35 @@ namespace Giny.Pokefus
         }
         private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
         {
-            double probability = 0.05d;
+            double probability = 0.02d;
 
             if (monster.Level >= 50)
             {
-                probability = 0.04;
+                probability = 0.018;
             }
             if (monster.Level >= 100)
             {
-                probability = 0.03;
+                probability = 0.015;
             }
             if (monster.Level >= 150)
             {
-                probability = 0.02;
+                probability = 0.010;
             }
             if (monster.Level >= 200)
             {
-                probability = 0.01;
+                probability = 0.008;
             }
             if (monster.Record.IsBoss)
             {
-                probability = 0.008;
+                probability = 0.001;
             }
 
-            probability += (fighter.Level / 200) / 20;
+            probability += (fighter.Level / 200d) / 100d;
 
-
-            probability += (fighter.Stats.Prospecting.TotalInContext() / 5000);
+            probability += (fighter.Stats.Prospecting.TotalInContext() / 7000d);
 
             var percentage = Math.Round(probability * 100d, 2);
 
-            fighter.Character.Reply(string.Format(DropInfoMessage, monster.Name, percentage));
 
             return percentage;
         }

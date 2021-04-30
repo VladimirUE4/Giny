@@ -26,6 +26,20 @@ namespace Giny.World
 {
     class WorldCommands
     {
+        [ConsoleCommand("rate")]
+        public static void ExperienceRateCommand(double ratio)
+        {
+            ConfigFile.Instance.XpRate = ratio;
+
+            foreach (var client in WorldServer.Instance.GetOnlineClients())
+            {
+                client.Character.SendServerExperienceModificator();
+            }
+
+            Logger.Write("Experience rate multiplicator is now set to : " + ConfigFile.Instance.XpRate, Channels.Info );
+
+
+        }
         [ConsoleCommand("reset")]
         public static void ResetCommand()
         {

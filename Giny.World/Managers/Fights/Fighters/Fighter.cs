@@ -262,7 +262,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
 
 
-        public virtual IEnumerable<DroppedItem> RollLoot(IFightResult looter)
+        public virtual IEnumerable<DroppedItem> RollLoot(IFightResult looter, double bonusRatio)
         {
             return new DroppedItem[0];
         }

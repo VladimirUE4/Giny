@@ -106,13 +106,13 @@ namespace Giny.World.Managers.Fights
 
             foreach (var team in GetTeams())
             {
-                double xpBonusPercent = 0d;
-                double dropBonusPercent = 0d;
+                double xpBonusRatio = 0d;
+                double dropBonusRatio = 0d;
 
                 if (team == GetTeamChallenged())
                 {
-                    xpBonusPercent += GetChallengesExpRatioBonus();
-                    dropBonusPercent += GetChallengesDropRatioBonus();
+                    xpBonusRatio += GetChallengesExpRatioBonus();
+                    dropBonusRatio += GetChallengesDropRatioBonus();
                 }
 
                 IEnumerable<Fighter> droppers = team.EnemyTeam.GetFighters<Fighter>(false).Where(entry => !entry.Alive && entry.CanDrop);
@@ -127,18 +127,18 @@ namespace Giny.World.Managers.Fights
                 {
                     if (looter is FightPlayerResult && looter.Outcome == FightOutcomeEnum.RESULT_VICTORY)
                     {
-                        ((FightPlayerResult)looter).AddEarnedExperience(xpBonusPercent); // bonus ratio = challenges
+                        ((FightPlayerResult)looter).AddEarnedExperience(xpBonusRatio); // bonus ratio = challenges
                     }
 
                     if (team == Winners)
                     {
-                        foreach (var item in droppers.SelectMany(dropper => dropper.RollLoot(looter)))
+                        foreach (var item in droppers.SelectMany(dropper => dropper.RollLoot(looter, dropBonusRatio)))
                         {
                             looter.Loot.AddItem(item);
                         }
                     }
 
-                    looter.Loot.Kamas = teamPP > 0 ? FightFormulas.Instance.AdjustDroppedKamas(looter, teamPP, kamas) : 0;
+                    looter.Loot.Kamas = teamPP > 0 ? FightFormulas.Instance.AdjustDroppedKamas(looter, teamPP, kamas, dropBonusRatio) : 0;
                 }
             }
 
