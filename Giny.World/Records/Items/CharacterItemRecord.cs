@@ -60,6 +60,21 @@ namespace Giny.World.Records.Items
         {
             return new ObjectItemNotInContainer(GId, Effects.GetObjectEffects(), UId, Quantity);
         }
+
+        public CharacterItemRecord ToMimicry(short newSkinId, short appearanceId)
+        {
+            CharacterItemRecord newItem = (CharacterItemRecord)this.CloneWithoutUID();
+            newItem.Effects.Add(new EffectInteger(EffectsEnum.Effect_Appearance, (ushort)newSkinId));
+            newItem.Quantity = 1;
+            newItem.AppearanceId = appearanceId;
+            return newItem;
+        }
+        public void EraseMimicry()
+        {
+            this.Effects.RemoveAll(EffectsEnum.Effect_Appearance);
+            this.AppearanceId = Record.AppearenceId;
+        }
+
         public static IEnumerable<CharacterItemRecord> GetCharacterItems(long characterId)
         {
             return CharactersItems.Values.Where(x => x.CharacterId == characterId);

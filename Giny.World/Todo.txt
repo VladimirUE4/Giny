@@ -3,56 +3,44 @@
 -----------> Roleplay <-----------
 
 -Mimibiotes
--Dragodindes
--Succès
--Quêtes
--PNJ Talk Talk
+-Dragodindes // ?
+-Succès // ?
+-PNJ Talk Talk // ?
 -Finir Pokéfus
--Idoles
--Guildes Alliances?
--Anomalies
--Portals
--Kolizeum
--Almanach
--Havre sac
+-Idoles // ?
+-Alliances // ?
+-Anomalies // ?
+-Portals 
+-Kolizeum // ?
+-Almanach // ?
+-Havre sac // ?
 -Alignement
--Compagnons
--Energie ? Phoenix
--Pain et vie
--Tutoriel ?
--Maisons
--Poubelles
--Mariages
--Songes infinies
--Npc action EXCHANGE
--Craft
--FM
+-Compagnons // ?
+-Energie ? Phoenix // !!!
+-Pain et vie // !!!
+-Maisons // ?
+-Poubelles // ?
+-Mariages // ?
+-Songes infinies // ?
+-Npc action TRADE // ?
+-FM // ?
 -Tests unitaires
--Challenges
+-Challenges // !
 
 
 ----------- avant ouverture -----------
-bug marchand
-site bug ogrines convert
-Guildes
-Bug fix item.Sold hdv & merchant (quantity)
 Percepteurs
 Kolizeum 1vs2 3vs3
-Micro quêtes (kamas) 
 Pokefus équilibré
 Mimibiotes
 Challenges
-HDV
-Craft
 FM
 Pain et vie
 Récompenses dj
 Idoles
-Stated éléments
 Dofus drop
 Nouveaux donjons
 Réfléchir évents
-Vendeur d'item jusqu'au niveau 60 
 Tester rates
 Fixer living objets
 

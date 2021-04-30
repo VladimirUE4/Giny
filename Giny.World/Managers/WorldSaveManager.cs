@@ -37,8 +37,6 @@ namespace Giny.World.Managers
             {
                 if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
                 {
-                    Logger.Write("Saving server ...", Channels.Warning);
-
                     WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
 
                     WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
@@ -48,15 +46,11 @@ namespace Giny.World.Managers
                         client.Character.Record.UpdateElement();
                     }
 
-
                     CyclicSaveTask.Instance.Save();
-
 
                     WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
 
                     WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
-
-                    Logger.Write("Server saved ...", Channels.Warning);
 
                     CreateNextTask();
                 }

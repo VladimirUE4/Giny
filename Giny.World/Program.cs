@@ -33,11 +33,11 @@ using System.Xml;
 
 namespace Giny.World
 {
+    
     class Program
     {
         static void Main(string[] args)
         {
-
             /* WIPManager.Analyse(Assembly.GetExecutingAssembly());
               Console.Read(); */
 

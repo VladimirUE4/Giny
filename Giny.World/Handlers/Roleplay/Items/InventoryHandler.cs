@@ -15,7 +15,7 @@ namespace Giny.World.Handlers.Items
     class InventoryHandler
     {
         [MessageHandler]
-        public static void HandleObjectUseMessage(ObjectUseMessage message,WorldClient client)
+        public static void HandleObjectUseMessage(ObjectUseMessage message, WorldClient client)
         {
             if (!client.Character.Busy && !client.Character.Fighting)
                 client.Character.UseItem(message.objectUID, true);

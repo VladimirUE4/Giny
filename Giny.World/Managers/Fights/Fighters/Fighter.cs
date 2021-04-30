@@ -503,7 +503,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public short GetSpellBoost<T>(short spellId) where T : SpellBoostBuff
         {
-            return (short)GetBuffs<SpellBoostBuff>().Where(x => x.SpellId == spellId).Sum(x => x.GetDelta());
+            return (short)GetBuffs<T>().Where(x => x.SpellId == spellId).Sum(x => x.GetDelta());
         }
         public void DecrementAllCastedBuffsDuration()
         {

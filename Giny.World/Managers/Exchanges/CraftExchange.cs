@@ -1,6 +1,7 @@
 ﻿using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
+using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Formulas;
 using Giny.World.Managers.Items;
@@ -224,7 +225,20 @@ namespace Giny.World.Managers.Exchanges
             Character.Inventory.RemoveItems(removed);
             Character.Inventory.AddItems(results);
 
-            OnCraftResulted(CraftResultEnum.CRAFT_SUCCESS, results.Last());
+            if (results.Count == 1)
+            {
+                OnCraftResulted(CraftResultEnum.CRAFT_SUCCESS, results.Last().GetObjectItemNotInContainer());
+            }
+            else
+            {
+                OnCraftResulted(CraftResultEnum.CRAFT_SUCCESS, new ObjectItemNotInContainer()
+                {
+                    effects = recipe.ResultRecord.Effects.GetObjectEffects(),
+                    objectGID = (short)recipe.ResultId,
+                    objectUID = 0,
+                    quantity = results.Count,
+                });
+            }
 
             int craftXpRatio = recipe.ResultRecord.CraftXpRatio;
             int exp = JobFormulas.Instance.GetCraftExperience(recipe.ResultRecord.Level, CharacterJob.Level, craftXpRatio);
@@ -236,22 +250,13 @@ namespace Giny.World.Managers.Exchanges
         {
             Character.Client.Send(new ExchangeCraftResultMessage((byte)result));
         }
-        private void OnCraftResulted(CraftResultEnum result, CharacterItemRecord item)
+        private void OnCraftResulted(CraftResultEnum result, ObjectItemNotInContainer item)
         {
             Character.Client.Send(new ExchangeCraftResultWithObjectDescMessage()
             {
                 craftResult = (byte)result,
-                objectInfo = item.GetObjectItemNotInContainer(),
+                objectInfo = item,
             });
         }
-        private void OnCraftResulted(CraftResultEnum result, long gid)
-        {
-            Character.Client.Send(new ExchangeCraftResultWithObjectIdMessage()
-            {
-                craftResult = (byte)result,
-                objectGenericId = (short)gid,
-            });
-        }
-
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Api\CharacterApi.cs" />
     <Compile Include="Api\FightApi.cs" />
     <Compile Include="Api\InventoryApi.cs" />
+    <Compile Include="Handlers\Roleplay\Items\MimicrysHandler.cs" />
     <Compile Include="Managers\Bidshops\AveragePriceScheduler.cs" />
     <Compile Include="Handlers\Roleplay\Items\IdolsHandler.cs" />
     <Compile Include="Handlers\Roleplay\Parties\PartiesHandler.cs" />

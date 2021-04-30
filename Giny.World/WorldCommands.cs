@@ -67,7 +67,7 @@ namespace Giny.World
         public static void InfosCommand()
         {
             Logger.Write("Connected : " + WorldServer.Instance.Clients.Count);
-            Logger.Write("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip));
+            Logger.Write("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
             Logger.Write("Max Connected : " + WorldServer.Instance.MaximumClients);
         }
         [ConsoleCommand("save")]

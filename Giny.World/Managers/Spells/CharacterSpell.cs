@@ -76,15 +76,15 @@ namespace Giny.World.Managers.Spells
         }
         public byte GetGrade(Character character)
         {
+            if (ActiveSpellRecord.Levels.Count == 1)
+            {
+                return 1;
+            }
+
             byte index = 0;
 
             for (byte i = 0; i < 3; i++)
             {
-                if (i >= (ActiveSpellRecord.Levels.Count - 1))
-                {
-                    index = i;
-                    break;
-                }
                 if (character.Level >= ActiveSpellRecord.Levels[i].MinPlayerLevel)
                 {
                     index = i;
