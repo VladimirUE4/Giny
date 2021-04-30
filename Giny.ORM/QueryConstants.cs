@@ -37,7 +37,8 @@ namespace Giny.ORM
         {
             { "String", "VARCHAR(255)" },
             { "Int16", "SMALLINT" },
-            { "Int32", "BIGINT" },
+            { "Int32", "INT" },
+            { "Int64", "BIGINT" },
             { "Byte", "TINYINT" },
         };
 

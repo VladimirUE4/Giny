@@ -93,11 +93,11 @@ namespace Giny.World.Managers.Fights.Results
         public override void Apply()
         {
             base.Character.AddExperience(this.ExperienceFightDelta, false);
-            // this.Character.AddMinationExperience((ulong)this.ExperienceFightDelta);
-            /* if (base.Character.HasGuild && this.ExperienceForGuild > 0)
-             {
-                 base.Character.GuildMember.AddExp(this.ExperienceForGuild);
-             } */
+
+            if (base.Character.HasGuild && this.ExperienceForGuild > 0)
+            {
+                base.Character.Guild.AddExp(Character.GuildMember, ExperienceForGuild);
+            }
         }
     }
 }

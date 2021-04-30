@@ -29,6 +29,8 @@ namespace Giny.World.Managers.Fights.Fighters
 {
     public class CharacterFighter : Fighter
     {
+        public event Action<CharacterFighter> OnCloseCombat;
+
         public Character Character
         {
             get;
@@ -262,6 +264,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 OnSpellCasted(handler);
             }
+
+            OnCloseCombat?.Invoke(this);
+
             Fight.CheckDeads();
             Fight.CheckFightEnd();
 

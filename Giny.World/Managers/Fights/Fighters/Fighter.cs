@@ -39,7 +39,15 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public const short CarriedSpellState = 8;
 
-        public event Action<Fighter> Moved;
+        public delegate void FighterEventDelegate(Fighter target);
+
+        public delegate void FighterKilledDelegate(Fighter target, Fighter source);
+
+        public event FighterEventDelegate Moved;
+
+        public event FighterEventDelegate Tackled;
+
+        public event FighterKilledDelegate Killed;
 
         public int Id
         {
@@ -253,7 +261,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-       
+
         public virtual IEnumerable<DroppedItem> RollLoot(IFightResult looter)
         {
             return new DroppedItem[0];
@@ -283,6 +291,8 @@ namespace Giny.World.Managers.Fights.Fighters
                  */
                 tackler.TriggerBuffs(TriggerType.OnTackle, null);
             }
+
+            Tackled?.Invoke(this);
         }
         private List<CellRecord> ApplyTackle(List<CellRecord> path)
         {
@@ -661,7 +671,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             return result;
         }
-        
+
         public IEnumerable<T> GetBuffs<T>() where T : Buff
         {
             return Buffs.OfType<T>();
@@ -772,7 +782,10 @@ namespace Giny.World.Managers.Fights.Fighters
             };
         }
 
-        public void BeforeTurnEnd()
+        /*
+         * Before turn end.
+         */
+        public void OnTurnEnding()
         {
             using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_END))
             {
@@ -1984,6 +1997,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual void OnDie(Fighter killedBy)
         {
+            Killed?.Invoke(this, killedBy);
             TriggerBuffs(TriggerType.OnDeath, new Death(killedBy));
         }
         public bool IsCarrying()

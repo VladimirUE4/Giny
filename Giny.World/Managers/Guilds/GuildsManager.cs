@@ -29,6 +29,49 @@ namespace Giny.World.Managers.Guilds
             get;
             set;
         }
+        public static readonly double[][] XpPerGap = new double[][]
+        {
+            new double[]
+            {
+                0.0,
+                10.0
+            },
+            new double[]
+            {
+                10.0,
+                8.0
+            },
+            new double[]
+            {
+                20.0,
+                6.0
+            },
+            new double[]
+            {
+                30.0,
+                4.0
+            },
+            new double[]
+            {
+                40.0,
+                3.0
+            },
+            new double[]
+            {
+                50.0,
+                2.0
+            },
+            new double[]
+            {
+                60.0,
+                1.5
+            },
+            new double[]
+            {
+                70.0,
+                1.0
+            }
+        };
 
         [StartupInvoke("Guilds", StartupInvokePriority.SixthPath)]
         public void Initialize()
@@ -46,6 +89,7 @@ namespace Giny.World.Managers.Guilds
             }
 
             UniqueIdProvider = new UniqueIdProvider(lastId);
+
         }
         [WIP]
         public void RemoveGuild(Guild guild)
@@ -108,7 +152,7 @@ namespace Giny.World.Managers.Guilds
         {
             Guild guild = GetGuild(character.GuildId);
 
-           
+
         }
     }
 }

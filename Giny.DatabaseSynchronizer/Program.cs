@@ -8,6 +8,7 @@ using Giny.ORM.IO;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Records;
 using Giny.World.Records.Breeds;
+using Giny.World.Records.Challenges;
 using Giny.World.Records.Characters;
 using Giny.World.Records.Effects;
 using Giny.World.Records.Items;
@@ -42,7 +43,6 @@ namespace Giny.DatabaseSynchronizer
         public static D2IFile D2IFileFR;
         public static D2IFile D2IFileEN;
 
-        [STAThread]
         static void Main(string[] args)
         {
             Logger.OnStartup();
@@ -79,6 +79,7 @@ namespace Giny.DatabaseSynchronizer
                 DatabaseManager.Instance.DropTableIfExists<SkillRecord>();
                 DatabaseManager.Instance.DropTableIfExists<MapPositionRecord>();
                 DatabaseManager.Instance.DropTableIfExists<NpcRecord>();
+                DatabaseManager.Instance.DropTableIfExists<ChallengeRecord>();
             }
 
             if (BUILD_MAPS)

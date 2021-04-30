@@ -59,6 +59,10 @@ namespace Giny.World.Managers.Experiences
             return (byte)(ExperienceRecord.GetExperiences().First(entry => entry.ExperienceGuild > experience).Level - 1);
         }
 
+        public long HighestExperienceGuild()
+        {
+            return HighestExperience.ExperienceGuild;
+        }
         public long GetJobXPForLevel(short level)
         {
             return ExperienceRecord.GetExperienceForLevel(level).ExperienceJob;

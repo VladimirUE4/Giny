@@ -50,12 +50,50 @@ namespace Giny.World.Managers.Chat
 
             client.Character.ReplyWarning(sb.ToString());
         }
+
         [ChatCommand("look", ServerRoleEnum.Administrator)]
         public static void LookCommand(WorldClient client, string lookStr)
         {
             var look = EntityLookManager.Instance.Parse(System.Web.HttpUtility.HtmlDecode(lookStr));
             client.Character.Look = look;
             client.Character.RefreshActorOnMap();
+        }
+        [ChatCommand("craft", ServerRoleEnum.Administrator)]
+        public static void CraftCommand(WorldClient client, int elementId, int skillId)
+        {
+            var elements = client.Character.Map.Elements.Where(x => x.Identifier == elementId);
+
+            if (elements.Count() == 0)
+            {
+                client.Character.ReplyWarning("Invalid element");
+                return;
+            }
+
+            var element = elements.First();
+
+            SkillTypeEnum skillType = (SkillTypeEnum)skillId;
+
+            InteractiveSkillRecord skillRecord = new InteractiveSkillRecord()
+            {
+                ActionIdentifier = GenericActionEnum.Craft,
+                Criteria = string.Empty,
+                Id = TableManager.Instance.PopId<InteractiveSkillRecord>(),
+                Identifier = element.Identifier,
+                MapId = client.Character.Map.Id,
+                Param1 = "",
+                Param2 = "",
+                SkillEnum = skillType,
+                Type = InteractiveTypeEnum.CRAFTING_TABLE,
+                Record = SkillRecord.GetSkill(skillType),
+            };
+
+            element.Skill = skillRecord;
+
+            skillRecord.AddInstantElement();
+
+            client.Character.Map.Instance.Reload();
+
+            client.Character.Reply("Craft table added on element " + element.Identifier);
         }
         [ChatCommand("sun", ServerRoleEnum.Administrator)]
         public static void AddSunCommand(WorldClient client, int elementId, int mapId, short cellId)

@@ -41,6 +41,8 @@ namespace Giny.World.Managers.Fights
 
         private UniqueIdProvider m_markIdPopper = new UniqueIdProvider(0);
 
+        public event Action<Fighter> TurnEnded;
+
         public int Id
         {
             get;
@@ -409,18 +411,18 @@ namespace Giny.World.Managers.Fights
 
             this.UpdateTimeLine();
 
+            foreach (var fighter in GetFighters())
+            {
+                fighter.OnFightStarted();
+            }
+
             this.OnFightStarted();
 
             Synchronizer = Synchronizer.RequestCheck(SynchronizerRole.StartFight, this, StartFight, LagAndStartFight, SynchronizerTimout * 1000);
 
         }
-        public void OnFightStarted()
-        {
-            foreach (var fighter in GetFighters())
-            {
-                fighter.OnFightStarted();
-            }
-        }
+        public abstract void OnFightStarted();
+
         private void StartFight()
         {
             this.StartAcknowledged = true;
@@ -581,6 +583,8 @@ namespace Giny.World.Managers.Fights
 
             Synchronizer = null;
 
+            TurnEnded?.Invoke(FighterPlaying);
+
             FighterPlaying.Stats.ResetUsedPoints();
             PassTurn();
         }
@@ -693,7 +697,7 @@ namespace Giny.World.Managers.Fights
         }
         private void OnTurnStopped()
         {
-            FighterPlaying.BeforeTurnEnd();
+            FighterPlaying.OnTurnEnding();
 
             CheckDeads();
 
@@ -948,6 +952,13 @@ namespace Giny.World.Managers.Fights
             {
                 this.Winners = this.BlueTeam;
             }
+
+            OnWinnersDetermined();
+        }
+
+        protected virtual void OnWinnersDetermined()
+        {
+
         }
 
         public virtual void EndFight()

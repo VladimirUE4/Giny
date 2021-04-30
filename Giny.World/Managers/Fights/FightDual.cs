@@ -52,5 +52,10 @@ namespace Giny.World.Managers.Fights
         {
            
         }
+
+        public override void OnFightStarted()
+        {
+           
+        }
     }
 }

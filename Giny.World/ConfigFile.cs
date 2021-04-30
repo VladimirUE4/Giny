@@ -138,7 +138,12 @@ namespace Giny.World
             set;
         } = "Wecome to <b>Giny</b> server.";
 
-        public int CraftXpRate
+        public double CraftXpRate
+        {
+            get;
+            set;
+        } = 1;
+        public double XpRate
         {
             get;
             set;

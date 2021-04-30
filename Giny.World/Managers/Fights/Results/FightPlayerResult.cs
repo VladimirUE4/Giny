@@ -1,11 +1,14 @@
 ﻿
 using Giny.Core.DesignPattern;
+using Giny.ORM;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Api;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Formulas;
+using Giny.World.Managers.Guilds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +102,7 @@ namespace Giny.World.Managers.Fights.Results
         public void AddEarnedExperience(double bonusRatio)
         {
             FightXp fightXp = FightFormulas.Instance.GetExperiencePvM(Fighter, 0, 0, 0);
+            fightXp.ApplyBonus(ConfigFile.Instance.XpRate);
             fightXp.ApplyBonus(bonusRatio);
 
             var experience = fightXp.Xp;
@@ -109,11 +113,11 @@ namespace Giny.World.Managers.Fights.Results
                 {
                     this.ExperienceData = new FightExperienceData(this.Character);
                 }
-             /*   if (this.Character.HasGuild && this.Character.GuildMember.Record.experienceGivenPercent > 0)
+                if (this.Character.HasGuild && this.Character.GuildMember.ExperienceGivenPercent > 0)
                 {
-                    int num = (int)((double)experience * ((double)this.Character.GuildMember.Record.experienceGivenPercent * 0.01));
-                    int num2 = (int)this.Character.Guild.AdjustGivenExperience(this.Character, (long)num);
-                    num2 = ((num2 > GuildProvider.MAX_XP) ? GuildProvider.MAX_XP : num2);
+                    long num = (int)(experience * (Character.GuildMember.ExperienceGivenPercent * 0.01d));
+                    long num2 = (int)this.Character.Guild.AdjustGivenExperience(this.Character, (long)num);
+                    num2 = ((num2 > ExperienceManager.Instance.HighestExperienceGuild()) ? ExperienceManager.Instance.HighestExperienceGuild() : num2);
                     experience -= num2;
                     if (num2 > 0)
                     {
@@ -121,7 +125,7 @@ namespace Giny.World.Managers.Fights.Results
                         this.ExperienceData.ExperienceForGuild += num2;
                         this.Character.Guild.Record.UpdateElement();
                     }
-                } */
+                }
 
 
                 this.ExperienceData.ShowExperienceFightDelta = true;
@@ -130,12 +134,12 @@ namespace Giny.World.Managers.Fights.Results
                 this.ExperienceData.ShowExperienceNextLevelFloor = true;
 
 
-                /*      if (this.Character.HasGuild && this.Character.GuildMember.Record.experienceGivenPercent > 0)
-                      {
-                          long num = (long)((double)experience * (1 - (double)this.Character.GuildMember.Record.experienceGivenPercent * 0.01));
-                          this.ExperienceData.ExperienceFightDelta += num;
-                      }
-                     else */
+                if (this.Character.HasGuild && this.Character.GuildMember.ExperienceGivenPercent > 0)
+                {
+                    long num = (long)(experience * (1 - this.Character.GuildMember.ExperienceGivenPercent * 0.01d));
+                    this.ExperienceData.ExperienceFightDelta += num;
+                }
+                else
                 {
                     this.ExperienceData.ExperienceFightDelta += experience;
                 }

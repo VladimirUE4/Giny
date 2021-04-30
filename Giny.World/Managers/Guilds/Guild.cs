@@ -142,6 +142,42 @@ namespace Giny.World.Managers.Guilds
             }
         }
 
+        public void AddExp(GuildMemberRecord member, long amount)
+        {
+            var level = this.Level;
+
+            Experience += amount;
+            member.GivenExperience += amount;
+            Record.UpdateElement();
+
+            if (this.Level > level)
+            {
+                this.Send(new GuildLevelUpMessage(Level));
+
+                foreach (var guildMember in OnlineMembers.Values)
+                {
+                    guildMember.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 208, Level);
+                }
+            }
+
+        }
+
+        public long AdjustGivenExperience(Character character, long delta)
+        {
+            int num = (int)(character.Level - this.Level);
+            long result;
+            for (int i = GuildsManager.XpPerGap.Length - 1; i >= 0; i--)
+            {
+                if ((double)num > GuildsManager.XpPerGap[i][0])
+                {
+                    result = (long)((double)delta * GuildsManager.XpPerGap[i][1] * 0.01);
+                    return result;
+                }
+            }
+            result = (long)((double)delta * GuildsManager.XpPerGap[0][1] * 0.01);
+            return result;
+        }
+
         /*
          * 1 meneur
          * 2 bras droit
@@ -149,7 +185,7 @@ namespace Giny.World.Managers.Guilds
         //[WIP]
         public void ChangeParameters(GuildMemberRecord member, byte experienceGivenPercent, short rank, int rights)
         {
-            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS)
+            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS && rank != 1)
             {
                 return;
             }

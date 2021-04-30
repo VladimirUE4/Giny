@@ -1,19 +1,17 @@
 ﻿using Giny.Core;
 using Giny.Core.IO;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Giny.DatabaseSynchronizer
 {
     public class ConfigFile
     {
-        public const string CONFIG_PATH = "config.json";
+        public const string ConfigPath = "config.json";
 
         public static ConfigFile Instance
         {
@@ -27,41 +25,27 @@ namespace Giny.DatabaseSynchronizer
         }
         public static void LoadConfig()
         {
-            if (!Initialize())
+            if (!Initialize() || !IsValidDofusPath(Instance.ClientPath))
             {
-                MessageBox.Show("Please select Dofus.exe file.", "Hello", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "EXE files (*.exe) | *.exe";
-
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    string path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
-
-                    if (!ConfigFile.IsValidDofusPath(path))
-                    {
-                        MessageBox.Show("This is not a correct dofus directory.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        LoadConfig();
-                    }
-                    else
-                    {
-                        CreateConfig(path);
-                    }
-                }
+                CreateConfig(string.Empty);
+                Logger.Write("Invalid Dofus path, Please modify " + ConfigPath + ".", Channels.Warning);
+                Console.ReadLine();
+                Environment.Exit(0);
             }
         }
 
         private static bool Initialize()
         {
-            if (File.Exists(CONFIG_PATH))
+            if (File.Exists(ConfigPath))
             {
                 try
                 {
-                    Instance = Json.Deserialize<ConfigFile>(File.ReadAllText(CONFIG_PATH));
+                    Instance = Json.Deserialize<ConfigFile>(File.ReadAllText(ConfigPath));
                     return true;
                 }
                 catch
                 {
-                    File.Delete(CONFIG_PATH);
+                    File.Delete(ConfigPath);
                     return false;
                 }
 
@@ -83,7 +67,7 @@ namespace Giny.DatabaseSynchronizer
         }
         public static void Save()
         {
-            File.WriteAllText(CONFIG_PATH, Json.Serialize(Instance));
+            File.WriteAllText(ConfigPath, Json.Serialize(Instance));
         }
 
         private static bool IsValidDofusPath(string path)

@@ -144,6 +144,17 @@
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOS.cs" />
     <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
+    <Compile Include="Managers\Fights\Challenges\Anchorite.cs" />
+    <Compile Include="Managers\Fights\Challenges\Challenge.cs" />
+    <Compile Include="Managers\Fights\Challenges\ChallengeResultEnum.cs" />
+    <Compile Include="Managers\Fights\Challenges\ChallengesManager.cs" />
+    <Compile Include="Managers\Fights\Challenges\DevCheat.cs" />
+    <Compile Include="Managers\Fights\Challenges\Mystical.cs" />
+    <Compile Include="Managers\Fights\Challenges\Nomadic.cs" />
+    <Compile Include="Managers\Fights\Challenges\Petulant.cs" />
+    <Compile Include="Managers\Fights\Challenges\Pusillanimous.cs" />
+    <Compile Include="Managers\Fights\Challenges\Statue.cs" />
+    <Compile Include="Managers\Fights\Challenges\Tights.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ArmorDamageReduction.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddRandModifier.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
@@ -201,6 +212,7 @@
     <Compile Include="Managers\Items\Collections\BankItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\CraftItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\TradeItemCollection.cs" />
+    <Compile Include="Records\Challenges\ChallengeRecord.cs" />
     <Compile Include="Records\Guilds\GuildEmblemRecord.cs" />
     <Compile Include="Records\Guilds\GuildMemberRecord.cs" />
     <Compile Include="Managers\Items\Collections\MerchantSellerItemCollection.cs" />
