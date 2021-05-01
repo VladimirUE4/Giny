@@ -1,4 +1,5 @@
 ﻿using Giny.IO.D2O;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -40,8 +41,6 @@ namespace Giny.D2O
             {
                 D2OManager.Initialize(dialog.SelectedPath);
             }
-
-
 
             foreach (var filename in D2OManager.GetFilenames())
             {

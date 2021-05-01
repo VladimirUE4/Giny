@@ -23,6 +23,12 @@ namespace Giny.Items
         public MainWindow()
         {
             InitializeComponent();
+            this.Content = new Loader(this);
+        }
+
+        public void OnLoadingEnd()
+        {
+            this.Content = new Editor();
         }
     }
 }

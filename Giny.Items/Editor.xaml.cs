@@ -1,0 +1,185 @@
+﻿using Giny.IO.D2O;
+using Giny.IO.D2OClasses;
+using Giny.ORM;
+using Giny.Protocol.Enums;
+using Giny.World.Managers.Effects;
+using Giny.World.Records.Items;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Giny.Items
+{
+    /// <summary>
+    /// Logique d'interaction pour Editor.xaml
+    /// </summary>
+    public partial class Editor : UserControl
+    {
+        private ItemRecord CurrentItem => itemList.SelectedItem as ItemRecord;
+
+        private EffectDice CurrentEffect => effects.SelectedItem as EffectDice;
+
+        public Editor()
+        {
+            InitializeComponent();
+            DisplayItems();
+            DisplayNewEffects();
+
+        }
+
+        private void DisplayNewEffects()
+        {
+            newEffect.Items.Clear();
+
+            var values = Enum.GetValues(typeof(EffectsEnum)).OfType<object>().Where(x => x.ToString().ToLower().Contains(newEffectSearch.Text.ToLower()));
+
+            foreach (var value in values)
+            {
+                newEffect.Items.Add(value);
+            }
+        }
+        private void DisplayItems()
+        {
+            string searchText = search.Text;
+
+            itemList.Items.Clear();
+
+            foreach (var item in ItemRecord.GetItems().Where(x => x.Name.ToLower().Contains(searchText.ToLower()) || x.Id.ToString() == searchText))
+            {
+                itemList.Items.Add(item);
+            }
+        }
+
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayItems();
+        }
+
+        private void itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayCurrentItem();
+        }
+        private void DisplayCurrentItem()
+        {
+            if (CurrentItem == null)
+            {
+                return;
+            }
+
+            id.Content = CurrentItem.Id;
+            name.Text = CurrentItem.Name;
+            level.Content = CurrentItem.Level;
+            price.Text = CurrentItem.Price.ToString();
+            type.Content = CurrentItem.TypeEnum;
+
+            effects.Items.Clear();
+
+            foreach (var effect in CurrentItem.Effects)
+            {
+                effects.Items.Add(effect);
+            }
+        }
+
+        private void effects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CurrentEffect != null)
+            {
+                min.Text = CurrentEffect.Min.ToString();
+                max.Text = CurrentEffect.Max.ToString();
+                value.Text = CurrentEffect.Value.ToString();
+            }
+        }
+
+        private void newEffectSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayNewEffects();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentItem.Effects.Clear();
+            DisplayCurrentItem();
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void price_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CurrentItem.Price = double.Parse(price.Text);
+            CurrentItem.UpdateInstantElement();
+        }
+
+        private void name_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Item item = D2OManager.GetObject<Item>("Items.d2o", (int)CurrentItem.Id);
+                Loader.D2IFile.SetText((int)item.NameId, name.Text);
+                Loader.D2IFile.Save();
+                CurrentItem.Name = name.Text;
+                CurrentItem.UpdateInstantElement();
+            }
+            catch
+            {
+                MessageBox.Show("Unable to update item name. Please d2i file might not be available.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+        }
+
+        private void RemoveEffectClick(object sender, RoutedEventArgs e)
+        {
+            CurrentItem.Effects.Remove(CurrentEffect);
+            CurrentItem.UpdateInstantElement();
+
+            DisplayCurrentItem();
+        }
+
+        private void min_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CurrentEffect.Min = int.Parse(min.Text);
+            CurrentItem.UpdateInstantElement();
+        }
+
+        private void max_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CurrentEffect.Max = int.Parse(max.Text);
+            CurrentItem.UpdateInstantElement();
+        }
+
+        private void value_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CurrentEffect.Value = int.Parse(value.Text);
+            CurrentItem.UpdateInstantElement();
+        }
+
+        private void AddEffectClick(object sender, RoutedEventArgs e)
+        {
+            EffectDice effect = new EffectDice((EffectsEnum)newEffect.SelectedItem, int.Parse(newMin.Text),
+                int.Parse(newMax.Text), int.Parse(newValue.Text));
+
+            CurrentItem.Effects.Add(effect);
+
+            CurrentItem.UpdateInstantElement();
+            DisplayCurrentItem();
+        }
+
+
+    }
+}

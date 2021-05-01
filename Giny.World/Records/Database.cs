@@ -26,6 +26,8 @@ namespace Giny.World.Records
 
             DatabaseManager.Instance.LoadTables();
 
+            DatabaseManager.Instance.OnLoadProgress -= OnLoadProgress;
+            m_logger = null;
         }
 
         private void OnStartLoad(Type type, string tableName)

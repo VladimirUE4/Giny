@@ -648,6 +648,10 @@ namespace Giny.World.Managers.Entities.Characters
         {
             this.OpenDialog(new ZaapDialog(this, element));
         }
+        public void OpenBookDialog(int documentId)
+        {
+            this.OpenDialog(new BookDialog(this, documentId));
+        }
         public void OpenGuildCreationDialog()
         {
             this.OpenDialog(new GuildCreationDialog(this));
@@ -1653,6 +1657,8 @@ namespace Giny.World.Managers.Entities.Characters
                 DisplayNotificationError("Objective (" + id + ") already reached, skipping.");
             }
         }
+
+
     }
 
 }

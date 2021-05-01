@@ -92,7 +92,7 @@ namespace Giny.World
         }
 
         [ConsoleCommand("npcs")]
-        public static void UpdateNpcsCommand()
+        public static void ReloadNpcsCommand()
         {
             DatabaseManager.Instance.Reload<NpcSpawnRecord>();
             DatabaseManager.Instance.Reload<NpcReplyRecord>();
@@ -112,6 +112,17 @@ namespace Giny.World
             NpcsManager.Instance.SpawnNpcs();
 
             Logger.Write("Npc Reloaded.", Channels.Log);
+        }
+        [ConsoleCommand("items")]
+        public static void ReloadItemsCommand()
+        {
+            DatabaseManager.Instance.Reload<ItemRecord>();
+            DatabaseManager.Instance.Reload<WeaponRecord>();
+
+            WeaponRecord.Initialize();
+            ItemRecord.Initialize();
+
+            Logger.Write("Items Reloaded.", Channels.Log);
         }
 
 

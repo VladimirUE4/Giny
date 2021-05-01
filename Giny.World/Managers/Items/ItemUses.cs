@@ -13,6 +13,12 @@ namespace Giny.World.Managers.Items
 {
     class ItemUses
     {
+        [ItemUsageHandler(EffectsEnum.Effect_ConsultDocument)]
+        public static bool ConsultDocument(Character character, EffectInteger effect)
+        {
+            character.OpenBookDialog(effect.Value);
+            return false;
+        }
         [ItemUsageHandler(EffectsEnum.Effect_TeleportToSavePoint)]
         public static bool TeleportSavePoint(Character character, EffectInteger effect)
         {

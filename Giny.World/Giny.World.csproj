@@ -121,6 +121,7 @@
     <Compile Include="Managers\Criterias\SubscribedCriteria.cs" />
     <Compile Include="Managers\Criterias\VitalityCriteria.cs" />
     <Compile Include="Managers\Criterias\WisdomCriteria.cs" />
+    <Compile Include="Managers\Dialogs\BookDialog.cs" />
     <Compile Include="Managers\Dialogs\GuildCreationDialog.cs" />
     <Compile Include="Managers\Dialogs\DialogBox\GuildInvitationRequest.cs" />
     <Compile Include="Managers\Effects\EffectCollection.cs" />

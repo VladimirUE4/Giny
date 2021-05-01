@@ -73,6 +73,7 @@ namespace Giny.World.Records.Items
             set;
         }
 
+        [Update]
         [D2OField("price")]
         public double Price
         {
@@ -130,6 +131,7 @@ namespace Giny.World.Records.Items
             get;
             set;
         }
+        [Update]
         [ProtoSerialize]
         [D2OField("possibleEffects")]
         public EffectCollection Effects

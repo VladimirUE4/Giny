@@ -1035,7 +1035,7 @@
         /// <summary>
         /// Consulter #3
         /// </summary>
-        Effect_620 = 620,
+        Effect_ConsultDocument = 620,
         /// <summary>
         /// Invoque : #3 (grade #1)
         /// </summary>

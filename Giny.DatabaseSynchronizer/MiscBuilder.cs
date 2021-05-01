@@ -15,8 +15,10 @@ namespace Giny.DatabaseSynchronizer
     {
         public static void Build(List<D2OReader> readers)
         {
-            BuildOptionalFeatures(readers);
+            BuildItemTypes(readers);
+
             return;
+            BuildOptionalFeatures(readers);
 
             BuildTextInformations(readers);
 
@@ -25,7 +27,6 @@ namespace Giny.DatabaseSynchronizer
             BuildJobType(readers);
             BuildSkillsType(readers);
             BuildInteractiveTypes(readers);
-            BuildItemTypes(readers);
             BuildMonsterRaces(readers);
             BuildNpcActions(readers);
             BuildNpcsDialogs(readers);

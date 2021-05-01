@@ -1,4 +1,5 @@
-﻿using Giny.Core.Extensions;
+﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.IO;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Giny.IO.D2I
     /// <summary>
     /// Dofus Language File *.d2i
     /// </summary>
+    [WIP("make an D2IManager (as D2O) for tools.")]
     public class D2IFile
     {
         private readonly Dictionary<int, D2IEntry<int>> m_entries = new Dictionary<int, D2IEntry<int>>();

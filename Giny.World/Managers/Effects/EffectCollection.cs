@@ -114,6 +114,10 @@ namespace Giny.World.Managers.Effects
         {
             Effects.Clear();
         }
+        public void Remove(Effect effect)
+        {
+            Effects.Remove(effect);
+        }
         public void RemoveAll(EffectsEnum effectsEnum)
         {
             Effects.RemoveAll(x => x.EffectEnum == effectsEnum);

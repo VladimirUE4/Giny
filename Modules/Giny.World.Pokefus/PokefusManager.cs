@@ -44,7 +44,7 @@ namespace Giny.Pokefus
         private const string UndroppableMessage = "Le monstre {0} n'a pas d'âme ...Il est impossible de drop son pokéfus !";
 
         private static short[] ForbiddenMonsters = new short[]
-       {
+        {
             232,233,494, 1003,216, 3578, 4275, 113, 4362, 4363, 4364, 499, 2819, 3138, 588, 4373,
             424,2954,3141,1181,3760,939,4619,116, 158, 216, 229,250,384,387, 424,499,557,558,559,
             3142,560, 654, 667,670,676,682,802, 831,872,890, 1027,1088,1094, 1140, 1145,1169,
@@ -58,7 +58,7 @@ namespace Giny.Pokefus
             4364,4442,4451,4456, 4487,4499, 4505,4512, 4523,4552,4559, 4597, 4619,4662,4677,4684,
             4685, 4695,4710,2793, 1044,4139,422,3543,1145,1169, 407,839,2636,1184,1185,1186,1188,1187,
             4460,1070,2570,666,3590,3592,3589,3591,3588,3234,1072,1085,1086,1087,4359,1050,3803,3561
-       };
+        };
 
         public void Initialize()
         {
@@ -104,7 +104,6 @@ namespace Giny.Pokefus
                     {
                         droppers.Add(dropRate, new List<MonsterFighter>() { monster });
                     }
-
 
 
                     if (!(dropRate >= chance))
@@ -159,35 +158,35 @@ namespace Giny.Pokefus
         }
         private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
         {
-            double probability = 0.02d;
+            const double ProspectingCoeff = 2.0d;
+
+            double dropRate = 0.025d;
 
             if (monster.Level >= 50)
             {
-                probability = 0.018;
+                dropRate = 0.020;
             }
-            if (monster.Level >= 100)
+            else if (monster.Level >= 100)
             {
-                probability = 0.015;
+                dropRate = 0.018;
             }
-            if (monster.Level >= 150)
+            else if (monster.Level >= 150)
             {
-                probability = 0.010;
+                dropRate = 0.015;
             }
-            if (monster.Level >= 200)
+            else if (monster.Level >= 200)
             {
-                probability = 0.008;
+                dropRate = 0.010;
             }
+
             if (monster.Record.IsBoss)
             {
-                probability = 0.001;
+                dropRate = 0.001;
             }
 
-            probability += (fighter.Level / 200d) / 100d;
+            dropRate = dropRate + (dropRate * ((fighter.Stats.Prospecting.TotalInContext() / 500d) * ProspectingCoeff));
 
-            probability += (fighter.Stats.Prospecting.TotalInContext() / 7000d);
-
-            var percentage = Math.Round(probability * 100d, 2);
-
+            var percentage = Math.Round(dropRate * 100d, 2);
 
             return percentage;
         }
