@@ -516,7 +516,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio
-/Dofus
+/Sufokia
 /Utils
 /RawPatch/apache-flex-sdk-4.16.1-bin
 /SQL

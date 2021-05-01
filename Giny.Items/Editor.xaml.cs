@@ -153,20 +153,29 @@ namespace Giny.Items
 
         private void min_LostFocus(object sender, RoutedEventArgs e)
         {
-            CurrentEffect.Min = int.Parse(min.Text);
-            CurrentItem.UpdateInstantElement();
+            if (min.Text != string.Empty)
+            {
+                CurrentEffect.Min = int.Parse(min.Text);
+                CurrentItem.UpdateInstantElement();
+            }
         }
 
         private void max_LostFocus(object sender, RoutedEventArgs e)
         {
-            CurrentEffect.Max = int.Parse(max.Text);
-            CurrentItem.UpdateInstantElement();
+            if (max.Text != string.Empty)
+            {
+                CurrentEffect.Max = int.Parse(max.Text);
+                CurrentItem.UpdateInstantElement();
+            }
         }
 
         private void value_LostFocus(object sender, RoutedEventArgs e)
         {
-            CurrentEffect.Value = int.Parse(value.Text);
-            CurrentItem.UpdateInstantElement();
+            if (value.Text != string.Empty)
+            {
+                CurrentEffect.Value = int.Parse(value.Text);
+                CurrentItem.UpdateInstantElement();
+            }
         }
 
         private void AddEffectClick(object sender, RoutedEventArgs e)
