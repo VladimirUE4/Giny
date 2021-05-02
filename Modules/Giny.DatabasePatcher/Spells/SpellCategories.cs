@@ -33,6 +33,18 @@ namespace Giny.DatabasePatcher.Spells
             EffectsEnum.Effect_PushBack,
             EffectsEnum.Effect_PullForward,
         };
+        private static readonly EffectsEnum[] DebuffEffects = new EffectsEnum[]
+        {
+            EffectsEnum.Effect_SubAP,
+            EffectsEnum.Effect_SubMP,
+            EffectsEnum.Effect_RemoveAP,
+            EffectsEnum.Effect_StealAP_440,
+            EffectsEnum.Effect_StealAP_84,
+            EffectsEnum.Effect_LostAP,
+            EffectsEnum.Effect_LostMP,
+            EffectsEnum.Effect_SubRange,
+            EffectsEnum.Effect_SubRange_135,
+        };
         private static readonly EffectsEnum[] HealingEffects = new EffectsEnum[]
         {
             EffectsEnum.Effect_HealHP_108,
@@ -84,13 +96,17 @@ namespace Giny.DatabasePatcher.Spells
 
             SpellLevelRecord level = record.Levels.LastOrDefault();
 
-            if (level.Effects.Any(x => SummonEffects.Contains(x.EffectEnum)))
-            {
-                category |= SpellCategoryEnum.Summon;
-            }
             if (level.Effects.Any(x => DamageEffects.Contains(x.EffectEnum)))
             {
                 category = SpellCategoryEnum.Damages;
+            }
+            if (level.Effects.Any(x => DebuffEffects.Contains(x.EffectEnum)))
+            {
+                category |= SpellCategoryEnum.Debuff;
+            }
+            if (level.Effects.Any(x => SummonEffects.Contains(x.EffectEnum)))
+            {
+                category |= SpellCategoryEnum.Summon;
             }
             if (level.Effects.Any(x => HealingEffects.Contains(x.EffectEnum)))
             {
@@ -112,7 +128,7 @@ namespace Giny.DatabasePatcher.Spells
             record.Category = category;
 
             record.UpdateInstantElement();
-             
+
         }
     }
 }

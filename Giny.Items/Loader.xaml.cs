@@ -38,11 +38,11 @@ namespace Giny.Items
         {
             InitializeComponent();
 
-            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "127.0.0.1",
-         "giny_world", "root", "");
+            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "5.206.224.144",
+         "giny_world", "root", "overflow35");
 
-            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Dofus\data\common");
-            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Dofus\data\i18n\i18n_fr.d2i");
+            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Sufokia\app\data\common");
+            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Sufokia\app\data\i18n\i18n_fr.d2i");
 
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
@@ -51,8 +51,8 @@ namespace Giny.Items
             {
                 AssemblyCore.OnAssembliesLoaded();
 
-              //  DatabaseManager.Instance.LoadTable<WeaponRecord>();
-               DatabaseManager.Instance.LoadTable<ItemRecord>();
+                DatabaseManager.Instance.LoadTable<WeaponRecord>();
+                DatabaseManager.Instance.LoadTable<ItemRecord>();
                 WeaponRecord.Initialize();
                 ItemRecord.Initialize();
 

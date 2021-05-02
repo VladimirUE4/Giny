@@ -29,7 +29,7 @@ namespace Giny.World.Managers.Fights.AI
             {
                 return;
             }
-            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Damages).Shuffle())
+            foreach (var spellRecord in GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Damages) || x.Category.HasFlag(SpellCategoryEnum.Debuff)).Shuffle())
             {
                 if (spellRecord.Levels.All(x => x.MaxRange == 0))
                 {

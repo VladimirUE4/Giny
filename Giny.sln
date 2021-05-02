@@ -55,6 +55,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sufokia", "Sufokia", "{9C86
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sufokia.Uplauncher", "Sufokia.Uplauncher\Sufokia.Uplauncher.csproj", "{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giny.DofusDrop", "Giny.DofusDrop\Giny.DofusDrop.csproj", "{60E6FC80-B125-4689-A64B-755588388904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -341,6 +343,18 @@ Global
 		{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E}.Release|x64.Build.0 = Release|Any CPU
 		{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E}.Release|x86.Build.0 = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|x64.Build.0 = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Debug|x86.Build.0 = Debug|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|x64.ActiveCfg = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|x64.Build.0 = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|x86.ActiveCfg = Release|Any CPU
+		{60E6FC80-B125-4689-A64B-755588388904}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -362,6 +376,7 @@ Global
 		{2C244C11-C940-4A21-BAEF-7D1E18DFF67D} = {909624E2-792C-45C4-8F19-FE59CADC046C}
 		{9707A262-50B0-4CE6-B52A-227C295B503F} = {909624E2-792C-45C4-8F19-FE59CADC046C}
 		{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E} = {9C86A469-13C3-4ACA-BA96-40DCD91CA939}
+		{60E6FC80-B125-4689-A64B-755588388904} = {A1439FB4-D95D-4A82-A66F-B2AE4B15967D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD6F6787-85F3-4C2B-952E-76A16DC27297}

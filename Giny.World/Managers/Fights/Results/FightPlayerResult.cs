@@ -94,7 +94,7 @@ namespace Giny.World.Managers.Fights.Results
                 this.PvpData.Apply();
             }
 
-            FightApi.PlayerResultApplied(this);
+            FightEventApi.PlayerResultApplied(this);
 
             this.Character.RefreshStats();
         }

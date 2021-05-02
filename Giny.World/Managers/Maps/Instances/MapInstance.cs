@@ -315,6 +315,7 @@ namespace Giny.World.Managers.Maps.Instances
                 character.Client.Send(message);
             }
         }
+        
         public void ToggleMute()
         {
             Mute = !Mute;
@@ -327,7 +328,10 @@ namespace Giny.World.Managers.Maps.Instances
         {
             return m_elements.OfType<T>();
         }
-
+        protected FightStartingPositions GetFightStartingPositions()
+        {
+            return new FightStartingPositions(Record.RedCells.Select(x => x.Id).ToArray(), Record.BlueCells.Select(x => x.Id).ToArray());
+        }
         protected InteractiveElement[] GetInteractiveElements(Character character)
         {
             return GetElements<MapInteractiveElement>().Select(x => x.GetInteractiveElement(character)).ToArray(); // todo create mapinteractiveelement and mapstatedelement

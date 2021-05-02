@@ -23,16 +23,17 @@ namespace Giny.Pokefus
 
         public void CreateHooks()
         {
-            FightApi.OnPlayerResultApplied += PokefusManager.Instance.OnPlayerResultApplied; 
-            CharacterApi.OnHumanOptionsCreated += PokefusManager.Instance.OnHumanOptionsCreated;
-            FightApi.OnFighterJoined += PokefusManager.Instance.OnFighterJoined;
+            FightEventApi.OnPlayerResultApplied += PokefusManager.Instance.OnPlayerResultApplied;
+            CharacterEventApi.OnHumanOptionsCreated += PokefusManager.Instance.OnHumanOptionsCreated;
+            FightEventApi.OnFighterJoined += PokefusManager.Instance.OnFighterJoined;
+            InventoryEventApi.CanEquipItem += PokefusManager.Instance.CanEquipItem;
         }
 
         public void DestroyHooks()
         {
-            FightApi.OnPlayerResultApplied -= PokefusManager.Instance.OnPlayerResultApplied;
-            CharacterApi.OnHumanOptionsCreated -= PokefusManager.Instance.OnHumanOptionsCreated;
-            FightApi.OnFighterJoined -= PokefusManager.Instance.OnFighterJoined;
+            FightEventApi.OnPlayerResultApplied -= PokefusManager.Instance.OnPlayerResultApplied;
+            CharacterEventApi.OnHumanOptionsCreated -= PokefusManager.Instance.OnHumanOptionsCreated;
+            FightEventApi.OnFighterJoined -= PokefusManager.Instance.OnFighterJoined;
         }
 
     }

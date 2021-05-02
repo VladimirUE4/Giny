@@ -337,7 +337,7 @@ namespace Giny.World.Managers.Fights
                 this.Send(new IdolFightPreparationUpdateMessage(0, GetIdols()));
             }
 
-            FightApi.PlacementStarted(this);
+            FightEventApi.PlacementStarted(this);
 
         }
         private void ShowBladesOnMap()

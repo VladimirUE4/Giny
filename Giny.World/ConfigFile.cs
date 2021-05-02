@@ -118,7 +118,7 @@ namespace Giny.World
         {
             get;
             set;
-        } = 100;
+        } = 1;
 
         public short StartAp
         {
@@ -148,6 +148,12 @@ namespace Giny.World
             get;
             set;
         } = 1;
+
+        public bool LogProtocol
+        {
+            get;
+            set;
+        } = true;
 
         [StartupInvoke("Config", StartupInvokePriority.Initial)]
         public static void Initialize()

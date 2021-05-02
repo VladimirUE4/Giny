@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Breeds
         private readonly static PlayableBreedEnum[] AvailableBreeds = new PlayableBreedEnum[]
         {
                 PlayableBreedEnum.Feca,
-                PlayableBreedEnum.Osamodas,
+               //  PlayableBreedEnum.Osamodas,
                 PlayableBreedEnum.Enutrof,
                 PlayableBreedEnum.Sram,
                 PlayableBreedEnum.Xelor,
@@ -34,11 +34,11 @@ namespace Giny.World.Managers.Breeds
                 PlayableBreedEnum.Cra,
                 PlayableBreedEnum.Sadida,
                 PlayableBreedEnum.Sacrieur,
-                PlayableBreedEnum.Pandawa,
-                PlayableBreedEnum.Roublard,
+               //  PlayableBreedEnum.Pandawa,
+               //  PlayableBreedEnum.Roublard,
                 PlayableBreedEnum.Zobal,
-                PlayableBreedEnum.Steamer,
-                PlayableBreedEnum.Eliotrope,
+               //  PlayableBreedEnum.Steamer,
+              //  PlayableBreedEnum.Eliotrope,
                 PlayableBreedEnum.Huppermage,
                 PlayableBreedEnum.Ouginak,
         };

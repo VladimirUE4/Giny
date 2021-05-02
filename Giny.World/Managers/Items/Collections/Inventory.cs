@@ -151,8 +151,8 @@ namespace Giny.World.Managers.Items.Collections
             Character.Client.Send(new ObjectAddedMessage(item.GetObjectItem(), 0)); // 0??????
             RefreshWeight();
         }
-        
-        
+
+
         public void UnequipAll()
         {
             foreach (var item in GetEquipedItems())
@@ -510,6 +510,10 @@ namespace Giny.World.Managers.Items.Collections
                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
                         return;
                     }
+                    if (!InventoryEventApi.OnItemEquipping(Character, item))
+                    {
+                        return;
+                    }
 
                     if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT)
                     {
@@ -707,7 +711,7 @@ namespace Giny.World.Managers.Items.Collections
         {
             Character.Client.Send(new ObjectMovementMessage(item.UId, (byte)newPosition));
         }
-        
+
         /*  public void DropItem(uint uid, uint quantity)
           {
 

@@ -755,7 +755,7 @@ namespace Giny.World.Managers.Fights.Fighters
             this.Fight.UpdateEntitiesPositions();
             Fight.UpdateTeams();
 
-            FightApi.FighterJoined(this);
+            FightEventApi.FighterJoined(this);
         }
         public void ShowFighter()
         {

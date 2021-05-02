@@ -81,13 +81,16 @@ namespace Giny.World.Network
         }
         public override void OnMessageReceived(NetworkMessage message)
         {
-            Logger.Write("(World) Received " + message, Channels.Info);
+            if (ConfigFile.Instance.LogProtocol)
+                Logger.Write("(World) Received " + message, Channels.Info);
+
             ProtocolMessageManager.HandleMessage(message, this);
         }
 
         public override void OnSended(IAsyncResult result)
         {
-            Logger.Write("(World) Send " + result.AsyncState);
+            if (ConfigFile.Instance.LogProtocol)
+                Logger.Write("(World) Send " + result.AsyncState);
         }
 
         public void SendCharactersList()
@@ -111,7 +114,7 @@ namespace Giny.World.Network
         {
             DisposeWorldClient();
             Logger.Write("(World) Client disconnected.");
-            WorldServer.Instance.RemoveClient(this);
+            WorldServer.Instance.Clients.Remove(this);
         }
 
         private void DisposeWorldClient()

@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Maps.Instances
         {
             return new MapComplementaryInformationsDataMessage(character.Map.SubareaId, Record.Id, GetHousesInformations(), GetGameRolePlayActorsInformations(),
               GetInteractiveElements(character), GetStatedElements(), GetMapObstacles(), GetFightsCommonInformations(), HasAgressiveMonsters(),
-              new Protocol.Types.FightStartingPositions(character.Map.RedCells.Select(x => x.Id).ToArray(), character.Map.BlueCells.Select(x => x.Id).ToArray()));
+              GetFightStartingPositions());
         }
 
 

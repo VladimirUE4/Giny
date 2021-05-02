@@ -39,6 +39,10 @@ namespace Giny.World.Managers.Fights.AI
         {
             return Fighter.GetSpells().Where(x => x.Category.HasFlag(category));
         }
+        protected IEnumerable<SpellRecord> GetSpells()
+        {
+            return Fighter.GetSpells();
+        }
 
         protected MapPoint GetTargetPoint(short spellId, Func<MapPoint, bool> predicate)
         {

@@ -19,6 +19,8 @@ namespace Giny.World.Records.Items
     [Table("items")]
     public class ItemRecord : ITable
     {
+        private const int MinimumItemPrice = 1;
+
         [Container]
         private static readonly ConcurrentDictionary<long, ItemRecord> Items = new ConcurrentDictionary<long, ItemRecord>();
 
@@ -183,6 +185,11 @@ namespace Giny.World.Records.Items
                 if (item.HasSet)
                 {
                     item.ItemSet = ItemSetRecord.GetItemSet(item.ItemSetId);
+                }
+
+                if (item.Price <= 0)
+                {
+                    item.Price = MinimumItemPrice;
                 }
             }
         }

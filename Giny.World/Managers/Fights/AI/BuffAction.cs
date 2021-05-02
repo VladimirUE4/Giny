@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Fights.AI
 
         public override void Execute()
         {
-            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Buff)))
+            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Buff) && !x.Category.HasFlag(SpellCategoryEnum.Debuff) && !x.Category.HasFlag(SpellCategoryEnum.Damages)))
             {
                 foreach (var ally in Fighter.Team.GetFighters<Fighter>().ToArray())
                 {

@@ -19,7 +19,7 @@ namespace Giny.World.Web
             set;
         }
 
-        [StartupInvoke("Web Api", StartupInvokePriority.Last)]
+        [StartupInvoke("Web Api", StartupInvokePriority.Last)] 
         public void Start()
         {
             this.WebServer = WebApp.Start<Startup>(Address);

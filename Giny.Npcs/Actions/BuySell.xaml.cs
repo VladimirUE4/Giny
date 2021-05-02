@@ -26,6 +26,11 @@ namespace Giny.Npcs
     /// </summary>
     public partial class BuySell : UserControl
     {
+        private List<ExchangeItem> SellItems
+        {
+            get;
+            set;
+        }
         private NpcActionRecord Action
         {
             get;
@@ -37,6 +42,7 @@ namespace Giny.Npcs
             this.Action = action;
 
             InitializeComponent();
+            LoadExchangeItems();
             DisplayItems();
 
             foreach (var itemType in Enum.GetValues(typeof(ItemTypeEnum)))
@@ -46,9 +52,9 @@ namespace Giny.Npcs
 
         }
 
-        private void DisplayItems()
+        private void LoadExchangeItems()
         {
-            items.Items.Clear();
+            this.SellItems = new List<ExchangeItem>();
 
             if (Action.Param1 != string.Empty)
             {
@@ -58,7 +64,22 @@ namespace Giny.Npcs
 
                     Item item = D2OManager.GetObject<Item>("Items.d2o", itemId);
                     string name = Loader.D2IFile.GetText((int)item.NameId);
-                    items.Items.Add(new ExchangeItem(itemId, name));
+
+                    var exchangeItem = new ExchangeItem(itemId, name);
+
+                    SellItems.Add(exchangeItem);
+                }
+            }
+        }
+        private void DisplayItems()
+        {
+            items.Items.Clear();
+
+            foreach (var item in SellItems)
+            {
+                if (item.Name.ToLower().Contains(searchItem.Text.ToLower()))
+                {
+                    items.Items.Add(item);
                 }
             }
 
@@ -92,11 +113,11 @@ namespace Giny.Npcs
 
             int index = 0;
 
-            foreach (ExchangeItem item in items.Items)
+            foreach (ExchangeItem item in SellItems)
             {
                 sb.Append(item.Id);
 
-                if (index != items.Items.Count - 1)
+                if (index != SellItems.Count - 1)
                 {
                     sb.Append(",");
                 }
@@ -111,9 +132,11 @@ namespace Giny.Npcs
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var item = (ExchangeItem)items.SelectedItem;
-            items.Items.Remove(item);
+            SellItems.Remove(item);
 
             UpdateItems();
+
+            DisplayItems();
 
         }
 
@@ -127,9 +150,11 @@ namespace Giny.Npcs
                 var text = Loader.D2IFile.GetText((int)item.NameId);
 
                 ExchangeItem eitem = new ExchangeItem(item.id, text);
-                items.Items.Add(eitem);
+                SellItems.Add(eitem);
 
                 UpdateItems();
+
+                DisplayItems();
 
             }
         }
@@ -157,16 +182,22 @@ namespace Giny.Npcs
             {
                 var text = Loader.D2IFile.GetText((int)d2oItem.NameId);
                 ExchangeItem eitem = new ExchangeItem(d2oItem.id, text);
-                items.Items.Add(eitem);
+                SellItems.Add(eitem);
             }
 
             UpdateItems();
+
+            DisplayItems();
+
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            items.Items.Clear();
+            SellItems.Clear();
+
             UpdateItems();
+            DisplayItems();
+
         }
 
         private void tokenId_TextChanged(object sender, TextChangedEventArgs e)
@@ -174,10 +205,15 @@ namespace Giny.Npcs
             Action.Param2 = tokenId.Text;
             Action.UpdateInstantElement();
         }
+
+        private void searchItem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayItems();
+        }
     }
     public class ExchangeItem
     {
-        private string Name
+        public string Name
         {
             get;
             set;

@@ -37,6 +37,8 @@ namespace Giny.Pokefus
 
         public const short MaxPokefusLevel = 200;
 
+        private const string PokefusLevelRequirementMessage = "Vous devez être niveau {0} pour pouvoir équiper ce pokéfus.";
+
         private const string PokefusLevelUpMessage = "Felicitation ! Votre Pokefus {0} passe niveau {1}";
 
         private const string DropInfoMessage = "Chance de drop pour {0} : <b>{1}</b> %";
@@ -57,7 +59,8 @@ namespace Giny.Pokefus
             4074, 4126,4164,4172,4216,4226,4228,4235,4245,4256,4270,4298,4299,4331,4332,4362,4363,
             4364,4442,4451,4456, 4487,4499, 4505,4512, 4523,4552,4559, 4597, 4619,4662,4677,4684,
             4685, 4695,4710,2793, 1044,4139,422,3543,1145,1169, 407,839,2636,1184,1185,1186,1188,1187,
-            4460,1070,2570,666,3590,3592,3589,3591,3588,3234,1072,1085,1086,1087,4359,1050,3803,3561
+            4460,1070,2570,666,3590,3592,3589,3591,3588,3234,1072,1085,1086,1087,4359,1050,3803,3561,
+            783
         };
 
         public void Initialize()
@@ -129,7 +132,7 @@ namespace Giny.Pokefus
         {
             var items = result.Character.Inventory.GetEquipedItems().Where(x => x.Effects.Exists<EffectPokefus>());
 
-            if (items.Count() == 0)
+            if (items.Count() == 0 || result.ExperienceData == null)
             {
                 return;
             }
@@ -245,7 +248,31 @@ namespace Giny.Pokefus
 
             return item;
         }
+        public bool CanEquipItem(Character character, CharacterItemRecord item)
+        {
+            EffectPokefus effect = item.Effects.Get<EffectPokefus>();
 
+            if (effect != null)
+            {
+                var monsterGrade = MonsterRecord.GetMonsterRecord(effect.MonsterId).GetGrade(effect.GradeId);
+
+                short required = monsterGrade.Level;
+
+                if (required > 200)
+                {
+                    required = 200;
+                }
+
+                if (required > character.Level)
+                {
+                    character.Reply(string.Format(PokefusLevelRequirementMessage, required));
+                    return false;
+                }
+
+                return true;
+            }
+            return true;
+        }
 
     }
 }

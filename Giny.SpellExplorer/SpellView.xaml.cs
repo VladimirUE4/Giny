@@ -151,7 +151,16 @@ namespace Giny.SpellExplorer
             }
             if (effect.EffectEnum == EffectsEnum.Effect_RemoveSpellEffects)
             {
-                effectInfo.Items.Add("Dispelled Spell : " + SpellRecord.GetSpellRecord((short)effect.Value).Name);
+                var spell = SpellRecord.GetSpellRecord((short)effect.Value);
+
+                if (spell != null)
+                {
+                    effectInfo.Items.Add("Dispelled Spell : " + spell.Name);
+                }
+                else
+                {
+                    effectInfo.Items.Add("Dispelled Spell : Not found");
+                }
             }
 
         }

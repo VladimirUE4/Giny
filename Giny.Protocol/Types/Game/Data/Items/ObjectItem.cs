@@ -76,6 +76,9 @@ namespace Giny.Protocol.Types
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
+
+            effects = new ObjectEffect[_effectsLen];
+
             for (uint _i3 = 0;_i3 < _effectsLen;_i3++)
             {
                 _id3 = (uint)reader.ReadUShort();

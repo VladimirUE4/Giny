@@ -50,7 +50,13 @@ namespace Giny.World.Managers.Chat
 
             client.Character.ReplyWarning(sb.ToString());
         }
-
+        [ChatCommand("infos", ServerRoleEnum.Administrator)]
+        public static void InfosCommand(WorldClient client)
+        {
+            client.Character.Reply("Connected : " + WorldServer.Instance.Clients.Count);
+            client.Character.Reply("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
+            client.Character.Reply("Max Connected : " + WorldServer.Instance.MaximumClients);
+        }
         [ChatCommand("look", ServerRoleEnum.Administrator)]
         public static void LookCommand(WorldClient client, string lookStr)
         {
@@ -258,7 +264,7 @@ namespace Giny.World.Managers.Chat
 
             client.Character.Reply("Zaapi added.");
         }
-        [ChatCommand("nocollide", ServerRoleEnum.GamemasterPadawan)]
+        [ChatCommand("nocollide", ServerRoleEnum.Administrator)]
         public static void NoCollideCommand(WorldClient client)
         {
             List<MapObstacle> obstacles = new List<MapObstacle>();
@@ -290,7 +296,7 @@ namespace Giny.World.Managers.Chat
         {
             client.Character.Teleport(mapId);
         }
-        [ChatCommand("item", ServerRoleEnum.Administrator)]
+        [ChatCommand("item", ServerRoleEnum.GamemasterPadawan)]
         public static void AddItemCommand(WorldClient client, short itemId, int quantity)
         {
             client.Character.Inventory.AddItem(itemId, quantity, true);
@@ -322,7 +328,7 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("<b>" + targetName + "</b> is not connected.");
             }
         }
-        [ChatCommand("spell", ServerRoleEnum.Administrator)]
+        [ChatCommand("spell", ServerRoleEnum.GamemasterPadawan)]
         public static void LearnSpell(WorldClient client, short spellId)
         {
             client.Character.LearnSpell(spellId, true);

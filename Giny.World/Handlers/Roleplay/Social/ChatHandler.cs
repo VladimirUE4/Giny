@@ -15,6 +15,12 @@ namespace Giny.World.Handlers.Roleplay.Social
     class ChatHandler
     {
         [MessageHandler]
+        public static void HandleChatClientMultiWithObject(ChatClientMultiWithObjectMessage message, WorldClient client)
+        {
+            var chatMessage = ChatChannelsManager.Instance.GetChatServerWithObjectMessage((ChatActivableChannelsEnum)message.channel, message.objects, message.content, client);
+            ChatChannelsManager.Instance.Handle(client, chatMessage);
+        }
+        [MessageHandler]
         public static void HandleChatSmileyRequestMessage(ChatSmileyRequestMessage message, WorldClient client)
         {
             client.Character.DisplaySmiley(message.smileyId);
@@ -22,7 +28,8 @@ namespace Giny.World.Handlers.Roleplay.Social
         [MessageHandler]
         public static void HandleChatMultiClient(ChatClientMultiMessage message, WorldClient client)
         {
-            ChatChannelsManager.Instance.Handle(client, message.content, (ChatActivableChannelsEnum)message.channel);
+            var chatMessage = ChatChannelsManager.Instance.GetChatServerMessage((ChatActivableChannelsEnum)message.channel, message.content, client);
+            ChatChannelsManager.Instance.Handle(client, chatMessage);
         }
 
         [MessageHandler]
@@ -47,5 +54,7 @@ namespace Giny.World.Handlers.Roleplay.Social
             }
 
         }
+
+
     }
 }

@@ -27,7 +27,7 @@ namespace Giny.Items
     /// </summary>
     public partial class Editor : UserControl
     {
-        private ItemRecord CurrentItem => itemList.SelectedItem as ItemRecord;
+        private ItemRecord CurrentItem => (ItemRecord)itemList.SelectedItem;
 
         private EffectDice CurrentEffect => effects.SelectedItem as EffectDice;
 
@@ -122,9 +122,21 @@ namespace Giny.Items
         private void price_LostFocus(object sender, RoutedEventArgs e)
         {
             CurrentItem.Price = double.Parse(price.Text);
-            CurrentItem.UpdateInstantElement();
+            UpdateItem();
         }
 
+        private void UpdateItem()
+        {
+            if (WeaponRecord.GetWeapon(CurrentItem.Id) != null)
+            {
+                var weaponRecord = WeaponRecord.GetWeapon(CurrentItem.Id);
+                weaponRecord.UpdateInstantElement();
+            }
+            else
+            {
+                CurrentItem.UpdateInstantElement();
+            }
+        }
         private void name_LostFocus(object sender, RoutedEventArgs e)
         {
             try
@@ -133,7 +145,7 @@ namespace Giny.Items
                 Loader.D2IFile.SetText((int)item.NameId, name.Text);
                 Loader.D2IFile.Save();
                 CurrentItem.Name = name.Text;
-                CurrentItem.UpdateInstantElement();
+                UpdateItem();
             }
             catch
             {
@@ -146,7 +158,7 @@ namespace Giny.Items
         private void RemoveEffectClick(object sender, RoutedEventArgs e)
         {
             CurrentItem.Effects.Remove(CurrentEffect);
-            CurrentItem.UpdateInstantElement();
+            UpdateItem();
 
             DisplayCurrentItem();
         }
@@ -156,7 +168,7 @@ namespace Giny.Items
             if (min.Text != string.Empty)
             {
                 CurrentEffect.Min = int.Parse(min.Text);
-                CurrentItem.UpdateInstantElement();
+                UpdateItem();
             }
         }
 
@@ -165,7 +177,7 @@ namespace Giny.Items
             if (max.Text != string.Empty)
             {
                 CurrentEffect.Max = int.Parse(max.Text);
-                CurrentItem.UpdateInstantElement();
+                UpdateItem();
             }
         }
 
@@ -174,7 +186,7 @@ namespace Giny.Items
             if (value.Text != string.Empty)
             {
                 CurrentEffect.Value = int.Parse(value.Text);
-                CurrentItem.UpdateInstantElement();
+                UpdateItem();
             }
         }
 
@@ -185,7 +197,7 @@ namespace Giny.Items
 
             CurrentItem.Effects.Add(effect);
 
-            CurrentItem.UpdateInstantElement();
+            UpdateItem();
             DisplayCurrentItem();
         }
 

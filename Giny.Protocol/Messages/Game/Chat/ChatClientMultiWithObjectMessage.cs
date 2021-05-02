@@ -37,6 +37,9 @@ namespace Giny.Protocol.Messages
             ObjectItem _item1 = null;
             base.Deserialize(reader);
             uint _objectsLen = (uint)reader.ReadUShort();
+
+            objects = new ObjectItem[_objectsLen];
+
             for (uint _i1 = 0;_i1 < _objectsLen;_i1++)
             {
                 _item1 = new ObjectItem();

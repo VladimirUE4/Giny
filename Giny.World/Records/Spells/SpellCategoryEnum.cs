@@ -16,5 +16,6 @@ namespace Giny.World.Records.Spells
         Buff = 8,
         Summon = 16,
         Mark = 32,
+        Debuff = 64,
     }
 }

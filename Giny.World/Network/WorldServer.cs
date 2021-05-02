@@ -63,21 +63,6 @@ namespace Giny.World.Network
             this.Started = true;
         }
 
-
-        public void RemoveClient(WorldClient worldClient)
-        {
-            Clients.Remove(worldClient);
-        }
-        public void AddClient(WorldClient client)
-        {
-            Clients.Add(client);
-
-            if (Clients.Count > MaximumClients)
-            {
-                MaximumClients = Clients.Count;
-            }
-        }
-
         public bool IsOnline(long characterId)
         {
             return GetOnlineClients().Any(x => x.Character.Id == characterId);
@@ -113,6 +98,11 @@ namespace Giny.World.Network
             Logger.Write("(World) New client connected.");
             WorldClient client = new WorldClient(acceptSocket);
             Clients.Add(client);
+
+            if (Clients.Count > MaximumClients)
+            {
+                MaximumClients = Clients.Count;
+            }
         }
         private void OnServerFailedToStart(Exception ex)
         {

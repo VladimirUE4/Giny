@@ -133,8 +133,16 @@ namespace Giny.World.Managers.Entities.Characters
             get;
             private set;
         }
-
-
+        public DateTime LastSalesChatMessage
+        {
+            get;
+            set;
+        }
+        public DateTime LastSeekChatMessage
+        {
+            get;
+            set;
+        }
         public bool ChangeMap
         {
             get;
@@ -464,7 +472,7 @@ namespace Giny.World.Managers.Entities.Characters
                 HumanOptions.Add(HumanOptionsManager.Instance.CreateHumanOptionGuild());
             }
 
-            CharacterApi.HumanOptionsCreated(this);
+            CharacterEventApi.HumanOptionsCreated(this);
 
         }
 
@@ -1658,7 +1666,15 @@ namespace Giny.World.Managers.Entities.Characters
             }
         }
 
-
+        public CharacterMinimalInformations GetCharacterMinimalInformations()
+        {
+            return new CharacterMinimalInformations()
+            {
+                id = Id,
+                level = Level,
+                name = Name,
+            };
+        }
     }
 
 }
