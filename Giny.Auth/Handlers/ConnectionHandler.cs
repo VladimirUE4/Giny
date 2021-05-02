@@ -47,26 +47,51 @@ namespace Giny.Auth.Handlers
                 client.OnSelectedServerRefused(serverId, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                      ServerStatusEnum.OFFLINE);
 
-                client.SendServerList();
-
                 return;
             }
             else if (ipcClient.WorldServerRecord.Status != ServerStatusEnum.ONLINE)
             {
                 client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                        ipcClient.WorldServerRecord.Status);
-
-                client.SendServerList();
                 return;
 
             }
+            if (ipcClient.WorldServerRecord.MonoAccount)
+            {
+                IPCServer.Instance.SendRequest(ipcClient, new IsIpConnectedRequestMessage(client.Ip),
+                delegate (IsIpConnectedMessage message)
+                {
+                    if (message.connected)
+                    {
+                        client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_MONOACCOUNT_ONLY,
+                      ipcClient.WorldServerRecord.Status);
+                        return;
+                    }
+                    else
+                    {
+                        SelectServer(client, ipcClient);
+                    }
+                },
+                delegate ()
+                {
+                    client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
+                         ipcClient.WorldServerRecord.Status);
+
+                });
+            }
+            else
+            {
+                SelectServer(client, ipcClient);
+            }
+
+
+        }
+        private static void SelectServer(AuthClient client, IPCClient worldServer)
+        {
             client.GenerateTicket();
-
             TicketsManager.Instance.Add(client.Ticket, client.Account);
-
-            client.Send(new SelectedServerDataMessage(ipcClient.WorldServerRecord.Id, ipcClient.WorldServerRecord.Host,
-                new short[] { ipcClient.WorldServerRecord.Port }, true, client.EncryptTicket()));
-
+            client.Send(new SelectedServerDataMessage(worldServer.WorldServerRecord.Id, worldServer.WorldServerRecord.Host,
+                new short[] { worldServer.WorldServerRecord.Port }, true, client.EncryptTicket()));
             client.Disconnect();
         }
         [MessageHandler]

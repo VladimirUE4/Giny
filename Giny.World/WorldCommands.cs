@@ -36,7 +36,7 @@ namespace Giny.World
                 client.Character.SendServerExperienceModificator();
             }
 
-            Logger.Write("Experience rate multiplicator is now set to : " + ConfigFile.Instance.XpRate, Channels.Info );
+            Logger.Write("Experience rate multiplicator is now set to : " + ConfigFile.Instance.XpRate, Channels.Info);
 
 
         }
@@ -80,9 +80,9 @@ namespace Giny.World
         [ConsoleCommand("infos")]
         public static void InfosCommand()
         {
-            Logger.Write("Connected : " + WorldServer.Instance.Clients.Count);
-            Logger.Write("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
-            Logger.Write("Max Connected : " + WorldServer.Instance.MaximumClients);
+            Logger.Write("Connected : " + WorldServer.Instance.Clients.Count, Channels.Info);
+            Logger.Write("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count(), Channels.Info);
+            Logger.Write("Max Connected : " + WorldServer.Instance.MaximumClients, Channels.Info);
         }
         [ConsoleCommand("save")]
         public static void SaveCommand()

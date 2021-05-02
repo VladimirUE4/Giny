@@ -37,6 +37,7 @@ namespace Sufokia.Uplauncher
         public MainWindow()
         {
             InitializeComponent();
+            CloseDofus();
             Config.Initialize();
             this.Loaded += MainWindow_Loaded;
             closeButton.MouseEnter += CloseButton_MouseEnter;
@@ -50,6 +51,13 @@ namespace Sufokia.Uplauncher
             Updater.DownloadStarted += Updater_DownloadStarted;
         }
 
+        private void CloseDofus()
+        {
+            foreach (var process in Process.GetProcessesByName("Dofus"))
+            {
+                process.Kill();
+            }
+        }
         private void Updater_DownloadStarted(string obj)
         {
             stateLabel.Content = "Téléchargement de la mise a jour ..";

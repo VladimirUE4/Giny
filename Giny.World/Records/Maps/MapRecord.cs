@@ -178,6 +178,10 @@ namespace Giny.World.Records.Maps
         }
         public bool IsCellWalkable(short cellId)
         {
+            if (cellId < 0 || cellId > 560)
+            {
+                return false;
+            }
             return Cells[cellId].Walkable;
         }
         public bool IsCellWalkable(int x, int y)

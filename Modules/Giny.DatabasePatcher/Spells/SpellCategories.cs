@@ -44,6 +44,7 @@ namespace Giny.DatabasePatcher.Spells
             EffectsEnum.Effect_LostMP,
             EffectsEnum.Effect_SubRange,
             EffectsEnum.Effect_SubRange_135,
+            EffectsEnum.Effect_SubAP_Roll,
         };
         private static readonly EffectsEnum[] HealingEffects = new EffectsEnum[]
         {
@@ -119,6 +120,10 @@ namespace Giny.DatabasePatcher.Spells
             if (level.Effects.Any(x => TeleportEffects.Contains(x.EffectEnum)))
             {
                 category |= SpellCategoryEnum.Teleport;
+            }
+            if (level.Effects.Any(x => MarkEffects.Contains(x.EffectEnum)))
+            {
+                category |= SpellCategoryEnum.Mark;
             }
             if (category == SpellCategoryEnum.None)
             {

@@ -58,7 +58,7 @@ namespace Giny.DofusDrop
 
         public void Initialize()
         {
-            Logger.Write("Dofus loot chance : " + DofusDropPercentage);
+            Logger.Write("Dofus loot chance : " + DofusDropPercentage + "%");
         }
     }
 }

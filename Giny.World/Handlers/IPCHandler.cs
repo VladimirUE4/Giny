@@ -19,5 +19,12 @@ namespace Giny.World.Handlers
             DisconnectClientResultMessage resultMessage = new DisconnectClientResultMessage(otherClient != null); // add client ip in packet to verify same account is conecting?
             client.SendIPCAnswer(resultMessage, message);
         }
+
+        [MessageHandler]
+        public static void HandleIsConnectedRequest(IsIpConnectedRequestMessage message, IPCClient client)
+        {
+            var connected = WorldServer.Instance.Clients.Any(x => x.Connected && x.Ip == message.ip);
+            client.SendIPCAnswer(new IsIpConnectedMessage(connected), message);
+        }
     }
 }

@@ -176,6 +176,8 @@
     <Compile Include="IPC\Messages\IPCCharacterDeletionRequestMessage.cs" />
     <Compile Include="IPC\Messages\IPCCharacterDeletionResultMessage.cs" />
     <Compile Include="IPC\Messages\IPCServerStatusUpdateMessage.cs" />
+    <Compile Include="IPC\Messages\IsIpConnectedMessage.cs" />
+    <Compile Include="IPC\Messages\IsIpConnectedRequestMessage.cs" />
     <Compile Include="IPC\Messages\ResetWorldRequestMessage.cs" />
     <Compile Include="IPC\Messages\ResetWorldResultMessage.cs" />
     <Compile Include="IPC\Types\Account.cs" />
