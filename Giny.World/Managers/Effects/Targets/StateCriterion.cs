@@ -41,8 +41,10 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
             if (Caster)
-                return Required ? handler.Source.HasState(State) : !handler.Source.HasState(State);
-
+            {
+                var caster = handler.CastHandler.Cast.GetCaster(); // Dofus Ebene
+                return Required ? caster.HasState(State) : !caster.HasState(State);
+            }
             return Required ? actor.HasState(State) : !actor.HasState(State);
         }
 

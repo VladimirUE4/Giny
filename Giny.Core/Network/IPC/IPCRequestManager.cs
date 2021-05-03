@@ -1,5 +1,7 @@
-﻿using Giny.Core.Pool;
+﻿using Giny.Core.Extensions;
+using Giny.Core.Pool;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ namespace Giny.Core.Network.IPC
 {
     public class IPCRequestManager
     {
-        private static Dictionary<short, IMessageRequest> m_requests = new Dictionary<short, IMessageRequest>();
+        private static ConcurrentDictionary<short, IMessageRequest> m_requests = new ConcurrentDictionary<short, IMessageRequest>();
 
         public delegate void RequestCallbackDelegate<in T>(T callbackMessage) where T : IPCMessage;
         public delegate void RequestCallbackErrorDelegate();
@@ -20,7 +22,7 @@ namespace Giny.Core.Network.IPC
             lock (m_requests)
             {
                 var messageRequest = new MessageRequest<T>(requestCallback, PopNextRequestId(), errorCallback);
-                m_requests.Add(messageRequest.RequestId, messageRequest);
+                m_requests.TryAdd(messageRequest.RequestId, messageRequest);
                 message.requestId = (short)messageRequest.RequestId;
                 message.authSide = authSide;
                 client.Send(message);
@@ -38,7 +40,7 @@ namespace Giny.Core.Network.IPC
                 if (m_requests.ContainsKey(ipcMessage.requestId))
                 {
                     m_requests[ipcMessage.requestId].ProcessMessage(ipcMessage);
-                    m_requests.Remove(ipcMessage.requestId);
+                    m_requests.TryRemove(ipcMessage.requestId);
                 }
                 else
                 {

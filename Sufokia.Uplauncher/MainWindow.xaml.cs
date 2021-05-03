@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 using Path = System.IO.Path;
 
 namespace Sufokia.Uplauncher
@@ -24,6 +25,8 @@ namespace Sufokia.Uplauncher
     public partial class MainWindow : Window
     {
         private const string DofusPath = "app/Dofus.exe";
+
+        private const string DofusProcessName = "Dofus";
 
         private const string CloseButtonPressed = "pack://application:,,,/btn_close_pressed.png";
         private const string CloseButtonNormal = "pack://application:,,,/btn_close_normal.png";
@@ -53,7 +56,7 @@ namespace Sufokia.Uplauncher
 
         private void CloseDofus()
         {
-            foreach (var process in Process.GetProcessesByName("Dofus"))
+            foreach (var process in Process.GetProcessesByName(DofusProcessName))
             {
                 process.Kill();
             }
@@ -69,7 +72,11 @@ namespace Sufokia.Uplauncher
             stateLabel.Content = "Le jeu est a jour.";
             Config.Instance.CurrentVersion = version;
             Config.Save();
+            StartDofus();
+        }
 
+        private void StartDofus()
+        {
             if (File.Exists(DofusPath))
             {
                 Process.Start(Path.Combine(Environment.CurrentDirectory, DofusPath));
@@ -79,7 +86,6 @@ namespace Sufokia.Uplauncher
                 stateLabel.Content = "Impossible de trouver Dofus.exe";
             }
         }
-
         private void Updater_PercentChanged(int obj)
         {
             stateLabel.Content = "Téléchargement de la mise a jour ... " + obj + "%";

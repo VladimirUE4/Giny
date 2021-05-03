@@ -31,10 +31,28 @@ namespace Giny.World.Managers.Fights.Cast
             set;
         }
 
-        public CellRecord TargetCell
+        public Fighter Target
         {
             get;
             set;
+        }
+
+        CellRecord m_targetCell;
+
+        public CellRecord TargetCell
+        {
+            get
+            {
+                if (Target != null)
+                {
+                    return Target.Cell;
+                }
+                return m_targetCell;
+            }
+            set
+            {
+                m_targetCell = value;
+            }
         }
         public bool Force
         {
@@ -85,11 +103,6 @@ namespace Giny.World.Managers.Fights.Cast
             get;
             set;
         }
-        public short DamagesDealt
-        {
-            get;
-            set;
-        }
         public Mark MarkSource
         {
             get;
@@ -111,7 +124,6 @@ namespace Giny.World.Managers.Fights.Cast
             this.Silent = false;
             this.Weapon = false;
             this.Childs = new List<SpellCast>();
-            this.DamagesDealt = 0;
         }
 
         public bool IsConditionBypassed(SpellCastResult result) => BypassedConditions != null && (BypassedConditions.Contains(result) || BypassedConditions.Contains(SpellCastResult.OK));
@@ -121,20 +133,7 @@ namespace Giny.World.Managers.Fights.Cast
             this.Childs.Add(child);
         }
 
-        public short GetTotalDamageDealt()
-        {
-            short sum = this.DamagesDealt;
-
-            SpellCast current = this;
-
-            while (current.Parent != null)
-            {
-                current = current.Parent;
-                sum += current.DamagesDealt;
-            }
-            return sum;
-        }
-        public Fighter GetInitialSource()
+        public Fighter GetCaster()
         {
             Fighter source = this.Source;
 

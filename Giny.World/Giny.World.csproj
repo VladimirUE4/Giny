@@ -214,6 +214,7 @@
     <Compile Include="Managers\Items\Collections\BankItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\CraftItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\TradeItemCollection.cs" />
+    <Compile Include="Managers\Stats\PointDodgeCharacteristic.cs" />
     <Compile Include="Records\Challenges\ChallengeRecord.cs" />
     <Compile Include="Records\Guilds\GuildEmblemRecord.cs" />
     <Compile Include="Records\Guilds\GuildMemberRecord.cs" />

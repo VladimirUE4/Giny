@@ -27,9 +27,10 @@ namespace Giny.World.Managers.Fights.Effects.Cast
             {
                 return;
             }
+
             foreach (var target in targets)
             {
-                SpellCast cast = new SpellCast(Source, spell,target.Cell, CastHandler.Cast);
+                SpellCast cast = new SpellCast(Source, spell,target.Cell, CastHandler.Cast); // Initial Caster or Source ? Ebène
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 cast.Silent = true;

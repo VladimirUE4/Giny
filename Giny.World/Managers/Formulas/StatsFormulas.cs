@@ -15,7 +15,8 @@ namespace Giny.World.Managers.Formulas
         {
             double num1 = stats.Total() + stats.Initiative.Total();
             double num2 = stats.LifePoints / (double)stats.MaxLifePoints;
-            return (int)(num1 * num2);
+            double value = num1 * num2;
+            return value > 0 ? (int)value : 0;
         }
 
         public int TotalWeight(Character character)

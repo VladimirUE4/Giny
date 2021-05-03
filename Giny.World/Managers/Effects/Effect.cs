@@ -268,6 +268,9 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.Instant);
                 case "EON":
                     return new Trigger(TriggerType.OnSpecificStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
+
+                case "ATB":
+                    return new Trigger(TriggerType.AfterTurnBegin);
             }
 
             return new Trigger(TriggerType.Unknown);

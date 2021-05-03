@@ -139,7 +139,6 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             Computed = jet.Generate(Source.HasRandDownModifier(), Source.HasRandUpModifier());
 
-            this.EffectHandler.CastHandler.Cast.DamagesDealt += Computed.Value;
         }
 
         private void ComputeFinalDamageBoost(Jet jet)

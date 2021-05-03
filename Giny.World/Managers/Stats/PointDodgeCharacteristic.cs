@@ -1,6 +1,4 @@
-﻿using Giny.Protocol.Types;
-using Giny.World.Managers.Fights.Effects.Buffs;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +8,8 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Stats
 {
     [ProtoContract]
-    public class RelativeCharacteristic : Characteristic
+    public class PointDodgeCharacteristic : RelativeCharacteristic
     {
-        protected Characteristic Relativ
-        {
-            get;
-            set;
-        }
-        public short RelativDelta
-        {
-            get
-            {
-                return (short)(Relativ.Total() / 10);
-            }
-        }
         [ProtoMember(1)]
         public override short Base
         {
@@ -43,25 +29,23 @@ namespace Giny.World.Managers.Stats
             set => base.Objects = value;
         }
 
-        public RelativeCharacteristic()
+        public override short Total()
         {
-
+            short total = base.Total();
+            return (short)(total > 0 ? total : 0);
         }
-        public void Bind(Characteristic relative)
+        public override short TotalInContext()
         {
-            this.Relativ = relative;
+            short totalInContext = base.Total();
+            return (short)(totalInContext > 0 ? totalInContext : 0);
         }
-        public override CharacterBaseCharacteristic GetBaseCharacteristic()
+        public static new PointDodgeCharacteristic Zero()
         {
-            return new CharacterBaseCharacteristic((short)(Base + RelativDelta), Additional, Objects, Context, Context);
+            return new PointDodgeCharacteristic();
         }
-        public static new RelativeCharacteristic Zero()
+        public static new PointDodgeCharacteristic New(short delta)
         {
-            return new RelativeCharacteristic();
-        }
-        public static new RelativeCharacteristic New(short delta)
-        {
-            return new RelativeCharacteristic()
+            return new PointDodgeCharacteristic()
             {
                 Base = delta,
                 Additional = 0,
@@ -72,7 +56,7 @@ namespace Giny.World.Managers.Stats
         }
         public override Characteristic Clone()
         {
-            return new RelativeCharacteristic()
+            return new PointDodgeCharacteristic()
             {
                 Base = base.Base,
                 Additional = Additional,
@@ -80,9 +64,6 @@ namespace Giny.World.Managers.Stats
                 Relativ = Relativ,
             };
         }
-        public override short Total()
-        {
-            return (short)(RelativDelta + Base + Additional + Objects);
-        }
+
     }
 }

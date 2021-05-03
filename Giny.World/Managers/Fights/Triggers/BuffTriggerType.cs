@@ -37,6 +37,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnTurnBegin, // TB
         OnTurnEnd, // TE
 
+        AfterTurnBegin, // ATB
+
         OnMPLost, // m , MPA (effective loss? attempt? )
         OnAPLost, // A
         OnRangeLost, // R

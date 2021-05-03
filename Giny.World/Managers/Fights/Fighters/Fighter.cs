@@ -212,6 +212,11 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             private set;
         }
+        public short DamageReceivedSequenced
+        {
+            get;
+            set;
+        }
 
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
@@ -223,6 +228,7 @@ namespace Giny.World.Managers.Fights.Fighters
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
             this.WasTeleportedInInvalidCell = false;
+            this.DamageReceivedSequenced = 0;
         }
 
         public virtual void Initialize()
@@ -365,8 +371,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public virtual void Move(List<CellRecord> path)
         {
-            Fight.ResetTriggers();
-
             path.Insert(0, this.Cell);
 
             if (path.Count <= 1)
@@ -635,9 +639,14 @@ namespace Giny.World.Managers.Fights.Fighters
 
             BuffIdProvider.Push(buff.Id);
         }
-        [WIP("voir dofus nébuleux")]
+        [WIP("voir dofus nébuleux (Fight.Timeline.IndexOf(buff.Target) < Fight.Timeline.Index) ?")]
         public void AddBuff(Buff buff)
         {
+            if (Fight.Timeline.IndexOf(buff.Target) < Fight.Timeline.Index && buff.Duration == 1)
+            {
+                buff.Duration++;
+            }
+
             if (BuffMaxStackReached(buff)) // WIP censer cumuler la durée ?
             {
                 Buff oldBuff = Buffs.FirstOrDefault(x => IsSimilar(x, buff));
@@ -657,11 +666,12 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
-            IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger).ToArray();
+            IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
+                x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
 
             foreach (var buff in buffs)
             {
-                buff.CanTrigger = false;
+                buff.LastTriggeredSequence = Fight.SequenceManager.CurrentSequence;
 
                 if (buff.Apply(token))
                 {
@@ -793,7 +803,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 {
                     Fight.TriggerMarks(this, MarkTriggerType.OnTurnEnd);
                     TriggerBuffs(TriggerType.OnTurnEnd, null);
-
                     OnTurnEnded();
 
                     this.WasTeleportedInInvalidCell = false;
@@ -866,12 +875,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 OnSpellCastFailed(cast);
                 return false;
             }
-
-            if (cast.GetParent() == null && !cast.Force)
-            {
-                Fight.ResetTriggers();
-            }
-
 
             using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_SPELL))
             {
@@ -1722,7 +1725,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 return DamageResult.Zero();
             }
 
-            TriggerBuffs(damage);
+            // TriggerBuffs(damage);
 
             delta = damage.Computed.Value;
 
@@ -1821,6 +1824,8 @@ namespace Giny.World.Managers.Fights.Fighters
                     Stats.MaxLifePoints -= permanentDamages;
                     Stats.LifePoints -= delta;
                     lifeLoss = delta;
+
+
                     Fight.Send(new GameActionFightLifePointsLostMessage()
                     {
                         actionId = 0,
@@ -1833,6 +1838,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
             }
 
+            DamageReceivedSequenced += (short)lifeLoss;
+
             short reflected = (short)CalculateDamageReflection(damage.Computed.Value);
 
             if (reflected > 0)
@@ -1844,6 +1851,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (damage.EffectSchool != EffectSchoolEnum.Fix)
             {
+                TriggerBuffs(damage); // <---- avant, après ?  Prygen .. a voir
                 TriggerBuffs(TriggerType.AfterDamaged, damage);
             }
 
@@ -1944,7 +1952,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool IsMeleeWith(Fighter fighter)
         {
-            return this.Cell.Point.ManhattanDistanceTo(fighter.Cell.Point) == 1;
+            return this.Cell.Point.ManhattanDistanceTo(fighter.Cell.Point) <= 1;
         }
         public bool IsMeleeWith(MapPoint point)
         {

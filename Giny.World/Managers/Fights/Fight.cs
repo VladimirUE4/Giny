@@ -259,7 +259,20 @@ namespace Giny.World.Managers.Fights
             this.Marks = new List<Mark>();
         }
 
-
+        public void OnSequenceStarted(FightSequence sequence)
+        {
+          
+        }
+        public void OnSequenceEnded(FightSequence sequence)
+        {
+            if (sequence.Type == SequenceTypeEnum.SEQUENCE_SPELL && sequence.Parent == null)
+            {
+                foreach (var fighter in GetFighters<Fighter>())
+                {
+                    fighter.DamageReceivedSequenced = 0;
+                }
+            }
+        }
         public virtual void OnSetReady(Fighter fighter, bool isReady)
         {
             this.Send(new GameFightHumanReadyStateMessage(fighter.Id, isReady));
@@ -460,7 +473,9 @@ namespace Giny.World.Managers.Fights
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
             {
-
+                /*
+                 * Here or after decrement buff delay ? seems here, see Dofus Ocre
+                 */
                 if (!FighterPlaying.IsSummoned() && RoundNumber > 1)
                 {
                     FighterPlaying.DecrementAllCastedBuffsDuration();
@@ -470,10 +485,16 @@ namespace Giny.World.Managers.Fights
                     FighterPlaying.DecrementAllCastedBuffsDelay();
                 }
 
+                var buffs = GetAllBuffs();
+
                 this.DecrementGlyphDuration(FighterPlaying);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
 
                 FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
+
+
+                // problem here ! 
+                FighterPlaying.TriggerBuffs(TriggerType.AfterTurnBegin, null);
 
             }
             CheckDeads();
@@ -641,7 +662,9 @@ namespace Giny.World.Managers.Fights
 
         public void TriggerMarks(Fighter target, MarkTriggerType triggerType)
         {
-            foreach (var mark in Marks.Where(x => x.Triggers.HasFlag(triggerType) && x.ContainsCell(target.Cell.Id)).ToArray())
+            Mark[] marks = Marks.Where(x => x.Triggers.HasFlag(triggerType) && x.ContainsCell(target.Cell.Id)).ToArray();
+
+            foreach (var mark in marks)
             {
                 using (this.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_GLYPH_TRAP))
                 {
@@ -929,17 +952,6 @@ namespace Giny.World.Managers.Fights
                     RedTeam.Options.GetFightOptionsInformations(),
                     BlueTeam.Options.GetFightOptionsInformations()
             };
-        }
-
-        public void ResetTriggers()
-        {
-            foreach (var fighter in GetFighters<Fighter>())
-            {
-                foreach (var buff in fighter.GetBuffs<TriggerBuff>())
-                {
-                    buff.CanTrigger = true;
-                }
-            }
         }
 
         private void DeterminsWinners()

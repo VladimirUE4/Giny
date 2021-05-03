@@ -51,6 +51,7 @@ namespace Giny.World.Managers.Fights.Synchronisation
             var id = m_nextSequenceId++;
             var sequence = new FightSequence(id, type, Fight.FighterPlaying);
             StartSequence(sequence);
+            Fight.OnSequenceStarted(sequence);
             return sequence;
         }
 
@@ -67,7 +68,16 @@ namespace Giny.World.Managers.Fights.Synchronisation
                 CurrentRootSequence = sequence;
             }
             else
-                CurrentSequence.AddChildren(sequence);
+            {
+                if (CurrentSequence != null)
+                {
+                    CurrentSequence.AddChildren(sequence);
+                }
+                else
+                {
+                    return;
+                }
+            }
 
 
             CurrentSequence = sequence;
@@ -90,6 +100,7 @@ namespace Giny.World.Managers.Fights.Synchronisation
             }
 
             CurrentSequence = sequence.Parent;
+            Fight.OnSequenceStarted(sequence);
         }
 
         public void ResetSequences()

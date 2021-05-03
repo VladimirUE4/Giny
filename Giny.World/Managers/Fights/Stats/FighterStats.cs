@@ -185,8 +185,8 @@ namespace Giny.World.Managers.Fights.Stats
             this.CriticalHit = character.Stats.CriticalHit.Clone();
             this.CriticalHitWeapon = character.Stats.CriticalHitWeapon;
             this.DamagesBonusPercent = character.Stats.DamagesBonusPercent.Clone();
-            this.DodgePAProbability = (RelativeCharacteristic)character.Stats.DodgePAProbability.Clone();
-            this.DodgePMProbability = (RelativeCharacteristic)character.Stats.DodgePMProbability.Clone();
+            this.DodgePAProbability = (PointDodgeCharacteristic)character.Stats.DodgePAProbability.Clone();
+            this.DodgePMProbability = (PointDodgeCharacteristic)character.Stats.DodgePMProbability.Clone();
             this.EarthDamageBonus = character.Stats.EarthDamageBonus.Clone();
             this.EarthReduction = character.Stats.EarthReduction.Clone();
             this.EarthResistPercent = (ResistanceCharacteristic)character.Stats.EarthResistPercent.Clone();
@@ -255,8 +255,8 @@ namespace Giny.World.Managers.Fights.Stats
             this.CriticalHit = other.CriticalHit.Clone();
             this.CriticalHitWeapon = other.CriticalHitWeapon;
             this.DamagesBonusPercent = other.DamagesBonusPercent.Clone();
-            this.DodgePAProbability = (RelativeCharacteristic)other.DodgePAProbability.Clone();
-            this.DodgePMProbability = (RelativeCharacteristic)other.DodgePMProbability.Clone();
+            this.DodgePAProbability = (PointDodgeCharacteristic)other.DodgePAProbability.Clone();
+            this.DodgePMProbability = (PointDodgeCharacteristic)other.DodgePMProbability.Clone();
             this.EarthDamageBonus = other.EarthDamageBonus.Clone();
             this.EarthReduction = other.EarthReduction.Clone();
             this.EarthResistPercent = (ResistanceCharacteristic)other.EarthResistPercent.Clone();
@@ -321,16 +321,16 @@ namespace Giny.World.Managers.Fights.Stats
             this.AirReduction = Characteristic.Zero();
             this.AirResistPercent = ResistanceCharacteristic.New(monsterGrade.AirResistance);
             this.AllDamagesBonus = Characteristic.Zero();
-        
+
 
             this.CriticalDamageBonus = Characteristic.Zero();
             this.CriticalDamageReduction = Characteristic.Zero();
             this.CriticalHit = Characteristic.Zero();
             this.CriticalHitWeapon = 0;
             this.DamagesBonusPercent = Characteristic.Zero();
-          
-            this.DodgePAProbability = RelativeCharacteristic.New(monsterGrade.ApDodge);
-            this.DodgePMProbability = RelativeCharacteristic.New(monsterGrade.MpDodge);
+
+            this.DodgePAProbability = PointDodgeCharacteristic.New(monsterGrade.ApDodge);
+            this.DodgePMProbability = PointDodgeCharacteristic.New(monsterGrade.MpDodge);
             this.EarthDamageBonus = Characteristic.Zero();
             this.EarthReduction = Characteristic.Zero();
             this.EarthResistPercent = ResistanceCharacteristic.New(monsterGrade.EarthResistance);
@@ -373,7 +373,7 @@ namespace Giny.World.Managers.Fights.Stats
             this.TackleEvade = RelativeCharacteristic.Zero();
             this.TrapBonus = Characteristic.Zero();
             this.TrapBonusPercent = Characteristic.Zero();
-         
+
             this.WaterDamageBonus = Characteristic.Zero();
             this.WaterReduction = Characteristic.Zero();
             this.WaterResistPercent = ResistanceCharacteristic.New(monsterGrade.WaterResistance);
@@ -394,7 +394,7 @@ namespace Giny.World.Managers.Fights.Stats
             this.Erosion = NaturalErosion;
             this.Initialize();
         }
-      
+
         public GameFightMinimalStats GetFightMinimalStats(Fighter owner, CharacterFighter target)
         {
             Fighter summoner = owner.GetSummoner();

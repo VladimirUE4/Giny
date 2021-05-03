@@ -53,6 +53,7 @@ namespace Giny.World.Managers.Fights.Timeline
             this.Fight = fight;
             this.Fighters = new List<Fighter>();
             this.RoundNumber = 1;
+            this.Index = -1;
         }
         public bool RemoveFighter(Fighter fighter)
         {

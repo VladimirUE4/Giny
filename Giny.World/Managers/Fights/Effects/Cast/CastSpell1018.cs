@@ -23,16 +23,16 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Source.Fight.Warn("CastSpell1018");
-
             Spell spell = CreateCastedSpell();
+
+            var caster = CastHandler.Cast.GetCaster();
 
             foreach (var target in targets)
             {
-                SpellCast cast = new SpellCast(Source,spell, target.Cell, CastHandler.Cast);
+                SpellCast cast = new SpellCast(caster, spell, target.Cell, CastHandler.Cast); //  // Initial Caster or Source ? Ebène
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
-                Source.CastSpell(cast);
+                caster.CastSpell(cast);
             }
         }
     }

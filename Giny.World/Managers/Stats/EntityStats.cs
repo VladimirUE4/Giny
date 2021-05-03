@@ -219,13 +219,13 @@ namespace Giny.World.Managers.Stats
             set;
         }
         [ProtoMember(28)]
-        public RelativeCharacteristic DodgePAProbability
+        public PointDodgeCharacteristic DodgePAProbability
         {
             get;
             set;
         }
         [ProtoMember(29)]
-        public RelativeCharacteristic DodgePMProbability
+        public PointDodgeCharacteristic DodgePMProbability
         {
             get;
             set;
@@ -590,8 +590,8 @@ namespace Giny.World.Managers.Stats
                 CriticalHit = Characteristic.Zero(),
                 Initiative = Characteristic.Zero(),
                 CriticalHitWeapon = 0,
-                DodgePAProbability = RelativeCharacteristic.Zero(),
-                DodgePMProbability = RelativeCharacteristic.Zero(),
+                DodgePAProbability = PointDodgeCharacteristic.Zero(),
+                DodgePMProbability = PointDodgeCharacteristic.Zero(),
                 EarthDamageBonus = Characteristic.Zero(),
                 EarthReduction = Characteristic.Zero(),
                 EarthResistPercent = ResistanceCharacteristic.Zero(),

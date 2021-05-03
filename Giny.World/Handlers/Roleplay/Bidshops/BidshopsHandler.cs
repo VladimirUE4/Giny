@@ -60,5 +60,17 @@ namespace Giny.World.Handlers.Roleplay.Bidshops
                 avgPrices = new long[] { price },
             });
         }
+
+        [MessageHandler]
+        public static void HandleObjectAveragePricesGetMessage(ObjectAveragePricesGetMessage message, WorldClient client)
+        {
+            var objectPrices = BidshopsManager.Instance.GetAveragePrices();
+
+            client.Send(new ObjectAveragePricesMessage()
+            {
+                ids = objectPrices.Keys.ToArray(),
+                avgPrices = objectPrices.Values.ToArray(),
+            });
+        }
     }
 }

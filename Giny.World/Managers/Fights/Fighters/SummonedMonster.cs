@@ -115,7 +115,15 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public override void OnTurnEnded()
         {
-          
+            if (Controller != null)
+            {
+                var nextSummon = Controller.GetNextControlableSummon(1);
+
+                if (nextSummon != null)
+                {
+                    nextSummon.SwitchContext();
+                }
+            }
         }
 
         

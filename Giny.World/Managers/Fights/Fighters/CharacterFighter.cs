@@ -419,13 +419,14 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnEnded()
         {
-            SummonedFighter summon = GetNextControlableSummon();
+            SummonedFighter summon = GetNextControlableSummon(1);
 
             if (summon != null)
             {
                 summon.SwitchContext();
             }
         }
+
         public override FightTeamMemberInformations GetFightTeamMemberInformations()
         {
             return new FightTeamMemberCharacterInformations()
@@ -475,22 +476,29 @@ namespace Giny.World.Managers.Fights.Fighters
                 Leave(false);
             }
         }
-        public SummonedFighter GetNextControlableSummon()
+        public SummonedFighter GetNextControlableSummon(int offset = 0)
         {
-            for (int index = Fight.Timeline.Index; index < Fight.Timeline.Fighters.Count; index++)
+            for (int index = Fight.Timeline.Index + offset; index < Fight.Timeline.Fighters.Count; index++)
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
+                if (fighter == this)
+                {
+                    return null;
+                }
                 if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;
                 }
             }
-            for (int index = 0; index < Fight.Timeline.Index; index++)
+            for (int index = 0; index < Fight.Timeline.Index + offset; index++)
             {
                 Fighter fighter = Fight.Timeline.Fighters[index];
 
-
+                if (fighter == this)
+                {
+                    return null;
+                }
                 if (fighter.GetController() == this && fighter.Alive)
                 {
                     return (SummonedFighter)fighter;

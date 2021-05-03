@@ -46,25 +46,27 @@ namespace Giny.Auth.Handlers
             {
                 client.OnSelectedServerRefused(serverId, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                      ServerStatusEnum.OFFLINE);
-
+                client.SendServerList();
                 return;
             }
             else if (ipcClient.WorldServerRecord.Status != ServerStatusEnum.ONLINE)
             {
                 client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                        ipcClient.WorldServerRecord.Status);
+                client.SendServerList();
                 return;
 
             }
             if (ipcClient.WorldServerRecord.MonoAccount)
             {
                 IPCServer.Instance.SendRequest(ipcClient, new IsIpConnectedRequestMessage(client.Ip),
-                delegate (IsIpConnectedMessage message)
+                delegate (IsIpConnectedMessage ipcMessage)
                 {
-                    if (message.connected)
+                    if (ipcMessage.connected)
                     {
                         client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_MONOACCOUNT_ONLY,
-                      ipcClient.WorldServerRecord.Status);
+                      ServerStatusEnum.FULL);
+                        client.SendServerList();
                         return;
                     }
                     else
@@ -76,6 +78,7 @@ namespace Giny.Auth.Handlers
                 {
                     client.OnSelectedServerRefused(ipcClient.WorldServerRecord.Id, ServerConnectionErrorEnum.SERVER_CONNECTION_ERROR_DUE_TO_STATUS,
                          ipcClient.WorldServerRecord.Status);
+                    client.SendServerList();
 
                 });
             }

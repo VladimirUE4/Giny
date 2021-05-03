@@ -136,7 +136,7 @@ namespace Giny.World.Managers.Fights.Cast
             */
 
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
-                affectedCells.Add(Source.Cell);
+                affectedCells.Add(Source.Cell); // Source.Cell
 
             var fighters = Source.Fight.GetFighters(affectedCells);
 

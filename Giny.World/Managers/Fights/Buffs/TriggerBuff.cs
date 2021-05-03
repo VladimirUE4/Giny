@@ -5,6 +5,7 @@ using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Effects.Damages;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Triggers;
 using System;
 using System.Collections.Generic;
@@ -39,9 +40,9 @@ namespace Giny.World.Managers.Fights.Buffs
         public int Delay
         {
             get;
-            private set;
+            set;
         }
-        public bool CanTrigger
+        public FightSequence LastTriggeredSequence
         {
             get;
             set;
@@ -55,9 +56,17 @@ namespace Giny.World.Managers.Fights.Buffs
             this.ApplyTrigger = applyTrigger;
             this.Delay = delay;
             this.RemoveTrigger = removeTrigger;
-            this.CanTrigger = true;
+            this.LastTriggeredSequence = null;
         }
 
+        public bool CanTrigger()
+        {
+            if (LastTriggeredSequence == null)
+            {
+                return true;
+            }
+            return LastTriggeredSequence != this.Target.Fight.SequenceManager.CurrentSequence && !LastTriggeredSequence.IsChild(Target.Fight.SequenceManager.CurrentSequence);
+        }
         public bool DecrementDelay()
         {
             return (this.Delay -= 1) == 0;

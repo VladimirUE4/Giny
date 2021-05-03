@@ -128,7 +128,6 @@ namespace Giny.Auth.Network
         public void OnSelectedServerRefused(short serverId, ServerConnectionErrorEnum error, ServerStatusEnum serverStatus)
         {
             Send(new SelectedServerRefusedMessage(serverId, (byte)error, (byte)serverStatus));
-            SendServerList();
         }
         public void OnNicknameRefusedMessage(NicknameRefusedReasonEnum reason)
         {
