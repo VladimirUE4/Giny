@@ -20,11 +20,11 @@ namespace Giny.SpellExplorer
     /// </summary>
     public partial class CastSpell : Window
     {
-        public CastSpell(SpellRecord spell)
+        public CastSpell(SpellRecord spell, byte? gradeId = null)
         {
             InitializeComponent();
 
-            this.contentControl.Content = new SpellView(spell);
+            this.contentControl.Content = new SpellView(spell, gradeId);
         }
     }
 }

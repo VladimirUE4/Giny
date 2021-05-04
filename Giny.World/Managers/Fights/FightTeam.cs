@@ -125,7 +125,6 @@ namespace Giny.World.Managers.Fights
                 target.Stats.LifePoints = 0;
             }
 
-            Fight.CheckDeads();
         }
         public IEnumerable<Portal> GetPortals()
         {

@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Heals
 {
+    /*
+     * Mot interdit
+     * Prygen
+     */
     [SpellEffectHandler(EffectsEnum.Effect_HealReceivedDamages)]
     public class HealReceivedDamage : SpellEffectHandler
     {
@@ -22,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Heals
         {
             foreach (var target in targets)
             {
-                short delta = (short)(target.DamageReceivedSequenced * (Effect.Min / 100d));
+                short delta = (short)(Source.DamageReceivedSequenced * (Effect.Min / 100d));
                 target.Heal(new Healing(Source, target, delta));
             }
         }

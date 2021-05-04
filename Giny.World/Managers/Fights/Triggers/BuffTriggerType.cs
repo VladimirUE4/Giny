@@ -60,7 +60,7 @@ namespace Giny.World.Managers.Fights.Triggers
         OnTackled, //tF
         OnTackle, //tS
 
-        OnTeleportPortal, // PT
+        OnTeleportPortal,
 
         /*
          * Custom

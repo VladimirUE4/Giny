@@ -30,13 +30,19 @@ namespace Giny.SpellExplorer
             get;
             set;
         }
-        public SpellView(SpellRecord spell)
+        public SpellView(SpellRecord spell, byte? gradeId = null)
         {
             this.Spell = spell;
             InitializeComponent();
             effectsList.SelectionChanged += EffectsList_SelectionChanged;
             levelsList.SelectionChanged += LevelsList_SelectionChanged;
             UpdateSpellInfo();
+
+            if (gradeId.HasValue && gradeId.Value - 1 < levelsList.Items.Count)
+            {
+                levelsList.SelectedItem = levelsList.Items.GetItemAt(gradeId.Value - 1);
+                levelsList.Focus();
+            }
         }
 
         private void LevelsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,8 +56,7 @@ namespace Giny.SpellExplorer
                 effectsList.Items.Add(effect);
             }
 
-            if (effectsList.Items.Count > 0)
-                effectsList.SelectedItem = effectsList.Items.GetItemAt(0);
+
         }
         private string TriggersToString(IEnumerable<World.Managers.Fights.Triggers.Trigger> triggers)
         {
@@ -132,9 +137,19 @@ namespace Giny.SpellExplorer
 
                     button.Click += (object o, RoutedEventArgs args) =>
                     {
+
                         SpellRecord spell = SpellRecord.GetSpellRecord((short)effect.Min);
-                        CastSpell castSpell = new CastSpell(spell);
-                        castSpell.Show();
+
+                        if (spell.Id == Spell.Id)
+                        {
+                            levelsList.SelectedItem = levelsList.Items.GetItemAt(effect.Max - 1);
+                            levelsList.Focus();
+                        }
+                        else
+                        {
+                            CastSpell castSpell = new CastSpell(spell, (byte)effect.Max);
+                            castSpell.Show();
+                        }
                     };
 
                     effectInfo.Items.Add(button);

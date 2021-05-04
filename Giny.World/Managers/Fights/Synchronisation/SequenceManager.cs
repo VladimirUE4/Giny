@@ -100,7 +100,7 @@ namespace Giny.World.Managers.Fights.Synchronisation
             }
 
             CurrentSequence = sequence.Parent;
-            Fight.OnSequenceStarted(sequence);
+            Fight.OnSequenceEnded(sequence);
         }
 
         public void ResetSequences()

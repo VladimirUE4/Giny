@@ -262,17 +262,20 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnCriticalHit);
                 case "M":
                     return new Trigger(TriggerType.OnMoved);
-                case "MPA":
-                    return new Trigger(TriggerType.OnMPLost);
                 case "X":
                     return new Trigger(TriggerType.OnDeath);
                 case "I":
                     return new Trigger(TriggerType.Instant);
                 case "EON":
                     return new Trigger(TriggerType.OnSpecificStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
-
+                case "TP":
+                    return new Trigger(TriggerType.OnTeleportPortal); // <---- TODO
                 case "ATB":
                     return new Trigger(TriggerType.AfterTurnBegin);
+                case "MPA":
+                    return new Trigger(TriggerType.OnMPLost);
+                case "APA":
+                    return new Trigger(TriggerType.OnAPLost);
             }
 
             return new Trigger(TriggerType.Unknown);

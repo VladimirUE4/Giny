@@ -26,7 +26,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
             foreach (var target in targets)
             {
-                if (target.IsSummoned() && target.GetSummoner() == Source)
+                //if (target.IsSummoned() && target.GetSummoner() == Source)
                 {
                     target.Die(Source);
 

@@ -14,7 +14,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
     /*
      * Mot Blessant (chaque cible lance le sort)
      */
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1017)] 
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1017)]
     public class CastSpell1017 : SpellEffectHandler
     {
         public CastSpell1017(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
@@ -28,24 +28,20 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
             ITriggerToken token = this.GetTriggerToken<ITriggerToken>();
 
-            if (token != null) // coup pour coup.
+            var targetCell = Source.Cell;
+
+            if (token != null)
             {
-                SpellCast cast = new SpellCast(Source, spell, token.GetSource().Cell, CastHandler.Cast);
+                targetCell = token.GetSource().Cell;
+            }
+
+            foreach (var target in targets)
+            {
+                SpellCast cast = new SpellCast(target, spell, targetCell, CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 cast.Silent = true;
-                Source.CastSpell(cast);
-            }
-            else
-            {
-                foreach (var target in targets)
-                {
-                    SpellCast cast = new SpellCast(target, spell, Source.Cell, CastHandler.Cast);
-                    cast.Token = this.GetTriggerToken<ITriggerToken>();
-                    cast.Force = true;
-                    cast.Silent = true;
-                    target.CastSpell(cast);
-                }
+                target.CastSpell(cast);
             }
         }
     }

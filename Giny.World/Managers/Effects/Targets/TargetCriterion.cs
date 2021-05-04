@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Effects.Targets
             {'I', SpellTargetType.ENEMY_NON_MONSTER_SUMMON},
             {'D', SpellTargetType.ENEMY_COMPANION},
             {'M', SpellTargetType.ENEMY_MONSTER},
-            {'H', SpellTargetType.ENEMY_UNKN_1},
+            {'H', SpellTargetType.ENEMY_HUMAN},
             {'L', SpellTargetType.ENEMY_PLAYER},
 
             {'A', SpellTargetType.ENEMY_ALL},

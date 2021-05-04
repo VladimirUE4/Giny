@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Giny.SpellExplorer"
         mc:Ignorable="d"
-        Title="CastSpell"  Height="546" Width="866" ResizeMode="NoResize">
+        Title="CastSpell"  Height="661.784" Width="866" ResizeMode="NoResize">
     <Grid>
-        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Top" Width="858" Height="515">
+        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Top" Width="858" Height="633">
             <ContentControl Name="contentControl" Content=""/>
         </ContentControl>
     </Grid>

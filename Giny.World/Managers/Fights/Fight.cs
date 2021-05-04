@@ -497,7 +497,6 @@ namespace Giny.World.Managers.Fights
                 FighterPlaying.TriggerBuffs(TriggerType.AfterTurnBegin, null);
 
             }
-            CheckDeads();
 
             Synchronize();
 
@@ -533,36 +532,6 @@ namespace Giny.World.Managers.Fights
                 sourceId = sourceId,
                 targetId = targetId,
             });
-        }
-        public void CheckDeads()
-        {
-            IEnumerable<Fighter> deads = GetFighters().Where(x => x.Alive == true && x.Stats.LifePoints <= 0);
-
-            if (deads.Count() > 0)
-            {
-                Fighter current = null;
-
-                using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_CHARACTER_DEATH))
-                {
-                    foreach (var fighter in deads)
-                    {
-                        fighter.Die(fighter);
-
-                        if (fighter.IsFighterTurn)
-                        {
-                            current = fighter;
-                        }
-                    }
-
-
-                }
-
-                if (current != null && StartAcknowledged)
-                {
-                    FighterPlaying.PassTurn();
-                }
-
-            }
         }
 
         public void StopTurn()
@@ -721,8 +690,6 @@ namespace Giny.World.Managers.Fights
         private void OnTurnStopped()
         {
             FighterPlaying.OnTurnEnding();
-
-            CheckDeads();
 
             if (SequenceManager.IsSequencing)
                 SequenceManager.EndAllSequences();

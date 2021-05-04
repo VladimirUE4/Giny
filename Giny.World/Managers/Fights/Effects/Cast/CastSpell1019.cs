@@ -25,26 +25,19 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
             ITriggerToken token = this.GetTriggerToken<ITriggerToken>();
 
-
-            if (token != null) // Dérobade
+            foreach (var target in targets) // Ratrapry (Prisma) verify source.
             {
-                var source = token.GetSource();
-                SpellCast cast = new SpellCast(Source, spell, source.Cell, CastHandler.Cast);
+                var targetCell = target.Cell;
+
+                if (token != null) // Dérobade, sram
+                {
+                    targetCell = token.GetSource().Cell;
+                }
+                SpellCast cast = new SpellCast(Source, spell, targetCell, CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 cast.Silent = true;
                 Source.CastSpell(cast);
-            }
-            else
-            {
-                foreach (var target in targets) // Ratrapry (Prisma) verify source.
-                {
-                    SpellCast cast = new SpellCast(Source, spell, target.Cell, CastHandler.Cast);
-                    cast.Token = this.GetTriggerToken<ITriggerToken>();
-                    cast.Force = true;
-                    cast.Silent = true;
-                    Source.CastSpell(cast);
-                }
             }
 
 

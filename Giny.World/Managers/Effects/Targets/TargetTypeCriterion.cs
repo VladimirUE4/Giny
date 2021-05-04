@@ -74,7 +74,7 @@ namespace Giny.World.Managers.Effects.Targets
             if (TargetType == SpellTargetType.ENEMY_ALL)
                 return true;
 
-            if ((TargetType.HasFlag(SpellTargetType.ENEMY_PLAYER) || TargetType.HasFlag(SpellTargetType.ENEMY_UNKN_1))
+            if ((TargetType.HasFlag(SpellTargetType.ENEMY_PLAYER) || TargetType.HasFlag(SpellTargetType.ENEMY_HUMAN))
                 && (actor is CharacterFighter))
                 return true;
 

@@ -480,6 +480,11 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             Stats.UseAp(amount);
             Fight.PointsVariation(source.Id, Id, action, (short)(-amount));
+
+            if (action == ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST)
+            {
+                TriggerBuffs(TriggerType.OnAPLost, null);
+            }
         }
         public void GainAp(Fighter source, short delta)
         {
@@ -899,7 +904,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
                 OnSpellCasted(handler);
-                Fight.CheckDeads();
             }
 
 
@@ -1319,6 +1323,12 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual void OnMove(Movement movement)
         {
+            var source = movement.GetSource();
+            
+            if (movement.Type != MovementType.Walk && source != this)
+            {
+                this.LastAttacker = source;
+            }
             if (movement.Type == MovementType.Walk && Carried != null)
             {
                 Carried.Cell = this.Cell;
@@ -1478,35 +1488,36 @@ namespace Giny.World.Managers.Fights.Fighters
             MovementHistory.OnCellChanged(oldCell);
         }
         [WIP("teleport triggered")]
-        public void SwitchPosition(Fighter source, bool register = true)
+        public void SwitchPosition(Fighter target, bool register = true)
         {
             if (!CanSwitchPosition() || !CanBeMoved())
                 return;
 
             CellRecord cell = this.Cell;
-            this.Cell = source.Cell;
-            source.Cell = cell;
+            this.Cell = target.Cell;
+            target.Cell = cell;
 
             Fight.Send(new GameActionFightExchangePositionsMessage()
             {
                 actionId = 0,
-                casterCellId = source.Cell.Id,
-                sourceId = source.Id,
+                casterCellId = target.Cell.Id,
+                sourceId = target.Id,
                 targetCellId = this.Cell.Id,
                 targetId = Id,
             });
 
             if (register)
             {
-                source.MovementHistory.RegisterEntry(this.Cell);
+                target.MovementHistory.RegisterEntry(this.Cell);
                 MovementHistory.RegisterEntry(cell);
             }
             else
             {
-                source.MovementHistory.RegisterEntry(this.Cell);
+                target.MovementHistory.RegisterEntry(this.Cell);
             }
-
-            OnMove(new Movement(MovementType.SwitchPosition, source));
+           
+            OnMove(new Movement(MovementType.SwitchPosition, this));
+            target.OnMove(new Movement(MovementType.SwitchPosition, this));
 
         }
         public void SetInvisiblityState(GameActionFightInvisibilityStateEnum state, Fighter source)
@@ -1855,6 +1866,11 @@ namespace Giny.World.Managers.Fights.Fighters
                 TriggerBuffs(TriggerType.AfterDamaged, damage);
             }
 
+            if (this.Stats.LifePoints <= 0)
+            {
+                Die(damage.Source);
+            }
+
             return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
         }
 
@@ -1874,7 +1890,10 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return;
             }
-            if (damage.GetEffectHandler() != null && damage.GetEffectHandler().Effect.Duration > 0)
+
+            var effectHandler = damage.GetEffectHandler();
+
+            if (effectHandler  != null && effectHandler.Effect.Duration > 0)
             {
                 return;
             }
@@ -1937,7 +1956,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
 
-            if (damage.GetEffectHandler().CastHandler.Cast.IsCriticalHit)
+            if (effectHandler != null && effectHandler.CastHandler.Cast.IsCriticalHit)
             {
                 damage.Source.TriggerBuffs(TriggerType.OnCriticalHit, damage);
             }
@@ -2078,27 +2097,36 @@ namespace Giny.World.Managers.Fights.Fighters
                 Carried = null;
             }
         }
-        [WIP("null token?")]
         public void Die(Fighter killedBy)
         {
             if (Alive)
             {
-                KillAllSummons();
-                RemoveAllCastedBuffs();
-                this.RemoveMarks();
-
-                this.DeathTime = DateTime.Now;
-
-                Fight.Send(new GameActionFightDeathMessage()
+                using (var sequence = Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_CHARACTER_DEATH))
                 {
-                    actionId = (short)ActionsEnum.ACTION_CHARACTER_DEATH,
-                    sourceId = killedBy.Id,
-                    targetId = this.Id,
-                });
+                    this.Stats.LifePoints = 0;
 
-                this.Alive = false;
+                    KillAllSummons();
+                    RemoveAllCastedBuffs();
+                    this.RemoveMarks();
 
-                this.OnDie(killedBy);
+                    this.DeathTime = DateTime.Now;
+                    Fight.Send(new GameActionFightDeathMessage()
+                    {
+                        actionId = (short)ActionsEnum.ACTION_CHARACTER_DEATH,
+                        sourceId = killedBy.Id,
+                        targetId = this.Id,
+                    });
+
+                    this.Alive = false;
+
+
+                    this.OnDie(killedBy);
+                }
+
+                if (IsFighterTurn)
+                {
+                    PassTurn();
+                }
 
             }
             else

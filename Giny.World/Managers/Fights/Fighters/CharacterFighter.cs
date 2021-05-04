@@ -267,7 +267,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
             OnCloseCombat?.Invoke(this);
 
-            Fight.CheckDeads();
             Fight.CheckFightEnd();
 
             return true;
@@ -351,8 +350,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 {
                     if (Alive)
                     {
-                        this.Stats.LifePoints = 0;
-                        this.Fight.CheckDeads();
+                        this.Die(this);
                     }
 
                     if (!Fight.Ended)
