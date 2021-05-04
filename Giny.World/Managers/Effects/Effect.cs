@@ -258,6 +258,8 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerType.OnInflictDamageMelee);
                 case "CDR":
                     return new Trigger(TriggerType.OnInflictDamageRange);
+                case "CC":
+                    return new Trigger(TriggerType.OnCriticalHit);
                 case "M":
                     return new Trigger(TriggerType.OnMoved);
                 case "MPA":

@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Giny.SpellExplorer"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="800">
     <Grid>
-        <ProgressBar Foreground="Goldenrod" Name="progressBar" HorizontalAlignment="Left" Height="23" Margin="145,217,0,0" VerticalAlignment="Top" Width="399"/>
-        <Label Name="loadingLbl" Content="Loading ..." HorizontalAlignment="Left" Margin="286,186,0,0" VerticalAlignment="Top"/>
+        <ProgressBar Foreground="Goldenrod" Name="progressBar" HorizontalAlignment="Left" Height="22" Margin="139,288,0,0" VerticalAlignment="Top" Width="399"/>
+        <Label Name="loadingLbl" Content="Loading ..." HorizontalAlignment="Left" Margin="280,256,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

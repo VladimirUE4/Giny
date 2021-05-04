@@ -49,6 +49,9 @@ namespace Giny.SpellExplorer
             {
                 effectsList.Items.Add(effect);
             }
+
+            if (effectsList.Items.Count > 0)
+                effectsList.SelectedItem = effectsList.Items.GetItemAt(0);
         }
         private string TriggersToString(IEnumerable<World.Managers.Fights.Triggers.Trigger> triggers)
         {
@@ -120,6 +123,7 @@ namespace Giny.SpellExplorer
                 case EffectsEnum.Effect_CastSpell_1019:
                 case EffectsEnum.Effect_CastSpell_1018:
                 case EffectsEnum.Effect_CastSpell_1017:
+                case EffectsEnum.Effect_Trap:
 
                     Button button = new Button();
                     button.Content = "Explore";

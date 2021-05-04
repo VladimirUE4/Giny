@@ -139,7 +139,7 @@ namespace Giny.World.Network
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
             Send(new ServerSettingsMessage("fr", 0, 0, false, 0, 200, true));
 
-            SendServerOptionalFeatures(OptionalFeaturesEnum.PvpKis, OptionalFeaturesEnum.Mount,
+            SendServerOptionalFeatures(OptionalFeaturesEnum.Mount,
                 OptionalFeaturesEnum.ItemIdols, OptionalFeaturesEnum.MapTacticMode, OptionalFeaturesEnum.TradeAveragePricesAutoUpdate);
 
             Send(new ServerSessionConstantsMessage(new ServerSessionConstant[]

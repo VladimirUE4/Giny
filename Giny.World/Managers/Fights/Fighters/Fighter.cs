@@ -1937,6 +1937,11 @@ namespace Giny.World.Managers.Fights.Fighters
                 TriggerBuffs(TriggerType.OnDamagedByEnemy, damage);
             }
 
+            if (damage.GetEffectHandler().CastHandler.Cast.IsCriticalHit)
+            {
+                damage.Source.TriggerBuffs(TriggerType.OnCriticalHit, damage);
+            }
+
 
 
         }
