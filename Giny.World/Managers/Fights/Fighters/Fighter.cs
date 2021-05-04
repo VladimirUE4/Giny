@@ -1863,7 +1863,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (damage.EffectSchool != EffectSchoolEnum.Fix)
             {
                 TriggerBuffs(damage); // <---- avant, après ?  Prygen .. a voir
-                TriggerBuffs(TriggerType.AfterDamaged, damage);
+              //  TriggerBuffs(TriggerType.AfterDamaged, damage); <--- unused ? HealWhenAttack
             }
 
             if (this.Stats.LifePoints <= 0)

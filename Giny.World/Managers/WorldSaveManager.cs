@@ -51,13 +51,10 @@ namespace Giny.World.Managers
                     WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
 
                     WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
-
-                    CreateNextTask();
                 }
                 else
                 {
                     Logger.Write("Unable to save world server, server is busy...", Channels.Warning);
-                    CreateNextTask();
                 }
             }));
 

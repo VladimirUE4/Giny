@@ -14,7 +14,6 @@ namespace Giny.World.Managers.Bidshops
 
         public const double RefreshDelaySeconds = 120f;
 
-        [WIP("unused. Client dont ask for average prices... ")]
         [StartupInvoke("Average Price Scheduler", StartupInvokePriority.Last)]
         public static void CreateTask()
         {

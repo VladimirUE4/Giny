@@ -22,15 +22,15 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedByAlly, // DBA
         OnDamagedByEnemy, // DBE
         OnDamagedBySummon, // DI
-        OnDamagedByWeapon, // DC
+       // OnDamagedByWeapon, // DC
         OnDamagedBySpell, // DS
-        OnDamagedByGlyph, // DG
-        OnDamagedByTrap, //DP
+      //  OnDamagedByGlyph, // DG
+       // OnDamagedByTrap, //DP
         OnDamagedMelee, //DM
         OnDamagedRange, //DR
-        OnDamagedByPush, // MD-->PD
+        OnDamagedByPush, // PD
         OnDamagedByAllyPush, //PMD
-        OnDamageEnemyByPush, // MMD
+        //OnDamageEnemyByPush, // MMD
 
         OnSummon, // CI
 
@@ -41,7 +41,7 @@ namespace Giny.World.Managers.Fights.Triggers
 
         OnMPLost, // m , MPA (effective loss? attempt? )
         OnAPLost, // A
-        OnRangeLost, // R
+      //   OnRangeLost, // R
 
         OnHealed, //H
 
@@ -65,7 +65,6 @@ namespace Giny.World.Managers.Fights.Triggers
         /*
          * Custom
          */
-        AfterDamaged,
         Delayed,
         Unknown,
 

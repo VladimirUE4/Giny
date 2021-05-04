@@ -27,7 +27,7 @@ namespace Giny.World.Managers.Fights.Effects.Heals
             foreach (var target in targets)
             {
                 AddTriggerBuff(target, FightDispellableEnum.DISPELLABLE,
-                    Trigger.Singleton(TriggerType.AfterDamaged), Apply);
+                    Trigger.Singleton(TriggerType.OnDamaged), Apply);
             }
         }
 
