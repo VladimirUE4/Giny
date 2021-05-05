@@ -108,13 +108,13 @@ namespace Giny.World.Managers.Fights.Stats
                 ShieldPoints = 0;
             }
         }
-        public void AddVitality(short delta)
+        public void AddMaxVitality(short delta)
         {
             this.BaseMaxLife += delta;
             this.MaxLifePoints += delta;
             this.LifePoints += delta;
         }
-        public void RemoveVitality(short delta)
+        public void RemoveMaxVitality(short delta)
         {
             this.BaseMaxLife -= delta;
             this.MaxLifePoints -= delta;
@@ -127,6 +127,24 @@ namespace Giny.World.Managers.Fights.Stats
             if (MaxLifePoints < 0)
             {
                 MaxLifePoints = 0;
+            }
+        }
+        public void RemoveVitality(short delta)
+        {
+            this.LifePoints -= delta;
+
+            if (LifePoints < 0)
+            {
+                LifePoints = 0;
+            }
+        }
+        public void AddVitality(short delta)
+        {
+            this.LifePoints += delta;
+
+            if (LifePoints >= MaxLifePoints)
+            {
+                LifePoints = MaxLifePoints;
             }
         }
         public void SetShield(short delta)

@@ -59,13 +59,18 @@ namespace Giny.World.Managers.Fights.Buffs
             this.LastTriggeredSequence = null;
         }
 
+        /*
+         * Prevent Recursivity
+         */
         public bool CanTrigger()
         {
             if (LastTriggeredSequence == null)
             {
                 return true;
             }
-            return LastTriggeredSequence != this.Target.Fight.SequenceManager.CurrentSequence && !LastTriggeredSequence.IsChild(Target.Fight.SequenceManager.CurrentSequence);
+
+            // LastTriggeredSequence != this.Target.Fight.SequenceManager.CurrentSequence &&  
+            return !LastTriggeredSequence.IsChild(Target.Fight.SequenceManager.CurrentSequence);
         }
         public bool DecrementDelay()
         {

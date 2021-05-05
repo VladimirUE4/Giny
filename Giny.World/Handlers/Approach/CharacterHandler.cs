@@ -144,7 +144,15 @@ namespace Giny.World.Handlers.Approach
         [MessageHandler]
         public static void HandleCharacterSelectionMessage(CharacterSelectionMessage message, WorldClient client)
         {
-            client.Character = new Character(client, client.GetCharacter(message.id));
+            CharacterRecord character = client.GetCharacter(message.id);
+
+            if (character == null)
+            {
+                client.Send(new CharacterSelectedErrorMessage());
+                return;
+            }
+
+            client.Character = new Character(client, character);
             ProcessSelection(client);
         }
         private static void ProcessSelection(WorldClient client)

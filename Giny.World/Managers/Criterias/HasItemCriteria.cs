@@ -30,6 +30,17 @@ namespace Giny.World.Managers.Criterias
             {
                 return !client.Character.Inventory.Exist(gid, quantity);
             }
+            else if (ComparaisonSymbol == 'X')
+            {
+                foreach (var item in client.Character.Inventory.GetEquipedItems())
+                {
+                    if (item.GId == gid)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
             else
             {
                 throw new Exception("Invalid comparaison symbol. (HasItemCriteria)");

@@ -146,6 +146,7 @@
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOS.cs" />
     <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\VitalityDebuff.cs" />
     <Compile Include="Managers\Fights\Challenges\Anchorite.cs" />
     <Compile Include="Managers\Fights\Challenges\Challenge.cs" />
     <Compile Include="Managers\Fights\Challenges\ChallengeResultEnum.cs" />

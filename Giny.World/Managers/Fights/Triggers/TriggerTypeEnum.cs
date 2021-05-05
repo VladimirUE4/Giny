@@ -10,8 +10,9 @@ namespace Giny.World.Managers.Fights.Triggers
     {
         Instant, // I
 
-        OnInflictDamageMelee, // CDM
-        OnInflictDamageRange, // CDR
+        CasterInflictDamageMelee, // CDM
+        CasterInflictDamageRange, // CDR
+        CasterInflictDamageEnnemy, // CBDE On inflige des dégats a un enemi
 
         OnDamaged, // D
         OnDamagedAir, // DA
@@ -19,8 +20,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedFire, // DF
         OnDamagedWater, // DW
         OnDamagedNeutral, // DN
-        OnDamagedByAlly, // DBA
-        OnDamagedByEnemy, // DBE
+        OnDamagedByAlly, // DBA   
+        OnDamagedByEnemy, // BDE
         OnDamagedBySummon, // DI
        // OnDamagedByWeapon, // DC
         OnDamagedBySpell, // DS
@@ -31,6 +32,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedByPush, // PD
         OnDamagedByAllyPush, //PMD
         //OnDamageEnemyByPush, // MMD
+
+
 
         OnSummon, // CI
 

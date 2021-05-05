@@ -476,32 +476,44 @@ namespace Giny.World.Managers.Fights.Fighters
         public void LooseMp(Fighter source, short amount, ActionsEnum action)
         {
             Stats.UseMp(amount);
-            Fight.PointsVariation(source.Id, Id, action, (short)(-amount));
-
-            if (action == ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST)
-            {
-                TriggerBuffs(TriggerTypeEnum.OnMPLost, null);
-            }
+            OnPointsVariation(source.Id, action, (short)(-amount));
         }
         public void LooseAp(Fighter source, short amount, ActionsEnum action)
         {
             Stats.UseAp(amount);
-            Fight.PointsVariation(source.Id, Id, action, (short)(-amount));
-
-            if (action == ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST)
-            {
-                TriggerBuffs(TriggerTypeEnum.OnAPLost, null);
-            }
+            OnPointsVariation(source.Id, action, (short)(-amount));
         }
         public void GainAp(Fighter source, short delta)
         {
             Stats.GainAp(delta);
-            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
+            OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
         }
         public void GainMp(Fighter source, short delta)
         {
             Stats.GainMp(delta);
-            Fight.PointsVariation(source.Id, Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_WIN, delta);
+            OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_WIN, delta);
+        }
+
+        private void OnPointsVariation(int sourceId, ActionsEnum action, short delta)
+        {
+            Fight.Send(new GameActionFightPointsVariationMessage()
+            {
+                actionId = (short)action,
+                delta = delta,
+                sourceId = sourceId,
+                targetId = Id,
+            });
+
+            switch (action)
+            {
+                case ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST:
+                    TriggerBuffs(TriggerTypeEnum.OnMPLost, null);
+                    break;
+                case ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST:
+                    TriggerBuffs(TriggerTypeEnum.OnAPLost, null);
+                    break;
+
+            }
         }
         public virtual void PassTurn()
         {
@@ -531,29 +543,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return (short)GetBuffs<T>().Where(x => x.SpellId == spellId).Sum(x => x.GetDelta());
         }
-        public void DecrementAllCastedBuffsDuration()
-        {
-            foreach (Fighter current in this.Fight.GetFighters<Fighter>())
-            {
-                current.DecrementBuffsDuration(this);
-            }
-        }
 
-        public void DecrementSummonsCastedBuffsDuration()
-        {
-            foreach (var summon in GetSummons())
-            {
-                summon.DecrementAllCastedBuffsDuration();
-            }
-        }
-
-        public void DecrementSummonsCastedBuffsDelays()
-        {
-            foreach (var summon in GetSummons())
-            {
-                summon.DecrementAllCastedBuffsDelay();
-            }
-        }
 
         protected IEnumerable<SummonedFighter> GetSummons()
         {
@@ -561,19 +551,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        public void DecrementBuffsDuration(Fighter caster)
-        {
-            foreach (var buff in Buffs.ToArray())
-            {
-                if (buff.Cast.Source == caster && !buff.HasDelay())
-                {
-                    if (buff.DecrementDuration())
-                    {
-                        RemoveAndDispellBuff(buff);
-                    }
-                }
-            }
-        }
+
         public bool HasBuff<T>() where T : Buff
         {
             return GetBuffs<T>().Count() > 0;
@@ -581,21 +559,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public abstract void OnTurnBegin();
 
-        public void DecrementAllCastedBuffsDelay()
-        {
-            foreach (var fighter in Fight.GetFighters<Fighter>())
-            {
-                foreach (var buff in fighter.GetBuffs<TriggerBuff>().Where(x => x.HasDelay()).ToArray())
-                {
-                    if (buff.Cast.Source == this && buff.DecrementDelay())
-                    {
-                        buff.Apply();
-
-                        RemoveAndDispellBuff(buff);
-                    }
-                }
-            }
-        }
         public void RemoveAndDispellBuff(Buff buff)
         {
             this.RemoveBuff(buff);
@@ -609,21 +572,13 @@ namespace Giny.World.Managers.Fights.Fighters
                 RemoveAndDispellBuff(buff);
             }
         }
-        [WIP("not sure about spell child.")]
+
         public void RemoveSpellEffects(Fighter source, short spellId)
         {
             IEnumerable<Buff> buffs = this.Buffs.Where(x => x.Cast.SpellId == spellId);
 
             foreach (var buff in buffs.ToArray())
             {
-                foreach (var spellCast in buff.Cast.GetAllChilds())
-                {
-                    if (spellCast.SpellId != spellId)
-                    {
-                        RemoveSpellEffects(source, spellCast.SpellId);
-                    }
-                }
-
                 RemoveAndDispellBuff(buff);
             }
 
@@ -1205,7 +1160,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (otherTarget != null && otherTarget != this)
             {
-                switch (Breed)
+                switch (source.Breed)
                 {
                     case BreedEnum.Xelor:
                         this.SwitchPosition(otherTarget, register);
@@ -1988,12 +1943,12 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             if (damage.Source.IsMeleeWith(this))
             {
-                damage.Source.TriggerBuffs(TriggerTypeEnum.OnInflictDamageMelee, damage);
+                damage.Source.TriggerBuffs(TriggerTypeEnum.CasterInflictDamageMelee, damage);
                 TriggerBuffs(TriggerTypeEnum.OnDamagedMelee, damage);
             }
             else
             {
-                damage.Source.TriggerBuffs(TriggerTypeEnum.OnInflictDamageRange, damage);
+                damage.Source.TriggerBuffs(TriggerTypeEnum.CasterInflictDamageRange, damage);
                 TriggerBuffs(TriggerTypeEnum.OnDamagedRange, damage);
             }
 
@@ -2004,11 +1959,17 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (damage.Source.IsFriendlyWith(this))
             {
+              
                 TriggerBuffs(TriggerTypeEnum.OnDamagedByAlly, damage);
             }
             else
             {
                 TriggerBuffs(TriggerTypeEnum.OnDamagedByEnemy, damage);
+            }
+
+            if (!damage.Source.IsFriendlyWith(this))
+            {
+                damage.Source.TriggerBuffs(TriggerTypeEnum.CasterInflictDamageEnnemy, damage);
             }
 
             if (effectHandler != null && effectHandler.CastHandler.Cast.IsCriticalHit)

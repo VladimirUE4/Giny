@@ -59,11 +59,17 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
+        public int TurnIndex
+        {
+            get;
+            set;
+        }
         public Buff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null)
         {
             this.Id = id;
             this.Target = target;
             this.EffectHandler = effectHandler;
+            this.TurnIndex = target.Fight.GetTurnIndex();
             this.Duration = effectHandler.Effect.Duration;
             this.Dispellable = dispellable;
             this.CustomActionId = customActionId;

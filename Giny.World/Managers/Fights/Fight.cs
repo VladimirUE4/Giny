@@ -63,7 +63,7 @@ namespace Giny.World.Managers.Fights
             get;
         }
 
-    
+
 
         public FightTeam RedTeam
         {
@@ -191,7 +191,6 @@ namespace Giny.World.Managers.Fights
 
         #endregion
 
-
         public void Send(NetworkMessage message)
         {
             BlueTeam.Send(message);
@@ -245,6 +244,7 @@ namespace Giny.World.Managers.Fights
         }
         public int GetTurnIndex()
         {
+
             return Timeline.Index;
         }
         public Idol[] GetIdols()
@@ -431,9 +431,11 @@ namespace Giny.World.Managers.Fights
 
             this.Send(GetGameFightStartMessage());
 
+            this.UpdateTimeLine();
+
             this.Synchronize();
 
-            this.UpdateTimeLine();
+            UpdateRound();
 
             foreach (var fighter in GetFighters())
             {
@@ -466,6 +468,7 @@ namespace Giny.World.Managers.Fights
         {
             if (StartAcknowledged && !Ended && !CheckFightEnd())
             {
+
                 this.OnTurnStarted();
             }
         }
@@ -479,44 +482,57 @@ namespace Giny.World.Managers.Fights
                 UpdateRound();
             }
 
-            // Game Fight Turn Start
-            FighterPlaying.TurnStartCell = FighterPlaying.Cell;
+            Synchronize();
+
+            this.Send(new GameFightTurnStartMessage(this.FighterPlaying.Id, Fight.TurnTime * 10));
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
             {
-
-                FighterPlaying.TriggerBuffs(TriggerTypeEnum.OnTurnBegin, null);
-
+                FighterPlaying.TurnStartCell = FighterPlaying.Cell;
 
                 /*
                  * Here or after decrement buff delay ? seems here, see Dofus Ocre
                  */
-                if (!FighterPlaying.IsSummoned() && RoundNumber > 1)
+
+                if (RoundNumber > 1)
                 {
-                    FighterPlaying.DecrementAllCastedBuffsDuration();
+                    foreach (var buff in Buffs.ToArray())
+                    {
+                        if (!Timeline.IsIndexValid(buff.TurnIndex))
+                        {
+                            for (int i = buff.TurnIndex; i >= 0; i--)
+                            {
+                                if (Timeline.IsIndexValid(i))
+                                {
+                                    buff.TurnIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
 
-                    FighterPlaying.DecrementSummonsCastedBuffsDuration();
-                    FighterPlaying.DecrementSummonsCastedBuffsDelays();
-                    FighterPlaying.DecrementAllCastedBuffsDelay();
+
+                    this.DecrementBuffsDuration();
+                    this.DecrementBuffsDelay();
                 }
-
-
                 this.DecrementGlyphDuration(FighterPlaying);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
+                FighterPlaying.TriggerBuffs(TriggerTypeEnum.OnTurnBegin, null);
 
                 FighterPlaying.TriggerBuffs(TriggerTypeEnum.AfterTurnBegin, null);
 
             }
 
-            Synchronize();
-
             /*
-             * If buffs killed fighter (iop vitality for instance)
-             */
+            * If buffs killed fighter (iop vitality for instance)
+            */
             if (FighterPlaying.Stats.LifePoints <= 0)
             {
                 FighterPlaying.Die(FighterPlaying);
             }
+
+
+
             if (CheckFightEnd())
             {
                 return;
@@ -528,7 +544,6 @@ namespace Giny.World.Managers.Fights
                 return;
             }
 
-            this.Send(new GameFightTurnStartMessage(this.FighterPlaying.Id, Fight.TurnTime * 10));
 
             TurnStartTime = DateTime.Now;
 
@@ -540,17 +555,36 @@ namespace Giny.World.Managers.Fights
             TurnStarted?.Invoke(this, FighterPlaying);
         }
 
-
-        public void PointsVariation(int sourceId, int targetId, ActionsEnum action, short delta)
+        private void DecrementBuffsDelay()
         {
-            this.Send(new GameActionFightPointsVariationMessage()
+            
+      
+
+            foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay() && x.TurnIndex == GetTurnIndex()).ToArray())
             {
-                actionId = (short)action,
-                delta = delta,
-                sourceId = sourceId,
-                targetId = targetId,
-            });
+                if (buff.DecrementDelay())
+                {
+                    buff.Apply();
+                    buff.Target.RemoveAndDispellBuff(buff);
+                }
+            }
         }
+        private void DecrementBuffsDuration()
+        {
+            
+            foreach (var buff in Buffs.ToArray().Where(x => x.TurnIndex == GetTurnIndex()))
+            {
+                if (!buff.HasDelay())
+                {
+                    if (buff.DecrementDuration())
+                    {
+                        buff.Target.RemoveAndDispellBuff(buff);
+                    }
+                }
+            }
+        }
+
+
 
         public void StopTurn()
         {

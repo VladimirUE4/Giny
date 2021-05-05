@@ -185,6 +185,10 @@ namespace Giny.World.Managers.Fights.Timeline
             this.Fighters = list;
             this.Index = 0;
         }
+        public bool IsIndexValid(int index)
+        {
+            return Fighters[index].Alive;
+        }
         public double[] GetAliveIds()
         {
             return Fighters.FindAll(x => x.Alive).Select(x => (double)x.Id).ToArray();

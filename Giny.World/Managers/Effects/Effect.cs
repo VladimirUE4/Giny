@@ -255,9 +255,9 @@ namespace Giny.World.Managers.Effects
                 case "DBA":
                     return new Trigger(TriggerTypeEnum.OnDamagedByAlly);
                 case "CDM":
-                    return new Trigger(TriggerTypeEnum.OnInflictDamageMelee);
+                    return new Trigger(TriggerTypeEnum.CasterInflictDamageMelee);
                 case "CDR":
-                    return new Trigger(TriggerTypeEnum.OnInflictDamageRange);
+                    return new Trigger(TriggerTypeEnum.CasterInflictDamageRange);
                 case "CC":
                     return new Trigger(TriggerTypeEnum.OnCriticalHit);
                 case "M":
@@ -276,6 +276,8 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerTypeEnum.OnMPLost);
                 case "APA":
                     return new Trigger(TriggerTypeEnum.OnAPLost);
+                case "CDBE":
+                    return new Trigger(TriggerTypeEnum.CasterInflictDamageEnnemy);
             }
 
             return new Trigger(TriggerTypeEnum.Unknown);
