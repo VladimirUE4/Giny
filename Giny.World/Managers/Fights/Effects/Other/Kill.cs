@@ -21,13 +21,14 @@ namespace Giny.World.Managers.Fights.Effects.Other
         {
             foreach (var target in targets)
             {
-                target.Stats.LifePoints = 0;
                 Source.Fight.Send(new Giny.Protocol.Messages.GameActionFightKillMessage()
                 {
                     actionId = 0,
                     sourceId = Source.Id,
                     targetId = target.Id,
                 });
+
+                target.Die(Source);
 
             }
 

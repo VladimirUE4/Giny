@@ -14,7 +14,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
         public short Delta
         {
             get;
-            private set;
+            set;
         }
         public Fighter Source
         {

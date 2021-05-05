@@ -67,9 +67,13 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override bool MustSkipTurn()
         {
-            return base.MustSkipTurn() || !Record.CanPlay;
+            return base.MustSkipTurn();
         }
 
+        public override bool InsertInTimeline()
+        {
+            return Record.UseSummonSlot;
+        }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
             return new GameFightMonsterInformations()

@@ -13,9 +13,10 @@
         </Grid.ColumnDefinitions>
         <TextBox Name="textBox"  HorizontalAlignment="Left" Height="23" Margin="89,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193" Grid.ColumnSpan="2"/>
         <Label Content="Spell name :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
-        <ListBox Name="spellSelector" HorizontalAlignment="Left" Height="563" Margin="10,54,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2"/>
+        <ListBox Name="spellSelector" HorizontalAlignment="Left" Height="521" Margin="10,54,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2"/>
         <ContentControl Name="contentControl" Content="" Grid.Column="1" Margin="142,0,0,0"/>
-        <Button Visibility="Hidden"  Name="unhandledBtn" Content="Effects Relator" HorizontalAlignment="Left" Margin="10,622,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2" Height="29" Click="Button_Click"/>
+        <Button Visibility="Hidden"  Name="unhandledBtn" Content="Effects Relator" HorizontalAlignment="Left" Margin="10,580,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2" Height="34" Click="Button_Click"/>
+        <Button Visibility="Hidden"  x:Name="triggersBtn" Content="Triggers Relator" HorizontalAlignment="Left" Margin="10,619,0,0" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2" Height="32" Click="triggersBtn_Click"/>
 
     </Grid>
 </Window>

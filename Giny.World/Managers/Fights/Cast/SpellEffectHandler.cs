@@ -195,7 +195,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute(IEnumerable<Fighter> targets)
         {
-            if (Effect.Triggers.Any(x => x.Type == TriggerType.Unknown))
+            if (Effect.Triggers.Any(x => x.Type == TriggerTypeEnum.Unknown))
             {
                 Source.Fight.Warn("Unknown trigger(s) : " + Effect.RawTriggers + " cannot cast effect " + Effect.EffectEnum);
                 return;
@@ -205,7 +205,7 @@ namespace Giny.World.Managers.Fights.Cast
             {
                 foreach (var target in targets)
                 {
-                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Trigger.Singleton(TriggerType.Delayed), delegate (TriggerBuff buff, ITriggerToken token)
+                    AddTriggerBuff(target, FightDispellableEnum.REALLY_NOT_DISPELLABLE, Trigger.Singleton(TriggerTypeEnum.Delayed), delegate (TriggerBuff buff, ITriggerToken token)
                       {
                           InternalApply(new Fighter[] { target });
                           return false;

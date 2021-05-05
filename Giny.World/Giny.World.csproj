@@ -159,6 +159,7 @@
     <Compile Include="Managers\Fights\Challenges\Tights.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\ArmorDamageReduction.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\AddRandModifier.cs" />
+    <Compile Include="Managers\Fights\Effects\Buffs\HealBuff.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\IncreaseSize.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\SpellBoostRange.cs" />
     <Compile Include="Managers\Fights\Effects\Buffs\SkipTurn.cs" />
@@ -178,7 +179,6 @@
     <Compile Include="Managers\Fights\Effects\Debuffs\SubVitalityPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercentWhenAttack.cs" />
-    <Compile Include="Managers\Fights\Effects\Heals\HealWhenAttack.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\DisablePortal.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyph.cs" />
     <Compile Include="Managers\Fights\Effects\Marks\SpawnGlyphAura.cs" />
@@ -187,6 +187,7 @@
     <Compile Include="Managers\Fights\Effects\Movements\TeleportPortal.cs" />
     <Compile Include="Managers\Fights\Effects\Other\Carry.cs" />
     <Compile Include="Managers\Fights\Effects\Other\Throw.cs" />
+    <Compile Include="Managers\Fights\Effects\Steal\StealMp.cs" />
     <Compile Include="Managers\Fights\Effects\Summons\SummonBomb.cs" />
     <Compile Include="Managers\Fights\Fighters\SummonedBomb.cs" />
     <Compile Include="Managers\Fights\FightContextual.cs" />
@@ -359,7 +360,7 @@
     <Compile Include="Managers\Fights\Effects\SpellEffectManager.cs" />
     <Compile Include="Managers\Effects\EffectString.cs" />
     <Compile Include="Managers\Fights\Buffs\Buff.cs" />
-    <Compile Include="Managers\Fights\Triggers\BuffTriggerType.cs" />
+    <Compile Include="Managers\Fights\Triggers\TriggerTypeEnum.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBaseDamageBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StatBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\StateBuff.cs" />

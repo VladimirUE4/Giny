@@ -5,6 +5,7 @@ using Giny.ORM.IO;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Effects;
 using Giny.World.Modules;
+using Giny.World.Records.Breeds;
 using Giny.World.Records.Effects;
 using Giny.World.Records.Monsters;
 using Giny.World.Records.Spells;
@@ -51,6 +52,7 @@ namespace Giny.SpellExplorer
                 DatabaseManager.Instance.LoadTable<MonsterRecord>();
                 DatabaseManager.Instance.LoadTable<EffectRecord>();
                 DatabaseManager.Instance.LoadTable<SpellStateRecord>();
+                DatabaseManager.Instance.LoadTable<BreedRecord>();
                 SpellEffectManager.Instance.Initialize();
 
                 DatabaseManager.Instance.LoadTable<SpellLevelRecord>();
@@ -77,11 +79,19 @@ namespace Giny.SpellExplorer
 
         private void OnLoadProgress(string arg1, double arg2)
         {
-            this.Dispatcher.Invoke(() =>
+            try
             {
-                double percentage = arg2 * 100d;
-                progressBar.Value = percentage;
-            });
+                this.Dispatcher.Invoke(() =>
+                {
+                    double percentage = arg2 * 100d;
+                    progressBar.Value = percentage;
+                });
+            }
+            catch
+            {
+                Environment.Exit(0);
+                // user close widow
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Giny.World.Managers.Fights.Triggers
 {
     public class Trigger
     {
-        public TriggerType Type
+        public TriggerTypeEnum Type
         {
             get;
             private set;
@@ -21,7 +21,7 @@ namespace Giny.World.Managers.Fights.Triggers
             private set;
         }
 
-        public Trigger(TriggerType type, int? value = null)
+        public Trigger(TriggerTypeEnum type, int? value = null)
         {
             this.Type = type;
             this.Value = value;
@@ -32,7 +32,7 @@ namespace Giny.World.Managers.Fights.Triggers
             return Type.ToString();
         }
 
-        public static IEnumerable<Trigger> Singleton(TriggerType type)
+        public static IEnumerable<Trigger> Singleton(TriggerTypeEnum type)
         {
             return new Trigger[]
             {
@@ -54,7 +54,7 @@ namespace Giny.World.Managers.Fights.Triggers
         }
         public static bool IsInstant(IEnumerable<Trigger> triggers)
         {
-            return triggers.Count() == 1 && triggers.ElementAt(0).Type == TriggerType.Instant;
+            return triggers.Count() == 1 && triggers.ElementAt(0).Type == TriggerTypeEnum.Instant;
         }
 
         public static bool SequenceEquals(IEnumerable<Trigger> t1, IEnumerable<Trigger> t2)

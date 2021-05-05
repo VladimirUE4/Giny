@@ -213,72 +213,72 @@ namespace Giny.World.Managers.Effects
             switch (identifier)
             {
                 case "PT":
-                    return new Trigger(TriggerType.OnTeleportPortal);
+                    return new Trigger(TriggerTypeEnum.OnTeleportPortal);
                 case "CT":
-                    return new Trigger(TriggerType.OnTackle);
+                    return new Trigger(TriggerTypeEnum.OnTackle);
                 case "CI":
-                    return new Trigger(TriggerType.OnSummon);
+                    return new Trigger(TriggerTypeEnum.OnSummon);
                 case "H":
-                    return new Trigger(TriggerType.OnHealed);
+                    return new Trigger(TriggerTypeEnum.OnHealed);
                 case "P":
-                    return new Trigger(TriggerType.OnPushed);
+                    return new Trigger(TriggerTypeEnum.OnPushed);
                 case "TE":
-                    return new Trigger(TriggerType.OnTurnEnd);
+                    return new Trigger(TriggerTypeEnum.OnTurnEnd);
                 case "TB":
-                    return new Trigger(TriggerType.OnTurnBegin);
+                    return new Trigger(TriggerTypeEnum.OnTurnBegin);
                 case "DI":
-                    return new Trigger(TriggerType.OnDamagedBySummon);
+                    return new Trigger(TriggerTypeEnum.OnDamagedBySummon);
                 case "D":
-                    return new Trigger(TriggerType.OnDamaged);
+                    return new Trigger(TriggerTypeEnum.OnDamaged);
                 case "DR":
-                    return new Trigger(TriggerType.OnDamagedRange);
+                    return new Trigger(TriggerTypeEnum.OnDamagedRange);
                 case "DS":
-                    return new Trigger(TriggerType.OnDamagedBySpell);
+                    return new Trigger(TriggerTypeEnum.OnDamagedBySpell);
                 case "DM":
-                    return new Trigger(TriggerType.OnDamagedMelee);
+                    return new Trigger(TriggerTypeEnum.OnDamagedMelee);
                 case "DA":
-                    return new Trigger(TriggerType.OnDamagedAir);
+                    return new Trigger(TriggerTypeEnum.OnDamagedAir);
                 case "DF":
-                    return new Trigger(TriggerType.OnDamagedFire);
+                    return new Trigger(TriggerTypeEnum.OnDamagedFire);
                 case "DN":
-                    return new Trigger(TriggerType.OnDamagedNeutral);
+                    return new Trigger(TriggerTypeEnum.OnDamagedNeutral);
                 case "DE":
-                    return new Trigger(TriggerType.OnDamagedEarth);
+                    return new Trigger(TriggerTypeEnum.OnDamagedEarth);
                 case "DW":
-                    return new Trigger(TriggerType.OnDamagedWater);
+                    return new Trigger(TriggerTypeEnum.OnDamagedWater);
                 case "PD":
-                    return new Trigger(TriggerType.OnDamagedByPush);
+                    return new Trigger(TriggerTypeEnum.OnDamagedByPush);
                 case "PMD":
-                    return new Trigger(TriggerType.OnDamagedByAllyPush);
+                    return new Trigger(TriggerTypeEnum.OnDamagedByAllyPush);
                 case "DBE":
-                    return new Trigger(TriggerType.OnDamagedByEnemy);
+                    return new Trigger(TriggerTypeEnum.OnDamagedByEnemy);
                 case "DBA":
-                    return new Trigger(TriggerType.OnDamagedByAlly);
+                    return new Trigger(TriggerTypeEnum.OnDamagedByAlly);
                 case "CDM":
-                    return new Trigger(TriggerType.OnInflictDamageMelee);
+                    return new Trigger(TriggerTypeEnum.OnInflictDamageMelee);
                 case "CDR":
-                    return new Trigger(TriggerType.OnInflictDamageRange);
+                    return new Trigger(TriggerTypeEnum.OnInflictDamageRange);
                 case "CC":
-                    return new Trigger(TriggerType.OnCriticalHit);
+                    return new Trigger(TriggerTypeEnum.OnCriticalHit);
                 case "M":
-                    return new Trigger(TriggerType.OnMoved);
+                    return new Trigger(TriggerTypeEnum.OnMoved);
                 case "X":
-                    return new Trigger(TriggerType.OnDeath);
+                    return new Trigger(TriggerTypeEnum.OnDeath);
                 case "I":
-                    return new Trigger(TriggerType.Instant);
+                    return new Trigger(TriggerTypeEnum.Instant);
                 case "EON":
-                    return new Trigger(TriggerType.OnSpecificStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
+                    return new Trigger(TriggerTypeEnum.OnSpecificStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
                 case "TP":
-                    return new Trigger(TriggerType.OnTeleportPortal); // <---- TODO
+                    return new Trigger(TriggerTypeEnum.OnTeleportPortal); // <---- TODO
                 case "ATB":
-                    return new Trigger(TriggerType.AfterTurnBegin);
+                    return new Trigger(TriggerTypeEnum.AfterTurnBegin);
                 case "MPA":
-                    return new Trigger(TriggerType.OnMPLost);
+                    return new Trigger(TriggerTypeEnum.OnMPLost);
                 case "APA":
-                    return new Trigger(TriggerType.OnAPLost);
+                    return new Trigger(TriggerTypeEnum.OnAPLost);
             }
 
-            return new Trigger(TriggerType.Unknown);
+            return new Trigger(TriggerTypeEnum.Unknown);
         }
 
 

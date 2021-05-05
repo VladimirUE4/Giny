@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Triggers
 {
-    public enum TriggerType
+    public enum TriggerTypeEnum
     {
         Instant, // I
 

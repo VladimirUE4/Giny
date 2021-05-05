@@ -182,6 +182,10 @@ namespace Giny.World.Records.Breeds
         {
             return Breeds[breedId];
         }
+        public static IEnumerable<BreedRecord> GetBreeds()
+        {
+            return Breeds.Values;
+        }
 
         public override string ToString()
         {

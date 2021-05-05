@@ -1,5 +1,7 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.World.Managers.Fights.Effects;
+using Giny.World.Managers.Fights.Triggers;
+using Giny.World.Records.Breeds;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -21,9 +23,9 @@ namespace Giny.SpellExplorer
     /// <summary>
     /// Logique d'interaction pour NotHandledEffects.xaml
     /// </summary>
-    public partial class EffectsRelator : Window
+    public partial class TriggersRelator : Window
     {
-        Dictionary<EffectsEnum, List<SpellRecord>> Effects = new Dictionary<EffectsEnum, List<SpellRecord>>();
+        Dictionary<TriggerTypeEnum, List<SpellRecord>> TriggerSpells = new Dictionary<TriggerTypeEnum, List<SpellRecord>>();
 
         private CancellationTokenSource CancelSource
         {
@@ -35,10 +37,10 @@ namespace Giny.SpellExplorer
 
         private bool loading;
 
-        public EffectsRelator()
+        public TriggersRelator()
         {
             InitializeComponent();
-            effects.SelectionChanged += Effects_SelectionChanged;
+            triggers.SelectionChanged += Effects_SelectionChanged;
             Load();
         }
 
@@ -52,22 +54,18 @@ namespace Giny.SpellExplorer
         {
             CancelSource = new CancellationTokenSource();
 
-            bool unhandledOnly = false;
-
-            string searchStr = "";
-
             Task.Run(() =>
             {
                 loading = true;
 
+                bool breedSpellOnly = false;
+
                 this.Dispatcher.Invoke(() =>
                 {
+                    breedSpellOnly = breedSpells.IsChecked.Value;
                     spells.Items.Clear();
-                    effects.Items.Clear();
-                    Effects.Clear();
-                    searchStr = search.Text;
-                    unhandledOnly = unhandleds.IsChecked.Value;
-                    count.Content = string.Empty;
+                    triggers.Items.Clear();
+                    TriggerSpells.Clear();
                 });
 
                 var spellRecords = SpellRecord.GetSpellRecords();
@@ -80,35 +78,41 @@ namespace Giny.SpellExplorer
                     {
                         foreach (var effect in level.Effects)
                         {
-                            if (SpellEffectManager.Instance.Exists(effect.EffectEnum) && unhandledOnly)
+                            foreach (var trigger in effect.Triggers)
                             {
-                                continue;
-                            }
-
-                            if (searchStr == string.Empty || effect.EffectEnum.ToString().ToLower().Contains(searchStr.ToLower()))
-                            {
-                                if (!Effects.ContainsKey(effect.EffectEnum))
+                                if (!TriggerSpells.ContainsKey(trigger.Type))
                                 {
-                                    Effects.Add(effect.EffectEnum, new List<SpellRecord>());
+                                    TriggerSpells.Add(trigger.Type, new List<SpellRecord>());
 
                                     this.Dispatcher.Invoke(() =>
                                     {
-                                        effects.Items.Add(effect.EffectEnum.ToString());
-                                        count.Content = "Count : " + Effects.Count;
+                                        triggers.Items.Add(trigger.Type.ToString());
                                     });
                                 }
 
-                                if (!Effects[effect.EffectEnum].Contains(spell))
-                                    Effects[effect.EffectEnum].Add(spell);
-
-                                this.Dispatcher.Invoke(() =>
+                                if (breedSpellOnly)
                                 {
-                                    if (effects.SelectedItem != null && effects.SelectedValue.ToString() == effect.EffectEnum.ToString())
+                                    if (IsBreedSpell(spell))
                                     {
-                                        spells.Items.Add(spell);
+                                        if (!TriggerSpells[trigger.Type].Contains(spell))
+                                            TriggerSpells[trigger.Type].Add(spell);
                                     }
-                                });
+                                }
+                                else
+                                {
+                                    if (!TriggerSpells[trigger.Type].Contains(spell))
+                                        TriggerSpells[trigger.Type].Add(spell);
+                                }
+
                             }
+
+                            this.Dispatcher.Invoke(() =>
+                            {
+                                if (triggers.SelectedItem != null && triggers.SelectedValue.ToString() == effect.EffectEnum.ToString())
+                                {
+                                    spells.Items.Add(spell);
+                                }
+                            });
 
                         }
                     }
@@ -130,27 +134,37 @@ namespace Giny.SpellExplorer
                 loading = false;
             });
         }
-
+        private bool IsBreedSpell(SpellRecord spell)
+        {
+            foreach (var breed in BreedRecord.GetBreeds())
+            {
+                if (breed.SpellIds.Contains(spell.Id))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void DisplaySpells()
         {
-            if (effects.SelectedItem == null)
+            if (triggers.SelectedItem == null)
             {
                 return;
             }
-            EffectsEnum effect = 0;
+            TriggerTypeEnum triggerType = 0;
 
-            if (Enum.TryParse<EffectsEnum>(effects.SelectedItem.ToString(), out effect))
+            if (Enum.TryParse<TriggerTypeEnum>(triggers.SelectedItem.ToString(), out triggerType))
             {
                 spells.Items.Clear();
 
-                foreach (var spell in Effects[effect])
+                foreach (var spell in TriggerSpells[triggerType])
                 {
                     spells.Items.Add(spell);
                 }
             }
             else
             {
-                MessageBox.Show("Unknown Effects Enum " + effects.SelectedItem.ToString());
+                MessageBox.Show("Unknown Effects Enum " + triggers.SelectedItem.ToString());
             }
         }
         private void Effects_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,10 +180,7 @@ namespace Giny.SpellExplorer
                 castSpell.Show();
             }
         }
-        private void UnhandledOnlyClicked(object sender, RoutedEventArgs e)
-        {
-            Load();
-        }
+
         private void Load()
         {
             if (loading)
@@ -188,9 +199,11 @@ namespace Giny.SpellExplorer
                 InternalLoad();
             }
         }
-        private void search_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void breedSpells_Click(object sender, RoutedEventArgs e)
         {
             Load();
+
         }
     }
 }

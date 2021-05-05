@@ -54,6 +54,7 @@ namespace Giny.SpellExplorer
             UpdateSpellList();
             textBox.TextChanged += TextBox_TextChanged;
             unhandledBtn.Visibility = Visibility.Visible;
+            triggersBtn.Visibility = Visibility.Visible;
             spellSelector.SelectionChanged += SpellSelector_SelectionChanged;
         }
         private void SpellSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,6 +73,12 @@ namespace Giny.SpellExplorer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             EffectsRelator view = new EffectsRelator();
+            view.Show();
+        }
+
+        private void triggersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TriggersRelator view = new TriggersRelator();
             view.Show();
         }
     }

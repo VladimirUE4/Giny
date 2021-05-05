@@ -61,7 +61,6 @@ namespace Giny.World.Managers.Fights.Buffs
         }
         public Buff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null)
         {
-           
             this.Id = id;
             this.Target = target;
             this.EffectHandler = effectHandler;
@@ -105,7 +104,7 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public virtual IEnumerable<Trigger> GetTriggers()
         {
-            return Trigger.Singleton(TriggerType.Instant);
+            return Trigger.Singleton(TriggerTypeEnum.Instant);
         }
         public virtual bool HasDelay()
         {

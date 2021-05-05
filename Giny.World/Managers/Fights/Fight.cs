@@ -62,6 +62,9 @@ namespace Giny.World.Managers.Fights
         {
             get;
         }
+
+    
+
         public FightTeam RedTeam
         {
             get;
@@ -106,8 +109,6 @@ namespace Giny.World.Managers.Fights
             get;
             private set;
         }
-
-
 
         public DateTime? StartTime
         {
@@ -173,6 +174,11 @@ namespace Giny.World.Managers.Fights
             get;
             set;
         }
+        public List<Buff> Buffs
+        {
+            get;
+            private set;
+        }
         public DateTime TurnStartTime
         {
             get;
@@ -237,6 +243,10 @@ namespace Giny.World.Managers.Fights
         {
             return GetFighters<T>(aliveOnly).Where(predicate);
         }
+        public int GetTurnIndex()
+        {
+            return Timeline.Index;
+        }
         public Idol[] GetIdols()
         {
             return new Idol[0];
@@ -257,11 +267,12 @@ namespace Giny.World.Managers.Fights
             this.SequenceManager = new SequenceManager(this);
             this.Synchronizer = null;
             this.Marks = new List<Mark>();
+            this.Buffs = new List<Buff>();
         }
 
         public void OnSequenceStarted(FightSequence sequence)
         {
-          
+
         }
         public void OnSequenceEnded(FightSequence sequence)
         {
@@ -270,6 +281,7 @@ namespace Giny.World.Managers.Fights
                 foreach (var fighter in GetFighters<Fighter>())
                 {
                     fighter.DamageReceivedSequenced = 0;
+                    fighter.LastExchangedPositionSequenced = null;
                 }
             }
         }
@@ -385,7 +397,6 @@ namespace Giny.World.Managers.Fights
         }
         public bool IsCellFree(CellRecord cell)
         {
-            var test = GetFighter(cell.Id);
             return cell.Walkable && !cell.NonWalkableDuringFight && GetFighter(cell.Id) == null;
         }
         public bool IsCellFree(short cellId)
@@ -473,6 +484,10 @@ namespace Giny.World.Managers.Fights
 
             using (SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_TURN_START))
             {
+
+                FighterPlaying.TriggerBuffs(TriggerTypeEnum.OnTurnBegin, null);
+
+
                 /*
                  * Here or after decrement buff delay ? seems here, see Dofus Ocre
                  */
@@ -485,25 +500,28 @@ namespace Giny.World.Managers.Fights
                     FighterPlaying.DecrementAllCastedBuffsDelay();
                 }
 
-                var buffs = GetAllBuffs();
 
                 this.DecrementGlyphDuration(FighterPlaying);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
 
-                FighterPlaying.TriggerBuffs(TriggerType.OnTurnBegin, null);
-
-
-                // problem here ! 
-                FighterPlaying.TriggerBuffs(TriggerType.AfterTurnBegin, null);
+                FighterPlaying.TriggerBuffs(TriggerTypeEnum.AfterTurnBegin, null);
 
             }
 
             Synchronize();
 
+            /*
+             * If buffs killed fighter (iop vitality for instance)
+             */
+            if (FighterPlaying.Stats.LifePoints <= 0)
+            {
+                FighterPlaying.Die(FighterPlaying);
+            }
             if (CheckFightEnd())
             {
                 return;
             }
+
             if (FighterPlaying.MustSkipTurn())
             {
                 StopTurn();
@@ -794,40 +812,13 @@ namespace Giny.World.Managers.Fights
                 summon.OnSummoned();
             }
 
-            source.TriggerBuffs(TriggerType.OnSummon, null);
+            source.TriggerBuffs(TriggerTypeEnum.OnSummon, null);
 
         }
-        public void OnBuffAdded(Buff buff)
-        {
-            var abstractFightDispellableEffect = buff.GetAbstractFightDispellableEffect();
 
-            Send(new GameActionFightDispellableEffectMessage()
-            {
-                actionId = buff.GetActionId(),
-                effect = abstractFightDispellableEffect,
-                sourceId = buff.Cast.Source.Id,
-            }); ;
-        }
-
-        public void OnBuffDurationUpdated(Fighter source, short actionId, Buff buff, short delta)
-        {
-            Send(new GameActionFightModifyEffectsDurationMessage()
-            {
-                actionId = actionId,
-                delta = (short)(-delta),
-                sourceId = source.Id,
-                targetId = Id,
-            });
-        }
         public IEnumerable<Buff> GetAllBuffs()
         {
-            foreach (var fighter in GetFighters<Fighter>())
-            {
-                foreach (var buff in fighter.GetBuffs())
-                {
-                    yield return buff;
-                }
-            }
+            return Buffs;
         }
         public void UpdateRound()
         {

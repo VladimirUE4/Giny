@@ -64,6 +64,9 @@
     <Compile Include="CastSpell.xaml.cs">
       <DependentUpon>CastSpell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TriggersRelator.xaml.cs">
+      <DependentUpon>TriggersRelator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
     <Page Include="CastSpell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TriggersRelator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
