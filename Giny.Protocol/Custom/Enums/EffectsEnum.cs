@@ -2295,7 +2295,7 @@
         /// #1
         /// </summary>
         /// 
-        Effect_Unknown_2017 = 2017,
+        Effect_CastSpell2017 = 2017,
         /// <summary>
         /// Something related to spells ?
         /// </summary>

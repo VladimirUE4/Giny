@@ -1,4 +1,4 @@
-﻿ using Giny.World.Managers.Fights.Cast;
+﻿using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using System;
 using System.Collections.Generic;
@@ -86,7 +86,7 @@ namespace Giny.World.Managers.Effects.Targets
                     case 'O':
                         return new LastAttackerCriterion(true);
                     case 'o':
-                        return new LastAttackerCriterion(false);
+                        return new LastAttackerCriterion(false); 
                     case 'W':
                         return new InvalidTeleportCriterion();
                     case 'r':
@@ -95,6 +95,10 @@ namespace Giny.World.Managers.Effects.Targets
                         return new ThroughPortalCriterion(true);
                     case 'K':
                         return new CarriedCriterion();
+                    case 'Q':
+                        return new CanSummonCriterion(caster, false);
+                    case 'q':
+                        return new CanSummonCriterion(caster, true);
                 }
 
                 return new UnknownCriterion(str);

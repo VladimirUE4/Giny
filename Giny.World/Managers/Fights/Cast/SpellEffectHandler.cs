@@ -97,13 +97,14 @@ namespace Giny.World.Managers.Fights.Cast
          * Karcham & Chamrak
          */
         [WIP]
-        protected bool CasterCriterionSatisfied 
+        protected bool CasterCriterionSatisfied
         {
             get;
             private set;
         }
         public SpellEffectHandler(EffectDice effect, SpellCastHandler castHandler)
         {
+
             Targets = effect.GetTargets();
 
             if (Targets.Any(x => x is UnknownCriterion))
@@ -116,13 +117,21 @@ namespace Giny.World.Managers.Fights.Cast
 
             this.AffectedFighters = GetAffectedFighters();
 
+
+
             this.CasterCriterionSatisfied = ComputeCasterCriterion();
+
+
 
         }
         private bool ComputeCasterCriterion()
         {
-            bool result = Targets.OfType<StateCriterion>().Where(x => x.Caster).All(x => x.IsTargetValid(Source, this));
-            return result;
+           
+
+            var caster = Source;
+            bool result = Targets.OfType<StateCriterion>().Where(x => x.Caster).All(x => x.IsTargetValid(caster, this));
+            bool result2 = Targets.OfType<CanSummonCriterion>().Where(x => x.Caster).All(x => x.IsTargetValid(caster, this));
+            return result & result2;
         }
 
         private IEnumerable<Fighter> GetAffectedFighters()
@@ -181,6 +190,8 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
+
+
             if (!CasterCriterionSatisfied)
             {
                 return;

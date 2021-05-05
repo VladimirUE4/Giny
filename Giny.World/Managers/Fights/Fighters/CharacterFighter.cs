@@ -142,6 +142,18 @@ namespace Giny.World.Managers.Fights.Fighters
                 cast.Force = true;
                 this.CastSpell(cast);
             }
+
+            switch (Breed)
+            {
+                case BreedEnum.Osamodas:
+                    SpellRecord record = SpellRecord.GetSpellRecord((short)13991);
+                    Spell spell = new Spell(record, record.GetLevel((byte)1));
+                    SpellCast cast = new SpellCast(this, spell, this.Cell);
+                    cast.Force = true;
+                    CastSpell(cast);
+                    break;
+                
+            }
         }
         public override void OnJoined()
         {

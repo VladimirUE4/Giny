@@ -8,14 +8,14 @@ namespace Giny.Protocol.Custom.Enums
 {
     public enum EffectSchoolEnum
     {
-        Neutral,
-        Earth,
-        Water,
-        Air,
-        Fire,
-        Pushback,
-        Healing,
-        Fix,
-        Unknown,
+        Neutral = 0,
+        Earth = 1,
+        Water = 3,
+        Air = 4,
+        Fire = 2,
+        Pushback = 5,
+        Healing = 6,
+        Fix = 7,
+        Unknown = 8,
     }
 }

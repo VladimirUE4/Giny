@@ -214,11 +214,6 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             private set;
         }
-        public short DamageReceivedSequenced
-        {
-            get;
-            set;
-        }
         /*
          * Prevent some Telefrag recursive issues (Desynchronisaiton)
          */
@@ -235,7 +230,6 @@ namespace Giny.World.Managers.Fights.Fighters
             this.BuffIdProvider = new UniqueIdProvider();
             this.SpellHistory = new SpellHistory(this);
             this.WasTeleportedInInvalidCell = false;
-            this.DamageReceivedSequenced = 0;
         }
 
         public virtual void Initialize()
@@ -550,6 +544,10 @@ namespace Giny.World.Managers.Fights.Fighters
             return Fight.GetFighters<SummonedFighter>(x => x.IsSummoned() && x.GetSummoner() == this);
         }
 
+        public int GetSummonsCount()
+        {
+            return GetSummons().OfType<SummonedMonster>().Where(x => x.Record.UseSummonSlot).Count();
+        }
 
 
         public bool HasBuff<T>() where T : Buff
@@ -1069,7 +1067,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public bool CanCastNoLOS(short spellId)
         {
-            return GetBuffs<SpellBoostRemoveLOS>().Any(x => x.SpellId == spellId && x.GetDelta() == 1);
+            return GetBuffs<SpellBoostRemoveLOSBuff>().Any(x => x.SpellId == spellId && x.GetDelta() == 1);
         }
 
         public bool IsInCastZone(SpellLevelRecord spellLevel, MapPoint castPoint, MapPoint cell)
@@ -1389,6 +1387,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
             apCost -= GetSpellBoost<SpellBoostReduceApCostBuff>(level.SpellId);
 
+            apCost += GetSpellBoost<SpellBoostIncreaseApCostBuff>(level.SpellId);
+
             if (apCost < 0)
             {
                 apCost = 0;
@@ -1592,7 +1592,7 @@ namespace Giny.World.Managers.Fights.Fighters
             return MovementHistory.GetEntries(2).Select(x => (short)x.Cell.Id).ToArray();
         }
 
-        public virtual bool InsertInTimeline()
+        public virtual bool DisplayInTimeline()
         {
             return true;
         }
@@ -1673,16 +1673,19 @@ namespace Giny.World.Managers.Fights.Fighters
                 delta = Stats.MaxLifePoints - Stats.LifePoints;
             }
 
-            Stats.LifePoints += delta;
 
-            Fight.Send(new GameActionFightLifePointsGainMessage()
+            if (delta > 0)
             {
-                actionId = (short)ActionsEnum.ACTION_CHARACTER_LIFE_POINTS_WIN,
-                delta = delta,
-                sourceId = healing.Source.Id,
-                targetId = Id,
-            });
+                Stats.LifePoints += delta;
 
+                Fight.Send(new GameActionFightLifePointsGainMessage()
+                {
+                    actionId = (short)ActionsEnum.ACTION_CHARACTER_LIFE_POINTS_WIN,
+                    delta = delta,
+                    sourceId = healing.Source.Id,
+                    targetId = Id,
+                });
+            }
 
 
         }
@@ -1772,7 +1775,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     Fight.Send(new GameActionFightLifeAndShieldPointsLostMessage()
                     {
                         actionId = 0,
-                        elementId = 0,
+                        elementId = (int)damage.EffectSchool,
                         loss = num,
                         shieldLoss = (short)Stats.ShieldPoints,
                         permanentDamages = permanentDamages,
@@ -1804,7 +1807,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     Fight.Send(new GameActionFightLifeAndShieldPointsLostMessage()
                     {
                         actionId = 0,
-                        elementId = 0,
+                        elementId = (int)damage.EffectSchool,
                         loss = 0,
                         permanentDamages = 0,
                         shieldLoss = (short)delta,
@@ -1830,7 +1833,7 @@ namespace Giny.World.Managers.Fights.Fighters
                         sourceId = damage.Source.Id,
                         targetId = this.Id,
                         actionId = 0,
-                        elementId = 0,
+                        elementId = (int)damage.EffectSchool,
                         loss = Stats.LifePoints,
                         permanentDamages = 0,
                     });
@@ -1851,7 +1854,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     Fight.Send(new GameActionFightLifePointsLostMessage()
                     {
                         actionId = 0,
-                        elementId = 0,
+                        elementId = (int)damage.EffectSchool,
                         loss = delta,
                         permanentDamages = permanentDamages,
                         sourceId = damage.Source.Id,
@@ -1859,8 +1862,6 @@ namespace Giny.World.Managers.Fights.Fighters
                     });
                 }
             }
-
-            DamageReceivedSequenced += (short)lifeLoss;
 
             short reflected = (short)CalculateDamageReflection(damage.Computed.Value);
 
@@ -1871,10 +1872,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 OnDamageReflected(damage.Source);
             }
 
-            if (damage.EffectSchool != EffectSchoolEnum.Fix)
-            {
-                // TriggerBuffs(AfterDamaged)      TriggerBuffs(TriggerType.AfterDamaged, damage);
-            }
 
             if (this.Stats.LifePoints <= 0)
             {
@@ -1896,7 +1893,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         private void TriggerBuffs(Damage damage)
         {
-            if (damage.EffectSchool == EffectSchoolEnum.Fix)
+            if (damage.EffectSchool == EffectSchoolEnum.Fix || damage.WontTriggerBuffs)
             {
                 return;
             }
@@ -1907,6 +1904,7 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 return;
             }
+
             TriggerBuffs(TriggerTypeEnum.OnDamaged, damage);
 
             if (damage.Source.IsSummoned())
@@ -1959,7 +1957,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (damage.Source.IsFriendlyWith(this))
             {
-              
+
                 TriggerBuffs(TriggerTypeEnum.OnDamagedByAlly, damage);
             }
             else
@@ -2112,6 +2110,10 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 Carried = null;
             }
+        }
+        public bool CanSummon()
+        {
+            return GetSummonsCount() < Stats.SummonableCreaturesBoost.TotalInContext();
         }
         public void Die(Fighter killedBy)
         {

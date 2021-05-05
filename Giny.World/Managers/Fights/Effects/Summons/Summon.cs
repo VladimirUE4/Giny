@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (Source.Fight.IsCellFree(TargetCell))
+            if (Source.Fight.IsCellFree(TargetCell) && Source.CanSummon())
             {
                 var fighter = CreateSummon((short)Effect.Min, (byte)Effect.Max);
                 Source.Fight.AddSummon(Source, fighter);

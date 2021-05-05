@@ -1,36 +1,36 @@
 ﻿using Giny.Protocol.Enums;
-using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
-using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Buffs.SpellBoost;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
-using Giny.World.Records.Effects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Fights.Effects.Other
+namespace Giny.World.Managers.Fights.Effects.Debuffs
 {
-    [SpellEffectHandler(EffectsEnum.Effect_DisableLOS)]
-    public class DisableLOS : SpellEffectHandler
+    [SpellEffectHandler(EffectsEnum.Effect_IncreaseSpellAPCost)]
+    public class IncreaseSpellApCost : SpellEffectHandler
     {
-        public DisableLOS(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public IncreaseSpellApCost(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 
         }
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
+            short spellId = (short)Effect.Min;
+            short delta = (short)Effect.Value;
+
             foreach (var target in targets)
             {
-                foreach (var spell in target.GetSpells())
+                if (target.HasSpell(spellId))
                 {
                     int id = target.BuffIdProvider.Pop();
-                    Buff buff = new SpellBoostRemoveLOSBuff(id, spell.Id, (short)Effect.Value, target, this, FightDispellableEnum.DISPELLABLE,
-                     (short)ActionsEnum.ACTION_BOOST_SPELL_NOLINEOFSIGHT);
+                    SpellBoostIncreaseApCostBuff buff = new SpellBoostIncreaseApCostBuff(id, spellId, delta,
+                        target, this, FightDispellableEnum.DISPELLABLE);
                     target.AddBuff(buff);
                 }
             }

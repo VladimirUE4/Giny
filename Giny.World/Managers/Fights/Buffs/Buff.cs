@@ -73,6 +73,11 @@ namespace Giny.World.Managers.Fights.Buffs
             this.Duration = effectHandler.Effect.Duration;
             this.Dispellable = dispellable;
             this.CustomActionId = customActionId;
+
+            if (Duration > 60) // fuck ankama.
+            {
+                Duration = -1;
+            }
         }
 
         public bool DecrementDuration()

@@ -13,6 +13,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 {
     /*
      * Mot Blessant (chaque cible lance le sort)
+     * Invocation Osamodas
      */
     [SpellEffectHandler(EffectsEnum.Effect_CastSpell_1017)]
     public class CastSpell1017 : SpellEffectHandler
@@ -34,6 +35,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
             {
                 targetCell = token.GetSource().Cell;
             }
+
 
             foreach (var target in targets)
             {

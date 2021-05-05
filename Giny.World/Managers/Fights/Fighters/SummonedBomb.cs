@@ -49,7 +49,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return false;
         }
-        public override bool InsertInTimeline()
+        public override bool DisplayInTimeline()
         {
             return false;
         }

@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.Extensions;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Fights.Effects;
 using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Records.Breeds;
@@ -25,7 +26,7 @@ namespace Giny.SpellExplorer
     /// </summary>
     public partial class TriggersRelator : Window
     {
-        Dictionary<TriggerTypeEnum, List<SpellRecord>> TriggerSpells = new Dictionary<TriggerTypeEnum, List<SpellRecord>>();
+        Dictionary<string, List<SpellRecord>> TriggerSpells = new Dictionary<string, List<SpellRecord>>();
 
         private CancellationTokenSource CancelSource
         {
@@ -78,15 +79,19 @@ namespace Giny.SpellExplorer
                     {
                         foreach (var effect in level.Effects)
                         {
-                            foreach (var trigger in effect.Triggers)
+                            int index = 0;
+                            foreach (var trigger in effect.RawTriggers.Split('|'))
                             {
-                                if (!TriggerSpells.ContainsKey(trigger.Type))
+                                string triggerName = trigger.RemoveNumbers() + " (" + effect.Triggers[index].Type + ")";
+
+                                if (!TriggerSpells.ContainsKey(triggerName))
                                 {
-                                    TriggerSpells.Add(trigger.Type, new List<SpellRecord>());
+                                    TriggerSpells.Add(triggerName, new List<SpellRecord>());
 
                                     this.Dispatcher.Invoke(() =>
                                     {
-                                        triggers.Items.Add(trigger.Type.ToString());
+
+                                        triggers.Items.Add(triggerName);
                                     });
                                 }
 
@@ -94,16 +99,16 @@ namespace Giny.SpellExplorer
                                 {
                                     if (IsBreedSpell(spell))
                                     {
-                                        if (!TriggerSpells[trigger.Type].Contains(spell))
-                                            TriggerSpells[trigger.Type].Add(spell);
+                                        if (!TriggerSpells[triggerName].Contains(spell))
+                                            TriggerSpells[triggerName].Add(spell);
                                     }
                                 }
                                 else
                                 {
-                                    if (!TriggerSpells[trigger.Type].Contains(spell))
-                                        TriggerSpells[trigger.Type].Add(spell);
+                                    if (!TriggerSpells[triggerName].Contains(spell))
+                                        TriggerSpells[triggerName].Add(spell);
                                 }
-
+                                index++;
                             }
 
                             this.Dispatcher.Invoke(() =>
@@ -151,20 +156,12 @@ namespace Giny.SpellExplorer
             {
                 return;
             }
-            TriggerTypeEnum triggerType = 0;
 
-            if (Enum.TryParse<TriggerTypeEnum>(triggers.SelectedItem.ToString(), out triggerType))
-            {
-                spells.Items.Clear();
+            spells.Items.Clear();
 
-                foreach (var spell in TriggerSpells[triggerType])
-                {
-                    spells.Items.Add(spell);
-                }
-            }
-            else
+            foreach (var spell in TriggerSpells[triggers.SelectedItem.ToString()])
             {
-                MessageBox.Show("Unknown Effects Enum " + triggers.SelectedItem.ToString());
+                spells.Items.Add(spell);
             }
         }
         private void Effects_SelectionChanged(object sender, SelectionChangedEventArgs e)

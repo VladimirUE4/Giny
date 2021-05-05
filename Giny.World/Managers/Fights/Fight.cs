@@ -280,7 +280,6 @@ namespace Giny.World.Managers.Fights
             {
                 foreach (var fighter in GetFighters<Fighter>())
                 {
-                    fighter.DamageReceivedSequenced = 0;
                     fighter.LastExchangedPositionSequenced = null;
                 }
             }
@@ -515,7 +514,7 @@ namespace Giny.World.Managers.Fights
                     this.DecrementBuffsDuration();
                     this.DecrementBuffsDelay();
                 }
-                this.DecrementGlyphDuration(FighterPlaying);
+                this.DecrementMarkDurations(FighterPlaying);
                 this.TriggerMarks(FighterPlaying, MarkTriggerType.OnTurnBegin);
                 FighterPlaying.TriggerBuffs(TriggerTypeEnum.OnTurnBegin, null);
 
@@ -557,8 +556,8 @@ namespace Giny.World.Managers.Fights
 
         private void DecrementBuffsDelay()
         {
-            
-      
+
+
 
             foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay() && x.TurnIndex == GetTurnIndex()).ToArray())
             {
@@ -571,7 +570,7 @@ namespace Giny.World.Managers.Fights
         }
         private void DecrementBuffsDuration()
         {
-            
+
             foreach (var buff in Buffs.ToArray().Where(x => x.TurnIndex == GetTurnIndex()))
             {
                 if (!buff.HasDelay())
@@ -799,8 +798,15 @@ namespace Giny.World.Managers.Fights
 
             mark.OnRemoved();
         }
-        private void DecrementGlyphDuration(Fighter fighterPlaying)
+        private void DecrementMarkDurations(Fighter fighterPlaying)
         {
+            foreach (var rune in fighterPlaying.GetMarks<Rune>().ToArray())
+            {
+                if (rune.DecrementDuration())
+                {
+                    RemoveMark(rune);
+                }
+            }
             foreach (var glyph in fighterPlaying.GetMarks<Glyph>().ToArray())
             {
                 if (glyph.DecrementDuration())
@@ -820,11 +826,7 @@ namespace Giny.World.Managers.Fights
             foreach (var summon in summons)
             {
                 source.Team.AddFighter(summon);
-
-                if (summon.InsertInTimeline())
-                {
-                    Timeline.InsertFighter(summon, Timeline.Index + 1);
-                }
+                Timeline.InsertFighter(summon, Timeline.Index + 1);
                 summon.Initialize();
             }
 
@@ -879,13 +881,12 @@ namespace Giny.World.Managers.Fights
             foreach (var fighter in GetAllConnectedFighters())
             {
                 UpdateTimeLine(fighter);
-
             }
         }
         public void UpdateTimeLine(CharacterFighter fighter)
         {
-            double[] ids = this.Timeline.GetAliveIds();
-            double[] deads = this.Timeline.GetDeadsIds();
+            double[] ids = this.Timeline.GetAlives().Where(x => x.DisplayInTimeline()).Select(x => (double)x.Id).ToArray();
+            double[] deads = this.Timeline.GetDeads().Where(x => x.DisplayInTimeline()).Select(x => (double)x.Id).ToArray();
             fighter.Send(new GameFightTurnListMessage(ids, deads));
         }
 

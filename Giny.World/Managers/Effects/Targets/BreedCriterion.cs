@@ -41,7 +41,7 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
             if (Caster)
-                actor = handler.CastHandler.Cast.GetCaster();
+                actor = handler.Source;
 
             if (actor is CharacterFighter)
                 return Required ? (int)((CharacterFighter)actor).Character.Breed.Id == Breed : (int)((CharacterFighter)actor).Character.Breed.Id != Breed;

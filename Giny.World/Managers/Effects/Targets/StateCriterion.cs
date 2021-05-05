@@ -42,7 +42,7 @@ namespace Giny.World.Managers.Effects.Targets
         {
             if (Caster)
             {
-                var caster = handler.CastHandler.Cast.GetCaster(); // Dofus Ebene
+                var caster = handler.Source;
                 return Required ? caster.HasState(State) : !caster.HasState(State);
             }
             return Required ? actor.HasState(State) : !actor.HasState(State);

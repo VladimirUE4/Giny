@@ -16,11 +16,16 @@ namespace Giny.World.Managers.Fights.Marks
 {
     public class Rune : Mark
     {
+        public int Duration
+        {
+            get;
+            set;
+        }
         public Rune(int id, EffectDice effect, Zone zone, MarkTriggerType triggers, Color color, Fighter source, CellRecord centerCell, SpellRecord spellRecord, SpellLevelRecord spellLevel) : base(id, effect, zone, triggers, color, source, centerCell, spellRecord, spellLevel)
         {
-            
+            this.Duration = effect.Duration;
         }
-   
+
         public override bool StopMovement => false;
 
         public override GameActionMarkTypeEnum Type => GameActionMarkTypeEnum.RUNE;
@@ -32,18 +37,23 @@ namespace Giny.World.Managers.Fights.Marks
 
         public override void OnAdded()
         {
-           
+
         }
 
         public override void OnRemoved()
         {
-          
+
         }
 
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
             Source.Fight.RemoveMark(this);
             ApplyEffects();
+        }
+
+        public bool DecrementDuration()
+        {
+            return this.Duration != -1 && (this.Duration -= 1) <= 0;
         }
     }
 }

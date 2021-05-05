@@ -2,6 +2,7 @@
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Effects.Targets;
 using Giny.World.Records.Effects;
+using Giny.World.Records.Monsters;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -135,24 +136,35 @@ namespace Giny.SpellExplorer
                     button.Width = 100;
                     button.Height = 30;
 
-                    button.Click += (object o, RoutedEventArgs args) =>
+                    SpellRecord spell = SpellRecord.GetSpellRecord((short)effect.Min);
+
+                    if (spell != null)
                     {
+                        effectInfo.Items.Add("Target Spell : " + spell.Name);
 
-                        SpellRecord spell = SpellRecord.GetSpellRecord((short)effect.Min);
-
-                        if (spell.Id == Spell.Id)
+                        button.Click += (object o, RoutedEventArgs args) =>
                         {
-                            levelsList.SelectedItem = levelsList.Items.GetItemAt(effect.Max - 1);
-                            levelsList.Focus();
-                        }
-                        else
-                        {
-                            CastSpell castSpell = new CastSpell(spell, (byte)effect.Max);
-                            castSpell.Show();
-                        }
-                    };
 
-                    effectInfo.Items.Add(button);
+
+
+                            if (spell.Id == Spell.Id)
+                            {
+                                levelsList.SelectedItem = levelsList.Items.GetItemAt(effect.Max - 1);
+                                levelsList.Focus();
+                            }
+                            else
+                            {
+                                CastSpell castSpell = new CastSpell(spell, (byte)effect.Max);
+                                castSpell.Show();
+                            }
+                        };
+
+                        effectInfo.Items.Add(button);
+                    }
+                    else
+                    {
+                        effectInfo.Items.Add("Unknown Target Spell : " + effect.Min);
+                    }
                     break;
                 default:
                     break;
@@ -183,6 +195,9 @@ namespace Giny.SpellExplorer
                 }
             }
 
+
+
+
         }
         private void UpdateSpellInfo()
         {
@@ -202,6 +217,13 @@ namespace Giny.SpellExplorer
             foreach (var level in Spell.Levels)
             {
                 levelsList.Items.Add(level);
+            }
+
+            var monster = MonsterRecord.GetMonsterRecords().FirstOrDefault(x => x.Spells.Contains(Spell.Id));
+
+            if (monster != null)
+            {
+                spellInfo.Items.Add("Monster owner name : " + monster.Name + " (" + monster.Id + ")");
             }
 
         }

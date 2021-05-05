@@ -70,9 +70,9 @@ namespace Giny.World.Managers.Fights.Fighters
             return base.MustSkipTurn();
         }
 
-        public override bool InsertInTimeline()
+        public override bool DisplayInTimeline()
         {
-            return Record.UseSummonSlot;
+            return Record.CanPlay;
         }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {
@@ -116,21 +116,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Record.SpellRecords.Values;
         }
-
-        public override void OnTurnEnded()
-        {
-            if (Controller != null)
-            {
-                var nextSummon = Controller.GetNextControlableSummon(1);
-
-                if (nextSummon != null)
-                {
-                    nextSummon.SwitchContext();
-                }
-            }
-        }
-
-        
+ 
         public override void OnSummoned()
         {
             CastSpell(Grade.StartingSpellLevelId);

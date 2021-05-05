@@ -133,6 +133,27 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Summoner;
         }
+        private void ChangeContextIfNeeded()
+        {
+            if (Controller != null)
+            {
+                var nextSummon = Controller.GetNextControlableSummon(1);
+
+                if (nextSummon != null)
+                {
+                    nextSummon.SwitchContext();
+                }
+            }
+        }
+        public override void OnDie(Fighter killedBy)
+        {
+            base.OnDie(killedBy);
+            ChangeContextIfNeeded();
+        }
+        public override void OnTurnEnded()
+        {
+            ChangeContextIfNeeded();
+        }
         public override Fighter GetController()
         {
             return Controller;

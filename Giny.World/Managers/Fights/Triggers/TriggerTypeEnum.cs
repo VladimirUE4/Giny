@@ -13,6 +13,7 @@ namespace Giny.World.Managers.Fights.Triggers
         CasterInflictDamageMelee, // CDM
         CasterInflictDamageRange, // CDR
         CasterInflictDamageEnnemy, // CBDE On inflige des dégats a un enemi
+        CasterHealed, // CH
 
         OnDamaged, // D
         OnDamagedAir, // DA
@@ -47,6 +48,7 @@ namespace Giny.World.Managers.Fights.Triggers
       //   OnRangeLost, // R
 
         OnHealed, //H
+
 
         OnStateAdded, // EO
         OnSpecificStateAdded, //EO#

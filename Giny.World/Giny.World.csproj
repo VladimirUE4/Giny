@@ -129,6 +129,7 @@
     <Compile Include="Managers\Effects\EffectCustom.cs" />
     <Compile Include="Managers\Effects\EffectPokefus.cs" />
     <Compile Include="Managers\Effects\EffectPokefusLevel.cs" />
+    <Compile Include="Managers\Effects\Targets\CanSummonCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\CarriedCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
@@ -142,9 +143,10 @@
     <Compile Include="Managers\Fights\Buffs\RandModifierBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\RescaleSkinBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SkipTurnBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostIncreaseApCostBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRangeBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBuff.cs" />
-    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOS.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOSBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\VitalityDebuff.cs" />
     <Compile Include="Managers\Fights\Challenges\Anchorite.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1017.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1018.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1019.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell2017.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamageIntercept.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerApUsed.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerCasterHpEroded.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Managers\Fights\Effects\Damages\DamageSharing.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\ReflectDamage.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\DisableState.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\IncreaseSpellApCost.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\SubVitalityPercent.cs" />

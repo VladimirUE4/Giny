@@ -21,15 +21,16 @@ namespace Giny.World.Managers.Fights.Effects.Marks
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (var trigger in Source.GetMarks<Rune>().ToArray())
+            var mark = Source.GetMarks<Rune>().Where(x => x.CenterCell == TargetCell).FirstOrDefault();
+
+            if (mark != null)
             {
                 using (Source.Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_GLYPH_TRAP))
                 {
-                    Fighter target = Source.Fight.GetFighter(trigger.CenterCell.Id);
-                    trigger.Trigger(target, MarkTriggerType.None);
+                    Fighter target = Source.Fight.GetFighter(mark.CenterCell.Id);
+                    mark.Trigger(target, MarkTriggerType.None);
                 }
             }
-
         }
     }
 }

@@ -23,19 +23,23 @@ namespace Giny.World.Managers.Fights.Effects.Marks
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (!Source.Fight.MarkExist<Rune>(x => x.CenterCell == TargetCell))
+            var mark = Source.Fight.GetMarks<Rune>().Where(x => x.CenterCell == TargetCell).FirstOrDefault();
+
+            if (mark != null)
             {
-                Zone zone = Effect.GetZone();
-
-                Color color = MarksManager.Instance.GetMarkColor(CastHandler.Cast.Spell.GetSpellEnum());
-
-                Rune rune = new Rune(Source.Fight.PopNextMarkId(), Effect,
-                    zone, MarkTriggerType.None, color,
-                    Source, TargetCell, CastHandler.Cast.Spell.Record,
-                    CastHandler.Cast.Spell.Level);
-
-                Source.Fight.AddMark(rune);
+                Source.Fight.RemoveMark(mark);
             }
+
+            Zone zone = Effect.GetZone();
+
+            Color color = MarksManager.Instance.GetMarkColor(CastHandler.Cast.Spell.GetSpellEnum());
+
+            Rune rune = new Rune(Source.Fight.PopNextMarkId(), Effect,
+                zone, MarkTriggerType.None, color,
+                Source, TargetCell, CastHandler.Cast.Spell.Record,
+                CastHandler.Cast.Spell.Level);
+
+            Source.Fight.AddMark(rune);
         }
     }
 }

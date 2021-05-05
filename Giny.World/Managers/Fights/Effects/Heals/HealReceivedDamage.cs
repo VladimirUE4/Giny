@@ -24,11 +24,7 @@ namespace Giny.World.Managers.Fights.Effects.Heals
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            foreach (var target in targets)
-            {
-                short delta = (short)(Source.DamageReceivedSequenced * (Effect.Min / 100d));
-                target.Heal(new Healing(Source, target, delta));
-            }
+            Source.Fight.Warn("Todo : Heal Received Damage");
         }
     }
 

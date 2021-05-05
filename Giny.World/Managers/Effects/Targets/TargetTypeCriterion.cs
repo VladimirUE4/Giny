@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Effects.Targets
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
             if (Caster)
-                actor = handler.CastHandler.Cast.GetCaster();
+                actor = handler.Source;
 
             if (TargetType == SpellTargetType.NONE)
                 // return false; note : wtf, why is there spells with TargetType = NONE ?

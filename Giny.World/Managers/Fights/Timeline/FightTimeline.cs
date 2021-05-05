@@ -189,13 +189,13 @@ namespace Giny.World.Managers.Fights.Timeline
         {
             return Fighters[index].Alive;
         }
-        public double[] GetAliveIds()
+        public Fighter[] GetAlives()
         {
-            return Fighters.FindAll(x => x.Alive).Select(x => (double)x.Id).ToArray();
+            return Fighters.FindAll(x => x.Alive).ToArray();
         }
-        public double[] GetDeadsIds()
+        public Fighter[] GetDeads()
         {
-            return Fighters.FindAll(x => !x.Alive).Select(x => (double)x.Id).ToArray();
+            return Fighters.FindAll(x => !x.Alive).ToArray();
         }
     }
 }
