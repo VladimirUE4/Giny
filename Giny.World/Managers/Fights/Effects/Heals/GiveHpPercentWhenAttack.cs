@@ -25,7 +25,8 @@ namespace Giny.World.Managers.Fights.Effects.Heals
 
             if (token != null)
             {
-                Source.Heal(new Healing(Source, Source, (short)(token.Computed * (Effect.Min / 100d))));
+                var healTarget = token.GetSource();
+                healTarget.Heal(new Healing(Source, healTarget, (short)(token.Computed * (Effect.Min / 100d))));
             }
             else
             {

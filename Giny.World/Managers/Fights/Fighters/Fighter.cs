@@ -550,25 +550,12 @@ namespace Giny.World.Managers.Fights.Fighters
         }
 
 
-        public bool HasBuff<T>() where T : Buff
-        {
-            return GetBuffs<T>().Count() > 0;
-        }
-
         public abstract void OnTurnBegin();
 
         public void RemoveAndDispellBuff(Buff buff)
         {
             this.RemoveBuff(buff);
             buff.Dispell();
-        }
-
-        public void RemoveBuffs<T>() where T : Buff
-        {
-            foreach (var buff in GetBuffs<T>().ToArray())
-            {
-                RemoveAndDispellBuff(buff);
-            }
         }
 
         public void RemoveSpellEffects(Fighter source, short spellId)
@@ -652,7 +639,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
                 x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
-
+            
             foreach (var buff in buffs)
             {
                 buff.LastTriggeredSequence = Fight.SequenceManager.CurrentSequence;
@@ -2044,7 +2031,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public virtual void OnDie(Fighter killedBy)
         {
             Killed?.Invoke(this, killedBy);
-            TriggerBuffs(TriggerTypeEnum.OnDeath, new Death(killedBy));
+            
         }
         public bool IsCarrying()
         {
@@ -2122,6 +2109,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 using (var sequence = Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_CHARACTER_DEATH))
                 {
                     this.Stats.LifePoints = 0;
+
+                    TriggerBuffs(TriggerTypeEnum.OnDeath, new Death(killedBy));
 
                     KillAllSummons();
                     RemoveAllCastedBuffs();

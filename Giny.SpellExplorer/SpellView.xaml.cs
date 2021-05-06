@@ -120,6 +120,19 @@ namespace Giny.SpellExplorer
 
             switch (effect.EffectEnum)
             {
+                case EffectsEnum.Effect_Summon:
+                case EffectsEnum.Effect_SummonSlave:
+                    MonsterRecord monster = MonsterRecord.GetMonsterRecord((short)effect.Min);
+
+                    if (monster != null)
+                    {
+                        effectInfo.Items.Add("Summoned : " + monster.Name);
+                    }
+                    else
+                    {
+                        effectInfo.Items.Add("Unknown Summon.");
+                    }
+                    break;
                 case EffectsEnum.Effect_CastSpell_793:
                 case EffectsEnum.Effect_CastSpell_792:
                 case EffectsEnum.Effect_CastSpell_2794:

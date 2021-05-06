@@ -24,7 +24,7 @@ namespace Giny.World.Managers.Fights.Buffs
             this.Look = look;
         }
 
-        public override void Apply()
+        public override void Execute()
         {
             base.Target.UpdateLook(Cast.Source);
         }

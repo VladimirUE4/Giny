@@ -27,12 +27,13 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             private set;
         }
+      
         public StateBuff(int id, SpellStateRecord record, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable) : base(id, target, effectHandler, dispellable)
         {
             this.Record = record;
         }
 
-        public override void Apply()
+        public override void Execute()
         {
             Target.OnStateAdded(this);
         }
@@ -61,6 +62,10 @@ namespace Giny.World.Managers.Fights.Buffs
         public override short GetDelta()
         {
             throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return "StateBuff : " + Record.Name;
         }
     }
 }

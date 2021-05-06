@@ -16,6 +16,8 @@ namespace Giny.World.Managers.Fights.Marks
         {
             switch (spellId)
             {
+                case SpellEnum.Cawwot:
+                    return Color.White;
                 /* Piège Répulsif
                  * Piège de Dérive
                  * Fosse commune */

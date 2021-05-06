@@ -38,7 +38,7 @@ namespace Giny.World.Managers.Fights.Buffs
             this.Delta = delta;
         }
 
-        public override void Apply()
+        public override void Execute()
         {
             Characteristic.Context += Delta;
         }

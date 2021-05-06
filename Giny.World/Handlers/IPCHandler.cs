@@ -14,7 +14,7 @@ namespace Giny.World.Handlers
         [MessageHandler]
         public static void HandleDisconnectRequest(DisconnectClientRequestMessage message, IPCClient client)
         {
-            var otherClient = WorldServer.Instance.GetClient(x => x.Account.Id == message.accountId);
+            var otherClient = WorldServer.Instance.GetClient(x => x.Account != null && x.Account.Id == message.accountId);
             otherClient?.Disconnect();
             DisconnectClientResultMessage resultMessage = new DisconnectClientResultMessage(otherClient != null); // add client ip in packet to verify same account is conecting?
             client.SendIPCAnswer(resultMessage, message);

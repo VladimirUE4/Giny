@@ -32,7 +32,6 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                 }
                 else
                 {
-
                     foreach (var oldBuff in target.GetBuffs<DisableStateBuff>().Where(x => x.StateId == stateId).ToArray())
                     {
                         target.RemoveAndDispellBuff(oldBuff);

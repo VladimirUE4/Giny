@@ -67,7 +67,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override bool MustSkipTurn()
         {
-            return base.MustSkipTurn();
+            return base.MustSkipTurn() || !Record.CanPlay;
         }
 
         public override bool DisplayInTimeline()
@@ -116,7 +116,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Record.SpellRecords.Values;
         }
- 
+
         public override void OnSummoned()
         {
             CastSpell(Grade.StartingSpellLevelId);

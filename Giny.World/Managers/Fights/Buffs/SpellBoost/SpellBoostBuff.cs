@@ -28,7 +28,7 @@ namespace Giny.World.Managers.Fights.Buffs.SpellBoost
             get;
             set;
         }
-        public override void Apply()
+        public override void Execute()
         {
 
         }

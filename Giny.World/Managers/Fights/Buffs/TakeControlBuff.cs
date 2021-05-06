@@ -15,7 +15,7 @@ namespace Giny.World.Managers.Fights.Buffs
         {
         }
 
-        public override void Apply()
+        public override void Execute()
         {
             ((SummonedFighter)Target).SetController((CharacterFighter)Cast.Source);
         }

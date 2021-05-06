@@ -21,7 +21,7 @@ namespace Giny.World.Managers.Fights.Buffs
         {
         }
 
-        public override void Apply()
+        public override void Execute()
         {
             Target.Stats.GlobalDamageReduction += Delta;
         }

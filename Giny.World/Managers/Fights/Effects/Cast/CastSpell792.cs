@@ -18,6 +18,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
      * Mot Interdit
      * Rassemblement 
      * Friction 
+     * Ségnifuge (Enutrof)
      */
     [SpellEffectHandler(EffectsEnum.Effect_CastSpell_792)]
     public class CastSpell792 : SpellEffectHandler

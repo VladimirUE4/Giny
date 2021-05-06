@@ -64,6 +64,11 @@ namespace Giny.World.Managers.Fights.Buffs
             get;
             set;
         }
+        public bool Applied
+        {
+            get;
+            private set;
+        }
         public Buff(int id, Fighter target, SpellEffectHandler effectHandler, FightDispellableEnum dispellable, short? customActionId = null)
         {
             this.Id = id;
@@ -85,7 +90,13 @@ namespace Giny.World.Managers.Fights.Buffs
             return this.Duration != -1 && (this.Duration -= 1) <= 0;
         }
 
-        public abstract void Apply();
+        public void Apply()
+        {
+            Execute();
+            this.Applied = true;
+        }
+
+        public abstract void Execute();
 
         public abstract void Dispell();
 

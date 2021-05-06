@@ -76,7 +76,7 @@ namespace Giny.World.Managers.Fights.Buffs
         {
             return (this.Delay -= 1) == 0;
         }
-        public override void Apply()
+        public override void Execute()
         {
             if (this.ApplyTrigger != null)
             {

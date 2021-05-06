@@ -26,7 +26,6 @@ namespace Giny.ORM
             get;
             private set;
         }
-
         public event Action<Type, string> OnStartLoadTable;
 
         public event Action<Type, string> OnEndLoadTable;

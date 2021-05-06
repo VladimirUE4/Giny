@@ -17,33 +17,38 @@ namespace Giny.World.Handlers.Approach
 {
     class ApproachHandler /* todo = world queue */
     {
+        static object m_locker = new object();
+
         [MessageHandler]
         public static void HandleAuthenticationTicketMessage(AuthenticationTicketMessage message, WorldClient client)
         {
-            var reader = new BigEndianReader(Encoding.ASCII.GetBytes(message.ticket));
-            var count = reader.ReadByte();
-            var ticket = reader.ReadUTFBytes(count);
-
-            IPCManager.Instance.SendRequest(new AccountRequestMessage(ticket),
-            delegate (AccountMessage msg)
+            lock (m_locker)
             {
-                if (msg.Account != null)
+                var reader = new BigEndianReader(Encoding.ASCII.GetBytes(message.ticket));
+                var count = reader.ReadByte();
+                var ticket = reader.ReadUTFBytes(count);
+
+                IPCManager.Instance.SendRequest(new AccountRequestMessage(ticket),
+                delegate (AccountMessage msg)
                 {
-                    client.Account = msg.Account;
-                    client.OnAccountReceived();
-                    client.Send(new AuthenticationTicketAcceptedMessage());
-                }
-                else
+                    if (msg.Account != null)
+                    {
+                        client.Account = msg.Account;
+                        client.OnAccountReceived();
+                        client.Send(new AuthenticationTicketAcceptedMessage());
+                    }
+                    else
+                    {
+                        client.Send(new AuthenticationTicketRefusedMessage());
+                        client.Disconnect();
+                    }
+                },
+                delegate ()
                 {
                     client.Send(new AuthenticationTicketRefusedMessage());
                     client.Disconnect();
-                }
-            },
-            delegate ()
-            {
-                client.Send(new AuthenticationTicketRefusedMessage());
-                client.Disconnect();
-            });
+                });
+            }
         }
         [MessageHandler]
         public static void HandleReloginTokenRequestMessage(ReloginTokenRequestMessage message,WorldClient client)

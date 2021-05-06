@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Fights.Buffs
             this.Up = up;
         }
 
-        public override void Apply()
+        public override void Execute()
         {
 
         }
