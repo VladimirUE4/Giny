@@ -2,6 +2,7 @@
 using Giny.Core.Time;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Fights.Buffs.SpellBoost;
+using Giny.World.Managers.Fights.Effects.Damages;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Triggers;
 using System;
@@ -64,11 +65,19 @@ namespace Giny.World.Managers.Fights.Cast.Units
             get;
             set;
         }
+        public bool IgnoreShield
+        {
+            get;
+            set;
+        }
         public bool WontTriggerBuffs
         {
             get;
             set;
         }
+
+        public event Action<DamageResult> Applied;
+
         public Damage(Fighter source, Fighter target, EffectSchoolEnum school, short min, short max, SpellEffectHandler effectHandler = null)
         {
             this.Source = source;
@@ -80,6 +89,11 @@ namespace Giny.World.Managers.Fights.Cast.Units
             this.IgnoreBoost = false;
             this.IgnoreResistances = false;
             this.WontTriggerBuffs = false;
+        }
+
+        public void OnApplied(DamageResult applied)
+        {
+            this.Applied?.Invoke(applied);
         }
         public void Compute()
         {
@@ -135,7 +149,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             jet.ValidateBounds();
 
-           // Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
+            // Source.Fight.Reply("Min:" + jet.Min + " Max:" + jet.Max, System.Drawing.Color.Red);
 
             Computed = jet.Generate(Source.HasRandDownModifier(), Source.HasRandUpModifier());
 

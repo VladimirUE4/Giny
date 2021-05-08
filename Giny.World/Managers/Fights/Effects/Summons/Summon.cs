@@ -23,12 +23,18 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            if (Source.Fight.IsCellFree(TargetCell) && Source.CanSummon())
+            MonsterRecord record = MonsterRecord.GetMonsterRecord((short)Effect.Min);
+
+            if (record != null && Source.Fight.IsCellFree(TargetCell))
             {
-                var fighter = CreateSummon((short)Effect.Min, (byte)Effect.Max);
-                Source.Fight.AddSummon(Source, fighter);
+                if (Source.CanSummon() || !record.UseSummonSlot)
+                {
+                    SummonedMonster summon = CreateSummon(record, (byte)Effect.Max);
+                    Source.Fight.AddSummon(Source, summon);
+                }
             }
 
+            
         }
     }
 }

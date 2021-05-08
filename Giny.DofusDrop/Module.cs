@@ -6,9 +6,11 @@ using Giny.World.Api;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Modules;
+using Giny.World.Network;
 using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,9 @@ namespace Giny.DofusDrop
     [Module("Dofus drop")]
     public class Module : IModule
     {
-        private const double DofusDropPercentage = 01d;
+        private const double DofusDropPercentage = 1d;
+
+        private const string DropMessage = "<b>{0}</b> vient de drop le <b>{1}</b>. Félicitation a lui !";
 
         public void CreateHooks()
         {
@@ -52,6 +56,12 @@ namespace Giny.DofusDrop
 
                     result.Character.Inventory.AddItem((short)dofusItem.Id, 1);
                     result.Loot.AddItem((short)dofusItem.Id, 1);
+
+                    foreach (var client in WorldServer.Instance.GetOnlineClients())
+                    {
+                        client.Character.Reply(string.Format(DropMessage, client.Character.Name, "Dofus Emeraude"), Color.HotPink);
+                    }
+
                 }
             }
         }

@@ -24,7 +24,10 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
             foreach (var target in targets)
             {
-                target.ReduceSpellCooldown(Source, spellId, reduceDelta);
+                if (target.HasSpell(spellId))
+                {
+                    target.ReduceSpellCooldown(Source, spellId, reduceDelta);
+                }
             }
         }
     }

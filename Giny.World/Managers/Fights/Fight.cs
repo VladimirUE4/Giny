@@ -10,6 +10,7 @@ using Giny.World.Api;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Buffs;
+using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Fights.Results;
@@ -281,6 +282,7 @@ namespace Giny.World.Managers.Fights
                 foreach (var fighter in GetFighters<Fighter>())
                 {
                     fighter.LastExchangedPositionSequenced = null;
+                    fighter.TotalDamageReceivedSequenced = 0;
                 }
             }
         }
@@ -467,7 +469,6 @@ namespace Giny.World.Managers.Fights
         {
             if (StartAcknowledged && !Ended && !CheckFightEnd())
             {
-
                 this.OnTurnStarted();
             }
         }
@@ -575,7 +576,7 @@ namespace Giny.World.Managers.Fights
             {
                 if (!buff.HasDelay())
                 {
-                    if (buff.DecrementDuration())
+                    if (buff.DecrementDuration() && buff.Target.HasBuff(buff))
                     {
                         buff.Target.RemoveAndDispellBuff(buff);
                     }

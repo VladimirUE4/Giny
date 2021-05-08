@@ -30,16 +30,16 @@ namespace Giny.DatabasePatcher
 
         public void Initialize()
         {
-            // Experiences.Patch();
-            // ItemAppearances.Patch();
-            //  LivingObjects.Patch();
-            // MapPlacements.Patch();
-            // SkillBones.Patch();
-            // StatedElements.Patch();
-            //  MonsterKamas.Patch();
-            //  MonsterSpawns.Patch();
+            Experiences.Patch();
+            ItemAppearances.Patch();
+            LivingObjects.Patch();
+            MapPlacements.Patch();
+            SkillBones.Patch();
+            StatedElements.Patch();
+            MonsterKamas.Patch();
+            MonsterSpawns.Patch();
             SpellCategories.Patch();
-            //   Teleporters.Patch();
+            Teleporters.Patch();
         }
 
 

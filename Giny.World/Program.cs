@@ -38,6 +38,11 @@ namespace Giny.World
     {
         static void Main(string[] args)
         {
+
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                
+            }
             /* WIPManager.Analyse(Assembly.GetExecutingAssembly());
               Console.Read(); */
 

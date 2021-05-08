@@ -25,11 +25,17 @@ namespace Giny.World.Managers.Fights.Effects.Buffs
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
+            short spellId = (short)Effect.Min;
+            short delta = (short)Effect.Value;
+
             foreach (var target in targets)
             {
-                int id = target.BuffIdProvider.Pop();
-                Buff buff = new SpellBoostRangeBuff(id, (short)Effect.Min, (short)Effect.Value, target, this, FightDispellableEnum.DISPELLABLE);
-                target.AddBuff(buff);
+                if (target.HasSpell(spellId))
+                {
+                    int id = target.BuffIdProvider.Pop();
+                    Buff buff = new SpellBoostRangeBuff(id, spellId, delta, target, this, FightDispellableEnum.DISPELLABLE);
+                    target.AddBuff(buff);
+                }
             }
         }
     }

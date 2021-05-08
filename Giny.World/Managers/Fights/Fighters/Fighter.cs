@@ -137,6 +137,8 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
         }
 
+
+
         public abstract BreedEnum Breed
         {
             get;
@@ -218,7 +220,17 @@ namespace Giny.World.Managers.Fights.Fighters
          * Prevent some Telefrag recursive issues (Desynchronisaiton)
          */
         [WIP] // work on sram traps and test again desynchronisation
-        public CellRecord LastExchangedPositionSequenced;
+        public CellRecord LastExchangedPositionSequenced
+        {
+            get;
+            set;
+        }
+
+        public int TotalDamageReceivedSequenced
+        {
+            get;
+            set;
+        }
 
         public Fighter(FightTeam team, CellRecord roleplayCell)
         {
@@ -237,7 +249,11 @@ namespace Giny.World.Managers.Fights.Fighters
             this.TurnStartCell = this.Cell;
             this.MovementHistory = new MovementHistory(this);
             this.BaseLook = Look.Clone();
+
         }
+
+
+
         public void FindPlacementDirection()
         {
             Tuple<short, short> tuple = null;
@@ -576,6 +592,12 @@ namespace Giny.World.Managers.Fights.Fighters
                 verboseCast = true
             });
         }
+
+        public bool HasBuff(Buff buff)
+        {
+            return Buffs.Contains(buff);
+        }
+
         public void RemoveBuff(Buff buff)
         {
             this.Buffs.Remove(buff);
@@ -639,7 +661,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
                 x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
-            
+
             foreach (var buff in buffs)
             {
                 buff.LastTriggeredSequence = Fight.SequenceManager.CurrentSequence;
@@ -799,7 +821,14 @@ namespace Giny.World.Managers.Fights.Fighters
             return Stats.InvisibilityState == GameActionFightInvisibilityStateEnum.INVISIBLE;
         }
 
-
+        public bool ExecuteSpell(short spellId, byte grade, CellRecord targetCell)
+        {
+            SpellRecord record = SpellRecord.GetSpellRecord(spellId);
+            Spell spell = new Spell(record, record.GetLevel(grade));
+            SpellCast cast = new SpellCast(this, spell, targetCell);
+            cast.Force = true;
+            return CastSpell(cast);
+        }
         public bool CastSpell(int levelId)
         {
             SpellLevelRecord level = SpellLevelRecord.GetSpellLevel(levelId);
@@ -958,7 +987,6 @@ namespace Giny.World.Managers.Fights.Fighters
             });
 
 
-
         }
 
         public virtual FightSpellCastCriticalEnum RollCriticalDice(SpellLevelRecord spell)
@@ -1066,9 +1094,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public Set GetSpellZone(SpellLevelRecord spellLevel, MapPoint point)
         {
-            var range = (int)spellLevel.MaxRange;
+            int range = GetSpellRange(spellLevel);
 
-            range += GetSpellBoost<SpellBoostRangeBuff>(spellLevel.SpellId);
+            int minimalRange = GetSpellMinimalRange(spellLevel);
 
             Set set;
 
@@ -1076,15 +1104,15 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 range += Stats.Range.TotalInContext();
 
-                if (range < spellLevel.MinRange)
-                    range = (int)spellLevel.MinRange;
+                if (range < minimalRange)
+                    range = minimalRange;
 
                 range = Math.Min(range, 63);
             }
 
             if (spellLevel.CastInDiagonal || spellLevel.CastInLine)
             {
-                set = new CrossSet(point, (short)range, spellLevel.MinRange)
+                set = new CrossSet(point, (short)range, (short)minimalRange)
                 {
                     AllDirections = spellLevel.CastInDiagonal && spellLevel.CastInLine,
                     Diagonal = spellLevel.CastInDiagonal
@@ -1092,10 +1120,23 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             else
             {
-                set = new LozengeSet(point, range, (int)spellLevel.MinRange);
+                set = new LozengeSet(point, range, minimalRange);
             }
 
             return set;
+        }
+        private int GetSpellMinimalRange(SpellLevelRecord level)
+        {
+            var range = (int)level.MinRange;
+            range -= GetSpellBoost<SpellReduceMinimalRangeBuff>(level.SpellId);
+            return range;
+        }
+        private int GetSpellRange(SpellLevelRecord level)
+        {
+            var range = (int)level.MaxRange;
+            range += GetSpellBoost<SpellBoostRangeBuff>(level.SpellId);
+            range -= GetSpellBoost<SpellReduceRangeBuff>(level.SpellId);
+            return range;
         }
         public virtual bool HasSpell(short spellId)
         {
@@ -1110,12 +1151,12 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public void OnStateRemoved(StateBuff buff)
         {
-            TriggerBuffs(TriggerTypeEnum.OnSpecificStateRemoved, buff, (short)buff.Record.Id);
+            TriggerBuffs(TriggerTypeEnum.OnStateRemoved, buff, (short)buff.Record.Id);
         }
 
         public void OnStateAdded(StateBuff buff)
         {
-            TriggerBuffs(TriggerTypeEnum.OnSpecificStateAdded, buff, (short)buff.Record.Id);
+            TriggerBuffs(TriggerTypeEnum.OnStateAdded, buff, (short)buff.Record.Id);
         }
         [WIP("remove this tuple")]
         public void TeleportToPortal(Fighter source)
@@ -1674,8 +1715,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 });
             }
 
+            TriggerBuffs(TriggerTypeEnum.OnLifePointsPending, null);
 
         }
+
         private void DispellShieldBuffs(int amount)
         {
             short num = (short)amount;
@@ -1752,7 +1795,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             int permanentDamages = CalculateErodedLife(delta);
 
-            if (Stats.ShieldPoints > 0)
+            if (Stats.ShieldPoints > 0 && !damage.IgnoreShield)
             {
                 if (Stats.ShieldPoints - delta <= 0)
                 {
@@ -1859,13 +1902,21 @@ namespace Giny.World.Managers.Fights.Fighters
                 OnDamageReflected(damage.Source);
             }
 
+            DamageResult result = new DamageResult(lifeLoss, permanentDamages, shieldLoss);
+
+            damage.OnApplied(result);
+            TotalDamageReceivedSequenced += lifeLoss;
 
             if (this.Stats.LifePoints <= 0)
             {
                 Die(damage.Source);
             }
 
-            return new DamageResult(lifeLoss, permanentDamages, shieldLoss);
+            TriggerBuffs(TriggerTypeEnum.OnLifePointsPending, null);
+
+
+
+            return result;
         }
 
         public void OnDamageReflected(Fighter attacker)
@@ -1961,9 +2012,29 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 damage.Source.TriggerBuffs(TriggerTypeEnum.OnCriticalHit, damage);
             }
+        }
+        public void OnStatsBuff(EffectsEnum effectEnum)
+        {
+            switch (effectEnum)
+            {
+                case EffectsEnum.Effect_SubRange:
+                case EffectsEnum.Effect_SubRange_135:
+                    TriggerBuffs(TriggerTypeEnum.OnRangeLost, null);
+                    break;
 
+                case EffectsEnum.Effect_SubAPPercent:
+                case EffectsEnum.Effect_SubAP:
+                case EffectsEnum.Effect_SubAP_Roll:
+                    TriggerBuffs(TriggerTypeEnum.OnAPLost, null);
+                    break;
 
+                case EffectsEnum.Effect_SubMPPercent:
+                case EffectsEnum.Effect_SubMP_Roll:
+                case EffectsEnum.Effect_SubMP:
+                    TriggerBuffs(TriggerTypeEnum.OnMPLost, null);
+                    break;
 
+            }
         }
         private int CalculateErodedLife(int damages)
         {
@@ -2031,7 +2102,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public virtual void OnDie(Fighter killedBy)
         {
             Killed?.Invoke(this, killedBy);
-            
+
         }
         public bool IsCarrying()
         {
@@ -2138,7 +2209,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
             else
             {
-                Logger.Write("Cannot kill " + this + ", he is already dead!", Channels.Warning);
+                Fight.Warn("Cannot kill " + this + ", he is already dead!");
             }
 
         }

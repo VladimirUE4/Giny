@@ -147,6 +147,8 @@
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRangeBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellBoostRemoveLOSBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellReduceMinimalRangeBuff.cs" />
+    <Compile Include="Managers\Fights\Buffs\SpellBoost\SpellReduceRangeBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\TakeControlBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\VitalityDebuff.cs" />
     <Compile Include="Managers\Fights\Challenges\Anchorite.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1018.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1019.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2017.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell2792.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamageIntercept.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerApUsed.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerCasterHpEroded.cs" />
@@ -180,6 +183,8 @@
     <Compile Include="Managers\Fights\Effects\Debuffs\DisableState.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\IncreaseSpellApCost.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\ReduceEffectsDuration.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\ReduceSpellMinimalRange.cs" />
+    <Compile Include="Managers\Fights\Effects\Debuffs\ReduceSpellRange.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\RevealsInvisible.cs" />
     <Compile Include="Managers\Fights\Effects\Debuffs\SubVitalityPercent.cs" />
     <Compile Include="Managers\Fights\Effects\Heals\GiveHpPercent.cs" />

@@ -46,5 +46,10 @@ namespace Giny.World.Managers.Effects.Targets
                 return flag;
             }
         }
+
+        public override string ToString()
+        {
+            return "Can Summon";
+        }
     }
 }

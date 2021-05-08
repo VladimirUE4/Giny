@@ -12,10 +12,11 @@ namespace Giny.World.Managers.Effects.Targets
 {
     public class MonsterCriterion : TargetCriterion
     {
-        public MonsterCriterion(int monsterId, bool required)
+        public MonsterCriterion(int monsterId, bool caster, bool required)
         {
             MonsterId = monsterId;
             Required = required;
+            Caster = caster;
         }
 
         public int MonsterId
@@ -30,11 +31,28 @@ namespace Giny.World.Managers.Effects.Targets
             set;
         }
 
+        public bool Caster
+        {
+            get;
+            set;
+        }
+
         public override bool IsDisjonction => Required;
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
-            => Required ? ((actor is IMonster) && (actor as IMonster).Record.Id == MonsterId) :
-                (!(actor is IMonster) || (actor as IMonster).Record.Id != MonsterId);
+        {
+            var target = actor;
+
+            if (Caster)
+            {
+                target = handler.Source;
+            }
+
+            bool result = Required ? ((target is IMonster) && (target as IMonster).Record.Id == MonsterId) :
+                 (!(target is IMonster) || (target as IMonster).Record.Id != MonsterId);
+
+            return result;
+        }
 
         public override string ToString()
         {

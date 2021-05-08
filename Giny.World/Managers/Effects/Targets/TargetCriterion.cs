@@ -64,9 +64,9 @@ namespace Giny.World.Managers.Effects.Targets
                     case 'E':
                         return new StateCriterion(int.Parse(str.Remove(0, 1)), caster, true);
                     case 'f':
-                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), false);
+                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), caster, false);
                     case 'F':
-                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), true);
+                        return new MonsterCriterion(int.Parse(str.Remove(0, 1)), caster, true);
                     case 'v':
                         return new LifeCriterion(int.Parse(str.Remove(0, 1)), true);
                     case 'V':
@@ -86,7 +86,7 @@ namespace Giny.World.Managers.Effects.Targets
                     case 'O':
                         return new LastAttackerCriterion(true);
                     case 'o':
-                        return new LastAttackerCriterion(false); 
+                        return new LastAttackerCriterion(false);
                     case 'W':
                         return new InvalidTeleportCriterion();
                     case 'r':

@@ -26,5 +26,9 @@ namespace Giny.World.Managers.Effects.Targets
         {
             return true;
         }
+        public override string ToString()
+        {
+            return "Through Portal";
+        }
     }
 }

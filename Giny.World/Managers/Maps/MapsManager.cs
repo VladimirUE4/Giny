@@ -22,7 +22,7 @@ namespace Giny.World.Managers.Maps
         public const string MAP_KEY = "649ae451ca33ec53bbcbcc33becf15f4";
 
         [StartupInvoke("Map Instances", StartupInvokePriority.FourthPass)]
-        public static void CreateInstances()
+        public void CreateInstances()
         {
             UpdateLogger updateLogger = new UpdateLogger();
 

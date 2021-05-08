@@ -41,6 +41,7 @@ namespace Giny.World.Managers.Fights.Buffs
         public override void Execute()
         {
             Characteristic.Context += Delta;
+            Target.OnStatsBuff(Effect.EffectEnum);
         }
 
         public override void Dispell()

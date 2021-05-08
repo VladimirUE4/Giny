@@ -76,6 +76,10 @@ namespace Giny.Core.Extensions
         {
             return Regex.Replace(input, @"[\d-]", string.Empty);
         }
+        public static string RemoveLetters(this string input)
+        {
+            return Regex.Replace(input, @"[^0-9.]", string.Empty);
+        }
         public static string RemoveChars(this string input, params char[] chars)
         {
             string result = input;

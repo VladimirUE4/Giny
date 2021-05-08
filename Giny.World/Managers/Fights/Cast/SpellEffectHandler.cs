@@ -133,6 +133,7 @@ namespace Giny.World.Managers.Fights.Cast
 
         private IEnumerable<Fighter> GetAffectedFighters()
         {
+            
             List<CellRecord> affectedCells = GetAffectedCells();
             /*
                 foreach (var cell in affectedCells)
@@ -187,7 +188,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         public void Execute()
         {
-          
+
 
             if (!CasterCriterionSatisfied)
             {
@@ -251,20 +252,17 @@ namespace Giny.World.Managers.Fights.Cast
         }
         protected abstract void Apply(IEnumerable<Fighter> targets);
 
-        protected SummonedMonster CreateSummon(short monsterId, byte grade)
+        protected SummonedMonster CreateSummon(MonsterRecord record, byte grade)
         {
-            MonsterRecord record = MonsterRecord.GetMonsterRecord(monsterId);
             SummonedMonster fighter = new SummonedMonster(Source, record, this, grade, TargetCell);
             return fighter;
         }
 
 
-        [WIP("useless?")]
         public T GetTriggerToken<T>() where T : ITriggerToken
         {
             return (T)TriggerToken;
         }
-        [WIP("useless?")]
         public void SetTriggerToken(ITriggerToken token)
         {
             TriggerToken = token;

@@ -23,9 +23,11 @@ namespace Giny.World.Managers.Effects.Targets
 
         public override bool IsTargetValid(Fighter actor, SpellEffectHandler handler)
         {
-            return Required == (actor == handler.Source ||
+            bool result = Required == (actor == handler.Source ||
                 (actor.GetSummoner() != null && (actor.GetSummoner() == handler.Source || actor.GetSummoner() == handler.Source.GetSummoner())) ||
                 handler.Source.GetSummoner() != null && handler.Source.GetSummoner() == actor);
+
+            return result;
         }
 
         public override string ToString()

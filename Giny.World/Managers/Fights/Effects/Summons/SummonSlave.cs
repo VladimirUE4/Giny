@@ -25,14 +25,17 @@ namespace Giny.World.Managers.Fights.Effects.Summons
                 return;
             }
 
-            if (!Source.CanSummon())
-            {
-                return;
-            }
+            MonsterRecord record = MonsterRecord.GetMonsterRecord((short)Effect.Min);
 
-            SummonedMonster fighter = CreateSummon((short)Effect.Min, (byte)Effect.Max);
-            fighter.SetController((CharacterFighter)Source);
-            Source.Fight.AddSummon(Source, fighter);
+            if (record != null && Source.Fight.IsCellFree(TargetCell))
+            {
+                if (Source.CanSummon() || !record.UseSummonSlot)
+                {
+                    SummonedMonster summon = CreateSummon(record, (byte)Effect.Max);
+                    summon.SetController((CharacterFighter)Source);
+                    Source.Fight.AddSummon(Source, summon);
+                }
+            }
         }
     }
 }

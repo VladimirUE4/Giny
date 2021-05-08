@@ -16,6 +16,17 @@ namespace Giny.World.Managers.Fights.Marks
         {
             switch (spellId)
             {
+                /*
+                 * Mot marquant 
+                 * Glyphe Lapino
+                 * Marque de Régénération
+                 */
+
+                case SpellEnum.StrikingGlyph:
+                case SpellEnum.FriendshipWord13197:
+                case SpellEnum.RegeneratingMark:
+                    return Color.DeepPink;
+
                 case SpellEnum.Cawwot:
                     return Color.White;
                 /* Piège Répulsif
@@ -24,7 +35,7 @@ namespace Giny.World.Managers.Fights.Marks
                 case SpellEnum.MassGrave14314:
                 case SpellEnum.RepellingTrap12914:
                 case SpellEnum.DriftTrap12942:
-                    return Color.FromArgb(10849205); 
+                    return Color.FromArgb(10849205);
 
                 /* Piège a Fragmentation
                  * Piège Sournois */
@@ -66,7 +77,7 @@ namespace Giny.World.Managers.Fights.Marks
                  */
                 case SpellEnum.ParalysingTrap12910:
                     return Color.FromArgb(2258204);
-                    
+
                 /*
                  * Runes Huppermage 
                  */

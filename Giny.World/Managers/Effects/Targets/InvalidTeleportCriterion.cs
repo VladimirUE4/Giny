@@ -19,5 +19,9 @@ namespace Giny.World.Managers.Effects.Targets
         {
             return actor.WasTeleportedInInvalidCell;
         }
+        public override string ToString()
+        {
+            return "Invalid Teleport";
+        }
     }
 }

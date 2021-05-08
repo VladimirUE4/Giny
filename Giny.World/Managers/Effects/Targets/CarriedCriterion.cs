@@ -19,5 +19,9 @@ namespace Giny.World.Managers.Effects.Targets
         {
             return actor.IsCarried();
         }
+        public override string ToString()
+        {
+            return "Is Carried";
+        }
     }
 }

@@ -20,10 +20,21 @@ namespace Giny.World.Managers.Stats
     {
         public const short BaseSummonsCount = 1;
 
+        public event Action LifePointsChanged;
+
+        private int m_lifePoints;
+
         public int LifePoints
         {
-            get;
-            set;
+            get
+            {
+                LifePointsChanged?.Invoke();
+                return m_lifePoints;
+            }
+            set
+            {
+                m_lifePoints = value;
+            }
         }
 
         [ProtoMember(1)]

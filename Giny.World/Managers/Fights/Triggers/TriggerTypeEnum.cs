@@ -32,9 +32,8 @@ namespace Giny.World.Managers.Fights.Triggers
         OnDamagedRange, //DR
         OnDamagedByPush, // PD
         OnDamagedByAllyPush, //PMD
+
         //OnDamageEnemyByPush, // MMD
-
-
 
         OnSummon, // CI
 
@@ -45,15 +44,14 @@ namespace Giny.World.Managers.Fights.Triggers
 
         OnMPLost, // m , MPA (effective loss? attempt? )
         OnAPLost, // A
-      //   OnRangeLost, // R
+        OnRangeLost, // R
+
+        OnLifePointsPending,
 
         OnHealed, //H
 
-
         OnStateAdded, // EO
-        OnSpecificStateAdded, //EO#
         OnStateRemoved, //Eo
-        OnSpecificStateRemoved, //Eo#
 
         OnDispelled, //d
 

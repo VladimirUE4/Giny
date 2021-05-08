@@ -91,7 +91,7 @@ namespace Giny.Core.Network
                 }
                 else
                 {
-                    Logger.Write("Received Unknown Data", Channels.Warning);
+                    Logger.Write("Unable to deserialize network message.", Channels.Warning);
                     m_bufferEndPosition = 0;
                 }
 

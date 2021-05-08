@@ -142,6 +142,7 @@ namespace Giny.SpellExplorer
                 case EffectsEnum.Effect_CastSpell_1019:
                 case EffectsEnum.Effect_CastSpell_1018:
                 case EffectsEnum.Effect_CastSpell_1017:
+                case EffectsEnum.Effect_CastSpell_2792:
                 case EffectsEnum.Effect_Trap:
 
                     Button button = new Button();

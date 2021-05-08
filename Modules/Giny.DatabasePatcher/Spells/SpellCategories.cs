@@ -54,6 +54,7 @@ namespace Giny.DatabasePatcher.Spells
             EffectsEnum.Effect_AddVitality,
             EffectsEnum.Effect_AddVitalityPercent,
             EffectsEnum.Effect_HealHP_407,
+            EffectsEnum.Effect_RestoreHPPercent,
         };
         private static readonly EffectsEnum[] BuffEffects = new EffectsEnum[]
         {
@@ -63,6 +64,8 @@ namespace Giny.DatabasePatcher.Spells
             EffectsEnum.Effect_AddShieldPercent,
             EffectsEnum.Effect_AddShield,
             EffectsEnum.Effect_AddState,
+            EffectsEnum.Effect_AddGlobalDamageReduction,
+            EffectsEnum.Effect_AddGlobalDamageReduction_105,
         };
         private static readonly EffectsEnum[] MarkEffects = new EffectsEnum[]
         {

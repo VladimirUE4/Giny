@@ -23,10 +23,12 @@ namespace Giny.World.Managers.Fights.Effects.Damages
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            Damage damages = GetTriggerToken<Damage>();
+            Damage token = GetTriggerToken<Damage>();
 
-            if (damages != null)
+            if (token != null)
             {
+                Damage damages = new Damage(token.Source, token.Target, token.EffectSchool, token.BaseMinDamages, token.BaseMaxDamages, token.GetEffectHandler());
+               
                 damages.Computed = (short)(damages.Computed * (Effect.Min / 100d));
 
                 foreach (var fighter in Source.GetMeleeFighters())

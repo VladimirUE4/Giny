@@ -23,7 +23,7 @@ namespace Giny.World.Managers.Fights.Effects.Cast
         {
             Spell spell = CreateCastedSpell();
 
-            var source = this.Source;// CastHandler.Cast.GetCaster();
+            var source = Source;
 
             if (spell == null)
             {
@@ -37,7 +37,6 @@ namespace Giny.World.Managers.Fights.Effects.Cast
                 cast.Force = true;
                 cast.Silent = true;
                 source.CastSpell(cast);
-
             }
 
         }

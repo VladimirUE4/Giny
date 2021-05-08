@@ -65,6 +65,11 @@ namespace Giny.World.Network
         {
             base.Send(new HelloGameMessage());
         }
+        public WorldClient()
+        {
+
+        }
+    
         public override void OnConnected()
         {
             throw new NotImplementedException();

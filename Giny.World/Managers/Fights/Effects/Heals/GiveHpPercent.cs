@@ -25,6 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Heals
             short delta = (short)(Source.Stats.LifePoints * (Effect.Min / 100d));
 
             Damage damage = new Damage(Source, Source, EffectSchoolEnum.Fix, delta, delta, this);
+            damage.IgnoreShield = true;
             Source.InflictDamage(damage);
 
             foreach (var target in targets)

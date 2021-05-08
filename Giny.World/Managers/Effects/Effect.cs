@@ -210,6 +210,15 @@ namespace Giny.World.Managers.Effects
         {
             string identifier = input.RemoveNumbers();
 
+            string rawParameter = input.RemoveLetters();
+
+            int parameter = 0;
+
+            if (rawParameter != string.Empty)
+            {
+                parameter = int.Parse(rawParameter);
+            }
+
             switch (identifier)
             {
                 case "PT":
@@ -267,7 +276,9 @@ namespace Giny.World.Managers.Effects
                 case "I":
                     return new Trigger(TriggerTypeEnum.Instant);
                 case "EON":
-                    return new Trigger(TriggerTypeEnum.OnSpecificStateAdded, int.Parse(new string(input.Skip(3).ToArray())));
+                    return new Trigger(TriggerTypeEnum.OnStateAdded, parameter);
+                case "EOFF":
+                    return new Trigger(TriggerTypeEnum.OnStateRemoved, parameter);
                 case "TP":
                     return new Trigger(TriggerTypeEnum.OnTeleportPortal); // <---- TODO
                 case "ATB":
@@ -278,6 +289,10 @@ namespace Giny.World.Managers.Effects
                     return new Trigger(TriggerTypeEnum.OnAPLost);
                 case "CDBE":
                     return new Trigger(TriggerTypeEnum.CasterInflictDamageEnnemy);
+                case "V":
+                    return new Trigger(TriggerTypeEnum.OnLifePointsPending);
+                case "R":
+                    return new Trigger(TriggerTypeEnum.OnRangeLost);
             }
 
             return new Trigger(TriggerTypeEnum.Unknown);

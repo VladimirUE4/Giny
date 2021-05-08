@@ -2,6 +2,7 @@
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,18 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
             foreach (var target in targets)
             {
-                //if (target.IsSummoned() && target.GetSummoner() == Source)
-                {
-                    target.Die(Source);
+                target.Die(Source);
 
-                    SummonedMonster summon = CreateSummon((short)Effect.Min, (byte)Effect.Max);
-                    summon.SetController((CharacterFighter)Source);
-                    Source.Fight.AddSummon(Source, summon);
+                MonsterRecord record = MonsterRecord.GetMonsterRecord((short)Effect.Min);
+
+                if (record != null && Source.Fight.IsCellFree(TargetCell))
+                {
+                    if (Source.CanSummon() || !record.UseSummonSlot)
+                    {
+                        SummonedMonster summon = CreateSummon(record, (byte)Effect.Max);
+                        summon.SetController((CharacterFighter)Source);
+                        Source.Fight.AddSummon(Source, summon);
+                    }
                 }
             }
         }
