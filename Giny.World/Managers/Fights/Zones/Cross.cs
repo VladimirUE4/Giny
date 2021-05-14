@@ -1,4 +1,6 @@
 ﻿using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -6,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Shapes
+namespace Giny.World.Managers.Fights.Zones
 {
-    public class Cross : IShape
+    public class Cross : Zone
     {
         public bool Diagonal
         {
@@ -37,35 +39,22 @@ namespace Giny.World.Managers.Maps.Shapes
                 return (uint)(this.Radius * 4 + 1);
             }
         }
-        public byte MinRadius
-        {
-            get;
-            set;
-        }
-        public DirectionsEnum Direction
-        {
-            get;
-            set;
-        }
-        public byte Radius
-        {
-            get;
-            set;
-        }
+
+
         public Cross(byte minRadius, byte radius)
         {
             this.MinRadius = minRadius;
             this.Radius = radius;
-            this.DisabledDirections = new System.Collections.Generic.List<DirectionsEnum>();
+            this.DisabledDirections = new List<DirectionsEnum>();
         }
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map)
+        public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
             List<CellRecord> list = new List<CellRecord>();
             if (this.MinRadius == 0)
             {
                 list.Add(centerCell);
             }
-            System.Collections.Generic.List<DirectionsEnum> list2 = this.DisabledDirections.ToList<DirectionsEnum>();
+            List<DirectionsEnum> list2 = this.DisabledDirections.ToList();
             if (this.OnlyPerpendicular)
             {
                 switch (this.Direction)
@@ -138,5 +127,7 @@ namespace Giny.World.Managers.Maps.Shapes
             }
             return list.ToArray();
         }
+
+
     }
 }

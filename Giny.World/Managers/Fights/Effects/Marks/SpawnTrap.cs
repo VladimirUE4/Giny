@@ -3,7 +3,7 @@ using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Marks;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Marks
         protected override void Apply(IEnumerable<Fighter> targets)
         {
             if (!Source.Fight.MarkExist<Trap>(x => x.CenterCell == TargetCell))
-            { 
+            {
                 Zone zone = Effect.GetZone();
 
                 Color color = MarksManager.Instance.GetMarkColor(CastHandler.Cast.Spell.GetSpellEnum());

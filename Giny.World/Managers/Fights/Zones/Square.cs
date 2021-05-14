@@ -1,11 +1,13 @@
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
 
-namespace Giny.World.Managers.Maps.Shapes
+namespace Giny.World.Managers.Fights.Zones
 {
-    public class Square : IShape
+    public class Square : Zone
     {
         public Square(byte minRadius, byte radius)
         {
@@ -19,35 +21,7 @@ namespace Giny.World.Managers.Maps.Shapes
             set;
         }
 
-        #region IShape Members
-
-        public uint Surface
-        {
-            get
-            {
-                return ((uint)Radius * 2 + 1) * ((uint)Radius * 2 + 1);
-            }
-        }
-
-        public byte MinRadius
-        {
-            get;
-            set;
-        }
-
-        public DirectionsEnum Direction
-        {
-            get;
-            set;
-        }
-
-        public byte Radius
-        {
-            get;
-            set;
-        }
-
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map)
+        public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
             var centerPoint = new MapPoint(centerCell.Id);
             var result = new List<CellRecord>();
@@ -87,6 +61,5 @@ namespace Giny.World.Managers.Maps.Shapes
 
             container.Add(map.Cells[MapPoint.CoordToCellId(x, y)]);
         }
-        #endregion
     }
 }

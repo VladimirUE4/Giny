@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Giny.World.Managers.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Shapes.Sets
+namespace Giny.World.Managers.Fights.Zones.Sets
 {
     public abstract class Set
     {

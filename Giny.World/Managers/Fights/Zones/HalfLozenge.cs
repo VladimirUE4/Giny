@@ -1,47 +1,22 @@
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
 
-namespace Giny.World.Managers.Maps.Shapes
+namespace Giny.World.Managers.Fights.Zones
 {
-    public class HalfLozenge : IShape
+    public class HalfLozenge : Zone
     {
         public HalfLozenge(byte minRadius, byte radius)
         {
             MinRadius = minRadius;
             Radius = radius;
-
             Direction = DirectionsEnum.DIRECTION_NORTH;
         }
 
-        public uint Surface
-        {
-            get
-            {
-                return (uint)Radius * 2 + 1;
-            }
-        }
-
-        public byte MinRadius
-        {
-            get;
-            set;
-        }
-
-        public DirectionsEnum Direction
-        {
-            get;
-            set;
-        }
-
-        public byte Radius
-        {
-            get;
-            set;
-        }
-
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map)
+        public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
             var centerPoint = centerCell.Point;
             var result = new List<CellRecord>();
@@ -85,5 +60,7 @@ namespace Giny.World.Managers.Maps.Shapes
 
             container.Add(map.Cells[MapPoint.CoordToCellId(x, y)]);
         }
+
+
     }
 }

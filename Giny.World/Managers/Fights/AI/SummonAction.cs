@@ -1,7 +1,6 @@
 ﻿using Giny.Core.Extensions;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Maps;
-using Giny.World.Managers.Maps.Shapes.Sets;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Cast
 {
-    public enum SpellShapeEnum
+    public enum ZoneEnum
     {
         X = 88,
         L = 76,
@@ -33,6 +33,5 @@ namespace Giny.World.Managers.Fights.Cast
         semicolon = 59,
         empty = 32,
         l = 108,
-        manual,
     }
 }

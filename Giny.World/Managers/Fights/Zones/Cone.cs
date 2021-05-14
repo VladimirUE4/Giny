@@ -1,4 +1,6 @@
 ﻿using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -6,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Shapes
+namespace Giny.World.Managers.Fights.Zones
 {
-    public class Cone : IShape
+    public class Cone : Zone
     {
         public uint Surface
         {
@@ -17,28 +19,14 @@ namespace Giny.World.Managers.Maps.Shapes
                 return (uint)((this.Radius + 1) * (this.Radius + 1));
             }
         }
-        public byte MinRadius
-        {
-            get;
-            set;
-        }
-        public DirectionsEnum Direction
-        {
-            get;
-            set;
-        }
-        public byte Radius
-        {
-            get;
-            set;
-        }
+
         public Cone(byte minRadius, byte radius)
         {
             this.MinRadius = minRadius;
             this.Radius = radius;
             this.Direction = DirectionsEnum.DIRECTION_SOUTH_EAST;
         }
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map)
+        public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
             MapPoint mapPoint = centerCell.Point;
             List<CellRecord> list = new List<CellRecord>();
@@ -116,6 +104,6 @@ namespace Giny.World.Managers.Maps.Shapes
             }
             return result;
         }
-    
+
     }
 }

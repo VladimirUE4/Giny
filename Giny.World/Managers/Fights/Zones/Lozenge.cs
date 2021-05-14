@@ -1,4 +1,6 @@
 ﻿using Giny.Protocol.Custom.Enums;
+using Giny.World.Managers.Fights.Cast;
+using Giny.World.Managers.Maps;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -6,43 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Shapes
+namespace Giny.World.Managers.Fights.Zones
 {
-    public class Lozenge : IShape
+    public class Lozenge : Zone
     {
-        public Lozenge(byte minRadius, byte radius)
+        public Lozenge(byte minRadius, byte radius) 
         {
             MinRadius = minRadius;
             Radius = radius;
         }
-
-        public uint Surface
-        {
-            get
-            {
-                return ((uint)Radius + 1) * ((uint)Radius + 1) + Radius * (uint)Radius;
-            }
-        }
-
-        public byte MinRadius
-        {
-            get;
-            set;
-        }
-
-        public DirectionsEnum Direction
-        {
-            get;
-            set;
-        }
-
-        public byte Radius
-        {
-            get;
-            set;
-        }
-
-        public CellRecord[] GetCells(CellRecord centerCell, MapRecord map)
+        public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
             var result = new List<CellRecord>();
 

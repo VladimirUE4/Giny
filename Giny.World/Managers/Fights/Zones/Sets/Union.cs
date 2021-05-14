@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Giny.World.Managers.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Maps.Shapes.Sets
+namespace Giny.World.Managers.Fights.Zones.Sets
 {
-    public class Intersection : Set
+    public class Union : Set
     {
-        public Intersection(Set A, Set B)
+        public Union(Set A, Set B)
         {
             this.A = A;
             this.B = B;
@@ -27,12 +28,12 @@ namespace Giny.World.Managers.Maps.Shapes.Sets
 
         public override IEnumerable<MapPoint> EnumerateSet()
         {
-            return A.EnumerateSet().Intersect(B.EnumerateSet());
+            return A.EnumerateSet().Union(B.EnumerateSet());
         }
 
         public override bool BelongToSet(MapPoint point)
         {
-            return A.BelongToSet(point) && B.BelongToSet(point);
+            return A.BelongToSet(point) || B.BelongToSet(point);
         }
     }
 }

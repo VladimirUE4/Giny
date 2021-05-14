@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Giny.World.Managers.Effects.Targets;
-using Giny.World.Managers.Maps.Shapes;
 using Giny.Core.DesignPattern;
 using Giny.IO.D2OTypes;
 using Giny.World.Managers.Maps;
@@ -20,6 +19,7 @@ using Giny.Protocol.Enums;
 using Giny.World.Records.Monsters;
 using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Managers.Actions;
+using Giny.World.Managers.Fights.Zones;
 
 namespace Giny.World.Managers.Fights.Cast
 {
@@ -116,8 +116,6 @@ namespace Giny.World.Managers.Fights.Cast
 
             this.AffectedFighters = GetAffectedFighters();
 
-
-
             this.CasterCriterionSatisfied = ComputeCasterCriterion();
 
 
@@ -133,14 +131,14 @@ namespace Giny.World.Managers.Fights.Cast
 
         private IEnumerable<Fighter> GetAffectedFighters()
         {
-            
+
             List<CellRecord> affectedCells = GetAffectedCells();
-            /*
-                foreach (var cell in affectedCells)
-                {
-                    Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
-                }
-            */
+
+            foreach (var cell in affectedCells)
+            {
+                Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
+            }
+
 
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))
                 affectedCells.Add(Source.Cell); // Source.Cell
@@ -161,7 +159,7 @@ namespace Giny.World.Managers.Fights.Cast
         }
         protected List<CellRecord> GetAffectedCells()
         {
-            return Zone.GetCells(TargetCell, Source.Fight.Map).ToList();
+            return Zone.GetCells(TargetCell, CastCell, Source.Fight.Map).ToList();
         }
 
         [WIP("usage?")]

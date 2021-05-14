@@ -11,7 +11,6 @@ using Giny.ORM;
 using Giny.Protocol;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Messages;
-using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Modules;
 using Giny.World.Network;
 using Giny.World.Records.Items;

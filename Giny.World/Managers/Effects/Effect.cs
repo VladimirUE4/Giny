@@ -5,16 +5,13 @@ using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Effects.Targets;
-using Giny.World.Managers.Fights.Buffs;
-using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Triggers;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
+using Giny.World.Records.Maps;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Effects
 {
@@ -147,63 +144,7 @@ namespace Giny.World.Managers.Effects
         }
         public Zone GetZone(DirectionsEnum direction)
         {
-            SpellShapeEnum zoneShape = 0;
-            int zoneSize = 0;
-            int zoneMinSize = 0;
-
-            if (string.IsNullOrEmpty(RawZone))
-            {
-                return null;
-            }
-
-            if (RawZone.StartsWith(";"))
-            {
-                string trimmed = RawZone.Replace(";", string.Empty);
-                return new Zone(trimmed.Split(',').Select(x => short.Parse(x)));
-            }
-
-            var shape = (SpellShapeEnum)RawZone[0];
-            byte size = 0;
-            byte minSize = 0;
-            int zoneEfficiency = 0;
-            int zoneMaxEfficiency = 0;
-            int zoneEfficiencyPercent = 0;
-
-            var data = RawZone.Remove(0, 1).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var hasMinSize = shape == SpellShapeEnum.C || shape == SpellShapeEnum.X || shape == SpellShapeEnum.Q || shape == SpellShapeEnum.plus || shape == SpellShapeEnum.sharp;
-
-            if (data.Length >= 4)
-            {
-                size = byte.Parse(data[0]);
-                minSize = byte.Parse(data[1]);
-                zoneEfficiency = byte.Parse(data[2]);
-                zoneMaxEfficiency = byte.Parse(data[2]);
-            }
-            else
-            {
-                if (data.Length >= 1)
-                    size = byte.Parse(data[0]);
-
-                if (data.Length >= 2)
-                    if (hasMinSize)
-                        minSize = byte.Parse(data[1]);
-                    else
-                        zoneEfficiency = byte.Parse(data[1]);
-
-                if (data.Length >= 3)
-                    if (hasMinSize)
-                        zoneEfficiency = byte.Parse(data[2]);
-                    else
-                        zoneMaxEfficiency = byte.Parse(data[2]);
-            }
-
-
-            zoneShape = shape;
-            zoneSize = size;
-            zoneMinSize = minSize;
-            zoneEfficiencyPercent = zoneEfficiency;
-
-            return new Zone(zoneShape, (byte)zoneSize, (byte)zoneMinSize, direction, zoneEfficiency, zoneMaxEfficiency);
+            return ZoneManager.Instance.BuildZone(RawZone, direction);
         }
         [WIP]
         private Trigger ParseTrigger(string input)

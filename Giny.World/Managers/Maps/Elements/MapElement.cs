@@ -1,7 +1,6 @@
 ﻿using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Generic;
 using Giny.World.Managers.Maps.Instances;
-using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Records.Maps;
 using System.Linq;
 

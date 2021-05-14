@@ -6,9 +6,10 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Entities;
 using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Managers.Maps.Paths;
-using Giny.World.Managers.Maps.Shapes;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using System;
@@ -108,7 +109,8 @@ namespace Giny.World.Managers.Monsters
         {
             Lozenge lozenge = new Lozenge(1, 5);
 
-            CellRecord cell = lozenge.GetCells(Map.GetCell(CellId), Map).Where((CellRecord entry) => entry.Walkable).Random();
+            var centerCell = Map.GetCell(CellId);
+            CellRecord cell = lozenge.GetCells(centerCell, centerCell, Map).Where((CellRecord entry) => entry.Walkable).Random();
 
             if (cell != null)
             {

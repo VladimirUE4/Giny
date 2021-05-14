@@ -3,7 +3,6 @@ using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Fighters;
-using Giny.World.Managers.Maps.Shapes.Sets;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Concurrent;

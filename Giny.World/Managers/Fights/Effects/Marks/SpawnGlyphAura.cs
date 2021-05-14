@@ -3,7 +3,7 @@ using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Marks;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

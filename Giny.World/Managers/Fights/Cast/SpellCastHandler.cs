@@ -1,6 +1,5 @@
 ﻿using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Fighters;
-using Giny.World.Managers.Maps.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

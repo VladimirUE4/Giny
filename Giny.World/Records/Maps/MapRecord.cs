@@ -8,7 +8,6 @@ using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Elements;
 using Giny.World.Managers.Maps.Instances;
-using Giny.World.Managers.Maps.Shapes;
 using ProtoBuf;
 using System;
 using System.Collections.Concurrent;

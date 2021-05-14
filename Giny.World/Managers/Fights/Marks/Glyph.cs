@@ -3,7 +3,7 @@ using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Sequences;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Managers.Spells;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;

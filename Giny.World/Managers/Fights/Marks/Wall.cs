@@ -1,7 +1,7 @@
 ﻿using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Fighters;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
