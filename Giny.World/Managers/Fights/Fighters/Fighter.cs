@@ -581,6 +581,11 @@ namespace Giny.World.Managers.Fights.Fighters
             foreach (var buff in buffs.ToArray())
             {
                 RemoveAndDispellBuff(buff);
+
+                if (buff.Cast.GetParent() != null)
+                {
+                    RemoveSpellEffects(source, buff.Cast.GetParent().SpellId);
+                }
             }
 
             Fight.Send(new GameActionFightDispellSpellMessage()
@@ -876,6 +881,11 @@ namespace Giny.World.Managers.Fights.Fighters
                 return false;
             }
 
+            if (!FightEventApi.CanCastSpell(cast))
+                return false;
+
+            cast.Target = Fight.GetFighter(cast.TargetCell.Id); // sure about that ? (friction)
+
             using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_SPELL))
             {
                 cast.Critical = RollCriticalDice(cast.Spell.Level);
@@ -1014,6 +1024,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP]
         public virtual SpellCastResult CanCastSpell(SpellCast cast)
         {
+
             if (cast.Force)
                 return SpellCastResult.OK;
 

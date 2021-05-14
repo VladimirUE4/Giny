@@ -1,4 +1,5 @@
 ﻿using Giny.World.Managers.Fights;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using System;
@@ -14,6 +15,7 @@ namespace Giny.World.Api
         public static event Action<FightPlayerResult> OnPlayerResultApplied;
         public static event Action<Fight> OnPlacementStarted;
         public static event Action<Fighter> OnFighterJoined;
+        public static event Func<SpellCast, bool> OnSpellCasting;
 
         internal static void PlayerResultApplied(FightPlayerResult fightPlayerResult)
         {
@@ -28,6 +30,16 @@ namespace Giny.World.Api
         internal static void FighterJoined(Fighter fighter)
         {
             OnFighterJoined?.Invoke(fighter);
+        }
+
+        public static bool CanCastSpell(SpellCast cast)
+        {
+            bool? result = OnSpellCasting?.Invoke(cast);
+
+            if (!result.HasValue)
+                return true;
+            else
+                return result.Value;
         }
     }
 }

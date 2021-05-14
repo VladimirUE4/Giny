@@ -13,7 +13,7 @@ namespace Giny.DatabasePatcher.Spells
 {
     public class SpellCategories
     {
-        private static readonly EffectsEnum[] DamageEffects = new EffectsEnum[]
+        public static readonly EffectsEnum[] DamageEffects = new EffectsEnum[]
         {
             EffectsEnum.Effect_DamageFire,
             EffectsEnum.Effect_DamageWater,

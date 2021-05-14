@@ -134,10 +134,10 @@ namespace Giny.World.Managers.Fights.Cast
 
             List<CellRecord> affectedCells = GetAffectedCells();
 
-            foreach (var cell in affectedCells)
+           /* foreach (var cell in affectedCells)
             {
                 Source.Fight.Send(new Giny.Protocol.Messages.ShowCellMessage(cell.Id, cell.Id));
-            }
+            } */
 
 
             if (Targets.Any(x => x is TargetTypeCriterion && ((TargetTypeCriterion)x).TargetType == SpellTargetType.SELF_ONLY) && !affectedCells.Contains(Source.Cell))

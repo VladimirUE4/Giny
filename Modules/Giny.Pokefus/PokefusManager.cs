@@ -7,6 +7,7 @@ using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Items;
@@ -35,6 +36,8 @@ namespace Giny.Pokefus
         private ItemRecord m_miniBossItemRecord;
         private ItemRecord m_bossItemRecord;
 
+
+
         public const short MaxPokefusLevel = 200;
 
         private const string PokefusLevelRequirementMessage = "Vous devez être niveau {0} pour pouvoir équiper ce pokéfus.";
@@ -43,9 +46,20 @@ namespace Giny.Pokefus
 
         private const string DropInfoMessage = "Chance de drop pour {0} : <b>{1}</b> %";
 
-        private const string UndroppableMessage = "Le monstre {0} n'a pas d'âme ...Il est impossible de drop son pokéfus !";
+        private const string CannotCastMessage = "Le sort : {0} ne peut pas être lancé par un pokéfus.";
 
-        private static short[] ForbiddenMonsters = new short[]
+        private static EffectsEnum[] ForbiddenPokefusSpellEffects = new EffectsEnum[]
+        {
+            EffectsEnum.Effect_Kill,
+            EffectsEnum.Effect_KillAndSummon,
+            EffectsEnum.Effect_KillAndSummonSlave,
+        };
+
+        private static short[] ForbiddenPokefusSpells = new short[]
+        {
+            411, // Tuerie
+        };
+      /*  private static short[] ForbiddenMonsters = new short[]
         {
             232,233,494, 1003,216, 3578, 4275, 113, 4362, 4363, 4364, 499, 2819, 3138, 588, 4373,
             424,2954,3141,1181,3760,939,4619,116, 158, 216, 229,250,384,387, 424,499,557,558,559,
@@ -62,6 +76,8 @@ namespace Giny.Pokefus
             4460,1070,2570,666,3590,3592,3589,3591,3588,3234,1072,1085,1086,1087,4359,1050,3803,3561,
             783
         };
+       */
+
 
         public void Initialize()
         {
@@ -91,11 +107,7 @@ namespace Giny.Pokefus
 
                 foreach (var monster in monsters)
                 {
-                    if (ForbiddenMonsters.Contains((short)monster.Record.Id))
-                    {
-                        result.Character.Reply(string.Format(UndroppableMessage, monster.Name));
-                        continue;
-                    }
+
                     var chance = (random.Next(0, 100) + random.NextDouble());
                     var dropRate = GetDropRate(monster, result.Fighter);
 
@@ -163,19 +175,19 @@ namespace Giny.Pokefus
         {
             const double ProspectingCoeff = 2.0d;
 
-            double dropRate = 0.025d;
+            double dropRate = 0.020d;
 
             if (monster.Level >= 50)
             {
-                dropRate = 0.020;
+                dropRate = 0.018;
             }
             else if (monster.Level >= 100)
             {
-                dropRate = 0.018;
+                dropRate = 0.016;
             }
             else if (monster.Level >= 150)
             {
-                dropRate = 0.015;
+                dropRate = 0.012;
             }
             else if (monster.Level >= 200)
             {
@@ -247,6 +259,32 @@ namespace Giny.Pokefus
             item.Effects.Add(new EffectInteger(EffectsEnum.Effect_Followed, (int)monster.Id));
 
             return item;
+        }
+        public bool OnSpellCasting(SpellCast arg)
+        {
+            bool result = true;
+
+            if (!(arg.Source is PokefusFighter))
+            {
+                return result;
+            }
+
+            if (arg.Spell.Level.Effects.Any(x => ForbiddenPokefusSpellEffects.Contains(x.EffectEnum)))
+            {
+                result = false;
+            }
+
+            if (ForbiddenPokefusSpells.Contains(arg.SpellId))
+            {
+                result = false;
+            }
+
+            if (!result)
+            {
+                arg.Source.Fight.Warn(string.Format(CannotCastMessage, arg.Spell.Record.Name));
+            }
+
+            return result;
         }
         public bool CanEquipItem(Character character, CharacterItemRecord item)
         {
