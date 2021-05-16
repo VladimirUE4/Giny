@@ -332,7 +332,7 @@ namespace Giny.World.Managers.Fights.Stats
         /*
          * Todo : Summoned / SummonerId
          */
-        public FighterStats(MonsterGrade monsterGrade, double coeff = 1d)
+        public FighterStats(MonsterGrade monsterGrade,double coeff = 1d)
         {
             this.ActionPoints = ApCharacteristic.New(monsterGrade.ActionPoints);
             this.AirDamageBonus = Characteristic.Zero();

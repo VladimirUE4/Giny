@@ -31,6 +31,10 @@ namespace Giny.Core.Network
         {
             get
             {
+                if (EndPoint == null)
+                {
+                    return null;
+                }
                 return EndPoint.Address.ToString();
             }
         }
@@ -82,27 +86,30 @@ namespace Giny.Core.Network
 
             while (m_bufferEndPosition > 0)
             {
-                BigEndianReader reader = new BigEndianReader(m_buffer);
-                NetworkMessage message = ProtocolMessageManager.BuildMessage(reader);
-
-                if (message != null)
+                using (BigEndianReader reader = new BigEndianReader(m_buffer))
                 {
-                    OnMessageReceived(message);
+                    NetworkMessage message = ProtocolMessageManager.BuildMessage(reader);
+
+                    if (message != null)
+                    {
+                        OnMessageReceived(message);
+                    }
+                    else
+                    {
+                        Logger.Write("Unable to deserialize network message.", Channels.Warning);
+                        Disconnect();
+                        m_bufferEndPosition = 0;
+                        return;
+                    }
+
+                    var newBuffer = new byte[BUFFER_LENGTH];
+                    Array.Copy(m_buffer, reader.Position, newBuffer, 0, newBuffer.Length - reader.Position);
+
+                    m_buffer = newBuffer;
+
+                    m_bufferEndPosition -= (int)reader.Position;
+
                 }
-                else
-                {
-                    Logger.Write("Unable to deserialize network message.", Channels.Warning);
-                    m_bufferEndPosition = 0;
-                }
-
-                var newBuffer = new byte[BUFFER_LENGTH];
-                Array.Copy(m_buffer, reader.Position, newBuffer, 0, newBuffer.Length - reader.Position);
-
-                m_buffer = newBuffer;
-
-                m_bufferEndPosition -= (int)reader.Position;
-
-                reader.Dispose();
             }
 
 

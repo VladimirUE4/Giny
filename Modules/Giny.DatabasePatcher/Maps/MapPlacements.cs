@@ -3,7 +3,7 @@ using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
 using Giny.Core.IO;
 using Giny.ORM;
-using Giny.World.Managers.Maps.Shapes;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -70,7 +70,9 @@ namespace Giny.DatabasePatcher.Maps
                                                       select entry).ShuffleWithProbabilities(relativePatternsComplx).ToArray<PlacementPattern>();
                 Lozenge searchZone = new Lozenge(0, SearchDeep);
 
-                CellRecord[] cells = searchZone.GetCells(map.GetCell(300), map);
+                var centerCell = map.GetCell(300);
+
+                CellRecord[] cells = searchZone.GetCells(centerCell, centerCell, map);
 
                 foreach (var cell in map.Cells)
                 {

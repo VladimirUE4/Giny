@@ -114,6 +114,10 @@ namespace Giny.World.Managers.Fights
         {
             return aliveOnly ? Fighters.OfType<T>().Where(x => x.Alive) : Fighters.OfType<T>();
         }
+        public IEnumerable<Fighter> GetFighters(bool aliveOnly = true)
+        {
+            return aliveOnly ? Fighters.Where(x => x.Alive) : Fighters;
+        }
         public Fighter[] GetDeads()
         {
             return Fighters.FindAll(x => !x.Alive).ToArray();
@@ -235,27 +239,7 @@ namespace Giny.World.Managers.Fights
                 teamTypeId = (byte)Type,
             };
         }
-        /*   public Fighter LowerFighter()
-           {
-               Fighter[] fighters = GetFighters<Fighter>(true).ToArray();
-               return fighters.Length == 0 ? null : fighters.Aggregate((f1, f2) => f1.Stats.CurrentLifePoints < f2.Stats.CurrentLifePoints ? f1 : f2);
-           }
-           public Fighter LowerFighterPercentage()
-           {
-               Fighter[] fighters = GetFighters<Fighter>(true).ToArray();
-               return fighters.Count == 0 ? null : fighters.Aggregate((f1, f2) => f1.Stats.LifePercentage < f2.Stats.LifePercentage ? f1 : f2);
-           }
-           public Fighter HigherFighter()
-           {
-               Fighter[] fighters = GetFighters<Fighter>(true).ToArray();
-               return fighters.Count == 0 ? null : fighters.Aggregate((f1, f2) => f1.Stats.CurrentLifePoints > f2.Stats.CurrentLifePoints ? f1 : f2);
-           }
-           public Fighter HigherFighterPercentage()
-           {
-               Fighter[] fighters = GetFighters<Fighter>(true).ToArray();
-               return fighters.Count == 0 ? null : fighters.Aggregate((f1, f2) => f1.Stats.LifePercentage > f2.Stats.LifePercentage ? f1 : f2);
-           }
-           */
+      
         public Fighter CloserFighter(Fighter source)
         {
             return GetFighters<Fighter>(true).OrderByDescending(x => x.GetMPDistance(source)).LastOrDefault();

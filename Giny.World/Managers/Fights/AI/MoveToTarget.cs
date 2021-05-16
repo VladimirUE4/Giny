@@ -16,23 +16,21 @@ namespace Giny.World.Managers.Fights.AI
 
         }
 
-        public override double ComputePriority()
-        {
-            return 0.5d;
-        }
-
-        public override void Execute()
+        protected override void Apply()
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
-            if (target.IsMeleeWith(Fighter))
+            if (target == null || target.IsMeleeWith(Fighter))
             {
                 return;
             }
 
-            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Teleport).Shuffle())
+            foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Teleport).Shuffle())
             {
-                var targetPoint = target.Cell.Point.GetNearPoints().FirstOrDefault(x => Fighter.Fight.IsCellFree(x.CellId));
+                var spell = Fighter.GetSpell(spellRecord.Id);
+                var points = Fighter.GetSpellZone(spell.Level, Fighter.Cell.Point).EnumerateValidPoints();
+
+                var targetPoint = points.Where(x => Fighter.Fight.IsCellFree(x.CellId)).MinBy(x => x.ManhattanDistanceTo(target.Cell.Point));
 
                 if (targetPoint != null)
                 {

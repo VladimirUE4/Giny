@@ -15,12 +15,7 @@ namespace Giny.World.Managers.Fights.AI
         {
         }
 
-        public override double ComputePriority()
-        {
-            return 2d;
-        }
-
-        public override void Execute()
+        protected override void Apply()
         {
             if (Fighter.IsTackled() || Fighter.Stats.LifePercentage > 20)
             {

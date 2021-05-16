@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 namespace Giny.World.Managers.Fights.Effects.Cast
 {
     /*
-     * Déplacement Osamodas
+     * Courone épine
      */
-    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2794)]
-    public class CastSpell2794 : SpellEffectHandler 
+    [SpellEffectHandler(EffectsEnum.Effect_CastSpell_2795)]
+    public class CastSpell2795 : SpellEffectHandler
     {
-        public CastSpell2794(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        public CastSpell2795(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
 
         }
@@ -26,10 +26,6 @@ namespace Giny.World.Managers.Fights.Effects.Cast
         {
             Spell spell = CreateCastedSpell();
 
-            if (spell == null)
-            {
-                return;
-            }
             foreach (var target in targets)  // target , sure 
             {
                 SpellCast cast = new SpellCast(target, spell, TargetCell, CastHandler.Cast);  // TargetCell, sure ! 

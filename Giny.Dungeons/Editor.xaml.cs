@@ -307,5 +307,66 @@ namespace Giny.Dungeons
             SelectedDungeon.Rooms[mapId].RespawnDelay = int.Parse(respawnDelay.Text);
             SelectedDungeon.UpdateInstantElement();
         }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            var values = names.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<MonsterRecord> monsters = new List<MonsterRecord>();
+
+            foreach (var value in values)
+            {
+                var name = Regex.Match(value.Trim(), @"(.*)\s*(\(.*\))").Groups[1].Value.Trim();
+
+                MonsterRecord record = MonsterRecord.GetMonsterRecords().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+
+                if (record == null)
+                {
+                    name = Regex.Match(value.Trim(), @"\(.*\)(.*)\s*").Groups[1].Value.Trim();
+                    record = MonsterRecord.GetMonsterRecords().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+                }
+
+
+                if (record != null)
+                {
+                    monsters.Add(record);
+
+                }
+                else
+                {
+                    MessageBox.Show("Unknown monster :" + value + " aborting.");
+                    return;
+
+                }
+            }
+
+            foreach (var monster in monsters)
+            {
+                InsertMonster(monster);
+            }
+
+            names.Text = string.Empty;
+
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            if (monsters.SelectedIndex >= 0)
+            {
+                long mapId = (long)maps.SelectedItem;
+                SelectedDungeon.Rooms[mapId].MonsterIds.RemoveAt(monsters.SelectedIndex);
+                SelectedDungeon.UpdateInstantElement();
+                monsters.Items.RemoveAt(monsters.SelectedIndex);
+                monsters.SelectedIndex = 0;
+            }
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            long mapId = (long)maps.SelectedItem;
+            SelectedDungeon.Rooms[mapId].MonsterIds.Clear();
+            SelectedDungeon.UpdateInstantElement();
+            monsters.Items.Clear();
+        }
     }
 }

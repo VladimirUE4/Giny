@@ -54,7 +54,11 @@ namespace Giny.World.Managers.Chat
         public static void InfosCommand(WorldClient client)
         {
             client.Character.Reply("Connected : " + WorldServer.Instance.Clients.Count);
-            client.Character.Reply("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
+
+            foreach (var onlineClient in WorldServer.Instance.GetOnlineClients())
+            {
+                client.Character.Reply("-" + onlineClient.Character.Name);
+            }
             client.Character.Reply("Max Connected : " + WorldServer.Instance.MaximumClients);
         }
         [ChatCommand("look", ServerRoleEnum.Administrator)]
@@ -372,7 +376,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-           
+
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());

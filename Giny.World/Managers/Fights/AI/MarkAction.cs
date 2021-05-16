@@ -15,12 +15,8 @@ namespace Giny.World.Managers.Fights.AI
         {
         }
 
-        public override double ComputePriority()
-        {
-            return 0.9d;
-        }
 
-        public override void Execute()
+        protected override void Apply()
         {
             var target = Fighter.EnemyTeam.CloserFighter(Fighter);
 
@@ -28,7 +24,7 @@ namespace Giny.World.Managers.Fights.AI
             {
                 return;
             }
-            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Mark).Shuffle())
+            foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Mark).Shuffle())
             {
                 var targetPoint = GetTargetPoint(spellRecord.Id, x => Fighter.Fight.IsCellFree(x.CellId));
 

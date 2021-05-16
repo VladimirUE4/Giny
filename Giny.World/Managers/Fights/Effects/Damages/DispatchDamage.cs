@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         {
             Damage token = GetTriggerToken<Damage>();
 
-            if (token != null)
+            if (token != null && token.Computed.HasValue)
             {
                 Damage damages = new Damage(token.Source, token.Target, token.EffectSchool, token.BaseMinDamages, token.BaseMaxDamages, token.GetEffectHandler());
                

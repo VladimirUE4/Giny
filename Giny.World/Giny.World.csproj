@@ -151,7 +151,13 @@
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
     <Compile Include="Managers\Exchanges\CraftExchange.cs" />
     <Compile Include="Managers\Exchanges\MerchantSellerExchange.cs" />
+    <Compile Include="Managers\Fights\AI\AIAction.cs" />
+    <Compile Include="Managers\Fights\AI\BuffAction.cs" />
+    <Compile Include="Managers\Fights\AI\CastOnEnemyAction.cs" />
+    <Compile Include="Managers\Fights\AI\FleeAction.cs" />
+    <Compile Include="Managers\Fights\AI\HealAction.cs" />
     <Compile Include="Managers\Fights\AI\MarkAction.cs" />
+    <Compile Include="Managers\Fights\AI\MoveToTarget.cs" />
     <Compile Include="Managers\Fights\AI\SummonAction.cs" />
     <Compile Include="Managers\Fights\Buffs\DisableStateBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\GlobalDamageReductionBuff.cs" />
@@ -188,6 +194,7 @@
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell1019.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2017.cs" />
     <Compile Include="Managers\Fights\Effects\Cast\CastSpell2792.cs" />
+    <Compile Include="Managers\Fights\Effects\Cast\CastSpell2795.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamageIntercept.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerApUsed.cs" />
     <Compile Include="Managers\Fights\Effects\Damages\DamagePerCasterHpEroded.cs" />
@@ -302,13 +309,7 @@
     <Compile Include="Managers\Effects\Targets\JustSummonedCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\SummonerCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\TelefragCriterion.cs" />
-    <Compile Include="Managers\Fights\AI\CastOnEnemyAction.cs" />
-    <Compile Include="Managers\Fights\AI\AIAction.cs" />
-    <Compile Include="Managers\Fights\AI\BuffAction.cs" />
-    <Compile Include="Managers\Fights\AI\FleeAction.cs" />
-    <Compile Include="Managers\Fights\AI\HealAction.cs" />
     <Compile Include="Managers\Fights\AI\MonsterBrain.cs" />
-    <Compile Include="Managers\Fights\AI\MoveToTarget.cs" />
     <Compile Include="Managers\Fights\Buffs\ErosionBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\FinalDamageBuff.cs" />
     <Compile Include="Managers\Fights\Buffs\InvisibilityBuff.cs" />

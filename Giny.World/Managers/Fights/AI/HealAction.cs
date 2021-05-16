@@ -15,18 +15,17 @@ namespace Giny.World.Managers.Fights.AI
         }
 
 
-        public override double ComputePriority()
-        {
-            return 0.2d;
-        }
 
-        public override void Execute()
+        protected override void Apply()
         {
             foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Healing)))
             {
                 foreach (var ally in Fighter.Team.GetFighters<Fighter>().OrderBy(x => x.Stats.LifePercentage))
                 {
-                    Fighter.CastSpell(spellRecord.Id, ally.Cell.Id);
+                    if (ally.Stats.LifePercentage < 100)
+                    {
+                        Fighter.CastSpell(spellRecord.Id, ally.Cell.Id);
+                    }
                 }
             }
 

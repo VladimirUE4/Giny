@@ -14,7 +14,38 @@ namespace Giny.World.Managers.Fights.AI
             get;
             set;
         }
-        private List<AIAction> Actions
+
+        private SummonAction SummonAction
+        {
+            get;
+            set;
+        }
+        private MarkAction MarkAction
+        {
+            get;
+            set;
+        }
+        private BuffAction BuffAction
+        {
+            get;
+            set;
+        }
+        private HealAction HealAction
+        {
+            get;
+            set;
+        }
+        private MoveToTarget MoveToTarget
+        {
+            get;
+            set;
+        }
+        private CastOnEnemyAction CastOnEnemyAction
+        {
+            get;
+            set;
+        }
+        private FleeAction FleeAction
         {
             get;
             set;
@@ -22,31 +53,26 @@ namespace Giny.World.Managers.Fights.AI
         public MonsterBrain(AIFighter fighter)
         {
             this.Fighter = fighter;
-            this.Actions = new List<AIAction>();
-            this.Initialize();
-        }
-
-        public void Initialize()
-        {
-            Actions.Add(new SummonAction(Fighter));
-            Actions.Add(new MarkAction(Fighter));
-            Actions.Add(new BuffAction(Fighter));
-            Actions.Add(new HealAction(Fighter));
-            Actions.Add(new MoveToTarget(Fighter));
-            Actions.Add(new CastOnEnemyAction(Fighter));
-            Actions.Add(new FleeAction(Fighter));
+            this.SummonAction = new SummonAction(Fighter);
+            this.MarkAction = new MarkAction(Fighter);
+            this.BuffAction = new BuffAction(Fighter);
+            this.HealAction = new HealAction(Fighter);
+            this.MoveToTarget = new MoveToTarget(Fighter);
+            this.CastOnEnemyAction = new CastOnEnemyAction(Fighter);
+            this.FleeAction = new FleeAction(Fighter);
         }
 
 
         public void Play()
         {
-            IEnumerable<AIAction> actions = Actions.OrderBy(x => x.ComputePriority()); // Sort all actions by priority 
-
-            foreach (var action in actions)
-            {
-                if (Fighter.Alive)
-                    action.Execute();
-            }
+            SummonAction.Execute();
+            MarkAction.Execute();
+            BuffAction.Execute();
+            HealAction.Execute();
+            CastOnEnemyAction.Execute();
+            MoveToTarget.Execute();
+            BuffAction.Execute();
+            FleeAction.Execute();
         }
     }
 }

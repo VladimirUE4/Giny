@@ -2367,7 +2367,7 @@
         /// <summary>
         /// #1 (Couronnes d'épines)
         /// </summary>
-        Effect_Unknown_2795 = 2795,
+        Effect_CastSpell_2795 = 2795,
         /// <summary>
         /// Tue la cible pour la remplacer par l'invocation : #1
         /// </summary>

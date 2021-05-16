@@ -492,7 +492,7 @@ namespace Giny.World.Managers.Items.Collections
                         OnError(ObjectErrorEnum.CRITERIONS);
                         return;
                     }
-                    if (DofusPositions.Contains((CharacterInventoryPositionEnum)item.Position) && DofusPositions.Contains((CharacterInventoryPositionEnum)position))
+                    if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED && DofusPositions.Contains((CharacterInventoryPositionEnum)item.Position) && DofusPositions.Contains((CharacterInventoryPositionEnum)position))
                         return;
 
                     if (CheckStacks(item, position, RingPositions) && item.Record.HasSet)
@@ -500,16 +500,12 @@ namespace Giny.World.Managers.Items.Collections
                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
                         return;
                     }
-                    if (CheckStacks(item, position, DofusPositions))
+                    if (CheckStacks(item, position, DofusPositions) && item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
                     {
                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
                         return;
                     }
-                    if (item.PositionEnum != CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
-                    {
-                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
-                        return;
-                    }
+                    
                     if (!InventoryEventApi.OnItemEquipping(Character, item))
                     {
                         return;

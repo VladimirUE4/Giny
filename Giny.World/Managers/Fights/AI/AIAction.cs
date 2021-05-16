@@ -28,17 +28,15 @@ namespace Giny.World.Managers.Fights.AI
         /*
          * Execute action
          */
-        public abstract void Execute();
-
-        /*
-         *  returns a priority factor between 0 and 1
-         */
-        public abstract double ComputePriority();
-
-        protected IEnumerable<SpellRecord> GetSpells(SpellCategoryEnum category)
+        public void Execute()
         {
-            return Fighter.GetSpells().Where(x => x.Category.HasFlag(category));
+            if (Fighter.Alive)
+            {
+                Apply();
+            }
         }
+        protected abstract void Apply();
+
         protected IEnumerable<SpellRecord> GetSpells()
         {
             return Fighter.GetSpells();
@@ -51,6 +49,17 @@ namespace Giny.World.Managers.Fights.AI
             IEnumerable<MapPoint> points = zone.EnumerateValidPoints();
             MapPoint targetPoint = points.Shuffle().FirstOrDefault(predicate);
             return targetPoint;
+        }
+
+        protected IEnumerable<CellRecord> EnumeratePossiblePosition()
+        {
+            if (Fighter.IsTackled())
+            {
+                return new List<CellRecord>();
+            }
+
+            return Fighter.Fight.Map.Cells.Where(x => x.Point.ManhattanDistanceTo(Fighter.Cell.Point) <= Fighter.Stats.MovementPoints.TotalInContext()
+                && x.Walkable && Fighter.Fight.IsCellFree(x));
         }
     }
 }

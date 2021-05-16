@@ -15,14 +15,10 @@ namespace Giny.World.Managers.Fights.AI
 
         }
 
-        public override double ComputePriority()
-        {
-            return 0d;
-        }
 
-        public override void Execute()
+        protected override void Apply()
         {
-            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Buff) && !x.Category.HasFlag(SpellCategoryEnum.Debuff) && !x.Category.HasFlag(SpellCategoryEnum.Damages)))
+            foreach (var spellRecord in Fighter.GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Buff) && !x.Category.HasFlag(SpellCategoryEnum.Debuff) && !x.Category.HasFlag(SpellCategoryEnum.Agressive)))
             {
                 foreach (var ally in Fighter.Team.GetFighters<Fighter>().ToArray())
                 {

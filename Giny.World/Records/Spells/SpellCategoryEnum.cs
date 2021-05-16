@@ -10,7 +10,7 @@ namespace Giny.World.Records.Spells
     public enum SpellCategoryEnum
     {
         None = 0,
-        Damages = 1,
+        Agressive = 1,
         Healing = 2,
         Teleport = 4,
         Buff = 8,

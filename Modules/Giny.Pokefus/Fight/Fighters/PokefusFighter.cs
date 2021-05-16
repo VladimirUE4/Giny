@@ -5,6 +5,7 @@ using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Monsters;
+using Giny.World.Managers.Stats;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
@@ -37,14 +38,36 @@ namespace Giny.Pokefus.Fight.Fighters
         public override void Initialize()
         {
             this.Look = Record.Look.Clone();
-            this.Stats = new FighterStats(Grade, ComputeStatsCoeff());
+
             this.SetController((CharacterFighter)Summoner);
+
             base.Initialize();
+
+            var coeff = ComputeStatsCoeff();
+            this.Stats = new FighterStats(Grade, coeff);
+
+            int lifePoints = (int)(coeff * 1000);
+
+            if (Level == 200)
+            {
+                lifePoints = 3000;
+            }
+
+            const double statsMax = 600;
+
+            this.Stats.Wisdom = Characteristic.New((short)(statsMax * coeff));
+            this.Stats.Chance = Characteristic.New((short)(statsMax * coeff));
+            this.Stats.Agility = Characteristic.New((short)(statsMax * coeff));
+            this.Stats.Strength = Characteristic.New((short)(statsMax * coeff));
+            this.Stats.Vitality = Characteristic.New((short)(statsMax * coeff));
+            this.Stats.BaseMaxLife = lifePoints;
+            this.Stats.LifePoints = lifePoints;
+            this.Stats.MaxLifePoints = lifePoints;
         }
 
         private double ComputeStatsCoeff()
         {
-            return (Level * 2 / 200) + 0.1d;
+            return (Level * 2d / 200d) + 0.1d;
         }
         public override GameFightFighterInformations GetFightFighterInformations(CharacterFighter target)
         {

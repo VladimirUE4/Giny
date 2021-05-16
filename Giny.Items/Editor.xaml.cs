@@ -130,6 +130,9 @@ namespace Giny.Items
             if (WeaponRecord.GetWeapon(CurrentItem.Id) != null)
             {
                 var weaponRecord = WeaponRecord.GetWeapon(CurrentItem.Id);
+                weaponRecord.Effects = CurrentItem.Effects;
+                weaponRecord.Price = CurrentItem.Price;
+                weaponRecord.Name = CurrentItem.Name;
                 weaponRecord.UpdateInstantElement();
             }
             else
@@ -165,7 +168,7 @@ namespace Giny.Items
 
         private void min_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (min.Text != string.Empty)
+            if (min.Text != string.Empty && CurrentEffect != null)
             {
                 CurrentEffect.Min = int.Parse(min.Text);
                 UpdateItem();
@@ -174,7 +177,7 @@ namespace Giny.Items
 
         private void max_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (max.Text != string.Empty)
+            if (max.Text != string.Empty && CurrentEffect != null)
             {
                 CurrentEffect.Max = int.Parse(max.Text);
                 UpdateItem();
@@ -183,7 +186,7 @@ namespace Giny.Items
 
         private void value_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (value.Text != string.Empty)
+            if (value.Text != string.Empty && CurrentEffect != null)
             {
                 CurrentEffect.Value = int.Parse(value.Text);
                 UpdateItem();
@@ -201,6 +204,18 @@ namespace Giny.Items
             DisplayCurrentItem();
         }
 
+        private void spellId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (spellId.Text == string.Empty)
+                return;
 
+            var id = int.Parse(spellId.Text);
+
+            if (D2OManager.ObjectExists("Spells.d2o", id))
+            {
+                var spell = D2OManager.GetObject<Spell>("Spells.d2o", id);
+                textId.Text = spell.DescriptionId.ToString();
+            }
+        }
     }
 }

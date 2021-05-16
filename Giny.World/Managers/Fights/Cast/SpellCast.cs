@@ -160,7 +160,7 @@ namespace Giny.World.Managers.Fights.Cast
 
             return childs;
         }
-       
+
 
         public SpellCast GetParent()
         {
@@ -171,5 +171,6 @@ namespace Giny.World.Managers.Fights.Cast
         {
             return Spell.Record.Name;
         }
+
     }
 }

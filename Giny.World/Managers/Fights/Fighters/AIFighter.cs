@@ -36,7 +36,14 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnBegin()
         {
-            this.Brain.Play();
+            try
+            {
+                this.Brain.Play();
+            }
+            catch
+            {
+                this.Fight.Warn("Unable to play AI : " + Name);
+            }
 
             if (Alive) // else has already passed turn
             {
@@ -44,6 +51,10 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
+        public List<CellRecord> FindPath(CellRecord cell)
+        {
+            return FindPath(cell.Point);
+        }
         public List<CellRecord> FindPath(MapPoint target)
         {
             Pathfinding pathfinding = new Pathfinding(Fight.Map);

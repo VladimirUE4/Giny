@@ -55,6 +55,10 @@ namespace Giny.Pokefus.Effects
 
         public void AddExperience(long value)
         {
+            if (Level == 200)
+            {
+                return;
+            }
             Exp += value;
         }
 

@@ -1,5 +1,7 @@
 ﻿using Giny.Core.Extensions;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
@@ -16,30 +18,88 @@ namespace Giny.World.Managers.Fights.AI
         }
 
 
-        public override double ComputePriority()
+        protected override void Apply()
         {
-            return 1d;
+            CastSpells();
+
+        }
+        private void CastSpells()
+        {
+            List<SpellCast> allCasts = new List<SpellCast>();
+
+            foreach (var cell in EnumeratePossiblePosition())
+            {
+                allCasts.AddRange(GetSpellCasts(cell));
+            }
+
+            allCasts.AddRange(GetSpellCasts(Fighter.Cell));
+
+            var bestCast = allCasts.MaxBy(x => GetEfficiency(x));
+
+            if (bestCast != null)
+            {
+                var path = Fighter.FindPath(bestCast.CastCell);
+                Fighter.Move(path);
+
+                if (bestCast.CastCell != Fighter.Cell)
+                {
+
+                }
+                Fighter.CastSpell(bestCast);
+                CastSpells();
+            }
         }
 
-        public override void Execute()
+        private double GetEfficiency(SpellCast cast)
         {
-            var target = Fighter.EnemyTeam.CloserFighter(Fighter);
+            double value = cast.CastCell.Point.ManhattanDistanceTo(Fighter.Cell.Point);
 
-            if (target == null)
+            if (!cast.Target.IsSummoned())
             {
-                return;
+                value += 10;
             }
-            foreach (var spellRecord in GetSpells().Where(x => x.Category.HasFlag(SpellCategoryEnum.Damages) || x.Category.HasFlag(SpellCategoryEnum.Debuff)).Shuffle())
+
+            return value;
+        }
+        private List<SpellCast> GetSpellCasts(CellRecord cell)
+        {
+            List<SpellCast> casts = new List<SpellCast>();
+
+            foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Agressive || x.Category == SpellCategoryEnum.Debuff).Shuffle())
             {
-                if (spellRecord.Levels.All(x => x.MaxRange == 0))
+                var spell = Fighter.GetSpell(spellRecord.Id);
+
+                if (spell.Level.MaxRange == 0)
                 {
-                    Fighter.CastSpell(spellRecord.Id, Fighter.Cell.Id);
-                }
-                else
-                {
-                    Fighter.CastSpell(spellRecord.Id, target.Cell.Id);
+                    SpellCast cast = new SpellCast(Fighter, spell, Fighter.Cell);
+                    cast.CastCell = Fighter.Cell;
+                    cast.Target = Fighter;
+
+                    if (Fighter.CanCastSpell(cast) == SpellCastResult.OK)
+                    {
+                        casts.Add(cast);
+                    }
                 }
             }
+
+            foreach (var target in Fighter.EnemyTeam.GetFighters())
+            {
+                foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Agressive || x.Category == SpellCategoryEnum.Debuff).Shuffle())
+                {
+                    var spell = Fighter.GetSpell(spellRecord.Id);
+
+                    SpellCast cast = new SpellCast(Fighter, spell, target.Cell);
+                    cast.CastCell = cell;
+                    cast.Target = target;
+
+                    if (Fighter.CanCastSpell(cast) == SpellCastResult.OK)
+                    {
+                        casts.Add(cast);
+                    }
+                }
+            }
+
+            return casts;
         }
     }
 }

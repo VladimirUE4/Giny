@@ -383,7 +383,11 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool IsTackled()
         {
-            return GetTackle(GetTacklers(Cell)).Consistent();
+            return GetTackle().Consistent();
+        }
+        public Tackle GetTackle()
+        {
+            return GetTackle(GetTacklers(Cell));
         }
 
         public virtual void Move(List<CellRecord> path)
@@ -754,7 +758,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public short GetMPDistance(Fighter other)
         {
-            return Cell.Point.DistanceTo(other.Cell.Point);
+            return Cell.Point.ManhattanDistanceTo(other.Cell.Point);
         }
         public virtual void OnJoined()
         {
@@ -867,6 +871,10 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public virtual bool CastSpell(SpellCast cast)
         {
+            if (cast.Spell == null)
+            {
+                return false;
+            }
             if (Fight.Ended)
                 return false;
 
@@ -1082,7 +1090,7 @@ namespace Giny.World.Managers.Fights.Fighters
             }
 
             if (!cast.IsConditionBypassed(SpellCastResult.NO_LOS) &&
-                (cast.Spell.Level.CastTestLos && !Fight.CanBeSeen(cast.Source.Cell.Point, cast.TargetCell.Point))
+                (cast.Spell.Level.CastTestLos && !Fight.CanBeSeen(cast.CastCell.Point, cast.TargetCell.Point))
                 && !CanCastNoLOS(spellLevel.SpellId))
             {
                 return SpellCastResult.NO_LOS;
@@ -1099,6 +1107,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public bool IsInCastZone(SpellLevelRecord spellLevel, MapPoint castPoint, MapPoint cell)
         {
             Set set = GetSpellZone(spellLevel, castPoint);
+           
             return set.BelongToSet(cell);
         }
 
@@ -1132,6 +1141,7 @@ namespace Giny.World.Managers.Fights.Fighters
             else
             {
                 set = new LozengeSet(point, range, minimalRange);
+
             }
 
             return set;

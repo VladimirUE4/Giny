@@ -11,6 +11,7 @@ using Giny.ORM;
 using Giny.Protocol;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Messages;
+using Giny.World.Managers.Maps;
 using Giny.World.Modules;
 using Giny.World.Network;
 using Giny.World.Records.Items;
@@ -32,16 +33,12 @@ using System.Xml;
 
 namespace Giny.World
 {
-    
+
     class Program
     {
         static void Main(string[] args)
         {
 
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
-            {
-                
-            }
             /* WIPManager.Analyse(Assembly.GetExecutingAssembly());
               Console.Read(); */
 

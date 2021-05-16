@@ -17,15 +17,15 @@ namespace Giny.World.Managers.Fights.AI
 
         }
 
-        public override double ComputePriority()
-        {
-            return -1;
-        }
 
-        public override void Execute()
+        protected override void Apply()
         {
+            if (!Fighter.CanSummon())
+            {
+                return;
+            }
 
-            foreach (var spellRecord in GetSpells(SpellCategoryEnum.Summon).Shuffle())
+            foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Summon).Shuffle())
             {
                 MapPoint targetPoint = GetTargetPoint(spellRecord.Id, x => Fighter.Fight.IsCellFree(x.CellId));
                 Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);

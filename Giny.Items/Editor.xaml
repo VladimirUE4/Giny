@@ -34,23 +34,27 @@
             <TextBox LostFocus="min_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="min" Height="23" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="249" Width="119"/>
             <TextBox LostFocus="max_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="max" Height="22" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="281" Width="119"/>
             <TextBox LostFocus="value_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="value" Height="23" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="308" Width="119"/>
-            <Button Content="Remove" Canvas.Left="43" Canvas.Top="394" Width="89" Height="25" RenderTransformOrigin="-0.454,0.568" Click="RemoveEffectClick"/>
+            <Button Content="Remove" Canvas.Left="43" Canvas.Top="419" Width="89" Height="25" RenderTransformOrigin="-0.454,0.568" Click="RemoveEffectClick"/>
 
 
 
 
-            <Rectangle  Height="254" Stroke="Black" Width="606" Canvas.Left="43" Canvas.Top="431"/>
-            <Label Content="Min :" Canvas.Left="466" Canvas.Top="486"/>
-            <Label Content="Max :" Canvas.Left="464" Canvas.Top="517"/>
-            <Label Content="Value :" Canvas.Left="464" Canvas.Top="548"/>
-            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newMin" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0" Canvas.Top="489" Width="120"/>
-            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newMax" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0" Canvas.Top="521" Width="120"/>
-            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newValue" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0&#xD;&#xA;" Canvas.Top="549" Width="120"/>
-            <ListBox Name="newEffect" Height="181" Canvas.Left="69" Canvas.Top="486" Width="362"/>
-            <Label Content="Search :" Canvas.Left="69" Canvas.Top="455"/>
-            <TextBox x:Name="newEffectSearch" Height="23" Canvas.Left="125" TextWrapping="Wrap" Text="" Canvas.Top="455" Width="306" TextChanged="newEffectSearch_TextChanged"/>
-            <Button Content="Add Effect" Canvas.Left="466" Canvas.Top="591" Width="164" Height="59" Click="AddEffectClick"/>
-            <Button Content="Clear" Canvas.Left="352" Canvas.Top="395" Width="79" Height="24" Click="Button_Click"/>
+            <Rectangle  Height="239" Stroke="Black" Width="606" Canvas.Left="43" Canvas.Top="464"/>
+            <Label Content="Min :" Canvas.Left="466" Canvas.Top="508"/>
+            <Label Content="Max :" Canvas.Left="464" Canvas.Top="539"/>
+            <Label Content="Value :" Canvas.Left="464" Canvas.Top="570"/>
+            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newMin" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0" Canvas.Top="511" Width="120"/>
+            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newMax" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0" Canvas.Top="543" Width="120"/>
+            <TextBox PreviewTextInput="NumberValidationTextBox"  Name="newValue" Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="0&#xD;&#xA;" Canvas.Top="571" Width="120"/>
+            <ListBox Name="newEffect" Height="181" Canvas.Left="69" Canvas.Top="508" Width="362"/>
+            <Label Content="Search :" Canvas.Left="69" Canvas.Top="477"/>
+            <TextBox x:Name="newEffectSearch" Height="23" Canvas.Left="125" TextWrapping="Wrap" Text="" Canvas.Top="477" Width="306" TextChanged="newEffectSearch_TextChanged"/>
+            <Button Content="Add Effect" Canvas.Left="466" Canvas.Top="613" Width="164" Height="59" Click="AddEffectClick"/>
+            <Button Content="Clear" Canvas.Left="352" Canvas.Top="419" Width="79" Height="24" Click="Button_Click"/>
+            <Label Content="SpellId :" Canvas.Left="670" Canvas.Top="243" Height="26" Width="52"/>
+            <TextBox  PreviewTextInput="NumberValidationTextBox"  x:Name="spellId" Height="23" Canvas.Left="727" TextWrapping="Wrap" Text="" Canvas.Top="246" Width="119" TextChanged="spellId_TextChanged"/>
+            <Label Content="DescId :" Canvas.Left="670" Canvas.Top="271" Width="52"/>
+            <TextBox Name="textId"  PreviewTextInput="NumberValidationTextBox"   Height="23" Canvas.Left="727" TextWrapping="Wrap" Text="" Canvas.Top="274" Width="119"  IsEnabled="False"/>
 
 
         </Canvas>
