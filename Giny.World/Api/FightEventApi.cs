@@ -1,7 +1,9 @@
-﻿using Giny.World.Managers.Fights;
+﻿using Giny.Protocol.Enums;
+using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
+using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +34,7 @@ namespace Giny.World.Api
             OnFighterJoined?.Invoke(fighter);
         }
 
-        public static bool CanCastSpell(SpellCast cast)
+        internal static bool CanCastSpell(SpellCast cast)
         {
             bool? result = OnSpellCasting?.Invoke(cast);
 
@@ -41,5 +43,6 @@ namespace Giny.World.Api
             else
                 return result.Value;
         }
+
     }
 }

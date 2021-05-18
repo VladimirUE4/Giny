@@ -34,7 +34,7 @@
             <TextBox LostFocus="min_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="min" Height="23" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="249" Width="119"/>
             <TextBox LostFocus="max_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="max" Height="22" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="281" Width="119"/>
             <TextBox LostFocus="value_LostFocus" PreviewTextInput="NumberValidationTextBox"  Name="value" Height="23" Canvas.Left="499" TextWrapping="Wrap" Text="" Canvas.Top="308" Width="119"/>
-            <Button Content="Remove" Canvas.Left="43" Canvas.Top="419" Width="89" Height="25" RenderTransformOrigin="-0.454,0.568" Click="RemoveEffectClick"/>
+            <Button Content="Remove" Canvas.Left="43" Canvas.Top="419" Width="100" Height="25" RenderTransformOrigin="-0.454,0.568" Click="RemoveEffectClick"/>
 
 
 
@@ -50,11 +50,10 @@
             <Label Content="Search :" Canvas.Left="69" Canvas.Top="477"/>
             <TextBox x:Name="newEffectSearch" Height="23" Canvas.Left="125" TextWrapping="Wrap" Text="" Canvas.Top="477" Width="306" TextChanged="newEffectSearch_TextChanged"/>
             <Button Content="Add Effect" Canvas.Left="466" Canvas.Top="613" Width="164" Height="59" Click="AddEffectClick"/>
-            <Button Content="Clear" Canvas.Left="352" Canvas.Top="419" Width="79" Height="24" Click="Button_Click"/>
-            <Label Content="SpellId :" Canvas.Left="670" Canvas.Top="243" Height="26" Width="52"/>
-            <TextBox  PreviewTextInput="NumberValidationTextBox"  x:Name="spellId" Height="23" Canvas.Left="727" TextWrapping="Wrap" Text="" Canvas.Top="246" Width="119" TextChanged="spellId_TextChanged"/>
-            <Label Content="DescId :" Canvas.Left="670" Canvas.Top="271" Width="52"/>
-            <TextBox Name="textId"  PreviewTextInput="NumberValidationTextBox"   Height="23" Canvas.Left="727" TextWrapping="Wrap" Text="" Canvas.Top="274" Width="119"  IsEnabled="False"/>
+            <Button Content="Clear" Canvas.Left="343" Canvas.Top="420" Width="88" Height="24" Click="Button_Click"/>
+            <TextBox Name="textId"    Height="182" Canvas.Left="672" TextWrapping="Wrap" Text="" Canvas.Top="236" Width="170"  LostFocus="textId_LostFocus"  />
+            <Button Content="Move Up" Canvas.Left="143" Canvas.Top="419" Width="100" Height="25" RenderTransformOrigin="-0.454,0.568" Click="MoveUpClick" />
+            <Button Content="Move Down" Canvas.Left="243" Canvas.Top="419" Width="100" Height="25" RenderTransformOrigin="-0.454,0.568" Click="MoveDownClick" />
 
 
         </Canvas>

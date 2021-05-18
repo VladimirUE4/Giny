@@ -19,10 +19,10 @@ namespace Giny.Pokefus.Fight.Fighters
 {
     public class PokefusFighter : SummonedMonster
     {
-        private CharacterItemRecord PokefusItem
+        public CharacterItemRecord PokefusItem
         {
             get;
-            set;
+            private set;
         }
         public PokefusFighter(Fighter owner, CharacterItemRecord pokefusItem, MonsterRecord record, SpellEffectHandler summoningEffect, byte gradeId, CellRecord cell) : base(owner, record, summoningEffect, gradeId, cell)
         {
@@ -59,7 +59,6 @@ namespace Giny.Pokefus.Fight.Fighters
             this.Stats.Chance = Characteristic.New((short)(statsMax * coeff));
             this.Stats.Agility = Characteristic.New((short)(statsMax * coeff));
             this.Stats.Strength = Characteristic.New((short)(statsMax * coeff));
-            this.Stats.Vitality = Characteristic.New((short)(statsMax * coeff));
             this.Stats.BaseMaxLife = lifePoints;
             this.Stats.LifePoints = lifePoints;
             this.Stats.MaxLifePoints = lifePoints;

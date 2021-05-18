@@ -59,7 +59,7 @@ namespace Giny.DofusDrop
 
                     foreach (var client in WorldServer.Instance.GetOnlineClients())
                     {
-                        client.Character.Reply(string.Format(DropMessage, client.Character.Name, "Dofus Emeraude"), Color.HotPink);
+                        client.Character.Reply(string.Format(DropMessage, client.Character.Name, dofusItem.Name), Color.HotPink);
                     }
 
                 }

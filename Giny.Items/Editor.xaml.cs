@@ -99,6 +99,22 @@ namespace Giny.Items
                 min.Text = CurrentEffect.Min.ToString();
                 max.Text = CurrentEffect.Max.ToString();
                 value.Text = CurrentEffect.Value.ToString();
+
+                if (CurrentEffect.EffectEnum == EffectsEnum.Effect_CastSpell_1175)
+                {
+                    var id = CurrentEffect.Min;
+
+                    if (D2OManager.ObjectExists("Spells.d2o", id))
+                    {
+                        var spell = D2OManager.GetObject<Spell>("Spells.d2o", id);
+                        textId.Text = Loader.D2IFile.GetText((int)spell.DescriptionId);
+                    }
+
+                }
+                else
+                {
+                    textId.Text = string.Empty;
+                }
             }
         }
 
@@ -204,18 +220,71 @@ namespace Giny.Items
             DisplayCurrentItem();
         }
 
-        private void spellId_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void MoveUpClick(object sender, RoutedEventArgs e)
         {
-            if (spellId.Text == string.Empty)
-                return;
+            var indice = effects.SelectedIndex;
 
-            var id = int.Parse(spellId.Text);
-
-            if (D2OManager.ObjectExists("Spells.d2o", id))
+            if (indice - 1 < 0)
             {
-                var spell = D2OManager.GetObject<Spell>("Spells.d2o", id);
-                textId.Text = spell.DescriptionId.ToString();
+                return;
             }
+            var current = CurrentItem.Effects[indice];
+            var next = CurrentItem.Effects[indice - 1];
+
+            CurrentItem.Effects[indice] = next;
+            CurrentItem.Effects[indice - 1] = current;
+
+            DisplayCurrentItem();
+
+            UpdateItem();
+
+            effects.SelectedIndex = indice - 1;
         }
+
+        private void MoveDownClick(object sender, RoutedEventArgs e)
+        {
+            var indice = effects.SelectedIndex;
+
+            if (indice + 1 >= CurrentItem.Effects.Count())
+            {
+                return;
+            }
+            var current = CurrentItem.Effects[indice];
+            var next = CurrentItem.Effects[indice + 1];
+
+            CurrentItem.Effects[indice] = next;
+            CurrentItem.Effects[indice + 1] = current;
+
+            DisplayCurrentItem();
+
+            UpdateItem();
+
+            effects.SelectedIndex = indice + 1;
+        }
+
+        private void textId_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (CurrentEffect != null && CurrentEffect.EffectEnum == EffectsEnum.Effect_CastSpell_1175)
+            {
+                var id = CurrentEffect.Min;
+
+                if (D2OManager.ObjectExists("Spells.d2o", id))
+                {
+                    var spell = D2OManager.GetObject<Spell>("Spells.d2o", id);
+                    Loader.D2IFile.SetText((int)spell.DescriptionId, textId.Text);
+
+                    try
+                    {
+                        Loader.D2IFile.Save();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Unable to update item name. Please d2i file might not be available.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+        }
+
     }
+}
 }

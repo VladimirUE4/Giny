@@ -28,6 +28,8 @@ namespace Giny.Pokefus
             FightEventApi.OnFighterJoined += PokefusManager.Instance.OnFighterJoined;
             InventoryEventApi.CanEquipItem += PokefusManager.Instance.CanEquipItem;
             FightEventApi.OnSpellCasting += PokefusManager.Instance.OnSpellCasting;
+            InventoryEventApi.OnItemEquipped += PokefusManager.Instance.OnItemEquipped;
+            InventoryEventApi.OnItemUnequipped += PokefusManager.Instance.OnItemUnequipped;
         }
 
         public void DestroyHooks()
@@ -37,6 +39,7 @@ namespace Giny.Pokefus
             FightEventApi.OnFighterJoined -= PokefusManager.Instance.OnFighterJoined;
             InventoryEventApi.CanEquipItem -= PokefusManager.Instance.CanEquipItem;
             FightEventApi.OnSpellCasting -= PokefusManager.Instance.OnSpellCasting;
+            InventoryEventApi.OnItemEquipped -= PokefusManager.Instance.OnItemEquipped;
         }
 
     }

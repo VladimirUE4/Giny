@@ -5,9 +5,11 @@ using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Api;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Fights.Buffs;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.History;
@@ -36,6 +38,8 @@ namespace Giny.World.Managers.Fights.Fighters
             get;
             private set;
         }
+
+
 
         public override short Level => Character.SafeLevel;
 
@@ -152,7 +156,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 case BreedEnum.Sacrieur:
                     ExecuteSpell(12718, 1, Cell);
                     break;
-                
+
             }
         }
 
@@ -183,6 +187,13 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return false;
         }
+
+        public void Restore()
+        {
+            this.Initialize();
+            this.ShowFighter();
+        }
+
         public override bool CastSpell(short spellId, short cellId)
         {
             if (IsFighterTurn)

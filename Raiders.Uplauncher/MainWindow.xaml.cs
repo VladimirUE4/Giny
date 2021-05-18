@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using System.Xml.Serialization;
 using Path = System.IO.Path;
 
-namespace Sufokia.Uplauncher
+namespace Raiders.Uplauncher
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
@@ -28,9 +28,9 @@ namespace Sufokia.Uplauncher
 
         private const string DofusProcessName = "Dofus";
 
-        private const string CloseButtonPressed = "pack://application:,,,/btn_close_pressed.png";
-        private const string CloseButtonNormal = "pack://application:,,,/btn_close_normal.png";
-        private const string CloseButtonOver = "pack://application:,,,/btn_close_over.png";
+        private const string CloseButtonPressed = "pack://application:,,,/Images/btn_close_pressed.png";
+        private const string CloseButtonNormal = "pack://application:,,,/Images/btn_close_normal.png";
+        private const string CloseButtonOver = "pack://application:,,,/Images/btn_close_over.png";
 
         private Updater Updater
         {

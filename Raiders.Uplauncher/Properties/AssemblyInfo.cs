@@ -7,11 +7,11 @@ using System.Windows;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Sufokia.Uplauncher")]
+[assembly: AssemblyTitle("Raiders.Uplauncher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sufokia.Uplauncher")]
+[assembly: AssemblyProduct("Raiders.Uplauncher")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

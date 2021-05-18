@@ -381,6 +381,8 @@ namespace Giny.World.Managers.Items.Collections
                     SetItemPosition(item2.UId, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, item2.Quantity);
             }
 
+            InventoryEventApi.ItemEquipped(Character, item);
+
         }
         /// <summary>
         /// Permet de déséquiper un item
@@ -417,6 +419,8 @@ namespace Giny.World.Managers.Items.Collections
                 }
 
                 OnItemMoved(item, lastPosition);
+
+                InventoryEventApi.ItemUnequipped(Character, item);
             }
         }
         bool CheckStacks(CharacterItemRecord item, CharacterInventoryPositionEnum position, CharacterInventoryPositionEnum[] checker)
@@ -478,127 +482,150 @@ namespace Giny.World.Managers.Items.Collections
         public void SetItemPosition(int uid, CharacterInventoryPositionEnum position, int quantity)
         {
             var item = GetItem(uid);
-            if (item != null)
+            SetItemPosition(item, position, quantity);
+        }
+        private void SetItemPosition(CharacterItemRecord item, CharacterInventoryPositionEnum position, int quantity)
+        {
+            if (item == null)
             {
-                if (position != CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
+                return;
+            }
+
+            if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT || item.Record.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+            {
+                if (Character.Fighting)
                 {
-                    if (Character.Level < item.Record.Level)
-                    {
-                        OnError(ObjectErrorEnum.LEVEL_TOO_LOW);
-                        return;
-                    }
-                    if (!CriteriaManager.Instance.EvaluateCriterias(Character.Client, item.Record.Criteria))
-                    {
-                        OnError(ObjectErrorEnum.CRITERIONS);
-                        return;
-                    }
-                    if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED && DofusPositions.Contains((CharacterInventoryPositionEnum)item.Position) && DofusPositions.Contains((CharacterInventoryPositionEnum)position))
-                        return;
-
-                    if (CheckStacks(item, position, RingPositions) && item.Record.HasSet)
-                    {
-                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
-                        return;
-                    }
-                    if (CheckStacks(item, position, DofusPositions) && item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
-                    {
-                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
-                        return;
-                    }
-                    
-                    if (!InventoryEventApi.OnItemEquipping(Character, item))
-                    {
-                        return;
-                    }
-
-                    if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT)
-                    {
-                        ItemTypeEnum livingObjectCategory = (ItemTypeEnum)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value;
-
-                        var targeted = GetEquipedItem(position);
-
-                        if (targeted == null)
-                        {
-                            OnLivingObjectEquipedDirectly();
-                            return;
-                        }
-                        if (targeted.Record.TypeEnum != livingObjectCategory)
-                        {
-                            OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
-                            return;
-                        }
-                        if (targeted.Effects.IsAssociated)
-                        {
-                            OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
-                            return;
-                        }
-                        if (item.Quantity > 1)
-                        {
-                            CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
-                            LivingObjectManager.Instance.AssociateLivingObject(Character, item, targeted);
-                            AddItem(newItem);
-                            item.UpdateElement();
-                            UpdateItemQuantity(item);
-                        }
-                        else
-                            LivingObjectManager.Instance.AssociateLivingObject(Character, item, targeted);
-
-                        return;
-                    }
-                    if (item.Record.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
-                    {
-                        var targeted = GetEquipedItem(position);
-
-                        if (targeted == null)
-                        {
-                            OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
-                            return;
-                        }
-                        if (targeted.Record.TypeId != item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
-                        {
-                            return;
-                        }
-                        if (targeted.Effects.IsAssociated)
-                        {
-                            OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
-                            return;
-                        }
-                        if (item.Quantity > 1)
-                        {
-                            CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
-                            this.Associate(item, targeted);
-                            AddItem(newItem);
-                            UpdateItemQuantity(item);
-                            item.UpdateElement();
-
-                        }
-                        else
-                            this.Associate(item, targeted);
-                        return;
-                    }
-
-                    EquipItem(item, position, quantity);
+                    return;
                 }
-                else
+            }
+
+            var oldPosition = item.PositionEnum;
+
+            if (position != CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
+            {
+                if (Character.Level < item.Record.Level)
                 {
-                    if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
+                    OnError(ObjectErrorEnum.LEVEL_TOO_LOW);
+                    return;
+                }
+                if (!CriteriaManager.Instance.EvaluateCriterias(Character.Client, item.Record.Criteria))
+                {
+                    OnError(ObjectErrorEnum.CRITERIONS);
+                    return;
+                }
+                if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED && DofusPositions.Contains((CharacterInventoryPositionEnum)item.Position) && DofusPositions.Contains((CharacterInventoryPositionEnum)position))
+                    return;
+
+                if (CheckStacks(item, position, RingPositions) && item.Record.HasSet)
+                {
+                    OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                    return;
+                }
+                if (CheckStacks(item, position, DofusPositions) && item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
+                {
+                    OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                    return;
+                }
+
+                if (!InventoryEventApi.OnItemEquipping(Character, item))
+                {
+                    return;
+                }
+
+                if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT)
+                {
+                    ItemTypeEnum livingObjectCategory = (ItemTypeEnum)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value;
+
+                    var targeted = GetEquipedItem(position);
+
+                    if (targeted == null)
                     {
-                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                        OnLivingObjectEquipedDirectly();
+                        return;
+                    }
+                    if (targeted.Record.TypeEnum != livingObjectCategory)
+                    {
+                        OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
+                        return;
+                    }
+                    if (targeted.Effects.IsAssociated)
+                    {
+                        OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
+                        return;
+                    }
+                    if (item.Quantity > 1)
+                    {
+                        CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+                        LivingObjectManager.Instance.AssociateLivingObject(Character, item, targeted);
+                        AddItem(newItem);
+                        item.UpdateElement();
+                        UpdateItemQuantity(item);
                         return;
                     }
                     else
                     {
-                        UnequipItem(item, quantity);
+                        LivingObjectManager.Instance.AssociateLivingObject(Character, item, targeted);
+                        return;
+                    }
+                }
+                if (item.Record.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+                {
+                    var targeted = GetEquipedItem(position);
+
+                    if (targeted == null)
+                    {
+                        OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                        return;
+                    }
+                    if (targeted.Record.TypeId != item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
+                    {
+                        return;
+                    }
+                    if (targeted.Effects.IsAssociated)
+                    {
+                        OnError(ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR);
+                        return;
+                    }
+                    if (item.Quantity > 1)
+                    {
+                        CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+                        this.Associate(item, targeted);
+                        AddItem(newItem);
+                        UpdateItemQuantity(item);
+                        item.UpdateElement();
+
+                    }
+                    else
+                    {
+                        this.Associate(item, targeted);
                     }
 
+                    return;
                 }
-                item.UpdateElement();
-                OnObjectMoved(item, position);
-                RefreshWeight();
-                Character.Record.UpdateElement();
-                Character.RefreshActorOnMap();
-                Character.RefreshStats();
+
+                EquipItem(item, position, quantity);
             }
+            else
+            {
+                if (item.PositionEnum == CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
+                {
+                    OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
+                    return;
+                }
+                else
+                {
+                    UnequipItem(item, quantity);
+                }
+
+            }
+
+            item.UpdateElement();
+            OnObjectMoved(item, position);
+            RefreshWeight();
+            Character.Record.UpdateElement();
+            Character.RefreshActorOnMap();
+            Character.RefreshStats();
+
         }
         private void Associate(CharacterItemRecord item, CharacterItemRecord targeted)
         {

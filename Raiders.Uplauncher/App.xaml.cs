@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Sufokia.Uplauncher
+namespace Raiders.Uplauncher
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml

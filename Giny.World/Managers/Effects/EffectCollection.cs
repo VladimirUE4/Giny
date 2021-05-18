@@ -148,5 +148,11 @@ namespace Giny.World.Managers.Effects
         {
             return Effects.GetEnumerator();
         }
+
+        public Effect this[int i]
+        {
+            get => this.Effects[i];
+            set => this.Effects[i] = value;
+        }
     }
 }

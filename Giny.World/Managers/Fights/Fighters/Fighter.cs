@@ -762,8 +762,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual void OnJoined()
         {
-            this.ShowFighter();
             this.Fight.UpdateFightersPlacementDirection();
+            this.ShowFighter();
             this.Fight.UpdateEntitiesPositions();
             Fight.UpdateTeams();
 

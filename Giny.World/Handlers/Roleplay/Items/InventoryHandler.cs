@@ -23,9 +23,21 @@ namespace Giny.World.Handlers.Items
         [MessageHandler]
         public static void HandleObjectSetPositionMessage(ObjectSetPositionMessage message, WorldClient client)
         {
-            if (!client.Character.Fighting && !client.Character.Busy)
+            if (client.Character.Busy)
             {
-                client.Character.Inventory.SetItemPosition(message.objectUID, (CharacterInventoryPositionEnum)message.position, message.quantity);
+                return;
+            }
+
+            if (client.Character.Fighting && client.Character.Fighter.Fight.Started)
+            {
+                return;
+            }
+
+            client.Character.Inventory.SetItemPosition(message.objectUID, (CharacterInventoryPositionEnum)message.position, message.quantity);
+
+            if (client.Character.Fighting)
+            {
+                client.Character.Fighter.Restore();
             }
         }
         [MessageHandler]
@@ -44,6 +56,10 @@ namespace Giny.World.Handlers.Items
         [MessageHandler]
         public static void HandleLivingObjectDissociateMessage(LivingObjectDissociateMessage message, WorldClient client)
         {
+            if (client.Character.Fighting)
+            {
+                return;
+            }
             CharacterItemRecord item = client.Character.Inventory.GetItem(message.livingUID);
 
             if (item != null)
@@ -56,6 +72,11 @@ namespace Giny.World.Handlers.Items
         [MessageHandler]
         public static void HandleLivingObjectChangeSkinRequestMessage(LivingObjectChangeSkinRequestMessage message, WorldClient client)
         {
+            if (client.Character.Fighting)
+            {
+                return;
+            }
+
             CharacterItemRecord item = client.Character.Inventory.GetItem(message.livingUID);
 
             if (item != null)
@@ -66,6 +87,10 @@ namespace Giny.World.Handlers.Items
         [MessageHandler]
         public static void HandleObjectFeedMessage(ObjectFeedMessage message, WorldClient client)
         {
+            if (client.Character.Fighting)
+            {
+                return;
+            }
             CharacterItemRecord item = client.Character.Inventory.GetItem(message.objectUID);
 
             if (item != null)
@@ -76,6 +101,10 @@ namespace Giny.World.Handlers.Items
         [MessageHandler]
         public static void HandleWrapperObjectDissociateRequestMessage(WrapperObjectDissociateRequestMessage message, WorldClient client)
         {
+            if (client.Character.Fighting)
+            {
+                return;
+            }
             CharacterItemRecord item = client.Character.Inventory.GetItem(message.hostUID);
 
             if (item != null)

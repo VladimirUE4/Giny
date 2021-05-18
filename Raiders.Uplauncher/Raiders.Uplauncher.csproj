@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FD37C014-4CD3-4AC7-B923-7DF2E3C9053E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Sufokia.Uplauncher</RootNamespace>
-    <AssemblyName>Sufokia.Uplauncher</AssemblyName>
+    <RootNamespace>Raiders.Uplauncher</RootNamespace>
+    <AssemblyName>Raiders.Uplauncher</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Sufokia\</OutputPath>
+    <OutputPath>..\Raiders\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -102,28 +102,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="btn_close_over.png" />
+    <Resource Include="Images\btn_close_over.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bg.png" />
+    <Resource Include="Images\corner_decoration_small.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="corner_decoration_small.png" />
+    <Resource Include="Images\btn_close_pressed.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="btn_close_pressed.png" />
+    <Resource Include="Images\btn_close_normal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="btn_close_normal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="tx_gradient_vertical_dark_bar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="window_border_bottom.png" />
+    <Resource Include="Images\tx_gradient_vertical_dark_bar.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

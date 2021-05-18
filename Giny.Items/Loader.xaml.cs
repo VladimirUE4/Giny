@@ -41,8 +41,8 @@ namespace Giny.Items
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "localhost",
          "giny_world", "root", "");
 
-            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Sufokia\app\data\common");
-            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Sufokia\app\data\i18n\i18n_fr.d2i");
+            D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Raiders\app\data\common");
+            D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Raiders\app\data\i18n\i18n_fr.d2i");
 
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
