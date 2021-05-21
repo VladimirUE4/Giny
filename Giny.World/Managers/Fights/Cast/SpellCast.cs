@@ -147,6 +147,21 @@ namespace Giny.World.Managers.Fights.Cast
             return source;
         }
 
+        public int GetDeep()
+        {
+            int deep = 0;
+
+            SpellCast current = this;
+
+            while (current.Parent != null)
+            {
+                current = current.Parent;
+                deep++;
+            }
+
+            return deep;
+        }
+
         public IEnumerable<SpellCast> GetAllChilds()
         {
             List<SpellCast> childs = new List<SpellCast>();

@@ -136,9 +136,15 @@ namespace Giny.World
         {
             get;
             set;
-        } = "Wecome to <b>Giny</b> server.";
+        } = "Bienvenue sur <b>Raiders</b>. Nous sommes heureux de vous revoir.";
 
-        public double CraftXpRate
+        public double JobRate
+        {
+            get;
+            set;
+        } = 1;
+
+        public double DropRate
         {
             get;
             set;

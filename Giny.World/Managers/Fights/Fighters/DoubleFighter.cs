@@ -29,7 +29,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public override void OnTurnEnded()
         {
-         
+            base.OnTurnEnded();
         }
         public override void Initialize()
         {

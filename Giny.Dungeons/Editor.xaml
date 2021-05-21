@@ -42,6 +42,8 @@
             <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="names" Height="60" Canvas.Left="268" TextWrapping="Wrap" Text="" Canvas.Top="475" Width="335"/>
             <Button Content="Insert from jeuxonline" Canvas.Left="268" Canvas.Top="544" Width="335" Height="33"  Click="Button_Click_7"/>
             <Button Content="Clear " HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Height="26" Canvas.Top="602" Canvas.Left="4" Click="Button_Click_9"/>
+            <TextBox  x:Name="mapIdRoom" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137" Canvas.Left="103" Canvas.Top="65"/>
+            <Label Content="MapId : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="62" Canvas.Left="4"/>
         </Canvas>
         <Label Content="Search : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,41,0,0"/>
         <TextBox Name="searchName" TextChanged="searchName_TextChanged"  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" Margin="78,45,0,0"/>

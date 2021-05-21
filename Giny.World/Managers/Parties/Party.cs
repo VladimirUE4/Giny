@@ -4,6 +4,7 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
+using Giny.World.Managers.Fights;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -410,6 +411,21 @@ namespace Giny.World.Managers.Parties
         {
             SendMembers(message);
             SendGuests(message);
+        }
+
+        public void OnInitiateFight(Character character, Fight fight)
+        {
+            SendMembers(new PartyMemberInStandardFightMessage()
+            {
+                memberAccountId = character.Client.Account.Id,
+                fightId = (short)fight.Id,
+                fightMap = character.Map.GetMapCoordinatesExtended(),
+                memberId = character.Id,
+                memberName = character.Name,
+                partyId = Id,
+                reason = 0,
+                timeBeforeFightStart = fight.GetPlacementTimeLeft(),
+            });
         }
     }
 }

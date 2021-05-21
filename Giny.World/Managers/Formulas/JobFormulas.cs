@@ -44,7 +44,7 @@ namespace Giny.World.Managers.Formulas
             {
                 result = value;
             }
-            return (int)(Math.Floor(result) * ConfigFile.Instance.CraftXpRate);
+            return (int)(Math.Floor(result) * ConfigFile.Instance.JobRate);
         }
     }
 }

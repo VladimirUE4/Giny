@@ -55,24 +55,25 @@ namespace Giny.World.Managers.Fights
             }
         }
 
-        public FightPvM CreateFightPvM(MonsterGroup group, MapRecord map, CellRecord cell)
+        public FightPvM CreateFightPvM(Character origin, MonsterGroup group, MapRecord map, CellRecord cell)
         {
             FightTeam blueTeam = new FightTeam(TeamEnum.TEAM_DEFENDER, map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_MONSTER);
             FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
-            var fight = new FightPvM(PopId(), map, blueTeam, redTeam, cell, group);
+            var fight = new FightPvM(origin, PopId(), map, blueTeam, redTeam, cell, group);
             Fights.TryAdd(fight.Id, fight);
             return fight;
         }
 
-        public FightDual CreateFightDual(Character source, Character target, CellRecord cell)
+        public FightDual CreateFightDual(Character source, CellRecord cell)
         {
             FightTeam blueteam = new FightTeam(TeamEnum.TEAM_DEFENDER, source.Map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
             FightTeam redteam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
-            var fight = new FightDual(PopId(), source.Map, blueteam, redteam, cell);
+            var fight = new FightDual(source, PopId(), source.Map, blueteam, redteam, cell);
 
             Fights.TryAdd(fight.Id, fight);
+
             return fight;
         }
 
@@ -81,8 +82,10 @@ namespace Giny.World.Managers.Fights
             FightTeam blueTeam = new FightTeam(TeamEnum.TEAM_DEFENDER, source.Map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_MONSTER);
             FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
-            var fight = new FightContextual(PopId(), source, targetObjective, source.Map, blueTeam, redTeam, source.GetCell());
+            var fight = new FightContextual(source, PopId(), targetObjective, source.Map, blueTeam, redTeam, source.GetCell());
             Fights.TryAdd(fight.Id, fight);
+
+
             return fight;
         }
     }

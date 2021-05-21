@@ -70,6 +70,10 @@ namespace Giny.World.Managers.Fights.Fighters
             return base.MustSkipTurn() || !Record.CanPlay;
         }
 
+        public override bool UseSummonSlot()
+        {
+            return Record.UseSummonSlot;
+        }
         public override bool DisplayInTimeline()
         {
             return Record.CanPlay;
@@ -116,6 +120,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             return Record.SpellRecords.Values;
         }
+
 
         public override void OnSummoned()
         {

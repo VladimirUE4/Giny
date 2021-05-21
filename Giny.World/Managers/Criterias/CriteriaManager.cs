@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.World.Modules;
 using Giny.World.Network;
 using System;
@@ -62,21 +63,22 @@ namespace Giny.World.Managers.Criterias
 
                 if (handler != null)
                 {
-                    if  (!handler.Eval(client))
+                    if (!handler.Eval(client))
                     {
                         return false;
                     }
                 }
                 else
                 {
-                    client.Character.Reply("Unknown criteria indentifier: " + criteriaIndentifier + ". Skeeping criteria");
+                    if (client.Account.Role > ServerRoleEnum.Player)
+                        client.Character.Reply("Unknown criteria indentifier: " + criteriaIndentifier + ". Skeeping criteria");
                     return true;
                 }
             }
 
             return true;
 
-          
+
         }
     }
     public class CriteriaAttribute : Attribute

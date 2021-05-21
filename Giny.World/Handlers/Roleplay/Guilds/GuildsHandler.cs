@@ -7,6 +7,7 @@ using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Guilds;
 using Giny.World.Network;
 using Giny.World.Records.Guilds;
+using Giny.World.Records.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Giny.World.Handlers.Roleplay.Guilds
         {
             GuildCreationResultEnum result = GuildsManager.Instance.CreateGuild(client.Character, message.guildName, message.guildEmblem);
             client.Character.OnGuildCreate(result);
+
         }
         [MessageHandler]
         public static void HandleGuildMotdSetRequestMessage(GuildMotdSetRequestMessage message, WorldClient client)

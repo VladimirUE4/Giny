@@ -28,7 +28,11 @@ namespace Giny.World.Managers.Fights.AI
             foreach (var spellRecord in GetSpells().Where(x => x.Category == SpellCategoryEnum.Summon).Shuffle())
             {
                 MapPoint targetPoint = GetTargetPoint(spellRecord.Id, x => Fighter.Fight.IsCellFree(x.CellId));
-                Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);
+
+                if (targetPoint != null)
+                {
+                    Fighter.CastSpell(spellRecord.Id, targetPoint.CellId);
+                }
             }
         }
     }

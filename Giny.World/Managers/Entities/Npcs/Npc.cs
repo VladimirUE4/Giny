@@ -37,8 +37,6 @@ namespace Giny.World.Managers.Entities.Npcs
             }
         }
 
-        //s public List<NpcActionRecord> ActionsRecord = new List<NpcActionRecord>();
-
         private long m_Id;
 
         public override long Id

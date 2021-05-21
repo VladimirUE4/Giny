@@ -15,6 +15,7 @@ using Giny.World.Managers.Items.Collections;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
+using Giny.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -171,25 +172,25 @@ namespace Giny.Pokefus
         }
         private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
         {
-            const double ProspectingCoeff = 2.0d;
+            const double ProspectingCoeff = 2d;
 
-            double dropRate = 0.020d;
+            double dropRate = 0.010d;
 
             if (monster.Level >= 50)
             {
-                dropRate = 0.018;
+                dropRate = 0.008;
             }
             else if (monster.Level >= 100)
             {
-                dropRate = 0.016;
+                dropRate = 0.007;
             }
             else if (monster.Level >= 150)
             {
-                dropRate = 0.012;
+                dropRate = 0.006;
             }
             else if (monster.Level >= 200)
             {
-                dropRate = 0.010;
+                dropRate = 0.005;
             }
 
             if (monster.Record.IsBoss)
@@ -278,16 +279,60 @@ namespace Giny.Pokefus
         }
         public bool OnSpellCasting(SpellCast arg)
         {
-            bool result = true;
 
             if (!(arg.Source is PokefusFighter))
             {
-                return result;
+                return true;
             }
+
+            
+            bool result = true;
 
             if (arg.Spell.Level.Effects.Any(x => ForbiddenPokefusSpellEffects.Contains(x.EffectEnum)))
             {
                 result = false;
+            }
+
+            foreach (var effect in arg.Spell.Level.Effects)
+            {
+                var dice = ((EffectDice)effect);
+
+                if (effect.EffectEnum == EffectsEnum.Effect_AddState)
+                {
+                    SpellStateRecord state = SpellStateRecord.GetSpellStateRecord(dice.Value);
+
+                    if (state.Id == 218 || state.Invulnerable)
+                    {
+                        result = false;
+                    }
+                }
+
+                if (effect.EffectEnum == EffectsEnum.Effect_SkipTurn || effect.EffectEnum == EffectsEnum.Effect_SkipTurn_1031)
+                {
+                    result = false;
+                }
+
+                if (effect.EffectEnum == EffectsEnum.Effect_SubResistances || effect.EffectEnum == EffectsEnum.Effect_SubEarthResistPercent||
+                    effect.EffectEnum == EffectsEnum.Effect_SubWaterResistPercent ||  effect.EffectEnum == EffectsEnum.Effect_SubAirResistPercent
+                    || effect.EffectEnum == EffectsEnum.Effect_SubFireResistPercent)
+                {
+                    if (dice.Max > 50 || dice.Min > 50)
+                    {
+                        result = false;
+                    }
+                }
+                if (effect.EffectEnum == EffectsEnum.Effect_DamageEarth || effect.EffectEnum == EffectsEnum.Effect_DamageAir ||
+                    effect.EffectEnum == EffectsEnum.Effect_DamageFire || effect.EffectEnum == EffectsEnum.Effect_DamageWater)
+                {
+                    if (dice.Min > 150 || dice.Max > 150)
+                    {
+                        result = false;
+                    }
+                }
+                if (effect.EffectEnum == EffectsEnum.Effect_Summon && dice.Min == 2941)
+                {
+                    result = false;
+                }
             }
 
             if (ForbiddenPokefusSpells.Contains(arg.SpellId))

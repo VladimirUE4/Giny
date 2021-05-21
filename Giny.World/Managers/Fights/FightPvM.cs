@@ -8,6 +8,7 @@ using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Monsters;
 using Giny.World.Managers.Fights.Challenges;
 using Giny.World.Managers.Fights.Fighters;
@@ -36,8 +37,8 @@ namespace Giny.World.Managers.Fights
             get;
             set;
         }
-        public FightPvM(int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell, MonsterGroup monsterGroup)
-            : base(id, map, blueTeam, redTeam, cell)
+        public FightPvM(Character origin, int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell, MonsterGroup monsterGroup)
+            : base(origin, id, map, blueTeam, redTeam, cell)
         {
             this.MonsterGroup = monsterGroup;
 
@@ -165,12 +166,12 @@ namespace Giny.World.Managers.Fights
                     }
                 }
             }
-
         }
 
         public override void OnFightStarted()
         {
-            Challenges = ChallengesManager.Instance.CreateChallenges(GetTeamChallenged(), GetChallengeCount());
+            Challenges = new List<Challenge>();// ChallengesManager.Instance.CreateChallenges(GetTeamChallenged(), GetChallengeCount());
+            Challenges.Add(new Pusillanimous(Records.Challenges.ChallengeRecord.GetChallenge(40), GetTeamChallenged()));
             DisplayChallenges();
         }
         private void DisplayChallenges()

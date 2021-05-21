@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Fights
     {
         public const int TurnTime = 30;
 
-        public const int SynchronizerTimout = 10;
+        public const int SynchronizerTimout = 15;
 
         public const int TurnBeforeDisconnection = 20;
 
@@ -64,7 +64,11 @@ namespace Giny.World.Managers.Fights
             get;
         }
 
-
+        protected Character Origin
+        {
+            get;
+            private set;
+        }
 
         public FightTeam RedTeam
         {
@@ -252,10 +256,11 @@ namespace Giny.World.Managers.Fights
         {
             return new Idol[0];
         }
-        public Fight(int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
+        public Fight(Character origin, int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
         {
             this.Id = id;
             this.Map = map;
+            this.Origin = origin;
             this.BlueTeam = blueTeam;
             this.RedTeam = redTeam;
             this.BlueTeam.Fight = this;
@@ -364,6 +369,7 @@ namespace Giny.World.Managers.Fights
             }
 
             FightEventApi.PlacementStarted(this);
+            Origin.OnInitiateFight(this);
 
         }
         private void ShowBladesOnMap()

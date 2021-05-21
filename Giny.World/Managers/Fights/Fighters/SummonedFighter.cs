@@ -154,6 +154,10 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             ChangeContextIfNeeded();
         }
+        public virtual bool UseSummonSlot()
+        {
+            return true;
+        }
         public override Fighter GetController()
         {
             return Controller;

@@ -119,14 +119,14 @@ namespace Giny.World.Managers.Maps.Elements
             {
                 CharacterJob job = Character.GetJob(Skill.Record.ParentJobId);
 
-                int quantity = JobFormulas.Instance.GetCollectedItemQuantity(job != null ? job.Level : 1, Skill.Record) ;
+                int quantity = JobFormulas.Instance.GetCollectedItemQuantity(job != null ? job.Level : 1, Skill.Record);
 
                 this.Character.Inventory.AddItem(Skill.Record.GatheredRessourceItem, quantity);
                 this.Character.Client.Send(new ObtainedItemMessage(Skill.Record.GatheredRessourceItem, quantity));
 
                 if (job != null)
                 {
-                    this.Character.AddJobExp(Skill.Record.ParentJobId, 5 * Skill.Record.MinLevel);
+                    this.Character.AddJobExp(Skill.Record.ParentJobId, (long)((5 * Skill.Record.MinLevel) * ConfigFile.Instance.JobRate));
                 }
                 this.Character.Collecting = false;
                 this.Character = null;

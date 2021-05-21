@@ -11,9 +11,9 @@ namespace Raiders.Uplauncher
 {
     public class Updater
     {
-        private const string VersionUrl = "http://5.206.224.144/launcher/version.txt";
+        private const string VersionUrl = "https://raw.githubusercontent.com/SlaveMaster123/i18n/master/version.txt";
 
-        private const string PackageUrl = "http://5.206.224.144/launcher/i18n_fr.d2i";
+        private const string PackageUrl = "https://raw.githubusercontent.com/SlaveMaster123/i18n/master/i18n_fr.d2i";
 
         private const string TargetPath = "app/data/i18n/i18n_fr.d2i";
 

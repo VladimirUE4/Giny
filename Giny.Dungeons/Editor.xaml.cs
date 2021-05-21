@@ -95,6 +95,8 @@ namespace Giny.Dungeons
             {
                 long mapId = (long)maps.SelectedItem;
 
+                mapIdRoom.Text = mapId.ToString();
+
                 monsterCanvas.Visibility = Visibility.Visible;
 
                 monsters.Items.Clear();

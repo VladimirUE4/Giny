@@ -217,7 +217,7 @@ namespace Giny.World.Managers.Items.Collections
         }
         protected virtual T GetSameItem(short gid, EffectCollection effects)
         {
-            return GetItems().FirstOrDefault(x => x.GId == gid && effects.SequenceEqual(effects));
+            return GetItems().FirstOrDefault(x => x.GId == gid && x.Effects.SequenceEqual(effects));
         }
         /*
          * We could have use a Dictionary<int uid,Item item> instead.

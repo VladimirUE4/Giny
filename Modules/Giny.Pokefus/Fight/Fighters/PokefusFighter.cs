@@ -104,6 +104,10 @@ namespace Giny.Pokefus.Fight.Fighters
             };
         }
 
+        public override bool UseSummonSlot()
+        {
+            return false;
+        }
         public override void Kick(Fighter source)
         {
             throw new NotImplementedException();

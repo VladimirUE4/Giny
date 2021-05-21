@@ -20,7 +20,7 @@ namespace Giny.DofusDrop
     [Module("Dofus drop")]
     public class Module : IModule
     {
-        private const double DofusDropPercentage = 1d;
+        private const double DofusDropPercentage = 0.2d;
 
         private const string DropMessage = "<b>{0}</b> vient de drop le <b>{1}</b>. Félicitation a lui !";
 
@@ -36,6 +36,11 @@ namespace Giny.DofusDrop
 
         private void OnResultApplied(FightPlayerResult result)
         {
+            if (result.Fight.Winners != result.Fighter.Team)
+            {
+                return;
+            }
+
             var bosses = result.Fighter.EnemyTeam.GetFighters<MonsterFighter>(false).Where(x => x.Record.IsBoss);
 
             if (bosses.Count() > 0)
@@ -59,7 +64,7 @@ namespace Giny.DofusDrop
 
                     foreach (var client in WorldServer.Instance.GetOnlineClients())
                     {
-                        client.Character.Reply(string.Format(DropMessage, client.Character.Name, dofusItem.Name), Color.HotPink);
+                        client.Character.Reply(string.Format(DropMessage, result.Character.Name, dofusItem.Name), Color.HotPink);
                     }
 
                 }

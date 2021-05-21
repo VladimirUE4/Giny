@@ -1,6 +1,7 @@
 ﻿using Giny.Core.Extensions;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Fights.Zones;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Spells;
 using System;
@@ -13,8 +14,11 @@ namespace Giny.World.Managers.Fights.AI
 {
     public class CastOnEnemyAction : AIAction
     {
+        public const int MaxIterations = 20;
+
         public CastOnEnemyAction(AIFighter fighter) : base(fighter)
         {
+
         }
 
 
@@ -23,8 +27,12 @@ namespace Giny.World.Managers.Fights.AI
             CastSpells();
 
         }
-        private void CastSpells()
+        private void CastSpells(int iterations = 0)
         {
+            if (iterations >= MaxIterations)
+            {
+                return;
+            }
             List<SpellCast> allCasts = new List<SpellCast>();
 
             foreach (var cell in EnumeratePossiblePosition())
@@ -36,17 +44,28 @@ namespace Giny.World.Managers.Fights.AI
 
             var bestCast = allCasts.MaxBy(x => GetEfficiency(x));
 
+
             if (bestCast != null)
             {
+                if (Fighter.Fight.Ended || !Fighter.Alive)
+                {
+                    return;
+                }
+
+                if (bestCast.Target != null && !bestCast.Target.Alive)
+                {
+                    return;
+                }
+
                 var path = Fighter.FindPath(bestCast.CastCell);
                 Fighter.Move(path);
 
-                if (bestCast.CastCell != Fighter.Cell)
+                if (bestCast.CastCell == Fighter.Cell)
                 {
-
+                    Fighter.CastSpell(bestCast);
                 }
-                Fighter.CastSpell(bestCast);
-                CastSpells();
+
+                CastSpells(iterations + 1);
             }
         }
 
@@ -54,7 +73,7 @@ namespace Giny.World.Managers.Fights.AI
         {
             double value = cast.CastCell.Point.ManhattanDistanceTo(Fighter.Cell.Point);
 
-            if (!cast.Target.IsSummoned())
+            if (cast.Target != null && !cast.Target.IsSummoned())
             {
                 value += 10;
             }
@@ -88,9 +107,18 @@ namespace Giny.World.Managers.Fights.AI
                 {
                     var spell = Fighter.GetSpell(spellRecord.Id);
 
-                    SpellCast cast = new SpellCast(Fighter, spell, target.Cell);
+                    var targetCell = target.Cell;
+
+                    if (target.IsInvisible())
+                    {
+                        targetCell = Fighter.Fight.Map.GetCell(Fighter.GetSpellZone(spell.Level, Fighter.Cell.Point).EnumerateValidPoints().Random());
+                    }
+
+                    SpellCast cast = new SpellCast(Fighter, spell, targetCell);
                     cast.CastCell = cell;
-                    cast.Target = target;
+
+                    if (!target.IsInvisible())
+                        cast.Target = target;
 
                     if (Fighter.CanCastSpell(cast) == SpellCastResult.OK)
                     {

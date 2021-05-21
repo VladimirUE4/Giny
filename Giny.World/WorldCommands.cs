@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.Commands;
 using Giny.Core.Extensions;
+using Giny.Core.Misc;
 using Giny.ORM;
 using Giny.Protocol.Enums;
 using Giny.Protocol.IPC.Messages;
@@ -15,6 +16,7 @@ using Giny.World.Records.Characters;
 using Giny.World.Records.Guilds;
 using Giny.World.Records.Items;
 using Giny.World.Records.Maps;
+using Giny.World.Records.Monsters;
 using Giny.World.Records.Npcs;
 using System;
 using System.Collections.Generic;
@@ -94,25 +96,9 @@ namespace Giny.World
         [ConsoleCommand("npcs")]
         public static void ReloadNpcsCommand()
         {
-            DatabaseManager.Instance.Reload<NpcSpawnRecord>();
-            DatabaseManager.Instance.Reload<NpcReplyRecord>();
-            DatabaseManager.Instance.Reload<NpcActionRecord>();
-
-            NpcSpawnRecord.Initialize();
-
-            foreach (var map in MapRecord.GetMaps())
-            {
-                foreach (var npc in map.Instance.GetEntities<Npc>())
-                {
-                    map.Instance.RemoveEntity(npc.Id);
-                }
-                map.Instance.Reload();
-            }
-
-            NpcsManager.Instance.SpawnNpcs();
-
-            Logger.Write("Npc Reloaded.", Channels.Log);
+            NpcsManager.Instance.ReloadNpcs();
         }
+
         [ConsoleCommand("items")]
         public static void ReloadItemsCommand()
         {
@@ -125,6 +111,7 @@ namespace Giny.World
             Logger.Write("Items Reloaded.", Channels.Log);
         }
 
+       
 
     }
 }

@@ -43,7 +43,7 @@ namespace Giny.World.Managers.Dialogs.DialogBox
 
             });
 
-            FightDual fight = FightManager.Instance.CreateFightDual(Source, Target, Source.GetCell());
+            FightDual fight = FightManager.Instance.CreateFightDual(Source, Source.GetCell());
 
             fight.RedTeam.AddFighter(Target.CreateFighter(fight.RedTeam));
 

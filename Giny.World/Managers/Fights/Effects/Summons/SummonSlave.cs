@@ -29,9 +29,10 @@ namespace Giny.World.Managers.Fights.Effects.Summons
 
             if (record != null && Source.Fight.IsCellFree(TargetCell))
             {
-                if (Source.CanSummon() || !record.UseSummonSlot)
+                SummonedMonster summon = CreateSummon(record, (byte)Effect.Max);
+
+                if (Source.CanSummon() || !summon.UseSummonSlot())
                 {
-                    SummonedMonster summon = CreateSummon(record, (byte)Effect.Max);
                     summon.SetController((CharacterFighter)Source);
                     Source.Fight.AddSummon(Source, summon);
                 }

@@ -20,6 +20,7 @@ using Giny.World.Managers.Exchanges;
 using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
+using Giny.World.Managers.Generic;
 using Giny.World.Managers.Guilds;
 using Giny.World.Managers.Items;
 using Giny.World.Managers.Items.Collections;
@@ -424,6 +425,14 @@ namespace Giny.World.Managers.Entities.Characters
 
             }
 
+        }
+
+        public void OnInitiateFight(Fight fight)
+        {
+            if (Party != null)
+            {
+                Party.OnInitiateFight(this, fight);
+            }
         }
 
         public void DestroyContext()
@@ -882,6 +891,13 @@ namespace Giny.World.Managers.Entities.Characters
             this.MovedCell = 0;
             this.IsMoving = false;
             this.MovementKeys = null;
+
+            var element = Map.Instance.GetElements<MapElement>().Where(x => x.Record.CellId == this.Record.CellId).FirstOrDefault();
+
+            if (element != null && element.Record.Skill != null && element.Record.Skill.ActionIdentifier == GenericActionEnum.Teleport)
+            {
+                Map.Instance.UseInteractive(this, element.Record.Identifier, 0);
+            }
         }
         public void CancelMove(short cellId)
         {
@@ -1602,6 +1618,8 @@ namespace Giny.World.Managers.Entities.Characters
 
             this.CurrentMapMessage(Map.Id);
 
+            this.Map.Instance.SendMapComplementary(Client);
+
             Fighter = FightManager.Instance.GetConnectedFighter(this);
 
             if (this.Fighter == null)
@@ -1613,7 +1631,6 @@ namespace Giny.World.Managers.Entities.Characters
 
             Fighter.OnReconnect(this);
 
-            this.Map.Instance.SendMapComplementary(Client);
 
         }
 
@@ -1623,6 +1640,13 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (result == GuildCreationResultEnum.GUILD_CREATE_OK)
             {
+                CharacterItemRecord item = this.Inventory.GetFirstItem(1575, 1);
+
+                if (item != null)
+                {
+                    Client.Character.Inventory.RemoveItem(item, 1);
+                }
+
                 Dialog.Close();
             }
         }

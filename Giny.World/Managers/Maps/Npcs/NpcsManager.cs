@@ -92,6 +92,27 @@ namespace Giny.World.Managers.Maps.Npcs
             map.Instance.Reload();
         }
 
+        public void ReloadNpcs()
+        {
+            DatabaseManager.Instance.Reload<NpcSpawnRecord>();
+            DatabaseManager.Instance.Reload<NpcReplyRecord>();
+            DatabaseManager.Instance.Reload<NpcActionRecord>();
+
+            NpcSpawnRecord.Initialize();
+
+            foreach (var map in MapRecord.GetMaps())
+            {
+                foreach (var npc in map.Instance.GetEntities<Npc>())
+                {
+                    map.Instance.RemoveEntity(npc.Id);
+                }
+                map.Instance.Reload();
+            }
+
+            NpcsManager.Instance.SpawnNpcs();
+
+        }
+
         public void AddNpc(int mapId, short cellId, DirectionsEnum direction, short templateId)
         {
             var targetMap = MapRecord.GetMap(mapId);

@@ -16,6 +16,8 @@ namespace Giny.World.Managers.Fights.Marks
         {
             switch (spellId)
             {
+                case SpellEnum.RepulsionGlyph:
+                    return Color.FromArgb(102, 0, 102);
                 /*
                  * Mot marquant 
                  * Glyphe Lapino

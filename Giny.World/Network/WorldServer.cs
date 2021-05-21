@@ -124,7 +124,7 @@ namespace Giny.World.Network
         }
         public void Send(NetworkMessage message)
         {
-            foreach (var client in Clients)
+            foreach (var client in GetOnlineClients())
             {
                 client.Send(message);
             }

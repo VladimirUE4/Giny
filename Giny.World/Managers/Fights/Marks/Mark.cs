@@ -157,13 +157,6 @@ namespace Giny.World.Managers.Fights.Marks
         }
         protected void ApplyEffects(Fighter fighter)
         {
-            SpellCast cast = CreateSpellCast();
-            cast.CastCell = CenterCell;
-            cast.Force = true;
-            cast.Target = fighter;
-            Source.CastSpell(cast);
-
-            /*
             SpellCastHandler castHandler = SpellManager.Instance.CreateSpellCastHandler(CreateSpellCast());
 
             if (!castHandler.Initialize())
@@ -175,8 +168,7 @@ namespace Giny.World.Managers.Fights.Marks
             {
                 IEnumerable<Fighter> targets = effectHandler.IsValidTarget(fighter) ? new Fighter[] { fighter } : new Fighter[0];
                 effectHandler.Execute(targets);
-            } 
-            */
+            }
         }
         protected void RemoveEffects(Fighter fighter)
         {

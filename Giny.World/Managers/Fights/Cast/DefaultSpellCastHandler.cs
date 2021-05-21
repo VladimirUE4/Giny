@@ -1,4 +1,5 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.Core.Time;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
@@ -116,8 +117,18 @@ namespace Giny.World.Managers.Fights.Cast
 
             foreach (var handler in handlers)
             {
-                handler.SetTriggerToken(Cast.Token);
-                handler.Execute();
+                //try
+                {
+                    handler.SetTriggerToken(Cast.Token);
+
+
+                    handler.Execute();
+                }
+                /* catch (Exception ex)
+                {
+                    Cast.Source.Fight.Warn("Unable to cast effect " + handler.Effect.EffectEnum);
+                    Logger.Write(ex, Channels.Critical);
+                } */
             }
 
             return true;

@@ -203,19 +203,6 @@ namespace Giny.World.Records.Maps
         {
             return WalkableCells.Where(x => !x.FarmCell).Random();
         }
-
-        public static MapRecord GetMap(long mapId)
-        {
-            return Maps[mapId];
-        }
-        public static IEnumerable<MapRecord> GetMaps(Point point)
-        {
-            return Maps.Values.Where(x => x.Position.Point == point);
-        }
-        public static IEnumerable<MapRecord> GetMaps()
-        {
-            return Maps.Values;
-        }
         public void ReloadMembers()
         {
             this.WalkableCells = this.Cells.Where(x => x.Walkable).ToArray();
@@ -283,23 +270,6 @@ namespace Giny.World.Records.Maps
         {
             return GetFirstElementRecord(InteractiveTypeEnum.ZAAP) != null;
         }
-        public static InteractiveElementRecord[] GetElementsByBonesId(int bonesId)
-        {
-            List<InteractiveElementRecord> records = new List<InteractiveElementRecord>();
-
-            foreach (var map in Maps)
-            {
-                foreach (var element in map.Value.Elements)
-                {
-                    if (element.BonesId == bonesId)
-                    {
-                        records.Add(element);
-                    }
-                }
-            }
-
-            return records.ToArray();
-        }
         public short GetNearCell(InteractiveTypeEnum interactiveType)
         {
             InteractiveElementRecord element = GetFirstElementRecord(interactiveType);
@@ -317,6 +287,49 @@ namespace Giny.World.Records.Maps
         {
             return Elements.FirstOrDefault(x => x.Identifier == elemId);
         }
+
+        public MapCoordinatesExtended GetMapCoordinatesExtended()
+        {
+            return new MapCoordinatesExtended()
+            {
+                mapId = Id,
+                subAreaId = SubareaId,
+                worldX = (short)Position.X,
+                worldY = (short)Position.Y
+            };
+        }
+
+        public static MapRecord GetMap(long mapId)
+        {
+            return Maps[mapId];
+        }
+        public static IEnumerable<MapRecord> GetMaps(Point point)
+        {
+            return Maps.Values.Where(x => x.Position.Point == point);
+        }
+        public static IEnumerable<MapRecord> GetMaps()
+        {
+            return Maps.Values;
+        }
+        
+        public static InteractiveElementRecord[] GetElementsByBonesId(int bonesId)
+        {
+            List<InteractiveElementRecord> records = new List<InteractiveElementRecord>();
+
+            foreach (var map in Maps)
+            {
+                foreach (var element in map.Value.Elements)
+                {
+                    if (element.BonesId == bonesId)
+                    {
+                        records.Add(element);
+                    }
+                }
+            }
+
+            return records.ToArray();
+        }
+       
     }
     [ProtoContract]
     public class InteractiveElementRecord

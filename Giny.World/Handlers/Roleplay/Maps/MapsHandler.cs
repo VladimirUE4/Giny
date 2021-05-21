@@ -115,7 +115,7 @@ namespace Giny.World.Handlers.Maps
 
                         CellRecord cell = client.Character.Map.GetCell(group.CellId);
 
-                        FightPvM fight = FightManager.Instance.CreateFightPvM(group, client.Character.Map, cell);
+                        FightPvM fight = FightManager.Instance.CreateFightPvM(client.Character, group, client.Character.Map, cell);
 
                         foreach (var monsterFighter in group.CreateFighters(fight.BlueTeam))
                         {

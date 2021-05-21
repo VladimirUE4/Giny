@@ -566,7 +566,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public int GetSummonsCount()
         {
-            return GetSummons().OfType<SummonedMonster>().Where(x => x.Record.UseSummonSlot).Count();
+            return GetSummons().OfType<SummonedMonster>().Where(x => x.UseSummonSlot()).Count();
         }
 
 
@@ -871,10 +871,21 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public virtual bool CastSpell(SpellCast cast)
         {
+            const int MaximumCastRecusion = 20;
+
             if (cast.Spell == null)
             {
                 return false;
             }
+
+            var parent = cast.GetParent();
+
+            if (cast.GetDeep() > MaximumCastRecusion) // prevent recursion
+            {
+                return false;
+            }
+
+
             if (Fight.Ended)
                 return false;
 
@@ -1032,7 +1043,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP]
         public virtual SpellCastResult CanCastSpell(SpellCast cast)
         {
-
+            
             if (cast.Force)
                 return SpellCastResult.OK;
 

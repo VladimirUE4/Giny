@@ -1,6 +1,7 @@
 ﻿using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
+using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Records.Maps;
@@ -20,7 +21,7 @@ namespace Giny.World.Managers.Fights
 
         public override bool SpawnJoin => false;
 
-        public FightDual(int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell) : base(id, map, blueTeam, redTeam, cell)
+        public FightDual(Character origin, int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell) : base(origin, id, map, blueTeam, redTeam, cell)
         {
 
         }
@@ -50,12 +51,12 @@ namespace Giny.World.Managers.Fights
 
         public override void OnFighterJoined(Fighter fighter)
         {
-           
+
         }
 
         public override void OnFightStarted()
         {
-           
+
         }
     }
 }

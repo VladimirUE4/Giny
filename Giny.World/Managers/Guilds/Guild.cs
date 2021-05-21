@@ -189,6 +189,10 @@ namespace Giny.World.Managers.Guilds
             {
                 return;
             }
+            if (member.Rank == 1)
+            {
+                return;
+            }
             member.Rights = (GuildRightsBitEnum)rights;
             member.ExperienceGivenPercent = experienceGivenPercent;
             member.Rank = rank;

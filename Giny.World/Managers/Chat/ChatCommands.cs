@@ -18,6 +18,7 @@ using Giny.World.Managers.Maps.Teleporters;
 using Giny.World.Managers.Monsters;
 using Giny.World.Network;
 using Giny.World.Records.Items;
+using Giny.World.Records.Jobs;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
 using Giny.World.Records.Tinsel;
@@ -53,13 +54,49 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("infos", ServerRoleEnum.Administrator)]
         public static void InfosCommand(WorldClient client)
         {
-            client.Character.Reply("Connected : " + WorldServer.Instance.Clients.Count);
-
             foreach (var onlineClient in WorldServer.Instance.GetOnlineClients())
             {
                 client.Character.Reply("-" + onlineClient.Character.Name);
             }
+
             client.Character.Reply("Max Connected : " + WorldServer.Instance.MaximumClients);
+            client.Character.Reply("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
+            client.Character.Reply("Connected : " + WorldServer.Instance.Clients.Count);
+
+        }
+        [ChatCommand("placement", ServerRoleEnum.Administrator)]
+        public static void AddPlacementCommand(WorldClient client, string type)
+        {
+            if (type != "blue" && type != "red")
+            {
+                client.Character.ReplyWarning("Invalid argument : " + type);
+                return;
+            }
+
+            if (type == "red")
+            {
+                client.Character.GetCell().Red = true;
+            }
+            else
+            {
+                client.Character.GetCell().Blue = true;
+            }
+
+
+            client.Character.Map.ReloadMembers();
+            client.Character.Map.UpdateInstantElement();
+            client.Character.Teleport(client.Character.Map);
+        }
+        [ChatCommand("npcs", ServerRoleEnum.Administrator)]
+        public static void ReloadNpcs(WorldClient client)
+        {
+            NpcsManager.Instance.ReloadNpcs();
+            client.Character.ReplyWarning("Npcs reloaded.");
+        }
+        [ChatCommand("event", ServerRoleEnum.Player)] // in module
+        public static void EventCommand(WorldClient client)
+        {
+            client.Character.Teleport(196086788);
         }
         [ChatCommand("look", ServerRoleEnum.Administrator)]
         public static void LookCommand(WorldClient client, string lookStr)
@@ -208,6 +245,11 @@ namespace Giny.World.Managers.Chat
         {
             NpcsManager.Instance.RemoveNpc(spawnId);
         }
+        [ChatCommand("spawn", ServerRoleEnum.Player)]
+        public static void SpawnCommmand(WorldClient client)
+        {
+            client.Character.SpawnPoint();
+        }
         [ChatCommand("start", ServerRoleEnum.Player)]
         public static void StartCommand(WorldClient client)
         {
@@ -295,6 +337,14 @@ namespace Giny.World.Managers.Chat
         {
             client.Character.AddExperience(amount);
         }
+        [ChatCommand("notif", ServerRoleEnum.Administrator)]
+        public static void NotifCommand(WorldClient client, string message)
+        {
+            foreach (var target in WorldServer.Instance.GetOnlineClients())
+            {
+                target.Character.DisplayNotification("Serveur : " + message);
+            }
+        }
         [ChatCommand("go", ServerRoleEnum.GamemasterPadawan)]
         public static void TeleportCommand(WorldClient client, int mapId)
         {
@@ -376,11 +426,8 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
-
-            return;
-            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(6);
+            IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(8);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
-
         }
 
     }

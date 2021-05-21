@@ -40,6 +40,7 @@ namespace Giny.World.Managers.Fights.Marks
         public override void Trigger(Fighter target, MarkTriggerType triggerType)
         {
             ApplyEffects(target);
+
         }
 
         public bool DecrementDuration()

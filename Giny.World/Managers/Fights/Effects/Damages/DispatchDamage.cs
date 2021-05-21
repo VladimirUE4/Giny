@@ -25,11 +25,11 @@ namespace Giny.World.Managers.Fights.Effects.Damages
         {
             Damage token = GetTriggerToken<Damage>();
 
-            if (token != null && token.Computed.HasValue)
+            if (token != null && token.Computed != null)
             {
                 Damage damages = new Damage(token.Source, token.Target, token.EffectSchool, token.BaseMinDamages, token.BaseMaxDamages, token.GetEffectHandler());
-               
-                damages.Computed = (short)(damages.Computed * (Effect.Min / 100d));
+                damages.WontTriggerBuffs = true;
+                damages.Computed = (short)(token.Computed * (Effect.Min / 100d));
 
                 foreach (var fighter in Source.GetMeleeFighters())
                 {

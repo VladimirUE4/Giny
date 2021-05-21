@@ -1,4 +1,5 @@
-﻿using Giny.Core.Time;
+﻿using Giny.Core;
+using Giny.Core.Time;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,11 @@ namespace Giny.World.Managers.Fights.Cast
 
             if (Min > Max)
             {
-                throw new Exception("Cannot compute damages. Min > Max.");
+                Logger.Write("Unable to compute jet Min :" + Min + " Max :" + Max, Channels.Critical);
+
+                Max = 1;
+                Min = 1;
+
             }
         }
         public short Generate(bool hasRandDownModifier, bool hasRandUpModifier)

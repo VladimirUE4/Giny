@@ -85,7 +85,10 @@ namespace Giny.World.Records.Jobs
             }
         }
 
-
+        public static IEnumerable<RecipeRecord> GetRecipesRecords()
+        {
+            return Recipes.Values;
+        }
         public static RecipeRecord GetRecipeRecord(long resultId)
         {
             return Recipes.TryGetValue(resultId);

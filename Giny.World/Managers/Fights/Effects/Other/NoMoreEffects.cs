@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Other
 {
+    /*
+     * Nothing to do...
+     */
     [SpellEffectHandler(EffectsEnum.Effect_NoMoreEffects)]
     public class NoMoreEffects : SpellEffectHandler
     {
@@ -19,7 +22,7 @@ namespace Giny.World.Managers.Fights.Effects.Other
 
         protected override void Apply(IEnumerable<Fighter> targets)
         {
-            this.Source.Fight.Warn("No more effects...");
+
         }
     }
 }

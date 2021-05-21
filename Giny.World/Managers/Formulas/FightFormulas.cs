@@ -44,8 +44,6 @@ namespace Giny.World.Managers.Formulas
 
         private const int KAMAS_RATE = 1;
 
-        private const int DROP_RATE = 1;
-
         public FightXp GetExperiencePvM(CharacterFighter fighter, int mapRewardRate = 0, int xpIdolsBonusPercentSolo = 0, int xpIdolsBonusPercentGroup = 0)
         {
             IEnumerable<MonsterFighter> monsters = fighter.Fight.GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER).GetFighters<MonsterFighter>(false);
@@ -191,7 +189,7 @@ namespace Giny.World.Managers.Formulas
             var additionalPP = (looter.Prospecting * bonusRatio);
             var looterPP = looter.Prospecting + additionalPP;
 
-            var rate = item.GetDropRate((int)dropper.Grade.GradeId) * (looterPP / 100d) + 1 * DROP_RATE;
+            var rate = (item.GetDropRate((int)dropper.Grade.GradeId) * (looterPP / 100d) + 1) * ConfigFile.Instance.DropRate;
 
             return rate;
         }

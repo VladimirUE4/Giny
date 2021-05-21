@@ -147,6 +147,11 @@ namespace Giny.World.Managers.Exchanges
                 Character.Client.Send(new ExchangeCraftCountModifiedMessage(count));
             }
         }
+        public void ResetCount()
+        {
+            this.Count = 1;
+            Character.Client.Send(new ExchangeCraftCountModifiedMessage(Count));
+        }
 
         public override void MoveItemPriced(int objectUID, int quantity, long price)
         {
@@ -222,6 +227,17 @@ namespace Giny.World.Managers.Exchanges
                 results.Add(ItemManager.Instance.CreateCharacterItem(recipe.ResultRecord, Character.Id, 1));
             }
 
+            foreach (var pair in removed)
+            {
+                var item = Character.Inventory.GetItem(pair.Key);
+
+                if (item.Quantity < pair.Value)
+                {
+                    Character.ReplyWarning("Unable to perform craft. Unable to compute recipe.");
+                    OnCraftResulted(CraftResultEnum.CRAFT_FORBIDDEN);
+                    return;
+                }
+            }
             Character.Inventory.RemoveItems(removed);
             Character.Inventory.AddItems(results);
 
@@ -244,7 +260,8 @@ namespace Giny.World.Managers.Exchanges
             int exp = JobFormulas.Instance.GetCraftExperience(recipe.ResultRecord.Level, CharacterJob.Level, craftXpRatio);
             Character.AddJobExp(CharacterJob.JobId, exp * Count);
             Items.Clear();
-            SetCount(1);
+            ResetCount();
+
         }
         private void OnCraftResulted(CraftResultEnum result)
         {
