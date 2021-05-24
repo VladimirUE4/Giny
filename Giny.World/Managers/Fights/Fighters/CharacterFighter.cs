@@ -149,6 +149,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
             switch (Breed)
             {
+                case BreedEnum.Zobal:
+                    ExecuteSpell(18633, 1, Cell);
+                    break;
                 case BreedEnum.Osamodas:
                     ExecuteSpell(13991, 1, Cell);
                     break;

@@ -1,4 +1,5 @@
-﻿using Giny.Core.Network.Messages;
+﻿using Giny.Core.DesignPattern;
+using Giny.Core.Network.Messages;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
@@ -22,9 +23,11 @@ namespace Giny.World.Handlers.Maps
 {
     class MapsHandler
     {
+        [WIP("check areaId")]
         [MessageHandler]
         public static void HandleFriendJoinRequestMessage(FriendJoinRequestMessage message, WorldClient client)
         {
+            return;
             var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.name);
 
             if (target != null)

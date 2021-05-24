@@ -204,7 +204,8 @@ namespace Giny.World.Managers.Items.Collections
 
         public void RefreshWeight()
         {
-            Character.Client.Send(new InventoryWeightMessage(CurrentWeight, 0, TotalWeight)); // 9N
+            Character.Client.Send(new InventoryWeightMessage(0, 0, 1000)); // 9N
+          //  Character.Client.Send(new InventoryWeightMessage(CurrentWeight, 0, TotalWeight)); // 9N
 
         }
         public void RefreshKamas()

@@ -33,7 +33,7 @@ namespace Giny.World.Managers.Fights.Challenges
         {
             if (ConcernedFighters.Contains(fighter))
             {
-                if (!fighter.GetMeleeFighters().Any(x => x.IsFriendlyWith(fighter)))
+                if (!fighter.GetMeleeFighters().Any(x => x != fighter && x.IsFriendlyWith(fighter)))
                 {
                     OnChallengeResulted(ChallengeResultEnum.Failed);
                 }

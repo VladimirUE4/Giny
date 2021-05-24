@@ -86,7 +86,12 @@ namespace Giny.World.Managers.Fights.Zones
                     result = new Line(zoneMinSize, zoneSize, false, false);
                     break;
                 case ZoneEnum.l:
-                    bool stopAtTarget = byte.Parse(data[4]) == 1;
+
+                    bool stopAtTarget = false;
+                    if (data.Length >= 5)
+                    {
+                        stopAtTarget = byte.Parse(data[4]) == 1;
+                    }
                     result = new Line(zoneSize, zoneMinSize, true, stopAtTarget);
                     break;
                 case ZoneEnum.T:

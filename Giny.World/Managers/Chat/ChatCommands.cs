@@ -334,7 +334,7 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("item", ServerRoleEnum.GamemasterPadawan)]
         public static void AddItemCommand(WorldClient client, short itemId, int quantity)
         {
-            client.Character.Inventory.AddItem(itemId, quantity, true);
+            client.Character.Inventory.AddItem(itemId, quantity, false);
             client.Character.OnItemGained(itemId, quantity);
         }
         [ChatCommand("relative", ServerRoleEnum.Administrator)]

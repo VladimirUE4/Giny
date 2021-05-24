@@ -20,6 +20,11 @@ namespace Giny.World.Handlers.Roleplay.Maps
                 client.Send(new LeaveDialogMessage((byte)client.Character.Dialog.DialogType));
                 client.Character.LeaveDialog();
             }
+
+            if (client.Character.IsInRequest())
+            {
+                client.Character.RequestBox.Cancel();
+            }
         }
     }
 }

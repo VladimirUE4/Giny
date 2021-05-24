@@ -239,7 +239,7 @@ namespace Giny.World.Managers.Entities.Characters
             }
         }
 
-        
+
         public override ServerEntityLook Look
         {
             get
@@ -591,7 +591,7 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new JobDescriptionMessage(Record.Jobs.Select(x => x.GetJobDescription()).ToArray()));
             Client.Send(new JobExperienceMultiUpdateMessage(Record.Jobs.Select(x => x.GetJobExperience()).ToArray()));
         }
-       
+
 
         public void RefreshGuild()
         {
@@ -1692,11 +1692,18 @@ namespace Giny.World.Managers.Entities.Characters
             return Record.DoneObjectives.Contains(id);
         }
 
-        public void ReachObjective(short id)
+        public void ReachObjective(short id, string message)
         {
             if (!Record.DoneObjectives.Contains(id))
             {
                 Record.DoneObjectives.Add(id);
+
+                if (!string.IsNullOrEmpty(message))
+                {
+                    string text = "Nouvel objectif atteint : <b>" + message + "</b>";
+                    DisplayNotification(text);
+                    Reply(text);
+                }
             }
         }
 

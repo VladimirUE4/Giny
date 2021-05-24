@@ -17,7 +17,7 @@ namespace Giny.World.Managers.Generic
 {
     public class GenericActions
     {
-        [GenericActionHandler(GenericActionEnum.AddItem, 2)]
+        [GenericActionHandler(GenericActionEnum.AddItem)]
         public static void HandleAddItem(Character character, IGenericActionParameter parameter)
         {
             short itemId = short.Parse(parameter.Param1);
@@ -25,7 +25,7 @@ namespace Giny.World.Managers.Generic
             character.Inventory.AddItem(itemId, quantity);
             character.OnItemGained(itemId, quantity);
         }
-        [GenericActionHandler(GenericActionEnum.RemoveItem, 2)]
+        [GenericActionHandler(GenericActionEnum.RemoveItem)]
         public static void HandleRemoveItem(Character character, IGenericActionParameter parameter)
         {
             short itemId = short.Parse(parameter.Param1);
@@ -42,7 +42,7 @@ namespace Giny.World.Managers.Generic
             character.Inventory.RemoveItem(item.UId, quantity);
             character.OnItemLost(itemId, quantity);
         }
-        [GenericActionHandler(GenericActionEnum.Teleport, 1)]
+        [GenericActionHandler(GenericActionEnum.Teleport)]
         public static void HandleTeleportAction(Character character, IGenericActionParameter parameter)
         {
             short cellId = -1;
@@ -55,12 +55,12 @@ namespace Giny.World.Managers.Generic
                 character.Teleport(int.Parse(parameter.Param1));
             }
         }
-        [GenericActionHandler(GenericActionEnum.OpenBank, 0)]
+        [GenericActionHandler(GenericActionEnum.OpenBank)]
         public static void HandleOpenBank(Character character, IGenericActionParameter parameter)
         {
             character.OpenBank();
         }
-        [GenericActionHandler(GenericActionEnum.Collect, 0)]
+        [GenericActionHandler(GenericActionEnum.Collect)]
         public static void HandleCollect(Character character, IGenericActionParameter parameter)
         {
             MapStatedElement element = parameter as MapStatedElement;
@@ -72,44 +72,44 @@ namespace Giny.World.Managers.Generic
 
             element.Use(character);
         }
-        [GenericActionHandler(GenericActionEnum.Bidshop, 1)]
+        [GenericActionHandler(GenericActionEnum.Bidshop)]
         public static void HandleBidshop(Character character, IGenericActionParameter parameter)
         {
             BidShopRecord record = BidShopRecord.GetBidShop(int.Parse(parameter.Param1));
             character.OpenBuyExchange(record);
         }
-        [GenericActionHandler(GenericActionEnum.Zaap, 0)]
+        [GenericActionHandler(GenericActionEnum.Zaap)]
         public static void HandleZaap(Character character, IGenericActionParameter parameter)
         {
             character.OpenZaap((MapElement)parameter);
         }
-        [GenericActionHandler(GenericActionEnum.Zaapi, 0)]
+        [GenericActionHandler(GenericActionEnum.Zaapi)]
         public static void HandleZaapi(Character character, IGenericActionParameter parameter)
         {
             character.OpenZaapi((MapElement)parameter);
         }
-        [GenericActionHandler(GenericActionEnum.LearnOrnament, 1)]
+        [GenericActionHandler(GenericActionEnum.LearnOrnament)]
         public static void HandleLearnOrnament(Character character, IGenericActionParameter parameter)
         {
             character.LearnOrnament(short.Parse(parameter.Param1), true);
         }
-        [GenericActionHandler(GenericActionEnum.LearnTitle, 1)]
+        [GenericActionHandler(GenericActionEnum.LearnTitle)]
         public static void HandleLearnTitle(Character character, IGenericActionParameter parameter)
         {
             character.LearnTitle(short.Parse(parameter.Param1));
         }
 
-        [GenericActionHandler(GenericActionEnum.CreateGuild, 0)]
+        [GenericActionHandler(GenericActionEnum.CreateGuild)]
         public static void HandleCreateGuild(Character character, IGenericActionParameter parameter)
         {
             character.OpenGuildCreationDialog();
         }
-        [GenericActionHandler(GenericActionEnum.LearnSpell, 1)]
+        [GenericActionHandler(GenericActionEnum.LearnSpell)]
         public static void HandleLearnSpell(Character character, IGenericActionParameter parameter)
         {
             character.LearnSpell(short.Parse(parameter.Param1), true);
         }
-        [GenericActionHandler(GenericActionEnum.AddKamas, 1)]
+        [GenericActionHandler(GenericActionEnum.AddKamas)]
         public static void HandleAddKamas(Character character, IGenericActionParameter parameter)
         {
             long amount = long.Parse(parameter.Param1);
@@ -117,7 +117,7 @@ namespace Giny.World.Managers.Generic
             character.OnKamasGained(amount);
         }
 
-        [GenericActionHandler(GenericActionEnum.Craft, 0)]
+        [GenericActionHandler(GenericActionEnum.Craft)]
         public static void HandleCraft(Character character, IGenericActionParameter parameter)
         {
             MapInteractiveElement element = parameter as MapInteractiveElement;
@@ -129,7 +129,7 @@ namespace Giny.World.Managers.Generic
 
             character.OpenCraftExchange(element.Record.Skill.Record);
         }
-        [GenericActionHandler(GenericActionEnum.Smithmagic, 0)]
+        [GenericActionHandler(GenericActionEnum.Smithmagic)]
         public static void HandlSmithmagic(Character character, IGenericActionParameter parameter)
         {
             MapInteractiveElement element = parameter as MapInteractiveElement;
@@ -142,37 +142,41 @@ namespace Giny.World.Managers.Generic
             character.OpenSmithmagicExchange(element.Record.Skill.Record);
         }
 
-        [GenericActionHandler(GenericActionEnum.RuneTrade,0)]
-        public static void HandleRuneTrade(Character character,IGenericActionParameter parameter)
+        [GenericActionHandler(GenericActionEnum.RuneTrade)]
+        public static void HandleRuneTrade(Character character, IGenericActionParameter parameter)
         {
             character.OpenRuneTradeExchange();
         }
 
-        [GenericActionHandler(GenericActionEnum.Reach, 1)]
+        [GenericActionHandler(GenericActionEnum.Reach)]
         public static void HandleReach(Character character, IGenericActionParameter parameter)
         {
+            character.ReachObjective(short.Parse(parameter.Param1), parameter.Param2);
 
-            character.ReachObjective(short.Parse(parameter.Param1));
-            string message = "Status de quête mis a jour : <b>" + parameter.Param2 + "</b>";
-
-            character.DisplayNotification(message);
-            character.Reply(message);
         }
-        [GenericActionHandler(GenericActionEnum.AddExperience, 1)]
+        [GenericActionHandler(GenericActionEnum.AddExperience)]
         public static void HandleAddExperience(Character character, IGenericActionParameter parameter)
         {
             character.AddExperience(long.Parse(parameter.Param1), true);
         }
 
-        [GenericActionHandler(GenericActionEnum.Fight, 2)]
+        [GenericActionHandler(GenericActionEnum.Fight)]
         public static void HandleFight(Character character, IGenericActionParameter parameter)
         {
-            short targetObjective = short.Parse(parameter.Param2);
+            short? targetObjective = null;
+
+            string message = parameter.Param3;
+
+            if (!string.IsNullOrEmpty(parameter.Param2))
+            {
+                targetObjective = short.Parse(parameter.Param2);
+            }
+
             IEnumerable<MonsterRecord> records = parameter.Param1.Split(',').Select(x => MonsterRecord.GetMonsterRecord(short.Parse(x)));
 
             if (records.Count() > 0)
             {
-                FightContextual fight = FightManager.Instance.CreateFightContextual(character, targetObjective);
+                FightContextual fight = FightManager.Instance.CreateFightContextual(character, targetObjective, message);
 
                 var cell = character.Map.RandomWalkableCell();
 

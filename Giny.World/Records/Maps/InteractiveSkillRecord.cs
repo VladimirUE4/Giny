@@ -90,7 +90,7 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
-       
+
         public static bool Exist(int identifier)
         {
             return InteractiveSkills.Any(x => x.Value.Identifier == identifier);

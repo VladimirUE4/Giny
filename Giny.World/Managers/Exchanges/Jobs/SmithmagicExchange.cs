@@ -36,9 +36,17 @@ namespace Giny.World.Managers.Exchanges.Jobs
 
         }
 
-        private CharacterItemRecord Rune => GetRune();
+        private CharacterItemRecord Rune
+        {
+            get;
+            set;
+        }
 
-        private CharacterItemRecord TargetItem => GetTargetItem();
+        private CharacterItemRecord TargetItem
+        {
+            get;
+            set;
+        }
 
         private double Pool
         {
@@ -138,9 +146,9 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 Character.AddJobExp(CharacterJob.JobId, exp);
             }
 
-
             Character.Inventory.RemoveItem(TargetItem.UId, 1);
-            Character.Inventory.AddItem(TargetItem);
+            this.TargetItem = Character.Inventory.AddItem(TargetItem, 1);
+
 
             Character.Inventory.RemoveItem(Rune.UId, 1);
             Items.RemoveItem(Rune.UId, 1);
@@ -168,8 +176,14 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 poolStatus = MagicPoolStatusEnum.UNMODIFIED;
             }
 
-
             OnResulted(TargetItem, poolStatus);
+        }
+        public override void MoveItem(int uid, int quantity)
+        {
+            base.MoveItem(uid, quantity);
+
+            this.Rune = GetRune();
+            this.TargetItem = GetTargetItem();
         }
         private double GetRuneWeigth()
         {
@@ -336,6 +350,10 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 magicPoolStatus = (byte)magicPoolStatus,
                 objectInfo = item.GetObjectItemNotInContainer(),
             });
+        }
+        public override void Close()
+        {
+            base.Close();
         }
     }
 }

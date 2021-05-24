@@ -92,28 +92,26 @@ namespace Giny.World.Managers.Exchanges.Jobs
         {
             List<CharacterItemRecord> results = new List<CharacterItemRecord>();
 
+            List<ItemRecord> runeItems = new List<ItemRecord>();
+
             foreach (EffectInteger effect in item.Effects)
             {
-                var record = ItemsManager.Instance.GetRuneItem(effect.EffectEnum, item.Record.Level);
+                var runes = ItemsManager.Instance.GetRunesItem(effect.EffectEnum);
 
-                var runeValue = record.Effects.GetFirst<EffectDice>().Min;
-
-                int effectValue = effect.Value;
-
-                int nbIterations = effectValue / runeValue;
-
-                for (int i = 0; i < nbIterations; i++)
+                foreach (var rune in runes)
                 {
-                    var delta = random.NextDouble();
+                    var maxQuantity = (Math.Pow(item.Record.Level, 1.2d)) / 5;
 
-                    if (delta <= ItemsManager.RuneDropChance)
+                    if (maxQuantity > 0)
                     {
-                        CharacterItemRecord runeItem = ItemsManager.Instance.CreateCharacterItem(record, Character.Id, 3);
+                        var quantity = random.Next(0, (int)maxQuantity);
+
+                        CharacterItemRecord runeItem = ItemsManager.Instance.CreateCharacterItem(rune, Character.Id, quantity);
                         results.Add(runeItem);
                     }
                 }
-
             }
+
 
             return results;
         }
@@ -131,8 +129,8 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 decraftedItems.Add(new DecraftedItemStackInfo()
                 {
                     objectUID = result.Key.UId,
-                    bonusMax = (float)ItemsManager.RuneDropChance,
-                    bonusMin = (float)ItemsManager.RuneDropChance,
+                    bonusMax = 1,
+                    bonusMin = 1,
                     runesId = result.Value.GetItems().Select(x => x.GId).ToArray(),
                     runesQty = result.Value.GetItems().Select(x => x.Quantity).ToArray(),
                 });

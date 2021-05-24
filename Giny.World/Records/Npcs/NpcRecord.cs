@@ -26,6 +26,7 @@ namespace Giny.World.Records.Npcs
             get;
             set;
         }
+        [Update]
         [I18NField]
         [D2OField("nameId")]
         public string Name

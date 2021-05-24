@@ -33,8 +33,6 @@ namespace Giny.World.Managers.Items
             set;
         }
 
-        public const double RuneDropChance = 0.2;
-
         private ConcurrentDictionary<EffectsEnum, double> EffectsWeigth = new ConcurrentDictionary<EffectsEnum, double>();
 
         private Dictionary<short, double> RunesWeightRaw = new Dictionary<short, double>()
@@ -296,32 +294,17 @@ namespace Giny.World.Managers.Items
             return m_idprovider.Pop();
         }
 
-        public ItemRecord GetRuneItem(EffectsEnum effect, short itemLevel)
+        public IEnumerable<ItemRecord> GetRunesItem(EffectsEnum effect)
         {
-            List<ItemRecord> runes = new List<ItemRecord>();
-
             foreach (var item in RunesWeight.Keys)
             {
                 var runeEffect = (EffectInteger)item.Effects.FirstOrDefault();
 
-
                 if (runeEffect.EffectEnum == effect)
                 {
-                    runes.Add(item);
+                    yield return item;
                 }
             }
-
-            if (runes.Count == 0)
-            {
-                return null;
-            }
-            var results = runes.OrderBy(x => x.Effects.GetFirst<EffectDice>().Min).ToArray();
-
-            double ratio = (double)itemLevel / ExperienceManager.MaxLevel;
-
-            var indice = (results.Count() - 1) * ratio;
-
-            return results[(int)indice];
         }
 
         public double? GetRuneWeight(ItemRecord runeRecord)

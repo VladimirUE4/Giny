@@ -50,6 +50,11 @@ namespace Giny.World.Managers.Chat
                 client.Character.LastSalesChatMessage = DateTime.UtcNow;
             }
         }
+        [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_NOOB)]
+        public static void Noob(WorldClient client,ChatServerMessage message)
+        {
+            WorldServer.Instance.Send(message);
+        }
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_SEEK)]
         public static void Seek(WorldClient client, ChatServerMessage message)
         {

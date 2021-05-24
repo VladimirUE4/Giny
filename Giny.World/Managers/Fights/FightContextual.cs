@@ -24,15 +24,21 @@ namespace Giny.World.Managers.Fights
 
         public override bool SpawnJoin => true;
 
-        private short TargetObjective
+        private short? TargetObjective
         {
             get;
             set;
         }
-        public FightContextual(Character origin, int id, short targetObjective, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
+        private string ObjectiveMessage
+        {
+            get;
+            set;
+        }
+        public FightContextual(Character origin, int id, short? targetObjective, string objectiveMessage, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
             : base(origin, id, map, blueTeam, redTeam, cell)
         {
             this.TargetObjective = targetObjective;
+            this.ObjectiveMessage = objectiveMessage;
         }
 
         public override FightCommonInformations GetFightCommonInformations()
@@ -54,7 +60,10 @@ namespace Giny.World.Managers.Fights
         {
             if (Winners == GetTeam(TeamTypeEnum.TEAM_TYPE_PLAYER))
             {
-                Origin.ReachObjective(TargetObjective);
+                if (TargetObjective.HasValue)
+                {
+                    Origin.ReachObjective(TargetObjective.Value, ObjectiveMessage);
+                }
             }
         }
 

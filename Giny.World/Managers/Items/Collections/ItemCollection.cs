@@ -22,6 +22,7 @@ namespace Giny.World.Managers.Items.Collections
                 return m_items.Count;
             }
         }
+
         public ItemCollection(IEnumerable<T> items)
         {
             this.m_items = CreateContainer();
