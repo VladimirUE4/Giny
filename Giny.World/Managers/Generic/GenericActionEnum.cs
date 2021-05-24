@@ -26,5 +26,7 @@ namespace Giny.World.Managers.Generic
         AddItem,
         AddExperience,
         Fight,
+        Smithmagic,
+        RuneTrade,
     }
 }

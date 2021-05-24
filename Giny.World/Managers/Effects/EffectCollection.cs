@@ -82,7 +82,7 @@ namespace Giny.World.Managers.Effects
             }
             return effects;
         }
-        public T Get<T>() where T : Effect
+        public T GetFirst<T>() where T : Effect
         {
             return Effects.OfType<T>().FirstOrDefault();
         }
@@ -90,7 +90,7 @@ namespace Giny.World.Managers.Effects
         {
             return (T)Effects.Find(predicate);
         }
-        public T Get<T>(EffectsEnum effectEnum) where T : Effect
+        public T GetFirst<T>(EffectsEnum effectEnum) where T : Effect
         {
             return (T)Effects.FirstOrDefault(x => x.EffectEnum == effectEnum);
         }
@@ -154,5 +154,7 @@ namespace Giny.World.Managers.Effects
             get => this.Effects[i];
             set => this.Effects[i] = value;
         }
+
+       
     }
 }

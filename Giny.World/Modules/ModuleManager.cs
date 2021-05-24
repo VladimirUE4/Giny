@@ -23,6 +23,7 @@ namespace Giny.World.Modules
         [StartupInvoke("Modules", StartupInvokePriority.Initial)]
         public void Initialize()
         {
+
             string path = Path.Combine(Environment.CurrentDirectory, ModulesPath);
 
             if (!Directory.Exists(path))
@@ -55,6 +56,7 @@ namespace Giny.World.Modules
 
             AssemblyCore.OnAssembliesLoaded();
         }
+
         [StartupInvoke("Modules", StartupInvokePriority.Modules)]
         public void LoadModules()
         {
@@ -65,13 +67,7 @@ namespace Giny.World.Modules
                 module.Value.CreateHooks();
             }
         }
-        public void UnloadModules()
-        {
-            foreach (var module in m_modules.Values)
-            {
-                module.DestroyHooks();
-            }
-        }
+       
 
         public IEnumerable<Type> GetModuleTypes()
         {

@@ -81,7 +81,6 @@ namespace Giny.World.Managers.Effects
         }
 
 
-
         public bool Equals(EffectDice effect)
         {
             return this.EffectId == effect.EffectId && effect.Min == Min && effect.Max == Max && effect.Value == Value;

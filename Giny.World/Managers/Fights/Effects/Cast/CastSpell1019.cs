@@ -25,6 +25,13 @@ namespace Giny.World.Managers.Fights.Effects.Cast
 
             ITriggerToken token = this.GetTriggerToken<ITriggerToken>();
 
+            var source = Source;
+
+            if (token != null)
+            {
+                source = token.GetSource();
+            }
+
             foreach (var target in targets) // Ratrapry (Prisma) verify source.
             {
                 var targetCell = target.Cell;
@@ -33,11 +40,12 @@ namespace Giny.World.Managers.Fights.Effects.Cast
                 {
                     targetCell = token.GetSource().Cell;
                 }
-                SpellCast cast = new SpellCast(Source, spell, targetCell, CastHandler.Cast);
+
+                SpellCast cast = new SpellCast(source, spell, targetCell, CastHandler.Cast);
                 cast.Token = this.GetTriggerToken<ITriggerToken>();
                 cast.Force = true;
                 cast.Silent = true;
-                Source.CastSpell(cast);
+                source.CastSpell(cast);
             }
 
 

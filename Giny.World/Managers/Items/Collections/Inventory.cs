@@ -128,7 +128,7 @@ namespace Giny.World.Managers.Items.Collections
         {
             foreach (var item in items)
             {
-                item.UId = ItemManager.Instance.PopItemUID();
+                item.UId = ItemsManager.Instance.PopItemUID();
                 item.AddElement();
             }
             Character.Client.Send(new ObjectsAddedMessage(Array.ConvertAll(items.ToArray(), x => x.GetObjectItem())));
@@ -146,7 +146,7 @@ namespace Giny.World.Managers.Items.Collections
         [WIP]
         public override void OnItemAdded(CharacterItemRecord item)
         {
-            item.UId = ItemManager.Instance.PopItemUID();
+            item.UId = ItemsManager.Instance.PopItemUID();
             item.AddElement();
             Character.Client.Send(new ObjectAddedMessage(item.GetObjectItem(), 0)); // 0??????
             RefreshWeight();
@@ -180,7 +180,7 @@ namespace Giny.World.Managers.Items.Collections
             var template = ItemRecord.GetItem(gid);
             if (template != null)
             {
-                var obj = ItemManager.Instance.CreateCharacterItem(template, Character.Id, quantity, perfect);
+                var obj = ItemsManager.Instance.CreateCharacterItem(template, Character.Id, quantity, perfect);
                 base.AddItem(obj);
                 return obj;
             }
@@ -366,7 +366,7 @@ namespace Giny.World.Managers.Items.Collections
             }
             else
             {
-                CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, quantity, position);
+                CharacterItemRecord newItem = ItemsManager.Instance.CutItem(item, quantity, position);
                 AddItem(newItem);
                 UpdateItemQuantity(item);
             }
@@ -534,7 +534,7 @@ namespace Giny.World.Managers.Items.Collections
 
                 if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT)
                 {
-                    ItemTypeEnum livingObjectCategory = (ItemTypeEnum)item.Effects.Get<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value;
+                    ItemTypeEnum livingObjectCategory = (ItemTypeEnum)item.Effects.GetFirst<EffectInteger>(EffectsEnum.Effect_LivingObjectCategory).Value;
 
                     var targeted = GetEquipedItem(position);
 
@@ -555,7 +555,7 @@ namespace Giny.World.Managers.Items.Collections
                     }
                     if (item.Quantity > 1)
                     {
-                        CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+                        CharacterItemRecord newItem = ItemsManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
                         LivingObjectManager.Instance.AssociateLivingObject(Character, item, targeted);
                         AddItem(newItem);
                         item.UpdateElement();
@@ -577,7 +577,7 @@ namespace Giny.World.Managers.Items.Collections
                         OnError(ObjectErrorEnum.CANNOT_EQUIP_HERE);
                         return;
                     }
-                    if (targeted.Record.TypeId != item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
+                    if (targeted.Record.TypeId != item.Effects.GetFirst<EffectInteger>(EffectsEnum.Effect_Compatible).Value)
                     {
                         return;
                     }
@@ -588,7 +588,7 @@ namespace Giny.World.Managers.Items.Collections
                     }
                     if (item.Quantity > 1)
                     {
-                        CharacterItemRecord newItem = ItemManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
+                        CharacterItemRecord newItem = ItemsManager.Instance.CutItem(item, 1, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED);
                         this.Associate(item, targeted);
                         AddItem(newItem);
                         UpdateItemQuantity(item);
@@ -653,7 +653,7 @@ namespace Giny.World.Managers.Items.Collections
         }
         public void Dissociate(CharacterItemRecord item, CharacterInventoryPositionEnum pos)
         {
-            EffectInteger effect = item.Effects.Get<EffectInteger>(EffectsEnum.Effect_Apparence_Wrapper);
+            EffectInteger effect = item.Effects.GetFirst<EffectInteger>(EffectsEnum.Effect_Apparence_Wrapper);
 
             if (effect != null)
             {

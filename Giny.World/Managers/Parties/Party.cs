@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
@@ -6,6 +7,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,12 +45,12 @@ namespace Giny.World.Managers.Parties
             get;
             private set;
         }
-        public List<Character> Members
+        public ConcurrentDictionary<long, Character> Members
         {
             get;
             private set;
         }
-        public List<Character> Guests
+        public ConcurrentDictionary<long, Character> Guests
         {
             get;
             private set;
@@ -76,8 +78,8 @@ namespace Giny.World.Managers.Parties
         }
         public Party(int partyId, Character leader)
         {
-            this.Members = new List<Character>();
-            this.Guests = new List<Character>();
+            this.Members = new ConcurrentDictionary<long, Character>();
+            this.Guests = new ConcurrentDictionary<long, Character>();
             this.Leader = leader;
             this.Id = Id;
             this.PartyName = "";
@@ -85,33 +87,36 @@ namespace Giny.World.Managers.Parties
 
         public PartyMemberInformations[] GetPartyMembersInformations()
         {
-            return Array.ConvertAll(Members.ToArray(), x => x.GetPartyMemberInformations());
+            return Members.Values.Select(x => x.GetPartyMemberInformations()).ToArray();
         }
 
         public PartyInvitationMemberInformations[] GetPartyInvitationMembersInformations()
         {
-            return Array.ConvertAll(Members.ToArray(), x => x.GetPartyInvitationMemberInformations());
+            return Members.Values.Select(x => x.GetPartyInvitationMemberInformations()).ToArray();
         }
 
         public PartyGuestInformations[] GetPartyGuestsInformations()
         {
-            return Array.ConvertAll(Guests.ToArray(), x => x.GetPartyGuestInformations(this));
+            return Guests.Values.Select(x => x.GetPartyGuestInformations(this)).ToArray();
         }
 
-        public void Create(Character Creator, Character Invited)
+        public void Create(Character source, Character invited)
         {
-            Members.Add(Creator);
-            Creator.Party = this;
-            this.Leader = Creator;
-            Party.SendPartyJoinMessage(Creator);
-
-            Creator.Client.Send(new PartyUpdateMessage()
+            if (!Members.ContainsKey(source.Id))
             {
-                memberInformations = Creator.GetPartyMemberInformations(),
-                partyId = Id,
-            });
+                Members.TryAdd(source.Id, source);
+                source.Party = this;
+                this.Leader = source;
+                Party.SendPartyJoinMessage(source);
 
-            OnInvited(Invited, Creator);
+                source.Client.Send(new PartyUpdateMessage()
+                {
+                    memberInformations = source.GetPartyMemberInformations(),
+                    partyId = Id,
+                });
+
+                OnInvited(invited, source);
+            }
         }
 
         public void OnInvited(Character invited, Character invitor)
@@ -150,7 +155,7 @@ namespace Giny.World.Managers.Parties
 
         public void RefuseInvation(Character character)
         {
-            if (Guests.Contains(character))
+            if (Guests.ContainsKey(character.Id))
             {
                 SendMembers(new PartyRefuseInvitationNotificationMessage()
                 {
@@ -162,21 +167,22 @@ namespace Giny.World.Managers.Parties
             }
         }
 
-        public void CancelInvitation(Character canceller, int guestId)
+        public void CancelInvitation(Character canceller, long guestId)
         {
             if (canceller == Leader)
             {
-                Character Guest = Guests.Find(x => x.Id == guestId);
+                Character guest = Guests.TryGetValue(guestId);
 
-                if (Guest != null)
+                if (guest != null)
                 {
-                    Guest.Client.Send(new PartyInvitationCancelledForGuestMessage()
+                    guest.Client.Send(new PartyInvitationCancelledForGuestMessage()
                     {
                         partyId = Id,
                         cancelerId = canceller.Id,
                     });
 
-                    RemoveGuest(Guest);
+                    RemoveGuest(guest);
+
                     if (Count > 1)
                     {
                         SendMembers(new PartyCancelInvitationNotificationMessage()
@@ -198,7 +204,7 @@ namespace Giny.World.Managers.Parties
                 return;
             if (character == null)
             {
-                this.Leader = Members.First(x => x.Id != this.Leader.Id);
+                this.Leader = Members.Values.FirstOrDefault(x => x.Id != this.Leader.Id);
 
                 SendMembers(new PartyLeaderUpdateMessage()
                 {
@@ -208,7 +214,7 @@ namespace Giny.World.Managers.Parties
             }
             else
             {
-                if (Members.Contains(character))
+                if (Members.ContainsKey(character.Id))
                 {
                     this.Leader = character;
 
@@ -253,11 +259,11 @@ namespace Giny.World.Managers.Parties
                 partyId = Id,
             });
 
-            foreach (Character character in Members)
+            foreach (Character character in Members.Values)
             {
                 character.Party = null;
             }
-            foreach (Character character in Guests)
+            foreach (Character character in Guests.Values)
             {
                 character.GuestedParties.Remove(this);
             }
@@ -267,9 +273,9 @@ namespace Giny.World.Managers.Parties
 
         public void AddMember(Character character)
         {
-            if (!Members.Contains(character))
+            if (!Members.ContainsKey(character.Id))
             {
-                Members.Add(character);
+                Members.TryAdd(character.Id, character);
                 character.Party = this;
                 RemoveGuest(character);
                 Party.SendPartyJoinMessage(character);
@@ -299,9 +305,9 @@ namespace Giny.World.Managers.Parties
         }
         public void RemoveMember(Character character)
         {
-            if (Members.Contains(character))
+            if (Members.ContainsKey(character.Id))
             {
-                Members.Remove(character);
+                Members.TryRemove(character.Id);
                 character.Party = null;
                 character.Client.Send(new PartyLeaveMessage()
                 {
@@ -312,9 +318,9 @@ namespace Giny.World.Managers.Parties
 
         public void AddGuest(Character character)
         {
-            if (!Guests.Contains(character) && !Members.Contains(character))
+            if (!Guests.ContainsKey(character.Id) && !Members.ContainsKey(character.Id))
             {
-                Guests.Add(character);
+                Guests.TryAdd(character.Id, character);
                 character.GuestedParties.Add(this);
 
                 SendMembers(new PartyNewGuestMessage()
@@ -327,9 +333,9 @@ namespace Giny.World.Managers.Parties
 
         public void RemoveGuest(Character character)
         {
-            if (Guests.Contains(character))
+            if (Guests.ContainsKey(character.Id))
             {
-                Guests.Remove(character);
+                Guests.TryRemove(character.Id);
                 character.GuestedParties.Remove(this);
                 VerifiyIntegrity();
             }
@@ -371,7 +377,7 @@ namespace Giny.World.Managers.Parties
 
         public Character GetMember(long characterId)
         {
-            return this.Members.Find(x => x.Id == characterId);
+            return this.Members.TryGetValue(characterId);
         }
 
         public static void SendPartyJoinMessage(Character character)
@@ -394,16 +400,16 @@ namespace Giny.World.Managers.Parties
 
         public void SendMembers(NetworkMessage message)
         {
-            foreach (Character character in Members)
+            foreach (var member in Members)
             {
-                character.Client.Send(message);
+                member.Value.Client.Send(message);
             }
         }
         public void SendGuests(NetworkMessage message)
         {
-            foreach (Character character in Guests)
+            foreach (var member in Guests)
             {
-                character.Client.Send(message);
+                member.Value.Client.Send(message);
             }
         }
 

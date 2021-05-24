@@ -55,7 +55,7 @@ namespace Giny.World.Records.Items
                 Look = Look,
                 Position = this.Position,
                 Quantity = this.Quantity,
-                UId = ItemManager.Instance.PopItemUID(),
+                UId = ItemsManager.Instance.PopItemUID(),
             };
         }
 

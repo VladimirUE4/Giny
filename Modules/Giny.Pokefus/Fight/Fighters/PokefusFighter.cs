@@ -29,7 +29,7 @@ namespace Giny.Pokefus.Fight.Fighters
             this.PokefusItem = pokefusItem;
         }
 
-        public override short Level => PokefusItem.Effects.Get<EffectPokefusLevel>().Level;
+        public override short Level => PokefusItem.Effects.GetFirst<EffectPokefusLevel>().Level;
 
         public override bool CanDrop => true;
 

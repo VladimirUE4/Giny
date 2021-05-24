@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Buffs
 {
+    [SpellEffectHandler(EffectsEnum.Effect_IncreaseSize_2868)]
     [SpellEffectHandler(EffectsEnum.Effect_IncreaseSize)]
     public class IncreaseSize : SpellEffectHandler
     {

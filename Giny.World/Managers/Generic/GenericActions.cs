@@ -129,6 +129,24 @@ namespace Giny.World.Managers.Generic
 
             character.OpenCraftExchange(element.Record.Skill.Record);
         }
+        [GenericActionHandler(GenericActionEnum.Smithmagic, 0)]
+        public static void HandlSmithmagic(Character character, IGenericActionParameter parameter)
+        {
+            MapInteractiveElement element = parameter as MapInteractiveElement;
+
+            if (element == null)
+            {
+                throw new Exception("Unable to craft. Invalid generic parameter.");
+            }
+
+            character.OpenSmithmagicExchange(element.Record.Skill.Record);
+        }
+
+        [GenericActionHandler(GenericActionEnum.RuneTrade,0)]
+        public static void HandleRuneTrade(Character character,IGenericActionParameter parameter)
+        {
+            character.OpenRuneTradeExchange();
+        }
 
         [GenericActionHandler(GenericActionEnum.Reach, 1)]
         public static void HandleReach(Character character, IGenericActionParameter parameter)
@@ -160,7 +178,7 @@ namespace Giny.World.Managers.Generic
 
                 foreach (var record in records)
                 {
-                    Monster monster = new Monster(record, cell);
+                    Monster monster = new Monster(record, cell, MonstersManager.Instance.GetAdaptativeGrade(record, character.SafeLevel));
 
                     fight.BlueTeam.AddFighter(monster.CreateFighter(fight.BlueTeam));
                 }

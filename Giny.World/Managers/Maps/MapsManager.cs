@@ -2,8 +2,11 @@
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
 using Giny.Core.Time;
+using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
+using Giny.World.Api;
 using Giny.World.Handlers.Roleplay.Maps.Paths;
+using Giny.World.Managers.Generic;
 using Giny.World.Managers.Maps.Instances;
 using Giny.World.Managers.Monsters;
 using Giny.World.Records;
@@ -52,6 +55,39 @@ namespace Giny.World.Managers.Maps
 
         }
 
+        public bool AddInteractiveSkill(MapRecord map, int elementId, GenericActionEnum genericAction, InteractiveTypeEnum interactiveType,
+            SkillTypeEnum skillType, string param1 = null, string param2 = null, string param3 = null)
+        {
+            var elements = map.Elements.Where(x => x.Identifier == elementId);
+
+            if (elements.Count() == 0)
+            {
+                return false;
+            }
+
+            var element = elements.First();
+
+            InteractiveSkillRecord skillRecord = new InteractiveSkillRecord()
+            {
+                ActionIdentifier = genericAction,
+                Criteria = string.Empty,
+                Id = TableManager.Instance.PopId<InteractiveSkillRecord>(),
+                Identifier = element.Identifier,
+                MapId = map.Id,
+                Param1 = param1,
+                Param2 = param2,
+                Param3 = param3,
+                SkillEnum = skillType,
+                Type = interactiveType,
+                Record = SkillRecord.GetSkill(skillType),
+            };
+
+            element.Skill = skillRecord;
+            skillRecord.AddInstantElement();
+            map.Instance.Reload();
+            return true;
+
+        }
         public int GetOverrideNeighbourMapId(int mapId, MapScrollEnum scrollType)
         {
             var scrollAction = MapScrollActionRecord.GetMapScrollAction(mapId);

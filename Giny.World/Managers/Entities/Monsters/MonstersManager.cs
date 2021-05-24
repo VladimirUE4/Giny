@@ -3,6 +3,7 @@ using Giny.Core.Extensions;
 using Giny.Core.Time;
 using Giny.World.Managers.Entities;
 using Giny.World.Managers.Entities.Monsters;
+using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Maps.Instances;
 using Giny.World.Records.Maps;
 using Giny.World.Records.Monsters;
@@ -20,8 +21,6 @@ namespace Giny.World.Managers.Monsters
 
         public const int SPAWNING_INTERVAL = 5;
 
-        public const byte MAX_MONSTER_PER_GROUP = 9;
-
         public const int MonsterSpawningPoolInterval = 5;
 
         public void SpawnMonsterGroups(MapRecord map, AsyncRandom random)
@@ -34,6 +33,18 @@ namespace Giny.World.Managers.Monsters
                 }
             }
         }
+
+        public byte GetAdaptativeGrade(MonsterRecord record, short characterLevel)
+        {
+            double ratioLevel = (double)characterLevel / ExperienceManager.MaxLevel;
+            double grade = (record.Grades.Length) * ratioLevel;
+            byte gradeId = (byte)grade;
+            if (gradeId == 0)
+            {
+                gradeId = 1;
+            }
+            return gradeId;
+        }
         public void SpawnMonsterGroup(MapRecord map, AsyncRandom random)
         {
             AddGeneratedMonsterGroup(map.Instance, map.Subarea.Monsters, random);
@@ -43,7 +54,14 @@ namespace Giny.World.Managers.Monsters
             MonsterGroup group = new MonsterGroup(instance.Record, instance.FindMonsterGroupCell().Id);
             group.Direction = Entity.RandomDirection4D(random);
 
-            int monsterCount = random.Next(1, MAX_MONSTER_PER_GROUP + 1);
+            if (instance.Record.RedCells.Length == 0)
+            {
+                return;
+            }
+
+            int maxMonsterCount = instance.Record.RedCells.Length + 1;
+
+            int monsterCount = random.Next(1, maxMonsterCount);
 
             int num2 = 0;
 

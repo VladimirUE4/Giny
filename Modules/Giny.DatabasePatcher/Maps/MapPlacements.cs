@@ -113,6 +113,46 @@ namespace Giny.DatabasePatcher.Maps
             }
 
             Logger.Write(string.Format("{0} on {1} maps fixed ({2:0.0}%)", succesCount, mapsCount, succesCount / (double)mapsCount * 100.0));
+
+            Logger.Write("Fixing maps with random pattern ...");
+
+            var randomizedMaps = maps.Where(x => x.BlueCells.Count() == 0 || x.RedCells.Count() == 0);
+
+            const int MaxPlacements = 11;
+
+            foreach (var map in randomizedMaps)
+            {
+                var cells = map.Cells.Where(x => x.IsValidFightCell());
+
+                var n = cells.Count() / 2;
+
+                if (n / 2d > MaxPlacements)
+                {
+                    n = MaxPlacements;
+                }
+
+                var blues = cells.Shuffle().Take(n);
+
+                var reds = cells.Shuffle().Where(x => !blues.Contains(x)).Take(n);
+
+
+                foreach (var blue in blues)
+                {
+                    blue.Blue = true;
+                }
+
+                foreach (var red in reds)
+                {
+                    red.Red = true;
+                }
+
+                succesCount++;
+
+                map.ReloadMembers();
+                map.UpdateInstantElement();
+            }
+
+            Logger.Write(string.Format("{0} on {1} maps fixed ({2:0.0}%)", succesCount, mapsCount, succesCount / (double)mapsCount * 100.0));
         }
 
     }

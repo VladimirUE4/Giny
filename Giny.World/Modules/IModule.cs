@@ -11,7 +11,5 @@ namespace Giny.World.Modules
         void Initialize();
 
         void CreateHooks();
-
-        void DestroyHooks();
     }
 }

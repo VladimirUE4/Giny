@@ -22,12 +22,6 @@ namespace Giny.DatabasePatcher
 
         }
 
-        public void DestroyHooks()
-        {
-
-        }
-
-
         public void Initialize()
         {
             Experiences.Patch();

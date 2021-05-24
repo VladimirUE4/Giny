@@ -170,8 +170,7 @@ namespace Giny.World.Managers.Fights
 
         public override void OnFightStarted()
         {
-            Challenges = new List<Challenge>();// ChallengesManager.Instance.CreateChallenges(GetTeamChallenged(), GetChallengeCount());
-            Challenges.Add(new Pusillanimous(Records.Challenges.ChallengeRecord.GetChallenge(40), GetTeamChallenged()));
+            Challenges = ChallengesManager.Instance.CreateChallenges(GetTeamChallenged(), GetChallengeCount());
             DisplayChallenges();
         }
         private void DisplayChallenges()

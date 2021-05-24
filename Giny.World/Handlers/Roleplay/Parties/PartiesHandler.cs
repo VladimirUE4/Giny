@@ -24,7 +24,8 @@ namespace Giny.World.Handlers.Roleplay.Parties
             }
             else
             {
-                client.Character.OnPartyJoinError(client.Character.Party.Id, PartyJoinErrorEnum.PARTY_JOIN_ERROR_PLAYER_NOT_FOUND);
+                int partyId = client.Character.HasParty ? client.Character.Party.Id : 0;
+                client.Character.OnPartyJoinError(partyId, PartyJoinErrorEnum.PARTY_JOIN_ERROR_PLAYER_NOT_FOUND);
             }
         }
         [MessageHandler]

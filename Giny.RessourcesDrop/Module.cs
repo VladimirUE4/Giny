@@ -16,11 +16,6 @@ namespace Giny.RessourcesDrop
             FightEventApi.OnPlayerResultApplied += DropManager.Instance.OnPlayerResultApplied;
         }
 
-        public void DestroyHooks()
-        {
-            FightEventApi.OnPlayerResultApplied -= DropManager.Instance.OnPlayerResultApplied;
-        }
-
         public void Initialize()
         {
             DropManager.Instance.Initialize();

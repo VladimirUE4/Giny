@@ -5,6 +5,7 @@ using Giny.World.Managers.Dialogs.DialogBox;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Merchants;
 using Giny.World.Managers.Exchanges;
+using Giny.World.Managers.Exchanges.Jobs;
 using Giny.World.Network;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
 {
     class ExchangesHandler
     {
-
+       
         [MessageHandler]
         public static void HandleExchangeOnHumanVendorRequest(ExchangeOnHumanVendorRequestMessage message, WorldClient client)
         {
@@ -44,9 +45,9 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
         [MessageHandler]
         public static void HandleExchangeCraftCountRequest(ExchangeCraftCountRequestMessage message, WorldClient client)
         {
-            if (client.Character.IsInDialog<CraftExchange>())
+            if (client.Character.IsInDialog<JobExchange>())
             {
-                client.Character.GetDialog<CraftExchange>().SetCount(message.count);
+                client.Character.GetDialog<JobExchange>().SetCount(message.count);
             }
         }
         [MessageHandler]
@@ -97,6 +98,12 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
         }
         [MessageHandler]
         public static void HandleExchangeReadyMessage(ExchangeReadyMessage message, WorldClient client)
+        {
+            if (client.Character.GetDialog<Exchange>() != null)
+                client.Character.GetDialog<Exchange>().Ready(message.ready, message.step);
+        }
+        [MessageHandler]
+        public static void HandleFocusedExchangeReadyMessage(FocusedExchangeReadyMessage message, WorldClient client)
         {
             if (client.Character.GetDialog<Exchange>() != null)
                 client.Character.GetDialog<Exchange>().Ready(message.ready, message.step);

@@ -302,8 +302,19 @@ namespace Giny.World.Managers.Guilds
                 nbTotalMembers = (short)Record.Members.Count,
             };
         }
+        [WIP]
         public GuildInformationsMembersMessage GetGuildInformationsMembersMessage()
         {
+            foreach (var member in Record.Members.ToArray()) // remove this loop
+            {
+                var record = CharacterRecord.GetCharacterRecord(member.CharacterId);
+
+                if (record == null)
+                {
+                    Record.Members.Remove(member);
+                }
+            }
+
             return new GuildInformationsMembersMessage()
             {
                 members = Record.Members.Select(x => x.ToGuildMember(this)).ToArray(),

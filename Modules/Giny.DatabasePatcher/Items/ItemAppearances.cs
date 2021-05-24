@@ -6,6 +6,8 @@ using Giny.Core.Network;
 using Giny.IO.MA3;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
+using Giny.World.Managers.Effects;
 using Giny.World.Records.Items;
 using Newtonsoft.Json;
 using System;
@@ -20,10 +22,11 @@ namespace Giny.DatabasePatcher.Items
     public class ItemAppearances
     {
         private static ItemTypeEnum[] ItemTypes = new ItemTypeEnum[]
-        {
+      {
             ItemTypeEnum.HAT,
             ItemTypeEnum.CLOAK,
-        };
+            ItemTypeEnum.MISCELLANEOUS,
+      };
 
         public const string ItemsUrl = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";
 
@@ -58,6 +61,31 @@ namespace Giny.DatabasePatcher.Items
             }
 
         }
+        private static bool UseLook(ItemRecord item)
+        {
+            if (item.TypeEnum == ItemTypeEnum.PETSMOUNT ||
+                item.TypeEnum == ItemTypeEnum.PET)
+            {
+                return true;
+            }
+
+            if (item.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+            {
+                var effect = item.Effects.GetFirst<EffectDice>(EffectsEnum.Effect_Compatible);
+
+                if (effect != null)
+                {
+                    var type = (ItemTypeEnum)effect.Value;
+                    return type == ItemTypeEnum.PETSMOUNT || type == ItemTypeEnum.PET;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
         private static void ProcessFromDofusBook()
         {
             foreach (var itemType in ItemTypes)
@@ -78,7 +106,24 @@ namespace Giny.DatabasePatcher.Items
                         if (ItemRecord.ItemExists(itemId))
                         {
                             ItemRecord itemRecord = ItemRecord.GetItem(itemId);
-                            ModifyItemAppearence(itemRecord, appearenceId);
+
+                            if (!UseLook(itemRecord))
+                            {
+                                ModifyItemAppearence(itemRecord, appearenceId);
+                            }
+                            else
+                            {
+                                string look = "{" + appearenceId + "}";
+
+                                if (look != itemRecord.Look)
+                                {
+                                    if (itemRecord.Look == string.Empty || itemRecord.Look == null)
+                                    {
+                                        itemRecord.Look = look;
+                                        itemRecord.UpdateInstantElement();
+                                    }
+                                }
+                            }
                         }
                     }
                 }

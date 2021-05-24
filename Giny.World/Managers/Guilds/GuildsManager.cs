@@ -152,7 +152,14 @@ namespace Giny.World.Managers.Guilds
         {
             Guild guild = GetGuild(character.GuildId);
 
+            var member = guild.Record.GetMember(character.Id);
+            
+            guild.Record.Members.Remove(member);
 
+            if (guild.Record.Members.Count == 0)
+            {
+                RemoveGuild(guild);
+            }
         }
     }
 }

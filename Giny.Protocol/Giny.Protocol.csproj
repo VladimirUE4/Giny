@@ -52,6 +52,7 @@
     <Compile Include="Custom\Enums\GuildInvitationStateEnum.cs" />
     <Compile Include="Custom\Enums\GuildRankEnum.cs" />
     <Compile Include="Custom\Enums\JobTypeEnum.cs" />
+    <Compile Include="Custom\Enums\MagicPoolStatus.cs" />
     <Compile Include="Custom\Enums\MimicryErrorEnum.cs" />
     <Compile Include="Custom\Enums\SkillTypeEnum.cs" />
     <Compile Include="Custom\Enums\InteractiveTypeEnum.cs" />

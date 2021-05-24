@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Core.Extensions;
 using Giny.Core.Pool;
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
@@ -274,7 +275,7 @@ namespace Giny.World.Records.Characters
         }
         public static CharacterRecord GetCharacterRecord(long id)
         {
-            return Characters[id];
+            return Characters.TryGetValue(id);
         }
         public static IEnumerable<CharacterRecord> GetCharacterRecords()
         {

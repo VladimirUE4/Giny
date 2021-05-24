@@ -82,7 +82,8 @@ namespace Giny.World.Managers.Fights
             FightTeam blueTeam = new FightTeam(TeamEnum.TEAM_DEFENDER, source.Map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_MONSTER);
             FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
-            var fight = new FightContextual(source, PopId(), targetObjective, source.Map, blueTeam, redTeam, source.GetCell());
+            var map = MapRecord.GetMap(source.Record.MapId);
+            var fight = new FightContextual(source, PopId(), targetObjective, map, blueTeam, redTeam, source.GetCell());
             Fights.TryAdd(fight.Id, fight);
 
 

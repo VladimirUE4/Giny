@@ -57,6 +57,8 @@ namespace Giny.Pokefus
         private static short[] ForbiddenPokefusSpells = new short[]
         {
             411, // Tuerie
+            228, // Etourderie Mortelle
+            1037, // Briss Deuniss
         };
         /*  private static short[] ForbiddenMonsters = new short[]
           {
@@ -89,7 +91,7 @@ namespace Giny.Pokefus
         {
             foreach (var item in GetPokefusItems(character.Inventory))
             {
-                EffectPokefus pokefusEffect = item.Effects.Get<EffectPokefus>();
+                EffectPokefus pokefusEffect = item.Effects.GetFirst<EffectPokefus>();
                 MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(pokefusEffect.MonsterId);
                 character.AddFollower(monsterRecord.Look);
             }
@@ -151,9 +153,9 @@ namespace Giny.Pokefus
 
             foreach (var item in items)
             {
-                EffectPokefus effect = item.Effects.Get<EffectPokefus>();
+                EffectPokefus effect = item.Effects.GetFirst<EffectPokefus>();
 
-                EffectPokefusLevel effectLevel = item.Effects.Get<EffectPokefusLevel>();
+                EffectPokefusLevel effectLevel = item.Effects.GetFirst<EffectPokefusLevel>();
 
                 var level = effectLevel.Level;
 
@@ -219,7 +221,7 @@ namespace Giny.Pokefus
 
         private void AddFighter(CharacterFighter owner, CharacterItemRecord pokefusItem)
         {
-            EffectPokefus effect = pokefusItem.Effects.Get<EffectPokefus>();
+            EffectPokefus effect = pokefusItem.Effects.GetFirst<EffectPokefus>();
             MonsterRecord monsterRecord = MonsterRecord.GetMonsterRecord(effect.MonsterId);
 
             CellRecord cell = owner.Team.GetPlacementCell();
@@ -267,7 +269,7 @@ namespace Giny.Pokefus
                 itemRecord = m_regularItemRecord;
             }
 
-            CharacterItemRecord item = ItemManager.Instance.CreateCharacterItem(itemRecord, characterId, 1);
+            CharacterItemRecord item = ItemsManager.Instance.CreateCharacterItem(itemRecord, characterId, 1);
 
             item.Effects.Clear();
 
@@ -349,7 +351,7 @@ namespace Giny.Pokefus
         }
         public bool CanEquipItem(Character character, CharacterItemRecord item)
         {
-            EffectPokefus effect = item.Effects.Get<EffectPokefus>();
+            EffectPokefus effect = item.Effects.GetFirst<EffectPokefus>();
 
             if (effect != null)
             {

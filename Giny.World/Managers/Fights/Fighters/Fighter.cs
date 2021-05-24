@@ -841,7 +841,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public bool CastSpell(int levelId)
         {
             SpellLevelRecord level = SpellLevelRecord.GetSpellLevel(levelId);
-
+          
             if (level != null)
             {
                 SpellRecord record = SpellRecord.GetSpellRecord(level.SpellId);
@@ -869,21 +869,29 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
+        [WIP]
         public virtual bool CastSpell(SpellCast cast)
         {
-            const int MaximumCastRecusion = 20;
 
             if (cast.Spell == null)
             {
                 return false;
             }
 
+            if (cast.SpellId == 11966)
+            {
+                return false; // sort julith , + 2 mobs, stackoverflow ???
+            }
+
+            if (cast.SpellId == 18869)
+            {
+                return false; // sort roi gami , Kami No Jishin, stackoverflow ???
+            }
+
             var parent = cast.GetParent();
 
-            if (cast.GetDeep() > MaximumCastRecusion) // prevent recursion
-            {
-                return false;
-            }
+           
+       
 
 
             if (Fight.Ended)
@@ -1043,7 +1051,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP]
         public virtual SpellCastResult CanCastSpell(SpellCast cast)
         {
-            
+
             if (cast.Force)
                 return SpellCastResult.OK;
 
@@ -1118,7 +1126,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public bool IsInCastZone(SpellLevelRecord spellLevel, MapPoint castPoint, MapPoint cell)
         {
             Set set = GetSpellZone(spellLevel, castPoint);
-           
+
             return set.BelongToSet(cell);
         }
 

@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override short GetDelta()
         {
-            return 0;
+            return (short)(Delta * 100d);
         }
     }
 }

@@ -58,5 +58,6 @@ namespace Giny.World.Managers.Effects
                 RawZone = RawZone,
             };
         }
+
     }
 }

@@ -239,7 +239,6 @@ namespace Giny.World.Managers.Effects
             return new Trigger(TriggerTypeEnum.Unknown);
         }
 
-
         private List<Trigger> ParseTriggers()
         {
             List<Trigger> results = new List<Trigger>();

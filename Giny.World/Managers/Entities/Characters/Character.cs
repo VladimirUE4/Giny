@@ -17,6 +17,7 @@ using Giny.World.Managers.Entities.Look;
 using Giny.World.Managers.Entities.Merchants;
 using Giny.World.Managers.Entities.Npcs;
 using Giny.World.Managers.Exchanges;
+using Giny.World.Managers.Exchanges.Jobs;
 using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
@@ -237,6 +238,8 @@ namespace Giny.World.Managers.Entities.Characters
                 }
             }
         }
+
+        
         public override ServerEntityLook Look
         {
             get
@@ -588,6 +591,8 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new JobDescriptionMessage(Record.Jobs.Select(x => x.GetJobDescription()).ToArray()));
             Client.Send(new JobExperienceMultiUpdateMessage(Record.Jobs.Select(x => x.GetJobExperience()).ToArray()));
         }
+       
+
         public void RefreshGuild()
         {
             if (HasGuild)
@@ -644,6 +649,14 @@ namespace Giny.World.Managers.Entities.Characters
         public void OpenCraftExchange(SkillRecord skill)
         {
             this.OpenDialog(new CraftExchange(this, skill));
+        }
+        public void OpenRuneTradeExchange()
+        {
+            this.OpenDialog(new RuneTradeExchange(this));
+        }
+        public void OpenSmithmagicExchange(SkillRecord skill)
+        {
+            this.OpenDialog(new SmithmagicExchange(this, skill));
         }
         public void OpenBuySellExchange(Npc npc, ItemRecord[] itemToSell, short tokenId)
         {
@@ -1326,7 +1339,7 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (item != null)
             {
-                if (ItemManager.Instance.UseItem(Client.Character, item))
+                if (ItemsManager.Instance.UseItem(Client.Character, item))
                     this.Inventory.RemoveItem(item.UId, 1);
 
                 if (send)
@@ -1406,6 +1419,7 @@ namespace Giny.World.Managers.Entities.Characters
             this.Fighter = new CharacterFighter(this, team, GetCell());
             return Fighter;
         }
+
         public void RejoinMap(long mapId, FightTypeEnum fightType, bool winner, bool spawnJoin)
         {
             DestroyContext();
@@ -1683,10 +1697,6 @@ namespace Giny.World.Managers.Entities.Characters
             if (!Record.DoneObjectives.Contains(id))
             {
                 Record.DoneObjectives.Add(id);
-            }
-            else
-            {
-                DisplayNotificationError("Objective (" + id + ") already reached, skipping.");
             }
         }
 

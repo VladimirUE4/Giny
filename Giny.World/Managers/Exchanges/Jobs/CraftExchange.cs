@@ -16,75 +16,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.World.Managers.Exchanges
+namespace Giny.World.Managers.Exchanges.Jobs
 {
-    public class CraftExchange : Exchange
+    public class CraftExchange : JobExchange
     {
-        private const int CountDefault = 1;
-
-        public const int CountLimit = 5000;
-
-        public override ExchangeTypeEnum ExchangeType => ExchangeTypeEnum.CRAFT;
-
-        private SkillRecord Skill
+        public CraftExchange(Character character, SkillRecord skill) : base(character, skill)
         {
-            get;
-            set;
-        }
-        private CraftItemCollection Items
-        {
-            get;
-            set;
-        }
-        private CharacterJob CharacterJob
-        {
-            get;
-            set;
-        }
-        private int Count
-        {
-            get;
-            set;
-        }
-        public CraftExchange(Character character, SkillRecord skillRecord) : base(character)
-        {
-            this.Skill = skillRecord;
-            this.Items = new CraftItemCollection(character);
-            this.CharacterJob = character.GetJob(skillRecord.ParentJobId);
-            this.Count = CountDefault;
-        }
 
-        public override void ModifyItemPriced(int objectUID, int quantity, long price)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void MoveItem(int uid, int quantity)
-        {
-            CharacterItemRecord item = null;
-
-            if (quantity > 0)
-            {
-                item = Character.Inventory.GetItem(uid);
-
-                if (item != null && CanAddItem(item, quantity))
-                {
-                    Items.AddItem(item, quantity);
-                }
-            }
-            else if (quantity < 0)
-            {
-                item = Items.GetItem(uid);
-
-                if (item != null)
-                {
-                    Items.RemoveItem(item, Math.Abs(quantity));
-                }
-            }
-            else
-            {
-                return;
-            }
         }
 
         public void SetRecipe(short gid)
@@ -101,31 +39,7 @@ namespace Giny.World.Managers.Exchanges
                 }
             }
         }
-
-        private bool CanAddItem(CharacterItemRecord item, int quantity)
-        {
-            if (item.PositionEnum != CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED)
-                return false;
-
-            CharacterItemRecord exchanged = Items.GetItem(item.GId, item.Effects);
-
-            if (exchanged != null && exchanged.UId != item.UId)
-                return false;
-
-            exchanged = Items.GetItem(item.UId);
-
-            if (exchanged == null)
-            {
-                return true;
-            }
-
-            if (exchanged.Quantity + quantity > item.Quantity)
-                return false;
-            else
-                return true;
-        }
-
-        public void SetCount(int count)
+        public override void SetCount(int count)
         {
             RecipeRecord recipe = GetCurrentRecipe();
 
@@ -147,34 +61,8 @@ namespace Giny.World.Managers.Exchanges
                 Character.Client.Send(new ExchangeCraftCountModifiedMessage(count));
             }
         }
-        public void ResetCount()
-        {
-            this.Count = 1;
-            Character.Client.Send(new ExchangeCraftCountModifiedMessage(Count));
-        }
 
-        public override void MoveItemPriced(int objectUID, int quantity, long price)
-        {
-            throw new NotImplementedException();
-        }
 
-        public override void MoveKamas(long quantity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnNpcGenericAction(NpcActionsEnum action)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Open()
-        {
-            Character.Client.Send(new ExchangeStartOkCraftWithInformationMessage()
-            {
-                skillId = (short)Skill.Id,
-            });
-        }
         private RecipeRecord GetCurrentRecipe()
         {
             short[] gids = Items.GetItems().Select(x => x.GId).ToArray();
@@ -224,7 +112,7 @@ namespace Giny.World.Managers.Exchanges
                         removed[ingredient.UId] += ingredient.Quantity;
 
                 }
-                results.Add(ItemManager.Instance.CreateCharacterItem(recipe.ResultRecord, Character.Id, 1));
+                results.Add(ItemsManager.Instance.CreateCharacterItem(recipe.ResultRecord, Character.Id, 1));
             }
 
             foreach (var pair in removed)
@@ -275,5 +163,7 @@ namespace Giny.World.Managers.Exchanges
                 objectInfo = item,
             });
         }
+
+
     }
 }

@@ -151,7 +151,7 @@ namespace Giny.World.Managers.Items.Collections
             }
         }
 
-        public virtual void AddItem(T item, int quantity)
+        public virtual T AddItem(T item, int quantity)
         {
             item.Initialize();
 
@@ -162,6 +162,7 @@ namespace Giny.World.Managers.Items.Collections
                 sameItem.Quantity += quantity;
                 OnItemStacked(sameItem, quantity);
                 OnItemQuantityChanged(sameItem, quantity);
+                return sameItem;
             }
             else
             {
@@ -169,6 +170,7 @@ namespace Giny.World.Managers.Items.Collections
                 item.Quantity = quantity;
                 m_items.Add(item);
                 OnItemAdded(item);
+                return item;
             }
         }
         public virtual void RemoveItem(T item, int quantity)

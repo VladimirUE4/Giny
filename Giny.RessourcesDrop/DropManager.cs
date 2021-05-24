@@ -50,10 +50,24 @@ namespace Giny.RessourcesDrop
                 ItemTypeEnum.FAIRYWORK,
         };
 
+        private static ItemTypeEnum[] IgnoredResultType = new ItemTypeEnum[]
+        {
+            ItemTypeEnum.CITY_QUESTS,
+            ItemTypeEnum.MAIN_QUESTS,
+            ItemTypeEnum.TEMPLE_QUESTS,
+        };
+
         public void Initialize()
         {
             foreach (var recipe in RecipeRecord.GetRecipesRecords())
             {
+                var resultRecord = ItemRecord.GetItem(recipe.ResultId);
+
+                if (IgnoredResultType.Contains(resultRecord.TypeEnum))
+                {
+                    continue;
+                }
+
                 foreach (var ingredient in recipe.Ingredients)
                 {
                     if (!IsDroppable(ingredient))

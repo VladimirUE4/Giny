@@ -19,7 +19,7 @@ namespace Giny.World.Records.Items
     [Table("items")]
     public class ItemRecord : ITable
     {
-        private const int MinimumItemPrice = 500;
+        private const int MinimumItemPrice = 1;
 
         [Container]
         private static readonly ConcurrentDictionary<long, ItemRecord> Items = new ConcurrentDictionary<long, ItemRecord>();

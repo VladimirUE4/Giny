@@ -67,5 +67,6 @@ namespace Giny.Pokefus.Effects
         {
             return string.Format(Description, MonsterName, GradeId);
         }
+
     }
 }

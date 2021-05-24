@@ -9,6 +9,7 @@ using Giny.World.Managers;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Npcs;
 using Giny.World.Managers.Maps.Npcs;
+using Giny.World.Modules;
 using Giny.World.Network;
 using Giny.World.Records;
 using Giny.World.Records.Accounts;
@@ -28,6 +29,7 @@ namespace Giny.World
 {
     class WorldCommands
     {
+       
         [ConsoleCommand("rate")]
         public static void ExperienceRateCommand(double ratio)
         {
@@ -97,6 +99,7 @@ namespace Giny.World
         public static void ReloadNpcsCommand()
         {
             NpcsManager.Instance.ReloadNpcs();
+            Logger.Write("Npcs reloaded");
         }
 
         [ConsoleCommand("items")]

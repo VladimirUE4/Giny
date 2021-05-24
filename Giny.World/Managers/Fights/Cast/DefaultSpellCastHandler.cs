@@ -117,18 +117,16 @@ namespace Giny.World.Managers.Fights.Cast
 
             foreach (var handler in handlers)
             {
-                //try
+                try
                 {
                     handler.SetTriggerToken(Cast.Token);
-
-
                     handler.Execute();
                 }
-                /* catch (Exception ex)
+                catch (Exception ex)
                 {
                     Cast.Source.Fight.Warn("Unable to cast effect " + handler.Effect.EffectEnum);
                     Logger.Write(ex, Channels.Critical);
-                } */
+                }
             }
 
             return true;

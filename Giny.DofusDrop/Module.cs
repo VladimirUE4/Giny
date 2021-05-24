@@ -29,11 +29,6 @@ namespace Giny.DofusDrop
             FightEventApi.OnPlayerResultApplied += OnResultApplied;
         }
 
-        public void DestroyHooks()
-        {
-            FightEventApi.OnPlayerResultApplied += OnResultApplied;
-        }
-
         private void OnResultApplied(FightPlayerResult result)
         {
             if (result.Fight.Winners != result.Fighter.Team)
@@ -75,5 +70,6 @@ namespace Giny.DofusDrop
         {
             Logger.Write("Dofus loot chance : " + DofusDropPercentage + "%");
         }
+
     }
 }

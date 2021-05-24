@@ -167,7 +167,7 @@ namespace Giny.World.Records.Items
                 Position = Position,
                 Price = price,
                 Quantity = Quantity,
-                UId = ItemManager.Instance.PopItemUID(),
+                UId = ItemsManager.Instance.PopItemUID(),
                 Sold = false,
             };
         }

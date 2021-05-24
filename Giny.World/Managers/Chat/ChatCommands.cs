@@ -85,7 +85,7 @@ namespace Giny.World.Managers.Chat
 
             client.Character.Map.ReloadMembers();
             client.Character.Map.UpdateInstantElement();
-            client.Character.Teleport(client.Character.Map);
+            client.Character.Teleport(client.Character.Map, client.Character.CellId);
         }
         [ChatCommand("npcs", ServerRoleEnum.Administrator)]
         public static void ReloadNpcs(WorldClient client)
@@ -105,80 +105,48 @@ namespace Giny.World.Managers.Chat
             client.Character.Look = look;
             client.Character.RefreshActorOnMap();
         }
-        [ChatCommand("craft", ServerRoleEnum.Administrator)]
-        public static void CraftCommand(WorldClient client, int elementId, int skillId)
-        {
-            var elements = client.Character.Map.Elements.Where(x => x.Identifier == elementId);
-
-            if (elements.Count() == 0)
-            {
-                client.Character.ReplyWarning("Invalid element");
-                return;
-            }
-
-            var element = elements.First();
-
-            SkillTypeEnum skillType = (SkillTypeEnum)skillId;
-
-            InteractiveSkillRecord skillRecord = new InteractiveSkillRecord()
-            {
-                ActionIdentifier = GenericActionEnum.Craft,
-                Criteria = string.Empty,
-                Id = TableManager.Instance.PopId<InteractiveSkillRecord>(),
-                Identifier = element.Identifier,
-                MapId = client.Character.Map.Id,
-                Param1 = "",
-                Param2 = "",
-                SkillEnum = skillType,
-                Type = InteractiveTypeEnum.CRAFTING_TABLE,
-                Record = SkillRecord.GetSkill(skillType),
-            };
-
-            element.Skill = skillRecord;
-
-            skillRecord.AddInstantElement();
-
-            client.Character.Map.Instance.Reload();
-
-            client.Character.Reply("Craft table added on element " + element.Identifier);
-        }
         [ChatCommand("sun", ServerRoleEnum.Administrator)]
         public static void AddSunCommand(WorldClient client, int elementId, int mapId, short cellId)
         {
-            var elements = client.Character.Map.Elements.Where(x => x.Identifier == elementId);
-
-            if (elements.Count() == 0)
+            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Teleport,
+                (InteractiveTypeEnum)0, SkillTypeEnum.USE114, mapId.ToString(), cellId.ToString()))
             {
-                client.Character.ReplyWarning("Invalid element");
-                return;
+                client.Character.Reply("Sun added on element " + elementId);
             }
-
-            var element = elements.First();
-
-            const SkillTypeEnum skillType = SkillTypeEnum.USE114;
-
-            InteractiveSkillRecord skillRecord = new InteractiveSkillRecord()
+            else
             {
-                ActionIdentifier = GenericActionEnum.Teleport,
-                Criteria = string.Empty,
-                Id = TableManager.Instance.PopId<InteractiveSkillRecord>(),
-                Identifier = element.Identifier,
-                MapId = client.Character.Map.Id,
-                Param1 = mapId.ToString(),
-                Param2 = cellId.ToString(),
-                SkillEnum = skillType,
-                Type = 0,
-                Record = SkillRecord.GetSkill(skillType),
-            };
+                client.Character.ReplyWarning("Unable to add element");
 
-            element.Skill = skillRecord;
+            }
+        }
 
-            skillRecord.AddInstantElement();
+        [ChatCommand("craft", ServerRoleEnum.Administrator)]
+        public static void CraftCommand(WorldClient client, int elementId, int skillType)
+        {
+            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Teleport,
+               InteractiveTypeEnum.CRAFTING_TABLE, (SkillTypeEnum)skillType))
+            {
+                client.Character.Reply("Craft table added element " + elementId);
+            }
+            else
+            {
+                client.Character.ReplyWarning("Unable to add element");
 
-            client.Character.Map.Instance.Reload();
+            }
+        }
+        [ChatCommand("smith", ServerRoleEnum.Administrator)]
+        public static void SmithCommand(WorldClient client, int elementId, int skillType)
+        {
+            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Smithmagic,
+               InteractiveTypeEnum.MAGIC_WORKSHOP, (SkillTypeEnum)skillType))
+            {
+                client.Character.Reply("Smith table added element " + elementId);
+            }
+            else
+            {
+                client.Character.ReplyWarning("Unable to add element");
 
-            client.Character.Reply("Sun added on element " + element.Identifier);
-
+            }
         }
 
         [ChatCommand("monsters", ServerRoleEnum.Administrator)]
@@ -286,6 +254,19 @@ namespace Giny.World.Managers.Chat
                 client.Character.ReplyWarning("This ornament do not exists.");
             }
         }
+        [ChatCommand("party", ServerRoleEnum.Administrator)]
+        public static void TeleportPartyCommand(WorldClient client)
+        {
+            if (!client.Character.HasParty)
+            {
+                client.Character.ReplyWarning("No party.");
+            }
+
+            foreach (var member in client.Character.Party.Members.Values)
+            {
+                member.Teleport(client.Character.Map.Id);
+            }
+        }
         [ChatCommand("addzaap", ServerRoleEnum.Administrator)]
         public static void AddZaapCommand(WorldClient client, int elementId, int zoneId)
         {
@@ -375,7 +356,7 @@ namespace Giny.World.Managers.Chat
 
             if (target != null)
             {
-                client.Character.Teleport((int)target.Character.Map.Id);
+                client.Character.Teleport((int)target.Character.Map.Id, target.Character.CellId);
             }
             else
             {

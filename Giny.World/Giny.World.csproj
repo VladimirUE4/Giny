@@ -149,8 +149,11 @@
     <Compile Include="Managers\Effects\Targets\InvalidTeleportCriterion.cs" />
     <Compile Include="Managers\Effects\Targets\ThroughPortalCriterion.cs" />
     <Compile Include="Managers\Entities\Monsters\ModularMonsterGroup.cs" />
-    <Compile Include="Managers\Exchanges\CraftExchange.cs" />
+    <Compile Include="Managers\Exchanges\Jobs\CraftExchange.cs" />
+    <Compile Include="Managers\Exchanges\Jobs\JobExchange.cs" />
+    <Compile Include="Managers\Exchanges\Jobs\RuneTradeExchange.cs" />
     <Compile Include="Managers\Exchanges\MerchantSellerExchange.cs" />
+    <Compile Include="Managers\Exchanges\Jobs\SmithmagicExchange.cs" />
     <Compile Include="Managers\Fights\AI\AIAction.cs" />
     <Compile Include="Managers\Fights\AI\BuffAction.cs" />
     <Compile Include="Managers\Fights\AI\CastOnEnemyAction.cs" />
@@ -246,7 +249,8 @@
     <Compile Include="Managers\Guilds\GuildMotd.cs" />
     <Compile Include="Managers\Guilds\GuildsManager.cs" />
     <Compile Include="Managers\Items\Collections\BankItemCollection.cs" />
-    <Compile Include="Managers\Items\Collections\CraftItemCollection.cs" />
+    <Compile Include="Managers\Items\Collections\BasicItemCollection.cs" />
+    <Compile Include="Managers\Items\Collections\JobItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\TradeItemCollection.cs" />
     <Compile Include="Managers\Stats\PointDodgeCharacteristic.cs" />
     <Compile Include="Records\Challenges\ChallengeRecord.cs" />
@@ -494,7 +498,7 @@
     <Compile Include="Managers\Items\Collections\ItemCollection.cs" />
     <Compile Include="Managers\Items\ItemEffects.cs" />
     <Compile Include="Managers\Items\ItemEffectsManager.cs" />
-    <Compile Include="Managers\Items\ItemManager.cs" />
+    <Compile Include="Managers\Items\ItemsManager.cs" />
     <Compile Include="Managers\Items\ItemUses.cs" />
     <Compile Include="Managers\Items\LivingObjectManager.cs" />
     <Compile Include="Managers\Items\Collections\MerchantItemCollection.cs" />
@@ -641,5 +645,6 @@
   <ItemGroup>
     <Content Include="Todo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

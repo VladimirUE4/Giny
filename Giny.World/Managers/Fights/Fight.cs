@@ -402,6 +402,7 @@ namespace Giny.World.Managers.Fights
 
             }
         }
+
         public bool IsCellFree(CellRecord cell)
         {
             return cell.Walkable && !cell.NonWalkableDuringFight && GetFighter(cell.Id) == null;

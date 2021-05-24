@@ -103,7 +103,7 @@ namespace Giny.World.Records.Items
         }
         public override AbstractItem CloneWithoutUID()
         {
-            return new CharacterItemRecord(CharacterId, ItemManager.Instance.PopItemUID(), GId, Position, Quantity, this.Effects.Clone(), AppearanceId, Look);
+            return new CharacterItemRecord(CharacterId, ItemsManager.Instance.PopItemUID(), GId, Position, Quantity, this.Effects.Clone(), AppearanceId, Look);
         }
 
         public static void RemoveCharacterItems(long characterId)
