@@ -24,12 +24,10 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Criteria : " VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="145"/>
             <TextBox LostFocus="criterias_LostFocus" x:Name="criterias" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187" Canvas.Left="58" Canvas.Top="144"/>
             <Label Content="Text :" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.223,-0.309" Canvas.Left="97" Canvas.Top="167"/>
-            <TextBox Name="replyText" Height="179" Canvas.Left="10" TextWrapping="Wrap"  Canvas.Top="189" Width="235"/>
-            <Button Content="Save" Click="Button_Click_4" Canvas.Left="10" Canvas.Top="373" Width="235" Height="39"/>
+            <TextBox LostFocus="replyText_LostFocus" Name="replyText" Height="223" Canvas.Left="10" TextWrapping="Wrap"  Canvas.Top="189" Width="235"/>
         </Canvas>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Criteria : " VerticalAlignment="Top" Margin="10,423,0,0"/>
         <TextBox x:Name="messageCriteria" LostFocus="messageCriteria_LostFocus" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="246" RenderTransformOrigin="0.5,0.5" Margin="62,420,0,0"/>
-        <Button Content="Save Text" HorizontalAlignment="Left" Margin="10,324,0,94" Width="298" Click="Button_Click_3"/>
-        <TextBox Name="messageText" HorizontalAlignment="Left" Height="305" Margin="10,14,0,0" TextWrapping="Wrap" SpellCheck.IsEnabled="True" VerticalAlignment="Top" Width="298"/>
+        <TextBox LostFocus="messageText_LostFocus" Name="messageText" HorizontalAlignment="Left" Height="352" Margin="10,14,0,0" TextWrapping="Wrap" SpellCheck.IsEnabled="True" VerticalAlignment="Top" Width="298"/>
     </Grid>
 </UserControl>

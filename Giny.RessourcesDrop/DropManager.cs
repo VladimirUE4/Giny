@@ -4,6 +4,7 @@ using Giny.Core.Extensions;
 using Giny.Core.Time;
 using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
+using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Records.Items;
@@ -110,6 +111,10 @@ namespace Giny.RessourcesDrop
         public void OnPlayerResultApplied(FightPlayerResult result)
         {
             if (result.Fight.Winners != result.Fighter.Team)
+            {
+                return;
+            }
+            if (!(result.Fight is FightPvM))
             {
                 return;
             }

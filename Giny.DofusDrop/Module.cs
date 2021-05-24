@@ -3,6 +3,7 @@ using Giny.Core.Extensions;
 using Giny.Core.Time;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Api;
+using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
 using Giny.World.Modules;
@@ -32,6 +33,10 @@ namespace Giny.DofusDrop
         private void OnResultApplied(FightPlayerResult result)
         {
             if (result.Fight.Winners != result.Fighter.Team)
+            {
+                return;
+            }
+            if (!(result.Fight is FightPvM))
             {
                 return;
             }

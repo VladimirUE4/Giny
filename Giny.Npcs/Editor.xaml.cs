@@ -85,8 +85,7 @@ namespace Giny.Npcs
                 actions.Items.Clear();
                 actionsContent.Content = null;
                 DisplayActions(CurrentNpc);
-                templateId.Text = CurrentNpc.TemplateId.ToString();
-              
+
                 mapId.Text = CurrentNpc.MapId.ToString();
                 cellId.Text = CurrentNpc.CellId.ToString();
 
@@ -100,6 +99,11 @@ namespace Giny.Npcs
                 }
 
                 direction.SelectedItem = CurrentNpc.Direction;
+
+                if (actions.Items.Count > 0)
+                {
+                    actions.SelectedItem = actions.Items[0];
+                 }
 
             }
         }
@@ -159,7 +163,6 @@ namespace Giny.Npcs
 
         private void UpdateRecord()
         {
-            CurrentNpc.TemplateId = short.Parse(templateId.Text);
             CurrentNpc.Template = NpcRecord.GetNpcRecord(CurrentNpc.TemplateId);
             CurrentNpc.MapId = int.Parse(mapId.Text);
             CurrentNpc.CellId = short.Parse(cellId.Text);
@@ -172,19 +175,7 @@ namespace Giny.Npcs
             DisplayNpcs(NpcSpawnRecord.GetNpcSpawns());
             npcs.SelectedItem = current;
         }
-        private void templateId_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (NpcRecord.NpcExist(short.Parse(templateId.Text)))
-            {
-                UpdateRecord();
-            }
-            else
-            {
-                templateId.Text = CurrentNpc.TemplateId.ToString();
-            }
 
-            RefreshNpcList();
-        }
 
         private void mapId_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -240,19 +231,6 @@ namespace Giny.Npcs
             actionsContent.Content = string.Empty;
         }
 
-        private void RemoveNpcClick(object sender, RoutedEventArgs e)
-        {
-            CurrentNpc.RemoveInstantElement();
-
-            foreach (var action in CurrentNpc.Actions)
-            {
-                RemoveNpcAction(action);
-            }
-
-            RefreshNpcList();
-        }
-
-
         public static void RemoveNpcAction(NpcActionRecord actionRecord)
         {
             if (actionRecord.Action == NpcActionsEnum.TALK)
@@ -266,6 +244,27 @@ namespace Giny.Npcs
             actionRecord.RemoveInstantElement();
         }
 
-      
+        private void Savei18nClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Loader.D2IFile.Save();
+                MessageBox.Show("D2I file saved sucessfully !", "Informations", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch
+            {
+                MessageBox.Show("Unable to save file. Please very the file is not used by another process", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void npcName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CurrentNpc.Template.Name = npcName.Text;
+            var d2oNpc = D2OManager.GetObject<Npc>("Npcs.d2o", CurrentNpc.TemplateId);
+            Loader.D2IFile.SetText((int)d2oNpc.NameId, npcName.Text);
+            RefreshNpcList();
+            CurrentNpc.Template.UpdateInstantElement();
+
+        }
     }
 }

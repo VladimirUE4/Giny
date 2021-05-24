@@ -270,39 +270,21 @@ namespace Giny.Npcs
             ActionRecord.UpdateInstantElement();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void messageText_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var messageId = int.Parse(ActionRecord.Param1);
-                var npcMessage = D2OManager.GetObject<NpcMessage>("NpcMessages.d2o", messageId);
-                string text = messageText.Text;
-                Loader.D2IFile.SetText((int)npcMessage.MessageId, text);
-                Loader.D2IFile.Save();
-                MessageBox.Show("D2I file saved sucessfully !", "Informations", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            }
-            catch
-            {
-                MessageBox.Show("Unable to save file. Please very the file is not used by another process", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            var messageId = int.Parse(ActionRecord.Param1);
+            var npcMessage = D2OManager.GetObject<NpcMessage>("NpcMessages.d2o", messageId);
+            string text = messageText.Text;
+            Loader.D2IFile.SetText((int)npcMessage.MessageId, text);
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void replyText_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                NpcReply reply = (NpcReply)replies.SelectedItem;
-                Loader.D2IFile.SetText((int)reply.TextId, replyText.Text);
-                Loader.D2IFile.Save();
-                DisplayReplies();
-
-                MessageBox.Show("D2I file saved sucessfully !", "Informations", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            }
-            catch
-            {
-                MessageBox.Show("Unable to save file. Please very the file is not used by another process", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            var indice = replies.SelectedIndex;
+            NpcReply reply = (NpcReply)replies.SelectedItem;
+            Loader.D2IFile.SetText((int)reply.TextId, replyText.Text);
+            DisplayReplies();
+            replies.SelectedIndex = indice;
         }
     }
     public class NpcReply
