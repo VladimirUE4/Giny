@@ -34,6 +34,7 @@ namespace Giny.World.Managers.Exchanges
 
         private long MovedKamas = 0;
 
+
         public Character Target
         {
             get;
@@ -43,7 +44,7 @@ namespace Giny.World.Managers.Exchanges
         public PlayerTradeExchange(Character character, Character target)
             : base(character)
         {
-            this.Items = new TradeItemCollection(character, target); 
+            this.Items = new TradeItemCollection(character, target);
             this.Target = target;
         }
 
@@ -108,6 +109,22 @@ namespace Giny.World.Managers.Exchanges
             else
                 return true;
         }
+        public void TransferAllFromInventory()
+        {
+            foreach (var item in Character.Inventory.GetItems().Where(x => !x.IsEquiped()))
+            {
+                MoveItem(item.UId, item.Quantity);
+            }
+        }
+
+        public void TransferAllToInventory()
+        {
+            foreach (var item in Items.GetItems())
+            {
+                MoveItem(item.UId, -item.Quantity);
+            }
+        }
+
         public override void MoveItem(int uid, int quantity)
         {
             if (!IsReady)

@@ -17,6 +17,7 @@ using System.Reflection;
 using Giny.Core.Extensions;
 using System.Text;
 using System.Threading.Tasks;
+using Giny.World.Modules;
 
 namespace Giny.World.Managers.Items
 {
@@ -189,6 +190,8 @@ namespace Giny.World.Managers.Items
 
         private Dictionary<ItemUsageHandlerAttribute, MethodInfo> m_usageHandlers = new Dictionary<ItemUsageHandlerAttribute, MethodInfo>();
 
+
+
         [StartupInvoke("Items Manager", StartupInvokePriority.SixthPath)]
         public void Initialize()
         {
@@ -199,13 +202,16 @@ namespace Giny.World.Managers.Items
 
             m_idprovider = new UniqueIdProvider(lastUID);
 
-            foreach (var method in typeof(ItemUses).GetMethods())
+            foreach (var type in AssemblyCore.GetTypes())
             {
-                var attribute = method.GetCustomAttribute<ItemUsageHandlerAttribute>();
-
-                if (attribute != null)
+                foreach (var method in type.GetMethods())
                 {
-                    m_usageHandlers.Add(attribute, method);
+                    var attribute = method.GetCustomAttribute<ItemUsageHandlerAttribute>();
+
+                    if (attribute != null)
+                    {
+                        m_usageHandlers.Add(attribute, method);
+                    }
                 }
             }
 
@@ -293,7 +299,14 @@ namespace Giny.World.Managers.Items
         {
             return m_idprovider.Pop();
         }
+        public void Reload()
+        {
+            DatabaseManager.Instance.Reload<ItemRecord>();
+            DatabaseManager.Instance.Reload<WeaponRecord>();
 
+            WeaponRecord.Initialize();
+            ItemRecord.Initialize();
+        }
         public IEnumerable<ItemRecord> GetRunesItem(EffectsEnum effect)
         {
             foreach (var item in RunesWeight.Keys)
@@ -307,6 +320,7 @@ namespace Giny.World.Managers.Items
             }
         }
 
+       
         public double? GetRuneWeight(ItemRecord runeRecord)
         {
             if (RunesWeight.ContainsKey(runeRecord))

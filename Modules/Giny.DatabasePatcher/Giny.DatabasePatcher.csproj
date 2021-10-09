@@ -48,8 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Experience\Experiences.cs" />
+    <Compile Include="Idols\IdolsSpell.cs" />
     <Compile Include="Items\LivingObjects.cs" />
-    <Compile Include="Maps\StatedElements.cs" />
+    <Compile Include="Maps\InteractiveElements.cs" />
     <Compile Include="Items\ItemAppearances.cs" />
     <Compile Include="Maps\Teleporters.cs" />
     <Compile Include="Module.cs" />

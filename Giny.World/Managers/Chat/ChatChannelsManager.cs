@@ -53,8 +53,22 @@ namespace Giny.World.Managers.Chat
             }
         }
 
+        public ChatServerCopyWithObjectMessage GetServerCopyWithObjectMessage(ChatActivableChannelsEnum channel, ObjectItem[] items, string message, WorldClient target)
+        {
+            return new ChatServerCopyWithObjectMessage()
+            {
+                receiverId = target.Character.Id,
+                receiverName = target.Character.Name,
+                channel = (byte)channel,
+                content = message,
+                fingerprint = string.Empty,
+                objects = items,
+                timestamp = DateTime.Now.GetUnixTimeStamp(),
+            };
+        }
         public ChatServerWithObjectMessage GetChatServerWithObjectMessage(ChatActivableChannelsEnum channel, ObjectItem[] items, string message, WorldClient client)
         {
+
             return new ChatServerWithObjectMessage()
             {
                 senderAccountId = client.Account.Id,
@@ -83,7 +97,7 @@ namespace Giny.World.Managers.Chat
             };
         }
 
-        public ChatServerCopyMessage GetChatServerCopyMessage(ChatActivableChannelsEnum channel, string message, WorldClient client, WorldClient target)
+        public ChatServerCopyMessage GetChatServerCopyMessage(ChatActivableChannelsEnum channel, string message, WorldClient target)
         {
             return new ChatServerCopyMessage()
             {

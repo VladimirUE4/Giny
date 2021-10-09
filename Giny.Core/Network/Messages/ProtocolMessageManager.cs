@@ -156,14 +156,14 @@ namespace Giny.Core.Network.Messages
                     }
                     catch (Exception ex)
                     {
-                        Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Value.Method.Name, ex.InnerException.ToString()), Channels.Warning);
+                        client.OnHandlingError(message, handler.Value, ex);
                         return false;
                     }
                 }
             }
             else
             {
-                Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), Channels.Warning);
+                client.OnMessageUnhandled(message);
                 return true;
             }
         }

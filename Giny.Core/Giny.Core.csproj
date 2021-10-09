@@ -70,6 +70,7 @@
     <Compile Include="DesignPattern\UselessAttribute.cs" />
     <Compile Include="DesignPattern\WIPManager.cs" />
     <Compile Include="Extensions\CollectionsExtensions.cs" />
+    <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Extensions\TaskFactoryExtensions.cs" />
     <Compile Include="Extensions\TimeExtensions.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="IO\Web.cs" />
     <Compile Include="IO\Xml.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Logs\LogFile.cs" />
     <Compile Include="Misc\Notepad.cs" />
     <Compile Include="Network\Client.cs" />
     <Compile Include="Network\Http.cs" />
@@ -105,6 +107,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Time\ActionTimer.cs" />
     <Compile Include="Time\AsyncRandom.cs" />
+    <Compile Include="Time\CircularBuffer.cs" />
+    <Compile Include="Time\HighPrecisionTimer.cs" />
     <Compile Include="UpdateLogger.cs" />
   </ItemGroup>
   <ItemGroup>

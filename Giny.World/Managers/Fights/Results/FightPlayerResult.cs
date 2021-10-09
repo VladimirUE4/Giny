@@ -99,9 +99,9 @@ namespace Giny.World.Managers.Fights.Results
             this.Character.RefreshStats();
         }
         [WIP]
-        public void AddEarnedExperience(double bonusRatio)
+        public void AddEarnedExperience(double bonusRatio, int mapRewardRate, int xpIdolBonusPercentSolo, int xpIdolBonusPercentGroup)
         {
-            FightXp fightXp = FightFormulas.Instance.GetExperiencePvM(Fighter, 0, 0, 0);
+            FightXp fightXp = FightFormulas.Instance.GetExperiencePvM(Fighter, mapRewardRate, xpIdolBonusPercentSolo, xpIdolBonusPercentGroup);
             fightXp.ApplyMultiplicator(ConfigFile.Instance.XpRate);
             fightXp.ApplyBonus(bonusRatio);
 

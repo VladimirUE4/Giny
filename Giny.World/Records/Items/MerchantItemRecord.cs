@@ -115,13 +115,16 @@ namespace Giny.World.Records.Items
 
         public static IEnumerable<MerchantItemRecord> GetMerchantItemsSolded(long characterId)
         {
-            return GetAllMerchantItems(characterId).Where(x => x.QuantitySold > 0);
+            return GetMerchantItems(characterId).Where(x => x.QuantitySold > 0);
         }
-        public static IEnumerable<MerchantItemRecord> GetAllMerchantItems(long characterId)
+        public static IEnumerable<MerchantItemRecord> GetMerchantItems(long characterId)
         {
             return MerchantItems.Values.Where(x => x.CharacterId == characterId);
         }
-
+        public static IEnumerable<MerchantItemRecord> GetMerchantItems()
+        {
+            return MerchantItems.Values;
+        }
         public override void Initialize()
         {
 
@@ -129,7 +132,7 @@ namespace Giny.World.Records.Items
 
         public static void RemoveMerchantItems(long id)
         {
-            GetAllMerchantItems(id).RemoveInstantElements();
+            GetMerchantItems(id).RemoveInstantElements();
         }
 
 

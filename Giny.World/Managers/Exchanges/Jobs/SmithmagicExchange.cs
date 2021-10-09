@@ -56,6 +56,16 @@ namespace Giny.World.Managers.Exchanges.Jobs
 
         public override void Ready(bool ready, short step)
         {
+            if (TargetItem == null)
+            {
+                return;
+            }
+            if (CharacterJob.Level < TargetItem.Record.Level)
+            {
+                OnResulted(TargetItem, MagicPoolStatusEnum.UNMODIFIED);
+                Character.Reply("Vous n'avez pas le niveau pour forgemager cet objet.");
+                return;
+            }
             if (Items.Count != 2)
             {
                 return;
@@ -79,7 +89,6 @@ namespace Giny.World.Managers.Exchanges.Jobs
             {
                 result = SmithMagicResultEnum.Critical;
             }
-
             else if (delta <= 0.5)
             {
                 result = SmithMagicResultEnum.Neutral;
@@ -99,7 +108,7 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 }
             }
 
-            bool effectAdded = false;
+            bool experience = false;
 
             if (result == SmithMagicResultEnum.Decreased)
             {
@@ -126,7 +135,6 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 if (CanAddEffect())
                 {
                     AddRuneEffects(Rune, TargetItem);
-                    effectAdded = true;
                 }
             }
             else if (result == SmithMagicResultEnum.Critical)
@@ -134,20 +142,27 @@ namespace Giny.World.Managers.Exchanges.Jobs
                 if (CanAddEffect())
                 {
                     AddRuneEffects(Rune, TargetItem);
-                    effectAdded = true;
+                    experience = true;
                 }
             }
 
-            if (effectAdded)
+            if (experience)
             {
                 double n = Math.Abs(TargetItem.Record.Level / (double)CharacterJob.Level);
                 double n2 = GetRuneWeigth();
-                long exp = (long)(n * n2 * ConfigFile.Instance.JobRate);
+                long exp = (long)((n * n2 + 5) * ConfigFile.Instance.JobRate);
                 Character.AddJobExp(CharacterJob.JobId, exp);
             }
 
-            Character.Inventory.RemoveItem(TargetItem.UId, 1);
-            this.TargetItem = Character.Inventory.AddItem(TargetItem, 1);
+            if (Character.Inventory.RemoveItem(TargetItem.UId, 1))
+            {
+                this.TargetItem = Character.Inventory.AddItem(TargetItem, 1);
+            }
+            else
+            {
+                OnResulted(TargetItem, MagicPoolStatusEnum.UNMODIFIED);
+                return;
+            }
 
 
             Character.Inventory.RemoveItem(Rune.UId, 1);
@@ -182,12 +197,24 @@ namespace Giny.World.Managers.Exchanges.Jobs
         {
             base.MoveItem(uid, quantity);
 
-            this.Rune = GetRune();
-            this.TargetItem = GetTargetItem();
+            if (quantity > 0)
+            {
+                var item = Items.GetItem(uid);
+
+                if (item.Record.TypeEnum == ItemTypeEnum.SMITHMAGIC_RUNE)
+                {
+                    this.Rune = GetRune();
+                }
+                else
+                {
+                    this.TargetItem = GetTargetItem();
+                }
+            }
         }
         private double GetRuneWeigth()
         {
-            return ItemsManager.Instance.GetRuneWeight(Rune.Record).Value;
+            var value = ItemsManager.Instance.GetRuneWeight(Rune.Record);
+            return value.HasValue ? value.Value : 0;
         }
         private double DecreaseItem()
         {
@@ -204,10 +231,6 @@ namespace Giny.World.Managers.Exchanges.Jobs
 
             var effects = TargetItem.Effects.Select(x => (EffectInteger)x).Shuffle().Take(3).ToList();
 
-            if (effects.Any(x => x.EffectEnum == runeEffect.EffectEnum) && effects.Count() > 1)
-            {
-                effects.RemoveAll(x => x.EffectEnum == runeEffect.EffectEnum);
-            }
 
             while (runeWeigth > 0)
             {
@@ -231,7 +254,7 @@ namespace Giny.World.Managers.Exchanges.Jobs
                     }
                 }
 
-                if (effects.All(x => x.Value == 0))
+                if (effects.All(x => x.Value == 0 || ItemsManager.Instance.GetEffectWeight(x.EffectEnum) == null))
                 {
                     break;
                 }
@@ -259,33 +282,30 @@ namespace Giny.World.Managers.Exchanges.Jobs
             if (runeEffect.EffectEnum == EffectsEnum.Effect_AddAP_111 ||
                 runeEffect.EffectEnum == EffectsEnum.Effect_AddMP)
             {
-                return 0.20d;
+                return 0.05d;
             }
-            double ratio = CharacterJob.Level / (double)TargetItem.Record.Level;
-
-
-            if (ratio < 0.1d)
-            {
-                ratio = 0.1d;
-            }
-            if (ratio > 0.80d)
-            {
-                ratio = 0.80d;
-            }
+            double ratio = 0.8d;
 
             var itemEffect = TargetItem.Effects.GetFirst<EffectInteger>(runeEffect.EffectEnum);
 
-
             if (itemEffect != null)
             {
-                var maxEffect = TargetItem.Record.Effects.GetFirst<EffectDice>().Max;
+                var maxEffect = TargetItem.Record.Effects.GetFirst<EffectDice>(runeEffect.EffectEnum);
 
-                double n = itemEffect.Value - maxEffect;
-
-                if (n > 0)
+                if (maxEffect != null)
                 {
-                    ratio -= n / maxEffect;
+                    double n = itemEffect.Value - maxEffect.Min;
+
+                    if (n > 0)
+                    {
+                        ratio = 0.3;
+                    }
                 }
+                else
+                {
+                    ratio -= (itemEffect.Value / 101d);
+                }
+
             }
 
 

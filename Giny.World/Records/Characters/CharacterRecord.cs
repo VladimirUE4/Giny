@@ -270,7 +270,7 @@ namespace Giny.World.Records.Characters
                 Jobs = CharacterJob.New().ToArray(),
                 GuildId = 0,
                 DoneObjectives = new List<short>(),
-               
+
             };
         }
         public static CharacterRecord GetCharacterRecord(long id)

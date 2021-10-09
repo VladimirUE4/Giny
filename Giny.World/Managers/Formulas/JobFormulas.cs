@@ -17,7 +17,9 @@ namespace Giny.World.Managers.Formulas
         public int GetCollectedItemQuantity(int jobLevel, SkillRecord skillRecord)
         {
             AsyncRandom rd = new AsyncRandom();
-            return rd.Next(jobLevel == ExperienceManager.MaxLevel ? 7 : 1, skillRecord.MinLevel == ExperienceManager.MaxLevel ? 1 : (int)(7d + ((jobLevel - skillRecord.MinLevel) / 10)));
+            var min = jobLevel == ExperienceManager.MaxLevel ? 7 : 1;
+            var max = skillRecord.MinLevel == ExperienceManager.MaxLevel ? 8 : (int)(7d + ((jobLevel - skillRecord.MinLevel) / 10));
+            return rd.Next(min, max);
         }
 
         public int GetCraftExperience(short resultLevel, short crafterLevel, int craftXpRatio)

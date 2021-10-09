@@ -25,7 +25,7 @@ using Giny.Core.DesignPattern;
 
 namespace Giny.World.Managers.Maps.Instances
 {
-    public abstract class MapInstance
+    public abstract class MapInstance : INetworkEntity
     {
         public int MonsterGroupCount
         {
@@ -94,7 +94,7 @@ namespace Giny.World.Managers.Maps.Instances
         }
         private void SpawnMonsterGroup()
         {
-            if (this.MonsterGroupCount < MonstersManager.MAX_MONSTER_GROUP_PER_MAP)
+            if (this.MonsterGroupCount < MonstersManager.MaxGroupPerMap)
             {
                 AsyncRandom rd = new AsyncRandom();
 
@@ -367,11 +367,11 @@ namespace Giny.World.Managers.Maps.Instances
                 {
                     if (GenericActionsManager.Instance.IsHandled(element))
                     {
-                        bool canMove = element.Record.Skill.Record.ParentBonesId == -1; /* Should be working */
+                        bool canMove = element.Record.Skill.Record.ParentBonesIds.Count == 0; /* Should be working */
 
                         short duration = canMove ? (short)0 : SkillsManager.SKILL_DURATION; /* Duration should be related to job level (its not a const) */
 
-                        character.SendMap(new InteractiveUsedMessage(character.Id, elemId, (short)element.Record.Skill.SkillEnum, duration, canMove));
+                        character.SendMap(new InteractiveUsedMessage(character.Id, elemId, (short)element.Record.Skill.SkillId, duration, canMove));
                         GenericActionsManager.Instance.Handle(character, element);
                     }
                     else

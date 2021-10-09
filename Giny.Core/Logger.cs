@@ -80,8 +80,9 @@ namespace Giny.Core
                 Console.WriteLine(Environment.NewLine);
             }
         }
-        private static void Logo()
+        public static void DrawLogo()
         {
+            Console.Title = Assembly.GetCallingAssembly().GetName().Name;
             WriteColor1(@"   ______   _                     ");
             WriteColor1(@" .' ___  | (_)                    ");
             WriteColor1(@"/ .'   \_| __   _ .--.    _   __  ");
@@ -89,13 +90,8 @@ namespace Giny.Core
             WriteColor1(@"\ `.___]   | |  | | | |   \ '/ /  ");
             WriteColor2(@" `._____.'[___][___||__][\_:  /   ");
             WriteColor2(@"     written by Skinz    \__.'    ");
-
-        }
-        public static void OnStartup()
-        {
-            Console.Title = Assembly.GetCallingAssembly().GetName().Name;
-            Logo();
             NewLine();
         }
+        
     }
 }

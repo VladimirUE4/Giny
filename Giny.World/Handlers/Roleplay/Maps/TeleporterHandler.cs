@@ -17,6 +17,7 @@ namespace Giny.World.Handlers.Roleplay.Maps
         [MessageHandler]
         public static void HandleTeleportRequestMessage(TeleportRequestMessage message, WorldClient client)
         {
+            
             TeleporterDialog dialog = client.Character.GetDialog<TeleporterDialog>();
 
             if (dialog != null)

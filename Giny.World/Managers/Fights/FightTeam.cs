@@ -7,6 +7,7 @@ using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Marks;
 using Giny.World.Managers.Maps;
+using Giny.World.Network;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights
 {
-    public class FightTeam
+    public class FightTeam : INetworkEntity
     {
         public TeamEnum TeamId
         {
@@ -42,7 +43,7 @@ namespace Giny.World.Managers.Fights
 
         public FightTeam EnemyTeam => this == Fight.RedTeam ? Fight.BlueTeam : Fight.RedTeam;
 
-        public CellRecord[] PlacementCells
+        public IEnumerable<CellRecord> PlacementCells
         {
             get;
             set;
@@ -81,7 +82,7 @@ namespace Giny.World.Managers.Fights
             }
         }
 
-        public FightTeam(TeamEnum id, CellRecord[] placementCells, AlignmentSideEnum side, TeamTypeEnum teamtype)
+        public FightTeam(TeamEnum id, IEnumerable<CellRecord> placementCells, AlignmentSideEnum side, TeamTypeEnum teamtype)
         {
             this.Side = side;
             this.Type = teamtype;
@@ -239,7 +240,7 @@ namespace Giny.World.Managers.Fights
                 teamTypeId = (byte)Type,
             };
         }
-      
+
         public Fighter CloserFighter(Fighter source)
         {
             return GetFighters<Fighter>(true).OrderByDescending(x => x.GetMPDistance(source)).LastOrDefault();

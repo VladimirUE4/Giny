@@ -67,7 +67,14 @@ namespace Giny.Auth.Network.IPC
         {
             Logger.Write("(IPC) Send " + result.AsyncState);
         }
-
+        public override void OnMessageUnhandled(NetworkMessage message)
+        {
+            Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), Channels.Warning);
+        }
+        public override void OnHandlingError(NetworkMessage message, Delegate handler, Exception ex)
+        {
+            Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Method.Name, ex.ToString()), Channels.Warning);
+        }
         public override void OnDisconnected()
         {
             Logger.Write("(IPC) client disconnected.");
@@ -79,5 +86,7 @@ namespace Giny.Auth.Network.IPC
                 IPCServer.Instance.RemoveClient(WorldServerRecord.Id);
             }
         }
+
+        
     }
 }

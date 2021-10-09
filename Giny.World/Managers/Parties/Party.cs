@@ -6,6 +6,8 @@ using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights;
+using Giny.World.Managers.Idols;
+using Giny.World.Network;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Parties
 {
-    public abstract class Party
+    public abstract class Party : INetworkEntity
     {
         public int Id
         {
@@ -76,6 +78,11 @@ namespace Giny.World.Managers.Parties
                 return Members.Count() + Guests.Count();
             }
         }
+        public IdolsInventory IdolsInventory
+        {
+            get;
+            private set;
+        }
         public Party(int partyId, Character leader)
         {
             this.Members = new ConcurrentDictionary<long, Character>();
@@ -83,6 +90,8 @@ namespace Giny.World.Managers.Parties
             this.Leader = leader;
             this.Id = Id;
             this.PartyName = "";
+
+            OnLeaderUpdated();
         }
 
         public PartyMemberInformations[] GetPartyMembersInformations()
@@ -157,7 +166,7 @@ namespace Giny.World.Managers.Parties
         {
             if (Guests.ContainsKey(character.Id))
             {
-                SendMembers(new PartyRefuseInvitationNotificationMessage()
+                Send(new PartyRefuseInvitationNotificationMessage()
                 {
                     partyId = Id,
                     guestId = character.Id,
@@ -185,7 +194,7 @@ namespace Giny.World.Managers.Parties
 
                     if (Count > 1)
                     {
-                        SendMembers(new PartyCancelInvitationNotificationMessage()
+                        Send(new PartyCancelInvitationNotificationMessage()
                         {
                             partyId = Id,
                             cancelerId = canceller.Id,
@@ -206,11 +215,7 @@ namespace Giny.World.Managers.Parties
             {
                 this.Leader = Members.Values.FirstOrDefault(x => x.Id != this.Leader.Id);
 
-                SendMembers(new PartyLeaderUpdateMessage()
-                {
-                    partyId = Id,
-                    partyLeaderId = Leader.Id,
-                });
+
             }
             else
             {
@@ -218,15 +223,23 @@ namespace Giny.World.Managers.Parties
                 {
                     this.Leader = character;
 
-                    SendMembers(new PartyLeaderUpdateMessage()
-                    {
-                        partyId = Id,
-                        partyLeaderId = Leader.Id,
-                    });
                 }
             }
+
+            Send(new PartyLeaderUpdateMessage()
+            {
+                partyId = Id,
+                partyLeaderId = Leader.Id,
+            });
+
+            OnLeaderUpdated();
+
         }
 
+        private void OnLeaderUpdated()
+        {
+            this.IdolsInventory = new IdolsInventory(Leader.IdolsInventory.GetAllIdols());
+        }
         public bool Leave(Character character)
         {
             RemoveMember(character);
@@ -241,7 +254,7 @@ namespace Giny.World.Managers.Parties
                 this.Abdicate();
             }
 
-            SendMembers(new PartyMemberRemoveMessage()
+            Send(new PartyMemberRemoveMessage()
             {
                 partyId = Id,
                 leavingPlayerId = character.Id,
@@ -297,7 +310,7 @@ namespace Giny.World.Managers.Parties
             if (character.Party != this)
                 return;
 
-            SendMembers(new PartyNewMemberMessage()
+            Send(new PartyNewMemberMessage()
             {
                 partyId = Id,
                 memberInformations = character.GetPartyMemberInformations()
@@ -323,7 +336,7 @@ namespace Giny.World.Managers.Parties
                 Guests.TryAdd(character.Id, character);
                 character.GuestedParties.Add(this);
 
-                SendMembers(new PartyNewGuestMessage()
+                Send(new PartyNewGuestMessage()
                 {
                     partyId = Id,
                     guest = character.GetPartyGuestInformations(this),
@@ -364,7 +377,7 @@ namespace Giny.World.Managers.Parties
                     partyId = Id,
                 });
 
-                SendMembers(new PartyMemberEjectedMessage()
+                Send(new PartyMemberEjectedMessage()
                 {
                     partyId = Id,
                     kickerId = kicker.Id,
@@ -397,8 +410,10 @@ namespace Giny.World.Managers.Parties
 
 
 
-
-        public void SendMembers(NetworkMessage message)
+        /*
+         * Send message to all members (not guests)
+         */
+        public void Send(NetworkMessage message)
         {
             foreach (var member in Members)
             {
@@ -415,13 +430,13 @@ namespace Giny.World.Managers.Parties
 
         public void SendToAll(NetworkMessage message)
         {
-            SendMembers(message);
+            Send(message);
             SendGuests(message);
         }
 
         public void OnInitiateFight(Character character, Fight fight)
         {
-            SendMembers(new PartyMemberInStandardFightMessage()
+            Send(new PartyMemberInStandardFightMessage()
             {
                 memberAccountId = character.Client.Account.Id,
                 fightId = (short)fight.Id,

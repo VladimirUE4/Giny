@@ -209,7 +209,7 @@ namespace Giny.World.Records.Spells
 
         public override string ToString()
         {
-            return "Grade : (" + Grade + ")";
+            return "{" + Id + "} Grade : (" + Grade + ")";
         }
         public static SpellLevelRecord GetSpellLevel(long levelId)
         {

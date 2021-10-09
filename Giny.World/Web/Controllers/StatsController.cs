@@ -18,17 +18,26 @@ namespace Giny.World.Web.Controllers
     [RoutePrefix("api/stats")]
     public class StatsController : ApiController
     {
-
         public Dictionary<string, string> Get()
         {
             return new Dictionary<string, string>()
             {
-                { "connected", WorldServer.Instance.Clients.Count.ToString() },
-                { "connectedDistinct",WorldServer.Instance.Clients.DistinctBy(x=>x.Ip).Count().ToString() },
+                { "connected", WorldServer.Instance.GetOnlineClients().Count().ToString() },
+                { "connectedDistinct",WorldServer.Instance.GetOnlineClients().DistinctBy(x=>x.Ip).Count().ToString() },
                 { "connectedMax",WorldServer.Instance.MaximumClients.ToString() },
                 { "characters",CharacterRecord.GetCharacterRecords().Count().ToString() },
                 { "items",CharacterItemRecord.GetCharactersItemsCount().ToString() },
             };
         }
     }
+    [EnableCors("http://localhost:3000", "*", "*")]
+    [RoutePrefix("api/onlines")]
+    public class OnlinesController : ApiController
+    {
+        public IEnumerable<long> Get()
+        {
+            return WorldServer.Instance.GetOnlineClients().Select(x => x.Character.Id);
+        }
+    }
+
 }

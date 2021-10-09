@@ -42,8 +42,8 @@ namespace Giny.Npcs
         {
             InitializeComponent();
 
-            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "5.206.224.144",
-         "giny_world", "root", "overflow35");
+            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "127.0.0.1",
+         "giny_world", "root", "");
 
             D2OManager.Initialize(@"C:\Users\Skinz\Desktop\Giny\Giny\Raiders\app\data\common");
             D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Raiders\app\data\i18n\i18n_fr.d2i");

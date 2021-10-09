@@ -180,6 +180,12 @@ namespace Giny.World.Records.Monsters
                         monster.SpellRecords[spellRecord.Id] = spellRecord;
                     }
                 }
+
+                if (monster.Look.Colors.Count > 0)
+                {
+                    int[] colors = EntityLookManager.Instance.GetConvertedColors(monster.Look.Colors);
+                    monster.Look.SetColors(colors);
+                }
             }
         }
 

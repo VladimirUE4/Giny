@@ -44,10 +44,11 @@ namespace Giny.World.Managers.Items.Collections
             item.QuantitySold += item.Quantity;
             item.Quantity = 0;
             item.UpdateElement();
-
+        
             Merchant.SendExchangers(new ExchangeShopStockMovementRemovedMessage()
             {
                 objectId = item.UId,
+            
             });
         }
     }

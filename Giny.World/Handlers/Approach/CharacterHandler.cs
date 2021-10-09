@@ -70,8 +70,7 @@ namespace Giny.World.Handlers.Approach
             client.Character.OnLevelChanged(1, (short)(client.Character.Level - 1));
             BreedManager.Instance.LearnBreedSpells(client.Character);
             newCharacter.AddInstantElement();
-
-
+            client.Character.JustCreated = true;
             ProcessSelection(client);
         }
         [MessageHandler]

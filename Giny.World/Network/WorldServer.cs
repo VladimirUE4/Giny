@@ -95,7 +95,11 @@ namespace Giny.World.Network
         }
         private void OnClientConnected(Socket acceptSocket)
         {
-            Logger.Write("(World) New client connected.");
+            if (ConfigFile.Instance.LogProtocol)
+            {
+                Logger.Write("(World) New client connected.");
+            }
+
             WorldClient client = new WorldClient(acceptSocket);
             Clients.Add(client);
 
@@ -103,6 +107,15 @@ namespace Giny.World.Network
             {
                 MaximumClients = Clients.Count;
             }
+        }
+        public void RemoveClient(WorldClient client)
+        {
+            if (ConfigFile.Instance.LogProtocol)
+            {
+                Logger.Write("(World) Client disconnected.");
+            }
+
+            Clients.Remove(client);
         }
         private void OnServerFailedToStart(Exception ex)
         {

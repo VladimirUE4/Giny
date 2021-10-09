@@ -66,6 +66,10 @@ namespace Giny.Core.Network
 
         public abstract void OnMessageReceived(NetworkMessage message);
 
+        public abstract void OnMessageUnhandled(NetworkMessage message);
+
+        public abstract void OnHandlingError(NetworkMessage message, Delegate handler, Exception ex);
+
         public abstract void OnFailToConnect(Exception ex);
 
         private void OnDataArrival(int dataSize)
@@ -96,7 +100,6 @@ namespace Giny.Core.Network
                     }
                     else
                     {
-                        Logger.Write("Unable to deserialize network message.", Channels.Warning);
                         Disconnect();
                         m_bufferEndPosition = 0;
                         return;
@@ -126,17 +129,11 @@ namespace Giny.Core.Network
                         m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    Logger.Write("Unable to send message to client : " + ex, Channels.Warning);
                     Disconnect();
                 }
             }
-            else
-            {
-                Logger.Write("Attempt was made to send data to disconnect socket.", Channels.Warning);
-            }
-
         }
         public abstract void OnSended(IAsyncResult result);
 
@@ -205,7 +202,15 @@ namespace Giny.Core.Network
             if (m_socket != null)
             {
                 Dispose();
-                OnDisconnected();
+
+                try
+                {
+                    OnDisconnected();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Write("Unable to disconnect client : " + ex);
+                }
             }
         }
 
@@ -217,5 +222,6 @@ namespace Giny.Core.Network
             m_socket = null;
 
         }
+
     }
 }

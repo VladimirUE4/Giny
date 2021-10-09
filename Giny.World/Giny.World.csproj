@@ -112,9 +112,10 @@
     <Compile Include="Api\FightEventApi.cs" />
     <Compile Include="Api\InventoryEventApi.cs" />
     <Compile Include="Handlers\Roleplay\HavenBag\HavenBagHandler.cs" />
+    <Compile Include="Handlers\Roleplay\Idols\IdolsHandler.cs" />
     <Compile Include="Handlers\Roleplay\Items\MimicrysHandler.cs" />
+    <Compile Include="Logs\LogManager.cs" />
     <Compile Include="Managers\Bidshops\AveragePriceScheduler.cs" />
-    <Compile Include="Handlers\Roleplay\Items\IdolsHandler.cs" />
     <Compile Include="Handlers\Roleplay\Parties\PartiesHandler.cs" />
     <Compile Include="Managers\Criterias\ActionPointsCriteria.cs" />
     <Compile Include="Managers\Criterias\AgilityCriteria.cs" />
@@ -248,11 +249,14 @@
     <Compile Include="Managers\Guilds\Guild.cs" />
     <Compile Include="Managers\Guilds\GuildMotd.cs" />
     <Compile Include="Managers\Guilds\GuildsManager.cs" />
+    <Compile Include="Managers\Idols\IdolXp.cs" />
     <Compile Include="Managers\Items\Collections\BankItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\BasicItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\JobItemCollection.cs" />
     <Compile Include="Managers\Items\Collections\TradeItemCollection.cs" />
+    <Compile Include="Managers\Idols\IdolsInventory.cs" />
     <Compile Include="Managers\Stats\PointDodgeCharacteristic.cs" />
+    <Compile Include="Network\INetworkEntity.cs" />
     <Compile Include="Records\Challenges\ChallengeRecord.cs" />
     <Compile Include="Records\Guilds\GuildEmblemRecord.cs" />
     <Compile Include="Records\Guilds\GuildMemberRecord.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="Managers\Parties\ClassicalParty.cs" />
     <Compile Include="Managers\Parties\PartyManager.cs" />
     <Compile Include="Records\Guilds\GuildRecord.cs" />
+    <Compile Include="Records\Idols\IdolRecord.cs" />
     <Compile Include="Records\Jobs\RecipeRecord.cs" />
     <Compile Include="Web\WebGiftManager.cs" />
     <Compile Include="Modules\AssemblyCore.cs" />

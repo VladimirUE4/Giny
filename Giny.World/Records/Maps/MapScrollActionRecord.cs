@@ -53,7 +53,7 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
-        public static MapScrollActionRecord GetMapScrollAction(int mapId)
+        public static MapScrollActionRecord GetMapScrollAction(long mapId)
         {
             return MapScrollActions.ContainsKey(mapId) ? MapScrollActions[mapId] : null;
         }

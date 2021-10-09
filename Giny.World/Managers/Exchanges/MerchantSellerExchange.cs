@@ -59,17 +59,22 @@ namespace Giny.World.Managers.Exchanges
             Character.Client.Send(new ExchangeStartOkHumanVendorMessage()
             {
                 sellerId = Merchant.Id,
-                objectsInfos = Merchant.Items.GetItems().Select(x => x.GetObjectItemToSellInHumanVendorShop()).ToArray(),
+                objectsInfos = Merchant.Items.GetItems().Where(x => !x.Sold).Select(x => x.GetObjectItemToSellInHumanVendorShop()).ToArray(),
             });
 
         }
 
-        [WIP("probleme quantité.")]
         public void Buy(int uid, int quantity)
         {
             MerchantItemRecord item = Merchant.Items.GetItem(uid);
 
-            if (item == null || item.Quantity < quantity)
+            if (item == null)
+            {
+                Character.OnExchangeError(ExchangeErrorEnum.BUY_ERROR);
+                return;
+            }
+
+            if (item.Quantity < quantity)
             {
                 Character.OnExchangeError(ExchangeErrorEnum.BUY_ERROR);
                 return;
@@ -89,11 +94,11 @@ namespace Giny.World.Managers.Exchanges
 
             Merchant.Items.RemoveItem(item, quantity);
 
-            Character.OnItemGained(item.GId, quantity);
- 
+            Character.NotifyItemGained(item.GId, quantity);
+
             Character.Client.Send(new ExchangeBuyOkMessage());
 
-            if (Merchant.Items.GetItems().Count() == 0)
+            if (Merchant.Items.GetItems().Where(x => !x.Sold).Count() == 0)
             {
                 this.Close();
                 Merchant.Remove();

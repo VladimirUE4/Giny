@@ -46,13 +46,35 @@ namespace Giny.World.Handlers.Roleplay.Social
             if (target != null)
             {
                 target.Send(ChatChannelsManager.Instance.GetChatServerMessage(ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, client));
-                client.Send(ChatChannelsManager.Instance.GetChatServerCopyMessage(ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, client, target));
+                client.Send(ChatChannelsManager.Instance.GetChatServerCopyMessage(ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, target));
             }
             else
             {
                 client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_RECEIVER_NOT_FOUND);
             }
 
+        }
+
+        [MessageHandler]
+        public static void HandleChatClientPrivateWithObject(ChatClientPrivateWithObjectMessage message, WorldClient client)
+        {
+            if (message.receiver == client.Character.Name)
+            {
+                client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_INTERIOR_MONOLOGUE);
+                return;
+            }
+
+            WorldClient target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.receiver);
+
+            if (target != null)
+            {
+                client.Send(ChatChannelsManager.Instance.GetServerCopyWithObjectMessage(ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.objects, message.content, target));
+                target.Send(ChatChannelsManager.Instance.GetChatServerWithObjectMessage(ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.objects, message.content, client));
+            }
+            else
+            {
+                client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_RECEIVER_NOT_FOUND);
+            }
         }
 
 

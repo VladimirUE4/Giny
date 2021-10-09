@@ -80,7 +80,7 @@ namespace Giny.RessourcesDrop
                             continue;
                         }
 
-                        if (SkillRecord.GetSkills().Any(x => x.GatheredRessourceItem == ingredient && x.ParentBonesId != -1))
+                        if (SkillRecord.GetSkills().Any(x => x.GatheredRessourceItem == ingredient && x.ParentBonesIds.Count > 0))
                         {
                             continue;
                         }

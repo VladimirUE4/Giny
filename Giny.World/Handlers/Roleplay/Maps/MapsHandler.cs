@@ -112,7 +112,7 @@ namespace Giny.World.Handlers.Maps
 
                 if (group != null && client.Character.CellId == group.CellId)
                 {
-                    if (client.Character.Map.BlueCells.Length >= group.MonsterCount && client.Character.Map.RedCells.Count() >= client.Character.FighterCount)
+                    if (client.Character.Map.BlueCells.Count >= group.MonsterCount && client.Character.Map.RedCells.Count() >= client.Character.FighterCount)
                     {
                         client.Character.Map.Instance.RemoveEntity(group.Id);
 
@@ -200,21 +200,27 @@ namespace Giny.World.Handlers.Maps
 
             if (scrollType != MapScrollEnum.UNDEFINED)
             {
-                int overrided = MapsManager.Instance.GetOverrideNeighbourMapId((int)client.Character.Map.Id, scrollType);
-                short cellId = MapsManager.Instance.GetNeighbourCellId(client.Character.Record.CellId, scrollType);
+                int teleportMapId = MapsManager.Instance.GetNeighbourMapId(client.Character.Map, scrollType);
+
+                MapPoint cellPoint = new MapPoint(MapsManager.Instance.GetNeighbourCellId(client.Character.Record.CellId, scrollType));
 
                 client.Character.Record.Direction = MapsManager.Instance.GetScrollDirection(scrollType);
-
-                int teleportMapId = overrided != -1 ? overrided : (int)message.mapId;
-                if (overrided == 0)
-                    teleportMapId = (int)message.mapId;
 
                 MapRecord teleportedMap = MapRecord.GetMap(teleportMapId);
 
                 if (teleportedMap != null)
                 {
-                    cellId = teleportedMap.IsCellWalkable(cellId) ? cellId : MapsManager.Instance.FindNearMapBorder(teleportedMap, scrollType, cellId);
-                    client.Character.Teleport(teleportMapId, cellId);
+                    if (!cellPoint.IsInMap() || !teleportedMap.IsCellWalkable(cellPoint.CellId))
+                    {
+                        cellPoint = new MapPoint(MapsManager.Instance.FindNearMapBorder(teleportedMap, scrollType, cellPoint));
+                    }
+
+                    if (!cellPoint.IsInMap())
+                    {
+                        cellPoint = teleportedMap.RandomWalkableCell().Point;
+                    }
+
+                    client.Character.Teleport(teleportMapId, cellPoint.CellId);
                 }
                 else
                 {

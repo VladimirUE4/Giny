@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace Giny.IO.D2P
 {
-    public class D2PFile :  IDisposable
+    public class D2PFile : IDisposable
     {
+        public const string Extension = ".d2p";
+
         private readonly Dictionary<string, D2PEntry> m_entries = new Dictionary<string, D2PEntry>();
         private readonly List<D2PFile> m_links = new List<D2PFile>();
         private readonly Queue<D2PFile> m_linksToSave = new Queue<D2PFile>();
@@ -305,16 +307,14 @@ namespace Giny.IO.D2P
         public D2PEntry TryGetEntry(string fileName)
         {
             D2PEntry entry;
-            D2PEntry result;
             if (this.m_entries.TryGetValue(fileName, out entry))
             {
-                result = entry;
+                return entry;
             }
             else
             {
-                result = null;
+                return null;
             }
-            return result;
         }
 
         public string[] GetFilesName()
@@ -429,16 +429,7 @@ namespace Giny.IO.D2P
         }
         public bool Contains(string fileName)
         {
-            var data = this.m_entries.Keys.FirstOrDefault(x => x.Contains(fileName));
-
-            bool result = data != null;
-
-            if (result)
-            {
-
-            }
-
-            return result;
+            return m_entries.ContainsKey(fileName);
         }
 
         public Dictionary<D2PEntry, byte[]> ReadAllFiles()
@@ -663,7 +654,7 @@ namespace Giny.IO.D2P
                 {
                     D2PEntry entry = array[i];
 
-             
+
                     byte[] data = this.ReadFile(entry);
                     entry.Index = (int)writer.Position - offset;
                     writer.WriteBytes(data);

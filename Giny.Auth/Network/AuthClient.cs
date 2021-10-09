@@ -107,13 +107,19 @@ namespace Giny.Auth.Network
 
         public override void OnMessageReceived(NetworkMessage message)
         {
-            Logger.Write("Received " + message,Channels.Info);
+            Logger.Write("Received " + message, Channels.Info);
             ProtocolMessageManager.HandleMessage(message, this);
         }
 
         public override void OnSended(IAsyncResult result)
         {
             Logger.Write("Send " + result.AsyncState);
+        }
+
+
+        public override void OnMessageUnhandled(NetworkMessage message)
+        {
+            Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), Channels.Warning);
         }
 
         public override void OnDisconnected()

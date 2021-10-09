@@ -14,7 +14,9 @@ using Giny.Protocol.Messages;
 using Giny.World.Managers.Maps;
 using Giny.World.Modules;
 using Giny.World.Network;
+using Giny.World.Records.Idols;
 using Giny.World.Records.Items;
+using Giny.World.Records.Spells;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -41,12 +43,11 @@ namespace Giny.World
             /* WIPManager.Analyse(Assembly.GetExecutingAssembly());
               Console.Read(); */
 
-            Logger.OnStartup();
+            Logger.DrawLogo();
             StartupManager.Instance.Initialize(Assembly.GetExecutingAssembly());
             IPCManager.Instance.ConnectToAuth();
             ConsoleCommandsManager.Instance.ReadCommand();
         }
-
 
         [StartupInvoke("Protocol Manager", StartupInvokePriority.SecondPass)]
         public static void InitializeProtocolManager()

@@ -59,6 +59,8 @@ namespace Giny.Pokefus
             411, // Tuerie
             228, // Etourderie Mortelle
             1037, // Briss Deuniss
+            14757, // Sort tot
+            914, // Invocation Poutch
         };
         /*  private static short[] ForbiddenMonsters = new short[]
           {
@@ -130,7 +132,10 @@ namespace Giny.Pokefus
                     result.Character.Inventory.AddItem(item);
                 }
 
-                AddPokefusExperience(result);
+                if (result.ExperienceData != null)
+                {
+                    AddPokefusExperience(result.Character, result.ExperienceData.ExperienceFightDelta);
+                }
 
                 foreach (var dropData in droppers)
                 {
@@ -141,15 +146,15 @@ namespace Giny.Pokefus
 
             }
         }
-        private void AddPokefusExperience(FightPlayerResult result)
+        public bool AddPokefusExperience(Character character, long experienceDelta)
         {
-            var items = result.Character.Inventory.GetEquipedItems().Where(x => x.Effects.Exists<EffectPokefus>());
+            var items = character.Inventory.GetEquipedItems().Where(x => x.Effects.Exists<EffectPokefus>());
 
-            if (items.Count() == 0 || result.ExperienceData == null)
+            if (items.Count() == 0)
             {
-                return;
+                return false;
             }
-            var delta = result.ExperienceData.ExperienceFightDelta / items.Count();
+            var delta = experienceDelta / items.Count();
 
             foreach (var item in items)
             {
@@ -163,13 +168,15 @@ namespace Giny.Pokefus
 
                 if (level != effectLevel.Level)
                 {
-                    result.Character.DisplayPopup(0, "Serveur", string.Format(PokefusLevelUpMessage, effect.MonsterName, effectLevel.Level));
+                    character.DisplayPopup(0, "Serveur", string.Format(PokefusLevelUpMessage, effect.MonsterName, effectLevel.Level));
                 }
 
-                result.Character.Inventory.OnItemModified(item);
+                character.Inventory.OnItemModified(item);
 
                 item.UpdateElement();
             }
+
+            return true;
 
         }
         private double GetDropRate(MonsterFighter monster, CharacterFighter fighter)
@@ -287,7 +294,7 @@ namespace Giny.Pokefus
                 return true;
             }
 
-            
+
             bool result = true;
 
             if (arg.Spell.Level.Effects.Any(x => ForbiddenPokefusSpellEffects.Contains(x.EffectEnum)))
@@ -309,13 +316,20 @@ namespace Giny.Pokefus
                     }
                 }
 
+                if (effect.EffectEnum == EffectsEnum.Effect_SubAP || effect.EffectEnum == EffectsEnum.Effect_RemoveAP || effect.EffectEnum == EffectsEnum.Effect_SubAP_Roll)
+                {
+                    if (dice.Max > 4 || dice.Max > 4)
+                    {
+                        result = false;
+                    }
+                }
                 if (effect.EffectEnum == EffectsEnum.Effect_SkipTurn || effect.EffectEnum == EffectsEnum.Effect_SkipTurn_1031)
                 {
                     result = false;
                 }
 
-                if (effect.EffectEnum == EffectsEnum.Effect_SubResistances || effect.EffectEnum == EffectsEnum.Effect_SubEarthResistPercent||
-                    effect.EffectEnum == EffectsEnum.Effect_SubWaterResistPercent ||  effect.EffectEnum == EffectsEnum.Effect_SubAirResistPercent
+                if (effect.EffectEnum == EffectsEnum.Effect_SubResistances || effect.EffectEnum == EffectsEnum.Effect_SubEarthResistPercent ||
+                    effect.EffectEnum == EffectsEnum.Effect_SubWaterResistPercent || effect.EffectEnum == EffectsEnum.Effect_SubAirResistPercent
                     || effect.EffectEnum == EffectsEnum.Effect_SubFireResistPercent)
                 {
                     if (dice.Max > 50 || dice.Min > 50)
@@ -324,7 +338,8 @@ namespace Giny.Pokefus
                     }
                 }
                 if (effect.EffectEnum == EffectsEnum.Effect_DamageEarth || effect.EffectEnum == EffectsEnum.Effect_DamageAir ||
-                    effect.EffectEnum == EffectsEnum.Effect_DamageFire || effect.EffectEnum == EffectsEnum.Effect_DamageWater)
+                    effect.EffectEnum == EffectsEnum.Effect_DamageFire || effect.EffectEnum == EffectsEnum.Effect_DamageWater ||
+                    effect.EffectEnum == EffectsEnum.Effect_DamageNeutral)
                 {
                     if (dice.Min > 150 || dice.Max > 150)
                     {
@@ -349,6 +364,7 @@ namespace Giny.Pokefus
 
             return result;
         }
+
         public bool CanEquipItem(Character character, CharacterItemRecord item)
         {
             EffectPokefus effect = item.Effects.GetFirst<EffectPokefus>();

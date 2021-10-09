@@ -40,11 +40,11 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Update]
-        public int ParentBonesId
+        public List<int> ParentBonesIds
         {
             get;
             set;
-        } = -1;
+        } = new List<int>();
 
         [D2OField("interactiveId")]
         public int InteractiveTypeId

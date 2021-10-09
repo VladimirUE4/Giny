@@ -7,37 +7,33 @@ namespace Giny.IO.DLM.Elements
         public const uint CELL_HALF_WIDTH = 43;
         public const float CELL_HALF_HEIGHT = 21.5F;
 
-        public int Hue1
+        public sbyte HueR
+        {
+            get;
+            set;
+        }
+        public sbyte HueG
+        {
+            get;
+            set;
+        }
+        public sbyte HueB
         {
             get;
             set;
         }
 
-        public int Hue2
+        public sbyte ShadowR
         {
             get;
             set;
         }
-
-        public int Hue3
+        public sbyte ShadowG
         {
             get;
             set;
         }
-
-        public int Shadow1
-        {
-            get;
-            set;
-        }
-
-        public int Shadow2
-        {
-            get;
-            set;
-        }
-
-        public int Shadow3
+        public sbyte ShadowB
         {
             get;
             set;
@@ -82,15 +78,18 @@ namespace Giny.IO.DLM.Elements
         {
 
         }
+
         public GraphicalElement(BigEndianReader _reader, sbyte mapVersion)
         {
             ElementId = _reader.ReadUInt();
-            Hue1 = _reader.ReadSByte();
-            Hue2 = _reader.ReadSByte();
-            Hue3 = _reader.ReadSByte();
-            Shadow1 = _reader.ReadSByte();
-            Shadow2 = _reader.ReadSByte();
-            Shadow3 = _reader.ReadSByte();
+
+            this.HueR = _reader.ReadSByte();
+            this.HueG = _reader.ReadSByte();
+            this.HueB = _reader.ReadSByte();
+
+            this.ShadowR = _reader.ReadSByte();
+            this.ShadowG = _reader.ReadSByte();
+            this.ShadowB = _reader.ReadSByte();
 
             if (mapVersion <= 4)
             {
@@ -112,19 +111,18 @@ namespace Giny.IO.DLM.Elements
 
             Altitude = _reader.ReadSByte();
             Identifier = _reader.ReadUInt();
-
         }
 
         public override void Serialize(BigEndianWriter writer, sbyte mapVersion)
         {
             writer.WriteUInt(ElementId);
 
-            writer.WriteSByte((sbyte)Hue1);
-            writer.WriteSByte((sbyte)Hue2);
-            writer.WriteSByte((sbyte)Hue3);
-            writer.WriteSByte((sbyte)Shadow1);
-            writer.WriteSByte((sbyte)Shadow2);
-            writer.WriteSByte((sbyte)Shadow3);
+            writer.WriteSByte((sbyte)HueR);
+            writer.WriteSByte((sbyte)HueG);
+            writer.WriteSByte((sbyte)HueB);
+            writer.WriteSByte((sbyte)ShadowR);
+            writer.WriteSByte((sbyte)ShadowG);
+            writer.WriteSByte((sbyte)ShadowB);
 
             if (mapVersion <= 4)
             {

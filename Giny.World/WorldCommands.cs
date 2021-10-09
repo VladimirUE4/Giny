@@ -8,6 +8,7 @@ using Giny.Protocol.IPC.Messages;
 using Giny.World.Managers;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Entities.Npcs;
+using Giny.World.Managers.Items;
 using Giny.World.Managers.Maps.Npcs;
 using Giny.World.Modules;
 using Giny.World.Network;
@@ -29,6 +30,12 @@ namespace Giny.World
 {
     class WorldCommands
     {
+        [ConsoleCommand("clear")]
+        public static void ClearCommand()
+        {
+            Console.Clear();
+            Logger.DrawLogo();
+        }
        
         [ConsoleCommand("rate")]
         public static void ExperienceRateCommand(double ratio)
@@ -92,9 +99,10 @@ namespace Giny.World
         public static void SaveCommand()
         {
             WorldSaveManager.Instance.PerformSave();
-            Logger.Write("Server saved.", Channels.Log);
+     
         }
 
+     
         [ConsoleCommand("npcs")]
         public static void ReloadNpcsCommand()
         {
@@ -105,12 +113,7 @@ namespace Giny.World
         [ConsoleCommand("items")]
         public static void ReloadItemsCommand()
         {
-            DatabaseManager.Instance.Reload<ItemRecord>();
-            DatabaseManager.Instance.Reload<WeaponRecord>();
-
-            WeaponRecord.Initialize();
-            ItemRecord.Initialize();
-
+            ItemsManager.Instance.Reload();
             Logger.Write("Items Reloaded.", Channels.Log);
         }
 

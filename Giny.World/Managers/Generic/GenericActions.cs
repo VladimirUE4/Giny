@@ -17,13 +17,32 @@ namespace Giny.World.Managers.Generic
 {
     public class GenericActions
     {
+        [GenericActionHandler(GenericActionEnum.Unhandled)]
+        public static void HandleUnhandled(Character character, IGenericActionParameter parameter)
+        {
+            MapInteractiveElement element = parameter as MapInteractiveElement;
+
+            if (element != null)
+            {
+
+
+                if (character.Client.Account.Role == Protocol.Custom.Enums.ServerRoleEnum.Administrator)
+                {
+                    character.ReplyWarning("This action is not handled. ElementId : " + element.Record.Identifier + " Bones : " + element.Record.BonesId);
+                }
+                else
+                {
+                    character.DisplayNotification("Oups ! On dirait que cet élement interactif n'est pas encore géré ! Si tu as besoin de l'utiliser, indique le dans le canal discord #elements. Bon jeu !");
+                }
+            }
+        }
         [GenericActionHandler(GenericActionEnum.AddItem)]
         public static void HandleAddItem(Character character, IGenericActionParameter parameter)
         {
             short itemId = short.Parse(parameter.Param1);
             int quantity = int.Parse(parameter.Param2);
             character.Inventory.AddItem(itemId, quantity);
-            character.OnItemGained(itemId, quantity);
+            character.NotifyItemGained(itemId, quantity);
         }
         [GenericActionHandler(GenericActionEnum.RemoveItem)]
         public static void HandleRemoveItem(Character character, IGenericActionParameter parameter)
@@ -40,7 +59,7 @@ namespace Giny.World.Managers.Generic
             }
 
             character.Inventory.RemoveItem(item.UId, quantity);
-            character.OnItemLost(itemId, quantity);
+            character.NotifyItemLost(itemId, quantity);
         }
         [GenericActionHandler(GenericActionEnum.Teleport)]
         public static void HandleTeleportAction(Character character, IGenericActionParameter parameter)
@@ -160,6 +179,11 @@ namespace Giny.World.Managers.Generic
             character.AddExperience(long.Parse(parameter.Param1), true);
         }
 
+        [GenericActionHandler(GenericActionEnum.Notification)]
+        public static void HandleNotification(Character character, IGenericActionParameter parameter)
+        {
+            character.DisplayNotification(parameter.Param1);
+        }
         [GenericActionHandler(GenericActionEnum.Fight)]
         public static void HandleFight(Character character, IGenericActionParameter parameter)
         {

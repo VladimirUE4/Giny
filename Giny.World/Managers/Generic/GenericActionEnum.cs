@@ -25,8 +25,10 @@ namespace Giny.World.Managers.Generic
         Reach,
         AddItem,
         AddExperience,
+        Notification,
         Fight,
         Smithmagic,
         RuneTrade,
+        Unhandled,
     }
 }

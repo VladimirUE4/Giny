@@ -668,6 +668,10 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
+            if (type == TriggerTypeEnum.OnAPLost)
+            {
+
+            }
             IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
                 x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
 
@@ -841,7 +845,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public bool CastSpell(int levelId)
         {
             SpellLevelRecord level = SpellLevelRecord.GetSpellLevel(levelId);
-          
+
             if (level != null)
             {
                 SpellRecord record = SpellRecord.GetSpellRecord(level.SpellId);
@@ -883,17 +887,6 @@ namespace Giny.World.Managers.Fights.Fighters
                 return false; // sort julith , + 2 mobs, stackoverflow ???
             }
 
-            if (cast.SpellId == 18869)
-            {
-                return false; // sort roi gami , Kami No Jishin, stackoverflow ???
-            }
-
-            var parent = cast.GetParent();
-
-           
-       
-
-
             if (Fight.Ended)
                 return false;
 
@@ -913,6 +906,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             cast.Target = Fight.GetFighter(cast.TargetCell.Id); // sure about that ? (friction)
 
+
             using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_SPELL))
             {
                 cast.Critical = RollCriticalDice(cast.Spell.Level);
@@ -924,6 +918,8 @@ namespace Giny.World.Managers.Fights.Fighters
                     OnSpellCastFailed(cast);
                     return false;
                 }
+
+                UpdateInvisibility(handler);
 
                 OnSpellCasting(handler);
 
@@ -992,12 +988,11 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
-        [WIP("see stump")]
-        private void OnSpellCasting(SpellCastHandler handler)
+        protected void UpdateInvisibility(SpellCastHandler castedSpellHandler)
         {
-            if (IsInvisible() && !handler.Cast.Force)
+            if (IsInvisible() && !castedSpellHandler.Cast.Force)
             {
-                if (handler.RevealsInvisible() && !CanBeReveals())
+                if (castedSpellHandler.RevealsInvisible() && !CanBeReveals())
                 {
                     Reveals();
                 }
@@ -1007,6 +1002,10 @@ namespace Giny.World.Managers.Fights.Fighters
                 }
 
             }
+        }
+        [WIP("see stump")]
+        private void OnSpellCasting(SpellCastHandler handler)
+        {
             Fighter target = Fight.GetFighter(handler.Cast.TargetCell.Id);
 
             Fight.Send(new GameActionFightSpellCastMessage()
@@ -1682,7 +1681,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual bool CanTackle()
         {
-            return !GetBuffs<StateBuff>().Where(x => x.Record.CantTackle).Any(y => HasState(y.StateId)) && !IsCarried();
+            return !GetBuffs<StateBuff>().Where(x => x.Record.CantTackle).Any(y => HasState(y.StateId)) && !IsCarried() && !IsInvisible();
         }
         public virtual bool CanBeTackled()
         {

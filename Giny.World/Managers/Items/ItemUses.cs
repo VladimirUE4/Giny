@@ -88,5 +88,24 @@ namespace Giny.World.Managers.Items
             character.OpenUIByObject(ObjectUITypeEnum.MIMICRY, item.UId);
             return false;
         }
+
+        [ItemUsageHandler(16836)]
+        public static bool Container16836(Character character, CharacterItemRecord item)
+        {
+            character.Inventory.AddItem(2012, 10);
+            return true;
+        }
+        [ItemUsageHandler(16833)]
+        public static bool Container16833(Character character, CharacterItemRecord item)
+        {
+            character.Inventory.AddItem(519, 10);
+            return true;
+        }
+        [ItemUsageHandler(16828)]
+        public static bool Container16828(Character character, CharacterItemRecord item)
+        {
+            character.Inventory.AddItem(6671, 10);
+            return true;
+        }
     }
 }

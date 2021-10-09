@@ -17,7 +17,22 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
 {
     class ExchangesHandler
     {
-       
+        [MessageHandler]
+        public static void HandleExchangeObjectTransfertAllToInv(ExchangeObjectTransfertAllToInvMessage message, WorldClient client)
+        {
+            if (client.Character.IsInDialog<PlayerTradeExchange>())
+            {
+                client.Character.GetDialog<PlayerTradeExchange>().TransferAllToInventory();
+            }
+        }
+        [MessageHandler]
+        public static void HandleExchangeObjectTransfertAllFromInv(ExchangeObjectTransfertAllFromInvMessage message, WorldClient client)
+        {
+            if (client.Character.IsInDialog<PlayerTradeExchange>())
+            {
+                client.Character.GetDialog<PlayerTradeExchange>().TransferAllFromInventory();
+            }
+        }
         [MessageHandler]
         public static void HandleExchangeOnHumanVendorRequest(ExchangeOnHumanVendorRequestMessage message, WorldClient client)
         {
@@ -88,7 +103,7 @@ namespace Giny.World.Handlers.Roleplay.Exchanges
             }
             else if (client.Character.IsInExchange(ExchangeTypeEnum.DISCONNECTED_VENDOR))
             {
-                client.Character.GetDialog<MerchantSellerExchange>().Buy((short)message.objectToBuyId, message.quantity);
+                client.Character.GetDialog<MerchantSellerExchange>().Buy(message.objectToBuyId, message.quantity);
             }
         }
         [MessageHandler]

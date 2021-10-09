@@ -11,6 +11,7 @@ using Giny.World.Managers.Entities.Npcs;
 using Giny.World.Managers.Experiences;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Generic;
+using Giny.World.Managers.Items;
 using Giny.World.Managers.Maps;
 using Giny.World.Managers.Maps.Npcs;
 using Giny.World.Managers.Maps.Paths;
@@ -60,33 +61,38 @@ namespace Giny.World.Managers.Chat
             }
 
             client.Character.Reply("Max Connected : " + WorldServer.Instance.MaximumClients);
-            client.Character.Reply("Ips : " + WorldServer.Instance.Clients.DistinctBy(x => x.Ip).Count());
-            client.Character.Reply("Connected : " + WorldServer.Instance.Clients.Count);
+            client.Character.Reply("Ips : " + WorldServer.Instance.GetOnlineClients().DistinctBy(x => x.Ip).Count());
+            client.Character.Reply("Connected : " + WorldServer.Instance.GetOnlineClients().Count());
 
         }
-        [ChatCommand("placement", ServerRoleEnum.Administrator)]
-        public static void AddPlacementCommand(WorldClient client, string type)
+        [ChatCommand("items", ServerRoleEnum.Administrator)]
+        public static void ReloadItemsCommand(WorldClient client)
         {
-            if (type != "blue" && type != "red")
+            ItemsManager.Instance.Reload();
+            client.Character.Reply("Items reloaded.");
+        }
+        [ChatCommand("bonta", ServerRoleEnum.Player)]
+        public static void BontaCommand(WorldClient client)
+        {
+            const int targetMapId = 147768;
+
+            if (client.Character.Map.Id == targetMapId)
             {
-                client.Character.ReplyWarning("Invalid argument : " + type);
                 return;
             }
-
-            if (type == "red")
+            if (client.Character.HasParty)
             {
-                client.Character.GetCell().Red = true;
+                foreach (var member in client.Character.Party.Members.Values)
+                {
+                    member.Teleport(targetMapId);
+                }
             }
             else
             {
-                client.Character.GetCell().Blue = true;
+                client.Character.Teleport(targetMapId);
             }
-
-
-            client.Character.Map.ReloadMembers();
-            client.Character.Map.UpdateInstantElement();
-            client.Character.Teleport(client.Character.Map, client.Character.CellId);
         }
+
         [ChatCommand("npcs", ServerRoleEnum.Administrator)]
         public static void ReloadNpcs(WorldClient client)
         {
@@ -123,8 +129,11 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("craft", ServerRoleEnum.Administrator)]
         public static void CraftCommand(WorldClient client, int elementId, int skillType)
         {
-            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Teleport,
-               InteractiveTypeEnum.CRAFTING_TABLE, (SkillTypeEnum)skillType))
+            var skill = SkillRecord.GetSkill((SkillTypeEnum)skillType);
+
+            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Craft,
+                (InteractiveTypeEnum)skill.InteractiveTypeId,
+              (SkillTypeEnum)skill.Id))
             {
                 client.Character.Reply("Craft table added element " + elementId);
             }
@@ -134,11 +143,42 @@ namespace Giny.World.Managers.Chat
 
             }
         }
+        [ChatCommand("jobxp", ServerRoleEnum.Administrator)]
+        public static void AddJobXp(WorldClient client, long amount)
+        {
+            foreach (var job in client.Character.Record.Jobs)
+            {
+                client.Character.AddJobExp(job.JobId, amount);
+            }
+        }
+        [ChatCommand("rmin", ServerRoleEnum.Administrator)]
+        public static void RemoveInteractiveCommand(WorldClient client, int elementId)
+        {
+            var element = client.Character.Map.GetElementRecord(elementId);
+
+
+            if (element == null)
+            {
+                client.Character.ReplyWarning("Unable to find element : " + elementId);
+                return;
+            }
+            if (element.Skill == null)
+            {
+                client.Character.ReplyWarning("Unable to find skill : " + elementId);
+                return;
+            }
+            element.Skill.RemoveInstantElement();
+            element.Skill = null;
+
+            client.Character.Map.Instance.Reload();
+        }
         [ChatCommand("smith", ServerRoleEnum.Administrator)]
         public static void SmithCommand(WorldClient client, int elementId, int skillType)
         {
-            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Smithmagic,
-               InteractiveTypeEnum.MAGIC_WORKSHOP, (SkillTypeEnum)skillType))
+            var skill = SkillRecord.GetSkill((SkillTypeEnum)skillType);
+
+            if (MapsManager.Instance.AddInteractiveSkill(client.Character.Map, elementId, GenericActionEnum.Smithmagic, (InteractiveTypeEnum)skill.InteractiveTypeId,
+              (SkillTypeEnum)skill.Id))
             {
                 client.Character.Reply("Smith table added element " + elementId);
             }
@@ -335,7 +375,7 @@ namespace Giny.World.Managers.Chat
         public static void AddItemCommand(WorldClient client, short itemId, int quantity)
         {
             client.Character.Inventory.AddItem(itemId, quantity, false);
-            client.Character.OnItemGained(itemId, quantity);
+            client.Character.NotifyItemGained(itemId, quantity);
         }
         [ChatCommand("relative", ServerRoleEnum.Administrator)]
         public static void RelativeMapCommand(WorldClient client)
@@ -404,11 +444,135 @@ namespace Giny.World.Managers.Chat
                 client.Character.Reply("Item set added.");
             }
         }
+        [ChatCommand("restore", ServerRoleEnum.Administrator)]
+        public static void RestoreCharacter(WorldClient client, string targetName)
+        {
+            var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == targetName);
+
+            if (target != null)
+            {
+                foreach (var item in target.Character.Inventory.GetEquipedItems())
+                {
+                    target.Character.Inventory.SetItemPosition(item.UId, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, item.Quantity);
+                }
+
+                target.Character.Stats.ActionPoints.Objects = 0;
+                target.Character.Stats.MovementPoints.Objects = 0;
+                target.Character.Stats.Agility.Objects = 0;
+                target.Character.Stats.AirDamageBonus.Objects = 0;
+                target.Character.Stats.AirReduction.Objects = 0;
+                target.Character.Stats.AirResistPercent.Objects = 0;
+                target.Character.Stats.AllDamagesBonus.Objects = 0;
+                target.Character.Stats.DamagesBonusPercent.Objects = 0;
+                target.Character.Stats.Chance.Objects = 0;
+                target.Character.Stats.CriticalDamageBonus.Objects = 0;
+                target.Character.Stats.CriticalDamageReduction.Objects = 0;
+                target.Character.Stats.CriticalHit.Objects = 0;
+                target.Character.Stats.Initiative.Objects = 0;
+                target.Character.Stats.DodgePAProbability.Objects = 0;
+                target.Character.Stats.DodgePMProbability.Objects = 0;
+                target.Character.Stats.EarthDamageBonus.Objects = 0;
+                target.Character.Stats.EarthReduction.Objects = 0;
+                target.Character.Stats.EarthResistPercent.Objects = 0;
+                target.Character.Stats.FireDamageBonus.Objects = 0;
+                target.Character.Stats.FireReduction.Objects = 0;
+                target.Character.Stats.FireResistPercent.Objects = 0;
+                target.Character.Stats.GlyphBonusPercent.Objects = 0;
+                target.Character.Stats.RuneBonusPercent.Objects = 0;
+                target.Character.Stats.PermanentDamagePercent.Objects = 0;
+                target.Character.Stats.HealBonus.Objects = 0;
+                target.Character.Stats.Intelligence.Objects = 0;
+                target.Character.Stats.NeutralDamageBonus.Objects = 0;
+                target.Character.Stats.NeutralReduction.Objects = 0;
+                target.Character.Stats.NeutralResistPercent.Objects = 0;
+                target.Character.Stats.Prospecting.Objects = 0;
+                target.Character.Stats.PushDamageBonus.Objects = 0;
+                target.Character.Stats.PushDamageReduction.Objects = 0;
+                target.Character.Stats.Range.Objects = 0;
+                target.Character.Stats.Reflect.Objects = 0;
+                target.Character.Stats.Strength.Objects = 0;
+                target.Character.Stats.SummonableCreaturesBoost.Objects = 0;
+                target.Character.Stats.TrapBonus.Objects = 0;
+                target.Character.Stats.TrapBonusPercent.Objects = 0;
+                target.Character.Stats.Vitality.Objects = 0;
+                target.Character.Stats.WaterDamageBonus.Objects = 0;
+                target.Character.Stats.WaterReduction.Objects = 0;
+                target.Character.Stats.WaterResistPercent.Objects = 0;
+                target.Character.Stats.WeaponDamagesBonusPercent.Objects = 0;
+                target.Character.Stats.Wisdom.Objects = 0;
+                target.Character.Stats.TackleBlock.Objects = 0;
+                target.Character.Stats.TackleEvade.Objects = 0;
+                target.Character.Stats.APAttack.Objects = 0;
+                target.Character.Stats.MPAttack.Objects = 0;
+                target.Character.Stats.MeleeDamageDonePercent.Objects = 0;
+                target.Character.Stats.MeleeDamageResistancePercent.Objects = 0;
+                target.Character.Stats.RangedDamageDonePercent.Objects = 0;
+                target.Character.Stats.RangedDamageResistancePercent.Objects = 0;
+                target.Character.Stats.SpellDamageDonePercent.Objects = 0;
+                target.Character.Stats.SpellDamageResistancePercent.Objects = 0;
+                target.Character.Stats.WeaponDamageDonePercent.Objects = 0;
+                target.Character.Stats.WeaponDamageResistancePercent.Objects = 0;
+                target.Character.Stats.WeightBonus.Objects = 0;
+
+                target.Character.RefreshStats();
+            }
+            client.Character.Reply("Target restored.");
+        }
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(8);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
+        }
+
+        [ChatCommand("restoreitem", ServerRoleEnum.Administrator)]
+        public static void RestoreItemCommand(WorldClient client, short itemId)
+        {
+            foreach (var item in CharacterItemRecord.GetCharacterItems())
+            {
+                if (item.GId == itemId)
+                {
+                    item.Effects = item.Record.Effects.Generate();
+                    item.UpdateElement();
+
+                    if (WorldServer.Instance.IsOnline(item.CharacterId) && item is CharacterItemRecord)
+                    {
+                        var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Id == item.CharacterId);
+                        target.Character.Inventory.OnItemModified(item);
+
+                        client.Character.Reply("Update " + item.Record + ". Owner : " + target.Character.Name);
+                    }
+                }
+            }
+
+            foreach (var item in BankItemRecord.GetBankItems())
+            {
+                if (item.GId == itemId)
+                {
+                    item.Effects = item.Record.Effects.Generate();
+                    item.UpdateElement();
+                }
+            }
+
+            foreach (var item in BidShopItemRecord.GetItems())
+            {
+                if (item.GId == itemId)
+                {
+                    item.Effects = item.Record.Effects.Generate();
+                    item.UpdateElement();
+                }
+            }
+
+            foreach (var item in MerchantItemRecord.GetMerchantItems())
+            {
+                if (item.GId == itemId)
+                {
+                    item.Effects = item.Record.Effects.Generate();
+                    item.UpdateElement();
+                }
+            }
+
+            client.Character.Reply("Item restored.");
         }
 
     }

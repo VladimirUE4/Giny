@@ -87,7 +87,6 @@ namespace Giny.InGameLadder
         }
 
 
-
         [ChatCommand("ladder", ServerRoleEnum.Player)]
         public static void LadderCommand(WorldClient client)
         {
@@ -119,7 +118,6 @@ namespace Giny.InGameLadder
 
             this.Look = Record.Look.ActorLook.Clone();
             this.Look.SetBones(1);
-            this.Look.Rescale(1d + ((1d / Rank) * 0.3));
         }
 
         private long m_id;

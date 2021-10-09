@@ -208,6 +208,10 @@ namespace Giny.ORM.IO
             }
             else if (property.PropertyType.IsGenericType)
             {
+                if (element.GetType().Name == "IdolRecord")
+                {
+
+                }
                 List<object> results = new List<object>();
 
                 Type genericType = property.PropertyType.GetGenericTypeDefinition();
@@ -218,7 +222,7 @@ namespace Giny.ORM.IO
 
                     foreach (var v in values)
                     {
-                        results.Add(v);
+                        results.Add(v.ToString().Replace(",","."));
                     }
                     return string.Join(",", results);
                 }

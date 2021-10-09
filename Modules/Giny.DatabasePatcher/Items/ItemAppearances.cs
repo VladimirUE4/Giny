@@ -26,6 +26,7 @@ namespace Giny.DatabasePatcher.Items
             ItemTypeEnum.HAT,
             ItemTypeEnum.CLOAK,
             ItemTypeEnum.MISCELLANEOUS,
+            ItemTypeEnum.SHIELD,
       };
 
         public const string ItemsUrl = "http://www.dofus.tools/myAvatar3/assets/data/Items.ma3";

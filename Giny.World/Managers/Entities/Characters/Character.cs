@@ -23,6 +23,7 @@ using Giny.World.Managers.Fights;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Generic;
 using Giny.World.Managers.Guilds;
+using Giny.World.Managers.Idols;
 using Giny.World.Managers.Items;
 using Giny.World.Managers.Items.Collections;
 using Giny.World.Managers.Maps;
@@ -105,6 +106,11 @@ namespace Giny.World.Managers.Entities.Characters
             get;
             set;
         }
+        public IdolsInventory IdolsInventory
+        {
+            get;
+            private set;
+        }
         public EntityStats Stats
         {
             get
@@ -130,6 +136,11 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public bool HasGuild => Record.GuildId != 0;
 
+        public bool JustCreated
+        {
+            get;
+            set;
+        }
         public WorldClient Client
         {
             get;
@@ -371,13 +382,14 @@ namespace Giny.World.Managers.Entities.Characters
             this.Breed = BreedRecord.GetBreed(record.BreedId);
 
             this.Inventory = new Inventory(this, CharacterItemRecord.GetCharacterItems(Id));
-            this.MerchantItems = new MerchantItemCollection(this, MerchantItemRecord.GetAllMerchantItems(Id));
+            this.MerchantItems = new MerchantItemCollection(this, MerchantItemRecord.GetMerchantItems(Id));
             this.BankItems = new BankItemCollection(this, BankItemRecord.GetBankItems(Client.Account.Id));
             this.GuestedParties = new List<Party>();
             this.GeneralShortcutBar = new GeneralShortcutBar(this);
             this.SpellShortcutBar = new SpellShortcutBar(this);
             this.HumanOptions = new List<CharacterHumanOption>();
             this.SkillsAllowed = SkillsManager.Instance.GetAllowedSkills(this);
+            this.IdolsInventory = new IdolsInventory(this);
             this.Collecting = false;
         }
 
@@ -1002,15 +1014,39 @@ namespace Giny.World.Managers.Entities.Characters
             }
         }
 
-        public void OnItemGained(short gid, int quantity)
+        public void OnItemAdded(CharacterItemRecord item)
+        {
+            if (item.Record.TypeEnum == ItemTypeEnum.IDOL)
+            {
+                IdolsInventory.Update(this);
+            }
+
+            if (HasParty && Party.Leader == this)
+            {
+                Party.IdolsInventory.Update(this);
+            }
+        }
+        public void OnItemRemoved(CharacterItemRecord item)
+        {
+            if (item.Record.TypeEnum == ItemTypeEnum.IDOL)
+            {
+                IdolsInventory.Update(this);
+            }
+
+            if (HasParty && Party.Leader == this)
+            {
+                Party.IdolsInventory.Update(this);
+            }
+        }
+        public void NotifyItemGained(short gid, int quantity)
         {
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 21, new object[] { quantity, gid });
         }
-        public void OnItemSelled(short gid, int quantity, long price)
+        public void NotifyItemSelled(short gid, int quantity, long price)
         {
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 65, new object[] { price, string.Empty, gid, quantity });
         }
-        public void OnItemLost(short gid, int quantity)
+        public void NotifyItemLost(short gid, int quantity)
         {
             this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 22, new object[] { quantity, gid });
         }
@@ -1070,8 +1106,10 @@ namespace Giny.World.Managers.Entities.Characters
         }
         private void OnConnected()
         {
+            this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 89, new string[0]); // not only when just created in th
+
             this.Client.Send(new AlmanachCalendarDateMessage(1)); // for monsters!
-            this.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 89, new string[0]);
+
             this.Reply(ConfigFile.Instance.WelcomeMessage, Color.CornflowerBlue);
             CheckSoldItems();
             Guild?.OnConnected(this);
@@ -1116,9 +1154,10 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void OnDisconnected()
         {
+            Record.UpdateElement();
+
             Record.InGameContext = false;
             Guild?.OnDisconnected(this);
-            Record.UpdateElement();
 
             if (Dialog != null)
                 Dialog.Close();
@@ -1493,11 +1532,11 @@ namespace Giny.World.Managers.Entities.Characters
                 return false;
             }
 
-            if (!Map.Position.AllowHumanVendor)
-            {
-                TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 237);
-                return false;
-            }
+            /*  if (!Map.Position.AllowHumanVendor)
+              {
+                  TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 237);
+                  return false;
+              } */
 
             if (Map.Instance.IsMerchantLimitReached())
             {
@@ -1569,6 +1608,74 @@ namespace Giny.World.Managers.Entities.Characters
             };
         }
 
+        public void RefreshIdols()
+        {
+            short[] chosenIdols = IdolsInventory.GetActiveIdols().Select(x => (short)x.Id).ToArray();
+
+            short[] partyChosenIdols = new short[0];
+
+            PartyIdol[] partyIdols = new PartyIdol[0];
+
+            if (this.HasParty)
+            {
+                partyChosenIdols = Party.IdolsInventory.GetActiveIdols().Select(x => (short)x.Id).ToArray();
+                partyIdols = Party.IdolsInventory.GetAllIdols().Select(x => x.GetPartyIdol(this.Id)).ToArray();
+            }
+
+            this.Client.Send(new IdolListMessage()
+            {
+                chosenIdols = chosenIdols,
+                partyChosenIdols = partyChosenIdols,
+                partyIdols = partyIdols,
+            });
+        }
+        public void SelectIdol(short idolId, bool activate, bool party)
+        {
+            if (Fighting && Fighter.Fight.Started)
+            {
+                return;
+            }
+
+            if (party)
+            {
+                if (HasParty && Party.Leader == this)
+                {
+                    if (Party.IdolsInventory.Select(idolId, activate))
+                    {
+                        this.Client.Send(new IdolSelectedMessage((short)idolId, activate, party));
+
+                        foreach (var member in Party.Members.Values)
+                        {
+                            member.RefreshIdols();
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (IdolsInventory.Select(idolId, activate))
+                {
+                    this.Client.Send(new IdolSelectedMessage((short)idolId, activate, party));
+                }
+            }
+
+            if (Fighting)
+            {
+                Fighter.Fight.Send(new IdolFightPreparationUpdateMessage()
+                {
+                    idols = IdolsInventory.GetActiveIdols().Select(x => x.GetIdol()).ToArray(),
+                    idolSource = 0,
+                });
+            }
+
+
+
+
+        }
 
         public PartyInvitationMemberInformations GetPartyInvitationMemberInformations()
         {

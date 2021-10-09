@@ -37,7 +37,7 @@ namespace Giny.DatabasePatcher.Maps
                 {
                     if (ZaapiGfxIds.Contains(element.GfxId) && element.IsInMap())
                     {
-                        if (!InteractiveSkillRecord.Exist(element.Identifier))
+                        if (!InteractiveSkillRecord.ExistAndHandled(element.Identifier))
                         {
                             TeleportersManager.Instance.AddDestination(
                             TeleporterTypeEnum.TELEPORTER_SUBWAY,
@@ -52,7 +52,7 @@ namespace Giny.DatabasePatcher.Maps
 
                     if (element.BonesId == ZaapBones && element.IsInMap())
                     {
-                        if (!InteractiveSkillRecord.Exist(element.Identifier))
+                        if (!InteractiveSkillRecord.ExistAndHandled(element.Identifier))
                         {
                             TeleportersManager.Instance.AddDestination(TeleporterTypeEnum.TELEPORTER_ZAAP,
                             InteractiveTypeEnum.ZAAP,

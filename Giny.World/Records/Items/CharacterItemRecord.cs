@@ -79,6 +79,10 @@ namespace Giny.World.Records.Items
         {
             return CharactersItems.Values.Where(x => x.CharacterId == characterId);
         }
+        public static IEnumerable<CharacterItemRecord> GetCharacterItems()
+        {
+            return CharactersItems.Values;
+        }
         public static long GetCharactersItemsCount()
         {
             return CharactersItems.Count;

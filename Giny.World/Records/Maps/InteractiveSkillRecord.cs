@@ -36,17 +36,20 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
+        [Update]
         public GenericActionEnum ActionIdentifier
         {
             get;
             set;
         }
+        [Update]
         public InteractiveTypeEnum Type
         {
             get;
             set;
         }
-        public SkillTypeEnum SkillEnum
+        [Update]
+        public SkillTypeEnum SkillId
         {
             get;
             set;
@@ -57,18 +60,19 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
+        [Update]
         public string Param1
         {
             get;
             set;
         }
-
+        [Update]
         public string Param2
         {
             get;
             set;
         }
-
+        [Update]
         public string Param3
         {
             get;
@@ -95,6 +99,10 @@ namespace Giny.World.Records.Maps
         {
             return InteractiveSkills.Any(x => x.Value.Identifier == identifier);
         }
+        public static bool ExistAndHandled(int identifier)
+        {
+            return InteractiveSkills.Any(x => x.Value.Identifier == identifier && x.Value.ActionIdentifier != GenericActionEnum.Unhandled);
+        }
         public static InteractiveSkillRecord GetInteractiveSkill(long id)
         {
             return InteractiveSkills.Values.FirstOrDefault(x => x.Identifier == id);
@@ -105,12 +113,16 @@ namespace Giny.World.Records.Maps
         {
             foreach (var skill in InteractiveSkills.Values)
             {
-                skill.Record = SkillRecord.GetSkill(skill.SkillEnum);
+                skill.Record = SkillRecord.GetSkill(skill.SkillId);
             }
         }
         public static IEnumerable<InteractiveSkillRecord> GetInteractiveSkills()
         {
             return InteractiveSkills.Values;
+        }
+        public override string ToString()
+        {
+            return "{" + Identifier + "} " + ActionIdentifier;
         }
 
     }

@@ -133,6 +133,9 @@ namespace Giny.World.Records.Spells
             Spells.TryGetValue(spellId, out result);
             return result;
         }
-
+        public static SpellRecord GetSpellRecord(string name)
+        {
+            return Spells.Values.FirstOrDefault(x => x.Name == name);
+        }
     }
 }

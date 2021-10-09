@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Chat
         {
             if (client.Character.HasParty)
             {
-                client.Character.Party.SendMembers(message);
+                client.Character.Party.Send(message);
             }
         }
         [ChatChannelHandler(ChatActivableChannelsEnum.CHANNEL_ADMIN)]

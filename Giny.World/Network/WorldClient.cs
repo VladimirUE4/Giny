@@ -24,6 +24,7 @@ using Giny.World.Managers.Items;
 using Giny.World.Records.Items;
 using Giny.World.Managers.Items.Collections;
 using Giny.Core.DesignPattern;
+using Giny.World.Logs;
 
 namespace Giny.World.Network
 {
@@ -69,7 +70,7 @@ namespace Giny.World.Network
         {
 
         }
-    
+
         public override void OnConnected()
         {
             throw new NotImplementedException();
@@ -77,7 +78,14 @@ namespace Giny.World.Network
 
         public override void OnConnectionClosed()
         {
-            OnDisconnected();
+            try
+            {
+                OnDisconnected();
+            }
+            catch (Exception ex)
+            {
+                Logger.Write("Unable to disconnect World Client : " + ex, Channels.Warning);
+            }
         }
 
         public override void OnFailToConnect(Exception ex)
@@ -96,6 +104,19 @@ namespace Giny.World.Network
         {
             if (ConfigFile.Instance.LogProtocol)
                 Logger.Write("(World) Send " + result.AsyncState);
+        }
+
+        public override void OnMessageUnhandled(NetworkMessage message)
+        {
+            if (ConfigFile.Instance.LogProtocol)
+                Logger.Write(string.Format("No Handler: ({0}) {1}", message.MessageId, message.ToString()), Channels.Warning);
+
+        }
+
+        public override void OnHandlingError(NetworkMessage message, Delegate handler, Exception ex)
+        {
+            Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Method.Name, ex.ToString()), Channels.Warning);
+            LogManager.Instance.OnError(this, message, ex);
         }
 
         public void SendCharactersList()
@@ -117,12 +138,11 @@ namespace Giny.World.Network
 
         public override void OnDisconnected()
         {
-            DisposeWorldClient();
-            Logger.Write("(World) Client disconnected.");
-            WorldServer.Instance.Clients.Remove(this);
+            WorldServer.Instance.RemoveClient(this);
+            Dispose();
         }
 
-        private void DisposeWorldClient()
+        private void Dispose()
         {
             Character?.OnDisconnected();
         }
@@ -139,6 +159,8 @@ namespace Giny.World.Network
         [WIP]
         public void OnAccountReceived()
         {
+            Send(new AccountInformationsUpdateMessage(DateTime.Now.AddYears(3).GetUnixTimeStampDouble()));
+
             LoadWorldAccount();
             SendBasicTime();
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
@@ -193,5 +215,7 @@ namespace Giny.World.Network
             var offset = (short)TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).TotalMinutes;
             Send(new BasicTimeMessage(DateTime.Now.GetUnixTimeStampLong(), offset));
         }
+
+
     }
 }

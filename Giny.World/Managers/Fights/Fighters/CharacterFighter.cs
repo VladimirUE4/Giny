@@ -17,6 +17,7 @@ using Giny.World.Managers.Fights.Results;
 using Giny.World.Managers.Fights.Sequences;
 using Giny.World.Managers.Fights.Stats;
 using Giny.World.Managers.Fights.Synchronisation;
+using Giny.World.Managers.Idols;
 using Giny.World.Managers.Items;
 using Giny.World.Managers.Items.Collections;
 using Giny.World.Managers.Spells;
@@ -147,6 +148,8 @@ namespace Giny.World.Managers.Fights.Fighters
                 this.CastSpell(cast);
             }
 
+          
+
             switch (Breed)
             {
                 case BreedEnum.Zobal:
@@ -255,7 +258,6 @@ namespace Giny.World.Managers.Fights.Fighters
 
             short weaponGenericId = (short)(HasWeapon ? WeaponRecord.Id : 0);
 
-
             using (Fight.SequenceManager.StartSequence(SequenceTypeEnum.SEQUENCE_WEAPON))
             {
                 cast.Critical = RollCriticalDice(cast.Spell.Level);
@@ -267,6 +269,8 @@ namespace Giny.World.Managers.Fights.Fighters
                     OnSpellCastFailed(cast);
                     return false;
                 }
+
+                UpdateInvisibility(handler);
 
                 Fight.Send(new GameActionFightCloseCombatMessage()
                 {
@@ -328,6 +332,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 status = Character.GetPlayerStatus(),
             };
         }
+
         public override void OnMoveFailed(MovementFailedReason reason)
         {
             if (reason == MovementFailedReason.Obstacle)

@@ -19,6 +19,12 @@ namespace Giny.DatabasePatcher.Monsters
             1247, // Leprechaun
             793, // Bouftou d'Hallouine
             494, // Poutch Ingball
+            3592, // Poutch
+            3590, // Poutch
+            3591, // Poutch
+            3589, // Poutch d'Ombre
+            3588, // Poutch Vil smisse
+            3244, // Hyperscampe, Sufokia
         };
 
         public static void Patch()

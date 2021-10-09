@@ -65,36 +65,24 @@ namespace Giny.World.Managers.Maps.Teleporters
 
         public void AddDestination(TeleporterTypeEnum teleporterType, InteractiveTypeEnum interactiveType, GenericActionEnum genericAction, MapRecord targetMap, InteractiveElementRecord element, int zoneId)
         {
-            InteractiveSkillRecord interactiveSkill = new InteractiveSkillRecord()
-            {
-                ActionIdentifier = genericAction,
-                Criteria = string.Empty,
-                Id = InteractiveSkillRecord.PopNextId(),
-                Identifier = element.Identifier,
-                MapId = targetMap.Id,
-                Param1 = zoneId.ToString(),
-                Param2 = string.Empty,
-                Param3 = string.Empty,
-                SkillEnum = SkillTypeEnum.USE114,
-                Record = SkillRecord.GetSkill(SkillTypeEnum.USE114),
-                Type = interactiveType,
-            };
-
-            element.Skill = interactiveSkill;
-
-            interactiveSkill.AddInstantElement();
-
-            targetMap.Instance.Reload();
-
             var destinations = m_destinations[teleporterType];
+
+            if (destinations[zoneId].Contains(targetMap.Id))
+            {
+                return;
+            }
+
+            MapsManager.Instance.AddInteractiveSkill(targetMap, element.Identifier, genericAction,
+                interactiveType, SkillTypeEnum.USE114, zoneId.ToString());
+
 
             if (!destinations.ContainsKey(zoneId))
             {
-                destinations.Add(zoneId, new List<long>() { interactiveSkill.MapId });
+                destinations.Add(zoneId, new List<long>() { targetMap.Id });
             }
             else
             {
-                destinations[zoneId].Add(interactiveSkill.MapId);
+                destinations[zoneId].Add(targetMap.Id);
             }
 
         }

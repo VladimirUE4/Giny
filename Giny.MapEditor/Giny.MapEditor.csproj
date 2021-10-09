@@ -194,10 +194,6 @@
       <Project>{c6182b67-9d36-4e64-8ba9-9e186f818667}</Project>
       <Name>Giny.ORM</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Giny.Wpf\Giny.Wpf.csproj">
-      <Project>{2c244c11-c940-4a21-baef-7d1e18dff67d}</Project>
-      <Name>Giny.Wpf</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

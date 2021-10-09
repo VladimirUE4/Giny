@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace Giny.World.Records.Maps
 {
     [Table("maps")]
-    public class MapRecord : ITable 
+    public class MapRecord : ITable
     {
         [Container]
         private static ConcurrentDictionary<long, MapRecord> Maps = new ConcurrentDictionary<long, MapRecord>();
@@ -87,25 +87,25 @@ namespace Giny.World.Records.Maps
             set;
         }
         [Ignore]
-        public CellRecord[] WalkableCells
+        public List<CellRecord> WalkableCells
         {
             get;
             set;
         }
         [Ignore]
-        public CellRecord[] RightChange
+        public List<CellRecord> RightChange
         {
             get;
             set;
         }
         [Ignore]
-        public CellRecord[] LeftChange
+        public List<CellRecord> LeftChange
         {
             get;
             set;
         }
         [Ignore]
-        public CellRecord[] BottomChange
+        public List<CellRecord> BottomChange
         {
             get;
             set;
@@ -113,19 +113,19 @@ namespace Giny.World.Records.Maps
 
 
         [Ignore]
-        public CellRecord[] TopChange
+        public List<CellRecord> TopChange
         {
             get;
             set;
         }
         [Ignore]
-        public CellRecord[] BlueCells
+        public List<CellRecord> BlueCells
         {
             get;
             set;
         }
         [Ignore]
-        public CellRecord[] RedCells
+        public List<CellRecord> RedCells
         {
             get;
             set;
@@ -144,12 +144,12 @@ namespace Giny.World.Records.Maps
         }
         [Ignore]
         public bool CanSpawnMonsters =>
-            !IsDungeonEntrance 
+            !IsDungeonEntrance
             && (Position.AllowMonsterRespawn)
             && !IsDungeonMap
             && !HasZaap()
             && Cells.All(x => !x.FarmCell)
-            && (BlueCells.Length > 0 && RedCells.Length > 0);
+            && (BlueCells.Count > 0 && RedCells.Count > 0);
 
         [Ignore]
         public bool IsDungeonMap => Dungeon != null;
@@ -205,14 +205,14 @@ namespace Giny.World.Records.Maps
         }
         public void ReloadMembers()
         {
-            this.WalkableCells = this.Cells.Where(x => x.Walkable).ToArray();
-            this.RightChange = this.Cells.Where(x => x.IsRightChange).ToArray();
-            this.LeftChange = this.Cells.Where(x => x.IsLeftChange).ToArray();
-            this.TopChange = this.Cells.Where(x => x.IsTopChange).ToArray();
-            this.BottomChange = this.Cells.Where(x => x.IsBottomChange).ToArray();
+            this.WalkableCells = this.Cells.Where(x => x.Walkable).ToList();
+            this.RightChange = this.Cells.Where(x => x.IsRightChange).ToList();
+            this.LeftChange = this.Cells.Where(x => x.IsLeftChange).ToList();
+            this.TopChange = this.Cells.Where(x => x.IsTopChange).ToList();
+            this.BottomChange = this.Cells.Where(x => x.IsBottomChange).ToList();
 
-            this.BlueCells = this.Cells.Where(x => x.Blue).ToArray();
-            this.RedCells = this.Cells.Where(x => x.Red).ToArray();
+            this.BlueCells = this.Cells.Where(x => x.Blue).ToList();
+            this.RedCells = this.Cells.Where(x => x.Red).ToList();
 
             this.Position = MapPositionRecord.GetMapPosition(this.Id);
 
@@ -228,20 +228,26 @@ namespace Giny.World.Records.Maps
 
             this.Dungeon = DungeonRecord.GetDungeonRecord(Id);
         }
-        public CellRecord[] GetMapChangeCells(MapScrollEnum scrollType)
+        public IEnumerable<CellRecord> GetMapChangeCells(MapScrollEnum scrollType)
         {
+            IEnumerable<CellRecord> result = new List<CellRecord>();
+
             switch (scrollType)
             {
                 case MapScrollEnum.TOP:
-                    return TopChange;
+                    result = TopChange;
+                    break;
                 case MapScrollEnum.LEFT:
-                    return LeftChange;
+                    result = LeftChange;
+                    break;
                 case MapScrollEnum.BOTTOM:
-                    return BottomChange;
+                    result = BottomChange;
+                    break;
                 case MapScrollEnum.RIGHT:
-                    return RightChange;
+                    result = RightChange;
+                    break;
             }
-            return new CellRecord[0];
+            return result.Where(x => x.Point.IsInMap());
         }
         public CellRecord GetCell(int id)
         {
@@ -305,14 +311,14 @@ namespace Giny.World.Records.Maps
         }
         public static IEnumerable<MapRecord> GetMaps(Point point)
         {
-            return Maps.Values.Where(x => x.Position.Point == point);
+            return MapPositionRecord.GetMapPositions().Where(x => x.Point == point).Select(x => GetMap(x.Id));
         }
         public static IEnumerable<MapRecord> GetMaps()
         {
             return Maps.Values;
         }
-        
-        public static InteractiveElementRecord[] GetElementsByBonesId(int bonesId)
+
+        public static InteractiveElementRecord[] GetElementsByBonesId(List<int> bonesIds)
         {
             List<InteractiveElementRecord> records = new List<InteractiveElementRecord>();
 
@@ -320,7 +326,7 @@ namespace Giny.World.Records.Maps
             {
                 foreach (var element in map.Value.Elements)
                 {
-                    if (element.BonesId == bonesId)
+                    if (bonesIds.Contains(element.BonesId))
                     {
                         records.Add(element);
                     }
@@ -329,7 +335,7 @@ namespace Giny.World.Records.Maps
 
             return records.ToArray();
         }
-       
+
     }
     [ProtoContract]
     public class InteractiveElementRecord

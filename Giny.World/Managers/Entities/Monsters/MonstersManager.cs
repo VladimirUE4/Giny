@@ -17,17 +17,21 @@ namespace Giny.World.Managers.Monsters
 {
     public class MonstersManager : Singleton<MonstersManager>
     {
-        public const sbyte MAX_MONSTER_GROUP_PER_MAP = 5;
+        public const sbyte MaxGroupPerMap = 5;
 
-        public const int SPAWNING_INTERVAL = 5;
+        public const int SpawningInterval = 5;
 
         public const int MonsterSpawningPoolInterval = 5;
+
+        private const int MaximumSimilarMonsterPerGroup = 3;
+
+        private const int MaxMonstersPerGroup = 8;
 
         public void SpawnMonsterGroups(MapRecord map, AsyncRandom random)
         {
             if (map.Subarea.Monsters.Length > 0)
             {
-                for (sbyte groupId = 0; groupId < random.Next(1, MAX_MONSTER_GROUP_PER_MAP + 1); groupId++)
+                for (sbyte groupId = 0; groupId < random.Next(1, MaxGroupPerMap + 1); groupId++)
                 {
                     SpawnMonsterGroup(map, random);
                 }
@@ -54,12 +58,17 @@ namespace Giny.World.Managers.Monsters
             MonsterGroup group = new MonsterGroup(instance.Record, instance.FindMonsterGroupCell().Id);
             group.Direction = Entity.RandomDirection4D(random);
 
-            if (instance.Record.RedCells.Length == 0)
+            if (instance.Record.RedCells.Count == 0)
             {
                 return;
             }
 
-            int maxMonsterCount = instance.Record.RedCells.Length + 1;
+            int maxMonsterCount = instance.Record.RedCells.Count + 1;
+
+            if (maxMonsterCount > MaxMonstersPerGroup)
+            {
+                maxMonsterCount = MaxMonstersPerGroup;
+            }
 
             int monsterCount = random.Next(1, maxMonsterCount);
 
@@ -78,9 +87,19 @@ namespace Giny.World.Managers.Monsters
                 if (monsterSpawn.Probability > num)
                 {
                     MonsterRecord template = MonsterRecord.GetMonsterRecord(monsterSpawn.MonsterId);
-                    Monster monster = new Monster(template, group.GetCell());
-                    group.AddMonster(monster);
-                    num2++;
+
+                    var count = random.Next(1, MaximumSimilarMonsterPerGroup + 1);
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (num2 == monsterCount)
+                        {
+                            break;
+                        }
+                        Monster monster = new Monster(template, group.GetCell());
+                        group.AddMonster(monster);
+                        num2++;
+                    }
                 }
             }
 

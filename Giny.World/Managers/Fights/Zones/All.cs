@@ -18,7 +18,7 @@ namespace Giny.World.Managers.Fights.Zones
 
         public override CellRecord[] GetCells(CellRecord centerCell, CellRecord casterCell, MapRecord map)
         {
-            return map.WalkableCells;
+            return map.WalkableCells.ToArray();
         }
     }
 }

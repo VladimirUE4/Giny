@@ -22,7 +22,7 @@ namespace Giny.World.Web
             if (client != null)
             {
                 CharacterItemRecord item = client.Character.Inventory.AddItem((short)tokenId, tokenCount);
-                client.Character.OnItemGained((short)tokenId, tokenCount);
+                client.Character.NotifyItemGained((short)tokenId, tokenCount);
                 client.Character.DisplayNotification(string.Format(Message, tokenCount, item.Record.Name));
                 return true;
             }

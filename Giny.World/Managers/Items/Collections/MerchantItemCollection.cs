@@ -109,7 +109,7 @@ namespace Giny.World.Managers.Items.Collections
 
             if (quantity < 0 && merchantItem != null && merchantItem.Quantity >= Math.Abs(quantity))
             {
-                Character.Inventory.AddItem(merchantItem.ToCharacterItemRecord(Character.Id));
+                Character.Inventory.AddItem(merchantItem.ToCharacterItemRecord(Character.Id), Math.Abs(quantity));
                 Character.MerchantItems.RemoveItem(merchantItem, -quantity);
             }
             else

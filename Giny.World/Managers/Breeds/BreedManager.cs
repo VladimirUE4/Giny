@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Breeds
                 PlayableBreedEnum.Cra,
                 PlayableBreedEnum.Sadida,
                 PlayableBreedEnum.Sacrieur,
-             //   PlayableBreedEnum.Pandawa,
+                PlayableBreedEnum.Pandawa,
               //  PlayableBreedEnum.Roublard,
                 PlayableBreedEnum.Zobal,
               //  PlayableBreedEnum.Steamer,

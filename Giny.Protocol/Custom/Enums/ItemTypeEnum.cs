@@ -201,5 +201,6 @@ namespace Giny.Protocol.Custom.Enums
         EMOTE_POTION = 214,
         ARCHIPELAGO_OF_SCALES = 215,
         PURSE_OF_KAMAS = 216,
+        PRYSMARADITE = 217,
     }
 }

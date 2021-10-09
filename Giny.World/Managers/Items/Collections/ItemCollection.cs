@@ -204,15 +204,33 @@ namespace Giny.World.Managers.Items.Collections
             m_items.Clear();
             OnItemsRemoved(removedItems);
         }
-        public void RemoveItem(int uid)
+        public bool RemoveItem(int uid)
         {
             T item = GetItem(uid);
-            RemoveItem(item, item.Quantity);
+
+            if (item != null)
+            {
+                RemoveItem(item, item.Quantity);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void RemoveItem(int uid, int quantity)
+        public bool RemoveItem(int uid, int quantity)
         {
             T item = GetItem(uid);
-            RemoveItem(item, quantity);
+
+            if (item != null && item.Quantity >= quantity)
+            {
+                RemoveItem(item, quantity);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool Contains(T item)
         {

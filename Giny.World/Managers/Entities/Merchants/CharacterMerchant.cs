@@ -48,7 +48,7 @@ namespace Giny.World.Managers.Entities.Merchants
             Look.RemoveAura();
             Look.SubEntities.Add(new ServerSubentityLook(SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MERCHANT_BAG, 0, bagLook));
 
-            IEnumerable<MerchantItemRecord> items = MerchantItemRecord.GetAllMerchantItems(this.Record.CharacterId);
+            IEnumerable<MerchantItemRecord> items = MerchantItemRecord.GetMerchantItems(this.Record.CharacterId);
             this.Items = new MerchantSellerItemCollection(this, items);
             this.Exchanges = new SynchronizedCollection<MerchantSellerExchange>();
         }

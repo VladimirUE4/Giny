@@ -10,23 +10,22 @@ namespace Giny.IO.SWL
 {
     public class SwlFile
     {
-        private string FileName
+        public byte[] Swf
         {
             get;
-            set;
-        }
-        private byte[] Swf
-        {
-            get;
-            set;
+            private set;
         }
 
-        public SwlFile(string path)
+        public string[] Classes
         {
-            BigEndianReader reader = new BigEndianReader(File.ReadAllBytes(path));
-            FileName = Path.GetFileNameWithoutExtension(path);
+            get;
+            private set;
+        }
+
+        public SwlFile(byte[] fileContent)
+        {
+            BigEndianReader reader = new BigEndianReader(fileContent);
             Deserialize(reader);
-
         }
         private void Deserialize(BigEndianReader reader)
         {
@@ -44,6 +43,8 @@ namespace Giny.IO.SWL
             {
                 classes.Add(reader.ReadUTF());
             }
+
+            this.Classes = classes.ToArray();
 
             Swf = reader.ReadBytes((int)reader.BytesAvailable);
         }

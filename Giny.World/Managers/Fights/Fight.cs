@@ -10,6 +10,7 @@ using Giny.World.Api;
 using Giny.World.Managers.Actions;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Buffs;
+using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Cast.Units;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Marks;
@@ -19,7 +20,10 @@ using Giny.World.Managers.Fights.Synchronisation;
 using Giny.World.Managers.Fights.Timeline;
 using Giny.World.Managers.Fights.Triggers;
 using Giny.World.Managers.Fights.Zones;
+using Giny.World.Managers.Idols;
 using Giny.World.Managers.Maps;
+using Giny.World.Network;
+using Giny.World.Records.Idols;
 using Giny.World.Records.Maps;
 using System;
 using System.Collections.Generic;
@@ -30,7 +34,7 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights
 {
-    public abstract class Fight
+    public abstract class Fight : INetworkEntity
     {
         public const int TurnTime = 30;
 
@@ -190,6 +194,11 @@ namespace Giny.World.Managers.Fights
             private set;
         }
 
+        protected IdolsInventory Idols
+        {
+            get;
+            private set;
+        }
         #region Events
 
         public event Action<Fight, Fighter> TurnStarted;
@@ -252,10 +261,7 @@ namespace Giny.World.Managers.Fights
 
             return Timeline.Index;
         }
-        public Idol[] GetIdols()
-        {
-            return new Idol[0];
-        }
+
         public Fight(Character origin, int id, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
         {
             this.Id = id;
@@ -316,7 +322,7 @@ namespace Giny.World.Managers.Fights
             if (RedTeam.Type == teamType)
                 return RedTeam;
 
-            throw new Exception("Unable to find team (" + teamType + ")");
+            return null;
         }
         public void UpdateFightersPlacementDirection()
         {
@@ -365,13 +371,33 @@ namespace Giny.World.Managers.Fights
             if (ShowBlades)
             {
                 ShowBladesOnMap();
-                this.Send(new IdolFightPreparationUpdateMessage(0, GetIdols()));
             }
+
+            OnPlacementStarted();
 
             FightEventApi.PlacementStarted(this);
             Origin.OnInitiateFight(this);
 
         }
+
+        protected virtual void OnPlacementStarted()
+        {
+            if (Origin.HasParty)
+            {
+                Idols = Origin.Party.IdolsInventory;
+            }
+            else
+            {
+                Idols = Origin.IdolsInventory;
+
+            }
+            this.Send(new IdolFightPreparationUpdateMessage()
+            {
+                idols = Idols.GetActiveIdols().Select(x => x.GetIdol()).ToArray(),
+                idolSource = 0,
+            });
+        }
+
         private void ShowBladesOnMap()
         {
             this.FindBladesPlacement();
@@ -437,25 +463,64 @@ namespace Giny.World.Managers.Fights
 
             this.Timeline.OrderLine();
 
-            this.Send(GetGameFightStartMessage());
+            this.Send(new GameFightStartMessage(GetIdols()));
 
             this.UpdateTimeLine();
 
             this.Synchronize();
 
-            UpdateRound();
+            this.UpdateRound();
 
             foreach (var fighter in GetFighters())
             {
                 fighter.OnFightStarted();
             }
 
+            this.CastIdols();
+
             this.OnFightStarted();
 
             Synchronizer = Synchronizer.RequestCheck(SynchronizerRole.StartFight, this, StartFight, LagAndStartFight, SynchronizerTimout * 1000);
 
         }
+
+        public Idol[] GetIdols()
+        {
+            return Idols.GetActiveIdols().Select(x => x.GetIdol()).ToArray();
+        }
+
+        private void CastIdols()
+        {
+            var targetTeam = this.GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER);
+
+            if (targetTeam == null)
+            {
+                return;
+            }
+
+            var targetFighters = targetTeam.GetFighters<MonsterFighter>();
+
+            foreach (var idol in Idols.GetActiveIdols())
+            {
+                if (targetFighters.Any(x => idol.IncompatibleMonsters.Contains((int)x.Record.Id)))
+                {
+                    continue;
+                }
+
+                foreach (var enemy in targetFighters)
+                {
+                    SpellCast cast = new SpellCast(enemy, idol.Spell, enemy.Cell);
+                    cast.Target = enemy;
+                    cast.Force = true;
+                    enemy.CastSpell(cast);
+                }
+
+            }
+        }
+
         public abstract void OnFightStarted();
+
+
 
         private void StartFight()
         {
@@ -879,10 +944,9 @@ namespace Giny.World.Managers.Fights
         {
             fighter.Send(new GameFightSynchronizeMessage(GetFighters().Select(x => x.GetFightFighterInformations(fighter)).ToArray()));
         }
-        public virtual GameFightStartMessage GetGameFightStartMessage()
-        {
-            return new GameFightStartMessage(GetIdols());
-        }
+
+
+
 
         public void UpdateTimeLine()
         {

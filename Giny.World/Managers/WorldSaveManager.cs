@@ -8,8 +8,10 @@ using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.World.Network;
 using Giny.World.Records;
+using Giny.World.Records.Characters;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -37,20 +39,23 @@ namespace Giny.World.Managers
             {
                 if (WorldServer.Instance.Status == ServerStatusEnum.ONLINE)
                 {
+                    Stopwatch stopwatch = Stopwatch.StartNew();
                     WorldServer.Instance.SetServerStatus(ServerStatusEnum.SAVING);
 
-                    WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
+                    //   WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 164));
 
-                    foreach (var client in WorldServer.Instance.GetOnlineClients())
+                    foreach (var client in WorldServer.Instance.Clients.Where(x => x.Character != null))
                     {
                         client.Character.Record.UpdateElement();
                     }
 
                     CyclicSaveTask.Instance.Save();
 
-                    WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
+                    //    WorldServer.Instance.Foreach(x => x.Character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 165));
 
                     WorldServer.Instance.SetServerStatus(ServerStatusEnum.ONLINE);
+
+                    Logger.WriteColor2("World server saved in " + Math.Round(stopwatch.Elapsed.TotalSeconds, 2) + "s");
                 }
                 else
                 {
@@ -58,7 +63,10 @@ namespace Giny.World.Managers
                 }
             }));
 
+
             thread.Start();
+
+
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using Giny.Core;
 using Giny.DatabasePatcher.Experience;
+using Giny.DatabasePatcher.Idols;
 using Giny.DatabasePatcher.Items;
 using Giny.DatabasePatcher.Maps;
 using Giny.DatabasePatcher.Monsters;
@@ -26,10 +27,11 @@ namespace Giny.DatabasePatcher
         {
             Experiences.Patch();
             ItemAppearances.Patch();
+            IdolsSpell.Patch();
             LivingObjects.Patch();
-            MapPlacements.Patch();
+          //  MapPlacements.Patch();
             SkillBones.Patch();
-            StatedElements.Patch();
+            InteractiveElements.Patch();
             MonsterKamas.Patch();
             MonsterSpawns.Patch();
             SpellCategories.Patch();

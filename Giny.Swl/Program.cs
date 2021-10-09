@@ -21,6 +21,7 @@ namespace Giny.Swl
 
         static void Main(string[] args)
         {
+
             if (!Directory.Exists(OutputDirectory))
             {
                 Directory.CreateDirectory(OutputDirectory);
@@ -33,7 +34,7 @@ namespace Giny.Swl
 
             foreach (var file in Directory.GetFiles(InputDirectory))
             {
-                SwlFile swl = new SwlFile(file);
+                SwlFile swl = new SwlFile(File.ReadAllBytes(file));
                 Console.WriteLine(Path.GetFileName(file));
                 swl.ExtractSwf(OutputDirectory + "/" + Path.GetFileNameWithoutExtension(file) + ".swf");
             }

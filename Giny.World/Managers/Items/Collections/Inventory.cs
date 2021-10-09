@@ -51,12 +51,14 @@ namespace Giny.World.Managers.Items.Collections
         {
             get
             {
+                return 0;
+                /*
                 int currWeight = 0;
                 foreach (CharacterItemRecord item in GetItems().ToList())
                 {
                     currWeight += ItemRecord.GetItem(item.GId).RealWeight * item.Quantity;
                 }
-                return currWeight;
+                return currWeight; */
             }
         }
 
@@ -73,7 +75,8 @@ namespace Giny.World.Managers.Items.Collections
         {
             get
             {
-                return StatsFormulas.Instance.TotalWeight(Character);
+                return 1000;
+                //return StatsFormulas.Instance.TotalWeight(Character);
             }
         }
 
@@ -130,6 +133,7 @@ namespace Giny.World.Managers.Items.Collections
             {
                 item.UId = ItemsManager.Instance.PopItemUID();
                 item.AddElement();
+                Character.OnItemAdded(item);
             }
             Character.Client.Send(new ObjectsAddedMessage(Array.ConvertAll(items.ToArray(), x => x.GetObjectItem())));
             RefreshWeight();
@@ -141,6 +145,7 @@ namespace Giny.World.Managers.Items.Collections
             Character.Client.Send(new ObjectDeletedMessage(item.UId));
             Character.GeneralShortcutBar.OnItemRemoved(item);
             RefreshWeight();
+            Character.OnItemAdded(item);
         }
 
         [WIP]
@@ -204,9 +209,7 @@ namespace Giny.World.Managers.Items.Collections
 
         public void RefreshWeight()
         {
-            Character.Client.Send(new InventoryWeightMessage(0, 0, 1000)); // 9N
-          //  Character.Client.Send(new InventoryWeightMessage(CurrentWeight, 0, TotalWeight)); // 9N
-
+            Character.Client.Send(new InventoryWeightMessage(CurrentWeight, 0, TotalWeight));
         }
         public void RefreshKamas()
         {

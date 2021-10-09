@@ -96,6 +96,11 @@ namespace Giny.World.Managers.Fights.Effects
             look.AddSkin(1955);
         }
 
+        [SpellAppearance(1326)]
+        public static void BambouPandawa(Fighter fighter,ref ServerEntityLook look)
+        {
+            look.SetBones(4576);
+        }
         [SpellAppearance(667)]
         public static void DrunkedPandawa(Fighter fighter, ref ServerEntityLook look)
         {

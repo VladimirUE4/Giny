@@ -64,7 +64,10 @@ namespace Giny.World.Records.Items
         {
             return BankItems.Values.Where(x => x.AccountId == accountId);
         }
-
+        public static IEnumerable<BankItemRecord> GetBankItems()
+        {
+            return BankItems.Values;
+        }
         public override void Initialize()
         {
            
