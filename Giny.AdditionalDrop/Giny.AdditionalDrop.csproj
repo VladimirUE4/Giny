@@ -7,8 +7,8 @@
     <ProjectGuid>{5E44863F-9DFB-4844-9E3A-5610F073701C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Giny.RessourcesDrop</RootNamespace>
-    <AssemblyName>Giny.RessourcesDrop</AssemblyName>
+    <RootNamespace>Giny.AdditionalDrop</RootNamespace>
+    <AssemblyName>Giny.AdditionalDrop</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

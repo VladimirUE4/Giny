@@ -21,8 +21,8 @@ namespace Giny.Core
 
         private static Channels Channels = DefaultChannels;
 
-        private const ConsoleColor Color1 = ConsoleColor.Cyan;
-        private const ConsoleColor Color2 = ConsoleColor.DarkCyan;
+        private const ConsoleColor Color1 = ConsoleColor.DarkMagenta;
+        private const ConsoleColor Color2 = ConsoleColor.Magenta;
 
         private static Dictionary<Channels, ConsoleColor> ChannelsColors = new Dictionary<Channels, ConsoleColor>()
         {

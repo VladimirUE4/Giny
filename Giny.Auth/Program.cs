@@ -31,7 +31,7 @@ namespace Giny.Auth
     {
         static void Main(string[] args)
         {
-            Logger.OnStartup();
+            Logger.DrawLogo();
             StartupManager.Instance.Initialize(Assembly.GetExecutingAssembly());
 
             IPCServer.Instance.Start(ConfigFile.Instance.IPCHost, ConfigFile.Instance.IPCPort);

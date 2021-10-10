@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Giny.RessourcesDrop
 {
-    [Module("Ressource drop")]
+    [Module("Additional Drop")]
     public class Module : IModule
     {
         public void CreateHooks()

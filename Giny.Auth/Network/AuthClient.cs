@@ -168,5 +168,9 @@ namespace Giny.Auth.Network
             return (byte)Characters.Where(x => x.ServerId == serverId).Count();
         }
 
+        public override void OnHandlingError(NetworkMessage message, Delegate handler, Exception ex)
+        {
+            Logger.Write(string.Format("Unable to handle message {0} {1} : '{2}'", message.ToString(), handler.Method.Name, ex.ToString()), Channels.Warning);
+        }
     }
 }
