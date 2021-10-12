@@ -11,9 +11,19 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Fights.Effects.Damages
 {
+    /// <summary>
+    /// Couronne d'épine.
+    /// </summary>
     [SpellEffectHandler(EffectsEnum.Effect_DispatchDamage_1223)]
     public class DispatchDamage1123 : SpellEffectHandler
     {
-       
+        public DispatchDamage1123(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
+        {
+        }
+
+        protected override void Apply(IEnumerable<Fighter> targets)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
