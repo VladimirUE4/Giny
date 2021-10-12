@@ -91,7 +91,7 @@ namespace Giny.World.Handlers.Roleplay.Items
                 return;
             }
 
-            CharacterItemRecord result = hostItem.ToMimicry(foodItem.GId, foodItem.AppearanceId);
+            CharacterItemRecord result = hostItem.ToMimicry(foodItem.Record);
 
             if (message.preview)
             {

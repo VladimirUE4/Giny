@@ -104,7 +104,7 @@ namespace Giny.World.Managers.Fights.Fighters
         public DirectionsEnum Direction
         {
             get;
-            private set;
+            protected set;
         }
         public ServerEntityLook Look
         {
@@ -136,8 +136,6 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             get;
         }
-
-
 
         public abstract BreedEnum Breed
         {

@@ -61,18 +61,20 @@ namespace Giny.World.Records.Items
             return new ObjectItemNotInContainer(GId, Effects.GetObjectEffects(), UId, Quantity);
         }
 
-        public CharacterItemRecord ToMimicry(short newSkinId, short appearanceId)
+        public CharacterItemRecord ToMimicry(ItemRecord foodItem)
         {
             CharacterItemRecord newItem = (CharacterItemRecord)this.CloneWithoutUID();
-            newItem.Effects.Add(new EffectInteger(EffectsEnum.Effect_Appearance, (ushort)newSkinId));
+            newItem.Effects.Add(new EffectInteger(EffectsEnum.Effect_Appearance, (ushort)foodItem.Id));
             newItem.Quantity = 1;
-            newItem.AppearanceId = appearanceId;
+            newItem.AppearanceId = foodItem.AppearenceId;
+            newItem.Look = foodItem.Look;
             return newItem;
         }
         public void EraseMimicry()
         {
             this.Effects.RemoveAll(EffectsEnum.Effect_Appearance);
             this.AppearanceId = Record.AppearenceId;
+            this.Look = Record.Look;
         }
 
         public static IEnumerable<CharacterItemRecord> GetCharacterItems(long characterId)

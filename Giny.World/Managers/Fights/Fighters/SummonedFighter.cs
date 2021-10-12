@@ -45,15 +45,16 @@ namespace Giny.World.Managers.Fights.Fighters
         public SummonedFighter(Fighter owner, SpellEffectHandler summoningEffect, CellRecord cell) :
             base(owner.Team, null)
         {
-            this.Cell = cell;
-            this.SummoningEffect = summoningEffect;
-            this.Summoner = owner;
+            Cell = cell;
+            SummoningEffect = summoningEffect;
+            Summoner = owner;
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            this.FightStartCell = this.Cell;
+            FightStartCell = this.Cell;
+            Direction = Summoner.Cell.Point.OrientationTo(Cell.Point);
         }
         public override FightTeamMemberInformations GetFightTeamMemberInformations()
         {
