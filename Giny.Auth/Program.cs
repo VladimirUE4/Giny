@@ -37,8 +37,6 @@ namespace Giny.Auth
             IPCServer.Instance.Start(ConfigFile.Instance.IPCHost, ConfigFile.Instance.IPCPort);
             AuthServer.Instance.Start(ConfigFile.Instance.Host, ConfigFile.Instance.Port);
             ConsoleCommandsManager.Instance.ReadCommand();
-
-         
             
         }
         [StartupInvoke("Database", StartupInvokePriority.SecondPass)]

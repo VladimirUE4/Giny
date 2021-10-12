@@ -21,11 +21,11 @@ namespace Giny.ProtocolBuilder
     {
         static void Main(string[] args)
         {
-            Logger.OnStartup();
+            Logger.DrawLogo();
             Stopwatch stopwatch = Stopwatch.StartNew();
 
 
-            // BuildEnums();
+             BuildEnums();
 
            // BuildMessages();
           //  BuildTypes();

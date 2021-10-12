@@ -86,7 +86,7 @@ namespace Giny.ProtocolBuilder.Profiles
 
             var converter = CreateDofusConverter();
             host.Session["Converter"] = converter;
-
+            
             var output = engine.ProcessTemplate(File.ReadAllText(TemplatePath), host);
 
             foreach (CompilerError error in host.Errors)
