@@ -521,6 +521,14 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
+            var item = client.Character.Inventory.GetEquipedItems().FirstOrDefault(x => x.Record.TypeEnum == ItemTypeEnum.RING);
+
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_AddAP_111, 1));
+
+            item.UpdateElement();
+
+            client.Character.Inventory.OnItemModified(item);
+            return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(8);
             MonstersManager.Instance.AddFixedMonsterGroup(client.Character.Map.Instance, client.Character.CellId, records.ToArray());
         }

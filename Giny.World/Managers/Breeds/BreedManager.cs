@@ -35,10 +35,10 @@ namespace Giny.World.Managers.Breeds
                 PlayableBreedEnum.Sadida,
                 PlayableBreedEnum.Sacrieur,
                 PlayableBreedEnum.Pandawa,
-              //  PlayableBreedEnum.Roublard,
+                PlayableBreedEnum.Roublard,
                 PlayableBreedEnum.Zobal,
-              //  PlayableBreedEnum.Steamer,
-               // PlayableBreedEnum.Eliotrope,
+                PlayableBreedEnum.Steamer,
+                PlayableBreedEnum.Eliotrope,
                 PlayableBreedEnum.Huppermage,
                 PlayableBreedEnum.Ouginak,
         };

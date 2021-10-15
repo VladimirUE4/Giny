@@ -584,9 +584,10 @@ namespace Giny.World.Managers.Fights.Fighters
             {
                 RemoveAndDispellBuff(buff);
 
-                if (buff.Cast.GetParent() != null)
+                if (buff.Cast.GetParent() != null) 
                 {
-                    RemoveSpellEffects(source, buff.Cast.GetParent().SpellId);
+                    // DOFUS EBENE -> do not remove parent
+                    //RemoveSpellEffects(source, buff.Cast.GetParent().SpellId);
                 }
             }
 
@@ -666,13 +667,9 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             bool result = false;
 
-            if (type == TriggerTypeEnum.OnAPLost)
-            {
-
-            }
             IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
                 x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
-
+           
             foreach (var buff in buffs)
             {
                 buff.LastTriggeredSequence = Fight.SequenceManager.CurrentSequence;

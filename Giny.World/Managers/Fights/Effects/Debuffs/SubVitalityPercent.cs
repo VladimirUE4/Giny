@@ -17,7 +17,10 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
     [SpellEffectHandler(EffectsEnum.Effect_SubVitalityPercent_2845)]
     public class SubVitalityPercent : SpellEffectHandler
     {
-        private const ActionsEnum ActionId = ActionsEnum.ACTION_CHARACTER_LIFE_POINTS_MALUS_PERCENT;
+        /// <summary>
+        /// Plus clair d'afficher le nombre de PV perdu
+        /// </summary>
+        private const ActionsEnum ActionId = ActionsEnum.ACTION_CHARACTER_DEBOOST_VITALITY;// ActionsEnum.ACTION_CHARACTER_LIFE_POINTS_MALUS_PERCENT;
 
         public SubVitalityPercent(EffectDice effect, SpellCastHandler castHandler) : base(effect, castHandler)
         {
@@ -27,7 +30,16 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
         {
             foreach (var target in targets)
             {
-                short delta = (short)(-target.Stats.MaxLifePoints * (double)Effect.Min / 100.0d);
+                short delta = 0;
+
+                if (Effect.EffectEnum == EffectsEnum.Effect_SubVitalityPercent_1048)
+                {
+                    delta = (short)(-target.Stats.LifePoints * (double)Effect.Min / 100.0d);
+                }
+                else if (Effect.EffectEnum == EffectsEnum.Effect_SubVitalityPercent_2845)
+                {
+                    delta = (short)(-target.Stats.MaxLifePoints * (double)Effect.Min / 100.0d);
+                }
 
                 VitalityDebuff buff = new VitalityDebuff(target.BuffIdProvider.Pop(), delta, target, this,
                    (FightDispellableEnum)Effect.Dispellable, ActionId);
