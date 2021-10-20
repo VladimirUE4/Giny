@@ -111,6 +111,7 @@
     <Compile Include="Api\CharacterEventApi.cs" />
     <Compile Include="Api\FightEventApi.cs" />
     <Compile Include="Api\InventoryEventApi.cs" />
+    <Compile Include="Handlers\Roleplay\Arena\ArenaHandler.cs" />
     <Compile Include="Handlers\Roleplay\HavenBag\HavenBagHandler.cs" />
     <Compile Include="Handlers\Roleplay\Idols\IdolsHandler.cs" />
     <Compile Include="Handlers\Roleplay\Items\MimicrysHandler.cs" />

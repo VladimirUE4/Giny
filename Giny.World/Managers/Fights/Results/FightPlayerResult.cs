@@ -26,11 +26,11 @@ namespace Giny.World.Managers.Fights.Results
                 return base.Fighter.Character;
             }
         }
-        public new byte Level
+        public short CharacterLevel
         {
             get
             {
-                return (byte)this.Character.Level;
+                return this.Character.Level;
             }
         }
         public FightExperienceData ExperienceData
@@ -70,7 +70,7 @@ namespace Giny.World.Managers.Fights.Results
                 outcome = (short)base.Outcome,
                 alive = Alive,
                 id = Id,
-                level = Level,
+                level = CharacterLevel,
                 additional = list.ToArray(),
                 rewards = Loot.GetFightLoot(),
                 wave = 0
