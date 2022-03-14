@@ -136,7 +136,7 @@ namespace Giny.World
         {
             get;
             set;
-        } = "Bienvenue sur <b>Raiders</b>. Nous sommes heureux de vous revoir.";
+        } = "Bienvenue sur le <b>serveur de test</b>. Nous sommes heureux de vous revoir.";
 
         public double JobRate
         {
