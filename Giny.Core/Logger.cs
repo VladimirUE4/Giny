@@ -21,8 +21,8 @@ namespace Giny.Core
 
         private static Channels Channels = DefaultChannels;
 
-        private const ConsoleColor Color1 = ConsoleColor.DarkMagenta;
-        private const ConsoleColor Color2 = ConsoleColor.Magenta;
+        private const ConsoleColor Color1 = ConsoleColor.DarkBlue;
+        private const ConsoleColor Color2 = ConsoleColor.Blue;
 
         private static Dictionary<Channels, ConsoleColor> ChannelsColors = new Dictionary<Channels, ConsoleColor>()
         {
@@ -86,10 +86,10 @@ namespace Giny.Core
             WriteColor1(@"   ______   _                     ");
             WriteColor1(@" .' ___  | (_)                    ");
             WriteColor1(@"/ .'   \_| __   _ .--.    _   __  ");
-            WriteColor1(@"| |   ____[  | [ `.-. |  [ \ [  ] ");
-            WriteColor1(@"\ `.___]   | |  | | | |   \ '/ /  ");
+            WriteColor2(@"| |   ____[  | [ `.-. |  [ \ [  ] ");
+            WriteColor2(@"\ `.___]   | |  | | | |   \ '/ /  ");
             WriteColor2(@" `._____.'[___][___||__][\_:  /   ");
-            WriteColor2(@"     written by Skinz    \__.'    ");
+            WriteColor2(@"  github.com/Skinz3/Giny \__.'    ");
             NewLine();
         }
         
