@@ -26,11 +26,11 @@ namespace Giny.ORM
             get;
             private set;
         }
+        public event Action<string, int, int> OnLoadProgress;
+
         public event Action<Type, string> OnStartLoadTable;
 
         public event Action<Type, string> OnEndLoadTable;
-
-        public event Action<string, double> OnLoadProgress;
 
         public void Initialize(Assembly recordsAssembly, string host, string database, string user, string password)
         {
@@ -72,15 +72,21 @@ namespace Giny.ORM
         }
         public void LoadTables()
         {
+            int i = 0;
+
             foreach (var tableType in TableTypes)
             {
+
                 var definition = TableManager.Instance.GetDefinition(tableType);
                 var attribute = definition.TableAttribute;
+
+                OnLoadProgress?.Invoke(attribute.TableName, i, TableTypes.Length);
 
                 if (attribute.Load)
                 {
                     LoadTable(tableType);
                 }
+                i++;
             }
         }
         private void LoadTable(Type type)
@@ -138,11 +144,6 @@ namespace Giny.ORM
                     }
                 }
             }
-        }
-
-        public void OnProgress(string tableName, double ratio)
-        {
-            OnLoadProgress?.Invoke(tableName, ratio);
         }
 
         public void DeleteTable<T>() where T : ITable

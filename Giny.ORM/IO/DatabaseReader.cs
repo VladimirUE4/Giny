@@ -92,18 +92,6 @@ namespace Giny.ORM.IO
         }
         private void ReadTable(MySqlConnection connection, string parameter)
         {
-            long rowCount = 0;
-
-            try
-            {
-                rowCount = Count(connection);
-            }
-            catch (Exception ex)
-            {
-                Logger.Write("Unable to read table " + TableName, Channels.Warning);
-                AskForStructureRebuild(connection, parameter);
-            }
-
             lock (DatabaseManager.SyncRoot)
             {
                 using (var command = new MySqlCommand(parameter, connection))
@@ -138,8 +126,6 @@ namespace Giny.ORM.IO
 
                         this.Elements.Add(itable.Id, itable);
                         n++;
-
-                        DatabaseManager.Instance.OnProgress(TableName, n / rowCount);
 
                     }
                     this.m_reader.Close();

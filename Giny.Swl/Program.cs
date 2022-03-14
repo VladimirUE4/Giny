@@ -17,7 +17,7 @@ namespace Giny.Swl
 
         public const string InputDirectory = "Input/";
 
-        static readonly UpdateLogger logger = new UpdateLogger();
+        static readonly PercentageLogger logger = new PercentageLogger();
 
         static void Main(string[] args)
         {

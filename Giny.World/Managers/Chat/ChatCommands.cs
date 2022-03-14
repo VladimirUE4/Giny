@@ -523,9 +523,12 @@ namespace Giny.World.Managers.Chat
         {
             var item = client.Character.Inventory.GetEquipedItems().FirstOrDefault(x => x.Record.TypeEnum == ItemTypeEnum.RING);
 
-            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_AddAP_111, 1));
+            client.Character.Inventory.Unequip(item.PositionEnum);
+
+            item.Effects.Add(new EffectInteger(EffectsEnum.Effect_AddCriticalHit, 40));
 
             item.UpdateElement();
+
 
             client.Character.Inventory.OnItemModified(item);
             return;

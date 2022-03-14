@@ -88,6 +88,7 @@
     <Compile Include="IO\Xml.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Logs\LogFile.cs" />
+    <Compile Include="Logs\ProgressLogger.cs" />
     <Compile Include="Misc\Notepad.cs" />
     <Compile Include="Network\Client.cs" />
     <Compile Include="Network\Http.cs" />
@@ -109,7 +110,7 @@
     <Compile Include="Time\AsyncRandom.cs" />
     <Compile Include="Time\CircularBuffer.cs" />
     <Compile Include="Time\HighPrecisionTimer.cs" />
-    <Compile Include="UpdateLogger.cs" />
+    <Compile Include="Logs\PercentageLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

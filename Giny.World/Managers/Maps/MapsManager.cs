@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
+using Giny.Core.Logs;
 using Giny.Core.Time;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
@@ -27,11 +28,11 @@ namespace Giny.World.Managers.Maps
         [StartupInvoke("Map Instances", StartupInvokePriority.FourthPass)]
         public void CreateInstances()
         {
-            UpdateLogger updateLogger = new UpdateLogger();
-
             var maps = MapRecord.GetMaps().ToArray();
 
-            double n = 0;
+            ProgressLogger progressLogger = new ProgressLogger();
+
+            int n = 0;
             foreach (var record in maps)
             {
                 record.Instance = new ClassicMapInstance(record);
@@ -46,12 +47,10 @@ namespace Giny.World.Managers.Maps
                 {
                     MonstersManager.Instance.SpawnMonsterGroups(record, random);
                 }
-
-                double ratio = (n / maps.Length) * 100;
-
-                updateLogger.Update((int)ratio);
-                n++;
+                progressLogger.WriteProgressBar(n++, maps.Length);
             }
+
+            progressLogger.Flush();
 
         }
 
@@ -124,107 +123,107 @@ namespace Giny.World.Managers.Maps
             return -1;
         }
 
-    public short GetNeighbourCellId(short cellId, MapScrollEnum scrollType)
-    {
-        switch (scrollType)
+        public short GetNeighbourCellId(short cellId, MapScrollEnum scrollType)
         {
-            case MapScrollEnum.TOP:
-                return (short)(cellId + 532);
-            case MapScrollEnum.LEFT:
-                return (short)(cellId + 27);
-            case MapScrollEnum.BOTTOM:
-                return (short)(cellId - 532);
-            case MapScrollEnum.RIGHT:
-                return (short)(cellId - 27);
-            default:
-                return 0;
-        }
-    }
-
-    public DirectionsEnum GetScrollDirection(MapScrollEnum scrollType)
-    {
-        switch (scrollType)
-        {
-            case MapScrollEnum.TOP:
-                return DirectionsEnum.DIRECTION_NORTH;
-
-            case MapScrollEnum.LEFT:
-                return DirectionsEnum.DIRECTION_WEST;
-
-            case MapScrollEnum.BOTTOM:
-                return DirectionsEnum.DIRECTION_SOUTH;
-
-            case MapScrollEnum.RIGHT:
-                return DirectionsEnum.DIRECTION_EAST;
-
-            default:
-                return DirectionsEnum.DIRECTION_EAST;
-        }
-    }
-
-    private MapScrollEnum InvertScrollType(MapScrollEnum scroll)
-    {
-        switch (scroll)
-        {
-            case MapScrollEnum.TOP:
-                return MapScrollEnum.BOTTOM;
-            case MapScrollEnum.BOTTOM:
-                return MapScrollEnum.TOP;
-            case MapScrollEnum.LEFT:
-                return MapScrollEnum.RIGHT;
-            case MapScrollEnum.RIGHT:
-                return MapScrollEnum.LEFT;
-        }
-        return MapScrollEnum.UNDEFINED;
-    }
-    public short FindNearMapBorder(MapRecord destinationMap, MapScrollEnum scrollType, MapPoint cellPoint)
-    {
-        var invertedScrollType = InvertScrollType(scrollType);
-        var cells = destinationMap.GetMapChangeCells(invertedScrollType);
-        if (cells.Count() == 0)
-        {
-            return destinationMap.RandomWalkableCell().Id;
-        }
-
-        return cells.Aggregate((previous, next) => previous.Point.ManhattanDistanceTo(cellPoint) < next.Point.ManhattanDistanceTo(cellPoint) ? previous : next).Id;
-    }
-    /*
-     * If cell is free & walkable, return cell
-     * else return near free cell.
-     * if no free cell is available return random walkable cell
-     */
-    public CellRecord SecureRoleplayCell(MapRecord map, CellRecord roleplayCell)
-    {
-        if (roleplayCell.Walkable && map.Instance.IsCellFree(roleplayCell.Id))
-        {
-            return roleplayCell;
-        }
-        else
-        {
-            CellRecord freeCell = GetNearFreeCell(map, roleplayCell);
-
-            if (freeCell != null)
+            switch (scrollType)
             {
-                return freeCell;
+                case MapScrollEnum.TOP:
+                    return (short)(cellId + 532);
+                case MapScrollEnum.LEFT:
+                    return (short)(cellId + 27);
+                case MapScrollEnum.BOTTOM:
+                    return (short)(cellId - 532);
+                case MapScrollEnum.RIGHT:
+                    return (short)(cellId - 27);
+                default:
+                    return 0;
+            }
+        }
+
+        public DirectionsEnum GetScrollDirection(MapScrollEnum scrollType)
+        {
+            switch (scrollType)
+            {
+                case MapScrollEnum.TOP:
+                    return DirectionsEnum.DIRECTION_NORTH;
+
+                case MapScrollEnum.LEFT:
+                    return DirectionsEnum.DIRECTION_WEST;
+
+                case MapScrollEnum.BOTTOM:
+                    return DirectionsEnum.DIRECTION_SOUTH;
+
+                case MapScrollEnum.RIGHT:
+                    return DirectionsEnum.DIRECTION_EAST;
+
+                default:
+                    return DirectionsEnum.DIRECTION_EAST;
+            }
+        }
+
+        private MapScrollEnum InvertScrollType(MapScrollEnum scroll)
+        {
+            switch (scroll)
+            {
+                case MapScrollEnum.TOP:
+                    return MapScrollEnum.BOTTOM;
+                case MapScrollEnum.BOTTOM:
+                    return MapScrollEnum.TOP;
+                case MapScrollEnum.LEFT:
+                    return MapScrollEnum.RIGHT;
+                case MapScrollEnum.RIGHT:
+                    return MapScrollEnum.LEFT;
+            }
+            return MapScrollEnum.UNDEFINED;
+        }
+        public short FindNearMapBorder(MapRecord destinationMap, MapScrollEnum scrollType, MapPoint cellPoint)
+        {
+            var invertedScrollType = InvertScrollType(scrollType);
+            var cells = destinationMap.GetMapChangeCells(invertedScrollType);
+            if (cells.Count() == 0)
+            {
+                return destinationMap.RandomWalkableCell().Id;
+            }
+
+            return cells.Aggregate((previous, next) => previous.Point.ManhattanDistanceTo(cellPoint) < next.Point.ManhattanDistanceTo(cellPoint) ? previous : next).Id;
+        }
+        /*
+         * If cell is free & walkable, return cell
+         * else return near free cell.
+         * if no free cell is available return random walkable cell
+         */
+        public CellRecord SecureRoleplayCell(MapRecord map, CellRecord roleplayCell)
+        {
+            if (roleplayCell.Walkable && map.Instance.IsCellFree(roleplayCell.Id))
+            {
+                return roleplayCell;
             }
             else
             {
-                return map.RandomWalkableCell();
+                CellRecord freeCell = GetNearFreeCell(map, roleplayCell);
+
+                if (freeCell != null)
+                {
+                    return freeCell;
+                }
+                else
+                {
+                    return map.RandomWalkableCell();
+                }
+            }
+        }
+        public CellRecord GetNearFreeCell(MapRecord map, CellRecord roleplayCell)
+        {
+            MapPoint[] points = roleplayCell.Point.GetNearPoints().Where(x => map.IsCellWalkable(x.CellId) && map.Instance.IsCellFree(x.CellId) == true).ToArray();
+
+            if (points.Length > 0)
+            {
+                return map.GetCell(points.Random());
+            }
+            else
+            {
+                return null;
             }
         }
     }
-    public CellRecord GetNearFreeCell(MapRecord map, CellRecord roleplayCell)
-    {
-        MapPoint[] points = roleplayCell.Point.GetNearPoints().Where(x => map.IsCellWalkable(x.CellId) && map.Instance.IsCellFree(x.CellId) == true).ToArray();
-
-        if (points.Length > 0)
-        {
-            return map.GetCell(points.Random());
-        }
-        else
-        {
-            return null;
-        }
-    }
-}
 }

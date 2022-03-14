@@ -22,7 +22,7 @@ namespace Giny.RessourcesDrop
 {
     public class DropManager : Singleton<DropManager>
     {
-        private const double DropChance = 8d;
+        private const double DropChance = 18d;
 
         private ConcurrentBag<ItemRecord> DroppableItems = new ConcurrentBag<ItemRecord>();
 
@@ -83,7 +83,6 @@ namespace Giny.RessourcesDrop
             {
                 maxLevel = 200;
             }
-
             var minLevel = 1;
 
             if (maxLevel > 100)

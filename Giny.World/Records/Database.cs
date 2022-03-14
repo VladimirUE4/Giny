@@ -1,6 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
+using Giny.Core.Logs;
 using Giny.ORM;
 using System;
 using System.Collections.Generic;
@@ -13,32 +14,27 @@ namespace Giny.World.Records
 {
     public class Database : Singleton<Database>
     {
-        private UpdateLogger m_logger;
+        ProgressLogger ProgressLogger = new ProgressLogger();
 
         [StartupInvoke("Database", StartupInvokePriority.SecondPass)]
         public void InitializeDatabase()
         {
             DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
-            DatabaseManager.Instance.OnStartLoadTable += OnStartLoad;
 
             DatabaseManager.Instance.Initialize(Assembly.GetExecutingAssembly(), ConfigFile.Instance.SQLHost,
                ConfigFile.Instance.SQLDBName, ConfigFile.Instance.SQLUser, ConfigFile.Instance.SQLPassword);
 
             DatabaseManager.Instance.LoadTables();
 
+            ProgressLogger.Flush();
+
             DatabaseManager.Instance.OnLoadProgress -= OnLoadProgress;
-            m_logger = null;
         }
 
-        private void OnStartLoad(Type type, string tableName)
-        {
-            Logger.Write("Loading " + tableName.FirstCharToUpper() + " ...", Channels.Log);
-            m_logger = new UpdateLogger();
-        }
 
-        private void OnLoadProgress(string tableName, double ratio)
+        private void OnLoadProgress(string tableName, int currentIndex, int length)
         {
-            m_logger.Update((int)(ratio * 100));
+            ProgressLogger.WriteProgressBar(currentIndex, length);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
+using Giny.Core.Logs;
 using Giny.ORM.Attributes;
 using Giny.ORM.Interfaces;
 using Giny.Protocol.Custom.Enums;
@@ -163,13 +164,25 @@ namespace Giny.World.Records.Maps
             get;
             set;
         }
-        [StartupInvoke("Maps Bindings", StartupInvokePriority.SecondPass)]
+        [StartupInvoke("Maps links", StartupInvokePriority.SecondPass)]
         public static void Initialize()
         {
-            foreach (var map in GetMaps())
+            ProgressLogger progressLogger = new ProgressLogger();
+
+            int i = 0;
+
+            var maps = GetMaps();
+
+            var mapsCount = maps.Count();
+
+            foreach (var map in maps)
             {
+                progressLogger.WriteProgressBar(i, mapsCount);
                 map.ReloadMembers();
+                i++;
             }
+
+            progressLogger.Flush();
         }
         public long? GetNextRoomMapId()
         {

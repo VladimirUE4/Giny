@@ -44,7 +44,7 @@ namespace Giny.DatabasePatcher.Maps
 
             return;
 
-            UpdateLogger logger = new UpdateLogger();
+            PercentageLogger logger = new PercentageLogger();
 
             var maps = MapRecord.GetMaps();
 
