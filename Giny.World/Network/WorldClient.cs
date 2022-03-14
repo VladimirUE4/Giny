@@ -164,10 +164,9 @@ namespace Giny.World.Network
             LoadWorldAccount();
             SendBasicTime();
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
-            Send(new ServerSettingsMessage("fr", 0, 0, false, 0, 200, true));
+            Send(new ServerSettingsMessage("fr", 0, 0, false, 1, 200, true));
 
-            SendServerOptionalFeatures(OptionalFeaturesEnum.Mount,
-                OptionalFeaturesEnum.ItemIdols, OptionalFeaturesEnum.MapTacticMode, OptionalFeaturesEnum.TradeAveragePricesAutoUpdate);
+            SendServerOptionalFeatures(OptionalFeaturesEnum.PvpKis);
 
             Send(new ServerSessionConstantsMessage(new ServerSessionConstant[]
            {

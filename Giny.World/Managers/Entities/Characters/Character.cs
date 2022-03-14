@@ -1118,12 +1118,45 @@ namespace Giny.World.Managers.Entities.Characters
         {
             this.Client.Send(new GameMapNoMovementMessage((short)Point.X, (short)Point.Y));
         }
+
+        /*    public void RegisterArena()
+            {
+                this.ArenaMember = ArenaProvider.Instance.Register(this);
+                this.ArenaMember.UpdateStep(true, PvpArenaStepEnum.ARENA_STEP_REGISTRED);
+            }
+            public void UnregisterArena()
+            {
+                if (InArena)
+                {
+                    ArenaProvider.Instance.Unregister(this);
+                    this.ArenaMember.UpdateStep(false, PvpArenaStepEnum.ARENA_STEP_UNREGISTER);
+                    this.ArenaMember = null;
+                }
+            }
+            public void AnwserArena(bool accept)
+            {
+                if (InArena)
+                {
+                    ArenaMember.Anwser(accept);
+                }
+            }
+        */
+
+        public void RefreshArenaInfos()
+        {
+            var infos = new ArenaRankInfos(new ArenaRanking(1, 2), new ArenaLeagueRanking(1, 1, 200, 100, 1), 1, 2, 3);
+            Client.Send(new GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage()
+            {
+                duel = infos,
+                solo = infos,
+                team = infos,
+            });
+        }
         [WIP]
         public void OnEnterMap()
         {
 
             this.ChangeMap = false;
-            // this.UpdateServerExperience(Map.SubArea.ExperienceRate);
 
             if (this.Busy)
                 this.LeaveDialog();
