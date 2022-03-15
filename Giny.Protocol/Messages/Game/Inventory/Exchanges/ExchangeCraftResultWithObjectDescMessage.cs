@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeCraftResultWithObjectDescMessage : ExchangeCraftResultMessage  
     { 
-        public new const ushort Id = 7951;
+        public  const ushort Id = 118;
         public override ushort MessageId => Id;
 
         public ObjectItemNotInContainer objectInfo;

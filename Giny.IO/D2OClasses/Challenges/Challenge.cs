@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Challenge", "com.ankamagames.dofus.datacenter.challenges")]
+    [D2OClass("Challenge", "")]
     public class Challenge : IDataObject , IIndexedData
     {
-        public const string MODULE = "Challenge";
+        public const string MODULE = "Challenges";
 
         public int Id => (int)id;
 
@@ -21,6 +21,7 @@ namespace Giny.IO.D2OClasses
         public uint iconId;
         public string activationCriterion;
         public string completionCriterion;
+        public uint targetMonsterId;
 
         [D2OIgnore]
         public int Id_
@@ -116,6 +117,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 completionCriterion = value;
+            }
+        }
+        [D2OIgnore]
+        public uint TargetMonsterId
+        {
+            get
+            {
+                return targetMonsterId;
+            }
+            set
+            {
+                targetMonsterId = value;
             }
         }
 

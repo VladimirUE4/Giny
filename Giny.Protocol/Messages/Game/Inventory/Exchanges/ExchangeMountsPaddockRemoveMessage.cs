@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMountsPaddockRemoveMessage : NetworkMessage  
     { 
-        public new const ushort Id = 952;
+        public  const ushort Id = 2113;
         public override ushort MessageId => Id;
 
         public int[] mountsId;

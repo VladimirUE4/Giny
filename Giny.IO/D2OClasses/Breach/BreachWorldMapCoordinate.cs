@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("BreachWorldMapCoordinate", "com.ankamagames.dofus.datacenter.breach")]
+    [D2OClass("BreachWorldMapCoordinate", "")]
     public class BreachWorldMapCoordinate : IDataObject , IIndexedData
     {
         public const string MODULE = "BreachWorldMapCoordinates";

@@ -5,24 +5,25 @@ using Giny.Protocol;
 using Giny.Protocol.Enums;
 
 namespace Giny.Protocol.Types
-{ 
-    public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations  
-    { 
-        public const ushort Id = 9292;
+{
+    public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations
+    {
+        public const ushort Id = 3148;
         public override ushort TypeId => Id;
 
-        public GroupMonsterStaticInformations staticInfos;
         public byte lootShare;
         public byte alignmentSide;
         public bool keyRingBonus;
         public bool hasHardcoreDrop;
         public bool hasAVARewardToken;
+        public GroupMonsterStaticInformations staticInfos;
 
         public GameRolePlayGroupMonsterInformations()
         {
         }
-        public GameRolePlayGroupMonsterInformations(byte lootShare,byte alignmentSide,bool keyRingBonus,bool hasHardcoreDrop,bool hasAVARewardToken)
+        public GameRolePlayGroupMonsterInformations(GroupMonsterStaticInformations staticInfos, byte lootShare, byte alignmentSide, bool keyRingBonus, bool hasHardcoreDrop, bool hasAVARewardToken)
         {
+            this.staticInfos = staticInfos;
             this.lootShare = lootShare;
             this.alignmentSide = alignmentSide;
             this.keyRingBonus = keyRingBonus;
@@ -33,9 +34,9 @@ namespace Giny.Protocol.Types
         {
             base.Serialize(writer);
             byte _box0 = 0;
-            _box0 = BooleanByteWrapper.SetFlag(_box0,0,keyRingBonus);
-            _box0 = BooleanByteWrapper.SetFlag(_box0,1,hasHardcoreDrop);
-            _box0 = BooleanByteWrapper.SetFlag(_box0,2,hasAVARewardToken);
+            _box0 = BooleanByteWrapper.SetFlag(_box0, 0, keyRingBonus);
+            _box0 = BooleanByteWrapper.SetFlag(_box0, 1, hasHardcoreDrop);
+            _box0 = BooleanByteWrapper.SetFlag(_box0, 2, hasAVARewardToken);
             writer.WriteByte((byte)_box0);
             writer.WriteShort((short)staticInfos.TypeId);
             staticInfos.Serialize(writer);
@@ -51,9 +52,9 @@ namespace Giny.Protocol.Types
         {
             base.Deserialize(reader);
             byte _box0 = reader.ReadByte();
-            keyRingBonus = BooleanByteWrapper.GetFlag(_box0,0);
-            hasHardcoreDrop = BooleanByteWrapper.GetFlag(_box0,1);
-            hasAVARewardToken = BooleanByteWrapper.GetFlag(_box0,2);
+            keyRingBonus = BooleanByteWrapper.GetFlag(_box0, 0);
+            hasHardcoreDrop = BooleanByteWrapper.GetFlag(_box0, 1);
+            hasAVARewardToken = BooleanByteWrapper.GetFlag(_box0, 2);
             uint _id1 = (uint)reader.ReadUShort();
             staticInfos = ProtocolTypeManager.GetInstance<GroupMonsterStaticInformations>((short)_id1);
             staticInfos.Deserialize(reader);

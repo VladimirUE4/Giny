@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class DecraftedItemStackInfo  
     { 
-        public const ushort Id = 7627;
+        public const ushort Id = 8215;
         public virtual ushort TypeId => Id;
 
         public int objectUID;

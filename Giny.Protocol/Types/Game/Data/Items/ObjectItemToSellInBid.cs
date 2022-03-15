@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemToSellInBid : ObjectItemToSell  
     { 
-        public const ushort Id = 8467;
+        public const ushort Id = 3500;
         public override ushort TypeId => Id;
 
         public int unsoldDelay;

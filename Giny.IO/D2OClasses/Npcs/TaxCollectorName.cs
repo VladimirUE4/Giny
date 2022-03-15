@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("TaxCollectorName", "com.ankamagames.dofus.datacenter.npcs")]
+    [D2OClass("TaxCollectorName", "")]
     public class TaxCollectorName : IDataObject , IIndexedData
     {
         public const string MODULE = "TaxCollectorNames";

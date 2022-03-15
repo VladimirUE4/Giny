@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOptionObjectUse : HumanOption  
     { 
-        public const ushort Id = 9970;
+        public const ushort Id = 1192;
         public override ushort TypeId => Id;
 
         public byte delayTypeId;

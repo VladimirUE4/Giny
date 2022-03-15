@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("NamingRule", "com.ankamagames.dofus.datacenter.communication")]
+    [D2OClass("NamingRule", "")]
     public class NamingRule : IDataObject , IIndexedData
     {
         public const string MODULE = "NamingRules";

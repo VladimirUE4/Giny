@@ -1,17 +1,15 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
 using Giny.Protocol.Enums;
-using Version = Giny.Protocol.Types.Version;
 
 namespace Giny.Protocol.Messages
 { 
     public class IdentificationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5667;
+        public  const ushort Id = 4337;
         public override ushort MessageId => Id;
 
         public Version version;
@@ -57,7 +55,7 @@ namespace Giny.Protocol.Messages
             writer.WriteShort((short)serverId);
             if (sessionOptionalSalt < -9.00719925474099E+15 || sessionOptionalSalt > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sessionOptionalSalt + ") on element sessionOptionalSalt.");
+                throw new System.Exception("Forbidden value (" + sessionOptionalSalt + ") on element sessionOptionalSalt.");
             }
 
             writer.WriteVarLong((long)sessionOptionalSalt);
@@ -66,7 +64,7 @@ namespace Giny.Protocol.Messages
             {
                 if (failedAttempts[_i9] < 0)
                 {
-                    throw new Exception("Forbidden value (" + failedAttempts[_i9] + ") on element 9 (starting at 1) of failedAttempts.");
+                    throw new System.Exception("Forbidden value (" + failedAttempts[_i9] + ") on element 9 (starting at 1) of failedAttempts.");
                 }
 
                 writer.WriteVarShort((short)failedAttempts[_i9]);
@@ -96,7 +94,7 @@ namespace Giny.Protocol.Messages
             sessionOptionalSalt = (long)reader.ReadVarLong();
             if (sessionOptionalSalt < -9.00719925474099E+15 || sessionOptionalSalt > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sessionOptionalSalt + ") on element of IdentificationMessage.sessionOptionalSalt.");
+                throw new System.Exception("Forbidden value (" + sessionOptionalSalt + ") on element of IdentificationMessage.sessionOptionalSalt.");
             }
 
             uint _failedAttemptsLen = (uint)reader.ReadUShort();
@@ -106,7 +104,7 @@ namespace Giny.Protocol.Messages
                 _val9 = (uint)reader.ReadVarUhShort();
                 if (_val9 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val9 + ") on elements of failedAttempts.");
+                    throw new System.Exception("Forbidden value (" + _val9 + ") on elements of failedAttempts.");
                 }
 
                 failedAttempts[_i9] = (short)_val9;

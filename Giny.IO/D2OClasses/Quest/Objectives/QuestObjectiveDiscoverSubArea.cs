@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("QuestObjectiveDiscoverSubArea", "com.ankamagames.dofus.datacenter.quest.objectives")]
+    [D2OClass("QuestObjectiveDiscoverSubArea", "")]
     public class QuestObjectiveDiscoverSubArea : QuestObjective , IIndexedData
     {
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("BreachInfinityLevel", "com.ankamagames.dofus.datacenter.breach")]
+    [D2OClass("BreachInfinityLevel", "")]
     public class BreachInfinityLevel : IDataObject , IIndexedData
     {
         public const string MODULE = "BreachInfinityLevels";

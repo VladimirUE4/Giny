@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatClientPrivateWithObjectMessage : ChatClientPrivateMessage  
     { 
-        public new const ushort Id = 9448;
+        public  const ushort Id = 1043;
         public override ushort MessageId => Id;
 
         public ObjectItem[] objects;
@@ -37,8 +37,6 @@ namespace Giny.Protocol.Messages
             ObjectItem _item1 = null;
             base.Deserialize(reader);
             uint _objectsLen = (uint)reader.ReadUShort();
-
-            objects = new ObjectItem[_objectsLen];
             for (uint _i1 = 0;_i1 < _objectsLen;_i1++)
             {
                 _item1 = new ObjectItem();

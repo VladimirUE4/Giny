@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobExperienceOtherPlayerUpdateMessage : JobExperienceUpdateMessage  
     { 
-        public new const ushort Id = 187;
+        public  const ushort Id = 5477;
         public override ushort MessageId => Id;
 
         public long playerId;

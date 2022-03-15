@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightDispellableEffectExtendedInformations  
     { 
-        public const ushort Id = 7562;
+        public const ushort Id = 8005;
         public virtual ushort TypeId => Id;
 
         public short actionId;

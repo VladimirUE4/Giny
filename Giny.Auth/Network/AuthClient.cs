@@ -19,6 +19,7 @@ using Giny.Core.Time;
 using Giny.Core.IO;
 using Giny.Core.Cryptography;
 using Giny.Core.Extensions;
+using Giny.Protocol.Types;
 
 namespace Giny.Auth.Network
 {
@@ -156,12 +157,14 @@ namespace Giny.Auth.Network
         /// </summary>
         public void OnIdentificationSuccess(bool wasConnected)
         {
-            Send(new IdentificationSuccessMessage(Account.Username, Account.Nickname,
+            Send(new IdentificationSuccessMessage(Account.Username, new AccountTagInformation(Account.Nickname, "none"),
                  Account.Id, 0, HasRights, HasRights, string.Empty, 0, 0, 0, wasConnected, 0));
         }
         public void SendServerList()
         {
-            Send(new ServersListMessage(WorldServerRecord.GetGameServerInformations(this), 0, true));
+            var servers = WorldServerRecord.GetGameServerInformations(this);
+
+            Send(new ServersListMessage(servers, 0, true));
         }
         public byte GetCharactersSlots(short serverId)
         {

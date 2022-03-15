@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SimpleCharacterCharacteristicForPreset  
     { 
-        public const ushort Id = 1047;
+        public const ushort Id = 7495;
         public virtual ushort TypeId => Id;
 
         public string keyword;

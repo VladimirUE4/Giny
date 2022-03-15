@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("QuestXPBonus", "com.ankamagames.dofus.datacenter.bonus")]
+    [D2OClass("QuestXPBonus", "")]
     public class QuestXPBonus : QuestBonus , IIndexedData
     {
 

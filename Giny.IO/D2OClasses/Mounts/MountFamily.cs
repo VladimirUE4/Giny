@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("MountFamily", "com.ankamagames.dofus.datacenter.mounts")]
+    [D2OClass("MountFamily", "")]
     public class MountFamily : IDataObject , IIndexedData
     {
         public const string MODULE = "MountFamily";

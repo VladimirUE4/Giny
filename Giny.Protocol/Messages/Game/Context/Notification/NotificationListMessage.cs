@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NotificationListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1082;
+        public  const ushort Id = 7026;
         public override ushort MessageId => Id;
 
         public int[] flags;

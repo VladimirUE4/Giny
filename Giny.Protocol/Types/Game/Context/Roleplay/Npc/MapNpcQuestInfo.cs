@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MapNpcQuestInfo  
     { 
-        public const ushort Id = 3117;
+        public const ushort Id = 7429;
         public virtual ushort TypeId => Id;
 
         public double mapId;

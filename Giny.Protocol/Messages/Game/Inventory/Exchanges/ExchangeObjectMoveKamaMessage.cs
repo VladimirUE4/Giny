@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeObjectMoveKamaMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9857;
+        public  const ushort Id = 427;
         public override ushort MessageId => Id;
 
         public long quantity;

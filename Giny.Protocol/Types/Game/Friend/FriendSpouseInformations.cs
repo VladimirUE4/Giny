@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FriendSpouseInformations  
     { 
-        public const ushort Id = 9044;
+        public const ushort Id = 9956;
         public virtual ushort TypeId => Id;
 
         public int spouseAccountId;

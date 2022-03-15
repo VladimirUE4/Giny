@@ -11,7 +11,7 @@ namespace Giny.Protocol.IPC.Messages
 {
     public class DisconnectClientResultMessage : IPCMessage
     {
-        public const ushort Id = 4;
+        public const ushort Id = 5;
 
         public override ushort MessageId
         {

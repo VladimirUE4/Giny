@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeReplayStopMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2946;
+        public  const ushort Id = 6235;
         public override ushort MessageId => Id;
 
 

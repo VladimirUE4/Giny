@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceGuildLeavingMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7369;
+        public  const ushort Id = 129;
         public override ushort MessageId => Id;
 
         public bool kicked;

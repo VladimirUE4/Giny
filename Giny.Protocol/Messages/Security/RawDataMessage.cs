@@ -7,10 +7,10 @@ using Giny.Protocol;
 using Giny.Protocol.Enums;
 
 namespace Giny.Protocol.Messages
-{ 
-    public class RawDataMessage : NetworkMessage  
-    { 
-        public new const ushort Id = 2262;
+{
+    public class RawDataMessage : NetworkMessage
+    {
+        public new const ushort Id = 4602;
         public override ushort MessageId => Id;
 
         public byte[] content;
@@ -25,7 +25,7 @@ namespace Giny.Protocol.Messages
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteVarInt((int)content.Length);
-            for (uint _i1 = 0;_i1 < content.Length;_i1++)
+            for (uint _i1 = 0; _i1 < content.Length; _i1++)
             {
                 writer.WriteByte((byte)content[_i1]);
             }

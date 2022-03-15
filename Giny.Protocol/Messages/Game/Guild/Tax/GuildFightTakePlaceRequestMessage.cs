@@ -10,27 +10,37 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildFightTakePlaceRequestMessage : GuildFightJoinRequestMessage  
     { 
-        public new const ushort Id = 2860;
+        public  const ushort Id = 1932;
         public override ushort MessageId => Id;
 
-        public int replacedCharacterId;
+        public long replacedCharacterId;
 
         public GuildFightTakePlaceRequestMessage()
         {
         }
-        public GuildFightTakePlaceRequestMessage(int replacedCharacterId)
+        public GuildFightTakePlaceRequestMessage(long replacedCharacterId)
         {
             this.replacedCharacterId = replacedCharacterId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteInt((int)replacedCharacterId);
+            if (replacedCharacterId < 0 || replacedCharacterId > 9.00719925474099E+15)
+            {
+                throw new Exception("Forbidden value (" + replacedCharacterId + ") on element replacedCharacterId.");
+            }
+
+            writer.WriteVarLong((long)replacedCharacterId);
         }
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            replacedCharacterId = (int)reader.ReadInt();
+            replacedCharacterId = (long)reader.ReadVarUhLong();
+            if (replacedCharacterId < 0 || replacedCharacterId > 9.00719925474099E+15)
+            {
+                throw new Exception("Forbidden value (" + replacedCharacterId + ") on element of GuildFightTakePlaceRequestMessage.replacedCharacterId.");
+            }
+
         }
 
 

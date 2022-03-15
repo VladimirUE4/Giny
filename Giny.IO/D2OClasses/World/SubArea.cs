@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SubArea", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("SubArea", "")]
     public class SubArea : IDataObject , IIndexedData
     {
         public const string MODULE = "SubAreas";
@@ -30,14 +30,9 @@ namespace Giny.IO.D2OClasses
         public bool mountAutoTripAllowed;
         public bool psiAllowed;
         public List<uint> monsters;
-        public List<double> entranceMapIds;
-        public List<double> exitMapIds;
         public bool capturable;
-        public List<uint> achievements;
         public List<List<double>> quests;
         public List<List<double>> npcs;
-        public int exploreAchievementId;
-        public bool isDiscovered;
         public List<int> harvestables;
         public int associatedZaapMapId;
 
@@ -246,30 +241,6 @@ namespace Giny.IO.D2OClasses
             }
         }
         [D2OIgnore]
-        public List<double> EntranceMapIds
-        {
-            get
-            {
-                return entranceMapIds;
-            }
-            set
-            {
-                entranceMapIds = value;
-            }
-        }
-        [D2OIgnore]
-        public List<double> ExitMapIds
-        {
-            get
-            {
-                return exitMapIds;
-            }
-            set
-            {
-                exitMapIds = value;
-            }
-        }
-        [D2OIgnore]
         public bool Capturable
         {
             get
@@ -279,18 +250,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 capturable = value;
-            }
-        }
-        [D2OIgnore]
-        public List<uint> Achievements
-        {
-            get
-            {
-                return achievements;
-            }
-            set
-            {
-                achievements = value;
             }
         }
         [D2OIgnore]
@@ -315,30 +274,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 npcs = value;
-            }
-        }
-        [D2OIgnore]
-        public int ExploreAchievementId
-        {
-            get
-            {
-                return exploreAchievementId;
-            }
-            set
-            {
-                exploreAchievementId = value;
-            }
-        }
-        [D2OIgnore]
-        public bool IsDiscovered
-        {
-            get
-            {
-                return isDiscovered;
-            }
-            set
-            {
-                isDiscovered = value;
             }
         }
         [D2OIgnore]

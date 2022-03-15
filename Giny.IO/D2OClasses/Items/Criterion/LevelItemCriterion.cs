@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("LevelItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("LevelItemCriterion", "")]
     public class LevelItemCriterion : ItemCriterion , IIndexedData
     {
 

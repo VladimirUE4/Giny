@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceInvitationStateRecruterMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1920;
+        public  const ushort Id = 2498;
         public override ushort MessageId => Id;
 
         public string recrutedName;

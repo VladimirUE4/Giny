@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Quest", "com.ankamagames.dofus.datacenter.quest")]
+    [D2OClass("Quest", "")]
     public class Quest : IDataObject , IIndexedData
     {
         public const string MODULE = "Quests";

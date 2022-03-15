@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CharacterXPMapping", "com.ankamagames.dofus.datacenter.misc")]
+    [D2OClass("CharacterXPMapping", "")]
     public class CharacterXPMapping : IDataObject , IIndexedData
     {
         public const string MODULE = "CharacterXPMappings";

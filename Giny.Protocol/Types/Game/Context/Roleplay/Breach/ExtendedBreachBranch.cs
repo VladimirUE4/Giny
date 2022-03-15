@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ExtendedBreachBranch : BreachBranch  
     { 
-        public const ushort Id = 6573;
+        public const ushort Id = 9376;
         public override ushort TypeId => Id;
 
         public BreachReward[] rewards;

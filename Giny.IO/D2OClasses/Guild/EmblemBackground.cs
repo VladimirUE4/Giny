@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("EmblemBackground", "com.ankamagames.dofus.datacenter.guild")]
+    [D2OClass("EmblemBackground", "")]
     public class EmblemBackground : IDataObject , IIndexedData
     {
         public const string MODULE = "EmblemBackgrounds";

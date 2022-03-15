@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightOptionToggleMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8943;
+        public  const ushort Id = 2382;
         public override ushort MessageId => Id;
 
         public byte option;

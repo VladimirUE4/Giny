@@ -27,13 +27,7 @@ namespace Giny.World.Handlers.Maps
         [MessageHandler]
         public static void HandleFriendJoinRequestMessage(FriendJoinRequestMessage message, WorldClient client)
         {
-            return;
-            var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.name);
-
-            if (target != null)
-            {
-                client.Character.Teleport(target.Character.Record.MapId, target.Character.Map.Instance.GetNearEntityCell(target.Character.GetCell()));
-            }
+            //  client.Character.Teleport(target.Character.Record.MapId, target.Character.Map.Instance.GetNearEntityCell(target.Character.GetCell()));
         }
         [MessageHandler]
         public static void HandleGameMapChangeOriantation(GameMapChangeOrientationRequestMessage message, WorldClient client)

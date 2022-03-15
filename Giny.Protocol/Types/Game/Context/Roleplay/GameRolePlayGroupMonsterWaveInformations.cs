@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayGroupMonsterWaveInformations : GameRolePlayGroupMonsterInformations  
     { 
-        public const ushort Id = 521;
+        public const ushort Id = 5382;
         public override ushort TypeId => Id;
 
         public byte nbWaves;

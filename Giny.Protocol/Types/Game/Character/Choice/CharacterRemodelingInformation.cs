@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterRemodelingInformation : AbstractCharacterInformation  
     { 
-        public const ushort Id = 9208;
+        public const ushort Id = 5402;
         public override ushort TypeId => Id;
 
         public string name;

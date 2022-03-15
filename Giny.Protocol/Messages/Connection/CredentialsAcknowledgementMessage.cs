@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CredentialsAcknowledgementMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9137;
+        public  const ushort Id = 4834;
         public override ushort MessageId => Id;
 
 

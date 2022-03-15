@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("MountBehavior", "com.ankamagames.dofus.datacenter.mounts")]
+    [D2OClass("MountBehavior", "")]
     public class MountBehavior : IDataObject , IIndexedData
     {
         public const string MODULE = "MountBehaviors";

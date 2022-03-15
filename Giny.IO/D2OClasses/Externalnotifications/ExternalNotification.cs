@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ExternalNotification", "com.ankamagames.dofus.datacenter.externalnotifications")]
+    [D2OClass("ExternalNotification", "")]
     public class ExternalNotification : IDataObject , IIndexedData
     {
         public const string MODULE = "ExternalNotifications";

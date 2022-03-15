@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AchievementDetailedListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8753;
+        public  const ushort Id = 9855;
         public override ushort MessageId => Id;
 
         public Achievement[] startedAchievements;

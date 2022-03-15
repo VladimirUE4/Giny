@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentRankJntGift", "com.ankamagames.dofus.datacenter.alignments")]
+    [D2OClass("AlignmentRankJntGift", "")]
     public class AlignmentRankJntGift : IDataObject , IIndexedData
     {
         public const string MODULE = "AlignmentRankJntGift";
@@ -15,7 +15,6 @@ namespace Giny.IO.D2OClasses
 
         public int id;
         public List<int> gifts;
-        public List<int> parameters;
         public List<int> levels;
 
         [D2OIgnore]
@@ -40,18 +39,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 gifts = value;
-            }
-        }
-        [D2OIgnore]
-        public List<int> Parameters
-        {
-            get
-            {
-                return parameters;
-            }
-            set
-            {
-                parameters = value;
             }
         }
         [D2OIgnore]

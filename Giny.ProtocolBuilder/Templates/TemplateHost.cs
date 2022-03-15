@@ -117,7 +117,7 @@ namespace Giny.ProtocolBuilder.Templates
         {
             get
             {
-                return new[]
+                return new string[]
                            {
                                "System",
                            };

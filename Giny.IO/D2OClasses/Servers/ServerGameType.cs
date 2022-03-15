@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ServerGameType", "com.ankamagames.dofus.datacenter.servers")]
+    [D2OClass("ServerGameType", "")]
     public class ServerGameType : IDataObject , IIndexedData
     {
         public const string MODULE = "ServerGameTypes";

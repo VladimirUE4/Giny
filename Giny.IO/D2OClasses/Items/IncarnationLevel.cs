@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("IncarnationLevel", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("IncarnationLevel", "")]
     public class IncarnationLevel : IDataObject , IIndexedData
     {
         public const string MODULE = "IncarnationLevels";

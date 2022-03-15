@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class UpdateMountCharacteristic  
     { 
-        public const ushort Id = 8476;
+        public const ushort Id = 826;
         public virtual ushort TypeId => Id;
 
         public byte type;

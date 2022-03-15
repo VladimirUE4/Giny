@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("LuaFormula", "com.ankamagames.dofus.datacenter.misc")]
+    [D2OClass("LuaFormula", "")]
     public class LuaFormula : IDataObject , IIndexedData
     {
         public const string MODULE = "LuaFormulas";

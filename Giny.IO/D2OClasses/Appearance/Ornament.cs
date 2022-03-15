@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Ornament", "com.ankamagames.dofus.datacenter.appearance")]
+    [D2OClass("Ornament", "")]
     public class Ornament : IDataObject , IIndexedData
     {
         public const string MODULE = "Ornaments";
@@ -18,7 +18,6 @@ namespace Giny.IO.D2OClasses
         public bool visible;
         public int assetId;
         public int iconId;
-        public int rarity;
         public int order;
 
         [D2OIgnore]
@@ -79,18 +78,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 iconId = value;
-            }
-        }
-        [D2OIgnore]
-        public int Rarity
-        {
-            get
-            {
-                return rarity;
-            }
-            set
-            {
-                rarity = value;
             }
         }
         [D2OIgnore]

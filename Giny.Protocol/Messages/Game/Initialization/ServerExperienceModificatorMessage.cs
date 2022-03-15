@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ServerExperienceModificatorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9490;
+        public  const ushort Id = 7180;
         public override ushort MessageId => Id;
 
         public short experiencePercent;

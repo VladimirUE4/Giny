@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildMotdSetRequestMessage : SocialNoticeSetRequestMessage  
     { 
-        public new const ushort Id = 8648;
+        public  const ushort Id = 3391;
         public override ushort MessageId => Id;
 
         public string content;

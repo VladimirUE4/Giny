@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceCreationResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1359;
+        public  const ushort Id = 4954;
         public override ushort MessageId => Id;
 
         public byte result;

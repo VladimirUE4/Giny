@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Effect", "com.ankamagames.dofus.datacenter.effects")]
+    [D2OClass("Effect", "")]
     public class Effect : IDataObject , IIndexedData
     {
         public const string MODULE = "Effects";

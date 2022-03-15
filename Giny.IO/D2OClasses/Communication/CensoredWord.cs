@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CensoredWord", "com.ankamagames.dofus.datacenter.communication")]
+    [D2OClass("CensoredWord", "")]
     public class CensoredWord : IDataObject , IIndexedData
     {
         public const string MODULE = "CensoredWords";

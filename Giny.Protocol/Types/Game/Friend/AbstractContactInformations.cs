@@ -8,19 +8,19 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractContactInformations  
     { 
-        public const ushort Id = 3761;
+        public const ushort Id = 6684;
         public virtual ushort TypeId => Id;
 
         public int accountId;
-        public string accountName;
+        public AccountTagInformation accountTag;
 
         public AbstractContactInformations()
         {
         }
-        public AbstractContactInformations(int accountId,string accountName)
+        public AbstractContactInformations(int accountId,AccountTagInformation accountTag)
         {
             this.accountId = accountId;
-            this.accountName = accountName;
+            this.accountTag = accountTag;
         }
         public virtual void Serialize(IDataWriter writer)
         {
@@ -30,7 +30,7 @@ namespace Giny.Protocol.Types
             }
 
             writer.WriteInt((int)accountId);
-            writer.WriteUTF((string)accountName);
+            accountTag.Serialize(writer);
         }
         public virtual void Deserialize(IDataReader reader)
         {
@@ -40,7 +40,8 @@ namespace Giny.Protocol.Types
                 throw new Exception("Forbidden value (" + accountId + ") on element of AbstractContactInformations.accountId.");
             }
 
-            accountName = (string)reader.ReadUTF();
+            accountTag = new AccountTagInformation();
+            accountTag.Deserialize(reader);
         }
 
 

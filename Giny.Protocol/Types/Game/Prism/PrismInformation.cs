@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PrismInformation  
     { 
-        public const ushort Id = 1525;
+        public const ushort Id = 6060;
         public virtual ushort TypeId => Id;
 
         public byte typeId;

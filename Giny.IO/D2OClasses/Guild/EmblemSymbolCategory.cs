@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("EmblemSymbolCategory", "com.ankamagames.dofus.datacenter.guild")]
+    [D2OClass("EmblemSymbolCategory", "")]
     public class EmblemSymbolCategory : IDataObject , IIndexedData
     {
         public const string MODULE = "EmblemSymbolCategories";

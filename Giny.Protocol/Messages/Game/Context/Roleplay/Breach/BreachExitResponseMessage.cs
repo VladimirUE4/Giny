@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachExitResponseMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9718;
+        public  const ushort Id = 7143;
         public override ushort MessageId => Id;
 
         public bool exited;

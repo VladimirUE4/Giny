@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlignmentRankUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 423;
+        public  const ushort Id = 7764;
         public override ushort MessageId => Id;
 
         public byte alignmentRank;

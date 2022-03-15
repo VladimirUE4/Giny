@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PrismInfoJoinLeaveRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4898;
+        public  const ushort Id = 6247;
         public override ushort MessageId => Id;
 
         public bool join;

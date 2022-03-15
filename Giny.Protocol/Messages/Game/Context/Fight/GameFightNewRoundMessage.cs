@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightNewRoundMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6998;
+        public  const ushort Id = 1656;
         public override ushort MessageId => Id;
 
         public int roundNumber;

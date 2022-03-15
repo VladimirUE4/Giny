@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockContentInformations : PaddockInformations  
     { 
-        public const ushort Id = 5999;
+        public const ushort Id = 8051;
         public override ushort TypeId => Id;
 
         public double paddockId;

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightResultPlayerListEntry : FightResultFighterListEntry  
     { 
-        public const ushort Id = 1038;
+        public const ushort Id = 9771;
         public override ushort TypeId => Id;
 
         public short level;

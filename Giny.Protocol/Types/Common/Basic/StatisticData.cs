@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class StatisticData  
     { 
-        public const ushort Id = 8706;
+        public const ushort Id = 9162;
         public virtual ushort TypeId => Id;
 
 

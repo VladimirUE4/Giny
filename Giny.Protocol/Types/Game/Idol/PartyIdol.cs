@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyIdol : Idol  
     { 
-        public const ushort Id = 1051;
+        public const ushort Id = 563;
         public override ushort TypeId => Id;
 
         public long[] ownersIds;

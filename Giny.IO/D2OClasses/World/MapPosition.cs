@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("MapPosition", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("MapPosition", "")]
     public class MapPosition : IDataObject , IIndexedData
     {
         public const string MODULE = "MapPositions";

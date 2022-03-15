@@ -89,7 +89,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 disposition = GetEntityDispositionInformations(),
                 look = Look.ToEntityLook(),
                 previousPositions = new short[0],
-                stats = Stats.GetFightMinimalStats(this, target),
+                stats = Stats.GetGameFightCharacteristics(this, target),
                 wave = 0,
                 spawnInfo = new GameContextBasicSpawnInformation()
                 {

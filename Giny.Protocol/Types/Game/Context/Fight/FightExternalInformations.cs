@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightExternalInformations  
     { 
-        public const ushort Id = 4455;
+        public const ushort Id = 7149;
         public virtual ushort TypeId => Id;
 
         public short fightId;

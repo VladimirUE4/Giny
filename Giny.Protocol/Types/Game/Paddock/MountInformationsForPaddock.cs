@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MountInformationsForPaddock  
     { 
-        public const ushort Id = 8570;
+        public const ushort Id = 1513;
         public virtual ushort TypeId => Id;
 
         public short modelId;

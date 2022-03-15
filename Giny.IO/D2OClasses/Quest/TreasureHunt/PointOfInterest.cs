@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("PointOfInterest", "com.ankamagames.dofus.datacenter.quest.treasureHunt")]
+    [D2OClass("PointOfInterest", "")]
     public class PointOfInterest : IDataObject , IIndexedData
     {
         public const string MODULE = "PointOfInterest";

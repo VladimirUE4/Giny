@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayArenaSwitchToGameServerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4687;
+        public  const ushort Id = 651;
         public override ushort MessageId => Id;
 
         public bool validToken;

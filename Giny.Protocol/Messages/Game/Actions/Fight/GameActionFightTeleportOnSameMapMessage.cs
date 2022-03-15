@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightTeleportOnSameMapMessage : AbstractGameActionMessage  
     { 
-        public new const ushort Id = 6358;
+        public  const ushort Id = 7589;
         public override ushort MessageId => Id;
 
         public double targetId;

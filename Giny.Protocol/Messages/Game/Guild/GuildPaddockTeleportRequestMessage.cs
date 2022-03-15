@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildPaddockTeleportRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3362;
+        public  const ushort Id = 7914;
         public override ushort MessageId => Id;
 
         public double paddockId;

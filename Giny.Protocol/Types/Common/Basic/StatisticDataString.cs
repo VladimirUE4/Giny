@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class StatisticDataString : StatisticData  
     { 
-        public const ushort Id = 134;
+        public const ushort Id = 6983;
         public override ushort TypeId => Id;
 
         public string value;

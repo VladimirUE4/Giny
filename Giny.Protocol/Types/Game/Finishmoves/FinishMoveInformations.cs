@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FinishMoveInformations  
     { 
-        public const ushort Id = 2518;
+        public const ushort Id = 2972;
         public virtual ushort TypeId => Id;
 
         public int finishMoveId;

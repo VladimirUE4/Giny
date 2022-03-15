@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectCreature : ObjectEffect  
     { 
-        public const ushort Id = 7034;
+        public const ushort Id = 8829;
         public override ushort TypeId => Id;
 
         public short monsterFamilyId;

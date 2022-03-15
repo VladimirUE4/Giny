@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SpeakingItemsTrigger", "com.ankamagames.dofus.datacenter.livingObjects")]
+    [D2OClass("SpeakingItemsTrigger", "")]
     public class SpeakingItemsTrigger : IDataObject , IIndexedData
     {
         public const string MODULE = "SpeakingItemsTriggers";

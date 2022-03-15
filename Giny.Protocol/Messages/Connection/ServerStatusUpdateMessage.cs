@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ServerStatusUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3755;
+        public  const ushort Id = 1411;
         public override ushort MessageId => Id;
 
         public GameServerInformations server;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class EvolutiveObjectRecycleResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9919;
+        public  const ushort Id = 8805;
         public override ushort MessageId => Id;
 
         public RecycledItem[] recycledItems;

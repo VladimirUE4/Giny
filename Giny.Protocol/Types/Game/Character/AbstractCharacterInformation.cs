@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractCharacterInformation  
     { 
-        public const ushort Id = 4631;
+        public const ushort Id = 2714;
         public virtual ushort TypeId => Id;
 
         public long id;

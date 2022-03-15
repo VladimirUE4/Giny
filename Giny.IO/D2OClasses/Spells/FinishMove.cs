@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("FinishMove", "com.ankamagames.dofus.datacenter.spells")]
+    [D2OClass("FinishMove", "")]
     public class FinishMove : IDataObject , IIndexedData
     {
         public const string MODULE = "FinishMoves";

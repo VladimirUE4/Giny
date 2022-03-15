@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CreatureBoneOverride", "com.ankamagames.dofus.datacenter.appearance")]
+    [D2OClass("CreatureBoneOverride", "")]
     public class CreatureBoneOverride : IDataObject , IIndexedData
     {
         public const string MODULE = "CreatureBonesOverrides";
 
-        public int Id => 0;
+        public int Id => throw new NotImplementedException();
 
         public int boneId;
         public int creatureBoneId;

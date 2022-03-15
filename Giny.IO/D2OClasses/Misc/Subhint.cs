@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Subhint", "com.ankamagames.dofus.datacenter.misc")]
+    [D2OClass("Subhint", "")]
     public class Subhint : IDataObject , IIndexedData
     {
         public const string MODULE = "Subhints";

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CreatureBoneType", "com.ankamagames.dofus.datacenter.appearance")]
+    [D2OClass("CreatureBoneType", "")]
     public class CreatureBoneType : IDataObject , IIndexedData
     {
         public const string MODULE = "CreatureBonesTypes";

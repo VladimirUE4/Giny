@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class StatsPreset : Preset  
     { 
-        public const ushort Id = 3738;
+        public const ushort Id = 6559;
         public override ushort TypeId => Id;
 
         public SimpleCharacterCharacteristicForPreset[] stats;

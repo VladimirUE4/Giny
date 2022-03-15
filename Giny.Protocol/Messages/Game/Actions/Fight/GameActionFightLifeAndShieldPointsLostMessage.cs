@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightLifeAndShieldPointsLostMessage : GameActionFightLifePointsLostMessage  
     { 
-        public new const ushort Id = 1903;
+        public  const ushort Id = 6816;
         public override ushort MessageId => Id;
 
         public short shieldLoss;

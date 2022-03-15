@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SkillActionDescriptionCollect : SkillActionDescriptionTimed  
     { 
-        public const ushort Id = 7961;
+        public const ushort Id = 5191;
         public override ushort TypeId => Id;
 
         public short min;

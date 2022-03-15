@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("PresetIcon", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("PresetIcon", "")]
     public class PresetIcon : IDataObject , IIndexedData
     {
         public const string MODULE = "PresetIcons";

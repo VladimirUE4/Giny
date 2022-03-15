@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterSelectedForceReadyMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3810;
+        public  const ushort Id = 6390;
         public override ushort MessageId => Id;
 
 

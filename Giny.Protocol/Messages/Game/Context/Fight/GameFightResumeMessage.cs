@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightResumeMessage : GameFightSpectateMessage  
     { 
-        public new const ushort Id = 9823;
+        public  const ushort Id = 4566;
         public override ushort MessageId => Id;
 
         public GameFightSpellCooldown[] spellCooldowns;

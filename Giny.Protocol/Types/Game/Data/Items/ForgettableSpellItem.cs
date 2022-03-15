@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ForgettableSpellItem : SpellItem  
     { 
-        public const ushort Id = 9960;
+        public const ushort Id = 2497;
         public override ushort TypeId => Id;
 
         public bool available;

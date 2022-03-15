@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SkillActionDescription  
     { 
-        public const ushort Id = 3206;
+        public const ushort Id = 2262;
         public virtual ushort TypeId => Id;
 
         public short skillId;

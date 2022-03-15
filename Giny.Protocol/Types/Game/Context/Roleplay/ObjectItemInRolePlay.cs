@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemInRolePlay  
     { 
-        public const ushort Id = 8884;
+        public const ushort Id = 4848;
         public virtual ushort TypeId => Id;
 
         public short cellId;

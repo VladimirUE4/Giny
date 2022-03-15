@@ -10,7 +10,7 @@ namespace Giny.Protocol.IPC.Messages
 {
     public class AccountRequestMessage : IPCMessage
     {
-        public const ushort Id = 2;
+        public const ushort Id = 3;
 
         public override ushort MessageId
         {

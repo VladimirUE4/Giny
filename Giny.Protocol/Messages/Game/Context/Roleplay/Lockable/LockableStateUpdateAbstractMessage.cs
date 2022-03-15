@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LockableStateUpdateAbstractMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9666;
+        public  const ushort Id = 5676;
         public override ushort MessageId => Id;
 
         public bool locked;

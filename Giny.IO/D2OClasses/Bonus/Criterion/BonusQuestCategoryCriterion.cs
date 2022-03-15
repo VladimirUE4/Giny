@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("BonusQuestCategoryCriterion", "com.ankamagames.dofus.datacenter.bonus.criterion")]
+    [D2OClass("BonusQuestCategoryCriterion", "")]
     public class BonusQuestCategoryCriterion : BonusCriterion , IIndexedData
     {
 

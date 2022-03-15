@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItem : Item  
     { 
-        public const ushort Id = 1604;
+        public const ushort Id = 2916;
         public override ushort TypeId => Id;
 
         public short position;
@@ -76,9 +76,6 @@ namespace Giny.Protocol.Types
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
-
-            effects = new ObjectEffect[_effectsLen];
-
             for (uint _i3 = 0;_i3 < _effectsLen;_i3++)
             {
                 _id3 = (uint)reader.ReadUShort();

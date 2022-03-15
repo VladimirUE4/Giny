@@ -115,7 +115,7 @@
     <Compile Include="Handlers\Roleplay\HavenBag\HavenBagHandler.cs" />
     <Compile Include="Handlers\Roleplay\Idols\IdolsHandler.cs" />
     <Compile Include="Handlers\Roleplay\Items\MimicrysHandler.cs" />
-    <Compile Include="Logs\LogManager.cs" />
+    <Compile Include="Logging\LogManager.cs" />
     <Compile Include="Managers\Bidshops\AveragePriceScheduler.cs" />
     <Compile Include="Handlers\Roleplay\Parties\PartiesHandler.cs" />
     <Compile Include="Managers\Criterias\ActionPointsCriteria.cs" />

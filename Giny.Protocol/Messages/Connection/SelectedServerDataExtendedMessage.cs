@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SelectedServerDataExtendedMessage : SelectedServerDataMessage  
     { 
-        public new const ushort Id = 2106;
+        public  const ushort Id = 2850;
         public override ushort MessageId => Id;
 
         public GameServerInformations[] servers;

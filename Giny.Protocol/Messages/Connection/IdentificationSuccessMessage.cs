@@ -10,11 +10,11 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationSuccessMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9679;
+        public  const ushort Id = 331;
         public override ushort MessageId => Id;
 
         public string login;
-        public string nickname;
+        public AccountTagInformation accountTag;
         public int accountId;
         public byte communityId;
         public bool hasRights;
@@ -29,10 +29,10 @@ namespace Giny.Protocol.Messages
         public IdentificationSuccessMessage()
         {
         }
-        public IdentificationSuccessMessage(string login,string nickname,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom)
+        public IdentificationSuccessMessage(string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom)
         {
             this.login = login;
-            this.nickname = nickname;
+            this.accountTag = accountTag;
             this.accountId = accountId;
             this.communityId = communityId;
             this.hasRights = hasRights;
@@ -52,7 +52,7 @@ namespace Giny.Protocol.Messages
             _box0 = BooleanByteWrapper.SetFlag(_box0,2,wasAlreadyConnected);
             writer.WriteByte((byte)_box0);
             writer.WriteUTF((string)login);
-            writer.WriteUTF((string)nickname);
+            accountTag.Serialize(writer);
             if (accountId < 0)
             {
                 throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
@@ -98,7 +98,8 @@ namespace Giny.Protocol.Messages
             hasConsoleRight = BooleanByteWrapper.GetFlag(_box0,1);
             wasAlreadyConnected = BooleanByteWrapper.GetFlag(_box0,2);
             login = (string)reader.ReadUTF();
-            nickname = (string)reader.ReadUTF();
+            accountTag = new AccountTagInformation();
+            accountTag.Deserialize(reader);
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {

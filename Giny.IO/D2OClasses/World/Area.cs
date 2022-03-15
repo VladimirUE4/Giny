@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Area", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("Area", "")]
     public class Area : IDataObject , IIndexedData
     {
         public const string MODULE = "Areas";
@@ -21,6 +21,7 @@ namespace Giny.IO.D2OClasses
         public Rectangle bounds;
         public uint worldmapId;
         public bool hasWorldMap;
+        public bool hasSuggestion;
 
         [D2OIgnore]
         public int Id_
@@ -116,6 +117,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 hasWorldMap = value;
+            }
+        }
+        [D2OIgnore]
+        public bool HasSuggestion
+        {
+            get
+            {
+                return hasSuggestion;
+            }
+            set
+            {
+                hasSuggestion = value;
             }
         }
 

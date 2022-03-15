@@ -320,7 +320,7 @@ namespace Giny.World.Managers.Fights.Fighters
                     teamId = (byte)Team.TeamId,
                 },
 
-                stats = Stats.GetFightMinimalStats(this, target),
+                stats = Stats.GetGameFightCharacteristics(this, target),
                 alignmentInfos = new ActorAlignmentInformations(),//todo
                 breed = Character.Breed.Id,
                 hiddenInPrefight = false,

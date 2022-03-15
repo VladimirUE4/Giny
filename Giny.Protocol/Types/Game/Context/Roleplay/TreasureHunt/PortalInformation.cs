@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class PortalInformation  
     { 
-        public const ushort Id = 4544;
+        public const ushort Id = 2145;
         public virtual ushort TypeId => Id;
 
         public int portalId;

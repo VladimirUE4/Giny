@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationAccountForceMessage : IdentificationMessage  
     { 
-        public new const ushort Id = 6812;
+        public  const ushort Id = 2449;
         public override ushort MessageId => Id;
 
         public string forcedAccountLogin;

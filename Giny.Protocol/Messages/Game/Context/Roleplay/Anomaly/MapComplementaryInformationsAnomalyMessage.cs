@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapComplementaryInformationsAnomalyMessage : MapComplementaryInformationsDataMessage  
     { 
-        public new const ushort Id = 9929;
+        public  const ushort Id = 6414;
         public override ushort MessageId => Id;
 
         public short level;

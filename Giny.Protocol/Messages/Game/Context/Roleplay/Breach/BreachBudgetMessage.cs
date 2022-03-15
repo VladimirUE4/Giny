@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachBudgetMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1956;
+        public  const ushort Id = 1903;
         public override ushort MessageId => Id;
 
         public int bugdet;

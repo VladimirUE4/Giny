@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlmanaxCalendar", "com.ankamagames.dofus.datacenter.almanax")]
+    [D2OClass("AlmanaxCalendar", "")]
     public class AlmanaxCalendar : IDataObject , IIndexedData
     {
         public const string MODULE = "AlmanaxCalendars";

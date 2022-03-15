@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeBidPriceForSellerMessage : ExchangeBidPriceMessage  
     { 
-        public new const ushort Id = 2041;
+        public  const ushort Id = 8645;
         public override ushort MessageId => Id;
 
         public bool allIdentical;

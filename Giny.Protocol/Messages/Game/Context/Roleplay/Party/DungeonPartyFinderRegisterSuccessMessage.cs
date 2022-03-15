@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DungeonPartyFinderRegisterSuccessMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9610;
+        public  const ushort Id = 2385;
         public override ushort MessageId => Id;
 
         public short[] dungeonIds;

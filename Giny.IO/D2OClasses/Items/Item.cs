@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Item", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("Item", "")]
     public class Item : IDataObject , IIndexedData
     {
         public const string MODULE = "Items";
@@ -48,6 +48,7 @@ namespace Giny.IO.D2OClasses
         public uint favoriteSubAreasBonus;
         public int craftXpRatio;
         public string craftVisible;
+        public string craftConditional;
         public string craftFeasible;
         public bool needUseConfirm;
         public bool isDestructible;
@@ -479,6 +480,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 craftVisible = value;
+            }
+        }
+        [D2OIgnore]
+        public string CraftConditional
+        {
+            get
+            {
+                return craftConditional;
+            }
+            set
+            {
+                craftConditional = value;
             }
         }
         [D2OIgnore]

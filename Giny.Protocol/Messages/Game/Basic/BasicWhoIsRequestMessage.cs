@@ -10,29 +10,32 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5985;
+        public  const ushort Id = 1784;
         public override ushort MessageId => Id;
 
         public bool verbose;
-        public string search;
+        public AbstractPlayerSearchInformation target;
 
         public BasicWhoIsRequestMessage()
         {
         }
-        public BasicWhoIsRequestMessage(bool verbose,string search)
+        public BasicWhoIsRequestMessage(bool verbose,AbstractPlayerSearchInformation target)
         {
             this.verbose = verbose;
-            this.search = search;
+            this.target = target;
         }
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteBoolean((bool)verbose);
-            writer.WriteUTF((string)search);
+            writer.WriteShort((short)target.TypeId);
+            target.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
             verbose = (bool)reader.ReadBoolean();
-            search = (string)reader.ReadUTF();
+            uint _id2 = (uint)reader.ReadUShort();
+            target = ProtocolTypeManager.GetInstance<AbstractPlayerSearchInformation>((short)_id2);
+            target.Deserialize(reader);
         }
 
 

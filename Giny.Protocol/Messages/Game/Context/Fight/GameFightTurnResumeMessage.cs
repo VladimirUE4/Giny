@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightTurnResumeMessage : GameFightTurnStartMessage  
     { 
-        public new const ushort Id = 2151;
+        public  const ushort Id = 9827;
         public override ushort MessageId => Id;
 
         public int remainingTime;

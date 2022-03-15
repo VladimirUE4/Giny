@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Weapon", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("Weapon", "")]
     public class Weapon : Item , IIndexedData
     {
 

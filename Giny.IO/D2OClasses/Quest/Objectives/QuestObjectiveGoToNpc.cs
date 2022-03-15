@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("QuestObjectiveGoToNpc", "com.ankamagames.dofus.datacenter.quest.objectives")]
+    [D2OClass("QuestObjectiveGoToNpc", "")]
     public class QuestObjectiveGoToNpc : QuestObjective , IIndexedData
     {
 

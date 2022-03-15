@@ -10,16 +10,16 @@ namespace Giny.Protocol.Messages
 { 
     public class RefreshCharacterStatsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6276;
+        public  const ushort Id = 154;
         public override ushort MessageId => Id;
 
         public double fighterId;
-        public GameFightMinimalStats stats;
+        public GameFightCharacteristics stats;
 
         public RefreshCharacterStatsMessage()
         {
         }
-        public RefreshCharacterStatsMessage(double fighterId,GameFightMinimalStats stats)
+        public RefreshCharacterStatsMessage(double fighterId,GameFightCharacteristics stats)
         {
             this.fighterId = fighterId;
             this.stats = stats;
@@ -42,7 +42,7 @@ namespace Giny.Protocol.Messages
                 throw new Exception("Forbidden value (" + fighterId + ") on element of RefreshCharacterStatsMessage.fighterId.");
             }
 
-            stats = new GameFightMinimalStats();
+            stats = new GameFightCharacteristics();
             stats.Deserialize(reader);
         }
 

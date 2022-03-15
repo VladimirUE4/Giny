@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ChatChannel", "com.ankamagames.dofus.datacenter.communication")]
+    [D2OClass("ChatChannel", "")]
     public class ChatChannel : IDataObject , IIndexedData
     {
         public const string MODULE = "ChatChannels";

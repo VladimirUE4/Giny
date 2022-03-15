@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DocumentReadingBeginMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6278;
+        public  const ushort Id = 3768;
         public override ushort MessageId => Id;
 
         public short documentId;

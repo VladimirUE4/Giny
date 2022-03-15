@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DungeonPartyFinderAvailableDungeonsRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5060;
+        public  const ushort Id = 9701;
         public override ushort MessageId => Id;
 
 

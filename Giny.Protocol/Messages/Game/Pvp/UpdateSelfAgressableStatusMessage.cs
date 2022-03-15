@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class UpdateSelfAgressableStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6611;
+        public  const ushort Id = 4140;
         public override ushort MessageId => Id;
 
         public byte status;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class WrapperObjectDissociateRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9321;
+        public  const ushort Id = 9634;
         public override ushort MessageId => Id;
 
         public int hostUID;

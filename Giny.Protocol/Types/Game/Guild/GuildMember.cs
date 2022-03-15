@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GuildMember : CharacterMinimalInformations  
     { 
-        public const ushort Id = 9947;
+        public const ushort Id = 5491;
         public override ushort TypeId => Id;
 
         public byte breed;

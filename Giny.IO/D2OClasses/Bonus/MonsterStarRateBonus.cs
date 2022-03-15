@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("MonsterStarRateBonus", "com.ankamagames.dofus.datacenter.bonus")]
+    [D2OClass("MonsterStarRateBonus", "")]
     public class MonsterStarRateBonus : MonsterLightBonus , IIndexedData
     {
 

@@ -10,29 +10,30 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendDeleteResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2874;
+        public  const ushort Id = 8619;
         public override ushort MessageId => Id;
 
         public bool success;
-        public string name;
+        public AccountTagInformation tag;
 
         public FriendDeleteResultMessage()
         {
         }
-        public FriendDeleteResultMessage(bool success,string name)
+        public FriendDeleteResultMessage(bool success,AccountTagInformation tag)
         {
             this.success = success;
-            this.name = name;
+            this.tag = tag;
         }
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteBoolean((bool)success);
-            writer.WriteUTF((string)name);
+            tag.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
             success = (bool)reader.ReadBoolean();
-            name = (string)reader.ReadUTF();
+            tag = new AccountTagInformation();
+            tag.Deserialize(reader);
         }
 
 

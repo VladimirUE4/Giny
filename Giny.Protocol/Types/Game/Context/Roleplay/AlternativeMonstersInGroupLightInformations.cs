@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AlternativeMonstersInGroupLightInformations  
     { 
-        public const ushort Id = 4329;
+        public const ushort Id = 1183;
         public virtual ushort TypeId => Id;
 
         public int playerCount;

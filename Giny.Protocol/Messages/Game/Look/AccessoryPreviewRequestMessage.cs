@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AccessoryPreviewRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5863;
+        public  const ushort Id = 35;
         public override ushort MessageId => Id;
 
         public short[] genericId;

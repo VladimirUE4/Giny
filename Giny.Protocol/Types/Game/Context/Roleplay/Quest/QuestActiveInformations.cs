@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class QuestActiveInformations  
     { 
-        public const ushort Id = 2413;
+        public const ushort Id = 1975;
         public virtual ushort TypeId => Id;
 
         public short questId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameDataPaddockObjectAddMessage : NetworkMessage  
     { 
-        public new const ushort Id = 531;
+        public  const ushort Id = 8122;
         public override ushort MessageId => Id;
 
         public PaddockItem paddockItemDescription;

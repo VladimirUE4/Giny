@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SuperArea", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("SuperArea", "")]
     public class SuperArea : IDataObject , IIndexedData
     {
         public const string MODULE = "SuperAreas";

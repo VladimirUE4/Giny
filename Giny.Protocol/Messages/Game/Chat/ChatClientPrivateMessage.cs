@@ -10,27 +10,30 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatClientPrivateMessage : ChatAbstractClientMessage  
     { 
-        public new const ushort Id = 7158;
+        public  const ushort Id = 1814;
         public override ushort MessageId => Id;
 
-        public string receiver;
+        public AbstractPlayerSearchInformation receiver;
 
         public ChatClientPrivateMessage()
         {
         }
-        public ChatClientPrivateMessage(string receiver)
+        public ChatClientPrivateMessage(AbstractPlayerSearchInformation receiver)
         {
             this.receiver = receiver;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteUTF((string)receiver);
+            writer.WriteShort((short)receiver.TypeId);
+            receiver.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            receiver = (string)reader.ReadUTF();
+            uint _id1 = (uint)reader.ReadUShort();
+            receiver = ProtocolTypeManager.GetInstance<AbstractPlayerSearchInformation>((short)_id1);
+            receiver.Deserialize(reader);
         }
 
 

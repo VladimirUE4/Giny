@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ArenaMaxTeamRankCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("ArenaMaxTeamRankCriterion", "")]
     public class ArenaMaxTeamRankCriterion : ItemCriterion , IIndexedData
     {
 

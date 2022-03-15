@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AllianceAvAItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("AllianceAvAItemCriterion", "")]
     public class AllianceAvAItemCriterion : ItemCriterion , IIndexedData
     {
 

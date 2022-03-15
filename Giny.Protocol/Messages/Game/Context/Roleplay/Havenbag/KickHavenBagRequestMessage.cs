@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class KickHavenBagRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9456;
+        public  const ushort Id = 188;
         public override ushort MessageId => Id;
 
         public long guestId;

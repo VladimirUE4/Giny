@@ -8,23 +8,21 @@ namespace Giny.Protocol.Types
 { 
     public class GuildInsiderFactSheetInformations : GuildFactSheetInformations  
     { 
-        public const ushort Id = 9940;
+        public const ushort Id = 8132;
         public override ushort TypeId => Id;
 
         public string leaderName;
         public short nbConnectedMembers;
         public byte nbTaxCollectors;
-        public int lastActivity;
 
         public GuildInsiderFactSheetInformations()
         {
         }
-        public GuildInsiderFactSheetInformations(string leaderName,short nbConnectedMembers,byte nbTaxCollectors,int lastActivity)
+        public GuildInsiderFactSheetInformations(string leaderName,short nbConnectedMembers,byte nbTaxCollectors)
         {
             this.leaderName = leaderName;
             this.nbConnectedMembers = nbConnectedMembers;
             this.nbTaxCollectors = nbTaxCollectors;
-            this.lastActivity = lastActivity;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -42,12 +40,6 @@ namespace Giny.Protocol.Types
             }
 
             writer.WriteByte((byte)nbTaxCollectors);
-            if (lastActivity < 0)
-            {
-                throw new Exception("Forbidden value (" + lastActivity + ") on element lastActivity.");
-            }
-
-            writer.WriteInt((int)lastActivity);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -63,12 +55,6 @@ namespace Giny.Protocol.Types
             if (nbTaxCollectors < 0)
             {
                 throw new Exception("Forbidden value (" + nbTaxCollectors + ") on element of GuildInsiderFactSheetInformations.nbTaxCollectors.");
-            }
-
-            lastActivity = (int)reader.ReadInt();
-            if (lastActivity < 0)
-            {
-                throw new Exception("Forbidden value (" + lastActivity + ") on element of GuildInsiderFactSheetInformations.lastActivity.");
             }
 
         }

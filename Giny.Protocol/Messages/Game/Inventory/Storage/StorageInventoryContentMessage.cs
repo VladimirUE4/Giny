@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class StorageInventoryContentMessage : InventoryContentMessage  
     { 
-        public new const ushort Id = 8412;
+        public  const ushort Id = 561;
         public override ushort MessageId => Id;
 
 

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayAttackMonsterRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8218;
+        public  const ushort Id = 3767;
         public override ushort MessageId => Id;
 
         public double monsterGroupId;

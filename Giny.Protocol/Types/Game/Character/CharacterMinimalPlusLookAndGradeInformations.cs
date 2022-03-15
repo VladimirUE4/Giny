@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalPlusLookAndGradeInformations : CharacterMinimalPlusLookInformations  
     { 
-        public const ushort Id = 9668;
+        public const ushort Id = 7522;
         public override ushort TypeId => Id;
 
         public int grade;

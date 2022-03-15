@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HaapiTokenRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2216;
+        public  const ushort Id = 7220;
         public override ushort MessageId => Id;
 
 

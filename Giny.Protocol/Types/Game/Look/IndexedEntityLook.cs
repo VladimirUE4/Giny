@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class IndexedEntityLook  
     { 
-        public const ushort Id = 7882;
+        public const ushort Id = 1904;
         public virtual ushort TypeId => Id;
 
         public EntityLook look;

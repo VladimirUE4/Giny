@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangePlayerRequestMessage : ExchangeRequestMessage  
     { 
-        public new const ushort Id = 3334;
+        public  const ushort Id = 2400;
         public override ushort MessageId => Id;
 
         public long target;

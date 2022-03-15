@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IgnoredAddedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2887;
+        public  const ushort Id = 6480;
         public override ushort MessageId => Id;
 
         public IgnoredInformations ignoreAdded;

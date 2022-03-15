@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentRank", "com.ankamagames.dofus.datacenter.alignments")]
+    [D2OClass("AlignmentRank", "")]
     public class AlignmentRank : IDataObject , IIndexedData
     {
         public const string MODULE = "AlignmentRank";
@@ -18,7 +18,6 @@ namespace Giny.IO.D2OClasses
         public uint nameId;
         public uint descriptionId;
         public int minimumAlignment;
-        public int objectsStolen;
         public List<int> gifts;
 
         [D2OIgnore]
@@ -79,18 +78,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 minimumAlignment = value;
-            }
-        }
-        [D2OIgnore]
-        public int ObjectsStolen
-        {
-            get
-            {
-                return objectsStolen;
-            }
-            set
-            {
-                objectsStolen = value;
             }
         }
         [D2OIgnore]

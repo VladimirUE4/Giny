@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class QuestStepStartedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3800;
+        public  const ushort Id = 6142;
         public override ushort MessageId => Id;
 
         public short questId;

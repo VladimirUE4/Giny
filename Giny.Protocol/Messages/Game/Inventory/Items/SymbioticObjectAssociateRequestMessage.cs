@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SymbioticObjectAssociateRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8160;
+        public  const ushort Id = 7604;
         public override ushort MessageId => Id;
 
         public int symbioteUID;

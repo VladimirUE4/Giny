@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeWaitingResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2900;
+        public  const ushort Id = 4369;
         public override ushort MessageId => Id;
 
         public bool bwait;

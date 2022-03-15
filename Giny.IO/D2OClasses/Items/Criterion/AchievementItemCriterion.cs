@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AchievementItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("AchievementItemCriterion", "")]
     public class AchievementItemCriterion : ItemCriterion , IIndexedData
     {
 

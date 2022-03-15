@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightPauseMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5189;
+        public  const ushort Id = 8818;
         public override ushort MessageId => Id;
 
         public bool isPaused;

@@ -10,25 +10,26 @@ namespace Giny.Protocol.Messages
 { 
     public class AcquaintanceSearchMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8113;
+        public  const ushort Id = 9528;
         public override ushort MessageId => Id;
 
-        public string nickname;
+        public AccountTagInformation tag;
 
         public AcquaintanceSearchMessage()
         {
         }
-        public AcquaintanceSearchMessage(string nickname)
+        public AcquaintanceSearchMessage(AccountTagInformation tag)
         {
-            this.nickname = nickname;
+            this.tag = tag;
         }
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteUTF((string)nickname);
+            tag.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
-            nickname = (string)reader.ReadUTF();
+            tag = new AccountTagInformation();
+            tag.Deserialize(reader);
         }
 
 

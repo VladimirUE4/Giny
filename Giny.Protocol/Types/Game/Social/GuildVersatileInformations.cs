@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class GuildVersatileInformations  
     { 
-        public const ushort Id = 1344;
+        public const ushort Id = 4170;
         public virtual ushort TypeId => Id;
 
         public int guildId;

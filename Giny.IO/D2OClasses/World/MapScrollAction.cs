@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("MapScrollAction", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("MapScrollAction", "")]
     public class MapScrollAction : IDataObject , IIndexedData
     {
         public const string MODULE = "MapScrollActions";

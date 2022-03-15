@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeObjectTransfertExistingFromInvMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6949;
+        public  const ushort Id = 8876;
         public override ushort MessageId => Id;
 
 

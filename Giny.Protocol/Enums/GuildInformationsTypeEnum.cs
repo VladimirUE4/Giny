@@ -12,6 +12,7 @@ namespace Giny.Protocol.Enums
         INFO_TAX_COLLECTOR_GUILD_ONLY = 6,
         INFO_TAX_COLLECTOR_ALLIANCE = 7,
         INFO_TAX_COLLECTOR_LEAVE = 8,
+        INFO_RECRUITMENT = 9,
 
     }
 }

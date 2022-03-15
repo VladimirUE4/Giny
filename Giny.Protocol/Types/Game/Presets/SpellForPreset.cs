@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class SpellForPreset  
     { 
-        public const ushort Id = 2897;
+        public const ushort Id = 7500;
         public virtual ushort TypeId => Id;
 
         public short spellId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationFailedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9617;
+        public  const ushort Id = 7135;
         public override ushort MessageId => Id;
 
         public byte reason;

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AllianceInsiderPrismInformation : PrismInformation  
     { 
-        public const ushort Id = 3742;
+        public const ushort Id = 8201;
         public override ushort TypeId => Id;
 
         public int lastTimeSlotModificationDate;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("FriendlistItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("FriendlistItemCriterion", "")]
     public class FriendlistItemCriterion : ItemCriterion , IIndexedData
     {
 

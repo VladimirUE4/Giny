@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentGift", "com.ankamagames.dofus.datacenter.alignments")]
+    [D2OClass("AlignmentGift", "")]
     public class AlignmentGift : IDataObject , IIndexedData
     {
         public const string MODULE = "AlignmentGift";
@@ -15,8 +15,6 @@ namespace Giny.IO.D2OClasses
 
         public int id;
         public uint nameId;
-        public int effectId;
-        public uint gfxId;
 
         [D2OIgnore]
         public int Id_
@@ -40,30 +38,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 nameId = value;
-            }
-        }
-        [D2OIgnore]
-        public int EffectId
-        {
-            get
-            {
-                return effectId;
-            }
-            set
-            {
-                effectId = value;
-            }
-        }
-        [D2OIgnore]
-        public uint GfxId
-        {
-            get
-            {
-                return gfxId;
-            }
-            set
-            {
-                gfxId = value;
             }
         }
 

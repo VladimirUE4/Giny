@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CompanionCharacteristic", "com.ankamagames.dofus.datacenter.monsters")]
+    [D2OClass("CompanionCharacteristic", "")]
     public class CompanionCharacteristic : IDataObject , IIndexedData
     {
         public const string MODULE = "CompanionCharacteristics";

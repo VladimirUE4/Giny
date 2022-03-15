@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MountClientData  
     { 
-        public const ushort Id = 3424;
+        public const ushort Id = 9874;
         public virtual ushort TypeId => Id;
 
         public double id;

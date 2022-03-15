@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Idol", "com.ankamagames.dofus.datacenter.idols")]
+    [D2OClass("Idol", "")]
     public class Idol : IDataObject , IIndexedData
     {
         public const string MODULE = "Idols";

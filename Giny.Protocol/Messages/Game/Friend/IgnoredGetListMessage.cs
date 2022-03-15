@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IgnoredGetListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9301;
+        public  const ushort Id = 4403;
         public override ushort MessageId => Id;
 
 

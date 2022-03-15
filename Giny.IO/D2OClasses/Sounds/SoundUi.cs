@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SoundUi", "com.ankamagames.dofus.datacenter.sounds")]
+    [D2OClass("SoundUi", "")]
     public class SoundUi : IDataObject , IIndexedData
     {
         public const string MODULE = "SoundUi";

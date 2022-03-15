@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class StopToListenRunningFightRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7587;
+        public  const ushort Id = 4030;
         public override ushort MessageId => Id;
 
 

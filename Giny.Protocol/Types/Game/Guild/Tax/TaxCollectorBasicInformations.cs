@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TaxCollectorBasicInformations  
     { 
-        public const ushort Id = 6946;
+        public const ushort Id = 1488;
         public virtual ushort TypeId => Id;
 
         public short firstNameId;

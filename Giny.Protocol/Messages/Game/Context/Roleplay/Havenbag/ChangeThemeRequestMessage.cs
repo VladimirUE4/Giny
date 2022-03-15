@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChangeThemeRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8122;
+        public  const ushort Id = 8958;
         public override ushort MessageId => Id;
 
         public byte theme;

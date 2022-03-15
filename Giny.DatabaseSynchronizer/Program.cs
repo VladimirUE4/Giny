@@ -46,7 +46,7 @@ namespace Giny.DatabaseSynchronizer
 
         static void Main(string[] args)
         {
-            Logger.OnStartup();
+            Logger.DrawLogo();
 
             ConfigFile.LoadConfig();
 

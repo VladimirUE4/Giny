@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightShowFighterRandomStaticPoseMessage : GameFightShowFighterMessage  
     { 
-        public new const ushort Id = 3415;
+        public  const ushort Id = 7534;
         public override ushort MessageId => Id;
 
 

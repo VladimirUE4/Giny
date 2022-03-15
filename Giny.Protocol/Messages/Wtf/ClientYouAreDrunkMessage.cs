@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ClientYouAreDrunkMessage : DebugInClientMessage  
     { 
-        public new const ushort Id = 6551;
+        public  const ushort Id = 159;
         public override ushort MessageId => Id;
 
 

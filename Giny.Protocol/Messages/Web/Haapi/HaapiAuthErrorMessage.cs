@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HaapiAuthErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1483;
+        public  const ushort Id = 5003;
         public override ushort MessageId => Id;
 
         public byte type;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("InfoMessage", "com.ankamagames.dofus.datacenter.communication")]
+    [D2OClass("InfoMessage", "")]
     public class InfoMessage : IDataObject , IIndexedData
     {
         public const string MODULE = "InfoMessages";

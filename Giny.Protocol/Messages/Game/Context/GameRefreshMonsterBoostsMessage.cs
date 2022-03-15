@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRefreshMonsterBoostsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1461;
+        public  const ushort Id = 2110;
         public override ushort MessageId => Id;
 
         public MonsterBoosts[] monsterBoosts;

@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MonsterBoosts  
     { 
-        public const ushort Id = 1524;
+        public const ushort Id = 7719;
         public virtual ushort TypeId => Id;
 
         public int id;

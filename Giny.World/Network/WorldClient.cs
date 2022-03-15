@@ -24,7 +24,7 @@ using Giny.World.Managers.Items;
 using Giny.World.Records.Items;
 using Giny.World.Managers.Items.Collections;
 using Giny.Core.DesignPattern;
-using Giny.World.Logs;
+using Giny.World.Logging;
 
 namespace Giny.World.Network
 {

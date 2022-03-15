@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class WrapperObjectErrorMessage : SymbioticObjectErrorMessage  
     { 
-        public new const ushort Id = 9761;
+        public  const ushort Id = 1930;
         public override ushort MessageId => Id;
 
 

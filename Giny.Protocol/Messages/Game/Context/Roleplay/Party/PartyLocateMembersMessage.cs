@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyLocateMembersMessage : AbstractPartyMessage  
     { 
-        public new const ushort Id = 4043;
+        public  const ushort Id = 3205;
         public override ushort MessageId => Id;
 
         public PartyMemberGeoPosition[] geopositions;

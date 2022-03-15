@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ExtendedLockedBreachBranch : ExtendedBreachBranch  
     { 
-        public const ushort Id = 1746;
+        public const ushort Id = 169;
         public override ushort TypeId => Id;
 
         public int unlockPrice;

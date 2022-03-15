@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartedWithPodsMessage : ExchangeStartedMessage  
     { 
-        public new const ushort Id = 2697;
+        public  const ushort Id = 2123;
         public override ushort MessageId => Id;
 
         public double firstCharacterId;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MimicryObjectFeedAndAssociateRequestMessage : SymbioticObjectAssociateRequestMessage  
     { 
-        public new const ushort Id = 3975;
+        public  const ushort Id = 2549;
         public override ushort MessageId => Id;
 
         public int foodUID;

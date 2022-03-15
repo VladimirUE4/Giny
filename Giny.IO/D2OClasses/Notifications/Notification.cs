@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Notification", "com.ankamagames.dofus.datacenter.notifications")]
+    [D2OClass("Notification", "")]
     public class Notification : IDataObject , IIndexedData
     {
         public const string MODULE = "Notifications";

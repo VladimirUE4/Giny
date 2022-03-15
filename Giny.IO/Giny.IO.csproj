@@ -53,8 +53,6 @@
     <Compile Include="Compression\Deflate.cs" />
     <Compile Include="D2I\D2IFile.cs" />
     <Compile Include="D2OClasses\Abuse\AbuseReasons.cs" />
-    <Compile Include="D2OClasses\Alignments\AlignmentBalance.cs" />
-    <Compile Include="D2OClasses\Alignments\AlignmentEffect.cs" />
     <Compile Include="D2OClasses\Alignments\AlignmentGift.cs" />
     <Compile Include="D2OClasses\Alignments\AlignmentOrder.cs" />
     <Compile Include="D2OClasses\Alignments\AlignmentRank.cs" />
@@ -129,6 +127,8 @@
     <Compile Include="D2OClasses\Guild\EmblemBackground.cs" />
     <Compile Include="D2OClasses\Guild\EmblemSymbol.cs" />
     <Compile Include="D2OClasses\Guild\EmblemSymbolCategory.cs" />
+    <Compile Include="D2OClasses\Guild\GuildTag.cs" />
+    <Compile Include="D2OClasses\Guild\GuildTagsType.cs" />
     <Compile Include="D2OClasses\Guild\RankName.cs" />
     <Compile Include="D2OClasses\Houses\HavenbagFurniture.cs" />
     <Compile Include="D2OClasses\Houses\HavenbagTheme.cs" />
@@ -176,6 +176,7 @@
     <Compile Include="D2OClasses\Items\Criterion\KamaItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\LevelItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\MapCharactersItemCriterion.cs" />
+    <Compile Include="D2OClasses\Items\Criterion\MapItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\MariedItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\MonsterGroupChallengeCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\MonthItemCriterion.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="D2OClasses\Misc\Pack.cs" />
     <Compile Include="D2OClasses\Misc\Subhint.cs" />
     <Compile Include="D2OClasses\Misc\Tips.cs" />
-    <Compile Include="D2OClasses\Misc\Url.cs" />
     <Compile Include="D2OClasses\Monsters\Companion.cs" />
     <Compile Include="D2OClasses\Monsters\CompanionCharacteristic.cs" />
     <Compile Include="D2OClasses\Monsters\CompanionSpell.cs" />
@@ -257,9 +257,13 @@
     <Compile Include="D2OClasses\Npcs\NpcMessage.cs" />
     <Compile Include="D2OClasses\Npcs\TaxCollectorFirstname.cs" />
     <Compile Include="D2OClasses\Npcs\TaxCollectorName.cs" />
+    <Compile Include="D2OClasses\OptionalFeatures\CustomModeBreedSpell.cs" />
+    <Compile Include="D2OClasses\OptionalFeatures\ForgettableSpell.cs" />
     <Compile Include="D2OClasses\Playlists\Playlist.cs" />
     <Compile Include="D2OClasses\Popup\PopupButton.cs" />
     <Compile Include="D2OClasses\Popup\PopupInformation.cs" />
+    <Compile Include="D2OClasses\Progression\ActivitySuggestion.cs" />
+    <Compile Include="D2OClasses\Progression\ActivitySuggestionsCategory.cs" />
     <Compile Include="D2OClasses\Progression\FeatureDescription.cs" />
     <Compile Include="D2OClasses\Quest\Achievement.cs" />
     <Compile Include="D2OClasses\Quest\AchievementCategory.cs" />
@@ -308,8 +312,6 @@
     <Compile Include="D2OClasses\Spells\SpellVariant.cs" />
     <Compile Include="D2OClasses\Temporis\AchievementProgress.cs" />
     <Compile Include="D2OClasses\Temporis\AchievementProgressStep.cs" />
-    <Compile Include="D2OClasses\Temporis\CustomModeBreedSpell.cs" />
-    <Compile Include="D2OClasses\Temporis\ForgettableSpell.cs" />
     <Compile Include="D2OClasses\World\Area.cs" />
     <Compile Include="D2OClasses\World\Dungeon.cs" />
     <Compile Include="D2OClasses\World\Hint.cs" />

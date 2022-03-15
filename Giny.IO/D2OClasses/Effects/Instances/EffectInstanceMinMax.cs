@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("EffectInstanceMinMax", "com.ankamagames.dofus.datacenter.effects.instances")]
+    [D2OClass("EffectInstanceMinMax", "")]
     public class EffectInstanceMinMax : EffectInstance , IIndexedData
     {
 

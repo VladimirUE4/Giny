@@ -7,10 +7,10 @@ using Giny.Protocol;
 using Giny.Protocol.Enums;
 
 namespace Giny.Protocol.Messages
-{
-    public class CharacterCreationRequestMessage : NetworkMessage
-    {
-        public new const ushort Id = 2210;
+{ 
+    public class CharacterCreationRequestMessage : NetworkMessage  
+    { 
+        public  const ushort Id = 5026;
         public override ushort MessageId => Id;
 
         public string name;
@@ -22,7 +22,7 @@ namespace Giny.Protocol.Messages
         public CharacterCreationRequestMessage()
         {
         }
-        public CharacterCreationRequestMessage(string name, byte breed, bool sex, int[] colors, short cosmeticId)
+        public CharacterCreationRequestMessage(string name,byte breed,bool sex,int[] colors,short cosmeticId)
         {
             this.name = name;
             this.breed = breed;
@@ -35,7 +35,7 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)name);
             writer.WriteByte((byte)breed);
             writer.WriteBoolean((bool)sex);
-            for (uint _i4 = 0; _i4 < 5; _i4++)
+            for (uint _i4 = 0;_i4 < 5;_i4++)
             {
                 writer.WriteInt((int)colors[_i4]);
             }
@@ -56,10 +56,8 @@ namespace Giny.Protocol.Messages
                 throw new Exception("Forbidden value (" + breed + ") on element of CharacterCreationRequestMessage.breed.");
             }
 
-            colors = new int[5];
-
             sex = (bool)reader.ReadBoolean();
-            for (uint _i4 = 0; _i4 < 5; _i4++)
+            for (uint _i4 = 0;_i4 < 5;_i4++)
             {
                 colors[_i4] = reader.ReadInt();
             }
@@ -75,5 +73,11 @@ namespace Giny.Protocol.Messages
 
     }
 }
+
+
+
+
+
+
 
 

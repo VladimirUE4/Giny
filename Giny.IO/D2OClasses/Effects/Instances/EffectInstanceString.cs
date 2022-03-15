@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("EffectInstanceString", "com.ankamagames.dofus.datacenter.effects.instances")]
+    [D2OClass("EffectInstanceString", "")]
     public class EffectInstanceString : EffectInstance , IIndexedData
     {
 

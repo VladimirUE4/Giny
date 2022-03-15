@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AccountHouseInformations : HouseInformations  
     { 
-        public const ushort Id = 8630;
+        public const ushort Id = 3170;
         public override ushort TypeId => Id;
 
         public HouseInstanceInformations houseInfos;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdolPartyRegisterRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5528;
+        public  const ushort Id = 868;
         public override ushort MessageId => Id;
 
         public bool register;

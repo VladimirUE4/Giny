@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemInformationWithQuantity : ObjectItemMinimalInformation  
     { 
-        public const ushort Id = 6066;
+        public const ushort Id = 4715;
         public override ushort TypeId => Id;
 
         public int quantity;

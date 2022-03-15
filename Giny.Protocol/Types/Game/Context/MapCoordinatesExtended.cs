@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MapCoordinatesExtended : MapCoordinatesAndId  
     { 
-        public const ushort Id = 8214;
+        public const ushort Id = 3550;
         public override ushort TypeId => Id;
 
         public short subAreaId;

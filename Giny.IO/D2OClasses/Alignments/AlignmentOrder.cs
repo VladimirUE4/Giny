@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentOrder", "com.ankamagames.dofus.datacenter.alignments")]
+    [D2OClass("AlignmentOrder", "")]
     public class AlignmentOrder : IDataObject , IIndexedData
     {
         public const string MODULE = "AlignmentOrder";

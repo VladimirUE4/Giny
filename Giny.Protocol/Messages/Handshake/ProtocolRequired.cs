@@ -10,14 +10,13 @@ namespace Giny.Protocol.Messages
 { 
     public class ProtocolRequired : NetworkMessage  
     { 
-        public new const ushort Id = 6660;
+        public  const ushort Id = 5716;
         public override ushort MessageId => Id;
 
         public string version;
 
         public ProtocolRequired()
         {
-
         }
         public ProtocolRequired(string version)
         {

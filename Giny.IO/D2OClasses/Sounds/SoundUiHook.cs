@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SoundUiHook", "com.ankamagames.dofus.datacenter.sounds")]
+    [D2OClass("SoundUiHook", "")]
     public class SoundUiHook : IDataObject , IIndexedData
     {
         public const string MODULE = "SoundUiHook";

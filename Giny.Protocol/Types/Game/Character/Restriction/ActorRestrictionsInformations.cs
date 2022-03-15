@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ActorRestrictionsInformations  
     { 
-        public const ushort Id = 9470;
+        public const ushort Id = 8982;
         public virtual ushort TypeId => Id;
 
         public bool cantBeAggressed;
@@ -31,12 +31,11 @@ namespace Giny.Protocol.Types
         public bool cantSpeakToNPC;
         public bool cantChangeZone;
         public bool cantAttackMonster;
-        public bool cantWalk8Directions;
 
         public ActorRestrictionsInformations()
         {
         }
-        public ActorRestrictionsInformations(bool cantBeAggressed,bool cantBeChallenged,bool cantTrade,bool cantBeAttackedByMutant,bool cantRun,bool forceSlowWalk,bool cantMinimize,bool cantMove,bool cantAggress,bool cantChallenge,bool cantExchange,bool cantAttack,bool cantChat,bool cantBeMerchant,bool cantUseObject,bool cantUseTaxCollector,bool cantUseInteractive,bool cantSpeakToNPC,bool cantChangeZone,bool cantAttackMonster,bool cantWalk8Directions)
+        public ActorRestrictionsInformations(bool cantBeAggressed,bool cantBeChallenged,bool cantTrade,bool cantBeAttackedByMutant,bool cantRun,bool forceSlowWalk,bool cantMinimize,bool cantMove,bool cantAggress,bool cantChallenge,bool cantExchange,bool cantAttack,bool cantChat,bool cantBeMerchant,bool cantUseObject,bool cantUseTaxCollector,bool cantUseInteractive,bool cantSpeakToNPC,bool cantChangeZone,bool cantAttackMonster)
         {
             this.cantBeAggressed = cantBeAggressed;
             this.cantBeChallenged = cantBeChallenged;
@@ -58,7 +57,6 @@ namespace Giny.Protocol.Types
             this.cantSpeakToNPC = cantSpeakToNPC;
             this.cantChangeZone = cantChangeZone;
             this.cantAttackMonster = cantAttackMonster;
-            this.cantWalk8Directions = cantWalk8Directions;
         }
         public virtual void Serialize(IDataWriter writer)
         {
@@ -87,7 +85,6 @@ namespace Giny.Protocol.Types
             _box2 = BooleanByteWrapper.SetFlag(_box2,1,cantSpeakToNPC);
             _box2 = BooleanByteWrapper.SetFlag(_box2,2,cantChangeZone);
             _box2 = BooleanByteWrapper.SetFlag(_box2,3,cantAttackMonster);
-            _box2 = BooleanByteWrapper.SetFlag(_box2,4,cantWalk8Directions);
             writer.WriteByte((byte)_box2);
         }
         public virtual void Deserialize(IDataReader reader)
@@ -115,7 +112,6 @@ namespace Giny.Protocol.Types
             cantSpeakToNPC = BooleanByteWrapper.GetFlag(_box2,1);
             cantChangeZone = BooleanByteWrapper.GetFlag(_box2,2);
             cantAttackMonster = BooleanByteWrapper.GetFlag(_box2,3);
-            cantWalk8Directions = BooleanByteWrapper.GetFlag(_box2,4);
         }
 
 

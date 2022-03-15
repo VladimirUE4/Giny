@@ -10,31 +10,31 @@ namespace Giny.Protocol.Messages
 { 
     public class EmotePlayErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5039;
+        public  const ushort Id = 9167;
         public override ushort MessageId => Id;
 
-        public byte emoteId;
+        public short emoteId;
 
         public EmotePlayErrorMessage()
         {
         }
-        public EmotePlayErrorMessage(byte emoteId)
+        public EmotePlayErrorMessage(short emoteId)
         {
             this.emoteId = emoteId;
         }
         public override void Serialize(IDataWriter writer)
         {
-            if (emoteId < 0 || emoteId > 255)
+            if (emoteId < 0 || emoteId > 65535)
             {
                 throw new Exception("Forbidden value (" + emoteId + ") on element emoteId.");
             }
 
-            writer.WriteByte((byte)emoteId);
+            writer.WriteShort((short)emoteId);
         }
         public override void Deserialize(IDataReader reader)
         {
-            emoteId = (byte)reader.ReadSByte();
-            if (emoteId < 0 || emoteId > 255)
+            emoteId = (short)reader.ReadUShort();
+            if (emoteId < 0 || emoteId > 65535)
             {
                 throw new Exception("Forbidden value (" + emoteId + ") on element of EmotePlayExceptionMessage.emoteId.");
             }

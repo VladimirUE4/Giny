@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TaxCollectorMovementRemoveMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3879;
+        public  const ushort Id = 5927;
         public override ushort MessageId => Id;
 
         public double collectorId;

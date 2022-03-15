@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceKickRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4617;
+        public  const ushort Id = 1648;
         public override ushort MessageId => Id;
 
         public int kickedId;

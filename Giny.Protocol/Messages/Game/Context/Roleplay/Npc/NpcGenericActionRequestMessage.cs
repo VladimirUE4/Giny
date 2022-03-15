@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NpcGenericActionRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6429;
+        public  const ushort Id = 1598;
         public override ushort MessageId => Id;
 
         public int npcId;

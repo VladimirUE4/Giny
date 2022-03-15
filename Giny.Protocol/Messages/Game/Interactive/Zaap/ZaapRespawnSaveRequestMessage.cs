@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ZaapRespawnSaveRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4584;
+        public  const ushort Id = 4572;
         public override ushort MessageId => Id;
 
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("QuestObjectiveParameters", "com.ankamagames.dofus.datacenter.quest.objectives")]
+    [D2OClass("QuestObjectiveParameters", "")]
     public class QuestObjectiveParameters : Proxy , IIndexedData
     {
 

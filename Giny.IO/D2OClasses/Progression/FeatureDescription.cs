@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("FeatureDescription", "com.ankamagames.dofus.datacenter.progression")]
+    [D2OClass("FeatureDescription", "")]
     public class FeatureDescription : IDataObject , IIndexedData
     {
         public const string MODULE = "FeatureDescriptions";

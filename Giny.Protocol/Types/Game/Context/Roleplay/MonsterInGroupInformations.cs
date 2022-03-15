@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class MonsterInGroupInformations : MonsterInGroupLightInformations  
     { 
-        public const ushort Id = 8376;
+        public const ushort Id = 2614;
         public override ushort TypeId => Id;
 
         public EntityLook look;

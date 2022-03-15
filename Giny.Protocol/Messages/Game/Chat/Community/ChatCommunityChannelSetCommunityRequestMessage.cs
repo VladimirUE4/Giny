@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatCommunityChannelSetCommunityRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7192;
+        public  const ushort Id = 9201;
         public override ushort MessageId => Id;
 
         public short communityId;

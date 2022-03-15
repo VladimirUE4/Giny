@@ -8,12 +8,12 @@ namespace Giny.Protocol.Types
 { 
     public class HouseInformationsForGuild : HouseInformations  
     { 
-        public const ushort Id = 8727;
+        public const ushort Id = 3219;
         public override ushort TypeId => Id;
 
         public int instanceId;
         public bool secondHand;
-        public string ownerName;
+        public AccountTagInformation ownerTag;
         public short worldX;
         public short worldY;
         public double mapId;
@@ -24,11 +24,11 @@ namespace Giny.Protocol.Types
         public HouseInformationsForGuild()
         {
         }
-        public HouseInformationsForGuild(int instanceId,bool secondHand,string ownerName,short worldX,short worldY,double mapId,short subAreaId,int[] skillListIds,int guildshareParams)
+        public HouseInformationsForGuild(int instanceId,bool secondHand,AccountTagInformation ownerTag,short worldX,short worldY,double mapId,short subAreaId,int[] skillListIds,int guildshareParams)
         {
             this.instanceId = instanceId;
             this.secondHand = secondHand;
-            this.ownerName = ownerName;
+            this.ownerTag = ownerTag;
             this.worldX = worldX;
             this.worldY = worldY;
             this.mapId = mapId;
@@ -46,7 +46,7 @@ namespace Giny.Protocol.Types
 
             writer.WriteInt((int)instanceId);
             writer.WriteBoolean((bool)secondHand);
-            writer.WriteUTF((string)ownerName);
+            ownerTag.Serialize(writer);
             if (worldX < -255 || worldX > 255)
             {
                 throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
@@ -95,7 +95,8 @@ namespace Giny.Protocol.Types
             }
 
             secondHand = (bool)reader.ReadBoolean();
-            ownerName = (string)reader.ReadUTF();
+            ownerTag = new AccountTagInformation();
+            ownerTag.Deserialize(reader);
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {

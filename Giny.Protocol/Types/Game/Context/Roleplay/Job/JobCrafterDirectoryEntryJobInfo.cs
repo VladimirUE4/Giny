@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class JobCrafterDirectoryEntryJobInfo  
     { 
-        public const ushort Id = 7129;
+        public const ushort Id = 5220;
         public virtual ushort TypeId => Id;
 
         public byte jobId;

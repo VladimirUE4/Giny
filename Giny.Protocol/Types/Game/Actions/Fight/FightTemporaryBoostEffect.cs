@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTemporaryBoostEffect : AbstractFightDispellableEffect  
     { 
-        public const ushort Id = 2053;
+        public const ushort Id = 7366;
         public override ushort TypeId => Id;
 
         public int delta;

@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DebugInClientMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2705;
+        public  const ushort Id = 6517;
         public override ushort MessageId => Id;
 
         public byte level;

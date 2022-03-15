@@ -112,7 +112,7 @@ namespace Giny.World.Records.Characters
         }
         [ProtoSerialize]
         [Update]
-        public List<byte> KnownEmotes
+        public List<short> KnownEmotes
         {
             get;
             set;
@@ -259,7 +259,7 @@ namespace Giny.World.Records.Characters
                 Stats = EntityStats.New(ConfigFile.Instance.StartLevel, breedId),
                 Kamas = 0,
                 StatsPoints = 0,
-                KnownEmotes = new List<byte>() { 1 },
+                KnownEmotes = new List<short>() { 1 },
                 Shortcuts = new List<CharacterShortcut>(),
                 SpawnPointMapId = ConfigFile.Instance.SpawnMapId,
                 KnownOrnaments = new List<short>(),

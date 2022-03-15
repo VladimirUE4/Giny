@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ShortcutEntitiesPreset : Shortcut  
     { 
-        public const ushort Id = 3594;
+        public const ushort Id = 3590;
         public override ushort TypeId => Id;
 
         public short presetId;

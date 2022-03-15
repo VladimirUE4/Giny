@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameCautiousMapMovementMessage : GameMapMovementMessage  
     { 
-        public new const ushort Id = 7676;
+        public  const ushort Id = 431;
         public override ushort MessageId => Id;
 
 

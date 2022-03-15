@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountReleaseRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 618;
+        public  const ushort Id = 5543;
         public override ushort MessageId => Id;
 
 

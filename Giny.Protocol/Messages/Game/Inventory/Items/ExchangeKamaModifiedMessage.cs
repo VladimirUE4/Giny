@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeKamaModifiedMessage : ExchangeObjectMessage  
     { 
-        public new const ushort Id = 598;
+        public  const ushort Id = 1705;
         public override ushort MessageId => Id;
 
         public long quantity;

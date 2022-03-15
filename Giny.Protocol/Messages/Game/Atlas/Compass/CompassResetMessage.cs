@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CompassResetMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4473;
+        public  const ushort Id = 4432;
         public override ushort MessageId => Id;
 
         public byte type;

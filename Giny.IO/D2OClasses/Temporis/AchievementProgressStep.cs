@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AchievementProgressStep", "com.ankamagames.dofus.datacenter.temporis")]
+    [D2OClass("AchievementProgressStep", "")]
     public class AchievementProgressStep : IDataObject , IIndexedData
     {
         public const string MODULE = "AchievementProgressSteps";

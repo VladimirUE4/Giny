@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class QuestObjectiveInformationsWithCompletion : QuestObjectiveInformations  
     { 
-        public const ushort Id = 1770;
+        public const ushort Id = 5115;
         public override ushort TypeId => Id;
 
         public short curCompletion;

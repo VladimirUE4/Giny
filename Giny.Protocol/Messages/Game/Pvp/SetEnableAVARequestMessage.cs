@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SetEnableAVARequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7227;
+        public  const ushort Id = 3626;
         public override ushort MessageId => Id;
 
         public bool enable;

@@ -413,7 +413,7 @@ namespace Giny.World.Managers.Fights.Stats
             this.Initialize();
         }
 
-        public GameFightMinimalStats GetFightMinimalStats(Fighter owner, CharacterFighter target)
+        public GameFightCharacteristics GetGameFightCharacteristics(Fighter owner, CharacterFighter target)
         {
             Fighter summoner = owner.GetSummoner();
 

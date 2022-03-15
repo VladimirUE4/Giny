@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTemporaryBoostStateEffect : FightTemporaryBoostEffect  
     { 
-        public const ushort Id = 3882;
+        public const ushort Id = 8281;
         public override ushort TypeId => Id;
 
         public short stateId;

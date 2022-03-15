@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LockableStateUpdateStorageMessage : LockableStateUpdateAbstractMessage  
     { 
-        public new const ushort Id = 8935;
+        public  const ushort Id = 5127;
         public override ushort MessageId => Id;
 
         public double mapId;

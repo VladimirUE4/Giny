@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Waypoint", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("Waypoint", "")]
     public class Waypoint : IDataObject , IIndexedData
     {
         public const string MODULE = "Waypoints";

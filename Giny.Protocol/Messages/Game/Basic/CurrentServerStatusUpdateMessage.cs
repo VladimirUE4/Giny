@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CurrentServerStatusUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1870;
+        public  const ushort Id = 547;
         public override ushort MessageId => Id;
 
         public byte status;

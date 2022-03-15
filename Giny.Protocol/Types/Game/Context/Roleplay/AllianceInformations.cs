@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AllianceInformations : BasicNamedAllianceInformations  
     { 
-        public const ushort Id = 9961;
+        public const ushort Id = 5338;
         public override ushort TypeId => Id;
 
         public GuildEmblem allianceEmblem;

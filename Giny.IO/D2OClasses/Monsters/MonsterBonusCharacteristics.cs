@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Giny.IO.D2OClasses
 {
     [D2OClass("MonsterBonusCharacteristics", "com.ankamagames.dofus.datacenter.monsters")]
-    public class MonsterBonusCharacteristics : IDataObject , IIndexedData
+    public class MonsterBonusCharacteristics : IDataObject, IIndexedData
     {
 
         public int Id => throw new NotImplementedException();
@@ -235,11 +235,10 @@ namespace Giny.IO.D2OClasses
                 bonusAirDamage = value;
             }
         }
-     
+
 
     }
 }
-
 
 
 

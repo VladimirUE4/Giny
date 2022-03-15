@@ -222,7 +222,7 @@ namespace Giny.World.Managers.Entities.Look
         /// 5142 --> aura multicolore
         /// 5143 --> aura blanche
         /// </summary>
-        public short GetAuraBones(Character character, byte emoteId)
+        public short GetAuraBones(Character character, short emoteId)
         {
             switch (emoteId)
             {

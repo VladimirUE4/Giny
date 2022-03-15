@@ -10,15 +10,15 @@ namespace Giny.Protocol.Messages
 { 
     public class EmoteListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4861;
+        public  const ushort Id = 9032;
         public override ushort MessageId => Id;
 
-        public byte[] emoteIds;
+        public short[] emoteIds;
 
         public EmoteListMessage()
         {
         }
-        public EmoteListMessage(byte[] emoteIds)
+        public EmoteListMessage(short[] emoteIds)
         {
             this.emoteIds = emoteIds;
         }
@@ -27,12 +27,12 @@ namespace Giny.Protocol.Messages
             writer.WriteShort((short)emoteIds.Length);
             for (uint _i1 = 0;_i1 < emoteIds.Length;_i1++)
             {
-                if (emoteIds[_i1] < 0 || emoteIds[_i1] > 255)
+                if (emoteIds[_i1] < 0 || emoteIds[_i1] > 65535)
                 {
                     throw new Exception("Forbidden value (" + emoteIds[_i1] + ") on element 1 (starting at 1) of emoteIds.");
                 }
 
-                writer.WriteByte((byte)emoteIds[_i1]);
+                writer.WriteShort((short)emoteIds[_i1]);
             }
 
         }
@@ -40,16 +40,16 @@ namespace Giny.Protocol.Messages
         {
             uint _val1 = 0;
             uint _emoteIdsLen = (uint)reader.ReadUShort();
-            emoteIds = new byte[_emoteIdsLen];
+            emoteIds = new short[_emoteIdsLen];
             for (uint _i1 = 0;_i1 < _emoteIdsLen;_i1++)
             {
-                _val1 = (uint)reader.ReadSByte();
-                if (_val1 < 0 || _val1 > 255)
+                _val1 = (uint)reader.ReadUShort();
+                if (_val1 < 0 || _val1 > 65535)
                 {
                     throw new Exception("Forbidden value (" + _val1 + ") on elements of emoteIds.");
                 }
 
-                emoteIds[_i1] = (byte)_val1;
+                emoteIds[_i1] = (short)_val1;
             }
 
         }

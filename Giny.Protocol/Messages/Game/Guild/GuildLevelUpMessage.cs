@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildLevelUpMessage : NetworkMessage  
     { 
-        public new const ushort Id = 590;
+        public  const ushort Id = 7669;
         public override ushort MessageId => Id;
 
         public byte newLevel;

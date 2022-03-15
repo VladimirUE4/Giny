@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionSpamMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6143;
+        public  const ushort Id = 6276;
         public override ushort MessageId => Id;
 
         public short[] cells;

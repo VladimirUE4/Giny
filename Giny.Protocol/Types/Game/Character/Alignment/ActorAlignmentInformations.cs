@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ActorAlignmentInformations  
     { 
-        public const ushort Id = 3998;
+        public const ushort Id = 3635;
         public virtual ushort TypeId => Id;
 
         public byte alignmentSide;

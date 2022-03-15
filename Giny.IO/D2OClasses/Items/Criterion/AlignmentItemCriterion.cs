@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("AlignmentItemCriterion", "")]
     public class AlignmentItemCriterion : ItemCriterion , IIndexedData
     {
 

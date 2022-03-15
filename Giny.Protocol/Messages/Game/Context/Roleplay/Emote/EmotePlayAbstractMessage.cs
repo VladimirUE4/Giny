@@ -10,28 +10,28 @@ namespace Giny.Protocol.Messages
 { 
     public class EmotePlayAbstractMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6839;
+        public  const ushort Id = 4497;
         public override ushort MessageId => Id;
 
-        public byte emoteId;
+        public short emoteId;
         public double emoteStartTime;
 
         public EmotePlayAbstractMessage()
         {
         }
-        public EmotePlayAbstractMessage(byte emoteId,double emoteStartTime)
+        public EmotePlayAbstractMessage(short emoteId,double emoteStartTime)
         {
             this.emoteId = emoteId;
             this.emoteStartTime = emoteStartTime;
         }
         public override void Serialize(IDataWriter writer)
         {
-            if (emoteId < 0 || emoteId > 255)
+            if (emoteId < 0 || emoteId > 65535)
             {
                 throw new Exception("Forbidden value (" + emoteId + ") on element emoteId.");
             }
 
-            writer.WriteByte((byte)emoteId);
+            writer.WriteShort((short)emoteId);
             if (emoteStartTime < -9.00719925474099E+15 || emoteStartTime > 9.00719925474099E+15)
             {
                 throw new Exception("Forbidden value (" + emoteStartTime + ") on element emoteStartTime.");
@@ -41,8 +41,8 @@ namespace Giny.Protocol.Messages
         }
         public override void Deserialize(IDataReader reader)
         {
-            emoteId = (byte)reader.ReadSByte();
-            if (emoteId < 0 || emoteId > 255)
+            emoteId = (short)reader.ReadUShort();
+            if (emoteId < 0 || emoteId > 65535)
             {
                 throw new Exception("Forbidden value (" + emoteId + ") on element of EmotePlayAbstractMessage.emoteId.");
             }

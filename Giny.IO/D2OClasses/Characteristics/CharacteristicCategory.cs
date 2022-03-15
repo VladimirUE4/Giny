@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CharacteristicCategory", "com.ankamagames.dofus.datacenter.characteristics")]
+    [D2OClass("CharacteristicCategory", "")]
     public class CharacteristicCategory : IDataObject , IIndexedData
     {
         public const string MODULE = "CharacteristicCategories";

@@ -8,19 +8,19 @@ namespace Giny.Protocol.Types
 { 
     public class GameContextSummonsInformation  
     { 
-        public const ushort Id = 3995;
+        public const ushort Id = 253;
         public virtual ushort TypeId => Id;
 
         public SpawnInformation spawnInformation;
         public byte wave;
         public EntityLook look;
-        public GameFightMinimalStats stats;
+        public GameFightCharacteristics stats;
         public GameContextBasicSpawnInformation[] summons;
 
         public GameContextSummonsInformation()
         {
         }
-        public GameContextSummonsInformation(SpawnInformation spawnInformation,byte wave,EntityLook look,GameFightMinimalStats stats,GameContextBasicSpawnInformation[] summons)
+        public GameContextSummonsInformation(SpawnInformation spawnInformation,byte wave,EntityLook look,GameFightCharacteristics stats,GameContextBasicSpawnInformation[] summons)
         {
             this.spawnInformation = spawnInformation;
             this.wave = wave;
@@ -65,7 +65,7 @@ namespace Giny.Protocol.Types
             look = new EntityLook();
             look.Deserialize(reader);
             uint _id4 = (uint)reader.ReadUShort();
-            stats = ProtocolTypeManager.GetInstance<GameFightMinimalStats>((short)_id4);
+            stats = ProtocolTypeManager.GetInstance<GameFightCharacteristics>((short)_id4);
             stats.Deserialize(reader);
             uint _summonsLen = (uint)reader.ReadUShort();
             for (uint _i5 = 0;_i5 < _summonsLen;_i5++)

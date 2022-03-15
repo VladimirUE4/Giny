@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ServerTemporisSeason", "com.ankamagames.dofus.datacenter.servers")]
+    [D2OClass("ServerTemporisSeason", "")]
     public class ServerTemporisSeason : IDataObject , IIndexedData
     {
         public const string MODULE = "ServerTemporisSeasons";
 
-        public int Id => uid;
+        public int Id => throw new NotImplementedException();
 
         public int uid;
         public uint seasonNumber;

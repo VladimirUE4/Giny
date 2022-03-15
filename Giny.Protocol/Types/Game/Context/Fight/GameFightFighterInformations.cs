@@ -8,18 +8,18 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightFighterInformations : GameContextActorInformations  
     { 
-        public const ushort Id = 6298;
+        public const ushort Id = 5068;
         public override ushort TypeId => Id;
 
         public GameContextBasicSpawnInformation spawnInfo;
         public byte wave;
-        public GameFightMinimalStats stats;
+        public GameFightCharacteristics stats;
         public short[] previousPositions;
 
         public GameFightFighterInformations()
         {
         }
-        public GameFightFighterInformations(GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightMinimalStats stats,short[] previousPositions)
+        public GameFightFighterInformations(GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions)
         {
             this.spawnInfo = spawnInfo;
             this.wave = wave;
@@ -63,7 +63,7 @@ namespace Giny.Protocol.Types
             }
 
             uint _id3 = (uint)reader.ReadUShort();
-            stats = ProtocolTypeManager.GetInstance<GameFightMinimalStats>((short)_id3);
+            stats = ProtocolTypeManager.GetInstance<GameFightCharacteristics>((short)_id3);
             stats.Deserialize(reader);
             uint _previousPositionsLen = (uint)reader.ReadUShort();
             previousPositions = new short[_previousPositionsLen];

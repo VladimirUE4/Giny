@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SubscribeItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("SubscribeItemCriterion", "")]
     public class SubscribeItemCriterion : ItemCriterion , IIndexedData
     {
 

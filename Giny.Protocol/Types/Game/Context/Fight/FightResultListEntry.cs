@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightResultListEntry  
     { 
-        public const ushort Id = 9494;
+        public const ushort Id = 6627;
         public virtual ushort TypeId => Id;
 
         public short outcome;

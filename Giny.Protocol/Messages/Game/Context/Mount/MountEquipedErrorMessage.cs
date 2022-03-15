@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountEquipedErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3527;
+        public  const ushort Id = 1774;
         public override ushort MessageId => Id;
 
         public byte errorType;

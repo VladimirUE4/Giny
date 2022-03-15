@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightLoot  
     { 
-        public const ushort Id = 3121;
+        public const ushort Id = 7224;
         public virtual ushort TypeId => Id;
 
         public int[] objects;

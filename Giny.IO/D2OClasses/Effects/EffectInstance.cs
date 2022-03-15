@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Giny.IO.D2OClasses
 {
     [D2OClass("EffectInstance", "com.ankamagames.dofus.datacenter.effects")]
-    public class EffectInstance : IDataObject , IIndexedData
+    public class EffectInstance : IDataObject, IIndexedData
     {
 
         public int Id => throw new NotImplementedException();
@@ -368,9 +368,3 @@ namespace Giny.IO.D2OClasses
 
     }
 }
-
-
-
-
-
-

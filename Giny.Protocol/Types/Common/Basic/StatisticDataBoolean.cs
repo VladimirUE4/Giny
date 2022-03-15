@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class StatisticDataBoolean : StatisticData  
     { 
-        public const ushort Id = 9517;
+        public const ushort Id = 8397;
         public override ushort TypeId => Id;
 
         public bool value;

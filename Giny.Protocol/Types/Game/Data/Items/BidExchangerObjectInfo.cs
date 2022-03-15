@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class BidExchangerObjectInfo  
     { 
-        public const ushort Id = 4958;
+        public const ushort Id = 461;
         public virtual ushort TypeId => Id;
 
         public int objectUID;

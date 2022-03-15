@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LockableCodeResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1111;
+        public  const ushort Id = 3222;
         public override ushort MessageId => Id;
 
         public byte result;

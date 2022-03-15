@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameContextReadyMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9444;
+        public  const ushort Id = 912;
         public override ushort MessageId => Id;
 
         public double mapId;

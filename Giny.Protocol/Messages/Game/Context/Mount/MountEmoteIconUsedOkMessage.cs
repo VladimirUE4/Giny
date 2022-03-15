@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountEmoteIconUsedOkMessage : NetworkMessage  
     { 
-        public new const ushort Id = 612;
+        public  const ushort Id = 1654;
         public override ushort MessageId => Id;
 
         public int mountId;

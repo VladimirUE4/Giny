@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("RandomDropGroup", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("RandomDropGroup", "")]
     public class RandomDropGroup : IDataObject , IIndexedData
     {
         public const string MODULE = "RandomDropGroups";
@@ -17,6 +17,7 @@ namespace Giny.IO.D2OClasses
         public string name;
         public string description;
         public List<RandomDropItem> randomDropItems;
+        public bool displayContent;
         public bool displayChances;
 
         [D2OIgnore]
@@ -65,6 +66,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 randomDropItems = value;
+            }
+        }
+        [D2OIgnore]
+        public bool DisplayContent
+        {
+            get
+            {
+                return displayContent;
+            }
+            set
+            {
+                displayContent = value;
             }
         }
         [D2OIgnore]

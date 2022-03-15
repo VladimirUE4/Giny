@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SkinPosition", "com.ankamagames.dofus.datacenter.appearance")]
+    [D2OClass("SkinPosition", "")]
     public class SkinPosition : IDataObject , IIndexedData
     {
         public const string MODULE = "SkinPositions";

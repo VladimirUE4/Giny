@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectGroundListAddedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3154;
+        public  const ushort Id = 6617;
         public override ushort MessageId => Id;
 
         public short[] cells;

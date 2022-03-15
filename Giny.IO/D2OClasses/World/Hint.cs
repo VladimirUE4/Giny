@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Hint", "com.ankamagames.dofus.datacenter.world")]
+    [D2OClass("Hint", "")]
     public class Hint : IDataObject , IIndexedData
     {
         public const string MODULE = "Hints";
 
         public int Id => (int)id;
-        
+
         public int id;
         public uint gfx;
         public uint nameId;
@@ -23,8 +23,8 @@ namespace Giny.IO.D2OClasses
         public bool outdoor;
         public int subareaId;
         public int worldMapId;
-        public int categoryId;
         public uint level;
+        public int categoryId;
 
         [D2OIgnore]
         public int Id_

@@ -986,7 +986,7 @@ namespace Giny.World.Managers.Entities.Characters
                 return false;
             }
         }
-        public void PlayEmote(byte emoteId)
+        public void PlayEmote(short emoteId)
         {
             EmoteRecord template = EmoteRecord.GetEmote(emoteId);
 
@@ -1377,7 +1377,7 @@ namespace Giny.World.Managers.Entities.Characters
         public ActorRestrictionsInformations GetActorRestrictions()
         {
             return new ActorRestrictionsInformations(false, false, false, false, false, false, false, false, false, false, false,
-                false, false, false, false, false, false, false, false, false, false);
+                false, false, false, false, false, false, false, false, false);
         }
 
         public void SetExperience(long value)

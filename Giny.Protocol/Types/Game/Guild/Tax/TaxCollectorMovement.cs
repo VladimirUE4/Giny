@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TaxCollectorMovement  
     { 
-        public const ushort Id = 1360;
+        public const ushort Id = 6775;
         public virtual ushort TypeId => Id;
 
         public byte movementType;

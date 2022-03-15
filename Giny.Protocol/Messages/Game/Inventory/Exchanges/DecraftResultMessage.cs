@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DecraftResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2646;
+        public  const ushort Id = 7257;
         public override ushort MessageId => Id;
 
         public DecraftedItemStackInfo[] results;

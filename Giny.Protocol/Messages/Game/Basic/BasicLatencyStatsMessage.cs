@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicLatencyStatsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7674;
+        public  const ushort Id = 3831;
         public override ushort MessageId => Id;
 
         public short latency;

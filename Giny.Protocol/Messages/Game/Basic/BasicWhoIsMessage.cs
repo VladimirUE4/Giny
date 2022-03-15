@@ -10,12 +10,12 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2658;
+        public  const ushort Id = 7169;
         public override ushort MessageId => Id;
 
         public bool self;
         public byte position;
-        public string accountNickname;
+        public AccountTagInformation accountTag;
         public int accountId;
         public string playerName;
         public long playerId;
@@ -29,11 +29,11 @@ namespace Giny.Protocol.Messages
         public BasicWhoIsMessage()
         {
         }
-        public BasicWhoIsMessage(bool self,byte position,string accountNickname,int accountId,string playerName,long playerId,short areaId,short serverId,short originServerId,AbstractSocialGroupInfos[] socialGroups,bool verbose,byte playerState)
+        public BasicWhoIsMessage(bool self,byte position,AccountTagInformation accountTag,int accountId,string playerName,long playerId,short areaId,short serverId,short originServerId,AbstractSocialGroupInfos[] socialGroups,bool verbose,byte playerState)
         {
             this.self = self;
             this.position = position;
-            this.accountNickname = accountNickname;
+            this.accountTag = accountTag;
             this.accountId = accountId;
             this.playerName = playerName;
             this.playerId = playerId;
@@ -51,7 +51,7 @@ namespace Giny.Protocol.Messages
             _box0 = BooleanByteWrapper.SetFlag(_box0,1,verbose);
             writer.WriteByte((byte)_box0);
             writer.WriteByte((byte)position);
-            writer.WriteUTF((string)accountNickname);
+            accountTag.Serialize(writer);
             if (accountId < 0)
             {
                 throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
@@ -85,7 +85,8 @@ namespace Giny.Protocol.Messages
             self = BooleanByteWrapper.GetFlag(_box0,0);
             verbose = BooleanByteWrapper.GetFlag(_box0,1);
             position = (byte)reader.ReadByte();
-            accountNickname = (string)reader.ReadUTF();
+            accountTag = new AccountTagInformation();
+            accountTag.Deserialize(reader);
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {

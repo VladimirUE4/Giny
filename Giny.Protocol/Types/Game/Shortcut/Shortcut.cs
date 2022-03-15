@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class Shortcut  
     { 
-        public const ushort Id = 1043;
+        public const ushort Id = 5511;
         public virtual ushort TypeId => Id;
 
         public byte slot;

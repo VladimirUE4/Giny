@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMountsStableBornAddMessage : ExchangeMountsStableAddMessage  
     { 
-        public new const ushort Id = 8371;
+        public  const ushort Id = 1340;
         public override ushort MessageId => Id;
 
 

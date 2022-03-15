@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AlignmentSide", "com.ankamagames.dofus.datacenter.alignments")]
+    [D2OClass("AlignmentSide", "")]
     public class AlignmentSide : IDataObject , IIndexedData
     {
         public const string MODULE = "AlignmentSides";
@@ -15,7 +15,6 @@ namespace Giny.IO.D2OClasses
 
         public int id;
         public uint nameId;
-        public bool canConquest;
 
         [D2OIgnore]
         public int Id_
@@ -39,18 +38,6 @@ namespace Giny.IO.D2OClasses
             set
             {
                 nameId = value;
-            }
-        }
-        [D2OIgnore]
-        public bool CanConquest
-        {
-            get
-            {
-                return canConquest;
-            }
-            set
-            {
-                canConquest = value;
             }
         }
 

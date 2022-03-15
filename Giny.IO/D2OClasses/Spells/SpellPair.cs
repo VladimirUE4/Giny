@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("SpellPair", "com.ankamagames.dofus.datacenter.spells")]
+    [D2OClass("SpellPair", "")]
     public class SpellPair : IDataObject , IIndexedData
     {
         public const string MODULE = "SpellPairs";

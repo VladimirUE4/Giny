@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class TrustCertificate  
     { 
-        public const ushort Id = 8671;
+        public const ushort Id = 8866;
         public virtual ushort TypeId => Id;
 
         public int id;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("NpcMessage", "com.ankamagames.dofus.datacenter.npcs")]
+    [D2OClass("NpcMessage", "")]
     public class NpcMessage : IDataObject , IIndexedData
     {
         public const string MODULE = "NpcMessages";

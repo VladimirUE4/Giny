@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeReplyTaxVendorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9941;
+        public  const ushort Id = 7870;
         public override ushort MessageId => Id;
 
         public long objectValue;

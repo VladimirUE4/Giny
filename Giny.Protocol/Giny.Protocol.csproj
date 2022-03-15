@@ -113,8 +113,11 @@
     <Compile Include="Enums\GameContextEnum.cs" />
     <Compile Include="Enums\GameHierarchyEnum.cs" />
     <Compile Include="Enums\GameServerTypeEnum.cs" />
+    <Compile Include="Enums\GuildApplicationStateEnum.cs" />
     <Compile Include="Enums\GuildInformationsTypeEnum.cs" />
+    <Compile Include="Enums\GuildRecruitmentTypeEnum.cs" />
     <Compile Include="Enums\GuildRightsBitEnum.cs" />
+    <Compile Include="Enums\GuildSummarySortEnum.cs" />
     <Compile Include="Enums\HaapiAuthTypeEnum.cs" />
     <Compile Include="Enums\HaapiSessionTypeEnum.cs" />
     <Compile Include="Enums\HavenBagDailyLoteryErrorEnum.cs" />
@@ -217,6 +220,7 @@
     <Compile Include="Messages\Debug\DebugClearHighlightCellsMessage.cs" />
     <Compile Include="Messages\Debug\DebugHighlightCellsMessage.cs" />
     <Compile Include="Messages\Debug\DebugInClientMessage.cs" />
+    <Compile Include="Messages\Debug\DumpedEntityStatsMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementAlmostFinishedDetailedListMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementAlmostFinishedDetailedListRequestMessage.cs" />
     <Compile Include="Messages\Game\Achievement\AchievementDetailedListMessage.cs" />
@@ -391,6 +395,7 @@
     <Compile Include="Messages\Game\Character\Stats\LifePointsRegenEndMessage.cs" />
     <Compile Include="Messages\Game\Character\Stats\ResetCharacterStatsRequestMessage.cs" />
     <Compile Include="Messages\Game\Character\Stats\UpdateLifePointsMessage.cs" />
+    <Compile Include="Messages\Game\Character\Stats\UpdateSpellModifierMessage.cs" />
     <Compile Include="Messages\Game\Character\Status\PlayerStatusUpdateErrorMessage.cs" />
     <Compile Include="Messages\Game\Character\Status\PlayerStatusUpdateMessage.cs" />
     <Compile Include="Messages\Game\Character\Status\PlayerStatusUpdateRequestMessage.cs" />
@@ -405,6 +410,7 @@
     <Compile Include="Messages\Game\Chat\ChatClientPrivateMessage.cs" />
     <Compile Include="Messages\Game\Chat\ChatClientPrivateWithObjectMessage.cs" />
     <Compile Include="Messages\Game\Chat\ChatErrorMessage.cs" />
+    <Compile Include="Messages\Game\Chat\ChatKolizeumServerMessage.cs" />
     <Compile Include="Messages\Game\Chat\ChatServerCopyMessage.cs" />
     <Compile Include="Messages\Game\Chat\ChatServerCopyWithObjectMessage.cs" />
     <Compile Include="Messages\Game\Chat\ChatServerMessage.cs" />
@@ -421,6 +427,7 @@
     <Compile Include="Messages\Game\Context\Display\DisplayNumericalValuePaddockMessage.cs" />
     <Compile Include="Messages\Game\Context\Dungeon\DungeonKeyRingMessage.cs" />
     <Compile Include="Messages\Game\Context\Dungeon\DungeonKeyRingUpdateMessage.cs" />
+    <Compile Include="Messages\Game\Context\Fight\Arena\ArenaFighterIdleMessage.cs" />
     <Compile Include="Messages\Game\Context\Fight\Arena\ArenaFighterLeaveMessage.cs" />
     <Compile Include="Messages\Game\Context\Fight\Breach\BreachGameFightEndMessage.cs" />
     <Compile Include="Messages\Game\Context\Fight\Challenge\ChallengeInfoMessage.cs" />
@@ -499,6 +506,7 @@
     <Compile Include="Messages\Game\Context\GameMapMovementMessage.cs" />
     <Compile Include="Messages\Game\Context\GameMapMovementRequestMessage.cs" />
     <Compile Include="Messages\Game\Context\GameMapNoMovementMessage.cs" />
+    <Compile Include="Messages\Game\Context\GameMapSpeedMovementMessage.cs" />
     <Compile Include="Messages\Game\Context\GameRefreshMonsterBoostsMessage.cs" />
     <Compile Include="Messages\Game\Context\Mount\GameDataPaddockObjectAddMessage.cs" />
     <Compile Include="Messages\Game\Context\Mount\GameDataPaddockObjectListAddMessage.cs" />
@@ -574,6 +582,7 @@
     <Compile Include="Messages\Game\Context\Roleplay\Delay\GameRolePlayDelayedActionFinishedMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Delay\GameRolePlayDelayedActionMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Delay\GameRolePlayDelayedObjectUseMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\DiceRollRequestMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Document\DocumentReadingBeginMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Emote\EmoteAddMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Emote\EmoteListMessage.cs" />
@@ -589,8 +598,10 @@
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaFightPropositionMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaInvitationCandidatesAnswerMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaLeagueRewardsMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaPlayerBehavioursMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaRegisterMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaRegistrationStatusMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaRegistrationWarningMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaSwitchToFightServerMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaSwitchToGameServerMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Fight\Arena\GameRolePlayArenaUnregisterMessage.cs" />
@@ -784,6 +795,9 @@
     <Compile Include="Messages\Game\Context\Roleplay\Quest\QuestValidatedMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Quest\RefreshFollowedQuestsOrderRequestMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Quest\UnfollowQuestObjectiveRequestMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Quest\WatchQuestListMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Quest\WatchQuestStepInfoMessage.cs" />
+    <Compile Include="Messages\Game\Context\Roleplay\Quest\WatchQuestStepInfoRequestMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Spell\SpellVariantActivationMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Spell\SpellVariantActivationRequestMessage.cs" />
     <Compile Include="Messages\Game\Context\Roleplay\Stats\StatsUpgradeRequestMessage.cs" />
@@ -853,6 +867,21 @@
     <Compile Include="Messages\Game\Friend\WarnOnPermaDeathStateMessage.cs" />
     <Compile Include="Messages\Game\Guest\GuestLimitationMessage.cs" />
     <Compile Include="Messages\Game\Guest\GuestModeMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildApplicationAnswerMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildApplicationDeletedMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildApplicationIsAnsweredMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildApplicationListenMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildApplicationReceivedMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildDeleteApplicationRequestMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildGetPlayerApplicationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildListApplicationAnswerMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildListApplicationModifiedMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildListApplicationRequestMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildPlayerApplicationAbstractMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildPlayerApplicationInformationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildPlayerNoApplicationInformationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildSubmitApplicationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Application\GuildUpdateApplicationMessage.cs" />
     <Compile Include="Messages\Game\Guild\ChallengeFightJoinRefusedMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildBulletinMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildBulletinSetErrorMessage.cs" />
@@ -876,11 +905,12 @@
     <Compile Include="Messages\Game\Guild\GuildInformationsPaddocksMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInfosUpgradeMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInvitationAnswerMessage.cs" />
-    <Compile Include="Messages\Game\Guild\GuildInvitationByNameMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInvitationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\GuildInvitationSearchMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInvitationStateRecrutedMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInvitationStateRecruterMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildInvitedMessage.cs" />
+    <Compile Include="Messages\Game\Guild\GuildJoinAutomaticallyRequestMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildJoinedMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildKickRequestMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildLeftMessage.cs" />
@@ -900,7 +930,12 @@
     <Compile Include="Messages\Game\Guild\GuildPaddockRemovedMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildPaddockTeleportRequestMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildSpellUpgradeRequestMessage.cs" />
+    <Compile Include="Messages\Game\Guild\GuildSummaryMessage.cs" />
+    <Compile Include="Messages\Game\Guild\GuildSummaryRequestMessage.cs" />
     <Compile Include="Messages\Game\Guild\GuildVersatileInfoListMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Recruitment\GuildRecruitmentInvalidateMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Recruitment\RecruitmentInformationMessage.cs" />
+    <Compile Include="Messages\Game\Guild\Recruitment\UpdateRecruitmentInformationMessage.cs" />
     <Compile Include="Messages\Game\Guild\Tax\AbstractTaxCollectorListMessage.cs" />
     <Compile Include="Messages\Game\Guild\Tax\GameRolePlayTaxCollectorFightRequestMessage.cs" />
     <Compile Include="Messages\Game\Guild\Tax\GuildFightJoinRequestMessage.cs" />
@@ -1135,8 +1170,12 @@
     <Compile Include="Messages\Game\Look\AccessoryPreviewErrorMessage.cs" />
     <Compile Include="Messages\Game\Look\AccessoryPreviewMessage.cs" />
     <Compile Include="Messages\Game\Look\AccessoryPreviewRequestMessage.cs" />
+    <Compile Include="Messages\Game\Moderation\PopupWarningClosedMessage.cs" />
+    <Compile Include="Messages\Game\Moderation\PopupWarningCloseRequestMessage.cs" />
     <Compile Include="Messages\Game\Moderation\PopupWarningMessage.cs" />
     <Compile Include="Messages\Game\Modificator\AreaFightModificatorUpdateMessage.cs" />
+    <Compile Include="Messages\Game\PaginationAnswerAbstractMessage.cs" />
+    <Compile Include="Messages\Game\PaginationRequestAbstractMessage.cs" />
     <Compile Include="Messages\Game\Presets\IconNamedPresetSaveRequestMessage.cs" />
     <Compile Include="Messages\Game\Presets\IconPresetSaveRequestMessage.cs" />
     <Compile Include="Messages\Game\Presets\IdolsPresetSaveRequestMessage.cs" />
@@ -1173,6 +1212,10 @@
     <Compile Include="Messages\Game\Prism\PrismsListRegisterMessage.cs" />
     <Compile Include="Messages\Game\Prism\PrismsListUpdateMessage.cs" />
     <Compile Include="Messages\Game\Prism\PrismUseRequestMessage.cs" />
+    <Compile Include="Messages\Game\Progression\Suggestion\ActivityHideRequestMessage.cs" />
+    <Compile Include="Messages\Game\Progression\Suggestion\ActivityLockRequestMessage.cs" />
+    <Compile Include="Messages\Game\Progression\Suggestion\ActivitySuggestionsMessage.cs" />
+    <Compile Include="Messages\Game\Progression\Suggestion\ActivitySuggestionsRequestMessage.cs" />
     <Compile Include="Messages\Game\Pvp\AlignmentRankUpdateMessage.cs" />
     <Compile Include="Messages\Game\Pvp\SetEnableAVARequestMessage.cs" />
     <Compile Include="Messages\Game\Pvp\SetEnablePVPRequestMessage.cs" />
@@ -1251,12 +1294,16 @@
     <Compile Include="Messages\Wtf\ClientYouAreDrunkMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtocolTypeManager.cs" />
+    <Compile Include="Types\Common\AbstractPlayerSearchInformation.cs" />
+    <Compile Include="Types\Common\AccountTagInformation.cs" />
     <Compile Include="Types\Common\Basic\StatisticData.cs" />
     <Compile Include="Types\Common\Basic\StatisticDataBoolean.cs" />
     <Compile Include="Types\Common\Basic\StatisticDataByte.cs" />
     <Compile Include="Types\Common\Basic\StatisticDataInt.cs" />
     <Compile Include="Types\Common\Basic\StatisticDataShort.cs" />
     <Compile Include="Types\Common\Basic\StatisticDataString.cs" />
+    <Compile Include="Types\Common\PlayerSearchCharacterNameInformation.cs" />
+    <Compile Include="Types\Common\PlayerSearchTagInformation.cs" />
     <Compile Include="Types\Connection\GameServerInformations.cs" />
     <Compile Include="Types\Game\Achievement\Achievement.cs" />
     <Compile Include="Types\Game\Achievement\AchievementAchieved.cs" />
@@ -1281,9 +1328,13 @@
     <Compile Include="Types\Game\Character\Alignment\ActorAlignmentInformations.cs" />
     <Compile Include="Types\Game\Character\Alignment\ActorExtendedAlignmentInformations.cs" />
     <Compile Include="Types\Game\Character\CharacterBasicMinimalInformations.cs" />
-    <Compile Include="Types\Game\Character\Characteristic\CharacterBaseCharacteristic.cs" />
+    <Compile Include="Types\Game\Character\Characteristic\CharacterCharacteristic.cs" />
+    <Compile Include="Types\Game\Character\Characteristic\CharacterCharacteristicDetailed.cs" />
+    <Compile Include="Types\Game\Character\Characteristic\CharacterCharacteristics.cs" />
     <Compile Include="Types\Game\Character\Characteristic\CharacterCharacteristicsInformations.cs" />
+    <Compile Include="Types\Game\Character\Characteristic\CharacterCharacteristicValue.cs" />
     <Compile Include="Types\Game\Character\Characteristic\CharacterSpellModification.cs" />
+    <Compile Include="Types\Game\Character\Characteristic\CharacterUsableCharacteristicDetailed.cs" />
     <Compile Include="Types\Game\Character\CharacterMinimalAllianceInformations.cs" />
     <Compile Include="Types\Game\Character\CharacterMinimalGuildInformations.cs" />
     <Compile Include="Types\Game\Character\CharacterMinimalGuildPublicInformations.cs" />
@@ -1332,6 +1383,7 @@
     <Compile Include="Types\Game\Context\Fight\GameContextSummonsInformation.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightAIInformations.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightCharacterInformations.cs" />
+    <Compile Include="Types\Game\Context\Fight\GameFightCharacteristics.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightEffectTriggerCount.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightEntityInformation.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightFighterEntityLightInformation.cs" />
@@ -1341,8 +1393,6 @@
     <Compile Include="Types\Game\Context\Fight\GameFightFighterNamedInformations.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightFighterNamedLightInformations.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightFighterTaxCollectorLightInformations.cs" />
-    <Compile Include="Types\Game\Context\Fight\GameFightMinimalStats.cs" />
-    <Compile Include="Types\Game\Context\Fight\GameFightMinimalStatsPreparation.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightMonsterInformations.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightMonsterWithAlignmentInformations.cs" />
     <Compile Include="Types\Game\Context\Fight\GameFightMutantInformations.cs" />
@@ -1483,9 +1533,12 @@
     <Compile Include="Types\Game\Friend\FriendSpouseOnlineInformations.cs" />
     <Compile Include="Types\Game\Friend\IgnoredInformations.cs" />
     <Compile Include="Types\Game\Friend\IgnoredOnlineInformations.cs" />
+    <Compile Include="Types\Game\Guild\Application\ApplicationPlayerInformation.cs" />
+    <Compile Include="Types\Game\Guild\Application\GuildApplicationInformation.cs" />
     <Compile Include="Types\Game\Guild\GuildEmblem.cs" />
     <Compile Include="Types\Game\Guild\GuildMember.cs" />
     <Compile Include="Types\Game\Guild\HavenBagFurnitureInformation.cs" />
+    <Compile Include="Types\Game\Guild\Recruitment\GuildRecruitmentInformation.cs" />
     <Compile Include="Types\Game\Guild\Tax\AdditionalTaxCollectorInformations.cs" />
     <Compile Include="Types\Game\Guild\Tax\TaxCollectorBasicInformations.cs" />
     <Compile Include="Types\Game\Guild\Tax\TaxCollectorComplementaryInformations.cs" />
@@ -1582,8 +1635,6 @@
       <Name>Giny.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Custom\Messages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

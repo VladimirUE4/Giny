@@ -10,25 +10,28 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicWhoIsNoMatchMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2998;
+        public  const ushort Id = 7631;
         public override ushort MessageId => Id;
 
-        public string search;
+        public AbstractPlayerSearchInformation target;
 
         public BasicWhoIsNoMatchMessage()
         {
         }
-        public BasicWhoIsNoMatchMessage(string search)
+        public BasicWhoIsNoMatchMessage(AbstractPlayerSearchInformation target)
         {
-            this.search = search;
+            this.target = target;
         }
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteUTF((string)search);
+            writer.WriteShort((short)target.TypeId);
+            target.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
-            search = (string)reader.ReadUTF();
+            uint _id1 = (uint)reader.ReadUShort();
+            target = ProtocolTypeManager.GetInstance<AbstractPlayerSearchInformation>((short)_id1);
+            target.Deserialize(reader);
         }
 
 

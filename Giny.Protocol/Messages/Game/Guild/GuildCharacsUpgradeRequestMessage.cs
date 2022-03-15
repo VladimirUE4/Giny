@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildCharacsUpgradeRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6711;
+        public  const ushort Id = 3240;
         public override ushort MessageId => Id;
 
         public byte charaTypeTarget;

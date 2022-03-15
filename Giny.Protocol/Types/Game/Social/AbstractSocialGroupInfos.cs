@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractSocialGroupInfos  
     { 
-        public const ushort Id = 6801;
+        public const ushort Id = 6359;
         public virtual ushort TypeId => Id;
 
 

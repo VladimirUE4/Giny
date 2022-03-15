@@ -8,17 +8,17 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterSpellModification  
     { 
-        public const ushort Id = 8874;
+        public const ushort Id = 4425;
         public virtual ushort TypeId => Id;
 
         public byte modificationType;
         public short spellId;
-        public CharacterBaseCharacteristic value;
+        public CharacterCharacteristicDetailed value;
 
         public CharacterSpellModification()
         {
         }
-        public CharacterSpellModification(byte modificationType,short spellId,CharacterBaseCharacteristic value)
+        public CharacterSpellModification(byte modificationType,short spellId,CharacterCharacteristicDetailed value)
         {
             this.modificationType = modificationType;
             this.spellId = spellId;
@@ -49,7 +49,7 @@ namespace Giny.Protocol.Types
                 throw new Exception("Forbidden value (" + spellId + ") on element of CharacterSpellModification.spellId.");
             }
 
-            value = new CharacterBaseCharacteristic();
+            value = new CharacterCharacteristicDetailed();
             value.Deserialize(reader);
         }
 

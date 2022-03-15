@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeBidHouseGenericItemRemovedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4098;
+        public  const ushort Id = 9780;
         public override ushort MessageId => Id;
 
         public short objGenericId;

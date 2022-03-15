@@ -1,7 +1,7 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
-using Giny.Core.Logs;
+using Giny.Core.Logging;
 using Giny.ORM;
 using System;
 using System.Collections.Generic;

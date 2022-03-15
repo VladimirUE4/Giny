@@ -8,19 +8,25 @@ namespace Giny.Protocol.Types
 { 
     public class GuildFactSheetInformations : GuildInformations  
     { 
-        public const ushort Id = 9794;
+        public const ushort Id = 7387;
         public override ushort TypeId => Id;
 
         public long leaderId;
         public short nbMembers;
+        public short lastActivityDay;
+        public GuildRecruitmentInformation recruitment;
+        public int nbPendingApply;
 
         public GuildFactSheetInformations()
         {
         }
-        public GuildFactSheetInformations(long leaderId,short nbMembers)
+        public GuildFactSheetInformations(long leaderId,short nbMembers,short lastActivityDay,GuildRecruitmentInformation recruitment,int nbPendingApply)
         {
             this.leaderId = leaderId;
             this.nbMembers = nbMembers;
+            this.lastActivityDay = lastActivityDay;
+            this.recruitment = recruitment;
+            this.nbPendingApply = nbPendingApply;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -37,6 +43,19 @@ namespace Giny.Protocol.Types
             }
 
             writer.WriteVarShort((short)nbMembers);
+            if (lastActivityDay < 0)
+            {
+                throw new Exception("Forbidden value (" + lastActivityDay + ") on element lastActivityDay.");
+            }
+
+            writer.WriteShort((short)lastActivityDay);
+            recruitment.Serialize(writer);
+            if (nbPendingApply < 0)
+            {
+                throw new Exception("Forbidden value (" + nbPendingApply + ") on element nbPendingApply.");
+            }
+
+            writer.WriteInt((int)nbPendingApply);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -51,6 +70,20 @@ namespace Giny.Protocol.Types
             if (nbMembers < 0)
             {
                 throw new Exception("Forbidden value (" + nbMembers + ") on element of GuildFactSheetInformations.nbMembers.");
+            }
+
+            lastActivityDay = (short)reader.ReadShort();
+            if (lastActivityDay < 0)
+            {
+                throw new Exception("Forbidden value (" + lastActivityDay + ") on element of GuildFactSheetInformations.lastActivityDay.");
+            }
+
+            recruitment = new GuildRecruitmentInformation();
+            recruitment.Deserialize(reader);
+            nbPendingApply = (int)reader.ReadInt();
+            if (nbPendingApply < 0)
+            {
+                throw new Exception("Forbidden value (" + nbPendingApply + ") on element of GuildFactSheetInformations.nbPendingApply.");
             }
 
         }

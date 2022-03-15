@@ -10,25 +10,28 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyInvitationRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8942;
+        public  const ushort Id = 6419;
         public override ushort MessageId => Id;
 
-        public string name;
+        public AbstractPlayerSearchInformation target;
 
         public PartyInvitationRequestMessage()
         {
         }
-        public PartyInvitationRequestMessage(string name)
+        public PartyInvitationRequestMessage(AbstractPlayerSearchInformation target)
         {
-            this.name = name;
+            this.target = target;
         }
         public override void Serialize(IDataWriter writer)
         {
-            writer.WriteUTF((string)name);
+            writer.WriteShort((short)target.TypeId);
+            target.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
-            name = (string)reader.ReadUTF();
+            uint _id1 = (uint)reader.ReadUShort();
+            target = ProtocolTypeManager.GetInstance<AbstractPlayerSearchInformation>((short)_id1);
+            target.Deserialize(reader);
         }
 
 

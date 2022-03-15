@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("PrestigeLevelItemCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("PrestigeLevelItemCriterion", "")]
     public class PrestigeLevelItemCriterion : ItemCriterion , IIndexedData
     {
 

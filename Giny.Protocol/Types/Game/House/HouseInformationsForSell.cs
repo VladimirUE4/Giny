@@ -8,13 +8,14 @@ namespace Giny.Protocol.Types
 { 
     public class HouseInformationsForSell  
     { 
-        public const ushort Id = 432;
+        public const ushort Id = 1011;
         public virtual ushort TypeId => Id;
 
         public int instanceId;
         public bool secondHand;
         public int modelId;
-        public string ownerName;
+        public AccountTagInformation ownerTag;
+        public bool hasOwner;
         public string ownerCharacterName;
         public short worldX;
         public short worldY;
@@ -28,12 +29,13 @@ namespace Giny.Protocol.Types
         public HouseInformationsForSell()
         {
         }
-        public HouseInformationsForSell(int instanceId,bool secondHand,int modelId,string ownerName,string ownerCharacterName,short worldX,short worldY,short subAreaId,byte nbRoom,byte nbChest,int[] skillListIds,bool isLocked,long price)
+        public HouseInformationsForSell(int instanceId,bool secondHand,int modelId,AccountTagInformation ownerTag,bool hasOwner,string ownerCharacterName,short worldX,short worldY,short subAreaId,byte nbRoom,byte nbChest,int[] skillListIds,bool isLocked,long price)
         {
             this.instanceId = instanceId;
             this.secondHand = secondHand;
             this.modelId = modelId;
-            this.ownerName = ownerName;
+            this.ownerTag = ownerTag;
+            this.hasOwner = hasOwner;
             this.ownerCharacterName = ownerCharacterName;
             this.worldX = worldX;
             this.worldY = worldY;
@@ -59,7 +61,8 @@ namespace Giny.Protocol.Types
             }
 
             writer.WriteVarInt((int)modelId);
-            writer.WriteUTF((string)ownerName);
+            ownerTag.Serialize(writer);
+            writer.WriteBoolean((bool)hasOwner);
             writer.WriteUTF((string)ownerCharacterName);
             if (worldX < -255 || worldX > 255)
             {
@@ -82,9 +85,9 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)nbRoom);
             writer.WriteByte((byte)nbChest);
             writer.WriteShort((short)skillListIds.Length);
-            for (uint _i11 = 0;_i11 < skillListIds.Length;_i11++)
+            for (uint _i12 = 0;_i12 < skillListIds.Length;_i12++)
             {
-                writer.WriteInt((int)skillListIds[_i11]);
+                writer.WriteInt((int)skillListIds[_i12]);
             }
 
             writer.WriteBoolean((bool)isLocked);
@@ -97,7 +100,7 @@ namespace Giny.Protocol.Types
         }
         public virtual void Deserialize(IDataReader reader)
         {
-            int _val11 = 0;
+            int _val12 = 0;
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
@@ -111,7 +114,9 @@ namespace Giny.Protocol.Types
                 throw new Exception("Forbidden value (" + modelId + ") on element of HouseInformationsForSell.modelId.");
             }
 
-            ownerName = (string)reader.ReadUTF();
+            ownerTag = new AccountTagInformation();
+            ownerTag.Deserialize(reader);
+            hasOwner = (bool)reader.ReadBoolean();
             ownerCharacterName = (string)reader.ReadUTF();
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
@@ -135,10 +140,10 @@ namespace Giny.Protocol.Types
             nbChest = (byte)reader.ReadByte();
             uint _skillListIdsLen = (uint)reader.ReadUShort();
             skillListIds = new int[_skillListIdsLen];
-            for (uint _i11 = 0;_i11 < _skillListIdsLen;_i11++)
+            for (uint _i12 = 0;_i12 < _skillListIdsLen;_i12++)
             {
-                _val11 = (int)reader.ReadInt();
-                skillListIds[_i11] = (int)_val11;
+                _val12 = (int)reader.ReadInt();
+                skillListIds[_i12] = (int)_val12;
             }
 
             isLocked = (bool)reader.ReadBoolean();

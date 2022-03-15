@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PortalDialogCreationMessage : NpcDialogCreationMessage  
     { 
-        public new const ushort Id = 1645;
+        public  const ushort Id = 2919;
         public override ushort MessageId => Id;
 
         public int type;

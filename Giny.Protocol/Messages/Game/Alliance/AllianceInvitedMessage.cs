@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceInvitedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5577;
+        public  const ushort Id = 6009;
         public override ushort MessageId => Id;
 
         public long recruterId;

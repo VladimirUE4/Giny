@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HavenBagDailyLoteryMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1465;
+        public  const ushort Id = 2198;
         public override ushort MessageId => Id;
 
         public byte returnType;

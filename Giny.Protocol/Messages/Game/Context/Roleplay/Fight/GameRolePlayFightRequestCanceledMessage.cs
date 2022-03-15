@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayFightRequestCanceledMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3043;
+        public  const ushort Id = 4478;
         public override ushort MessageId => Id;
 
         public short fightId;

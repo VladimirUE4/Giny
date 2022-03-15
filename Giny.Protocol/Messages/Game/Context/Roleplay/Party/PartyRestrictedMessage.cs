@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyRestrictedMessage : AbstractPartyMessage  
     { 
-        public new const ushort Id = 4765;
+        public  const ushort Id = 6433;
         public override ushort MessageId => Id;
 
         public bool restricted;

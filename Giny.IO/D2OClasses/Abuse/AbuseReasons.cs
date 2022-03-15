@@ -6,27 +6,27 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("AbuseReasons", "com.ankamagames.dofus.datacenter.abuse")]
+    [D2OClass("AbuseReasons", "")]
     public class AbuseReasons : IDataObject , IIndexedData
     {
         public const string MODULE = "AbuseReasons";
 
         public int Id => throw new NotImplementedException();
 
-        public uint _abuseReasonId;
-        public uint _mask;
-        public int _reasonTextId;
+        public uint abuseReasonId;
+        public uint mask;
+        public int reasonTextId;
 
         [D2OIgnore]
         public uint AbuseReasonId
         {
             get
             {
-                return _abuseReasonId;
+                return abuseReasonId;
             }
             set
             {
-                _abuseReasonId = value;
+                abuseReasonId = value;
             }
         }
         [D2OIgnore]
@@ -34,11 +34,11 @@ namespace Giny.IO.D2OClasses
         {
             get
             {
-                return _mask;
+                return mask;
             }
             set
             {
-                _mask = value;
+                mask = value;
             }
         }
         [D2OIgnore]
@@ -46,11 +46,11 @@ namespace Giny.IO.D2OClasses
         {
             get
             {
-                return _reasonTextId;
+                return reasonTextId;
             }
             set
             {
-                _reasonTextId = value;
+                reasonTextId = value;
             }
         }
 

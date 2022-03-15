@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeSetCraftRecipeMessage : NetworkMessage  
     { 
-        public new const ushort Id = 988;
+        public  const ushort Id = 1333;
         public override ushort MessageId => Id;
 
         public short objectGID;

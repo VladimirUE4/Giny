@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("HavenbagTheme", "com.ankamagames.dofus.datacenter.houses")]
+    [D2OClass("HavenbagTheme", "")]
     public class HavenbagTheme : IDataObject , IIndexedData
     {
         public const string MODULE = "HavenbagThemes";

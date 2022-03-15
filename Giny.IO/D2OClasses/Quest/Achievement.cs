@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Achievement", "com.ankamagames.dofus.datacenter.quest")]
+    [D2OClass("Achievement", "")]
     public class Achievement : IDataObject , IIndexedData
     {
         public const string MODULE = "Achievements";

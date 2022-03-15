@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ReloginTokenStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4876;
+        public  const ushort Id = 3172;
         public override ushort MessageId => Id;
 
         public bool validToken;

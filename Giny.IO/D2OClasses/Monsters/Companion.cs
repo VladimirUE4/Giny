@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("Companion", "com.ankamagames.dofus.datacenter.monsters")]
+    [D2OClass("Companion", "")]
     public class Companion : IDataObject , IIndexedData
     {
         public const string MODULE = "Companions";
@@ -23,6 +23,7 @@ namespace Giny.IO.D2OClasses
         public List<uint> characteristics;
         public List<uint> spells;
         public int creatureBoneId;
+        public string visibility;
 
         [D2OIgnore]
         public int Id_
@@ -142,6 +143,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 creatureBoneId = value;
+            }
+        }
+        [D2OIgnore]
+        public string Visibility
+        {
+            get
+            {
+                return visibility;
+            }
+            set
+            {
+                visibility = value;
             }
         }
 

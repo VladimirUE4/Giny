@@ -8,7 +8,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectDuration : ObjectEffect  
     { 
-        public const ushort Id = 3785;
+        public const ushort Id = 5502;
         public override ushort TypeId => Id;
 
         public short days;

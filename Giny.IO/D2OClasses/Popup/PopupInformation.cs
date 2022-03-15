@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("PopupInformation", "com.ankamagames.dofus.datacenter.popup")]
+    [D2OClass("PopupInformation", "")]
     public class PopupInformation : IDataObject , IIndexedData
     {
         public const string MODULE = "PopupInformations";

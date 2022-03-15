@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PrismSetSabotagedRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8692;
+        public  const ushort Id = 1746;
         public override ushort MessageId => Id;
 
         public short subAreaId;

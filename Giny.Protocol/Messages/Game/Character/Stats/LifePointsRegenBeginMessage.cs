@@ -10,7 +10,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LifePointsRegenBeginMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9575;
+        public  const ushort Id = 9626;
         public override ushort MessageId => Id;
 
         public byte regenRate;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("ArenaSoloRankCriterion", "com.ankamagames.dofus.datacenter.items.criterion")]
+    [D2OClass("ArenaSoloRankCriterion", "")]
     public class ArenaSoloRankCriterion : ItemCriterion , IIndexedData
     {
 

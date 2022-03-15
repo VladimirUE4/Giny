@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("LegendaryPowerCategory", "com.ankamagames.dofus.datacenter.items")]
+    [D2OClass("LegendaryPowerCategory", "")]
     public class LegendaryPowerCategory : IDataObject , IIndexedData
     {
         public const string MODULE = "LegendaryPowersCategories";

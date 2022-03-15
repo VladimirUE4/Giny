@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 informations = new GameContextActorPositionInformations(Id, GetEntityDispositionInformations()),
                 teamId = (byte)Team.TeamId,
             };
-            fighterInformations.stats = Stats.GetFightMinimalStats(this, to);
+            fighterInformations.stats = Stats.GetGameFightCharacteristics(this, to);
             return fighterInformations;
         }
 
