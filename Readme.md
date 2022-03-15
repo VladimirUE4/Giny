@@ -1,8 +1,6 @@
-
-
 # Giny 
 
-Giny is a Dofus 2.58 emulator written in C# .Net 
+Giny est un émulateur pour Dofus 2.62 écrit en C#.
 
 This repository contains :
 
