@@ -35,6 +35,9 @@ using System.Xml;
 
 namespace Giny.World
 {
+    /// <summary>
+    /// Entry point.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
