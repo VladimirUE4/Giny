@@ -1,0 +1,52 @@
+﻿using Giny.Core;
+using Giny.EnumsBuilder.Generation;
+using Giny.IO;
+using Giny.IO.D2I;
+using Giny.IO.D2O;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Giny.EnumsBuilder
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Logger.DrawLogo();
+
+            var clientPath = ConfigurationManager.AppSettings["clientPath"];
+
+            List<D2OReader> d2oReaders = new List<D2OReader>();
+
+            string d2oDirectory = Path.Combine(clientPath, ClientConstants.D2oDirectory);
+
+            foreach (var file in Directory.GetFiles(d2oDirectory))
+            {
+                if (Path.GetExtension(file) == ".d2o")
+                    d2oReaders.Add(new D2OReader(file));
+            }
+
+            D2IFile d2iFile = new D2IFile(Path.Combine(clientPath, ClientConstants.i18nPathEN));
+
+            Logger.Write("Building enums ...");
+
+            Build(d2iFile, d2oReaders);
+
+            Logger.Write("Custom enums generated successfully.");
+
+            Console.ReadLine();
+        }
+
+        private static void Build(D2IFile d2iFile, List<D2OReader> d2oReaders)
+        {
+            var test = new SkillTypes();
+            var r = test.Generate(d2oReaders, d2iFile);
+            File.WriteAllText("SkillTypeEnum.cs", r);
+        }
+    }
+}

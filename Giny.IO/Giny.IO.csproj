@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compression\Deflate.cs" />
+    <Compile Include="ClientConstants.cs" />
     <Compile Include="D2I\D2IFile.cs" />
     <Compile Include="D2OClasses\Abuse\AbuseReasons.cs" />
     <Compile Include="D2OClasses\Alignments\AlignmentGift.cs" />
