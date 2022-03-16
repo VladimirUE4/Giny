@@ -31,7 +31,7 @@ if (Kernel.getWorker().contains(AuthentificationFrame)) // a remplacer par if (f
 ```   
                 
 * Signature.as
-```
+```actionscript
 public function verify(input:IDataInput, output:ByteArray) : Boolean
 {
      return true;
