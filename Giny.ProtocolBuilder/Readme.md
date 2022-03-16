@@ -23,7 +23,7 @@ getproperty Qname(PackageNamespace(""),"content")
 Function verify() : Boolean
 return true.
 
-AuthentificationManager.as
+* AuthentificationManager.as
 
       public function initAESKey() : void
       {
@@ -38,9 +38,11 @@ AuthentificationManager.as
          return this._AESKey;
       }
 
+# Protocol
 
-
-Verifier l'id du raw data message dans MessageReceiver.
+* Fixer les éventuels nom de variables invalide en C# (@base)
+* Apres la génération des D2O Classes utiliser Giny.D2O pour vérifiez les éventuels field manquant après la génération.
+* Verifier l'id du Raw data message dans MessageReceiver.
 
 CharacterCreationRequestMessage
 colors = new int[5];
@@ -57,4 +59,6 @@ ObjectFeedMessage
 GameRolePlayGroupMonsterInformations
 
 static infos a rajouter (non static)
+
+
 
