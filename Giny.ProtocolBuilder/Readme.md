@@ -22,6 +22,14 @@ if(buildType != -1 && buildType > -1)
 * ServerControlFrame.as
 Remplacer le paramètre content par rdMsg.content
 ``` l.loadBytes(rdMsg.content,lc);```
+```actionscript
+if (Kernel.getWorker().contains(AuthentificationFrame)) // a remplacer par if (false)
+{
+    _log.error("Impossible de traiter le paquet RawDataMessage durant cette phase.");
+    return (false);
+};
+```   
+                
 * Signature.as
 ```
 Function verify() : Boolean
