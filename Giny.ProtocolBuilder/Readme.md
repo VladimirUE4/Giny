@@ -1,6 +1,6 @@
 ﻿# Patch client
 
-Imports from DofusInvoker.swf sources:
+Exporter les scripts .as a partir du Dofus invoker:
 ```
 com.ankamagames.dofus.datacenter
 com.ankamagames.dofus.network.messages
@@ -8,7 +8,7 @@ com.ankamagames.dofus.network.enums
 com.ankamagames.dofus.network.types
 ```
 
-Patch : https://www.youtube.com/watch?v=iYpeW4VqFw0
+Patch ( déprécié) : https://www.youtube.com/watch?v=iYpeW4VqFw0
 
 * Kernel.as  (optionel) 
 
@@ -17,10 +17,8 @@ if(buildType != -1 && buildType > -1)
     BuildInfos.VERSION.buildType = buildType;
 }
 * ServerControlFrame.as
-Changer le paramètre
+Remplacer le paramètre content par rdMsg.content
 ``` l.loadBytes(rdMsg.content,lc);```
-En
-``` getproperty Qname(PackageNamespace(""),"content")```
 * Signature.as
 ```
 Function verify() : Boolean
@@ -36,7 +34,7 @@ public function initAESKey() : void
 ``` 
 transformer en
 
-```
+```actionscript
 public function initAESKey() : ByteArray
 {
     this._AESKey = this.generateRandomAESKey();
