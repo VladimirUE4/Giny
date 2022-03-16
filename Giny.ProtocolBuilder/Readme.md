@@ -16,6 +16,7 @@ if(buildType != -1 && buildType > -1)
     BuildInfos.VERSION.buildType = buildType;
 }
 ------------------ServerControlFrame.as------------------
+
 l94 change parameter l.loadBytes(rdMsg.content,lc);
 getslot 2
 getproperty Qname(PackageNamespace(""),"content")
@@ -24,19 +25,20 @@ Function verify() : Boolean
 return true.
 
 * AuthentificationManager.as
-
+```actionscript
       public function initAESKey() : void
       {
          this._AESKey = this.generateRandomAESKey();
       }
-
+```
 	  a transformer en
-
+```
       public function initAESKey() : ByteArray
       {
          this._AESKey = this.generateRandomAESKey();
          return this._AESKey;
       }
+```
 
 # Protocol
 
