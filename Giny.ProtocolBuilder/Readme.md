@@ -1,4 +1,6 @@
-﻿# Patch client
+# Instructions de mise à niveau 
+
+﻿## Patch client
 
 Exporter les scripts .as a partir du Dofus invoker:
 ```
@@ -43,7 +45,7 @@ public function initAESKey() : ByteArray
 }
 ```
 
-# Protocol
+## Protocol
 
 * Fixer les éventuels nom de variables invalide en C# (@base)
 * Apres la génération des D2O Classes utiliser Giny.D2O pour vérifiez les éventuels field manquant après la génération.
@@ -66,5 +68,9 @@ public function initAESKey() : ByteArray
  
 static infos a rajouter (non static)
 
+## Database
+
+* Une fois les erreurs de compilation de Giny.World résolues, utiliser le database synchroniser.
+* Utiliser le module database patcher
 
 
