@@ -32,8 +32,10 @@ if (Kernel.getWorker().contains(AuthentificationFrame)) // a remplacer par if (f
                 
 * Signature.as
 ```
-Function verify() : Boolean
-return true.
+public function verify(input:IDataInput, output:ByteArray) : Boolean
+{
+     return true;
+}
 ```
 
 * AuthentificationManager.as
