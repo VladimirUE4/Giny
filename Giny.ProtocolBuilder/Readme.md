@@ -1,6 +1,6 @@
 # Instructions de mise à niveau 
 
-﻿## Patch client
+## Patch
 
 Exporter les scripts .as a partir du Dofus invoker:
 ```
