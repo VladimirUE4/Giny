@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,20 @@ namespace Giny.EnumsBuilder
 {
     class Program
     {
+        private const string OutputPath = "Generated/";
+
         static void Main(string[] args)
         {
             Logger.DrawLogo();
 
             var clientPath = ConfigurationManager.AppSettings["clientPath"];
 
+            if (!Directory.Exists(clientPath))
+            {
+                Logger.Write("Unable to locate dofus client. Edit App.config", Channels.Warning);
+                Console.ReadLine();
+                return;
+            }
             List<D2OReader> d2oReaders = new List<D2OReader>();
 
             string d2oDirectory = Path.Combine(clientPath, ClientConstants.D2oDirectory);
@@ -44,9 +53,18 @@ namespace Giny.EnumsBuilder
 
         private static void Build(D2IFile d2iFile, List<D2OReader> d2oReaders)
         {
-            var test = new SkillTypes();
-            var r = test.Generate(d2oReaders, d2iFile);
-            File.WriteAllText("SkillTypeEnum.cs", r);
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (type.IsSubclassOf(typeof(AbstractEnum)))
+                {
+                    AbstractEnum @enum = (AbstractEnum)Activator.CreateInstance(type);
+                    string filename = @enum.ClassName + ".cs";
+                    string filepath = Path.Combine(OutputPath, filename);
+                    string fileContent = @enum.Generate(d2oReaders, d2iFile);
+                    File.WriteAllText(filepath, fileContent);
+                    Logger.Write(filename + " generated.");
+                }
+            }
         }
     }
 }
