@@ -1,4 +1,6 @@
-﻿Imports from DofusInvoker.swf sources:
+﻿# Patch client
+
+Imports from DofusInvoker.swf sources:
 
 com.ankamagames.dofus.datacenter
 com.ankamagames.dofus.network.messages
@@ -36,8 +38,9 @@ AuthentificationManager.as
          return this._AESKey;
       }
 
-Verifier l'id du raw data message dans MessageReceiver.
 
+
+Verifier l'id du raw data message dans MessageReceiver.
 
 CharacterCreationRequestMessage
 colors = new int[5];
@@ -53,4 +56,5 @@ ObjectFeedMessage
 
 GameRolePlayGroupMonsterInformations
 
-static infos -> non static
+static infos a rajouter (non static)
+
