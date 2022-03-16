@@ -49,20 +49,19 @@ public function initAESKey() : ByteArray
 * Apres la génération des D2O Classes utiliser Giny.D2O pour vérifiez les éventuels field manquant après la génération.
 * Verifier l'id du Raw data message dans MessageReceiver.
 
-CharacterCreationRequestMessage
-colors = new int[5];
 
-ObjectFeedMessage
+* Dans CharacterCreationRequestMessage
+```csharp colors = new int[5];```
 
-
-
+* Dans ObjectFeedMessage
+```csharp
  uint _mealLen = (uint)reader.ReadUShort();
             meal = new ObjectItemQuantity[_mealLen];  <------------
             for (uint _i2 = 0;_i2 < _mealLen;_i2++)
+```
 
-
-GameRolePlayGroupMonsterInformations
-
+* Dans GameRolePlayGroupMonsterInformations
+ 
 static infos a rajouter (non static)
 
 
