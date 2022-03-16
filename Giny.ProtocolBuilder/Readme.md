@@ -1,43 +1,47 @@
 ﻿# Patch client
 
 Imports from DofusInvoker.swf sources:
-
+```
 com.ankamagames.dofus.datacenter
 com.ankamagames.dofus.network.messages
 com.ankamagames.dofus.network.enums
 com.ankamagames.dofus.network.types
-
+```
 
 Patch : https://www.youtube.com/watch?v=iYpeW4VqFw0
 
-------------------Kernel.as------------------ // optionel
+* Kernel.as  (optionel) 
+
 if(buildType != -1 && buildType > -1)
 {
     BuildInfos.VERSION.buildType = buildType;
 }
-------------------ServerControlFrame.as------------------
-
-l94 change parameter l.loadBytes(rdMsg.content,lc);
-getslot 2
-getproperty Qname(PackageNamespace(""),"content")
-------------------Signature.as---------------------------
+* ServerControlFrame.as
+Changer le paramètre
+``` l.loadBytes(rdMsg.content,lc);```
+En
+``` getproperty Qname(PackageNamespace(""),"content")```
+* Signature.as
+```
 Function verify() : Boolean
 return true.
+```
 
 * AuthentificationManager.as
 ```actionscript
-      public function initAESKey() : void
-      {
-         this._AESKey = this.generateRandomAESKey();
-      }
+public function initAESKey() : void
+{
+    this._AESKey = this.generateRandomAESKey();
+}
+``` 
+transformer en
+
 ```
-	  a transformer en
-```
-      public function initAESKey() : ByteArray
-      {
-         this._AESKey = this.generateRandomAESKey();
-         return this._AESKey;
-      }
+public function initAESKey() : ByteArray
+{
+    this._AESKey = this.generateRandomAESKey();
+     return this._AESKey;
+}
 ```
 
 # Protocol
