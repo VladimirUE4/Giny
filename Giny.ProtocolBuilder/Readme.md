@@ -51,7 +51,9 @@ public function initAESKey() : ByteArray
 
 
 * Dans CharacterCreationRequestMessage
-```csharp colors = new int[5];```
+```csharp
+ colors = new int[5];
+```
 
 * Dans ObjectFeedMessage
 ```csharp
