@@ -16,7 +16,7 @@ namespace Giny.EnumsBuilder.Generation
 
         public string Generate(List<D2OReader> readers, D2IFile d2i)
         {
-            string content = ApplyRules(GenerateEnumContent(readers, d2i));
+            string content = GenerateEnumContent(readers, d2i);
 
             StringBuilder sb = new StringBuilder();
 
@@ -31,9 +31,9 @@ namespace Giny.EnumsBuilder.Generation
             return sb.ToString();
         }
 
-        private string ApplyRules(string generated)
+        protected virtual string ApplyRules(string line)
         {
-            return generated;
+            return line.ToUpper().Replace(" ", "_");
         }
     }
 }

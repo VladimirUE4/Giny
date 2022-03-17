@@ -20,7 +20,9 @@ namespace Giny.EnumsBuilder.Generation
 
             foreach (var skill in skills)
             {
-                sb.AppendLine(d2i.GetText((int)skill.NameId).ToUpper().Replace(" ", "_") + skill.id + "=" + skill.id + ",");
+                string name = d2i.GetText((int)skill.NameId);
+
+                sb.AppendLine(ApplyRules(name) + skill.id + "=" + skill.id + ",");
             }
 
             return sb.ToString();
