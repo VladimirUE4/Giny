@@ -17,7 +17,7 @@ namespace Giny.EnumsBuilder
     /// <summary>
     /// REMPLACER PARTOUT PAR ClientConstants.Cs
     /// </summary>
-    class Program 
+    class Program
     {
         private const string OutputPath = "Generated/";
 
@@ -33,6 +33,12 @@ namespace Giny.EnumsBuilder
                 Console.ReadLine();
                 return;
             }
+
+            if (!Directory.Exists(OutputPath))
+            {
+                Directory.CreateDirectory(OutputPath);
+            }
+
             List<D2OReader> d2oReaders = new List<D2OReader>();
 
             string d2oDirectory = Path.Combine(clientPath, ClientConstants.D2oDirectory);
@@ -45,11 +51,11 @@ namespace Giny.EnumsBuilder
 
             D2IFile d2iFile = new D2IFile(Path.Combine(clientPath, ClientConstants.i18nPathEN));
 
-            Logger.Write("Building enums ...");
+            Logger.Write("Building enums ...", Channels.Info);
 
             Build(d2iFile, d2oReaders);
 
-            Logger.Write("Custom enums generated successfully.");
+            Logger.Write("Custom enums generated successfully.", Channels.Info);
 
             Console.ReadLine();
         }
@@ -58,9 +64,9 @@ namespace Giny.EnumsBuilder
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                if (type.IsSubclassOf(typeof(AbstractEnum)))
+                if (type.IsSubclassOf(typeof(CustomEnum)))
                 {
-                    AbstractEnum @enum = (AbstractEnum)Activator.CreateInstance(type);
+                    CustomEnum @enum = (CustomEnum)Activator.CreateInstance(type);
                     string filename = @enum.ClassName + ".cs";
                     string filepath = Path.Combine(OutputPath, filename);
                     string fileContent = @enum.Generate(d2oReaders, d2iFile);

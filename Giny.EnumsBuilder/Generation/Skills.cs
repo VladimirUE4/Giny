@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Giny.EnumsBuilder.Generation
 {
-    public class SkillTypes : AbstractEnum
+    public class Skills : CustomEnum
     {
         public override string ClassName => "SkillTypeEnum";
 
@@ -21,7 +21,6 @@ namespace Giny.EnumsBuilder.Generation
             foreach (var skill in skills)
             {
                 string name = d2i.GetText((int)skill.NameId);
-
                 sb.AppendLine(ApplyRules(name) + skill.id + "=" + skill.id + ",");
             }
 

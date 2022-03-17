@@ -44,8 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generation\AbstractEnum.cs" />
-    <Compile Include="Generation\SkillTypes.cs" />
+    <Compile Include="Generation\CustomEnum.cs" />
+    <Compile Include="Generation\Characteristics.cs" />
+    <Compile Include="Generation\NpcActions.cs" />
+    <Compile Include="Generation\Interactives.cs" />
+    <Compile Include="Generation\Jobs.cs" />
+    <Compile Include="Generation\MonsterRaces.cs" />
+    <Compile Include="Generation\OptionalFeatures.cs" />
+    <Compile Include="Generation\Skills.cs" />
+    <Compile Include="Generation\Spells.cs" />
+    <Compile Include="Generation\ItemTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
