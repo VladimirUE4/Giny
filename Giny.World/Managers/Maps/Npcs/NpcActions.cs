@@ -16,7 +16,7 @@ namespace Giny.World.Managers.Maps.Npcs
         /// <summary>
         /// not sure about this parsing performances
         /// </summary>
-        [NpcActionHandler(NpcActionsEnum.BUY_SELL)]
+        [NpcActionHandler(NpcActionsEnum.BUYSELL)]
         public static void HandleBuySellAction(Character character, Npc npc, NpcActionRecord record)
         {
             List<ItemRecord> itemsToSell = new List<ItemRecord>();

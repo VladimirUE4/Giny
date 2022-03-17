@@ -20,9 +20,9 @@ namespace Giny.Protocol.Custom.Enums
         VIEW_HOUSES = 9,
         EXCHANGE_A_SEEMYOOL = 14,
         EXCHANGE_A_DRAGOTURKEY = 8,
-        BUY = 11,
+        BUY2 = 11,
         INSPECT = 3,
-        SELL = 5,
+        SELL2 = 5,
         EXCHANGE = 2,
     }
 }

@@ -20,7 +20,7 @@ namespace Giny.EnumsBuilder.Generation
 
             foreach (var interactive in interactives)
             {
-                sb.AppendLine(ApplyRules(d2i.GetText((int)interactive.NameId)) + "=" + interactive.id + ",");
+                sb.AppendLine(ApplyRules(d2i.GetText((int)interactive.NameId)) + interactive.id + "=" + interactive.id + ",");
             }
             return sb.ToString();
         }

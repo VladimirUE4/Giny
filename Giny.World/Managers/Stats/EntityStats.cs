@@ -474,6 +474,11 @@ namespace Giny.World.Managers.Stats
         {
             return Strength.Total() + Chance.Total() + Intelligence.Total() + Agility.Total();
         }
+
+        public CharacterCharacteristic[] GetCharacterCharacteristics()
+        {
+            return null;
+        }
         public CharacterCharacteristicsInformations GetCharacterCharacteristicsInformations(Character character)
         {
             var alignementInfos = new ActorExtendedAlignmentInformations()
@@ -491,94 +496,15 @@ namespace Giny.World.Managers.Stats
             return new CharacterCharacteristicsInformations()
             {
                 alignmentInfos = alignementInfos,
-                criticalMiss = new CharacterBaseCharacteristic(),
                 experienceBonusLimit = 0,
-                initiative = Initiative.GetBaseCharacteristic(),
-
+                characteristics = GetCharacterCharacteristics(),
                 probationTime = 0,
                 spellModifications = new CharacterSpellModification[0],
-                spellsPoints = 0,
-
-
-                actionPoints = ActionPoints.GetBaseCharacteristic(),
-                actionPointsCurrent = ActionPoints.TotalInContext(),
-                additionnalPoints = 0,
-                agility = Agility.GetBaseCharacteristic(),
-                airDamageBonus = AirDamageBonus.GetBaseCharacteristic(),
-                airElementReduction = AirReduction.GetBaseCharacteristic(),
-                airElementResistPercent = AirResistPercent.GetBaseCharacteristic(),
-                allDamagesBonus = AllDamagesBonus.GetBaseCharacteristic(),
-                dodgePALostProbability = DodgePAProbability.GetBaseCharacteristic(),
-                PAAttack = APAttack.GetBaseCharacteristic(),
-                PMAttack = MPAttack.GetBaseCharacteristic(),
-                chance = Chance.GetBaseCharacteristic(),
-                criticalDamageBonus = CriticalDamageBonus.GetBaseCharacteristic(),
-                criticalDamageReduction = CriticalDamageReduction.GetBaseCharacteristic(),
-                criticalHit = CriticalHit.GetBaseCharacteristic(),
                 criticalHitWeapon = CriticalHitWeapon,
-                damagesBonusPercent = DamagesBonusPercent.GetBaseCharacteristic(),
-                dodgePMLostProbability = DodgePMProbability.GetBaseCharacteristic(),
-                earthDamageBonus = EarthDamageBonus.GetBaseCharacteristic(),
-                earthElementReduction = EarthReduction.GetBaseCharacteristic(),
-                earthElementResistPercent = EarthResistPercent.GetBaseCharacteristic(),
-                energyPoints = Energy,
-                maxEnergyPoints = MaxEnergyPoints,
                 experience = character.Record.Experience,
-                fireDamageBonus = FireDamageBonus.GetBaseCharacteristic(),
-                fireElementReduction = FireReduction.GetBaseCharacteristic(),
-                fireElementResistPercent = FireResistPercent.GetBaseCharacteristic(),
-                glyphBonusPercent = GlyphBonusPercent.GetBaseCharacteristic(),
-                healBonus = HealBonus.GetBaseCharacteristic(),
-                intelligence = Intelligence.GetBaseCharacteristic(),
                 kamas = character.Record.Kamas,
-                lifePoints = LifePoints,
-                maxLifePoints = MaxLifePoints,
                 experienceLevelFloor = character.LowerBoundExperience,
                 experienceNextLevelFloor = character.UpperBoundExperience,
-                movementPoints = MovementPoints.GetBaseCharacteristic(),
-                movementPointsCurrent = MovementPoints.TotalInContext(),
-                neutralDamageBonus = NeutralDamageBonus.GetBaseCharacteristic(),
-                neutralElementReduction = NeutralReduction.GetBaseCharacteristic(),
-                neutralElementResistPercent = NeutralResistPercent.GetBaseCharacteristic(),
-                permanentDamagePercent = PermanentDamagePercent.GetBaseCharacteristic(),
-                prospecting = Prospecting.GetBaseCharacteristic(),
-                pushDamageBonus = PushDamageBonus.GetBaseCharacteristic(),
-                pushDamageReduction = PushDamageReduction.GetBaseCharacteristic(),
-                pvpAirElementReduction = new CharacterBaseCharacteristic(),
-                pvpAirElementResistPercent = new CharacterBaseCharacteristic(),
-                pvpEarthElementReduction = new CharacterBaseCharacteristic(),
-                pvpEarthElementResistPercent = new CharacterBaseCharacteristic(),
-                pvpFireElementReduction = new CharacterBaseCharacteristic(),
-                pvpFireElementResistPercent = new CharacterBaseCharacteristic(),
-                pvpNeutralElementReduction = new CharacterBaseCharacteristic(),
-                pvpNeutralElementResistPercent = new CharacterBaseCharacteristic(),
-                pvpWaterElementReduction = new CharacterBaseCharacteristic(),
-                pvpWaterElementResistPercent = new CharacterBaseCharacteristic(),
-                range = Range.GetBaseCharacteristic(),
-                reflect = Reflect.GetBaseCharacteristic(),
-                runeBonusPercent = RuneBonusPercent.GetBaseCharacteristic(),
-                statsPoints = character.Record.StatsPoints,
-                strength = Strength.GetBaseCharacteristic(),
-                summonableCreaturesBoost = SummonableCreaturesBoost.GetBaseCharacteristic(),
-                tackleBlock = TackleBlock.GetBaseCharacteristic(),
-                tackleEvade = TackleEvade.GetBaseCharacteristic(),
-                trapBonus = TrapBonus.GetBaseCharacteristic(),
-                trapBonusPercent = TrapBonusPercent.GetBaseCharacteristic(),
-                vitality = Vitality.GetBaseCharacteristic(),
-                waterDamageBonus = WaterDamageBonus.GetBaseCharacteristic(),
-                waterElementReduction = WaterReduction.GetBaseCharacteristic(),
-                waterElementResistPercent = WaterResistPercent.GetBaseCharacteristic(),
-                wisdom = Wisdom.GetBaseCharacteristic(),
-                weaponDamagesBonusPercent = WeaponDamagesBonusPercent.GetBaseCharacteristic(),
-                meleeDamageDonePercent = MeleeDamageDonePercent.GetBaseCharacteristic(),
-                meleeDamageReceivedPercent = MeleeDamageResistancePercent.GetBaseCharacteristic(),
-                rangedDamageDonePercent = RangedDamageDonePercent.GetBaseCharacteristic(),
-                rangedDamageReceivedPercent = RangedDamageResistancePercent.GetBaseCharacteristic(),
-                spellDamageDonePercent = SpellDamageDonePercent.GetBaseCharacteristic(),
-                spellDamageReceivedPercent = SpellDamageResistancePercent.GetBaseCharacteristic(),
-                weaponDamageDonePercent = WeaponDamageDonePercent.GetBaseCharacteristic(),
-                weaponDamageReceivedPercent = WeaponDamageResistancePercent.GetBaseCharacteristic(),
-
             };
         }
         public static EntityStats New(short level, byte breedId)

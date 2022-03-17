@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Generation\CustomEnum.cs" />
     <Compile Include="Generation\Characteristics.cs" />
-    <Compile Include="Generation\NpcActions.cs" />
     <Compile Include="Generation\Interactives.cs" />
     <Compile Include="Generation\Jobs.cs" />
     <Compile Include="Generation\MonsterRaces.cs" />

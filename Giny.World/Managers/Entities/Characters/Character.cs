@@ -622,7 +622,7 @@ namespace Giny.World.Managers.Entities.Characters
                 memberRights = (int)GuildMember.Rights,
             });
         }
-        public CharacterJob GetJob(JobsTypeEnum jobType)
+        public CharacterJob GetJob(JobTypeEnum jobType)
         {
             return Record.Jobs.FirstOrDefault(x => x.JobId == (byte)jobType);
         }
@@ -858,7 +858,7 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void TeleportToZaap(MapRecord map)
         {
-            Teleport(map, map.GetNearCell(InteractiveTypeEnum.ZAAP));
+            Teleport(map, map.GetNearCell(InteractiveTypeEnum.ZAAP16));
         }
         public void SetDirection(DirectionsEnum direction)
         {
