@@ -1,5 +1,6 @@
 ﻿using Giny.Core;
 using Giny.Core.Misc;
+using Giny.IO;
 using Giny.IO.D2O;
 using Giny.IO.D2OClasses;
 using Giny.ORM;
@@ -28,15 +29,11 @@ namespace Giny.DatabaseSynchronizer
 {
     class D2OSynchronizer
     {
-        public const string D2O_PATH = "data/common";
-
         private static List<D2OReader> m_readers = new List<D2OReader>();
 
         public static void Synchronize(bool buildMisc, bool buildTables)
         {
-
-
-            string d2oDirectory = Path.Combine(ConfigFile.Instance.ClientPath, D2O_PATH);
+            string d2oDirectory = Path.Combine(ConfigFile.Instance.ClientPath, ClientConstants.D2oDirectory);
 
             foreach (var file in Directory.GetFiles(d2oDirectory))
             {

@@ -13,7 +13,10 @@ using System.Threading.Tasks;
 
 namespace Giny.EnumsBuilder
 {
-    class Program
+    /// <summary>
+    /// REMPLACER PARTOUT PAR ClientConstants.Cs
+    /// </summary>
+    class Program 
     {
         static void Main(string[] args)
         {
