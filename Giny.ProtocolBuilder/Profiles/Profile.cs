@@ -42,74 +42,84 @@ namespace Giny.ProtocolBuilder.Profiles
                 return Path.Combine(Path.Combine(Environment.CurrentDirectory, Constants.TEMPLATES_PATH), TemplateFileName);
             }
         }
-        public AS3File AS3File
+
+        private string InputPath
         {
             get;
-            private set;
+            set;
         }
         public virtual bool ParseMethods => true;
 
-        public Profile(string as3FilePath)
+        public Profile(string inputPath)
         {
-            this.AS3File = new AS3File(as3FilePath, ParseMethods);
+            this.InputPath = inputPath;
         }
 
-        public abstract DofusConverter CreateDofusConverter();
+        public abstract DofusConverter CreateDofusConverter(AS3File file);
         /// <summary>
         /// improve
         /// </summary>
         /// <returns></returns>
-        public string GetRelativeOutputPath()
+        public string GetRelativeOutputPath(AS3File file)
         {
             if (RelativeOutputPath == string.Empty)
                 return string.Empty;
 
-            var directory = Path.GetDirectoryName(AS3File.FilePath);
+            var directory = Path.GetDirectoryName(file.FilePath);
             string dir = directory.Replace(RelativeOutputPath, string.Empty);
             dir = dir.UpperAfterChar('\\') + "\\";
             return dir;
         }
 
-        public abstract bool Skip();
+        public abstract bool Skip(AS3File file);
 
-        public string ProcessTemplate()
+        public void Generate()
         {
-            if (Skip())
+            var files = Directory.EnumerateFiles(InputPath, "*.*", SearchOption.AllDirectories).Select(x => new AS3File(x, ParseMethods));
+
+            foreach (var as3File in files)
             {
-                Logger.Write(AS3File.FileName + " skipped.", Channels.Warning);
-                return string.Empty;
+                Logger.Write("Written : " + Path.GetFileNameWithoutExtension(as3File.FilePath), Channels.Log);
+
+                if (Skip(as3File))
+                {
+                    Logger.Write(as3File.FileName + " skipped.", Channels.Warning);
+                    continue;
+                }
+                var directoryPath = Path.Combine(OutputDirectory, GetRelativeOutputPath(as3File));
+
+                var engine = new Engine();
+                var host = new TemplateHost(TemplatePath);
+
+                var converter = CreateDofusConverter(as3File);
+                converter.Prepare(files);
+               
+                host.Session["Converter"] = converter;
+
+                var text = File.ReadAllText(TemplatePath);
+                var output = engine.ProcessTemplate(text, host);
+
+                foreach (CompilerError error in host.Errors)
+                {
+                    Logger.Write(error.ErrorText + " line (" + error.Line + ")", Channels.Critical);
+                }
+
+                if (host.Errors.Count > 0)
+                {
+                    Console.Read();
+                    Environment.Exit(0);
+                }
+
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                string filePath = directoryPath + as3File.ClassName + host.FileExtension;
+
+                File.WriteAllText(filePath, output);
             }
-            var directoryPath = Path.Combine(OutputDirectory, GetRelativeOutputPath());
-
-            var engine = new Engine();
-            var host = new TemplateHost(TemplatePath);
-
-            var converter = CreateDofusConverter();
-            host.Session["Converter"] = converter;
-
-            var text = File.ReadAllText(TemplatePath);
-            var output = engine.ProcessTemplate(text, host);
-
-            foreach (CompilerError error in host.Errors)
-            {
-                Logger.Write(error.ErrorText + " line (" + error.Line + ")", Channels.Critical);
-            }
 
 
-            if (host.Errors.Count > 0)
-            {
-                Console.Read();
-                Environment.Exit(0);
-            }
 
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
-
-            string filePath = directoryPath + AS3File.ClassName + host.FileExtension;
-
-            File.WriteAllText(filePath, output);
-
-            return filePath;
         }
     }
 }

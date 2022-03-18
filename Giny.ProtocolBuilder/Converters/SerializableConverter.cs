@@ -13,6 +13,10 @@ namespace Giny.ProtocolBuilder.Converters
 {
     public abstract class SerializableConverter : DofusConverter
     {
+        public abstract string BaseClassName
+        {
+            get;
+        }
         public override string GetImplements()
         {
             return string.Empty;
@@ -24,7 +28,7 @@ namespace Giny.ProtocolBuilder.Converters
 
             AS3Method ctor = File.CreateConstructor(AS3AccessorsEnum.@public);
 
-            if (ctor.Parameters.Length > 0)
+            if (ctor.Parameters.Count > 0)
             {
                 AS3Method emptyCtor = File.CreateEmptyConstructor();
 
@@ -47,8 +51,60 @@ namespace Giny.ProtocolBuilder.Converters
             AS3Method deserializeMethod = AS3Method.RencapsulateMethod(File, "deserializeAs_" + GetClassName(), "Deserialize");
             return deserializeMethod;
         }
-        public override void Prepare()
+
+        private List<AS3Variable> GetParametersInBase(AS3File current, IEnumerable<AS3File> context)
         {
+            var targetName = current.Extends;
+
+            if (targetName == BaseClassName)
+            {
+                return new List<AS3Variable>();
+            }
+
+            var target = context.FirstOrDefault(x => x.ClassName == targetName);
+
+            var targetCtor = target.GetMethods(x => x.Name == "init" + target.ClassName).FirstOrDefault();
+
+            var results = GetParametersInBase(target, context);
+
+            if (targetCtor != null)
+            {
+                results.AddRange(targetCtor.Parameters); // deduct type aled.
+            }
+
+            return results;
+
+        }
+
+      
+        public override void Prepare(IEnumerable<AS3File> context)
+        {
+            if (File.Extends != BaseClassName)
+            {
+                var ctor = MethodToWrite.FirstOrDefault(x => x.IsConstructor && x.Parameters.Count > 0);
+
+                if (ctor == null)
+                {
+                    ctor = File.CreateEmptyConstructor();
+                }
+                var additionalParameters = GetParametersInBase(this.File, context);
+
+                if (additionalParameters.Count > 0)
+                {
+                    ctor.Parameters.AddRange(additionalParameters);
+
+                    foreach (var additional in additionalParameters)
+                    {
+                        VariableNameExpression expr = new VariableNameExpression(additional.Name);
+                        ctor.Expressions.Add(new AssignationExpression("this." + additional.Name, expr));
+                    }
+                    var test = ctor.Expressions;
+
+                }
+
+            }
+
+
             var serializeMethod = GetMethodToWrite("Serialize");
             var deserializeMethod = GetMethodToWrite("Deserialize");
 

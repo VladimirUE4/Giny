@@ -26,7 +26,7 @@ namespace Giny.AS3.Expressions
             get;
             set;
         }
-        public BaseExpression[] Expressions
+        public List<BaseExpression> Expressions
         {
             get;
             set;

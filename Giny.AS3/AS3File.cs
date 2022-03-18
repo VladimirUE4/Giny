@@ -100,7 +100,7 @@ namespace Giny.AS3
         private void Open()
         {
             this.ClassName = GetMatch(@"(?<=\bclass\s)(\w+)", 0);
-           // this.Package = GetMatch(@"(?<=package).*$", 0).Trim();
+            // this.Package = GetMatch(@"(?<=package).*$", 0).Trim();
             this.Imports = InitImports();
             this.Extends = GetMatch(@"(?<=\bextends\s)(\w+)", 0).Trim();
             this.ClassAccessor = InitClassAccessor();
@@ -253,11 +253,11 @@ namespace Giny.AS3
 
         public AS3Method CreateEmptyConstructor()
         {
-            return new AS3Method(this.ClassName, new AS3Variable[0], new AS3Type(string.Empty), new BaseExpression[0], AS3AccessorsEnum.@public, AS3ModifiersEnum.None);
+            return new AS3Method(this.ClassName, new List<AS3Variable>(), new AS3Type(string.Empty), new List<BaseExpression>(), AS3AccessorsEnum.@public, AS3ModifiersEnum.None);
         }
         public AS3Method CreateConstructor(AS3AccessorsEnum accessor)
         {
-          
+
             var fields = GetFields(x => x.Accessor == accessor && x.Modifiers == AS3ModifiersEnum.None);
 
             AS3Variable[] parameters = new AS3Variable[fields.Length];
@@ -269,7 +269,7 @@ namespace Giny.AS3
                 expressions[i] = new AssignationExpression("this." + fields[i].Name, new VariableNameExpression(fields[i].Name));
             }
 
-            return new AS3Method(ClassName, parameters, new AS3Type(string.Empty), expressions, AS3AccessorsEnum.@public, AS3ModifiersEnum.None);
+            return new AS3Method(ClassName, parameters.ToList(), new AS3Type(string.Empty), expressions.ToList(), AS3AccessorsEnum.@public, AS3ModifiersEnum.None);
         }
 
         public override string ToString()

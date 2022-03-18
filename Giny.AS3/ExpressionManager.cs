@@ -12,7 +12,7 @@ namespace Giny.AS3
     {
         public ParentExpression GetParentExpression(AS3Method method, BaseExpression methodExpression)
         {
-            var index = Array.IndexOf(method.Expressions, methodExpression);
+            var index = method.Expressions.IndexOf(methodExpression);
 
             for (int i = index; i > 0; i--)
             {

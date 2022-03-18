@@ -25,11 +25,12 @@ namespace Giny.ProtocolBuilder
             Stopwatch stopwatch = Stopwatch.StartNew();
 
 
-            BuildEnums();
+            //  BuildEnums();
 
             BuildMessages();
             BuildTypes();
-            BuildDatacenter();
+
+            //     BuildDatacenter();
 
             Logger.WriteColor1(string.Format("Build finished in {0}s", stopwatch.Elapsed.Seconds));
 
@@ -39,49 +40,27 @@ namespace Giny.ProtocolBuilder
         static void BuildEnums()
         {
             Logger.Write("Writting Enums...");
-
-
             string path = Path.Combine(Constants.SOURCES_PATH, Constants.ENUMS_PATH);
-
-            foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
-            {
-                Logger.Write("Writting enum : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
-                EnumProfile @enum = new EnumProfile(file);
-                @enum.ProcessTemplate();
-            }
-
+            EnumProfile @enum = new EnumProfile(path);
+            @enum.Generate();
         }
 
         static void BuildMessages()
         {
             Logger.Write("Building Messages...");
-
             string outputPath = Path.Combine(Environment.CurrentDirectory, Constants.MESSAGES_OUTPUT_PATH);
             string path = Path.Combine(Constants.SOURCES_PATH, Constants.MESSAGES_PATH);
+            MessageProfile message = new MessageProfile(path);
+            message.Generate();
 
-            foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
-            {
-                Logger.Write("Writting message : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
-                MessageProfile message = new MessageProfile(file);
-                message.ProcessTemplate();
-            }
         }
         static void BuildTypes()
         {
             Logger.Write("Building Types...");
-
             string outputPath = Path.Combine(Environment.CurrentDirectory, Constants.TYPES_OUTPUT_PATH);
             string path = Path.Combine(Constants.SOURCES_PATH, Constants.TYPES_PATH);
-
-            foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
-            {
-                Logger.Write("Writting type : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
-                TypeProfile type = new TypeProfile(file);
-                type.ProcessTemplate();
-
-            }
-
-
+            TypeProfile type = new TypeProfile(path);
+            type.Generate();
         }
         static void BuildDatacenter()
         {
@@ -89,13 +68,9 @@ namespace Giny.ProtocolBuilder
 
             string outputPath = Path.Combine(Environment.CurrentDirectory, Constants.DATACENTER_OUTPUT_PATH);
             string path = Path.Combine(Constants.SOURCES_PATH, Constants.DATACENTER_PATH);
+            DatacenterProfile datacenter = new DatacenterProfile(path);
+            datacenter.Generate();
 
-            foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
-            {
-                Logger.Write("Writting datacenter : " + Path.GetFileNameWithoutExtension(file), Channels.Log);
-                DatacenterProfile datacenter = new DatacenterProfile(file);
-                datacenter.ProcessTemplate();
-            }
         }
     }
 }

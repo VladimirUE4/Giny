@@ -22,6 +22,9 @@ namespace Giny.ProtocolBuilder.Converters
             "Giny.Protocol",
             "Giny.Protocol.Enums",
         };
+
+        public override string BaseClassName => "NetworkMessage";
+
         public override string GetNamespace()
         {
             return "Giny.Protocol.Messages";

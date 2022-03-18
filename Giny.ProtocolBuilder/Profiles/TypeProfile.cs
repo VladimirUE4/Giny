@@ -1,4 +1,5 @@
-﻿using Giny.ProtocolBuilder.Converters;
+﻿using Giny.AS3;
+using Giny.ProtocolBuilder.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,12 +22,12 @@ namespace Giny.ProtocolBuilder.Profiles
 
         public override string OutputDirectory => Path.Combine(Environment.CurrentDirectory, Constants.TYPES_OUTPUT_PATH);
 
-        public override DofusConverter CreateDofusConverter()
+        public override DofusConverter CreateDofusConverter(AS3File file)
         {
-            return new TypeConverter(AS3File);
+            return new TypeConverter(file);
         }
 
-        public override bool Skip()
+        public override bool Skip(AS3File file)
         {
             return false;
         }

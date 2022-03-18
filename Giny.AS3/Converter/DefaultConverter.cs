@@ -27,7 +27,7 @@ namespace Giny.AS3.Converter
         {
 
         }
-        public override void Prepare()
+        public override void Prepare(IEnumerable<AS3File> context)
         {
 
         }

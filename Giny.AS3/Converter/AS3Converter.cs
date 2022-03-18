@@ -35,10 +35,9 @@ namespace Giny.AS3.Converter
             this.File = file;
             this.FieldsToWrite = SelectFieldsToWrite();
             this.MethodToWrite = SelectMethodsToWrite();
-            this.Prepare();
         }
 
-        public abstract void Prepare();
+        public abstract void Prepare(IEnumerable<AS3File> context);
 
         public abstract string GetNamespace();
 
@@ -105,7 +104,7 @@ namespace Giny.AS3.Converter
 
             sb.AppendLine(content);
         }
-        private void WriteBlock(BaseExpression[] expressions, StringBuilder sb)
+        private void WriteBlock(List<BaseExpression> expressions, StringBuilder sb)
         {
             Append("{", sb);
 

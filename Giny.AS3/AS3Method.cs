@@ -16,7 +16,7 @@ namespace Giny.AS3
             get;
             private set;
         }
-        public AS3Variable[] Parameters
+        public List<AS3Variable> Parameters
         {
             get;
             private set;
@@ -36,7 +36,7 @@ namespace Giny.AS3
             get;
             set;
         }
-        public BaseExpression[] Expressions
+        public List<BaseExpression> Expressions
         {
             get;
             set;
@@ -66,7 +66,7 @@ namespace Giny.AS3
             get;
             set;
         }
-        public AS3Method(string name, AS3Variable[] parameters, AS3Type returnVariable, BaseExpression[] expressions, AS3AccessorsEnum accessor, AS3ModifiersEnum modifiers)
+        public AS3Method(string name, List<AS3Variable> parameters, AS3Type returnVariable, List<BaseExpression> expressions, AS3AccessorsEnum accessor, AS3ModifiersEnum modifiers)
         {
             this.Name = name;
             this.Parameters = parameters;
@@ -196,7 +196,7 @@ namespace Giny.AS3
 
             }
 
-            return new AS3Method(newMethodName, method.Parameters, method.ReturnType, expressions.ToArray(), method.Accessor, method.Modifiers);
+            return new AS3Method(newMethodName, method.Parameters, method.ReturnType, expressions, method.Accessor, method.Modifiers);
         }
     }
 

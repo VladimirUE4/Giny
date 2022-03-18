@@ -21,6 +21,9 @@ namespace Giny.ProtocolBuilder.Converters
             "Giny.Protocol",
             "Giny.Protocol.Enums",
         };
+
+        public override string BaseClassName => "";
+
         public override string GetNamespace()
         {
             return "Giny.Protocol.Types";
@@ -33,9 +36,9 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return base.GetExtends();
         }
-        public override void Prepare()
+        public override void Prepare(IEnumerable<AS3File> context)
         {
-            base.Prepare();
+            base.Prepare(context);
 
             if (GetExtends() == string.Empty)
             {

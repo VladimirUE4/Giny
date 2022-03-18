@@ -53,10 +53,8 @@ namespace Giny.ProtocolBuilder.Converters
         /// </summary>
         /// <param name="file"></param>
         /// <param name="serializeMethod"></param>
-        public static void DeductFieldTypes(AS3File file, BaseExpression[] expressions)
+        public static void DeductFieldTypes(AS3File file, List<BaseExpression> expressions)
         {
-
-
             foreach (var expression in expressions)
             {
                 var methodCall = expression as MethodCallExpression;
@@ -103,7 +101,7 @@ namespace Giny.ProtocolBuilder.Converters
 
             }
         }
-        public static void ChangeTypeIdToProperty(BaseExpression[] expressions)
+        public static void ChangeTypeIdToProperty(List<BaseExpression> expressions)
         {
             List<BaseExpression> finalExpressions = new List<BaseExpression>();
 
@@ -144,7 +142,7 @@ namespace Giny.ProtocolBuilder.Converters
             }
 
         }
-        public static void RenameSerializeAs_(BaseExpression[] expressions)
+        public static void RenameSerializeAs_(List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {
@@ -187,7 +185,7 @@ namespace Giny.ProtocolBuilder.Converters
                 }
             }
         }
-        public static void CreateGenericTypeForProtocolInstance(BaseExpression[] expressions)
+        public static void CreateGenericTypeForProtocolInstance(List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {
@@ -214,7 +212,7 @@ namespace Giny.ProtocolBuilder.Converters
             }
         }
 
-        public static void CastEnumsComparaisons(BaseExpression[] expressions)
+        public static void CastEnumsComparaisons(List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {
@@ -251,7 +249,7 @@ namespace Giny.ProtocolBuilder.Converters
             CastEnumOnConditionRecursively(condition.Next.Condition);
         }
 
-        public static void IOReadCastRecursively(DofusConverter converter, AS3File file, AS3Method deserializeMethod, BaseExpression[] expressions)
+        public static void IOReadCastRecursively(DofusConverter converter, AS3File file, AS3Method deserializeMethod, List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {
@@ -338,7 +336,7 @@ namespace Giny.ProtocolBuilder.Converters
 
             }
 
-            deserializeMethod.Expressions = finalExpressions.ToArray();
+            deserializeMethod.Expressions = finalExpressions;
         }
         public static void TransformVectorPushIntoCSharpArrayIndexer(AS3File file, DofusConverter converter, AS3Method deserializeMethod)
         {
@@ -376,12 +374,12 @@ namespace Giny.ProtocolBuilder.Converters
                         }
                     }
 
-                    forExpression.Expressions = finalExpressions.ToArray();
+                    forExpression.Expressions = finalExpressions;
                 }
 
             }
         }
-        public static void RenameDofusTypesSerializeMethodsRecursively(BaseExpression[] expressions)
+        public static void RenameDofusTypesSerializeMethodsRecursively(List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {
@@ -414,7 +412,7 @@ namespace Giny.ProtocolBuilder.Converters
             }
         }
 
-        public static void IOWriteCastRecursively(BaseExpression[] expressions)
+        public static void IOWriteCastRecursively(List<BaseExpression> expressions)
         {
             foreach (var expression in expressions)
             {

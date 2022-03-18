@@ -1,4 +1,5 @@
-﻿using Giny.ProtocolBuilder.Converters;
+﻿using Giny.AS3;
+using Giny.ProtocolBuilder.Converters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,14 +23,14 @@ namespace Giny.ProtocolBuilder.Profiles
 
         public override string OutputDirectory => Path.Combine(Environment.CurrentDirectory, Constants.DATACENTER_OUTPUT_PATH);
 
-        public override DofusConverter CreateDofusConverter()
+        public override DofusConverter CreateDofusConverter(AS3File file)
         {
-            return new DatacenterConverter(AS3File);
+            return new DatacenterConverter(file);
         }
 
-        public override bool Skip()
+        public override bool Skip(AS3File file)
         {
-            return AS3File.ClassName == string.Empty || AS3File.ClassName == "AnimFunMonsterData" || AS3File.ClassName == "AnimFunNpcData"; // interfaces or manually generated
+            return file.ClassName == string.Empty || file.ClassName == "AnimFunMonsterData" || file.ClassName == "AnimFunNpcData"; // interfaces or manually generated
         }
     }
 }

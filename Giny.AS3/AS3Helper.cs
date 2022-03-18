@@ -10,13 +10,13 @@ namespace Giny.AS3
 {
     public class AS3Helper
     {
-        public static AS3Variable[] GetParameters(AS3File file, string[] lines, int i)
+        public static List<AS3Variable> GetParameters(AS3File file, string[] lines, int i)
         {
             string parametersString = Regex.Match(lines[i], @"[(](.*)[)]").Groups[1].Value;
 
             if (parametersString == string.Empty)
             {
-                return new AS3Variable[0];
+                return new List<AS3Variable>();
             }
             string[] parameters = parametersString.Split(',');
             AS3Variable[] results = new AS3Variable[parameters.Length];
@@ -31,7 +31,7 @@ namespace Giny.AS3
                 results[w] = new AS3Variable(name, type);
             }
 
-            return results;
+            return results.ToList();
         }
         public static BlockDefinition GetBlockDefinitionForMethods(AS3File file, int i)
         {
@@ -83,7 +83,7 @@ namespace Giny.AS3
             int endIndex = startIndex + (linesCount);
             return new BlockDefinition(startIndex, endIndex);
         }
-        public static BaseExpression[] BuildExpressions(AS3File file, BlockDefinition blockDefinition)
+        public static List<BaseExpression> BuildExpressions(AS3File file, BlockDefinition blockDefinition)
         {
             var content = new List<BaseExpression>();
             int count = 1;
@@ -98,7 +98,7 @@ namespace Giny.AS3
                     content.Add(expression);
                 }
             }
-            return content.ToArray();
+            return content;
         }
     }
     public struct BlockDefinition

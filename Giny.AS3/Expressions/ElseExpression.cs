@@ -15,7 +15,7 @@ namespace Giny.AS3.Expressions
     {
         public override bool HasBracket => true;
 
-        public BaseExpression[] Expressions
+        public List<BaseExpression> Expressions
         {
             get;
             set;

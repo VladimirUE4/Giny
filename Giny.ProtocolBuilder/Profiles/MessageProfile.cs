@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giny.AS3;
 using Giny.AS3.Expressions;
 using Giny.ProtocolBuilder.Converters;
 
@@ -22,14 +23,14 @@ namespace Giny.ProtocolBuilder.Profiles
 
         public override string OutputDirectory => Path.Combine(Environment.CurrentDirectory, Constants.MESSAGES_OUTPUT_PATH);
 
-        public override DofusConverter CreateDofusConverter()
+        public override DofusConverter CreateDofusConverter(AS3File file)
         {
-            return new MessageConverter(AS3File);
+            return new MessageConverter(file);
         }
 
-        public override bool Skip()
+        public override bool Skip(AS3File file)
         {
-            int messageId = (int)AS3File.GetField("protocolId").GetValue<ConstantIntExpression>().Value;
+            int messageId = (int)file.GetField("protocolId").GetValue<ConstantIntExpression>().Value;
 
             switch (messageId)
             {
