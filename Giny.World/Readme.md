@@ -1,112 +1,46 @@
 ﻿
-Générer un protocol avec les paramètres des classes filles dans le constructeur et n'utiliser que le constructeur.
+# Giny.World
 
-Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
+## En cours 
+
+* Générer un protocol avec les paramètres des classes filles dans le constructeur et n'utiliser que le constructeur lors de l'instantiation des messages / types.
+* Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
+* Supprimer le systeme de quête custom (et tout le contenu custom hors modules.)
+
+## Todo list (non prioritaire)
+
+- [x] Mimibiotes
+- [ ] Dragodindes 
+- [ ] Succès  
+- [ ] PNJ Talk Talk  
+- [x] Finir Pokéfus
+- [x] Idoles  
+- [x] Alliances 
+- [x] Anomalies  
+- [ ] Portals 
+- [ ] Kolizeum 
+- [ ] Almanach  
+- [ ] Havre sac  
+- [ ] Alignement
+- [ ] Compagnons  
+- [ ] Energie / Phoenix  
+- [ ] Pain et vie  
+- [ ] Maisons  
+- [ ] Poubelles 
+- [ ] Mariages 
+- [ ] Songes infinies 
+- [ ] Npc action TRADE  
+- [ ] FM  
+- [ ] Tests unitaires
+- [x] Challenges (en cours)
+- [ ] Taxe de vente HDV
+- [ ] Fixer apparences living objets 
+- [ ] Finir guildes (percepteurs entre autre)
+- [ ] Bug items lors équipement (possibilité de ne pas respecter criterias)
+- [ ] Criterias (OR AND)
+- [ ] weapons GetCriticalEffects( gérer dommage dice.
+- [ ] Parchemin caracteristique wtf effets sur les grands parchemins
+- [ ] Invisibility a tests
+- [ ] Panache Reroll VIP StackOverflow
 
 
-
-
-
-
-
-
-
------------> Roleplay <-----------
-
--Mimibiotes
--Dragodindes // ?
--Succès // ?
--PNJ Talk Talk // ?
--Finir Pokéfus
--Idoles // ?
--Alliances // ?
--Anomalies // ?
--Portals 
--Kolizeum // ?
--Almanach // ?
--Havre sac // ?
--Alignement
--Compagnons // ?
--Energie ? Phoenix // !!!
--Pain et vie // !!!
--Maisons // ?
--Poubelles // ?
--Mariages // ?
--Songes infinies // ?
--Npc action TRADE // ?
--FM // ?
--Tests unitaires
--Challenges // !
--Taxe de vente HDV
-
------------ avant ouverture -----------
-Percepteurs
-Kolizeum 1vs2 3vs3
-Pokefus équilibré
-Mimibiotes
-Challenges
-FM
-Pain et vie
-Récompenses dj
-Idoles
-Dofus drop
-Nouveaux donjons
-Réfléchir évents
-Tester rates
-Fixer living objets
-
------------ avant ouverture -----------
-
-sushivan ordre living object record 
-jobtypeenum en anglais miscbuilder
-rework bank system
-Criterias (OR AND)
-weapons GetCriticalEffects( gérer dommage dice.
-Parchemin caracteristique wtf effets.
-Invisibility
-Poison damage client display
-Sort air en ligne iop (prob zone)
-
-Panache Reroll VIP StackOverflow
-
-Sorts a debug
-
--> IOP
-
-> Tempête de puissance
-> Duel-
-> Fustigation (Fuite & tacle)
-> Fendoir
-> Friction (n'attire pas de la bonne manière en diagonale) ATTENTION ne pas toujours attirer en diagonale ! sur PullForward.
-> Fracture (Zone)
-> Couperet (sub mp roll)
-> Conquête (HP invoc + passif de la conquête)
-> Violence
-> Précipitation not workin'
-
-Sort conquête : 9676 + dommage subis 50%
-
--> CRA
-
-> Fleche fulminante
-> Acuitée Absolue
-> Sentinelle
-> Fleche complice (wtf)
-
--> SRAM
-
-> perfidie
-> Injection toxique (spell cooldown, historique)
-> Epidémie	
-> Marque Mortuaire
-> Dérobade
-> Double
-> Invisiblité
-> Méprise
-> Fosse commune
-> Funeste.
-
-Carry
-Throw
-Portails
-Bombes
