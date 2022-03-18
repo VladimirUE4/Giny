@@ -6,6 +6,7 @@
 * Générer un protocol avec les paramètres des classes filles dans le constructeur et n'utiliser que le constructeur lors de l'instantiation des messages / types.
 * Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
 * Supprimer le systeme de quête custom (et tout le contenu custom hors modules.)
+* Revoir tools & modules
 
 ## Todo list (non prioritaire)
 
