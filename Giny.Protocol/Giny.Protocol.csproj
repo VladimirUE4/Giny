@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanByteWrapper.cs" />
+    <Compile Include="Custom\Enums\CharacteristicEnum.cs" />
     <Compile Include="Custom\Enums\DirectionsEnum.cs" />
     <Compile Include="Custom\Enums\EffectSchoolEnum.cs" />
     <Compile Include="Custom\Enums\EffectsEnum.cs" />
