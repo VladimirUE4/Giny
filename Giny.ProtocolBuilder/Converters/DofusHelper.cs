@@ -53,8 +53,10 @@ namespace Giny.ProtocolBuilder.Converters
         /// </summary>
         /// <param name="file"></param>
         /// <param name="serializeMethod"></param>
-        public static void DeductFieldTypes(AS3File file, List<BaseExpression> expressions)
+        public static List<AS3Variable> DeductFieldTypes(List<BaseExpression> expressions)
         {
+            List<AS3Variable> results = new List<AS3Variable>();
+
             foreach (var expression in expressions)
             {
                 var methodCall = expression as MethodCallExpression;
@@ -67,12 +69,14 @@ namespace Giny.ProtocolBuilder.Converters
 
                         if (variableNameExpression != null)
                         {
-                            var field = file.GetField(variableNameExpression.VariableName);
+                            results.Add(new AS3Variable(variableNameExpression.VariableName, DofusHelper.GetTypeFromDofusIO(methodCall.MethodName)));
 
-                            if (field != null)
-                            {
-                                field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName));
-                            }
+                            /*  var field = file.GetField(variableNameExpression.VariableName);
+
+                              if (field != null)
+                              {
+                                  field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName));
+                              } */
                         }
 
                         var arrayIndexer = methodCall.Parameters.ElementAt(0).Key as UnchangedExpression;
@@ -82,12 +86,15 @@ namespace Giny.ProtocolBuilder.Converters
                         {
                             var variableName = arrayIndexer.Line.Split('[')[0].Trim();
 
-                            var field = file.GetField(variableName);
+                            results.Add(new AS3Variable(variableName, DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]"));
 
-                            if (field != null)
-                            {
-                                field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]");
-                            }
+
+                            /*  var field = file.GetField(variableName);
+
+                              if (field != null)
+                              {
+                                  field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]");
+                              } */
                         }
                     }
                 }
@@ -96,10 +103,12 @@ namespace Giny.ProtocolBuilder.Converters
 
                 if (forExpression != null)
                 {
-                    DeductFieldTypes(file, forExpression.Expressions);
+                    results.AddRange(DeductFieldTypes(forExpression.Expressions));
+                    return results;
                 }
 
             }
+            return results;
         }
         public static void ChangeTypeIdToProperty(List<BaseExpression> expressions)
         {

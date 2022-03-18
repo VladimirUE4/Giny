@@ -76,7 +76,7 @@ namespace Giny.ProtocolBuilder.Converters
 
         }
 
-      
+
         public override void Prepare(IEnumerable<AS3File> context)
         {
             if (File.Extends != BaseClassName)
@@ -131,7 +131,14 @@ namespace Giny.ProtocolBuilder.Converters
 
             serializeMethod.SetModifiers(AS3ModifiersEnum.@override);
             DofusHelper.IOWriteCastRecursively(serializeMethod.Expressions);
-            DofusHelper.DeductFieldTypes(File, serializeMethod.Expressions); // order is importants!
+            var fieldTypes = DofusHelper.DeductFieldTypes(serializeMethod.Expressions); // order is importants!
+
+
+            foreach (var variable in fieldTypes) // a test
+            {
+                File.GetField(variable.Name).ChangeType(variable.Type.RawType);
+            }
+
             DofusHelper.RenameDofusTypesSerializeMethodsRecursively(serializeMethod.Expressions);
             DofusHelper.RenameSerializeAs_(serializeMethod.Expressions);
             DofusHelper.ChangeTypeIdToProperty(serializeMethod.Expressions);
