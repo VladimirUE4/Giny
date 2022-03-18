@@ -1,4 +1,15 @@
 ﻿
+Générer un protocol avec les paramètres des classes filles dans le constructeur et n'utiliser que le constructeur.
+
+Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
+
+
+
+
+
+
+
+
 
 -----------> Roleplay <-----------
 
