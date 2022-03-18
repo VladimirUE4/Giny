@@ -33,12 +33,12 @@ namespace Giny.AS3.Converter
         public AS3Converter(AS3File file)
         {
             this.File = file;
-            this.FieldsToWrite = GetFieldsToWrite();
-            this.MethodToWrite = GetMethodsToWrite();
-            this.Initialize();
+            this.FieldsToWrite = SelectFieldsToWrite();
+            this.MethodToWrite = SelectMethodsToWrite();
+            this.Prepare();
         }
 
-        public abstract void Initialize();
+        public abstract void Prepare();
 
         public abstract string GetNamespace();
 
@@ -88,9 +88,9 @@ namespace Giny.AS3.Converter
 
         protected abstract string GetField(AS3Field field);
 
-        protected abstract AS3Method[] GetMethodsToWrite();
+        protected abstract AS3Method[] SelectMethodsToWrite();
 
-        protected abstract AS3Field[] GetFieldsToWrite();
+        protected abstract AS3Field[] SelectFieldsToWrite();
 
         protected void Append(string content, StringBuilder sb)
         {

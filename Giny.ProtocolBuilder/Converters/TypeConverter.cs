@@ -33,14 +33,14 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return base.GetExtends();
         }
-        public override void Initialize()
+        public override void Prepare()
         {
-            base.Initialize();
+            base.Prepare();
 
             if (GetExtends() == string.Empty)
             {
-                SerializeMethod.SetModifiers(AS3ModifiersEnum.@virtual);
-                DeserializeMethod.SetModifiers(AS3ModifiersEnum.@virtual);
+                GetMethodToWrite("Serialize").SetModifiers(AS3ModifiersEnum.@virtual);
+                GetMethodToWrite("Deserialize").SetModifiers(AS3ModifiersEnum.@virtual);
             }
         }
         public string GetTypeProtocolId()

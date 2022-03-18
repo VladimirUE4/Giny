@@ -38,7 +38,7 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return "IIndexedData";
         }
-        protected override AS3Method[] GetMethodsToWrite()
+        protected override AS3Method[] SelectMethodsToWrite()
         {
             return new AS3Method[0];
         }
@@ -140,7 +140,7 @@ namespace Giny.ProtocolBuilder.Converters
             }
             return sb.ToString();
         }
-        protected override AS3Field[] GetFieldsToWrite()
+        protected override AS3Field[] SelectFieldsToWrite()
         {
             return File.GetFields(x => (AS3AccessorsEnum.@public).HasFlag(x.Accessor) && x.Modifiers == AS3ModifiersEnum.None);
         }

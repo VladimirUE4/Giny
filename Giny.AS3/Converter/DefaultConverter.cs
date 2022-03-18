@@ -27,7 +27,7 @@ namespace Giny.AS3.Converter
         {
 
         }
-        public override void Initialize()
+        public override void Prepare()
         {
 
         }
@@ -133,11 +133,11 @@ namespace Giny.AS3.Converter
             return sb.ToString();
         }
 
-        protected override AS3Method[] GetMethodsToWrite()
+        protected override AS3Method[] SelectMethodsToWrite()
         {
             return File.Methods;
         }
-        protected override AS3Field[] GetFieldsToWrite()
+        protected override AS3Field[] SelectFieldsToWrite()
         {
             return File.Fields;
         }

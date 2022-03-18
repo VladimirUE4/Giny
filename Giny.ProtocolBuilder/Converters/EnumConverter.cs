@@ -26,7 +26,7 @@ namespace Giny.ProtocolBuilder.Converters
         {
             "System"
         };
-        protected override AS3Field[] GetFieldsToWrite()
+        protected override AS3Field[] SelectFieldsToWrite()
         {
             return File.GetFields(x => x.Accessor == AS3AccessorsEnum.@public && x.Modifiers == AS3ModifiersEnum.@static);
         }

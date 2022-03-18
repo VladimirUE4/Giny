@@ -17,16 +17,7 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return string.Empty;
         }
-        protected AS3Method SerializeMethod
-        {
-            get;
-            set;
-        }
-        protected AS3Method DeserializeMethod
-        {
-            get;
-            set;
-        }
+
         private AS3Method[] GetCtors()
         {
             List<AS3Method> results = new List<AS3Method>();
@@ -36,6 +27,7 @@ namespace Giny.ProtocolBuilder.Converters
             if (ctor.Parameters.Length > 0)
             {
                 AS3Method emptyCtor = File.CreateEmptyConstructor();
+
                 results.Add(emptyCtor);
             }
             results.Add(ctor);
@@ -55,85 +47,87 @@ namespace Giny.ProtocolBuilder.Converters
             AS3Method deserializeMethod = AS3Method.RencapsulateMethod(File, "deserializeAs_" + GetClassName(), "Deserialize");
             return deserializeMethod;
         }
-        public override void Initialize()
+        public override void Prepare()
         {
-            this.SerializeMethod = GetMethodToWrite("Serialize");
-            this.DeserializeMethod = GetMethodToWrite("Deserialize");
+            var serializeMethod = GetMethodToWrite("Serialize");
+            var deserializeMethod = GetMethodToWrite("Deserialize");
 
-            SerializeMethod.RenameVariable("NaN", "double.NaN");
-            SerializeMethod.RenameVariable("super", "base");
-            SerializeMethod.RenameVariable("output", "writer");
-            SerializeMethod.RenameVariable("length", "Length");
-            SerializeMethod.RenameType("ICustomDataOutput", "IDataWriter");
-            SerializeMethod.RenameMethodCall("writeUTF", "WriteUTF");
-            SerializeMethod.RenameMethodCall("writeVarInt", "WriteVarInt");
-            SerializeMethod.RenameMethodCall("writeByte", "WriteByte");
-            SerializeMethod.RenameMethodCall("writeVarLong", "WriteVarLong");
-            SerializeMethod.RenameMethodCall("writeShort", "WriteShort");
-            SerializeMethod.RenameMethodCall("writeVarShort", "WriteVarShort");
-            SerializeMethod.RenameMethodCall("writeBoolean", "WriteBoolean");
-            SerializeMethod.RenameMethodCall("writeDouble", "WriteDouble");
-            SerializeMethod.RenameMethodCall("writeInt", "WriteInt");
-            SerializeMethod.RenameMethodCall("writeFloat", "WriteFloat");
-            SerializeMethod.RenameMethodCall("writeUnsignedInt", "WriteUInt");
-            SerializeMethod.RenameMethodCall("setFlag", "SetFlag");
-            SerializeMethod.RenameMethodCall("serialize", "Serialize");
+            serializeMethod.RenameVariable("NaN", "double.NaN");
+            serializeMethod.RenameVariable("super", "base");
+            serializeMethod.RenameVariable("output", "writer");
+            serializeMethod.RenameVariable("length", "Length");
+            serializeMethod.RenameType("ICustomDataOutput", "IDataWriter");
+            serializeMethod.RenameMethodCall("writeUTF", "WriteUTF");
+            serializeMethod.RenameMethodCall("writeVarInt", "WriteVarInt");
+            serializeMethod.RenameMethodCall("writeByte", "WriteByte");
+            serializeMethod.RenameMethodCall("writeVarLong", "WriteVarLong");
+            serializeMethod.RenameMethodCall("writeShort", "WriteShort");
+            serializeMethod.RenameMethodCall("writeVarShort", "WriteVarShort");
+            serializeMethod.RenameMethodCall("writeBoolean", "WriteBoolean");
+            serializeMethod.RenameMethodCall("writeDouble", "WriteDouble");
+            serializeMethod.RenameMethodCall("writeInt", "WriteInt");
+            serializeMethod.RenameMethodCall("writeFloat", "WriteFloat");
+            serializeMethod.RenameMethodCall("writeUnsignedInt", "WriteUInt");
+            serializeMethod.RenameMethodCall("setFlag", "SetFlag");
+            serializeMethod.RenameMethodCall("serialize", "Serialize");
 
-            SerializeMethod.ReplaceUnchangedExpression("getTypeId()", "TypeId");
+            serializeMethod.ReplaceUnchangedExpression("getTypeId()", "TypeId");
 
-            SerializeMethod.SetModifiers(AS3ModifiersEnum.@override);
-            DofusHelper.IOWriteCastRecursively(SerializeMethod.Expressions);
-            DofusHelper.DeductFieldTypes(File, SerializeMethod.Expressions); // order is importants!
-            DofusHelper.RenameDofusTypesSerializeMethodsRecursively(SerializeMethod.Expressions);
-            DofusHelper.RenameSerializeAs_(SerializeMethod.Expressions);
-            DofusHelper.ChangeTypeIdToProperty(this.SerializeMethod.Expressions);
+            serializeMethod.SetModifiers(AS3ModifiersEnum.@override);
+            DofusHelper.IOWriteCastRecursively(serializeMethod.Expressions);
+            DofusHelper.DeductFieldTypes(File, serializeMethod.Expressions); // order is importants!
+            DofusHelper.RenameDofusTypesSerializeMethodsRecursively(serializeMethod.Expressions);
+            DofusHelper.RenameSerializeAs_(serializeMethod.Expressions);
+            DofusHelper.ChangeTypeIdToProperty(serializeMethod.Expressions);
 
-            DeserializeMethod.RenameMethodCall("readByte", "ReadByte");
+            deserializeMethod.RenameMethodCall("readByte", "ReadByte");
 
-            DeserializeMethod.RenameVariable("NaN", "double.NaN");
-            DeserializeMethod.RenameVariable("super", "base");
-            DeserializeMethod.RenameVariable("input", "reader");
-            DeserializeMethod.RenameVariable("length", "Length");
-            DeserializeMethod.RenameType("ICustomDataInput", "IDataReader");
-            DeserializeMethod.RenameMethodCall("getInstance", "GetInstance");
-            DeserializeMethod.RenameMethodCall("readUTF", "ReadUTF");
-            DeserializeMethod.RenameMethodCall("readVarInt", "ReadVarInt");
-            DeserializeMethod.RenameMethodCall("readVarLong", "ReadVarLong");
-            DeserializeMethod.RenameMethodCall("readShort", "ReadShort");
-            DeserializeMethod.RenameMethodCall("readVarShort", "ReadVarShort");
-            DeserializeMethod.RenameMethodCall("readBoolean", "ReadBoolean");
-            DeserializeMethod.RenameMethodCall("readDouble", "ReadDouble");
-            DeserializeMethod.RenameMethodCall("readInt", "ReadInt");
-            DeserializeMethod.RenameMethodCall("readUnsignedInt", "ReadUInt");
-            DeserializeMethod.RenameMethodCall("readUnsignedShort", "ReadUShort");
-            DeserializeMethod.RenameMethodCall("readVarUhShort", "ReadVarUhShort");
-            DeserializeMethod.RenameMethodCall("readVarUhInt", "ReadVarUhInt");
-            DeserializeMethod.RenameMethodCall("readVarUhLong", "ReadVarUhLong");
-            DeserializeMethod.RenameMethodCall("readUnsignedByte", "ReadSByte");
-            DeserializeMethod.RenameMethodCall("readFloat", "ReadFloat");
-            DeserializeMethod.RenameMethodCall("getFlag", "GetFlag");
-            DeserializeMethod.RenameMethodCall("deserialize", "Deserialize");
+            deserializeMethod.RenameVariable("NaN", "double.NaN");
+            deserializeMethod.RenameVariable("super", "base");
+            deserializeMethod.RenameVariable("input", "reader");
+            deserializeMethod.RenameVariable("length", "Length");
+            deserializeMethod.RenameType("ICustomDataInput", "IDataReader");
+            deserializeMethod.RenameMethodCall("getInstance", "GetInstance");
+            deserializeMethod.RenameMethodCall("readUTF", "ReadUTF");
+            deserializeMethod.RenameMethodCall("readVarInt", "ReadVarInt");
+            deserializeMethod.RenameMethodCall("readVarLong", "ReadVarLong");
+            deserializeMethod.RenameMethodCall("readShort", "ReadShort");
+            deserializeMethod.RenameMethodCall("readVarShort", "ReadVarShort");
+            deserializeMethod.RenameMethodCall("readBoolean", "ReadBoolean");
+            deserializeMethod.RenameMethodCall("readDouble", "ReadDouble");
+            deserializeMethod.RenameMethodCall("readInt", "ReadInt");
+            deserializeMethod.RenameMethodCall("readUnsignedInt", "ReadUInt");
+            deserializeMethod.RenameMethodCall("readUnsignedShort", "ReadUShort");
+            deserializeMethod.RenameMethodCall("readVarUhShort", "ReadVarUhShort");
+            deserializeMethod.RenameMethodCall("readVarUhInt", "ReadVarUhInt");
+            deserializeMethod.RenameMethodCall("readVarUhLong", "ReadVarUhLong");
+            deserializeMethod.RenameMethodCall("readUnsignedByte", "ReadSByte");
+            deserializeMethod.RenameMethodCall("readFloat", "ReadFloat");
+            deserializeMethod.RenameMethodCall("getFlag", "GetFlag");
+            deserializeMethod.RenameMethodCall("deserialize", "Deserialize");
 
-            DeserializeMethod.SetModifiers(AS3ModifiersEnum.@override);
-            DofusHelper.IOReadCastRecursively(this, File, DeserializeMethod, DeserializeMethod.Expressions);
-            DofusHelper.InstantiateArrays(this, File, DeserializeMethod);
-            DofusHelper.TransformVectorPushIntoCSharpArrayIndexer(File, this, DeserializeMethod);
-            DofusHelper.CreateGenericTypeForProtocolInstance(DeserializeMethod.Expressions);
-            DofusHelper.CastEnumsComparaisons(DeserializeMethod.Expressions);
+            deserializeMethod.SetModifiers(AS3ModifiersEnum.@override);
+            DofusHelper.IOReadCastRecursively(this, File, deserializeMethod, deserializeMethod.Expressions);
+            DofusHelper.InstantiateArrays(this, File, deserializeMethod);
+            DofusHelper.TransformVectorPushIntoCSharpArrayIndexer(File, this, deserializeMethod);
+            DofusHelper.CreateGenericTypeForProtocolInstance(deserializeMethod.Expressions);
+            DofusHelper.CastEnumsComparaisons(deserializeMethod.Expressions);
         }
-        protected override AS3Method[] GetMethodsToWrite()
+        protected override AS3Method[] SelectMethodsToWrite()
         {
             return
                 GetCtors().
                 Concat(new AS3Method[]
-                { GetSerializeMethod(),
-                  GetDeserializeMethod() })
+                {
+                    GetSerializeMethod(),
+                    GetDeserializeMethod()}
+                )
                 .ToArray();
         }
 
-        protected override AS3Field[] GetFieldsToWrite()
+        protected override AS3Field[] SelectFieldsToWrite()
         {
-            return base.GetFieldsToWrite();
+            return base.SelectFieldsToWrite();
         }
         public SerializableConverter(AS3File file) : base(file)
         {

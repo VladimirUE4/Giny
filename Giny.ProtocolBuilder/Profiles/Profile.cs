@@ -4,6 +4,7 @@ using Giny.Core.Extensions;
 using Giny.ProtocolBuilder.Converters;
 using Giny.ProtocolBuilder.Templates;
 using Microsoft.VisualStudio.TextTemplating;
+using Mono.TextTemplating;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -81,7 +82,7 @@ namespace Giny.ProtocolBuilder.Profiles
             }
             var directoryPath = Path.Combine(OutputDirectory, GetRelativeOutputPath());
 
-            var engine = new Engine();
+            var engine = new TemplatingEngine();
             var host = new TemplateHost(TemplatePath);
 
             var converter = CreateDofusConverter();
