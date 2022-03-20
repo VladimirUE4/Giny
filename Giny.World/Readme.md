@@ -2,7 +2,7 @@
 # Giny.World
 
 ## En cours 
-
+* ProgressLogger + Logger.log interactions... (back)
 * CharacterCreationRequestMessage automatiser 
 ```csharp 
 colors = new int[5];
