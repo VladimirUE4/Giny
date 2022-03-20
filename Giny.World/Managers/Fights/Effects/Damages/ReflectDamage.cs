@@ -31,7 +31,7 @@ namespace Giny.World.Managers.Fights.Effects.Damages
             {
                 foreach (var target in targets)
                 {
-                    AddStatBuff(target, (short)Effect.Min, target.Stats.Reflect, FightDispellableEnum.DISPELLABLE);
+                    AddStatBuff(target, (short)Effect.Min, target.Stats[CharacteristicEnum.REFLECT], FightDispellableEnum.DISPELLABLE);
                 }
             }
         }

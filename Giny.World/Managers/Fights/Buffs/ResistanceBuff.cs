@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -24,18 +25,19 @@ namespace Giny.World.Managers.Fights.Buffs
 
         public override void Execute()
         {
-            Target.Stats.AirResistPercent.Context += Delta;
-            Target.Stats.FireResistPercent.Context += Delta;
-            Target.Stats.EarthResistPercent.Context += Delta;
-            Target.Stats.WaterResistPercent.Context += Delta;
+            
+            Target.Stats[CharacteristicEnum.AIR_ELEMENT_RESIST_PERCENT].Context += Delta;
+            Target.Stats[CharacteristicEnum.FIRE_ELEMENT_RESIST_PERCENT].Context += Delta;
+            Target.Stats[CharacteristicEnum.EARTH_ELEMENT_RESIST_PERCENT].Context += Delta;
+            Target.Stats[CharacteristicEnum.WATER_ELEMENT_RESIST_PERCENT].Context += Delta;
         }
 
         public override void Dispell()
         {
-            Target.Stats.AirResistPercent.Context -= Delta;
-            Target.Stats.FireResistPercent.Context -= Delta;
-            Target.Stats.EarthResistPercent.Context -= Delta;
-            Target.Stats.WaterResistPercent.Context -= Delta;
+            Target.Stats[CharacteristicEnum.AIR_ELEMENT_RESIST_PERCENT].Context -= Delta;
+            Target.Stats[CharacteristicEnum.FIRE_ELEMENT_RESIST_PERCENT].Context -= Delta;
+            Target.Stats[CharacteristicEnum.EARTH_ELEMENT_RESIST_PERCENT].Context -= Delta;
+            Target.Stats[CharacteristicEnum.WATER_ELEMENT_RESIST_PERCENT].Context -= Delta;
         }
 
         public override short GetDelta()

@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
@@ -192,69 +193,16 @@ namespace Giny.World.Managers.Fights.Stats
 
         public FighterStats(Character character)
         {
-            this.ActionPoints = (ApCharacteristic)character.Stats.ActionPoints.Clone();
-            this.Agility = character.Stats.Agility.Clone();
-            this.AirDamageBonus = character.Stats.AirDamageBonus.Clone();
-            this.AirReduction = character.Stats.AirReduction.Clone();
-            this.AirResistPercent = (ResistanceCharacteristic)character.Stats.AirResistPercent.Clone();
-            this.AllDamagesBonus = character.Stats.AllDamagesBonus.Clone();
-            this.Chance = character.Stats.Chance.Clone();
-            this.CriticalDamageBonus = character.Stats.CriticalDamageBonus.Clone();
-            this.CriticalDamageReduction = character.Stats.CriticalDamageReduction.Clone();
-            this.CriticalHit = character.Stats.CriticalHit.Clone();
+            foreach (KeyValuePair<CharacteristicEnum, Characteristic> stat in character.Stats.GetCharacteristics())
+            {
+                this[stat.Key] = stat.Value.Clone();
+            }
+
             this.CriticalHitWeapon = character.Stats.CriticalHitWeapon;
-            this.DamagesBonusPercent = character.Stats.DamagesBonusPercent.Clone();
-            this.DodgePAProbability = (PointDodgeCharacteristic)character.Stats.DodgePAProbability.Clone();
-            this.DodgePMProbability = (PointDodgeCharacteristic)character.Stats.DodgePMProbability.Clone();
-            this.EarthDamageBonus = character.Stats.EarthDamageBonus.Clone();
-            this.EarthReduction = character.Stats.EarthReduction.Clone();
-            this.EarthResistPercent = (ResistanceCharacteristic)character.Stats.EarthResistPercent.Clone();
             this.Energy = character.Stats.Energy;
-            this.FireDamageBonus = character.Stats.FireDamageBonus.Clone();
-            this.FireReduction = character.Stats.FireReduction.Clone();
-            this.FireResistPercent = (ResistanceCharacteristic)character.Stats.FireResistPercent.Clone();
-            this.GlobalDamageReduction = character.Stats.GlobalDamageReduction;
-            this.GlyphBonusPercent = character.Stats.GlyphBonusPercent.Clone();
-            this.HealBonus = character.Stats.HealBonus.Clone();
-            this.Initiative = character.Stats.Initiative;
-            this.Intelligence = character.Stats.Intelligence.Clone();
             this.LifePoints = character.Stats.LifePoints;
             this.MaxLifePoints = character.Stats.MaxLifePoints;
             this.MaxEnergyPoints = character.Stats.MaxEnergyPoints;
-            this.MeleeDamageDonePercent = character.Stats.MeleeDamageDonePercent.Clone();
-            this.MeleeDamageResistancePercent = character.Stats.MeleeDamageResistancePercent.Clone();
-            this.MovementPoints = (MpCharacteristic)character.Stats.MovementPoints.Clone();
-            this.NeutralDamageBonus = character.Stats.NeutralDamageBonus.Clone();
-            this.NeutralReduction = character.Stats.NeutralReduction.Clone();
-            this.NeutralResistPercent = (ResistanceCharacteristic)character.Stats.NeutralResistPercent.Clone();
-            this.APAttack = (RelativeCharacteristic)character.Stats.APAttack.Clone();
-            this.PermanentDamagePercent = character.Stats.PermanentDamagePercent.Clone();
-            this.MPAttack = (RelativeCharacteristic)character.Stats.MPAttack.Clone();
-            this.Prospecting = character.Stats.Prospecting;
-            this.PushDamageBonus = character.Stats.PushDamageBonus.Clone();
-            this.PushDamageReduction = character.Stats.PushDamageReduction.Clone();
-            this.Range = (RangeCharacteristic)character.Stats.Range.Clone();
-            this.RangedDamageDonePercent = character.Stats.RangedDamageDonePercent.Clone();
-            this.RangedDamageResistancePercent = character.Stats.RangedDamageResistancePercent.Clone();
-            this.Reflect = character.Stats.Reflect.Clone();
-            this.RuneBonusPercent = character.Stats.RuneBonusPercent.Clone();
-            this.SpellDamageDonePercent = character.Stats.SpellDamageDonePercent.Clone();
-            this.SpellDamageResistancePercent = character.Stats.SpellDamageResistancePercent.Clone();
-            this.Strength = character.Stats.Strength.Clone();
-            this.SummonableCreaturesBoost = character.Stats.SummonableCreaturesBoost.Clone();
-            this.TackleBlock = (RelativeCharacteristic)character.Stats.TackleBlock.Clone();
-            this.TackleEvade = (RelativeCharacteristic)character.Stats.TackleEvade.Clone();
-            this.TrapBonus = character.Stats.TrapBonus.Clone();
-            this.TrapBonusPercent = character.Stats.TrapBonusPercent.Clone();
-            this.Vitality = character.Stats.Vitality.Clone();
-            this.WaterDamageBonus = character.Stats.WaterDamageBonus.Clone();
-            this.WaterReduction = character.Stats.WaterReduction.Clone();
-            this.WaterResistPercent = (ResistanceCharacteristic)character.Stats.WaterResistPercent.Clone();
-            this.WeaponDamageDonePercent = character.Stats.WeaponDamageDonePercent.Clone();
-            this.WeaponDamageResistancePercent = character.Stats.WeaponDamageResistancePercent.Clone();
-            this.WeaponDamagesBonusPercent = character.Stats.WeaponDamagesBonusPercent.Clone();
-            this.WeightBonus = character.Stats.WeightBonus.Clone();
-            this.Wisdom = character.Stats.Wisdom.Clone();
             InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
             this.BaseMaxLife = MaxLifePoints;
             this.Erosion = NaturalErosion;
@@ -262,69 +210,16 @@ namespace Giny.World.Managers.Fights.Stats
         }
         public FighterStats(FighterStats other)
         {
-            this.ActionPoints = (ApCharacteristic)other.ActionPoints.Clone();
-            this.Agility = other.Agility.Clone();
-            this.AirDamageBonus = other.AirDamageBonus.Clone();
-            this.AirReduction = other.AirReduction.Clone();
-            this.AirResistPercent = (ResistanceCharacteristic)other.AirResistPercent.Clone();
-            this.AllDamagesBonus = other.AllDamagesBonus.Clone();
-            this.Chance = other.Chance.Clone();
-            this.CriticalDamageBonus = other.CriticalDamageBonus.Clone();
-            this.CriticalDamageReduction = other.CriticalDamageReduction.Clone();
-            this.CriticalHit = other.CriticalHit.Clone();
+            foreach (KeyValuePair<CharacteristicEnum, Characteristic> stat in other.GetCharacteristics())
+            {
+                this[stat.Key] = stat.Value.Clone();
+            }
+
             this.CriticalHitWeapon = other.CriticalHitWeapon;
-            this.DamagesBonusPercent = other.DamagesBonusPercent.Clone();
-            this.DodgePAProbability = (PointDodgeCharacteristic)other.DodgePAProbability.Clone();
-            this.DodgePMProbability = (PointDodgeCharacteristic)other.DodgePMProbability.Clone();
-            this.EarthDamageBonus = other.EarthDamageBonus.Clone();
-            this.EarthReduction = other.EarthReduction.Clone();
-            this.EarthResistPercent = (ResistanceCharacteristic)other.EarthResistPercent.Clone();
             this.Energy = other.Energy;
-            this.FireDamageBonus = other.FireDamageBonus.Clone();
-            this.FireReduction = other.FireReduction.Clone();
-            this.FireResistPercent = (ResistanceCharacteristic)other.FireResistPercent.Clone();
-            this.GlobalDamageReduction = other.GlobalDamageReduction;
-            this.GlyphBonusPercent = other.GlyphBonusPercent.Clone();
-            this.HealBonus = other.HealBonus.Clone();
-            this.Initiative = other.Initiative;
-            this.Intelligence = other.Intelligence.Clone();
             this.LifePoints = other.LifePoints;
             this.MaxLifePoints = other.MaxLifePoints;
             this.MaxEnergyPoints = other.MaxEnergyPoints;
-            this.MeleeDamageDonePercent = other.MeleeDamageDonePercent.Clone();
-            this.MeleeDamageResistancePercent = other.MeleeDamageResistancePercent.Clone();
-            this.MovementPoints = (MpCharacteristic)other.MovementPoints.Clone();
-            this.NeutralDamageBonus = other.NeutralDamageBonus.Clone();
-            this.NeutralReduction = other.NeutralReduction.Clone();
-            this.NeutralResistPercent = (ResistanceCharacteristic)other.NeutralResistPercent.Clone();
-            this.APAttack = (RelativeCharacteristic)other.APAttack.Clone();
-            this.PermanentDamagePercent = other.PermanentDamagePercent.Clone();
-            this.MPAttack = (RelativeCharacteristic)other.MPAttack.Clone();
-            this.Prospecting = other.Prospecting;
-            this.PushDamageBonus = other.PushDamageBonus.Clone();
-            this.PushDamageReduction = other.PushDamageReduction.Clone();
-            this.Range = (RangeCharacteristic)other.Range.Clone();
-            this.RangedDamageDonePercent = other.RangedDamageDonePercent.Clone();
-            this.RangedDamageResistancePercent = other.RangedDamageResistancePercent.Clone();
-            this.Reflect = other.Reflect.Clone();
-            this.RuneBonusPercent = other.RuneBonusPercent.Clone();
-            this.SpellDamageDonePercent = other.SpellDamageDonePercent.Clone();
-            this.SpellDamageResistancePercent = other.SpellDamageResistancePercent.Clone();
-            this.Strength = other.Strength.Clone();
-            this.SummonableCreaturesBoost = other.SummonableCreaturesBoost.Clone();
-            this.TackleBlock = (RelativeCharacteristic)other.TackleBlock.Clone();
-            this.TackleEvade = (RelativeCharacteristic)other.TackleEvade.Clone();
-            this.TrapBonus = other.TrapBonus.Clone();
-            this.TrapBonusPercent = other.TrapBonusPercent.Clone();
-            this.Vitality = other.Vitality.Clone();
-            this.WaterDamageBonus = other.WaterDamageBonus.Clone();
-            this.WaterReduction = other.WaterReduction.Clone();
-            this.WaterResistPercent = (ResistanceCharacteristic)other.WaterResistPercent.Clone();
-            this.WeaponDamageDonePercent = other.WeaponDamageDonePercent.Clone();
-            this.WeaponDamageResistancePercent = other.WeaponDamageResistancePercent.Clone();
-            this.WeaponDamagesBonusPercent = other.WeaponDamagesBonusPercent.Clone();
-            this.WeightBonus = other.WeightBonus.Clone();
-            this.Wisdom = other.Wisdom.Clone();
             InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
             this.BaseMaxLife = MaxLifePoints;
             this.Erosion = NaturalErosion;
@@ -335,78 +230,80 @@ namespace Giny.World.Managers.Fights.Stats
          */
         public FighterStats(MonsterGrade monsterGrade, double coeff = 1d)
         {
-            this.ActionPoints = ApCharacteristic.New(monsterGrade.ActionPoints);
-            this.AirDamageBonus = Characteristic.Zero();
-            this.AirReduction = Characteristic.Zero();
-            this.AirResistPercent = ResistanceCharacteristic.New(monsterGrade.AirResistance);
-            this.AllDamagesBonus = Characteristic.Zero();
+            this[CharacteristicEnum.ACTION_POINTS] = ApCharacteristic.New(monsterGrade.ActionPoints);
+            this[CharacteristicEnum.AIR_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.AIR_ELEMENT_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.AIR_ELEMENT_RESIST_PERCENT] = ResistanceCharacteristic.New(monsterGrade.AirResistance);
+            this[CharacteristicEnum.ALL_DAMAGES_BONUS] = Characteristic.Zero();
 
 
-            this.CriticalDamageBonus = Characteristic.Zero();
-            this.CriticalDamageReduction = Characteristic.Zero();
-            this.CriticalHit = Characteristic.Zero();
+            this[CharacteristicEnum.CRITICAL_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.CRITICAL_DAMAGE_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.CRITICAL_HIT] = Characteristic.Zero();
             this.CriticalHitWeapon = 0;
-            this.DamagesBonusPercent = Characteristic.Zero();
+            this[CharacteristicEnum.DAMAGES_BONUS_PERCENT] = Characteristic.Zero();
 
-            this.DodgePAProbability = PointDodgeCharacteristic.New(monsterGrade.ApDodge);
-            this.DodgePMProbability = PointDodgeCharacteristic.New(monsterGrade.MpDodge);
-            this.EarthDamageBonus = Characteristic.Zero();
-            this.EarthReduction = Characteristic.Zero();
-            this.EarthResistPercent = ResistanceCharacteristic.New(monsterGrade.EarthResistance);
+            this[CharacteristicEnum.DODGE_PALOST_PROBABILITY] = PointDodgeCharacteristic.New(monsterGrade.ApDodge);
+            this[CharacteristicEnum.DODGE_PMLOST_PROBABILITY] = PointDodgeCharacteristic.New(monsterGrade.MpDodge);
+            this[CharacteristicEnum.EARTH_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.EARTH_ELEMENT_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.EARTH_ELEMENT_RESIST_PERCENT] = ResistanceCharacteristic.New(monsterGrade.EarthResistance);
             this.Energy = 0;
-            this.FireDamageBonus = Characteristic.Zero();
-            this.FireReduction = Characteristic.Zero();
-            this.FireResistPercent = ResistanceCharacteristic.New(monsterGrade.FireResistance);
+            this[CharacteristicEnum.FIRE_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.FIRE_ELEMENT_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.FIRE_ELEMENT_RESIST_PERCENT] = ResistanceCharacteristic.New(monsterGrade.FireResistance);
             this.GlobalDamageReduction = 0;
-            this.GlyphBonusPercent = Characteristic.Zero();
-            this.HealBonus = Characteristic.Zero();
-            this.Initiative = Characteristic.Zero();
-            this.Intelligence = Characteristic.New(monsterGrade.Intelligence);
-            this.Wisdom = Characteristic.New((short)(monsterGrade.Wisdom * coeff));
-            this.Chance = Characteristic.New((short)(monsterGrade.Chance * coeff));
-            this.Agility = Characteristic.New((short)(monsterGrade.Agility * coeff));
-            this.Strength = Characteristic.New((short)(monsterGrade.Strength * coeff));
-            this.Vitality = Characteristic.New((short)(monsterGrade.Vitality * coeff));
+            this[CharacteristicEnum.GLYPH_POWER] = Characteristic.Zero();
+            this[CharacteristicEnum.HEAL_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.INITIATIVE] = Characteristic.Zero();
+            this[CharacteristicEnum.INTELLIGENCE] = Characteristic.New(monsterGrade.Intelligence);
+            this[CharacteristicEnum.WISDOM] = Characteristic.New((short)(monsterGrade.Wisdom * coeff));
+            this[CharacteristicEnum.CHANCE] = Characteristic.New((short)(monsterGrade.Chance * coeff));
+            this[CharacteristicEnum.AGILITY] = Characteristic.New((short)(monsterGrade.Agility * coeff));
+            this[CharacteristicEnum.STRENGTH] = Characteristic.New((short)(monsterGrade.Strength * coeff));
+            this[CharacteristicEnum.VITALITY] = Characteristic.New((short)(monsterGrade.Vitality * coeff));
             this.MaxLifePoints = (int)(monsterGrade.LifePoints * coeff);
             this.MaxEnergyPoints = 0;
 
-            this.MovementPoints = MpCharacteristic.New(monsterGrade.MovementPoints);
-            this.NeutralDamageBonus = Characteristic.Zero();
-            this.NeutralReduction = Characteristic.Zero();
-            this.NeutralResistPercent = ResistanceCharacteristic.New(monsterGrade.NeutralResistance);
-            this.APAttack = RelativeCharacteristic.Zero();
-            this.PermanentDamagePercent = Characteristic.Zero();
-            this.MPAttack = RelativeCharacteristic.Zero();
-            this.Prospecting = RelativeCharacteristic.Zero();
-            this.PushDamageBonus = Characteristic.Zero();
-            this.PushDamageReduction = Characteristic.Zero();
+            this[CharacteristicEnum.MOVEMENT_POINTS] = MpCharacteristic.New(monsterGrade.MovementPoints);
+            this[CharacteristicEnum.NEUTRAL_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.NEUTRAL_ELEMENT_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.NEUTRAL_ELEMENT_RESIST_PERCENT] = ResistanceCharacteristic.New(monsterGrade.NeutralResistance);
+            this[CharacteristicEnum.PAATTACK] = RelativeCharacteristic.Zero();
+            this[CharacteristicEnum.PERMANENT_DAMAGE_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.PMATTACK] = RelativeCharacteristic.Zero();
+            this[CharacteristicEnum.PROSPECTING] = RelativeCharacteristic.Zero();
+            this[CharacteristicEnum.PUSH_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.PUSH_DAMAGE_REDUCTION] = Characteristic.Zero();
 
-            this.Range = RangeCharacteristic.Zero();
+            this[CharacteristicEnum.RANGE] = RangeCharacteristic.Zero();
 
-            this.Reflect = Characteristic.New(monsterGrade.DamageReflect);
-            this.RuneBonusPercent = Characteristic.Zero();
+            this[CharacteristicEnum.REFLECT] = Characteristic.New(monsterGrade.DamageReflect);
+            this[CharacteristicEnum.RUNE_POWER] = Characteristic.Zero();
 
 
-            this.SummonableCreaturesBoost = Characteristic.New(BaseSummonsCount);
-            this.TackleBlock = RelativeCharacteristic.Zero();
-            this.TackleEvade = RelativeCharacteristic.Zero();
-            this.TrapBonus = Characteristic.Zero();
-            this.TrapBonusPercent = Characteristic.Zero();
+            this[CharacteristicEnum.SUMMONABLE_CREATURES_BOOST] = Characteristic.New(BaseSummonsCount);
+            this[CharacteristicEnum.TACKLE_BLOCK] = RelativeCharacteristic.Zero();
+            this[CharacteristicEnum.TACKLE_EVADE] = RelativeCharacteristic.Zero();
+            this[CharacteristicEnum.TRAP_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.TRAP_BONUS_PERCENT] = Characteristic.Zero();
 
-            this.WaterDamageBonus = Characteristic.Zero();
-            this.WaterReduction = Characteristic.Zero();
-            this.WaterResistPercent = ResistanceCharacteristic.New(monsterGrade.WaterResistance);
-            this.WeaponDamagesBonusPercent = Characteristic.Zero();
+            this[CharacteristicEnum.WATER_DAMAGE_BONUS] = Characteristic.Zero();
+            this[CharacteristicEnum.WATER_ELEMENT_REDUCTION] = Characteristic.Zero();
+            this[CharacteristicEnum.WATER_ELEMENT_RESIST_PERCENT] = ResistanceCharacteristic.New(monsterGrade.WaterResistance);
+            this[CharacteristicEnum.WEAPON_DAMAGES_BONUS_PERCENT] = Characteristic.Zero();
 
-            this.MeleeDamageDonePercent = Characteristic.Zero();
-            this.MeleeDamageResistancePercent = Characteristic.Zero();
-            this.WeaponDamageDonePercent = Characteristic.Zero();
-            this.WeaponDamageResistancePercent = Characteristic.Zero();
-            this.RangedDamageDonePercent = Characteristic.Zero();
-            this.RangedDamageResistancePercent = Characteristic.Zero();
-            this.SpellDamageDonePercent = Characteristic.Zero();
-            this.SpellDamageResistancePercent = Characteristic.Zero();
-            this.WeightBonus = Characteristic.Zero();
+            this[CharacteristicEnum.MELEE_DAMAGE_DONE_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.MELEE_DAMAGE_RECEIVED_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.WEAPON_DAMAGE_DONE_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.WEAPON_DAMAGE_RECEIVED_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.RANGED_DAMAGE_DONE_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.RANGED_DAMAGE_RECEIVED_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.SPELL_DAMAGE_DONE_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.SPELL_DAMAGE_RECEIVED_PERCENT] = Characteristic.Zero();
+            this[CharacteristicEnum.WEIGHT] = Characteristic.Zero();
+
+
             InvisibilityState = GameActionFightInvisibilityStateEnum.VISIBLE;
             this.BaseMaxLife = MaxLifePoints;
             this.LifePoints = MaxLifePoints;

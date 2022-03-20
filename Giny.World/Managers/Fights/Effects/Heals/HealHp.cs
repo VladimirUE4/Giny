@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
@@ -27,7 +28,8 @@ namespace Giny.World.Managers.Fights.Effects.Heals
         {
             short jet = Effect.GetDelta();
 
-            short delta = (short)(jet * (double)(100d + Source.Stats.Intelligence.TotalInContext()) / 100d + Source.Stats.HealBonus.TotalInContext());
+            short delta = (short)(jet * (double)(100d + Source.Stats.Intelligence.TotalInContext()) /
+                100d + Source.Stats[CharacteristicEnum.HEAL_BONUS].TotalInContext());
 
             foreach (var target in targets)
             {

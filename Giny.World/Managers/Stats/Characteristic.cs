@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace Giny.World.Managers.Stats
 {
+    [ProtoInclude(4, typeof(ApCharacteristic))]
+    [ProtoInclude(5, typeof(MpCharacteristic))]
+    [ProtoInclude(6, typeof(PointDodgeCharacteristic))]
+    [ProtoInclude(7, typeof(RangeCharacteristic))]
+    [ProtoInclude(8, typeof(RelativeCharacteristic))]
+    [ProtoInclude(9, typeof(ResistanceCharacteristic))]
     [ProtoContract]
     public class Characteristic
     {
@@ -62,7 +68,7 @@ namespace Giny.World.Managers.Stats
                 Objects = 0
             };
         }
-        public virtual CharacterCharacteristicDetailed GetBaseCharacteristic(CharacteristicEnum characteristic)
+        public virtual CharacterCharacteristicDetailed GetCharacterCharacteristicDetailed(CharacteristicEnum characteristic)
         {
             return new CharacterCharacteristicDetailed(Base, Additional, Objects, Context, Context, (short)characteristic);
         }

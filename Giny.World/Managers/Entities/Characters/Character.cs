@@ -44,6 +44,7 @@ using Giny.World.Records.Maps;
 using Giny.World.Records.Npcs;
 using Giny.World.Records.Spells;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -1462,12 +1463,13 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new TitlesAndOrnamentsListMessage(Record.KnownTitles.ToArray(), Record.KnownOrnaments.ToArray(), Record.ActiveTitleId, Record.ActiveOrnamentId)); ;
         }
+        [WIP("still working?")]
         public void Restat()
         {
-            int vitality = this.Stats.Vitality.Base;
+            int vitality = this.Stats[CharacteristicEnum.VITALITY].Base;
             this.Stats.LifePoints -= vitality;
             this.Stats.MaxLifePoints -= vitality;
-            this.Stats.Vitality.Base = 0;
+            this.Stats[CharacteristicEnum.VITALITY].Base = 0;
             this.Stats.Agility.Base = 0;
             this.Stats.Intelligence.Base = 0;
             this.Stats.Chance.Base = 0;
@@ -1632,7 +1634,7 @@ namespace Giny.World.Managers.Entities.Characters
                 mapId = Record.MapId,
                 maxLifePoints = Stats.MaxLifePoints,
                 name = Name,
-                prospecting = Stats.Prospecting.TotalInContext(),
+                prospecting = Stats[CharacteristicEnum.PROSPECTING].TotalInContext(),
                 regenRate = 0,
                 sex = Record.Sex,
                 status = GetPlayerStatus(),

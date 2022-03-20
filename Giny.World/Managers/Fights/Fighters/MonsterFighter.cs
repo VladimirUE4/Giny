@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Giny.Core.Extensions;
 using Giny.Core.Time;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Monsters;
@@ -128,7 +129,7 @@ namespace Giny.World.Managers.Fights.Fighters
             var random = new AsyncRandom();
             var items = new List<DroppedItem>();
 
-            var prospectingSum = EnemyTeam.GetFighters<CharacterFighter>(false).Sum(entry => entry.Stats.Prospecting.TotalInContext());
+            var prospectingSum = EnemyTeam.GetFighters<CharacterFighter>(false).Sum(entry => entry.Stats[CharacteristicEnum.PROSPECTING].TotalInContext());
 
             foreach (var droppableItem in Monster.Record.Drops.Where(droppableItem => !droppableItem.HasCriteria && prospectingSum >= droppableItem.ProspectingLock).Shuffle())
             {

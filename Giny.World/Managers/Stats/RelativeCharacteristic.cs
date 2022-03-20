@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Stats
         {
             this.Relativ = relative;
         }
-        public override CharacterCharacteristicDetailed GetBaseCharacteristic(CharacteristicEnum characteristic)
+        public override CharacterCharacteristicDetailed GetCharacterCharacteristicDetailed(CharacteristicEnum characteristic)
         {
             return new CharacterCharacteristicDetailed((short)(Base + RelativDelta), Additional, Objects, Context, Context, (short)characteristic);
         }

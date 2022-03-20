@@ -52,7 +52,7 @@ namespace Giny.World.Managers.Fights.Effects.Steal
                 case EffectsEnum.Effect_StealStrength:
                     return target.Stats.Strength;
                 case EffectsEnum.Effect_StealRange:
-                    return target.Stats.Range;
+                    return target.Stats[CharacteristicEnum.RANGE];
             }
 
             return null;

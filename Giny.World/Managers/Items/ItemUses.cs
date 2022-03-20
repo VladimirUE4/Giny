@@ -70,7 +70,7 @@ namespace Giny.World.Managers.Items
         [ItemUsageHandler(EffectsEnum.Effect_AddPermanentVitality)]
         public static bool PermanentVitality(Character character, EffectInteger effect)
         {
-            character.Record.Stats.Vitality.Additional += (short)effect.Value;
+            character.Record.Stats[CharacteristicEnum.VITALITY].Additional += (short)effect.Value;
             character.Record.Stats.LifePoints += effect.Value;
             character.Record.Stats.MaxLifePoints += effect.Value;
             character.TextInformation(TextInformationTypeEnum.TEXT_INFORMATION_MESSAGE, 13, effect.Value);

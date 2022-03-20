@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Giny.Core.DesignPattern;
 using Giny.Core.Time;
+using Giny.Protocol.Custom.Enums;
 using Giny.Protocol.Enums;
 using Giny.Protocol.Messages;
 using Giny.Protocol.Types;
@@ -117,7 +118,7 @@ namespace Giny.World.Managers.Fights
 
                 var looters = results.Where(x => x.CanLoot(team)).OrderByDescending(entry => entry.Prospecting);
 
-                var teamPP = team.GetFighters<CharacterFighter>(false).Sum(entry => entry.Stats.Prospecting.TotalInContext());
+                var teamPP = team.GetFighters<CharacterFighter>(false).Sum(entry => entry.Stats[CharacteristicEnum.PROSPECTING].TotalInContext());
 
                 var kamas = Winners == team ? droppers.Sum(entry => entry.GetDroppedKamas()) * team.GetFighters<CharacterFighter>().Count() : 0;
 

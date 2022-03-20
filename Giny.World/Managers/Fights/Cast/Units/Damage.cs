@@ -165,16 +165,16 @@ namespace Giny.World.Managers.Fights.Cast.Units
         {
             if (this.EffectHandler.CastHandler.Cast.IsCriticalHit)
             {
-                jet.Min += this.Source.Stats.CriticalDamageBonus.TotalInContext();
-                jet.Max += this.Source.Stats.CriticalDamageBonus.TotalInContext();
+                jet.Min += this.Source.Stats[CharacteristicEnum.CRITICAL_DAMAGE_BONUS].TotalInContext();
+                jet.Max += this.Source.Stats[CharacteristicEnum.CRITICAL_DAMAGE_BONUS].TotalInContext();
             }
         }
         private void ComputeCriticalDamageReduction(Jet jet)
         {
             if (this.EffectHandler.CastHandler.Cast.IsCriticalHit)
             {
-                jet.Min -= this.Target.Stats.CriticalDamageReduction.TotalInContext();
-                jet.Max -= this.Target.Stats.CriticalDamageReduction.TotalInContext();
+                jet.Min -= this.Target.Stats[CharacteristicEnum.CRITICAL_DAMAGE_REDUCTION].TotalInContext();
+                jet.Max -= this.Target.Stats[CharacteristicEnum.CRITICAL_DAMAGE_REDUCTION].TotalInContext();
             }
         }
 
@@ -182,37 +182,37 @@ namespace Giny.World.Managers.Fights.Cast.Units
         {
             if (Source.IsMeleeWith(Target))
             {
-                jet.Min += (short)(jet.Min * (Source.Stats.MeleeDamageDonePercent.TotalInContext() / 100d));
-                jet.Max += (short)(jet.Max * (Source.Stats.MeleeDamageDonePercent.TotalInContext() / 100d));
+                jet.Min += (short)(jet.Min * (Source.Stats[CharacteristicEnum.MELEE_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
+                jet.Max += (short)(jet.Max * (Source.Stats[CharacteristicEnum.MELEE_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
 
-                jet.Min -= (short)(jet.Min * (Target.Stats.MeleeDamageResistancePercent.TotalInContext() / 100d));
-                jet.Max -= (short)(jet.Max * (Target.Stats.MeleeDamageResistancePercent.TotalInContext() / 100d));
+                jet.Min -= (short)(jet.Min * (Target.Stats[CharacteristicEnum.MELEE_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
+                jet.Max -= (short)(jet.Max * (Target.Stats[CharacteristicEnum.MELEE_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
             }
             else
             {
-                jet.Min += (short)(jet.Min * (Source.Stats.RangedDamageDonePercent.TotalInContext() / 100d));
-                jet.Max += (short)(jet.Max * (Source.Stats.RangedDamageDonePercent.TotalInContext() / 100d));
+                jet.Min += (short)(jet.Min * (Source.Stats[CharacteristicEnum.RANGED_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
+                jet.Max += (short)(jet.Max * (Source.Stats[CharacteristicEnum.RANGED_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
 
-                jet.Min -= (short)(jet.Min * (Target.Stats.RangedDamageResistancePercent.TotalInContext() / 100d));
-                jet.Max -= (short)(jet.Max * (Target.Stats.RangedDamageResistancePercent.TotalInContext() / 100d));
+                jet.Min -= (short)(jet.Min * (Target.Stats[CharacteristicEnum.RANGED_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
+                jet.Max -= (short)(jet.Max * (Target.Stats[CharacteristicEnum.RANGED_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
             }
 
             if (this.EffectHandler.CastHandler.Cast.Weapon)
             {
-                jet.Min += (short)(jet.Min * (Source.Stats.WeaponDamageDonePercent.TotalInContext() / 100d));
-                jet.Max += (short)(jet.Max * (Source.Stats.WeaponDamageDonePercent.TotalInContext() / 100d));
+                jet.Min += (short)(jet.Min * (Source.Stats[CharacteristicEnum.WEAPON_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
+                jet.Max += (short)(jet.Max * (Source.Stats[CharacteristicEnum.WEAPON_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
 
-                jet.Min -= (short)(jet.Min * (Target.Stats.WeaponDamageResistancePercent.TotalInContext() / 100d));
-                jet.Max -= (short)(jet.Max * (Target.Stats.WeaponDamageResistancePercent.TotalInContext() / 100d));
+                jet.Min -= (short)(jet.Min * (Target.Stats[CharacteristicEnum.WEAPON_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
+                jet.Max -= (short)(jet.Max * (Target.Stats[CharacteristicEnum.WEAPON_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
             }
 
             if (this.IsSpellDamage())
             {
-                jet.Min += (short)(jet.Min * (Source.Stats.SpellDamageDonePercent.TotalInContext() / 100d));
-                jet.Max += (short)(jet.Max * (Source.Stats.SpellDamageDonePercent.TotalInContext() / 100d));
+                jet.Min += (short)(jet.Min * (Source.Stats[CharacteristicEnum.SPELL_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
+                jet.Max += (short)(jet.Max * (Source.Stats[CharacteristicEnum.SPELL_DAMAGE_DONE_PERCENT].TotalInContext() / 100d));
 
-                jet.Min -= (short)(jet.Min * (Target.Stats.SpellDamageResistancePercent.TotalInContext() / 100d));
-                jet.Max -= (short)(jet.Max * (Target.Stats.SpellDamageResistancePercent.TotalInContext() / 100d));
+                jet.Min -= (short)(jet.Min * (Target.Stats[CharacteristicEnum.SPELL_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
+                jet.Max -= (short)(jet.Max * (Target.Stats[CharacteristicEnum.SPELL_DAMAGE_RECEIVED_PERCENT].TotalInContext() / 100d));
             }
         }
         private void ComputeShapeEfficiencyModifiers(Jet jet)
@@ -230,24 +230,24 @@ namespace Giny.World.Managers.Fights.Cast.Units
             switch (EffectSchool)
             {
                 case EffectSchoolEnum.Earth:
-                    resistPercent = Target.Stats.EarthResistPercent.TotalInContext();
-                    reduction = Target.Stats.EarthReduction.TotalInContext();
+                    resistPercent = Target.Stats[CharacteristicEnum.EARTH_ELEMENT_RESIST_PERCENT].TotalInContext();
+                    reduction = Target.Stats[CharacteristicEnum.EARTH_ELEMENT_REDUCTION].TotalInContext();
                     break;
                 case EffectSchoolEnum.Air:
-                    resistPercent = Target.Stats.AirResistPercent.TotalInContext();
-                    reduction = Target.Stats.AirReduction.TotalInContext();
+                    resistPercent = Target.Stats[CharacteristicEnum.AIR_ELEMENT_RESIST_PERCENT].TotalInContext();
+                    reduction = Target.Stats[CharacteristicEnum.AIR_ELEMENT_REDUCTION].TotalInContext();
                     break;
                 case EffectSchoolEnum.Water:
-                    resistPercent = Target.Stats.WaterResistPercent.TotalInContext();
-                    reduction = Target.Stats.WaterReduction.TotalInContext();
+                    resistPercent = Target.Stats[CharacteristicEnum.WATER_ELEMENT_RESIST_PERCENT].TotalInContext();
+                    reduction = Target.Stats[CharacteristicEnum.WATER_ELEMENT_REDUCTION].TotalInContext();
                     break;
                 case EffectSchoolEnum.Fire:
-                    resistPercent = Target.Stats.FireResistPercent.TotalInContext();
-                    reduction = Target.Stats.FireReduction.TotalInContext();
+                    resistPercent = Target.Stats[CharacteristicEnum.FIRE_ELEMENT_RESIST_PERCENT].TotalInContext();
+                    reduction = Target.Stats[CharacteristicEnum.FIRE_ELEMENT_REDUCTION].TotalInContext();
                     break;
                 case EffectSchoolEnum.Neutral:
-                    resistPercent = Target.Stats.NeutralResistPercent.TotalInContext();
-                    reduction = Target.Stats.NeutralReduction.TotalInContext();
+                    resistPercent = Target.Stats[CharacteristicEnum.NEUTRAL_ELEMENT_RESIST_PERCENT].TotalInContext();
+                    reduction = Target.Stats[CharacteristicEnum.NEUTRAL_ELEMENT_REDUCTION].TotalInContext();
                     break;
             }
 
@@ -293,7 +293,7 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             if (this.EffectHandler.CastHandler.Cast.Weapon)
             {
-                weaponDamageBonus = Source.Stats.WeaponDamagesBonusPercent.TotalInContext();
+                weaponDamageBonus = Source.Stats[CharacteristicEnum.WEAPON_DAMAGES_BONUS_PERCENT].TotalInContext();
             }
             else if (IsSpellDamage())
             {
@@ -302,8 +302,8 @@ namespace Giny.World.Managers.Fights.Cast.Units
 
             if (!IgnoreBoost)
             {
-                allDamageBonus = Source.Stats.AllDamagesBonus.TotalInContext();
-                damageBonusPercent = Source.Stats.DamagesBonusPercent.TotalInContext();
+                allDamageBonus = Source.Stats[CharacteristicEnum.ALL_DAMAGES_BONUS].TotalInContext();
+                damageBonusPercent = Source.Stats[CharacteristicEnum.DAMAGES_BONUS_PERCENT].TotalInContext();
             }
 
             if (!IgnoreBoost)
@@ -313,23 +313,23 @@ namespace Giny.World.Managers.Fights.Cast.Units
                 {
                     case EffectSchoolEnum.Neutral:
                         elementDelta = Source.Stats.Strength.TotalInContext();
-                        elementDamageBonus = Source.Stats.NeutralDamageBonus.TotalInContext();
+                        elementDamageBonus = Source.Stats[CharacteristicEnum.NEUTRAL_DAMAGE_BONUS].TotalInContext();
                         break;
                     case EffectSchoolEnum.Earth:
                         elementDelta = Source.Stats.Strength.TotalInContext();
-                        elementDamageBonus = Source.Stats.EarthDamageBonus.TotalInContext();
+                        elementDamageBonus = Source.Stats[CharacteristicEnum.EARTH_DAMAGE_BONUS].TotalInContext();
                         break;
                     case EffectSchoolEnum.Water:
                         elementDelta = Source.Stats.Chance.TotalInContext();
-                        elementDamageBonus = Source.Stats.WaterDamageBonus.TotalInContext();
+                        elementDamageBonus = Source.Stats[CharacteristicEnum.WATER_DAMAGE_BONUS].TotalInContext();
                         break;
                     case EffectSchoolEnum.Air:
                         elementDelta = Source.Stats.Agility.TotalInContext();
-                        elementDamageBonus = Source.Stats.AirDamageBonus.TotalInContext();
+                        elementDamageBonus = Source.Stats[CharacteristicEnum.AIR_DAMAGE_BONUS].TotalInContext();
                         break;
                     case EffectSchoolEnum.Fire:
                         elementDelta = Source.Stats.Intelligence.TotalInContext();
-                        elementDamageBonus = Source.Stats.FireDamageBonus.TotalInContext();
+                        elementDamageBonus = Source.Stats[CharacteristicEnum.FIRE_DAMAGE_BONUS].TotalInContext();
                         break;
                     default:
                         elementDelta = jet;

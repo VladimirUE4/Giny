@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Fighters;
 using System;
@@ -47,7 +48,7 @@ namespace Giny.World.Managers.Fights.Results
             get
             {
                 T fighter = this.Fighter;
-                return fighter.Stats.Prospecting.TotalInContext();
+                return fighter.Stats[CharacteristicEnum.PROSPECTING].TotalInContext();
             }
         }
         public int Wisdom
@@ -55,7 +56,7 @@ namespace Giny.World.Managers.Fights.Results
             get
             {
                 T fighter = this.Fighter;
-                return fighter.Stats.Prospecting.TotalInContext();
+                return fighter.Stats[CharacteristicEnum.PROSPECTING].TotalInContext();
             }
         }
         public int Level

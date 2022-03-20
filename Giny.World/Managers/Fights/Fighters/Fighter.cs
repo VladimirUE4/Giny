@@ -365,7 +365,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var tackler in tacklers)
             {
-                result *= (Stats.TackleEvade.TotalInContext() + 2) / (2d * (tackler.Stats.TackleBlock.TotalInContext() + 2));
+                result *= (Stats[CharacteristicEnum.TACKLE_EVADE].TotalInContext() + 2) / (2d * (tackler.Stats[CharacteristicEnum.TACKLE_BLOCK].TotalInContext() + 2));
             }
 
             short looseAp = 0;
@@ -1031,7 +1031,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             var random = new AsyncRandom();
 
-            if (spell.CriticalHitProbability != 0 && random.NextDouble() * 100 < spell.CriticalHitProbability + Stats.CriticalHit.TotalInContext())
+            if (spell.CriticalHitProbability != 0 && random.NextDouble() * 100 < spell.CriticalHitProbability + Stats[CharacteristicEnum.CRITICAL_HIT].TotalInContext())
                 critical = FightSpellCastCriticalEnum.CRITICAL_HIT;
 
             return critical;
@@ -1135,7 +1135,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             if (spellLevel.RangeCanBeBoosted)
             {
-                range += Stats.Range.TotalInContext();
+                range += Stats[CharacteristicEnum.RANGE].TotalInContext();
 
                 if (range < minimalRange)
                     range = minimalRange;
@@ -1336,7 +1336,8 @@ namespace Giny.World.Managers.Fights.Fighters
         private void InflictPushDamages(Fighter source, int n, bool headOn)
         {
             double num1 = headOn ? 4 : 8d;
-            double num2 = ((source.Level / 2d) + (source.Stats.PushDamageBonus.TotalInContext() - this.Stats.PushDamageReduction.TotalInContext()) + 32d)
+            double num2 = ((source.Level / 2d) + (source.Stats[CharacteristicEnum.PUSH_DAMAGE_BONUS].TotalInContext() 
+                - this.Stats[CharacteristicEnum.PUSH_DAMAGE_REDUCTION].TotalInContext()) + 32d)
                  * (n / (double)num1);
 
             short delta = (short)num2;
@@ -1786,7 +1787,7 @@ namespace Giny.World.Managers.Fights.Fighters
         [WIP("only spell damage reflection are mutlplied by wisdom")] // verify this information
         public virtual int CalculateDamageReflection(int damage)
         {
-            var reflectDamages = Stats.Reflect.TotalInContext() * (1 + (Stats.Wisdom.TotalInContext() / 100));
+            var reflectDamages = Stats[CharacteristicEnum.REFLECT].TotalInContext() * (1 + (Stats.Wisdom.TotalInContext() / 100));
 
             if (reflectDamages > damage / 2d)
                 return (int)(damage / 2d);
@@ -2205,7 +2206,7 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public bool CanSummon()
         {
-            return GetSummonsCount() < Stats.SummonableCreaturesBoost.TotalInContext();
+            return GetSummonsCount() < Stats[CharacteristicEnum.SUMMONABLE_CREATURES_BOOST].TotalInContext();
         }
         public void Die(Fighter killedBy)
         {
@@ -2259,8 +2260,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual bool RollMPLose(Fighter from, short value)
         {
-            var mpAttack = from.Stats.MPAttack.TotalInContext() > 1 ? from.Stats.MPAttack.TotalInContext() : 1;
-            var mpDodge = Stats.DodgePMProbability.TotalInContext() > 1 ? Stats.DodgePMProbability.TotalInContext() : 1;
+            var mpAttack = from.Stats[CharacteristicEnum.PMATTACK].TotalInContext() > 1 ? from.Stats[CharacteristicEnum.PMATTACK].TotalInContext() : 1;
+            var mpDodge = Stats[CharacteristicEnum.DODGE_PMLOST_PROBABILITY].TotalInContext() > 1 ? Stats[CharacteristicEnum.DODGE_PMLOST_PROBABILITY].TotalInContext() : 1;
             var prob = ((Stats.MovementPoints.TotalInContext() - value) / (double)(Stats.MovementPoints.TotalInContext())) * (mpAttack / (double)mpDodge) / 2d;
 
             if (prob < 0.10)
@@ -2274,8 +2275,8 @@ namespace Giny.World.Managers.Fights.Fighters
         }
         public virtual bool RollAPLose(Fighter from, int value)
         {
-            var apAttack = from.Stats.APAttack.TotalInContext() > 1 ? from.Stats.APAttack.TotalInContext() : 1;
-            var apDodge = Stats.DodgePAProbability.TotalInContext() > 1 ? Stats.DodgePAProbability.TotalInContext() : 1;
+            var apAttack = from.Stats[CharacteristicEnum.PAATTACK].TotalInContext() > 1 ? from.Stats[CharacteristicEnum.PAATTACK].TotalInContext() : 1;
+            var apDodge = Stats[CharacteristicEnum.DODGE_PALOST_PROBABILITY].TotalInContext() > 1 ? Stats[CharacteristicEnum.DODGE_PALOST_PROBABILITY].TotalInContext() : 1;
             var prob = ((Stats.ActionPoints.TotalInContext() - value) / (double)(Stats.ActionPoints.TotalInContext())) * (apAttack / (double)apDodge) / 2d;
 
             if (prob < 0.10)

@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Enums;
 using Giny.World.Managers.Effects;
 using Giny.World.Managers.Fights.Cast;
 using Giny.World.Managers.Fights.Fighters;
@@ -73,10 +74,10 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
             switch (Effect.EffectEnum)
             {
                 case EffectsEnum.Effect_SubRange:
-                    return target.Stats.Range;
+                    return target.Stats[CharacteristicEnum.RANGE];
 
                 case EffectsEnum.Effect_SubDamageBonusPercent:
-                    return target.Stats.DamagesBonusPercent;
+                    return target.Stats[CharacteristicEnum.DAMAGES_BONUS_PERCENT];
 
                 case EffectsEnum.Effect_SubAgility:
                     return target.Stats.Agility;
@@ -94,88 +95,88 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                     return target.Stats.Wisdom;
 
                 case EffectsEnum.Effect_SubMeleeDamageDonePercent:
-                    return target.Stats.MeleeDamageDonePercent;
+                    return target.Stats[CharacteristicEnum.MELEE_DAMAGE_DONE_PERCENT];
 
                 case EffectsEnum.Effect_SubRangedDamageDonePercent:
-                    return target.Stats.RangedDamageDonePercent;
+                    return target.Stats[CharacteristicEnum.RANGED_DAMAGE_DONE_PERCENT];
 
                 case EffectsEnum.Effect_SubDamageBonus:
-                    return target.Stats.AllDamagesBonus;
+                    return target.Stats[CharacteristicEnum.ALL_DAMAGES_BONUS];
 
                 case EffectsEnum.Effect_SubCriticalHit:
-                    return target.Stats.CriticalHit;
+                    return target.Stats[CharacteristicEnum.CRITICAL_HIT];
 
                 case EffectsEnum.Effect_SubDodgeMPProbability:
-                    return target.Stats.DodgePMProbability;
+                    return target.Stats[CharacteristicEnum.DODGE_PMLOST_PROBABILITY];
 
                 case EffectsEnum.Effect_SubDodgeAPProbability:
-                    return target.Stats.DodgePAProbability;
+                    return target.Stats[CharacteristicEnum.DODGE_PALOST_PROBABILITY];
 
                 case EffectsEnum.Effect_SubMeleeResistance:
-                    return target.Stats.MeleeDamageResistancePercent;
+                    return target.Stats[CharacteristicEnum.MELEE_DAMAGE_RECEIVED_PERCENT];
 
                 case EffectsEnum.Effect_SubRangedResistance:
-                    return target.Stats.RangedDamageResistancePercent;
+                    return target.Stats[CharacteristicEnum.RANGED_DAMAGE_RECEIVED_PERCENT]; 
 
                 case EffectsEnum.Effect_SubSpellResistance:
-                    return target.Stats.SpellDamageResistancePercent;
+                    return target.Stats[CharacteristicEnum.SPELL_DAMAGE_RECEIVED_PERCENT];
 
                 case EffectsEnum.Effect_SubLock:
-                    return target.Stats.TackleBlock;
+                    return target.Stats[CharacteristicEnum.TACKLE_BLOCK];
 
                 case EffectsEnum.Effect_SubFireResistPercent:
-                    return target.Stats.FireResistPercent;
+                    return target.Stats[CharacteristicEnum.FIRE_ELEMENT_RESIST_PERCENT];
 
                 case EffectsEnum.Effect_SubEarthResistPercent:
-                    return target.Stats.EarthResistPercent;
+                    return target.Stats[CharacteristicEnum.EARTH_ELEMENT_RESIST_PERCENT];
 
                 case EffectsEnum.Effect_SubNeutralResistPercent:
-                    return target.Stats.NeutralResistPercent;
+                    return target.Stats[CharacteristicEnum.NEUTRAL_ELEMENT_RESIST_PERCENT];
 
                 case EffectsEnum.Effect_SubAirResistPercent:
-                    return target.Stats.AirResistPercent;
+                    return target.Stats[CharacteristicEnum.AIR_ELEMENT_RESIST_PERCENT];
 
                 case EffectsEnum.Effect_SubWaterResistPercent:
-                    return target.Stats.WaterResistPercent;
+                    return target.Stats[CharacteristicEnum.WATER_ELEMENT_RESIST_PERCENT];
 
                 case EffectsEnum.Effect_SubEvade:
-                    return target.Stats.TackleEvade;
+                    return target.Stats[CharacteristicEnum.TACKLE_EVADE];
 
                 case EffectsEnum.Effect_SubAPAttack:
-                    return target.Stats.APAttack;
+                    return target.Stats[CharacteristicEnum.PAATTACK];
 
                 case EffectsEnum.Effect_SubMPAttack:
-                    return target.Stats.MPAttack;
+                    return target.Stats[CharacteristicEnum.PMATTACK];
 
                 case EffectsEnum.Effect_SubEarthElementReduction:
-                    return target.Stats.EarthReduction;
+                    return target.Stats[CharacteristicEnum.EARTH_ELEMENT_REDUCTION];
 
                 case EffectsEnum.Effect_SubAirElementReduction:
-                    return target.Stats.AirReduction;
+                    return target.Stats[CharacteristicEnum.AIR_ELEMENT_REDUCTION];
 
                 case EffectsEnum.Effect_SubFireElementReduction:
-                    return target.Stats.FireReduction;
+                    return target.Stats[CharacteristicEnum.FIRE_ELEMENT_REDUCTION];
 
                 case EffectsEnum.Effect_SubWaterElementReduction:
-                    return target.Stats.WaterReduction;
+                    return target.Stats[CharacteristicEnum.WATER_ELEMENT_REDUCTION];
 
                 case EffectsEnum.Effect_SubNeutralElementReduction:
-                    return target.Stats.NeutralReduction;
+                    return target.Stats[CharacteristicEnum.NEUTRAL_ELEMENT_REDUCTION];
 
                 case EffectsEnum.Effect_SubPushDamageBonus:
-                    return target.Stats.PushDamageBonus;
+                    return target.Stats[CharacteristicEnum.PUSH_DAMAGE_BONUS];
 
                 case EffectsEnum.Effect_SubPushDamageReduction:
-                    return target.Stats.PushDamageReduction;
+                    return target.Stats[CharacteristicEnum.PUSH_DAMAGE_REDUCTION];
 
                 case EffectsEnum.Effect_SubHealBonus:
-                    return target.Stats.HealBonus;
+                    return target.Stats[CharacteristicEnum.HEAL_BONUS];
 
                 case EffectsEnum.Effect_SubCriticalDamageReduction:
-                    return target.Stats.CriticalDamageReduction;
+                    return target.Stats[CharacteristicEnum.CRITICAL_DAMAGE_REDUCTION];
 
                 case EffectsEnum.Effect_SubSpellDamageDonePercent:
-                    return target.Stats.SpellDamageDonePercent;
+                    return target.Stats[CharacteristicEnum.SPELL_DAMAGE_DONE_PERCENT];
 
                 default:
                     target.Fight.Warn(Effect.EffectEnum + " cannot be applied to stat buff.");

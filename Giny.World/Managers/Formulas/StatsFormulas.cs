@@ -1,4 +1,5 @@
 ﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Stats;
 using System;
@@ -13,7 +14,7 @@ namespace Giny.World.Managers.Formulas
     {
         public int TotalInitiative(EntityStats stats)
         {
-            double num1 = stats.Total() + stats.Initiative.Total();
+            double num1 = stats.Total() + stats[CharacteristicEnum.INITIATIVE].Total();
             double num2 = stats.LifePoints / (double)stats.MaxLifePoints;
             double value = num1 * num2;
             return value > 0 ? (int)value : 0;
@@ -21,7 +22,7 @@ namespace Giny.World.Managers.Formulas
 
         public int TotalWeight(Character character)
         {
-            return 1000 + (character.Record.Stats.Strength.Total() * 5) + character.Record.Stats.WeightBonus.Total();
+            return 1000 + (character.Record.Stats.Strength.Total() * 5) + character.Record.Stats[CharacteristicEnum.WEIGHT].Total();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Giny.World.Network;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.World.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Giny.World.Managers.Criterias
     {
         public override bool Eval(WorldClient client)
         {
-            return BasicEval(CriteriaValue, ComparaisonSymbol, client.Character.Record.Stats.Vitality.Additional);
+            return BasicEval(CriteriaValue, ComparaisonSymbol, client.Character.Record.Stats[CharacteristicEnum.VITALITY].Additional);
         }
     }
     [Criteria("CV")]
@@ -20,7 +21,7 @@ namespace Giny.World.Managers.Criterias
     {
         public override bool Eval(WorldClient client)
         {
-            return BasicEval(CriteriaValue, ComparaisonSymbol, client.Character.Record.Stats.Vitality.Total());
+            return BasicEval(CriteriaValue, ComparaisonSymbol, client.Character.Record.Stats[CharacteristicEnum.VITALITY].Total());
         }
     }
 }

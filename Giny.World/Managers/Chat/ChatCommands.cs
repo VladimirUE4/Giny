@@ -17,6 +17,7 @@ using Giny.World.Managers.Maps.Npcs;
 using Giny.World.Managers.Maps.Paths;
 using Giny.World.Managers.Maps.Teleporters;
 using Giny.World.Managers.Monsters;
+using Giny.World.Managers.Stats;
 using Giny.World.Network;
 using Giny.World.Records.Items;
 using Giny.World.Records.Jobs;
@@ -456,63 +457,10 @@ namespace Giny.World.Managers.Chat
                     target.Character.Inventory.SetItemPosition(item.UId, CharacterInventoryPositionEnum.INVENTORY_POSITION_NOT_EQUIPED, item.Quantity);
                 }
 
-                target.Character.Stats.ActionPoints.Objects = 0;
-                target.Character.Stats.MovementPoints.Objects = 0;
-                target.Character.Stats.Agility.Objects = 0;
-                target.Character.Stats.AirDamageBonus.Objects = 0;
-                target.Character.Stats.AirReduction.Objects = 0;
-                target.Character.Stats.AirResistPercent.Objects = 0;
-                target.Character.Stats.AllDamagesBonus.Objects = 0;
-                target.Character.Stats.DamagesBonusPercent.Objects = 0;
-                target.Character.Stats.Chance.Objects = 0;
-                target.Character.Stats.CriticalDamageBonus.Objects = 0;
-                target.Character.Stats.CriticalDamageReduction.Objects = 0;
-                target.Character.Stats.CriticalHit.Objects = 0;
-                target.Character.Stats.Initiative.Objects = 0;
-                target.Character.Stats.DodgePAProbability.Objects = 0;
-                target.Character.Stats.DodgePMProbability.Objects = 0;
-                target.Character.Stats.EarthDamageBonus.Objects = 0;
-                target.Character.Stats.EarthReduction.Objects = 0;
-                target.Character.Stats.EarthResistPercent.Objects = 0;
-                target.Character.Stats.FireDamageBonus.Objects = 0;
-                target.Character.Stats.FireReduction.Objects = 0;
-                target.Character.Stats.FireResistPercent.Objects = 0;
-                target.Character.Stats.GlyphBonusPercent.Objects = 0;
-                target.Character.Stats.RuneBonusPercent.Objects = 0;
-                target.Character.Stats.PermanentDamagePercent.Objects = 0;
-                target.Character.Stats.HealBonus.Objects = 0;
-                target.Character.Stats.Intelligence.Objects = 0;
-                target.Character.Stats.NeutralDamageBonus.Objects = 0;
-                target.Character.Stats.NeutralReduction.Objects = 0;
-                target.Character.Stats.NeutralResistPercent.Objects = 0;
-                target.Character.Stats.Prospecting.Objects = 0;
-                target.Character.Stats.PushDamageBonus.Objects = 0;
-                target.Character.Stats.PushDamageReduction.Objects = 0;
-                target.Character.Stats.Range.Objects = 0;
-                target.Character.Stats.Reflect.Objects = 0;
-                target.Character.Stats.Strength.Objects = 0;
-                target.Character.Stats.SummonableCreaturesBoost.Objects = 0;
-                target.Character.Stats.TrapBonus.Objects = 0;
-                target.Character.Stats.TrapBonusPercent.Objects = 0;
-                target.Character.Stats.Vitality.Objects = 0;
-                target.Character.Stats.WaterDamageBonus.Objects = 0;
-                target.Character.Stats.WaterReduction.Objects = 0;
-                target.Character.Stats.WaterResistPercent.Objects = 0;
-                target.Character.Stats.WeaponDamagesBonusPercent.Objects = 0;
-                target.Character.Stats.Wisdom.Objects = 0;
-                target.Character.Stats.TackleBlock.Objects = 0;
-                target.Character.Stats.TackleEvade.Objects = 0;
-                target.Character.Stats.APAttack.Objects = 0;
-                target.Character.Stats.MPAttack.Objects = 0;
-                target.Character.Stats.MeleeDamageDonePercent.Objects = 0;
-                target.Character.Stats.MeleeDamageResistancePercent.Objects = 0;
-                target.Character.Stats.RangedDamageDonePercent.Objects = 0;
-                target.Character.Stats.RangedDamageResistancePercent.Objects = 0;
-                target.Character.Stats.SpellDamageDonePercent.Objects = 0;
-                target.Character.Stats.SpellDamageResistancePercent.Objects = 0;
-                target.Character.Stats.WeaponDamageDonePercent.Objects = 0;
-                target.Character.Stats.WeaponDamageResistancePercent.Objects = 0;
-                target.Character.Stats.WeightBonus.Objects = 0;
+                foreach (KeyValuePair<CharacteristicEnum,Characteristic> stat in target.Character.Stats.GetCharacteristics())
+                {
+                    stat.Value.Objects = 0;
+                }
 
                 target.Character.RefreshStats();
             }
