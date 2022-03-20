@@ -2,6 +2,11 @@
 # Giny.World
 
 ## En cours 
+
+* CharacterCreationRequestMessage automatiser 
+```csharp 
+colors = new int[5];
+```
 * Une map position manquante ??? ankama ??
 * MapSynchronizer.cs 
 ```csharp 
