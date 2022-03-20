@@ -29,7 +29,7 @@ namespace Giny.DatabasePatcher
             ItemAppearances.Patch();
             IdolsSpell.Patch();
             LivingObjects.Patch();
-          //  MapPlacements.Patch();
+            MapPlacements.Patch();
             SkillBones.Patch();
             InteractiveElements.Patch();
             MonsterKamas.Patch();

@@ -314,10 +314,13 @@ namespace Giny.World.Managers.Fights.Stats
         [WIP]
         public GameFightCharacteristics GetGameFightCharacteristics(Fighter owner, CharacterFighter target)
         {
-            return null;
-
+ 
             Fighter summoner = owner.GetSummoner();
 
+            var summonerId = summoner != null ? summoner.Id : 0;
+
+            return new GameFightCharacteristics(new CharacterCharacteristics(owner.Stats.GetCharacterCharacteristics()), summonerId, summoner != null,
+                (byte)InvisibilityState);
             if (!owner.Fight.Started)
             {
                 /*  return new GameFightMinimalStatsPreparation()
