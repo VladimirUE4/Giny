@@ -2,7 +2,7 @@
 # Giny.World
 
 ## En cours 
-
+* CriticalHitProbability (overflow > short.max) lors du db sync.
 * EntityLookManager (parsing du [0])
 ```csharp
 
