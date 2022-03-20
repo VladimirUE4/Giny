@@ -63,12 +63,18 @@ namespace Giny.World.Managers.Stats
             get;
             set;
         }
+        /// <summary>
+        /// Deprecated ? 
+        /// </summary>
         [ProtoMember(3)]
         public short CriticalHitWeapon
         {
             get;
             set;
         }
+        /// <summary>
+        /// Deprecated ? 
+        /// </summary>
         [ProtoMember(4)]
         public short GlobalDamageReduction
         {
@@ -153,23 +159,18 @@ namespace Giny.World.Managers.Stats
             {
                 var characterCharacteristic = stat.Value.GetCharacterCharacteristicDetailed(stat.Key);
                 results.Add(characterCharacteristic);
-
             }
+
+            results.Add(new CharacterCharacteristicValue(LifePoints, (short)CharacteristicEnum.LIFE_POINTS));
+            results.Add(new CharacterCharacteristicValue(MaxLifePoints, (short)CharacteristicEnum.MAX_LIFE_POINTS));
+            results.Add(new CharacterCharacteristicValue(MaxEnergyPoints, (short)CharacteristicEnum.MAX_ENERGY_POINTS));
+            results.Add(new CharacterCharacteristicValue(Energy, (short)CharacteristicEnum.ENERGY_POINTS));
+         
             return results.ToArray();
         }
         public CharacterCharacteristicsInformations GetCharacterCharacteristicsInformations(Character character)
         {
-            var alignementInfos = new ActorExtendedAlignmentInformations()
-            {
-                aggressable = 0,
-                alignmentGrade = 0,
-                alignmentSide = 0,
-                alignmentValue = 0,
-                characterPower = 0,
-                honor = 0,
-                honorGradeFloor = 0,
-                honorNextGradeFloor = 0,
-            };
+            var alignementInfos = new ActorExtendedAlignmentInformations(0, 0, 0, 0, 0, 0, 0, 0);
 
             return new CharacterCharacteristicsInformations()
             {

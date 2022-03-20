@@ -1154,6 +1154,9 @@ namespace Giny.World.Managers.Fights
             FightManager.Instance.RemoveFight(this);
         }
 
-
+        public bool ContainsBoss()
+        {
+            return GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER).GetFighters<MonsterFighter>().Any(x => x.Record.IsBoss);
+        }
     }
 }

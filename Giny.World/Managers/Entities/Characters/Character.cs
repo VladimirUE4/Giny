@@ -1527,13 +1527,8 @@ namespace Giny.World.Managers.Entities.Characters
         }
         private void SendGameFightStartingMessage(Fight fight)
         {
-            this.Client.Send(new GameFightStartingMessage()
-            {
-                fightType = (byte)fight.FightType,
-                attackerId = (byte)fight.BlueTeam.TeamId,
-                defenderId = (byte)fight.RedTeam.TeamId,
-            });
-
+            this.Client.Send(new GameFightStartingMessage((byte)fight.FightType,
+            (short)fight.Id, (double)fight.BlueTeam.TeamId, (double)fight.RedTeam.TeamId, fight.ContainsBoss()));
         }
         public void DisplayNotification(string message)
         {
@@ -1620,27 +1615,10 @@ namespace Giny.World.Managers.Entities.Characters
 
         public PartyMemberInformations GetPartyMemberInformations()
         {
-            return new PartyMemberInformations()
-            {
-                id = Id,
-                alignmentSide = 0,
-                subAreaId = Map.SubareaId,
-                breed = Record.BreedId,
-                entities = new PartyEntityBaseInformation[0],
-                entityLook = Look.ToEntityLook(),
-                initiative = (short)Stats.TotalInitiative,
-                level = Level,
-                lifePoints = Stats.LifePoints,
-                mapId = Record.MapId,
-                maxLifePoints = Stats.MaxLifePoints,
-                name = Name,
-                prospecting = Stats[CharacteristicEnum.PROSPECTING].TotalInContext(),
-                regenRate = 0,
-                sex = Record.Sex,
-                status = GetPlayerStatus(),
-                worldX = (short)Map.Position.X,
-                worldY = (short)Map.Position.Y,
-            };
+            return new PartyMemberInformations(Stats.LifePoints, Stats.MaxLifePoints, Stats[CharacteristicEnum.PROSPECTING].TotalInContext(),
+                0, (short)Stats.TotalInitiative, 0, (short)Map.Position.X, (short)Map.Position.Y,
+                Record.MapId, Map.SubareaId, GetPlayerStatus(),
+                new PartyEntityBaseInformation[0], Id, Name, Level, Look.ToEntityLook(), Record.BreedId, Record.Sex);
         }
 
         public void RefreshIdols()
@@ -1657,12 +1635,7 @@ namespace Giny.World.Managers.Entities.Characters
                 partyIdols = Party.IdolsInventory.GetAllIdols().Select(x => x.GetPartyIdol(this.Id)).ToArray();
             }
 
-            this.Client.Send(new IdolListMessage()
-            {
-                chosenIdols = chosenIdols,
-                partyChosenIdols = partyChosenIdols,
-                partyIdols = partyIdols,
-            });
+            this.Client.Send(new IdolListMessage(chosenIdols, partyChosenIdols, partyIdols));
         }
         public void SelectIdol(short idolId, bool activate, bool party)
         {
@@ -1714,20 +1687,8 @@ namespace Giny.World.Managers.Entities.Characters
 
         public PartyInvitationMemberInformations GetPartyInvitationMemberInformations()
         {
-            return new PartyInvitationMemberInformations()
-            {
-                id = Id,
-                breed = Record.BreedId,
-                entities = new PartyEntityBaseInformation[0],
-                entityLook = Record.Look.ToEntityLook(),
-                level = Level,
-                mapId = Map.Id,
-                subAreaId = Map.SubareaId,
-                name = Name,
-                sex = Record.Sex,
-                worldX = (short)Map.Position.X,
-                worldY = (short)Map.Position.Y,
-            };
+            return new PartyInvitationMemberInformations((short)Map.Position.X, (short)Map.Position.Y,
+                Map.Id, Map.SubareaId, new PartyEntityBaseInformation[0], Id, Name, Level, Look.ToEntityLook(), Record.BreedId, Record.Sex);
         }
         public PartyGuestInformations GetPartyGuestInformations(Party party)
         {
@@ -1743,13 +1704,9 @@ namespace Giny.World.Managers.Entities.Characters
                 status = GetPlayerStatus(),
             };
         }
-        public void OnPartyJoinError(int partyId, PartyJoinErrorEnum errorEnum)
+        public void OnPartyJoinError(int partyId, PartyJoinErrorEnum reason)
         {
-            Client.Send(new PartyCannotJoinErrorMessage()
-            {
-                partyId = partyId,
-                reason = (byte)errorEnum,
-            });
+            Client.Send(new PartyCannotJoinErrorMessage((byte)reason, partyId));
         }
 
         public void InviteParty(Character character)
@@ -1851,12 +1808,7 @@ namespace Giny.World.Managers.Entities.Characters
 
         public CharacterMinimalInformations GetCharacterMinimalInformations()
         {
-            return new CharacterMinimalInformations()
-            {
-                id = Id,
-                level = Level,
-                name = Name,
-            };
+            return new CharacterMinimalInformations(Level, Id, Name);
         }
     }
 
