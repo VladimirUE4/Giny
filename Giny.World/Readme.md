@@ -8,7 +8,6 @@
 
 if (str.StartsWith("["))
 {
-  str = str.Substring(0, 3);
 }
             
  ```
