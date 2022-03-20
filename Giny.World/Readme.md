@@ -2,6 +2,11 @@
 # Giny.World
 
 ## En cours 
+
+* MapSynchronizer.cs 
+```csharp 
+Logger.Write("Unknown element id " + graphicalElement.ElementId, Channels.Warning);
+ ```
 * CriticalHitProbability (overflow > short.max) lors du db sync.
 * EntityLookManager (parsing du [0])
 ```csharp
