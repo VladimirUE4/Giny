@@ -35,13 +35,13 @@ namespace Giny.World.Handlers.Roleplay.Social
         [MessageHandler]
         public static void ChatClientPrivate(ChatClientPrivateMessage message, WorldClient client)
         {
-            if (message.receiver == client.Character.Name)
+            var target = WorldServer.Instance.GetClient(message.receiver);
+
+            if (target == client)
             {
                 client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_INTERIOR_MONOLOGUE);
                 return;
             }
-
-            WorldClient target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.receiver);
 
             if (target != null)
             {
@@ -58,13 +58,13 @@ namespace Giny.World.Handlers.Roleplay.Social
         [MessageHandler]
         public static void HandleChatClientPrivateWithObject(ChatClientPrivateWithObjectMessage message, WorldClient client)
         {
-            if (message.receiver == client.Character.Name)
+            var target = WorldServer.Instance.GetClient(message.receiver);
+
+            if (target == client)
             {
                 client.Character.OnChatError(ChatErrorEnum.CHAT_ERROR_INTERIOR_MONOLOGUE);
                 return;
             }
-
-            WorldClient target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.receiver);
 
             if (target != null)
             {

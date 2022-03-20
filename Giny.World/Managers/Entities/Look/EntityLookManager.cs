@@ -109,6 +109,11 @@ namespace Giny.World.Managers.Entities.Look
             if (str == string.Empty)
                 return null;
 
+            if (str.StartsWith("["))
+            {
+                str = new string(str.Skip(3).ToArray());
+            }
+
             if (string.IsNullOrEmpty(str) || str[0] != '{')
             {
                 throw new System.Exception("Incorrect EntityLook format : " + str);

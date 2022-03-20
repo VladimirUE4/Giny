@@ -85,15 +85,20 @@ namespace Giny.DatabaseSynchronizer
                                     {
                                         InteractiveElementRecord interactiveRecord = new InteractiveElementRecord();
 
-                                        
+                                        if (!Elements.ContainsKey((int)graphicalElement.ElementId))
+                                        {
+                                            Logger.Write("Unknown element id " + graphicalElement.ElementId, Channels.Warning);
+                                            continue;
+                                        }
+
                                         var gfxElement = Elements[(int)graphicalElement.ElementId];
 
                                         interactiveRecord.OffsetX = graphicalElement.OffsetX;
                                         interactiveRecord.OffsetY = graphicalElement.OffsetY;
                                         interactiveRecord.Identifier = (int)graphicalElement.Identifier;
                                         interactiveRecord.CellId = layerCell.CellId;
-                                     
-                                      
+
+
                                         if (gfxElement.Type != EleGraphicalElementTypes.ENTITY)
                                         {
                                             NormalGraphicalElementData normalElement = gfxElement as NormalGraphicalElementData;

@@ -41,7 +41,7 @@ namespace Giny.DatabasePatcher.Maps
                         {
                             TeleportersManager.Instance.AddDestination(
                             TeleporterTypeEnum.TELEPORTER_SUBWAY,
-                            InteractiveTypeEnum.ZAAPI,
+                            InteractiveTypeEnum.ZAAPI106,
                             GenericActionEnum.Zaapi,
                             map,
                             element,
@@ -55,7 +55,7 @@ namespace Giny.DatabasePatcher.Maps
                         if (!InteractiveSkillRecord.ExistAndHandled(element.Identifier))
                         {
                             TeleportersManager.Instance.AddDestination(TeleporterTypeEnum.TELEPORTER_ZAAP,
-                            InteractiveTypeEnum.ZAAP,
+                            InteractiveTypeEnum.ZAAP16,
                             GenericActionEnum.Zaap,
                             map,
                             element,

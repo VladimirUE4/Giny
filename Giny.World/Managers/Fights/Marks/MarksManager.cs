@@ -16,7 +16,7 @@ namespace Giny.World.Managers.Fights.Marks
         {
             switch (spellId)
             {
-                case SpellEnum.RepulsionGlyph:
+                case SpellEnum.REPULSION_GLYPH:
                     return Color.FromArgb(102, 0, 102);
                 /*
                  * Mot marquant 
@@ -24,89 +24,89 @@ namespace Giny.World.Managers.Fights.Marks
                  * Marque de Régénération
                  */
 
-                case SpellEnum.StrikingGlyph:
-                case SpellEnum.FriendshipWord13197:
-                case SpellEnum.RegeneratingMark:
+                case SpellEnum.STRIKING_GLYPH:
+                case SpellEnum.FRIENDSHIP_WORD13197:
+                case SpellEnum.REGENERATING_MARK:
                     return Color.DeepPink;
 
-                case SpellEnum.Cawwot:
+                case SpellEnum.CAWWOT:
                     return Color.White;
                 /* Piège Répulsif
                  * Piège de Dérive
                  * Fosse commune */
-                case SpellEnum.MassGrave14314:
-                case SpellEnum.RepellingTrap12914:
-                case SpellEnum.DriftTrap12942:
+                case SpellEnum.MASS_GRAVE14314:
+                case SpellEnum.REPELLING_TRAP12914:
+                case SpellEnum.DRIFT_TRAP:
                     return Color.FromArgb(10849205);
 
                 /* Piège a Fragmentation
                  * Piège Sournois */
-                case SpellEnum.FragmentationTrap12941:
-                case SpellEnum.TrickyTrap12906:
+                case SpellEnum.FRAGMENTATION_TRAP:
+                case SpellEnum.TRICKY_TRAP12906:
                     return Color.FromArgb(12128795);
                 /*
                  * Piège de masse
                  * Piège Scélérat */
-                case SpellEnum.MassTrap12920:
-                case SpellEnum.SickratTrap:
+                case SpellEnum.MASS_TRAP12920:
+                case SpellEnum.SICKRAT_TRAP: // pas sur id
                     return Color.FromArgb(5911580);
 
                 /*
                  * Piège Fangeux
                  * Calamité */
-                case SpellEnum.MiryTrap12916:
-                case SpellEnum.Calamity12950:
+                case SpellEnum.MIRY_TRAP:
+                case SpellEnum.CALAMITY12950:
                     return Color.FromArgb(4228004);
                 /*
                  * Piège Mortel
                  * Piège Funeste */
-                case SpellEnum.LethalTrap12921:
-                case SpellEnum.MalevolentTrap12948:
+                case SpellEnum.LETHAL_TRAP12921:
+                case SpellEnum.MALEVOLENT_TRAP:
                     return Color.FromArgb(0);
 
-                case SpellEnum.Mist12930:
+                case SpellEnum.MIST12930:
                     return Color.FromArgb(4149784);
                 /*
                  * Piège Insidieux
                  * Piège Insidieux (Glyphe)
                  */
-                case SpellEnum.InsidiousTrap12926:
-                case SpellEnum.InsidiousTrap12918:
+                case SpellEnum.INSIDIOUS_TRAP12926:
+                case SpellEnum.INSIDIOUS_TRAP:
                     return Color.FromArgb(3222918);
 
                 /*
                  * Piège d'Immobilisation
                  */
-                case SpellEnum.ParalysingTrap12910:
+                case SpellEnum.PARALYSING_TRAP12910:
                     return Color.FromArgb(2258204);
 
                 /*
                  * Runes Huppermage 
                  */
-                case SpellEnum.EarthRune:
+                case SpellEnum.EARTH_RUNE: // a revoir, pas sur id
                     return Color.Brown;
-                case SpellEnum.FireRune13687:
+                case SpellEnum.FIRE_RUNE13687:
                     return Color.Red;
-                case SpellEnum.WaterRune:
+                case SpellEnum.WATER_RUNE: // a revoir, pas sur id
                     return Color.Blue;
-                case SpellEnum.AirRune:
+                case SpellEnum.AIR_RUNE: // a revoir, pas sur id
                     return Color.Green;
 
 
                 /*
                 * Glyphes Féca
                 */
-                case SpellEnum.AggressiveGlyph12992:
+                case SpellEnum.AGGRESSIVE_GLYPH12992:
                     return Color.LimeGreen;
-                case SpellEnum.BurningGlyph12985:
+                case SpellEnum.BURNING_GLYPH12985:
                     return Color.OrangeRed;
-                case SpellEnum.ParalysingGlyph12990:
+                case SpellEnum.PARALYSING_GLYPH12990:
                     return Color.CornflowerBlue;
-                case SpellEnum.BlindingGlyph:
+                case SpellEnum.BLINDING_GLYPH: // pas sur id
                     return Color.SaddleBrown;
 
 
-                case SpellEnum.LoadHeadice: // glyphe korriandre
+                case SpellEnum.LOAD_HEADICE: // glyphe korriandre
                     return Color.White;
             }
 

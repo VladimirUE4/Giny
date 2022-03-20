@@ -31,7 +31,7 @@ namespace Giny.DatabaseSynchronizer
     {
         private static List<D2OReader> m_readers = new List<D2OReader>();
 
-        public static void Synchronize(bool buildMisc, bool buildTables)
+        public static void Synchronize(bool buildTables)
         {
             string d2oDirectory = Path.Combine(ConfigFile.Instance.ClientPath, ClientConstants.D2oDirectory);
 
@@ -40,9 +40,6 @@ namespace Giny.DatabaseSynchronizer
                 if (Path.GetExtension(file) == ".d2o")
                     m_readers.Add(new D2OReader(file));
             }
-
-            if (buildMisc)
-                MiscBuilder.Build(m_readers);
 
             if (buildTables)
             {
@@ -176,7 +173,14 @@ namespace Giny.DatabaseSynchronizer
                                     value = list.GetType().GetMethod("ToArray").Invoke(list, new object[0]);
                                 }
                             }
-                            property.SetValue(table, Convert.ChangeType(value, property.PropertyType));
+                            try
+                            {
+                                property.SetValue(table, Convert.ChangeType(value, property.PropertyType));
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Write("Unable to set property " + property.Name + " :" + ex, Channels.Warning);
+                            }
                         }
                     }
                 }

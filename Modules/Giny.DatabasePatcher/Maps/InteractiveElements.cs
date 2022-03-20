@@ -1,5 +1,6 @@
 ﻿using Giny.Core;
 using Giny.Core.DesignPattern;
+using Giny.Core.Logging;
 using Giny.ORM;
 using Giny.Protocol.Custom.Enums;
 using Giny.World.Managers.Generic;

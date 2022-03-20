@@ -213,15 +213,8 @@ namespace Giny.World.Records.Characters
         }
         public CharacterBaseInformations GetCharacterBaseInformations()
         {
-            return new CharacterBaseInformations(Sex)
-            {
-                breed = BreedId,
-                entityLook = Look.ToEntityLook(),
-                id = Id,
-                level = ExperienceManager.Instance.GetCharacterLevel(Experience),
-                name = Name,
-                sex = Sex,
-            };
+            return new CharacterBaseInformations(Sex, Id, Name, ExperienceManager.Instance.GetCharacterLevel(Experience),
+            Look.ToEntityLook(), BreedId);
         }
         [StartupInvoke(StartupInvokePriority.Last)]
         public static void Initialize()

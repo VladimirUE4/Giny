@@ -167,6 +167,17 @@ namespace Giny.World.Records.Items
         [Ignore]
         public bool HasSet => ItemSetId != -1;
 
+        public bool IsCeremonialItem()
+        {
+            return TypeEnum == ItemTypeEnum.CEREMONIAL_CAPE ||
+                TypeEnum == ItemTypeEnum.CEREMONIAL_HAT ||
+                TypeEnum == ItemTypeEnum.CEREMONIAL_PET ||
+                TypeEnum == ItemTypeEnum.CEREMONIAL_PETSMOUNT ||
+                TypeEnum == ItemTypeEnum.CEREMONIAL_SHIELD ||
+                TypeEnum == ItemTypeEnum.CEREMONIAL_WEAPON ||
+                TypeEnum == ItemTypeEnum.MISCELLANEOUS_CEREMONIAL_ITEM;
+        }
+
         public ObjectItemToSellInNpcShop GetObjectItemToSellInNpcShop()
         {
             return new ObjectItemToSellInNpcShop()

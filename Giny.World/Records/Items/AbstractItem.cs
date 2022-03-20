@@ -94,7 +94,7 @@ namespace Giny.World.Records.Items
             set;
         }
 
-
+        
         public ObjectItem GetObjectItem()
         {
             return new ObjectItem(Position, GId, Effects.GetObjectEffects(), UId, Quantity);

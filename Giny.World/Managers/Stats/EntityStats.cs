@@ -477,7 +477,7 @@ namespace Giny.World.Managers.Stats
 
         public CharacterCharacteristic[] GetCharacterCharacteristics()
         {
-            return null;
+            return new CharacterCharacteristic[0]; 
         }
         public CharacterCharacteristicsInformations GetCharacterCharacteristicsInformations(Character character)
         {

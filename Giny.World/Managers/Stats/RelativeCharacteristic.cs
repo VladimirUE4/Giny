@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Types;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Types;
 using Giny.World.Managers.Fights.Effects.Buffs;
 using ProtoBuf;
 using System;
@@ -51,9 +52,9 @@ namespace Giny.World.Managers.Stats
         {
             this.Relativ = relative;
         }
-        public override CharacterBaseCharacteristic GetBaseCharacteristic()
+        public override CharacterCharacteristicDetailed GetBaseCharacteristic(CharacteristicEnum characteristic)
         {
-            return new CharacterBaseCharacteristic((short)(Base + RelativDelta), Additional, Objects, Context, Context);
+            return new CharacterCharacteristicDetailed((short)(Base + RelativDelta), Additional, Objects, Context, Context, (short)characteristic);
         }
         public static new RelativeCharacteristic Zero()
         {

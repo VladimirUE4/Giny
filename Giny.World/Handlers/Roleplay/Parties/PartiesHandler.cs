@@ -16,7 +16,7 @@ namespace Giny.World.Handlers.Roleplay.Parties
         [MessageHandler]
         public static void HandlePartyInvitationRequest(PartyInvitationRequestMessage message, WorldClient client)
         {
-            WorldClient target = WorldServer.Instance.GetOnlineClient(x => x.Character.Name == message.name);
+            WorldClient target = WorldServer.Instance.GetClient(message.target);
 
             if (target != null)
             {

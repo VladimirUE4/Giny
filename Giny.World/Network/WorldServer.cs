@@ -4,6 +4,7 @@ using Giny.Core.Network;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Enums;
 using Giny.Protocol.IPC.Messages;
+using Giny.Protocol.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,7 @@ namespace Giny.World.Network
             get;
             private set;
         } = ServerStatusEnum.STARTING;
+
 
         private Server Server
         {
@@ -86,6 +88,20 @@ namespace Giny.World.Network
         {
             return Clients.FirstOrDefault(predicate);
         }
+        public WorldClient GetClient(AbstractPlayerSearchInformation target)
+        {
+            if (target is PlayerSearchCharacterNameInformation)
+            {
+                return GetOnlineClient(x => x.Character.Name == ((PlayerSearchCharacterNameInformation)target).name);
+            }
+            if (target is PlayerSearchTagInformation)
+            {
+                throw new NotImplementedException("tags not implemented.");
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Returns a client who is connected in game 
         /// </summary>

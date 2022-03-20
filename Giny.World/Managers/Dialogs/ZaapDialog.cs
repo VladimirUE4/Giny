@@ -42,14 +42,14 @@ namespace Giny.World.Managers.Dialogs
             }
             var destination = Destinations[map.Id];
 
-            var zaapElement = map.GetFirstElementRecord(InteractiveTypeEnum.ZAAP);
+            var zaapElement = map.GetFirstElementRecord(InteractiveTypeEnum.ZAAP16);
 
             if (zaapElement == null)
             {
                 return;
             }
 
-            short cellId = map.GetNearCell(InteractiveTypeEnum.ZAAP);
+            short cellId = map.GetNearCell(InteractiveTypeEnum.ZAAP16);
 
             if (this.Character.RemoveKamas(destination.cost))
             {

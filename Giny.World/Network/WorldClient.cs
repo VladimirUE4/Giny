@@ -166,7 +166,7 @@ namespace Giny.World.Network
             Characters = CharacterRecord.GetCharactersByAccountId(Account.Id);
             Send(new ServerSettingsMessage("fr", 0, 0, false, 1, 200, true));
 
-            SendServerOptionalFeatures(OptionalFeaturesEnum.PvpKis);
+            SendServerOptionalFeatures(OptionalFeaturesEnum.PVP_KIS);
 
             Send(new ServerSessionConstantsMessage(new ServerSessionConstant[]
            {

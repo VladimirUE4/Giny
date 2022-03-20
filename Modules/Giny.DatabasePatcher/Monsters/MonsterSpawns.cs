@@ -137,10 +137,6 @@ namespace Giny.DatabasePatcher.Monsters
                     return 0.05d;
                 case MonsterRacesEnum.PIWIS:
                     break;
-                case MonsterRacesEnum.PANDALA_VILLAGE_MONSTERS:
-                    break;
-                case MonsterRacesEnum.PANDALA_MONSTERS:
-                    break;
                 case MonsterRacesEnum.SCARALEAVES:
                     break;
                 case MonsterRacesEnum.ARACHNEES:

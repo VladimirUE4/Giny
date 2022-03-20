@@ -495,7 +495,7 @@ namespace Giny.World.Managers.Items.Collections
                 return;
             }
 
-            if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT || item.Record.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+            if (item.Record.TypeEnum == ItemTypeEnum.LIVING_OBJECT || item.Record.IsCeremonialItem())
             {
                 if (Character.Fighting)
                 {
@@ -572,7 +572,7 @@ namespace Giny.World.Managers.Items.Collections
                         return;
                     }
                 }
-                if (item.Record.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+                if (item.Record.IsCeremonialItem())
                 {
                     var targeted = GetEquipedItem(position);
 

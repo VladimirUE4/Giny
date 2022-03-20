@@ -67,6 +67,11 @@ namespace Giny.World.Managers.Maps.Teleporters
         {
             var destinations = m_destinations[teleporterType];
 
+            if (!destinations.ContainsKey(zoneId))
+            {
+                destinations.Add(zoneId, new List<long>());
+            }
+
             if (destinations[zoneId].Contains(targetMap.Id))
             {
                 return;

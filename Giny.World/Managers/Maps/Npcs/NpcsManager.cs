@@ -146,7 +146,7 @@ namespace Giny.World.Managers.Maps.Npcs
 
             NpcRecord record = NpcRecord.GetNpcRecord(templateId);
 
-            if (!record.Actions.Contains((byte)(NpcActionsEnum.BUY_SELL)))
+            if (!record.Actions.Contains((byte)(NpcActionsEnum.BUYSELL)))
             {
                 Logger.Write("Unable to create vendor with a non vendor npc.", Channels.Warning);
                 return;
@@ -156,7 +156,7 @@ namespace Giny.World.Managers.Maps.Npcs
             var npcSpawnId = NpcSpawnRecord.PopNextId();
 
             NpcActionRecord actionRecord = new NpcActionRecord();
-            actionRecord.Action = NpcActionsEnum.BUY_SELL;
+            actionRecord.Action = NpcActionsEnum.BUYSELL;
             actionRecord.Param1 = itemList;
             actionRecord.Param2 = "0";
             actionRecord.Id = NpcActionRecord.PopNextId();

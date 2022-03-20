@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Enums;
+﻿using Giny.Core.DesignPattern;
+using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Cast.Units;
@@ -332,7 +333,7 @@ namespace Giny.World.Managers.Fights.Stats
         /*
          * Todo : Summoned / SummonerId
          */
-        public FighterStats(MonsterGrade monsterGrade,double coeff = 1d)
+        public FighterStats(MonsterGrade monsterGrade, double coeff = 1d)
         {
             this.ActionPoints = ApCharacteristic.New(monsterGrade.ActionPoints);
             this.AirDamageBonus = Characteristic.Zero();
@@ -413,108 +414,111 @@ namespace Giny.World.Managers.Fights.Stats
             this.Initialize();
         }
 
+        [WIP]
         public GameFightCharacteristics GetGameFightCharacteristics(Fighter owner, CharacterFighter target)
         {
+            return null;
+
             Fighter summoner = owner.GetSummoner();
 
             if (!owner.Fight.Started)
             {
-                return new GameFightMinimalStatsPreparation()
-                {
-                    actionPoints = ActionPoints.TotalInContext(),
-                    airElementReduction = AirReduction.TotalInContext(),
-                    airElementResistPercent = AirResistPercent.TotalInContext(),
-                    baseMaxLifePoints = BaseMaxLife,
-                    criticalDamageFixedResist = CriticalDamageReduction.TotalInContext(),
-                    dodgePALostProbability = DodgePAProbability.TotalInContext(),
-                    dodgePMLostProbability = DodgePMProbability.TotalInContext(),
-                    initiative = TotalInitiative,
-                    maxActionPoints = ActionPoints.Total(),
-                    earthElementReduction = EarthReduction.TotalInContext(),
-                    earthElementResistPercent = EarthResistPercent.TotalInContext(),
-                    fireElementReduction = FireReduction.TotalInContext(),
-                    fireElementResistPercent = FireResistPercent.TotalInContext(),
-                    fixedDamageReflection = Reflect.TotalInContext(),
-                    invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
-                    lifePoints = LifePoints,
-                    maxLifePoints = MaxLifePoints,
-                    maxMovementPoints = MovementPoints.Total(),
-                    movementPoints = MovementPoints.TotalInContext(),
-                    neutralElementReduction = NeutralReduction.TotalInContext(),
-                    neutralElementResistPercent = NeutralResistPercent.TotalInContext(),
-                    permanentDamagePercent = PermanentDamagePercent.TotalInContext(),
-                    pushDamageFixedResist = PushDamageReduction.TotalInContext(),
-                    waterElementReduction = WaterReduction.TotalInContext(),
-                    waterElementResistPercent = WaterResistPercent.TotalInContext(),
-                    pvpEarthElementReduction = 0,
-                    pvpEarthElementResistPercent = 0,
-                    pvpFireElementReduction = 0,
-                    pvpAirElementReduction = 0,
-                    pvpNeutralElementReduction = 0,
-                    pvpNeutralElementResistPercent = 0,
-                    pvpWaterElementReduction = 0,
-                    pvpWaterElementResistPercent = 0,
-                    pvpAirElementResistPercent = 0,
-                    pvpFireElementResistPercent = 0,
-                    shieldPoints = ShieldPoints,
-                    summoned = owner.IsSummoned(),
-                    summoner = summoner != null ? summoner.Id : 0,
-                    tackleBlock = TackleBlock.TotalInContext(),
-                    tackleEvade = TackleEvade.TotalInContext(),
-                    rangedDamageReceivedPercent = (short)(100 - RangedDamageResistancePercent.TotalInContext()),
-                    meleeDamageReceivedPercent = (short)(100 - MeleeDamageResistancePercent.TotalInContext()),
-                    spellDamageReceivedPercent = (short)(100 - SpellDamageResistancePercent.TotalInContext()),
-                    weaponDamageReceivedPercent = (short)(100 - WeaponDamageResistancePercent.TotalInContext()),
-                };
+                /*  return new GameFightMinimalStatsPreparation()
+                  {
+                      actionPoints = ActionPoints.TotalInContext(),
+                      airElementReduction = AirReduction.TotalInContext(),
+                      airElementResistPercent = AirResistPercent.TotalInContext(),
+                      baseMaxLifePoints = BaseMaxLife,
+                      criticalDamageFixedResist = CriticalDamageReduction.TotalInContext(),
+                      dodgePALostProbability = DodgePAProbability.TotalInContext(),
+                      dodgePMLostProbability = DodgePMProbability.TotalInContext(),
+                      initiative = TotalInitiative,
+                      maxActionPoints = ActionPoints.Total(),
+                      earthElementReduction = EarthReduction.TotalInContext(),
+                      earthElementResistPercent = EarthResistPercent.TotalInContext(),
+                      fireElementReduction = FireReduction.TotalInContext(),
+                      fireElementResistPercent = FireResistPercent.TotalInContext(),
+                      fixedDamageReflection = Reflect.TotalInContext(),
+                      invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
+                      lifePoints = LifePoints,
+                      maxLifePoints = MaxLifePoints,
+                      maxMovementPoints = MovementPoints.Total(),
+                      movementPoints = MovementPoints.TotalInContext(),
+                      neutralElementReduction = NeutralReduction.TotalInContext(),
+                      neutralElementResistPercent = NeutralResistPercent.TotalInContext(),
+                      permanentDamagePercent = PermanentDamagePercent.TotalInContext(),
+                      pushDamageFixedResist = PushDamageReduction.TotalInContext(),
+                      waterElementReduction = WaterReduction.TotalInContext(),
+                      waterElementResistPercent = WaterResistPercent.TotalInContext(),
+                      pvpEarthElementReduction = 0,
+                      pvpEarthElementResistPercent = 0,
+                      pvpFireElementReduction = 0,
+                      pvpAirElementReduction = 0,
+                      pvpNeutralElementReduction = 0,
+                      pvpNeutralElementResistPercent = 0,
+                      pvpWaterElementReduction = 0,
+                      pvpWaterElementResistPercent = 0,
+                      pvpAirElementResistPercent = 0,
+                      pvpFireElementResistPercent = 0,
+                      shieldPoints = ShieldPoints,
+                      summoned = owner.IsSummoned(),
+                      summoner = summoner != null ? summoner.Id : 0,
+                      tackleBlock = TackleBlock.TotalInContext(),
+                      tackleEvade = TackleEvade.TotalInContext(),
+                      rangedDamageReceivedPercent = (short)(100 - RangedDamageResistancePercent.TotalInContext()),
+                      meleeDamageReceivedPercent = (short)(100 - MeleeDamageResistancePercent.TotalInContext()),
+                      spellDamageReceivedPercent = (short)(100 - SpellDamageResistancePercent.TotalInContext()),
+                      weaponDamageReceivedPercent = (short)(100 - WeaponDamageResistancePercent.TotalInContext()),
+                  }; */
             }
             else
             {
-                return new GameFightMinimalStats()
-                {
-                    actionPoints = ActionPoints.TotalInContext(),
-                    airElementReduction = AirReduction.TotalInContext(),
-                    airElementResistPercent = AirResistPercent.TotalInContext(),
-                    baseMaxLifePoints = BaseMaxLife,
-                    criticalDamageFixedResist = CriticalDamageReduction.TotalInContext(),
-                    dodgePALostProbability = DodgePAProbability.TotalInContext(),
-                    dodgePMLostProbability = DodgePMProbability.TotalInContext(),
-                    maxActionPoints = ActionPoints.Total(),
-                    earthElementReduction = EarthReduction.TotalInContext(),
-                    earthElementResistPercent = EarthResistPercent.TotalInContext(),
-                    fireElementReduction = FireReduction.TotalInContext(),
-                    fireElementResistPercent = FireResistPercent.TotalInContext(),
-                    fixedDamageReflection = Reflect.TotalInContext(),
-                    invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
-                    lifePoints = LifePoints,
-                    maxLifePoints = MaxLifePoints,
-                    shieldPoints = ShieldPoints,
-                    maxMovementPoints = MovementPoints.Total(),
-                    movementPoints = MovementPoints.TotalInContext(),
-                    neutralElementReduction = NeutralReduction.TotalInContext(),
-                    neutralElementResistPercent = NeutralResistPercent.TotalInContext(),
-                    permanentDamagePercent = PermanentDamagePercent.TotalInContext(),
-                    pushDamageFixedResist = PushDamageReduction.TotalInContext(),
-                    pvpEarthElementReduction = 0,
-                    pvpEarthElementResistPercent = 0,
-                    pvpFireElementReduction = 0,
-                    pvpFireElementResistPercent = 0,
-                    pvpNeutralElementReduction = 0,
-                    pvpAirElementResistPercent = 0,
-                    pvpAirElementReduction = 0,
-                    pvpWaterElementReduction = 0,
-                    pvpNeutralElementResistPercent = 0,
-                    pvpWaterElementResistPercent = 0,
-                    rangedDamageReceivedPercent = (short)(100 - RangedDamageResistancePercent.TotalInContext()),
-                    meleeDamageReceivedPercent = (short)(100 - MeleeDamageResistancePercent.TotalInContext()),
-                    spellDamageReceivedPercent = (short)(100 - SpellDamageResistancePercent.TotalInContext()),
-                    weaponDamageReceivedPercent = (short)(100 - WeaponDamageResistancePercent.TotalInContext()),
-                    summoned = owner.IsSummoned(),
-                    summoner = summoner != null ? summoner.Id : 0,
-                    tackleBlock = TackleBlock.TotalInContext(),
-                    tackleEvade = TackleEvade.TotalInContext(),
-                    waterElementReduction = WaterReduction.TotalInContext(),
-                    waterElementResistPercent = WaterResistPercent.TotalInContext(),
-                };
+                /*     return new GameFightMinimalStats()
+                     {
+                         actionPoints = ActionPoints.TotalInContext(),
+                         airElementReduction = AirReduction.TotalInContext(),
+                         airElementResistPercent = AirResistPercent.TotalInContext(),
+                         baseMaxLifePoints = BaseMaxLife,
+                         criticalDamageFixedResist = CriticalDamageReduction.TotalInContext(),
+                         dodgePALostProbability = DodgePAProbability.TotalInContext(),
+                         dodgePMLostProbability = DodgePMProbability.TotalInContext(),
+                         maxActionPoints = ActionPoints.Total(),
+                         earthElementReduction = EarthReduction.TotalInContext(),
+                         earthElementResistPercent = EarthResistPercent.TotalInContext(),
+                         fireElementReduction = FireReduction.TotalInContext(),
+                         fireElementResistPercent = FireResistPercent.TotalInContext(),
+                         fixedDamageReflection = Reflect.TotalInContext(),
+                         invisibilityState = (byte)owner.GetInvisibilityStateFor(target),
+                         lifePoints = LifePoints,
+                         maxLifePoints = MaxLifePoints,
+                         shieldPoints = ShieldPoints,
+                         maxMovementPoints = MovementPoints.Total(),
+                         movementPoints = MovementPoints.TotalInContext(),
+                         neutralElementReduction = NeutralReduction.TotalInContext(),
+                         neutralElementResistPercent = NeutralResistPercent.TotalInContext(),
+                         permanentDamagePercent = PermanentDamagePercent.TotalInContext(),
+                         pushDamageFixedResist = PushDamageReduction.TotalInContext(),
+                         pvpEarthElementReduction = 0,
+                         pvpEarthElementResistPercent = 0,
+                         pvpFireElementReduction = 0,
+                         pvpFireElementResistPercent = 0,
+                         pvpNeutralElementReduction = 0,
+                         pvpAirElementResistPercent = 0,
+                         pvpAirElementReduction = 0,
+                         pvpWaterElementReduction = 0,
+                         pvpNeutralElementResistPercent = 0,
+                         pvpWaterElementResistPercent = 0,
+                         rangedDamageReceivedPercent = (short)(100 - RangedDamageResistancePercent.TotalInContext()),
+                         meleeDamageReceivedPercent = (short)(100 - MeleeDamageResistancePercent.TotalInContext()),
+                         spellDamageReceivedPercent = (short)(100 - SpellDamageResistancePercent.TotalInContext()),
+                         weaponDamageReceivedPercent = (short)(100 - WeaponDamageResistancePercent.TotalInContext()),
+                         summoned = owner.IsSummoned(),
+                         summoner = summoner != null ? summoner.Id : 0,
+                         tackleBlock = TackleBlock.TotalInContext(),
+                         tackleEvade = TackleEvade.TotalInContext(),
+                         waterElementReduction = WaterReduction.TotalInContext(),
+                         waterElementResistPercent = WaterResistPercent.TotalInContext(),
+                     }; */
             }
         }
 

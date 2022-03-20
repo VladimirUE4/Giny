@@ -190,8 +190,6 @@ namespace Giny.World.Managers.Items
 
         private Dictionary<ItemUsageHandlerAttribute, MethodInfo> m_usageHandlers = new Dictionary<ItemUsageHandlerAttribute, MethodInfo>();
 
-
-
         [StartupInvoke("Items Manager", StartupInvokePriority.SixthPath)]
         public void Initialize()
         {
@@ -227,7 +225,6 @@ namespace Giny.World.Managers.Items
                 ItemRecord record = ItemRecord.GetItem(rawWeight.Key);
                 RunesWeight.TryAdd(record, rawWeight.Value);
             }
-
 
 
             EffectsWeigth.TryAdd(EffectsEnum.Effect_AddAP_111, 100);
@@ -345,6 +342,8 @@ namespace Giny.World.Managers.Items
                 return null;
             }
         }
+
+        
         public CharacterItemRecord CutItem(CharacterItemRecord item, int quantity, CharacterInventoryPositionEnum newItempos)
         {
             CharacterItemRecord newItem = (CharacterItemRecord)item.CloneWithoutUID();

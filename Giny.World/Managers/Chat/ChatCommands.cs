@@ -312,7 +312,7 @@ namespace Giny.World.Managers.Chat
         {
             TeleportersManager.Instance.AddDestination(
                 TeleporterTypeEnum.TELEPORTER_ZAAP,
-                InteractiveTypeEnum.ZAAP,
+                InteractiveTypeEnum.ZAAP16,
                 GenericActionEnum.Zaap,
                 client.Character.Map,
                client.Character.Map.GetElementRecord(elementId),
@@ -323,7 +323,7 @@ namespace Giny.World.Managers.Chat
         {
             TeleportersManager.Instance.AddDestination(
                 TeleporterTypeEnum.TELEPORTER_SUBWAY,
-                InteractiveTypeEnum.ZAAPI,
+                InteractiveTypeEnum.ZAAPI106,
                 GenericActionEnum.Zaapi,
                 client.Character.Map,
                client.Character.Map.GetElementRecord(elementId),

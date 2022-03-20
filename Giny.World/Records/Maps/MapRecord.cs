@@ -1,4 +1,5 @@
-﻿using Giny.Core.DesignPattern;
+﻿using Giny.Core;
+using Giny.Core.DesignPattern;
 using Giny.Core.Extensions;
 using Giny.Core.Logging;
 using Giny.ORM.Attributes;
@@ -146,7 +147,7 @@ namespace Giny.World.Records.Maps
         [Ignore]
         public bool CanSpawnMonsters =>
             !IsDungeonEntrance
-            && (Position.AllowMonsterRespawn)
+            && (Position != null ? Position.AllowMonsterRespawn : true)
             && !IsDungeonMap
             && !HasZaap()
             && Cells.All(x => !x.FarmCell)
@@ -229,6 +230,10 @@ namespace Giny.World.Records.Maps
 
             this.Position = MapPositionRecord.GetMapPosition(this.Id);
 
+            if (Position == null)
+            {
+                Logger.Write("Map " + Id + " has no position in database ...", Channels.Warning);
+            }
             this.Subarea = SubareaRecord.GetSubarea(this.SubareaId);
 
             foreach (var element in this.Elements)
@@ -287,7 +292,7 @@ namespace Giny.World.Records.Maps
         }
         public bool HasZaap()
         {
-            return GetFirstElementRecord(InteractiveTypeEnum.ZAAP) != null;
+            return GetFirstElementRecord(InteractiveTypeEnum.ZAAP16) != null;
         }
         public short GetNearCell(InteractiveTypeEnum interactiveType)
         {

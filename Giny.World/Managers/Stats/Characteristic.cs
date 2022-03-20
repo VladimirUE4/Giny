@@ -1,4 +1,5 @@
-﻿using Giny.Protocol.Types;
+﻿using Giny.Protocol.Custom.Enums;
+using Giny.Protocol.Types;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -61,9 +62,9 @@ namespace Giny.World.Managers.Stats
                 Objects = 0
             };
         }
-        public virtual CharacterBaseCharacteristic GetBaseCharacteristic()
+        public virtual CharacterCharacteristicDetailed GetBaseCharacteristic(CharacteristicEnum characteristic)
         {
-            return new CharacterBaseCharacteristic(Base, Additional, Objects, Context, Context);
+            return new CharacterCharacteristicDetailed(Base, Additional, Objects, Context, Context, (short)characteristic);
         }
         public virtual short Total()
         {

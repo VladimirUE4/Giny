@@ -70,7 +70,7 @@ namespace Giny.World.Records.Characters
         {
             List<CharacterJob> jobs = new List<CharacterJob>();
 
-            foreach (JobsTypeEnum job in Enum.GetValues(typeof(JobsTypeEnum)))
+            foreach (JobTypeEnum job in Enum.GetValues(typeof(JobTypeEnum)))
             {
                 CharacterJob characterJob = new CharacterJob()
                 {

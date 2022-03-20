@@ -56,6 +56,9 @@ namespace Giny.Protocol.Messages
             }
 
             sex = (bool)reader.ReadBoolean();
+
+            colors = new int[5];
+
             for (uint _i4 = 0;_i4 < 5;_i4++)
             {
                 colors[_i4] = reader.ReadInt();

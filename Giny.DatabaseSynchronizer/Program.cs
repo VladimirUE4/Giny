@@ -32,11 +32,9 @@ namespace Giny.DatabaseSynchronizer
 {
     class Program
     {
-        public const bool BUILD_MISC = false;
-
         public const bool BUILD_D2O_TABLES = true;
 
-        public const bool BUILD_MAPS = false;
+        public const bool BUILD_MAPS = true;
 
         public const string D2I_FILE_PATH_FR = "i18n_fr.d2i";
         public const string D2I_FILE_PATH_EN = "i18n_en.d2i";
@@ -92,7 +90,7 @@ namespace Giny.DatabaseSynchronizer
 
             DatabaseManager.Instance.CreateAllTablesIfNotExists();
 
-            D2OSynchronizer.Synchronize(BUILD_MISC, BUILD_D2O_TABLES);
+            D2OSynchronizer.Synchronize(BUILD_D2O_TABLES);
 
             if (BUILD_MAPS)
                 MapSynchronizer.Synchronize();

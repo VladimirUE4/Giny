@@ -134,5 +134,7 @@ namespace Giny.World.Records.Items
                 LivingObjectManager.Instance.FeedLivingObject(character, this, meal);
             }
         }
+
+        
     }
 }

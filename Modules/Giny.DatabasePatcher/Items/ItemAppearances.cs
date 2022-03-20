@@ -70,7 +70,7 @@ namespace Giny.DatabasePatcher.Items
                 return true;
             }
 
-            if (item.TypeEnum == ItemTypeEnum.CEREMONIAL_ITEM)
+            if (item.IsCeremonialItem())
             {
                 var effect = item.Effects.GetFirst<EffectDice>(EffectsEnum.Effect_Compatible);
 

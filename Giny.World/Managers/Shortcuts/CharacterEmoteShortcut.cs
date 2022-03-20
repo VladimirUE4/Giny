@@ -12,12 +12,12 @@ namespace Giny.World.Managers.Shortcuts
     public class CharacterEmoteShortcut : CharacterShortcut
     {
         [ProtoMember(4)]
-        public byte EmoteId
+        public short EmoteId
         {
             get;
             set;
         }
-        public CharacterEmoteShortcut(byte slotId, byte emoteId) : base(slotId)
+        public CharacterEmoteShortcut(byte slotId, short emoteId) : base(slotId)
         {
             this.EmoteId = emoteId;
         }
