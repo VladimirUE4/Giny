@@ -2,7 +2,7 @@
 # Giny.World
 
 ## En cours 
-
+* Une map position manquante ??? ankama ??
 * MapSynchronizer.cs 
 ```csharp 
 Logger.Write("Unknown element id " + graphicalElement.ElementId, Channels.Warning);
