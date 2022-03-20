@@ -2,6 +2,7 @@
 # Giny.World
 
 ## En cours 
+* Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
 * ProgressLogger + Logger.log interactions... (back)
 * CharacterCreationRequestMessage automatiser 
