@@ -3,7 +3,16 @@
 
 ## En cours 
 
-* Générer un protocol avec les paramètres des classes filles dans le constructeur et n'utiliser que le constructeur lors de l'instantiation des messages / types.
+* EntityLookManager (parsing du [0])
+```csharp
+
+if (str.StartsWith("["))
+{
+  str = str.Substring(0, 3);
+}
+            
+ ```
+* 
 * Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
 * Supprimer le systeme de quête custom (et tout le contenu custom hors modules.)
 * Revoir tools & modules
