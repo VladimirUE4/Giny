@@ -147,7 +147,7 @@ namespace Giny.World.Records.Maps
         [Ignore]
         public bool CanSpawnMonsters =>
             !IsDungeonEntrance
-            && (Position != null ? Position.AllowMonsterRespawn : true)
+            && Position.AllowMonsterRespawn
             && !IsDungeonMap
             && !HasZaap()
             && Cells.All(x => !x.FarmCell)

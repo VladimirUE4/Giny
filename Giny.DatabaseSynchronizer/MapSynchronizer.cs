@@ -14,6 +14,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giny.IO.D2O;
+using Giny.IO.D2OClasses;
 
 namespace Giny.DatabaseSynchronizer
 {
@@ -27,6 +29,9 @@ namespace Giny.DatabaseSynchronizer
 
         public static void Synchronize()
         {
+            Dictionary<long, MapPosition> mapPositions = D2OSynchronizer.d2oReaders.FirstOrDefault(x => x.Classes.Any(w => w.Value.Name == "MapPosition")).
+                EnumerateObjects().Cast<MapPosition>().ToDictionary(x => (long)x.id, x => x);
+
             Logger.Write("Building Maps...");
 
             foreach (var file in Directory.GetFiles(Path.Combine(ConfigFile.Instance.ClientPath, MAPS_PATH)))
@@ -47,7 +52,13 @@ namespace Giny.DatabaseSynchronizer
                         if (map.Cells == null)
                             continue;
 
+                        if (!mapPositions.ContainsKey(map.Id))
+                        {
+                            Logger.Write("Map " + map.Id + " has no Map Position in D2O files. Skipping", Channels.Warning);
+                            continue;
+                        }
                         MapRecord record = new MapRecord();
+
                         record.Version = map.MapVersion;
                         record.Id = map.Id;
                         record.SubareaId = map.SubareaId;
