@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of AbstractContactInformations.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of AbstractContactInformations.accountId.");
             }
 
             accountTag = new AccountTagInformation();

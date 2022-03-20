@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -97,13 +96,13 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
             if (model < 0)
             {
-                throw new Exception("Forbidden value (" + model + ") on element model.");
+                throw new System.Exception("Forbidden value (" + model + ") on element model.");
             }
 
             writer.WriteVarInt((int)model);
@@ -112,7 +111,7 @@ namespace Giny.Protocol.Types
             {
                 if (ancestor[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + ancestor[_i3] + ") on element 3 (starting at 1) of ancestor.");
+                    throw new System.Exception("Forbidden value (" + ancestor[_i3] + ") on element 3 (starting at 1) of ancestor.");
                 }
 
                 writer.WriteInt((int)ancestor[_i3]);
@@ -123,7 +122,7 @@ namespace Giny.Protocol.Types
             {
                 if (behaviors[_i4] < 0)
                 {
-                    throw new Exception("Forbidden value (" + behaviors[_i4] + ") on element 4 (starting at 1) of behaviors.");
+                    throw new System.Exception("Forbidden value (" + behaviors[_i4] + ") on element 4 (starting at 1) of behaviors.");
                 }
 
                 writer.WriteInt((int)behaviors[_i4]);
@@ -132,73 +131,73 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)name);
             if (ownerId < 0)
             {
-                throw new Exception("Forbidden value (" + ownerId + ") on element ownerId.");
+                throw new System.Exception("Forbidden value (" + ownerId + ") on element ownerId.");
             }
 
             writer.WriteInt((int)ownerId);
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element experience.");
             }
 
             writer.WriteVarLong((long)experience);
             if (experienceForLevel < 0 || experienceForLevel > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForLevel + ") on element experienceForLevel.");
+                throw new System.Exception("Forbidden value (" + experienceForLevel + ") on element experienceForLevel.");
             }
 
             writer.WriteVarLong((long)experienceForLevel);
             if (experienceForNextLevel < -9.00719925474099E+15 || experienceForNextLevel > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForNextLevel + ") on element experienceForNextLevel.");
+                throw new System.Exception("Forbidden value (" + experienceForNextLevel + ") on element experienceForNextLevel.");
             }
 
             writer.WriteDouble((double)experienceForNextLevel);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteByte((byte)level);
             if (maxPods < 0)
             {
-                throw new Exception("Forbidden value (" + maxPods + ") on element maxPods.");
+                throw new System.Exception("Forbidden value (" + maxPods + ") on element maxPods.");
             }
 
             writer.WriteVarInt((int)maxPods);
             if (stamina < 0)
             {
-                throw new Exception("Forbidden value (" + stamina + ") on element stamina.");
+                throw new System.Exception("Forbidden value (" + stamina + ") on element stamina.");
             }
 
             writer.WriteVarInt((int)stamina);
             if (staminaMax < 0)
             {
-                throw new Exception("Forbidden value (" + staminaMax + ") on element staminaMax.");
+                throw new System.Exception("Forbidden value (" + staminaMax + ") on element staminaMax.");
             }
 
             writer.WriteVarInt((int)staminaMax);
             if (maturity < 0)
             {
-                throw new Exception("Forbidden value (" + maturity + ") on element maturity.");
+                throw new System.Exception("Forbidden value (" + maturity + ") on element maturity.");
             }
 
             writer.WriteVarInt((int)maturity);
             if (maturityForAdult < 0)
             {
-                throw new Exception("Forbidden value (" + maturityForAdult + ") on element maturityForAdult.");
+                throw new System.Exception("Forbidden value (" + maturityForAdult + ") on element maturityForAdult.");
             }
 
             writer.WriteVarInt((int)maturityForAdult);
             if (energy < 0)
             {
-                throw new Exception("Forbidden value (" + energy + ") on element energy.");
+                throw new System.Exception("Forbidden value (" + energy + ") on element energy.");
             }
 
             writer.WriteVarInt((int)energy);
             if (energyMax < 0)
             {
-                throw new Exception("Forbidden value (" + energyMax + ") on element energyMax.");
+                throw new System.Exception("Forbidden value (" + energyMax + ") on element energyMax.");
             }
 
             writer.WriteVarInt((int)energyMax);
@@ -206,45 +205,45 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)aggressivityMax);
             if (serenityMax < 0)
             {
-                throw new Exception("Forbidden value (" + serenityMax + ") on element serenityMax.");
+                throw new System.Exception("Forbidden value (" + serenityMax + ") on element serenityMax.");
             }
 
             writer.WriteVarInt((int)serenityMax);
             if (love < 0)
             {
-                throw new Exception("Forbidden value (" + love + ") on element love.");
+                throw new System.Exception("Forbidden value (" + love + ") on element love.");
             }
 
             writer.WriteVarInt((int)love);
             if (loveMax < 0)
             {
-                throw new Exception("Forbidden value (" + loveMax + ") on element loveMax.");
+                throw new System.Exception("Forbidden value (" + loveMax + ") on element loveMax.");
             }
 
             writer.WriteVarInt((int)loveMax);
             writer.WriteInt((int)fecondationTime);
             if (boostLimiter < 0)
             {
-                throw new Exception("Forbidden value (" + boostLimiter + ") on element boostLimiter.");
+                throw new System.Exception("Forbidden value (" + boostLimiter + ") on element boostLimiter.");
             }
 
             writer.WriteInt((int)boostLimiter);
             if (boostMax < -9.00719925474099E+15 || boostMax > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + boostMax + ") on element boostMax.");
+                throw new System.Exception("Forbidden value (" + boostMax + ") on element boostMax.");
             }
 
             writer.WriteDouble((double)boostMax);
             writer.WriteInt((int)reproductionCount);
             if (reproductionCountMax < 0)
             {
-                throw new Exception("Forbidden value (" + reproductionCountMax + ") on element reproductionCountMax.");
+                throw new System.Exception("Forbidden value (" + reproductionCountMax + ") on element reproductionCountMax.");
             }
 
             writer.WriteVarInt((int)reproductionCountMax);
             if (harnessGID < 0)
             {
-                throw new Exception("Forbidden value (" + harnessGID + ") on element harnessGID.");
+                throw new System.Exception("Forbidden value (" + harnessGID + ") on element harnessGID.");
             }
 
             writer.WriteVarShort((short)harnessGID);
@@ -269,13 +268,13 @@ namespace Giny.Protocol.Types
             id = (double)reader.ReadDouble();
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of MountClientData.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of MountClientData.id.");
             }
 
             model = (int)reader.ReadVarUhInt();
             if (model < 0)
             {
-                throw new Exception("Forbidden value (" + model + ") on element of MountClientData.model.");
+                throw new System.Exception("Forbidden value (" + model + ") on element of MountClientData.model.");
             }
 
             uint _ancestorLen = (uint)reader.ReadUShort();
@@ -285,7 +284,7 @@ namespace Giny.Protocol.Types
                 _val3 = (uint)reader.ReadInt();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of ancestor.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of ancestor.");
                 }
 
                 ancestor[_i3] = (int)_val3;
@@ -298,7 +297,7 @@ namespace Giny.Protocol.Types
                 _val4 = (uint)reader.ReadInt();
                 if (_val4 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of behaviors.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of behaviors.");
                 }
 
                 behaviors[_i4] = (int)_val4;
@@ -308,73 +307,73 @@ namespace Giny.Protocol.Types
             ownerId = (int)reader.ReadInt();
             if (ownerId < 0)
             {
-                throw new Exception("Forbidden value (" + ownerId + ") on element of MountClientData.ownerId.");
+                throw new System.Exception("Forbidden value (" + ownerId + ") on element of MountClientData.ownerId.");
             }
 
             experience = (long)reader.ReadVarUhLong();
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element of MountClientData.experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element of MountClientData.experience.");
             }
 
             experienceForLevel = (long)reader.ReadVarUhLong();
             if (experienceForLevel < 0 || experienceForLevel > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForLevel + ") on element of MountClientData.experienceForLevel.");
+                throw new System.Exception("Forbidden value (" + experienceForLevel + ") on element of MountClientData.experienceForLevel.");
             }
 
             experienceForNextLevel = (double)reader.ReadDouble();
             if (experienceForNextLevel < -9.00719925474099E+15 || experienceForNextLevel > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForNextLevel + ") on element of MountClientData.experienceForNextLevel.");
+                throw new System.Exception("Forbidden value (" + experienceForNextLevel + ") on element of MountClientData.experienceForNextLevel.");
             }
 
             level = (byte)reader.ReadByte();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of MountClientData.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of MountClientData.level.");
             }
 
             maxPods = (int)reader.ReadVarUhInt();
             if (maxPods < 0)
             {
-                throw new Exception("Forbidden value (" + maxPods + ") on element of MountClientData.maxPods.");
+                throw new System.Exception("Forbidden value (" + maxPods + ") on element of MountClientData.maxPods.");
             }
 
             stamina = (int)reader.ReadVarUhInt();
             if (stamina < 0)
             {
-                throw new Exception("Forbidden value (" + stamina + ") on element of MountClientData.stamina.");
+                throw new System.Exception("Forbidden value (" + stamina + ") on element of MountClientData.stamina.");
             }
 
             staminaMax = (int)reader.ReadVarUhInt();
             if (staminaMax < 0)
             {
-                throw new Exception("Forbidden value (" + staminaMax + ") on element of MountClientData.staminaMax.");
+                throw new System.Exception("Forbidden value (" + staminaMax + ") on element of MountClientData.staminaMax.");
             }
 
             maturity = (int)reader.ReadVarUhInt();
             if (maturity < 0)
             {
-                throw new Exception("Forbidden value (" + maturity + ") on element of MountClientData.maturity.");
+                throw new System.Exception("Forbidden value (" + maturity + ") on element of MountClientData.maturity.");
             }
 
             maturityForAdult = (int)reader.ReadVarUhInt();
             if (maturityForAdult < 0)
             {
-                throw new Exception("Forbidden value (" + maturityForAdult + ") on element of MountClientData.maturityForAdult.");
+                throw new System.Exception("Forbidden value (" + maturityForAdult + ") on element of MountClientData.maturityForAdult.");
             }
 
             energy = (int)reader.ReadVarUhInt();
             if (energy < 0)
             {
-                throw new Exception("Forbidden value (" + energy + ") on element of MountClientData.energy.");
+                throw new System.Exception("Forbidden value (" + energy + ") on element of MountClientData.energy.");
             }
 
             energyMax = (int)reader.ReadVarUhInt();
             if (energyMax < 0)
             {
-                throw new Exception("Forbidden value (" + energyMax + ") on element of MountClientData.energyMax.");
+                throw new System.Exception("Forbidden value (" + energyMax + ") on element of MountClientData.energyMax.");
             }
 
             serenity = (int)reader.ReadInt();
@@ -382,45 +381,45 @@ namespace Giny.Protocol.Types
             serenityMax = (int)reader.ReadVarUhInt();
             if (serenityMax < 0)
             {
-                throw new Exception("Forbidden value (" + serenityMax + ") on element of MountClientData.serenityMax.");
+                throw new System.Exception("Forbidden value (" + serenityMax + ") on element of MountClientData.serenityMax.");
             }
 
             love = (int)reader.ReadVarUhInt();
             if (love < 0)
             {
-                throw new Exception("Forbidden value (" + love + ") on element of MountClientData.love.");
+                throw new System.Exception("Forbidden value (" + love + ") on element of MountClientData.love.");
             }
 
             loveMax = (int)reader.ReadVarUhInt();
             if (loveMax < 0)
             {
-                throw new Exception("Forbidden value (" + loveMax + ") on element of MountClientData.loveMax.");
+                throw new System.Exception("Forbidden value (" + loveMax + ") on element of MountClientData.loveMax.");
             }
 
             fecondationTime = (int)reader.ReadInt();
             boostLimiter = (int)reader.ReadInt();
             if (boostLimiter < 0)
             {
-                throw new Exception("Forbidden value (" + boostLimiter + ") on element of MountClientData.boostLimiter.");
+                throw new System.Exception("Forbidden value (" + boostLimiter + ") on element of MountClientData.boostLimiter.");
             }
 
             boostMax = (double)reader.ReadDouble();
             if (boostMax < -9.00719925474099E+15 || boostMax > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + boostMax + ") on element of MountClientData.boostMax.");
+                throw new System.Exception("Forbidden value (" + boostMax + ") on element of MountClientData.boostMax.");
             }
 
             reproductionCount = (int)reader.ReadInt();
             reproductionCountMax = (int)reader.ReadVarUhInt();
             if (reproductionCountMax < 0)
             {
-                throw new Exception("Forbidden value (" + reproductionCountMax + ") on element of MountClientData.reproductionCountMax.");
+                throw new System.Exception("Forbidden value (" + reproductionCountMax + ") on element of MountClientData.reproductionCountMax.");
             }
 
             harnessGID = (short)reader.ReadVarUhShort();
             if (harnessGID < 0)
             {
-                throw new Exception("Forbidden value (" + harnessGID + ") on element of MountClientData.harnessGID.");
+                throw new System.Exception("Forbidden value (" + harnessGID + ") on element of MountClientData.harnessGID.");
             }
 
             uint _effectListLen = (uint)reader.ReadUShort();

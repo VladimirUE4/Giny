@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyLocateMembersMessage()
         {
         }
-        public PartyLocateMembersMessage(PartyMemberGeoPosition[] geopositions)
+        public PartyLocateMembersMessage(PartyMemberGeoPosition[] geopositions,int partyId)
         {
             this.geopositions = geopositions;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {

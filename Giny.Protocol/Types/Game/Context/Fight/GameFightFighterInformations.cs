@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -19,12 +18,15 @@ namespace Giny.Protocol.Types
         public GameFightFighterInformations()
         {
         }
-        public GameFightFighterInformations(GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions)
+        public GameFightFighterInformations(GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions,double contextualId,EntityDispositionInformations disposition,EntityLook look)
         {
             this.spawnInfo = spawnInfo;
             this.wave = wave;
             this.stats = stats;
             this.previousPositions = previousPositions;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -32,7 +34,7 @@ namespace Giny.Protocol.Types
             spawnInfo.Serialize(writer);
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element wave.");
             }
 
             writer.WriteByte((byte)wave);
@@ -43,7 +45,7 @@ namespace Giny.Protocol.Types
             {
                 if (previousPositions[_i4] < 0 || previousPositions[_i4] > 559)
                 {
-                    throw new Exception("Forbidden value (" + previousPositions[_i4] + ") on element 4 (starting at 1) of previousPositions.");
+                    throw new System.Exception("Forbidden value (" + previousPositions[_i4] + ") on element 4 (starting at 1) of previousPositions.");
                 }
 
                 writer.WriteVarShort((short)previousPositions[_i4]);
@@ -59,7 +61,7 @@ namespace Giny.Protocol.Types
             wave = (byte)reader.ReadByte();
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element of GameFightFighterInformations.wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element of GameFightFighterInformations.wave.");
             }
 
             uint _id3 = (uint)reader.ReadUShort();
@@ -72,7 +74,7 @@ namespace Giny.Protocol.Types
                 _val4 = (uint)reader.ReadVarUhShort();
                 if (_val4 < 0 || _val4 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of previousPositions.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of previousPositions.");
                 }
 
                 previousPositions[_i4] = (short)_val4;

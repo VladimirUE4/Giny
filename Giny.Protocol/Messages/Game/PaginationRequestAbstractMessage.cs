@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (offset < 0 || offset > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + offset + ") on element offset.");
+                throw new System.Exception("Forbidden value (" + offset + ") on element offset.");
             }
 
             writer.WriteDouble((double)offset);
             if (count < 0 || count > 4294967295)
             {
-                throw new Exception("Forbidden value (" + count + ") on element count.");
+                throw new System.Exception("Forbidden value (" + count + ") on element count.");
             }
 
             writer.WriteUInt((uint)count);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             offset = (double)reader.ReadDouble();
             if (offset < 0 || offset > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + offset + ") on element of PaginationRequestAbstractMessage.offset.");
+                throw new System.Exception("Forbidden value (" + offset + ") on element of PaginationRequestAbstractMessage.offset.");
             }
 
             count = (uint)reader.ReadUInt();
             if (count < 0 || count > 4294967295)
             {
-                throw new Exception("Forbidden value (" + count + ") on element of PaginationRequestAbstractMessage.count.");
+                throw new System.Exception("Forbidden value (" + count + ") on element of PaginationRequestAbstractMessage.count.");
             }
 
         }

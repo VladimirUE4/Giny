@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,31 +33,31 @@ namespace Giny.Protocol.Messages
         {
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element requestId.");
             }
 
             writer.WriteInt((int)requestId);
             if (requesterId < -9.00719925474099E+15 || requesterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + requesterId + ") on element requesterId.");
+                throw new System.Exception("Forbidden value (" + requesterId + ") on element requesterId.");
             }
 
             writer.WriteDouble((double)requesterId);
             if (requesterCellId < 0 || requesterCellId > 559)
             {
-                throw new Exception("Forbidden value (" + requesterCellId + ") on element requesterCellId.");
+                throw new System.Exception("Forbidden value (" + requesterCellId + ") on element requesterCellId.");
             }
 
             writer.WriteVarShort((short)requesterCellId);
             if (requestedId < -9.00719925474099E+15 || requestedId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + requestedId + ") on element requestedId.");
+                throw new System.Exception("Forbidden value (" + requestedId + ") on element requestedId.");
             }
 
             writer.WriteDouble((double)requestedId);
             if (requestedCellId < 0 || requestedCellId > 559)
             {
-                throw new Exception("Forbidden value (" + requestedCellId + ") on element requestedCellId.");
+                throw new System.Exception("Forbidden value (" + requestedCellId + ") on element requestedCellId.");
             }
 
             writer.WriteVarShort((short)requestedCellId);
@@ -68,31 +67,31 @@ namespace Giny.Protocol.Messages
             requestId = (int)reader.ReadInt();
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestId.");
             }
 
             requesterId = (double)reader.ReadDouble();
             if (requesterId < -9.00719925474099E+15 || requesterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + requesterId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requesterId.");
+                throw new System.Exception("Forbidden value (" + requesterId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requesterId.");
             }
 
             requesterCellId = (short)reader.ReadVarUhShort();
             if (requesterCellId < 0 || requesterCellId > 559)
             {
-                throw new Exception("Forbidden value (" + requesterCellId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requesterCellId.");
+                throw new System.Exception("Forbidden value (" + requesterCellId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requesterCellId.");
             }
 
             requestedId = (double)reader.ReadDouble();
             if (requestedId < -9.00719925474099E+15 || requestedId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + requestedId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestedId.");
+                throw new System.Exception("Forbidden value (" + requestedId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestedId.");
             }
 
             requestedCellId = (short)reader.ReadVarUhShort();
             if (requestedCellId < 0 || requestedCellId > 559)
             {
-                throw new Exception("Forbidden value (" + requestedCellId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestedCellId.");
+                throw new System.Exception("Forbidden value (" + requestedCellId + ") on element of GameFightPlacementSwapPositionsOfferMessage.requestedCellId.");
             }
 
         }

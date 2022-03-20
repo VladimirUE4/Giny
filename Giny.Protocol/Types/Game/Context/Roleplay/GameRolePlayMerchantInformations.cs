@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,21 @@ namespace Giny.Protocol.Types
         public GameRolePlayMerchantInformations()
         {
         }
-        public GameRolePlayMerchantInformations(byte sellType,HumanOption[] options)
+        public GameRolePlayMerchantInformations(byte sellType,HumanOption[] options,double contextualId,EntityDispositionInformations disposition,EntityLook look,string name)
         {
             this.sellType = sellType;
             this.options = options;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.name = name;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (sellType < 0)
             {
-                throw new Exception("Forbidden value (" + sellType + ") on element sellType.");
+                throw new System.Exception("Forbidden value (" + sellType + ") on element sellType.");
             }
 
             writer.WriteByte((byte)sellType);
@@ -47,7 +50,7 @@ namespace Giny.Protocol.Types
             sellType = (byte)reader.ReadByte();
             if (sellType < 0)
             {
-                throw new Exception("Forbidden value (" + sellType + ") on element of GameRolePlayMerchantInformations.sellType.");
+                throw new System.Exception("Forbidden value (" + sellType + ") on element of GameRolePlayMerchantInformations.sellType.");
             }
 
             uint _optionsLen = (uint)reader.ReadUShort();

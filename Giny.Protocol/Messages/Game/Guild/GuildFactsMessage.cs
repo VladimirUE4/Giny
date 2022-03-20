@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,13 +33,13 @@ namespace Giny.Protocol.Messages
             infos.Serialize(writer);
             if (creationDate < 0)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element creationDate.");
             }
 
             writer.WriteInt((int)creationDate);
             if (nbTaxCollectors < 0)
             {
-                throw new Exception("Forbidden value (" + nbTaxCollectors + ") on element nbTaxCollectors.");
+                throw new System.Exception("Forbidden value (" + nbTaxCollectors + ") on element nbTaxCollectors.");
             }
 
             writer.WriteVarShort((short)nbTaxCollectors);
@@ -60,13 +59,13 @@ namespace Giny.Protocol.Messages
             creationDate = (int)reader.ReadInt();
             if (creationDate < 0)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element of GuildFactsMessage.creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element of GuildFactsMessage.creationDate.");
             }
 
             nbTaxCollectors = (short)reader.ReadVarUhShort();
             if (nbTaxCollectors < 0)
             {
-                throw new Exception("Forbidden value (" + nbTaxCollectors + ") on element of GuildFactsMessage.nbTaxCollectors.");
+                throw new System.Exception("Forbidden value (" + nbTaxCollectors + ") on element of GuildFactsMessage.nbTaxCollectors.");
             }
 
             uint _membersLen = (uint)reader.ReadUShort();

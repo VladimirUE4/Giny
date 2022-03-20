@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
             returnType = (byte)reader.ReadByte();
             if (returnType < 0)
             {
-                throw new Exception("Forbidden value (" + returnType + ") on element of HavenBagDailyLoteryMessage.returnType.");
+                throw new System.Exception("Forbidden value (" + returnType + ") on element of HavenBagDailyLoteryMessage.returnType.");
             }
 
             gameActionId = (string)reader.ReadUTF();

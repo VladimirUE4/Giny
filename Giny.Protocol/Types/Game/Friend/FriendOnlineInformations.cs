@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -25,7 +24,7 @@ namespace Giny.Protocol.Types
         public FriendOnlineInformations()
         {
         }
-        public FriendOnlineInformations(long playerId,string playerName,short level,byte alignmentSide,byte breed,bool sex,GuildInformations guildInfo,short moodSmileyId,PlayerStatus status,bool havenBagShared)
+        public FriendOnlineInformations(long playerId,string playerName,short level,byte alignmentSide,byte breed,bool sex,GuildInformations guildInfo,short moodSmileyId,PlayerStatus status,bool havenBagShared,int accountId,AccountTagInformation accountTag,byte playerState,short lastConnection,int achievementPoints,short leagueId,int ladderPosition)
         {
             this.playerId = playerId;
             this.playerName = playerName;
@@ -37,6 +36,13 @@ namespace Giny.Protocol.Types
             this.moodSmileyId = moodSmileyId;
             this.status = status;
             this.havenBagShared = havenBagShared;
+            this.accountId = accountId;
+            this.accountTag = accountTag;
+            this.playerState = playerState;
+            this.lastConnection = lastConnection;
+            this.achievementPoints = achievementPoints;
+            this.leagueId = leagueId;
+            this.ladderPosition = ladderPosition;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -47,14 +53,14 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
             writer.WriteUTF((string)playerName);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -63,7 +69,7 @@ namespace Giny.Protocol.Types
             guildInfo.Serialize(writer);
             if (moodSmileyId < 0)
             {
-                throw new Exception("Forbidden value (" + moodSmileyId + ") on element moodSmileyId.");
+                throw new System.Exception("Forbidden value (" + moodSmileyId + ") on element moodSmileyId.");
             }
 
             writer.WriteVarShort((short)moodSmileyId);
@@ -79,21 +85,21 @@ namespace Giny.Protocol.Types
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of FriendOnlineInformations.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of FriendOnlineInformations.playerId.");
             }
 
             playerName = (string)reader.ReadUTF();
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of FriendOnlineInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of FriendOnlineInformations.level.");
             }
 
             alignmentSide = (byte)reader.ReadByte();
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
             {
-                throw new Exception("Forbidden value (" + breed + ") on element of FriendOnlineInformations.breed.");
+                throw new System.Exception("Forbidden value (" + breed + ") on element of FriendOnlineInformations.breed.");
             }
 
             guildInfo = new GuildInformations();
@@ -101,7 +107,7 @@ namespace Giny.Protocol.Types
             moodSmileyId = (short)reader.ReadVarUhShort();
             if (moodSmileyId < 0)
             {
-                throw new Exception("Forbidden value (" + moodSmileyId + ") on element of FriendOnlineInformations.moodSmileyId.");
+                throw new System.Exception("Forbidden value (" + moodSmileyId + ") on element of FriendOnlineInformations.moodSmileyId.");
             }
 
             uint _id9 = (uint)reader.ReadUShort();

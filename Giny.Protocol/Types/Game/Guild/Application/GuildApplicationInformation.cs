@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)applyText);
             if (creationDate < -9.00719925474099E+15 || creationDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element creationDate.");
             }
 
             writer.WriteDouble((double)creationDate);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Types
             creationDate = (double)reader.ReadDouble();
             if (creationDate < -9.00719925474099E+15 || creationDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element of GuildApplicationInformation.creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element of GuildApplicationInformation.creationDate.");
             }
 
         }

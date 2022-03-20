@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public SpawnScaledMonsterInformation()
         {
         }
-        public SpawnScaledMonsterInformation(short creatureLevel)
+        public SpawnScaledMonsterInformation(short creatureLevel,short creatureGenericId)
         {
             this.creatureLevel = creatureLevel;
+            this.creatureGenericId = creatureGenericId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (creatureLevel < 0)
             {
-                throw new Exception("Forbidden value (" + creatureLevel + ") on element creatureLevel.");
+                throw new System.Exception("Forbidden value (" + creatureLevel + ") on element creatureLevel.");
             }
 
             writer.WriteShort((short)creatureLevel);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             creatureLevel = (short)reader.ReadShort();
             if (creatureLevel < 0)
             {
-                throw new Exception("Forbidden value (" + creatureLevel + ") on element of SpawnScaledMonsterInformation.creatureLevel.");
+                throw new System.Exception("Forbidden value (" + creatureLevel + ") on element of SpawnScaledMonsterInformation.creatureLevel.");
             }
 
         }

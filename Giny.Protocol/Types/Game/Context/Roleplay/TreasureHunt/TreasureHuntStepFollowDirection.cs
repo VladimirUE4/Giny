@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)direction);
             if (mapCount < 0)
             {
-                throw new Exception("Forbidden value (" + mapCount + ") on element mapCount.");
+                throw new System.Exception("Forbidden value (" + mapCount + ") on element mapCount.");
             }
 
             writer.WriteVarShort((short)mapCount);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Types
             direction = (byte)reader.ReadByte();
             if (direction < 0)
             {
-                throw new Exception("Forbidden value (" + direction + ") on element of TreasureHuntStepFollowDirection.direction.");
+                throw new System.Exception("Forbidden value (" + direction + ") on element of TreasureHuntStepFollowDirection.direction.");
             }
 
             mapCount = (short)reader.ReadVarUhShort();
             if (mapCount < 0)
             {
-                throw new Exception("Forbidden value (" + mapCount + ") on element of TreasureHuntStepFollowDirection.mapCount.");
+                throw new System.Exception("Forbidden value (" + mapCount + ") on element of TreasureHuntStepFollowDirection.mapCount.");
             }
 
         }

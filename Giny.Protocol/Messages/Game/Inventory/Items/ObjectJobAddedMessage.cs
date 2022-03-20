@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of ObjectJobAddedMessage.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of ObjectJobAddedMessage.jobId.");
             }
 
         }

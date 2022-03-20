@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element amount.");
             }
 
             writer.WriteVarLong((long)amount);
@@ -47,13 +46,13 @@ namespace Giny.Protocol.Messages
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseSellRequestMessage.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseSellRequestMessage.instanceId.");
             }
 
             amount = (long)reader.ReadVarUhLong();
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element of HouseSellRequestMessage.amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element of HouseSellRequestMessage.amount.");
             }
 
             forSale = (bool)reader.ReadBoolean();

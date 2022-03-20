@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             infoType = (byte)reader.ReadByte();
             if (infoType < 0)
             {
-                throw new Exception("Forbidden value (" + infoType + ") on element of GuildGetInformationsMessage.infoType.");
+                throw new System.Exception("Forbidden value (" + infoType + ") on element of GuildGetInformationsMessage.infoType.");
             }
 
         }

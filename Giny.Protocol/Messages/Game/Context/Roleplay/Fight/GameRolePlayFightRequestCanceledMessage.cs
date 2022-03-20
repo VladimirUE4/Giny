@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element sourceId.");
             }
 
             writer.WriteDouble((double)sourceId);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameRolePlayFightRequestCanceledMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameRolePlayFightRequestCanceledMessage.fightId.");
             }
 
             sourceId = (double)reader.ReadDouble();
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element of GameRolePlayFightRequestCanceledMessage.sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element of GameRolePlayFightRequestCanceledMessage.sourceId.");
             }
 
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameRolePlayFightRequestCanceledMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameRolePlayFightRequestCanceledMessage.targetId.");
             }
 
         }

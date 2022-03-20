@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (genericId < 0)
             {
-                throw new Exception("Forbidden value (" + genericId + ") on element genericId.");
+                throw new System.Exception("Forbidden value (" + genericId + ") on element genericId.");
             }
 
             writer.WriteVarShort((short)genericId);
             if (averagePrice < -9.00719925474099E+15 || averagePrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + averagePrice + ") on element averagePrice.");
+                throw new System.Exception("Forbidden value (" + averagePrice + ") on element averagePrice.");
             }
 
             writer.WriteVarLong((long)averagePrice);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             genericId = (short)reader.ReadVarUhShort();
             if (genericId < 0)
             {
-                throw new Exception("Forbidden value (" + genericId + ") on element of ExchangeBidPriceMessage.genericId.");
+                throw new System.Exception("Forbidden value (" + genericId + ") on element of ExchangeBidPriceMessage.genericId.");
             }
 
             averagePrice = (long)reader.ReadVarLong();
             if (averagePrice < -9.00719925474099E+15 || averagePrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + averagePrice + ") on element of ExchangeBidPriceMessage.averagePrice.");
+                throw new System.Exception("Forbidden value (" + averagePrice + ") on element of ExchangeBidPriceMessage.averagePrice.");
             }
 
         }

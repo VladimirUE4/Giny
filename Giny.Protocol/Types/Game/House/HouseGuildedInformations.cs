@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,16 @@ namespace Giny.Protocol.Types
         public HouseGuildedInformations()
         {
         }
-        public HouseGuildedInformations(GuildInformations guildInfo)
+        public HouseGuildedInformations(GuildInformations guildInfo,int instanceId,bool secondHand,bool isLocked,AccountTagInformation ownerTag,bool hasOwner,long price,bool isSaleLocked)
         {
             this.guildInfo = guildInfo;
+            this.instanceId = instanceId;
+            this.secondHand = secondHand;
+            this.isLocked = isLocked;
+            this.ownerTag = ownerTag;
+            this.hasOwner = hasOwner;
+            this.price = price;
+            this.isSaleLocked = isSaleLocked;
         }
         public override void Serialize(IDataWriter writer)
         {

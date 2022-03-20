@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public ObjectEffectCreature()
         {
         }
-        public ObjectEffectCreature(short monsterFamilyId)
+        public ObjectEffectCreature(short monsterFamilyId,short actionId)
         {
             this.monsterFamilyId = monsterFamilyId;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (monsterFamilyId < 0)
             {
-                throw new Exception("Forbidden value (" + monsterFamilyId + ") on element monsterFamilyId.");
+                throw new System.Exception("Forbidden value (" + monsterFamilyId + ") on element monsterFamilyId.");
             }
 
             writer.WriteVarShort((short)monsterFamilyId);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             monsterFamilyId = (short)reader.ReadVarUhShort();
             if (monsterFamilyId < 0)
             {
-                throw new Exception("Forbidden value (" + monsterFamilyId + ") on element of ObjectEffectCreature.monsterFamilyId.");
+                throw new System.Exception("Forbidden value (" + monsterFamilyId + ") on element of ObjectEffectCreature.monsterFamilyId.");
             }
 
         }

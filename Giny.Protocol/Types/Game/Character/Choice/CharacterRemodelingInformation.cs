@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,13 +19,14 @@ namespace Giny.Protocol.Types
         public CharacterRemodelingInformation()
         {
         }
-        public CharacterRemodelingInformation(string name,byte breed,bool sex,short cosmeticId,int[] colors)
+        public CharacterRemodelingInformation(string name,byte breed,bool sex,short cosmeticId,int[] colors,long id)
         {
             this.name = name;
             this.breed = breed;
             this.sex = sex;
             this.cosmeticId = cosmeticId;
             this.colors = colors;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)sex);
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
             }
 
             writer.WriteVarShort((short)cosmeticId);
@@ -57,7 +57,7 @@ namespace Giny.Protocol.Types
             cosmeticId = (short)reader.ReadVarUhShort();
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element of CharacterRemodelingInformation.cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element of CharacterRemodelingInformation.cosmeticId.");
             }
 
             uint _colorsLen = (uint)reader.ReadUShort();

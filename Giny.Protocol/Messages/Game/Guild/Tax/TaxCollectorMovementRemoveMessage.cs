@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (collectorId < 0 || collectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + collectorId + ") on element collectorId.");
+                throw new System.Exception("Forbidden value (" + collectorId + ") on element collectorId.");
             }
 
             writer.WriteDouble((double)collectorId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             collectorId = (double)reader.ReadDouble();
             if (collectorId < 0 || collectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + collectorId + ") on element of TaxCollectorMovementRemoveMessage.collectorId.");
+                throw new System.Exception("Forbidden value (" + collectorId + ") on element of TaxCollectorMovementRemoveMessage.collectorId.");
             }
 
         }

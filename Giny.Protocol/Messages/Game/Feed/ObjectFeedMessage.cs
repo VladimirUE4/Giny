@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element objectUID.");
             }
 
             writer.WriteVarInt((int)objectUID);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             objectUID = (int)reader.ReadVarUhInt();
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element of ObjectFeedMessage.objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element of ObjectFeedMessage.objectUID.");
             }
 
             uint _mealLen = (uint)reader.ReadUShort();

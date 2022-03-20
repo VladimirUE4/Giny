@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             spawnInformation.Serialize(writer);
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element wave.");
             }
 
             writer.WriteByte((byte)wave);
@@ -59,7 +58,7 @@ namespace Giny.Protocol.Types
             wave = (byte)reader.ReadByte();
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element of GameContextSummonsInformation.wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element of GameContextSummonsInformation.wave.");
             }
 
             look = new EntityLook();

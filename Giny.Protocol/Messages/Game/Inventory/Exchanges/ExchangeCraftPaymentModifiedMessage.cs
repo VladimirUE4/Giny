@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (goldSum < 0 || goldSum > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + goldSum + ") on element goldSum.");
+                throw new System.Exception("Forbidden value (" + goldSum + ") on element goldSum.");
             }
 
             writer.WriteVarLong((long)goldSum);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             goldSum = (long)reader.ReadVarUhLong();
             if (goldSum < 0 || goldSum > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + goldSum + ") on element of ExchangeCraftPaymentModifiedMessage.goldSum.");
+                throw new System.Exception("Forbidden value (" + goldSum + ") on element of ExchangeCraftPaymentModifiedMessage.goldSum.");
             }
 
         }

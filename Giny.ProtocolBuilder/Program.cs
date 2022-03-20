@@ -4,7 +4,6 @@ using Giny.AS3.Expressions;
 using Giny.Core;
 using Giny.ProtocolBuilder.Converters;
 using Giny.ProtocolBuilder.Profiles;
-using Giny.ProtocolBuilder.Templates;
 using Microsoft.VisualStudio.TextTemplating;
 using System;
 using System.CodeDom.Compiler;
@@ -34,7 +33,7 @@ namespace Giny.ProtocolBuilder
 
             Logger.WriteColor1(string.Format("Build finished in {0}s", stopwatch.Elapsed.Seconds));
 
-            Console.Read();
+            Console.ReadLine();
         }
 
         static void BuildEnums()

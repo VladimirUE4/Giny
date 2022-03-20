@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -31,19 +30,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)alignmentSide);
             if (alignmentValue < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentValue + ") on element alignmentValue.");
+                throw new System.Exception("Forbidden value (" + alignmentValue + ") on element alignmentValue.");
             }
 
             writer.WriteByte((byte)alignmentValue);
             if (alignmentGrade < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentGrade + ") on element alignmentGrade.");
+                throw new System.Exception("Forbidden value (" + alignmentGrade + ") on element alignmentGrade.");
             }
 
             writer.WriteByte((byte)alignmentGrade);
             if (characterPower < -9.00719925474099E+15 || characterPower > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + characterPower + ") on element characterPower.");
+                throw new System.Exception("Forbidden value (" + characterPower + ") on element characterPower.");
             }
 
             writer.WriteDouble((double)characterPower);
@@ -54,19 +53,19 @@ namespace Giny.Protocol.Types
             alignmentValue = (byte)reader.ReadByte();
             if (alignmentValue < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentValue + ") on element of ActorAlignmentInformations.alignmentValue.");
+                throw new System.Exception("Forbidden value (" + alignmentValue + ") on element of ActorAlignmentInformations.alignmentValue.");
             }
 
             alignmentGrade = (byte)reader.ReadByte();
             if (alignmentGrade < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentGrade + ") on element of ActorAlignmentInformations.alignmentGrade.");
+                throw new System.Exception("Forbidden value (" + alignmentGrade + ") on element of ActorAlignmentInformations.alignmentGrade.");
             }
 
             characterPower = (double)reader.ReadDouble();
             if (characterPower < -9.00719925474099E+15 || characterPower > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + characterPower + ") on element of ActorAlignmentInformations.characterPower.");
+                throw new System.Exception("Forbidden value (" + characterPower + ") on element of ActorAlignmentInformations.characterPower.");
             }
 
         }

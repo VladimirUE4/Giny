@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (documentId < 0)
             {
-                throw new Exception("Forbidden value (" + documentId + ") on element documentId.");
+                throw new System.Exception("Forbidden value (" + documentId + ") on element documentId.");
             }
 
             writer.WriteVarShort((short)documentId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             documentId = (short)reader.ReadVarUhShort();
             if (documentId < 0)
             {
-                throw new Exception("Forbidden value (" + documentId + ") on element of DocumentReadingBeginMessage.documentId.");
+                throw new System.Exception("Forbidden value (" + documentId + ") on element of DocumentReadingBeginMessage.documentId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (alignmentWarEffortDailyLimit < 0 || alignmentWarEffortDailyLimit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortDailyLimit + ") on element alignmentWarEffortDailyLimit.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortDailyLimit + ") on element alignmentWarEffortDailyLimit.");
             }
 
             writer.WriteVarLong((long)alignmentWarEffortDailyLimit);
             if (alignmentWarEffortDailyDonation < 0 || alignmentWarEffortDailyDonation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortDailyDonation + ") on element alignmentWarEffortDailyDonation.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortDailyDonation + ") on element alignmentWarEffortDailyDonation.");
             }
 
             writer.WriteVarLong((long)alignmentWarEffortDailyDonation);
             if (alignmentWarEffortPersonalDonation < 0 || alignmentWarEffortPersonalDonation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortPersonalDonation + ") on element alignmentWarEffortPersonalDonation.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortPersonalDonation + ") on element alignmentWarEffortPersonalDonation.");
             }
 
             writer.WriteVarLong((long)alignmentWarEffortPersonalDonation);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             alignmentWarEffortDailyLimit = (long)reader.ReadVarUhLong();
             if (alignmentWarEffortDailyLimit < 0 || alignmentWarEffortDailyLimit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortDailyLimit + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortDailyLimit.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortDailyLimit + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortDailyLimit.");
             }
 
             alignmentWarEffortDailyDonation = (long)reader.ReadVarUhLong();
             if (alignmentWarEffortDailyDonation < 0 || alignmentWarEffortDailyDonation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortDailyDonation + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortDailyDonation.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortDailyDonation + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortDailyDonation.");
             }
 
             alignmentWarEffortPersonalDonation = (long)reader.ReadVarUhLong();
             if (alignmentWarEffortPersonalDonation < 0 || alignmentWarEffortPersonalDonation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffortPersonalDonation + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortPersonalDonation.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffortPersonalDonation + ") on element of CharacterAlignmentWarEffortProgressionMessage.alignmentWarEffortPersonalDonation.");
             }
 
         }

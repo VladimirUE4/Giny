@@ -26,9 +26,9 @@ namespace Giny.ProtocolBuilder.Converters
         {
             "System"
         };
-        protected override AS3Field[] SelectFieldsToWrite()
+        protected override List<AS3Field> SelectFieldsToWrite()
         {
-            return File.GetFields(x => x.Accessor == AS3AccessorsEnum.@public && x.Modifiers == AS3ModifiersEnum.@static);
+            return File.GetFields(x => x.Accessor == AS3AccessorsEnum.@public && x.Modifiers == AS3ModifiersEnum.@static).ToList();
         }
         public string GetEnumFields()
         {
@@ -40,6 +40,11 @@ namespace Giny.ProtocolBuilder.Converters
             }
 
             return sb.ToString();
+        }
+
+        public override void PostPrepare()
+        {
+          
         }
     }
 }

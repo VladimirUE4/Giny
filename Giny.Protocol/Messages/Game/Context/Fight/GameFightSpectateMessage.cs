@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -48,13 +47,13 @@ namespace Giny.Protocol.Messages
 
             if (gameTurn < 0)
             {
-                throw new Exception("Forbidden value (" + gameTurn + ") on element gameTurn.");
+                throw new System.Exception("Forbidden value (" + gameTurn + ") on element gameTurn.");
             }
 
             writer.WriteVarShort((short)gameTurn);
             if (fightStart < 0)
             {
-                throw new Exception("Forbidden value (" + fightStart + ") on element fightStart.");
+                throw new System.Exception("Forbidden value (" + fightStart + ") on element fightStart.");
             }
 
             writer.WriteInt((int)fightStart);
@@ -96,13 +95,13 @@ namespace Giny.Protocol.Messages
             gameTurn = (short)reader.ReadVarUhShort();
             if (gameTurn < 0)
             {
-                throw new Exception("Forbidden value (" + gameTurn + ") on element of GameFightSpectateMessage.gameTurn.");
+                throw new System.Exception("Forbidden value (" + gameTurn + ") on element of GameFightSpectateMessage.gameTurn.");
             }
 
             fightStart = (int)reader.ReadInt();
             if (fightStart < 0)
             {
-                throw new Exception("Forbidden value (" + fightStart + ") on element of GameFightSpectateMessage.fightStart.");
+                throw new System.Exception("Forbidden value (" + fightStart + ") on element of GameFightSpectateMessage.fightStart.");
             }
 
             uint _idolsLen = (uint)reader.ReadUShort();

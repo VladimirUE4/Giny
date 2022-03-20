@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -58,7 +57,7 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of MapRunningFightDetailsMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of MapRunningFightDetailsMessage.fightId.");
             }
 
             uint _attackersLen = (uint)reader.ReadUShort();

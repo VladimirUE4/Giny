@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -33,7 +32,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)teamId);
             if (leaderId < -9.00719925474099E+15 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element leaderId.");
             }
 
             writer.WriteDouble((double)leaderId);
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)teamTypeId);
             if (nbWaves < 0)
             {
-                throw new Exception("Forbidden value (" + nbWaves + ") on element nbWaves.");
+                throw new System.Exception("Forbidden value (" + nbWaves + ") on element nbWaves.");
             }
 
             writer.WriteByte((byte)nbWaves);
@@ -51,26 +50,26 @@ namespace Giny.Protocol.Types
             teamId = (byte)reader.ReadByte();
             if (teamId < 0)
             {
-                throw new Exception("Forbidden value (" + teamId + ") on element of AbstractFightTeamInformations.teamId.");
+                throw new System.Exception("Forbidden value (" + teamId + ") on element of AbstractFightTeamInformations.teamId.");
             }
 
             leaderId = (double)reader.ReadDouble();
             if (leaderId < -9.00719925474099E+15 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element of AbstractFightTeamInformations.leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element of AbstractFightTeamInformations.leaderId.");
             }
 
             teamSide = (byte)reader.ReadByte();
             teamTypeId = (byte)reader.ReadByte();
             if (teamTypeId < 0)
             {
-                throw new Exception("Forbidden value (" + teamTypeId + ") on element of AbstractFightTeamInformations.teamTypeId.");
+                throw new System.Exception("Forbidden value (" + teamTypeId + ") on element of AbstractFightTeamInformations.teamTypeId.");
             }
 
             nbWaves = (byte)reader.ReadByte();
             if (nbWaves < 0)
             {
-                throw new Exception("Forbidden value (" + nbWaves + ") on element of AbstractFightTeamInformations.nbWaves.");
+                throw new System.Exception("Forbidden value (" + nbWaves + ") on element of AbstractFightTeamInformations.nbWaves.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,21 @@ namespace Giny.Protocol.Messages
         public IdentificationSuccessWithLoginTokenMessage()
         {
         }
-        public IdentificationSuccessWithLoginTokenMessage(string loginToken)
+        public IdentificationSuccessWithLoginTokenMessage(string loginToken,string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom)
         {
             this.loginToken = loginToken;
+            this.login = login;
+            this.accountTag = accountTag;
+            this.accountId = accountId;
+            this.communityId = communityId;
+            this.hasRights = hasRights;
+            this.hasConsoleRight = hasConsoleRight;
+            this.secretQuestion = secretQuestion;
+            this.accountCreation = accountCreation;
+            this.subscriptionElapsedDuration = subscriptionElapsedDuration;
+            this.subscriptionEndDate = subscriptionEndDate;
+            this.wasAlreadyConnected = wasAlreadyConnected;
+            this.havenbagAvailableRoom = havenbagAvailableRoom;
         }
         public override void Serialize(IDataWriter writer)
         {

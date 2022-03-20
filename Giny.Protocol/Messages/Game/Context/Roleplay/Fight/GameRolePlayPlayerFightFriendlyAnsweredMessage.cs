@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,19 +31,19 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
             if (sourceId < 0 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element sourceId.");
             }
 
             writer.WriteVarLong((long)sourceId);
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteVarLong((long)targetId);
@@ -55,19 +54,19 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.fightId.");
             }
 
             sourceId = (long)reader.ReadVarUhLong();
             if (sourceId < 0 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.sourceId.");
             }
 
             targetId = (long)reader.ReadVarUhLong();
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameRolePlayPlayerFightFriendlyAnsweredMessage.targetId.");
             }
 
             accept = (bool)reader.ReadBoolean();

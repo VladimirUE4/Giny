@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             {
                 if (objects[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + objects[_i1] + ") on element 1 (starting at 1) of objects.");
+                    throw new System.Exception("Forbidden value (" + objects[_i1] + ") on element 1 (starting at 1) of objects.");
                 }
 
                 writer.WriteVarInt((int)objects[_i1]);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
 
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
 
             writer.WriteVarLong((long)kamas);
@@ -52,7 +51,7 @@ namespace Giny.Protocol.Types
                 _val1 = (uint)reader.ReadVarUhInt();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of objects.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of objects.");
                 }
 
                 objects[_i1] = (int)_val1;
@@ -61,7 +60,7 @@ namespace Giny.Protocol.Types
             kamas = (long)reader.ReadVarUhLong();
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element of FightLoot.kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element of FightLoot.kamas.");
             }
 
         }

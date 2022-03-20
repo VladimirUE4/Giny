@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,11 @@ namespace Giny.Protocol.Types
         public FightTeamMemberCharacterInformations()
         {
         }
-        public FightTeamMemberCharacterInformations(string name,short level)
+        public FightTeamMemberCharacterInformations(string name,short level,double id)
         {
             this.name = name;
             this.level = level;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -28,7 +28,7 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)name);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -40,7 +40,7 @@ namespace Giny.Protocol.Types
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of FightTeamMemberCharacterInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of FightTeamMemberCharacterInformations.level.");
             }
 
         }

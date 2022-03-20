@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -23,7 +22,7 @@ namespace Giny.Protocol.Messages
         public PartyInvitationMessage()
         {
         }
-        public PartyInvitationMessage(byte partyType,string partyName,byte maxParticipants,long fromId,string fromName,long toId)
+        public PartyInvitationMessage(byte partyType,string partyName,byte maxParticipants,long fromId,string fromName,long toId,int partyId)
         {
             this.partyType = partyType;
             this.partyName = partyName;
@@ -31,6 +30,7 @@ namespace Giny.Protocol.Messages
             this.fromId = fromId;
             this.fromName = fromName;
             this.toId = toId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -39,20 +39,20 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)partyName);
             if (maxParticipants < 0)
             {
-                throw new Exception("Forbidden value (" + maxParticipants + ") on element maxParticipants.");
+                throw new System.Exception("Forbidden value (" + maxParticipants + ") on element maxParticipants.");
             }
 
             writer.WriteByte((byte)maxParticipants);
             if (fromId < 0 || fromId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fromId + ") on element fromId.");
+                throw new System.Exception("Forbidden value (" + fromId + ") on element fromId.");
             }
 
             writer.WriteVarLong((long)fromId);
             writer.WriteUTF((string)fromName);
             if (toId < 0 || toId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + toId + ") on element toId.");
+                throw new System.Exception("Forbidden value (" + toId + ") on element toId.");
             }
 
             writer.WriteVarLong((long)toId);
@@ -63,27 +63,27 @@ namespace Giny.Protocol.Messages
             partyType = (byte)reader.ReadByte();
             if (partyType < 0)
             {
-                throw new Exception("Forbidden value (" + partyType + ") on element of PartyInvitationMessage.partyType.");
+                throw new System.Exception("Forbidden value (" + partyType + ") on element of PartyInvitationMessage.partyType.");
             }
 
             partyName = (string)reader.ReadUTF();
             maxParticipants = (byte)reader.ReadByte();
             if (maxParticipants < 0)
             {
-                throw new Exception("Forbidden value (" + maxParticipants + ") on element of PartyInvitationMessage.maxParticipants.");
+                throw new System.Exception("Forbidden value (" + maxParticipants + ") on element of PartyInvitationMessage.maxParticipants.");
             }
 
             fromId = (long)reader.ReadVarUhLong();
             if (fromId < 0 || fromId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fromId + ") on element of PartyInvitationMessage.fromId.");
+                throw new System.Exception("Forbidden value (" + fromId + ") on element of PartyInvitationMessage.fromId.");
             }
 
             fromName = (string)reader.ReadUTF();
             toId = (long)reader.ReadVarUhLong();
             if (toId < 0 || toId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + toId + ") on element of PartyInvitationMessage.toId.");
+                throw new System.Exception("Forbidden value (" + toId + ") on element of PartyInvitationMessage.toId.");
             }
 
         }

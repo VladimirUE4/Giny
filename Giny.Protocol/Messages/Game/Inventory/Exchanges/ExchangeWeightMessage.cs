@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (currentWeight < 0)
             {
-                throw new Exception("Forbidden value (" + currentWeight + ") on element currentWeight.");
+                throw new System.Exception("Forbidden value (" + currentWeight + ") on element currentWeight.");
             }
 
             writer.WriteVarInt((int)currentWeight);
             if (maxWeight < 0)
             {
-                throw new Exception("Forbidden value (" + maxWeight + ") on element maxWeight.");
+                throw new System.Exception("Forbidden value (" + maxWeight + ") on element maxWeight.");
             }
 
             writer.WriteVarInt((int)maxWeight);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             currentWeight = (int)reader.ReadVarUhInt();
             if (currentWeight < 0)
             {
-                throw new Exception("Forbidden value (" + currentWeight + ") on element of ExchangeWeightMessage.currentWeight.");
+                throw new System.Exception("Forbidden value (" + currentWeight + ") on element of ExchangeWeightMessage.currentWeight.");
             }
 
             maxWeight = (int)reader.ReadVarUhInt();
             if (maxWeight < 0)
             {
-                throw new Exception("Forbidden value (" + maxWeight + ") on element of ExchangeWeightMessage.maxWeight.");
+                throw new System.Exception("Forbidden value (" + maxWeight + ") on element of ExchangeWeightMessage.maxWeight.");
             }
 
         }

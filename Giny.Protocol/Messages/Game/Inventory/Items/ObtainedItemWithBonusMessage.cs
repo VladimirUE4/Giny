@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public ObtainedItemWithBonusMessage()
         {
         }
-        public ObtainedItemWithBonusMessage(int bonusQuantity)
+        public ObtainedItemWithBonusMessage(int bonusQuantity,short genericId,int baseQuantity)
         {
             this.bonusQuantity = bonusQuantity;
+            this.genericId = genericId;
+            this.baseQuantity = baseQuantity;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (bonusQuantity < 0)
             {
-                throw new Exception("Forbidden value (" + bonusQuantity + ") on element bonusQuantity.");
+                throw new System.Exception("Forbidden value (" + bonusQuantity + ") on element bonusQuantity.");
             }
 
             writer.WriteVarInt((int)bonusQuantity);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             bonusQuantity = (int)reader.ReadVarUhInt();
             if (bonusQuantity < 0)
             {
-                throw new Exception("Forbidden value (" + bonusQuantity + ") on element of ObtainedItemWithBonusMessage.bonusQuantity.");
+                throw new System.Exception("Forbidden value (" + bonusQuantity + ") on element of ObtainedItemWithBonusMessage.bonusQuantity.");
             }
 
         }

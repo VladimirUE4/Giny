@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (lockedActivitiesIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + lockedActivitiesIds[_i1] + ") on element 1 (starting at 1) of lockedActivitiesIds.");
+                    throw new System.Exception("Forbidden value (" + lockedActivitiesIds[_i1] + ") on element 1 (starting at 1) of lockedActivitiesIds.");
                 }
 
                 writer.WriteVarShort((short)lockedActivitiesIds[_i1]);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             {
                 if (unlockedActivitiesIds[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + unlockedActivitiesIds[_i2] + ") on element 2 (starting at 1) of unlockedActivitiesIds.");
+                    throw new System.Exception("Forbidden value (" + unlockedActivitiesIds[_i2] + ") on element 2 (starting at 1) of unlockedActivitiesIds.");
                 }
 
                 writer.WriteVarShort((short)unlockedActivitiesIds[_i2]);
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of lockedActivitiesIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of lockedActivitiesIds.");
                 }
 
                 lockedActivitiesIds[_i1] = (short)_val1;
@@ -73,7 +72,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of unlockedActivitiesIds.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of unlockedActivitiesIds.");
                 }
 
                 unlockedActivitiesIds[_i2] = (short)_val2;

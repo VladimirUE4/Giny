@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Types
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -59,7 +58,7 @@ namespace Giny.Protocol.Types
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PrismFightersInformation.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PrismFightersInformation.subAreaId.");
             }
 
             waitingForHelpInfo = new ProtectedEntityWaitingForHelpInfo();

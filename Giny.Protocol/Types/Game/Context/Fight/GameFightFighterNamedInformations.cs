@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,13 +19,20 @@ namespace Giny.Protocol.Types
         public GameFightFighterNamedInformations()
         {
         }
-        public GameFightFighterNamedInformations(string name,PlayerStatus status,short leagueId,int ladderPosition,bool hiddenInPrefight)
+        public GameFightFighterNamedInformations(string name,PlayerStatus status,short leagueId,int ladderPosition,bool hiddenInPrefight,double contextualId,EntityDispositionInformations disposition,EntityLook look,GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions)
         {
             this.name = name;
             this.status = status;
             this.leagueId = leagueId;
             this.ladderPosition = ladderPosition;
             this.hiddenInPrefight = hiddenInPrefight;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.spawnInfo = spawnInfo;
+            this.wave = wave;
+            this.stats = stats;
+            this.previousPositions = previousPositions;
         }
         public override void Serialize(IDataWriter writer)
         {

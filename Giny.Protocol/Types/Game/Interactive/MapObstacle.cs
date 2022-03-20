@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (obstacleCellId < 0 || obstacleCellId > 559)
             {
-                throw new Exception("Forbidden value (" + obstacleCellId + ") on element obstacleCellId.");
+                throw new System.Exception("Forbidden value (" + obstacleCellId + ") on element obstacleCellId.");
             }
 
             writer.WriteVarShort((short)obstacleCellId);
@@ -37,13 +36,13 @@ namespace Giny.Protocol.Types
             obstacleCellId = (short)reader.ReadVarUhShort();
             if (obstacleCellId < 0 || obstacleCellId > 559)
             {
-                throw new Exception("Forbidden value (" + obstacleCellId + ") on element of MapObstacle.obstacleCellId.");
+                throw new System.Exception("Forbidden value (" + obstacleCellId + ") on element of MapObstacle.obstacleCellId.");
             }
 
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of MapObstacle.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of MapObstacle.state.");
             }
 
         }

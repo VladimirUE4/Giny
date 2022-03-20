@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (targetIds[_i1] < -9.00719925474099E+15 || targetIds[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + targetIds[_i1] + ") on element 1 (starting at 1) of targetIds.");
+                    throw new System.Exception("Forbidden value (" + targetIds[_i1] + ") on element 1 (starting at 1) of targetIds.");
                 }
 
                 writer.WriteDouble((double)targetIds[_i1]);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             {
                 if (targetCells[_i2] < -1 || targetCells[_i2] > 559)
                 {
-                    throw new Exception("Forbidden value (" + targetCells[_i2] + ") on element 2 (starting at 1) of targetCells.");
+                    throw new System.Exception("Forbidden value (" + targetCells[_i2] + ") on element 2 (starting at 1) of targetCells.");
                 }
 
                 writer.WriteShort((short)targetCells[_i2]);
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (double)reader.ReadDouble();
                 if (_val1 < -9.00719925474099E+15 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of targetIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of targetIds.");
                 }
 
                 targetIds[_i1] = (double)_val1;
@@ -73,7 +72,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (int)reader.ReadShort();
                 if (_val2 < -1 || _val2 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of targetCells.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of targetCells.");
                 }
 
                 targetCells[_i2] = (short)_val2;

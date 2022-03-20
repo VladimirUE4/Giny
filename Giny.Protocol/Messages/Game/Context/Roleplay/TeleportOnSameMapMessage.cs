@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of TeleportOnSameMapMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of TeleportOnSameMapMessage.targetId.");
             }
 
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of TeleportOnSameMapMessage.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of TeleportOnSameMapMessage.cellId.");
             }
 
         }

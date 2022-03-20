@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,14 @@ namespace Giny.Protocol.Types
         public GameRolePlayMountInformations()
         {
         }
-        public GameRolePlayMountInformations(string ownerName,byte level)
+        public GameRolePlayMountInformations(string ownerName,byte level,double contextualId,EntityDispositionInformations disposition,EntityLook look,string name)
         {
             this.ownerName = ownerName;
             this.level = level;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.name = name;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -28,7 +31,7 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)ownerName);
             if (level < 0 || level > 255)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteByte((byte)level);
@@ -40,7 +43,7 @@ namespace Giny.Protocol.Types
             level = (byte)reader.ReadSByte();
             if (level < 0 || level > 255)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of GameRolePlayMountInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of GameRolePlayMountInformations.level.");
             }
 
         }

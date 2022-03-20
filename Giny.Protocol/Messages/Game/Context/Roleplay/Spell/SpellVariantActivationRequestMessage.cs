@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of SpellVariantActivationRequestMessage.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of SpellVariantActivationRequestMessage.spellId.");
             }
 
         }

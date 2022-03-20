@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,16 @@ namespace Giny.Protocol.Types
         public FightTemporarySpellImmunityEffect()
         {
         }
-        public FightTemporarySpellImmunityEffect(int immuneSpellId)
+        public FightTemporarySpellImmunityEffect(int immuneSpellId,int uid,double targetId,short turnDuration,byte dispelable,short spellId,int effectId,int parentBoostUid)
         {
             this.immuneSpellId = immuneSpellId;
+            this.uid = uid;
+            this.targetId = targetId;
+            this.turnDuration = turnDuration;
+            this.dispelable = dispelable;
+            this.spellId = spellId;
+            this.effectId = effectId;
+            this.parentBoostUid = parentBoostUid;
         }
         public override void Serialize(IDataWriter writer)
         {

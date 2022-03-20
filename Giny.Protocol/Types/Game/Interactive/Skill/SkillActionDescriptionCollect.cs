@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,23 +16,25 @@ namespace Giny.Protocol.Types
         public SkillActionDescriptionCollect()
         {
         }
-        public SkillActionDescriptionCollect(short min,short max)
+        public SkillActionDescriptionCollect(short min,short max,short skillId,byte time)
         {
             this.min = min;
             this.max = max;
+            this.skillId = skillId;
+            this.time = time;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (min < 0)
             {
-                throw new Exception("Forbidden value (" + min + ") on element min.");
+                throw new System.Exception("Forbidden value (" + min + ") on element min.");
             }
 
             writer.WriteVarShort((short)min);
             if (max < 0)
             {
-                throw new Exception("Forbidden value (" + max + ") on element max.");
+                throw new System.Exception("Forbidden value (" + max + ") on element max.");
             }
 
             writer.WriteVarShort((short)max);
@@ -44,13 +45,13 @@ namespace Giny.Protocol.Types
             min = (short)reader.ReadVarUhShort();
             if (min < 0)
             {
-                throw new Exception("Forbidden value (" + min + ") on element of SkillActionDescriptionCollect.min.");
+                throw new System.Exception("Forbidden value (" + min + ") on element of SkillActionDescriptionCollect.min.");
             }
 
             max = (short)reader.ReadVarUhShort();
             if (max < 0)
             {
-                throw new Exception("Forbidden value (" + max + ") on element of SkillActionDescriptionCollect.max.");
+                throw new System.Exception("Forbidden value (" + max + ") on element of SkillActionDescriptionCollect.max.");
             }
 
         }

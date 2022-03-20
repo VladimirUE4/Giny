@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)spellId);
             if (cooldown < 0)
             {
-                throw new Exception("Forbidden value (" + cooldown + ") on element cooldown.");
+                throw new System.Exception("Forbidden value (" + cooldown + ") on element cooldown.");
             }
 
             writer.WriteByte((byte)cooldown);
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             cooldown = (byte)reader.ReadByte();
             if (cooldown < 0)
             {
-                throw new Exception("Forbidden value (" + cooldown + ") on element of GameFightSpellCooldown.cooldown.");
+                throw new System.Exception("Forbidden value (" + cooldown + ") on element of GameFightSpellCooldown.cooldown.");
             }
 
         }

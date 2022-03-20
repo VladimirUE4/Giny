@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
             }
 
             writer.WriteVarShort((short)dungeonId);
             if (buddyId < 0 || buddyId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + buddyId + ") on element buddyId.");
+                throw new System.Exception("Forbidden value (" + buddyId + ") on element buddyId.");
             }
 
             writer.WriteVarLong((long)buddyId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             dungeonId = (short)reader.ReadVarUhShort();
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element of TeleportToBuddyCloseMessage.dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element of TeleportToBuddyCloseMessage.dungeonId.");
             }
 
             buddyId = (long)reader.ReadVarUhLong();
             if (buddyId < 0 || buddyId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + buddyId + ") on element of TeleportToBuddyCloseMessage.buddyId.");
+                throw new System.Exception("Forbidden value (" + buddyId + ") on element of TeleportToBuddyCloseMessage.buddyId.");
             }
 
         }

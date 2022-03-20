@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -21,31 +20,41 @@ namespace Giny.Protocol.Messages
         public MapComplementaryInformationsBreachMessage()
         {
         }
-        public MapComplementaryInformationsBreachMessage(int floor,byte room,short infinityMode,BreachBranch[] branches)
+        public MapComplementaryInformationsBreachMessage(int floor,byte room,short infinityMode,BreachBranch[] branches,short subAreaId,double mapId,HouseInformations[] houses,GameRolePlayActorInformations[] actors,InteractiveElement[] interactiveElements,StatedElement[] statedElements,MapObstacle[] obstacles,FightCommonInformations[] fights,bool hasAggressiveMonsters,FightStartingPositions fightStartPositions)
         {
             this.floor = floor;
             this.room = room;
             this.infinityMode = infinityMode;
             this.branches = branches;
+            this.subAreaId = subAreaId;
+            this.mapId = mapId;
+            this.houses = houses;
+            this.actors = actors;
+            this.interactiveElements = interactiveElements;
+            this.statedElements = statedElements;
+            this.obstacles = obstacles;
+            this.fights = fights;
+            this.hasAggressiveMonsters = hasAggressiveMonsters;
+            this.fightStartPositions = fightStartPositions;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (floor < 0)
             {
-                throw new Exception("Forbidden value (" + floor + ") on element floor.");
+                throw new System.Exception("Forbidden value (" + floor + ") on element floor.");
             }
 
             writer.WriteVarInt((int)floor);
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element room.");
             }
 
             writer.WriteByte((byte)room);
             if (infinityMode < 0)
             {
-                throw new Exception("Forbidden value (" + infinityMode + ") on element infinityMode.");
+                throw new System.Exception("Forbidden value (" + infinityMode + ") on element infinityMode.");
             }
 
             writer.WriteShort((short)infinityMode);
@@ -65,19 +74,19 @@ namespace Giny.Protocol.Messages
             floor = (int)reader.ReadVarUhInt();
             if (floor < 0)
             {
-                throw new Exception("Forbidden value (" + floor + ") on element of MapComplementaryInformationsBreachMessage.floor.");
+                throw new System.Exception("Forbidden value (" + floor + ") on element of MapComplementaryInformationsBreachMessage.floor.");
             }
 
             room = (byte)reader.ReadByte();
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element of MapComplementaryInformationsBreachMessage.room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element of MapComplementaryInformationsBreachMessage.room.");
             }
 
             infinityMode = (short)reader.ReadShort();
             if (infinityMode < 0)
             {
-                throw new Exception("Forbidden value (" + infinityMode + ") on element of MapComplementaryInformationsBreachMessage.infinityMode.");
+                throw new System.Exception("Forbidden value (" + infinityMode + ") on element of MapComplementaryInformationsBreachMessage.infinityMode.");
             }
 
             uint _branchesLen = (uint)reader.ReadUShort();

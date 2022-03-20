@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,25 @@ namespace Giny.Protocol.Messages
         public GameActionFightLifePointsGainMessage()
         {
         }
-        public GameActionFightLifePointsGainMessage(double targetId,int delta)
+        public GameActionFightLifePointsGainMessage(double targetId,int delta,short actionId,double sourceId)
         {
             this.targetId = targetId;
             this.delta = delta;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
             if (delta < 0)
             {
-                throw new Exception("Forbidden value (" + delta + ") on element delta.");
+                throw new System.Exception("Forbidden value (" + delta + ") on element delta.");
             }
 
             writer.WriteVarInt((int)delta);
@@ -46,13 +47,13 @@ namespace Giny.Protocol.Messages
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameActionFightLifePointsGainMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameActionFightLifePointsGainMessage.targetId.");
             }
 
             delta = (int)reader.ReadVarUhInt();
             if (delta < 0)
             {
-                throw new Exception("Forbidden value (" + delta + ") on element of GameActionFightLifePointsGainMessage.delta.");
+                throw new System.Exception("Forbidden value (" + delta + ") on element of GameActionFightLifePointsGainMessage.delta.");
             }
 
         }

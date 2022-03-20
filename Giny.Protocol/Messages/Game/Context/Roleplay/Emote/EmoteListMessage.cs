@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             {
                 if (emoteIds[_i1] < 0 || emoteIds[_i1] > 65535)
                 {
-                    throw new Exception("Forbidden value (" + emoteIds[_i1] + ") on element 1 (starting at 1) of emoteIds.");
+                    throw new System.Exception("Forbidden value (" + emoteIds[_i1] + ") on element 1 (starting at 1) of emoteIds.");
                 }
 
                 writer.WriteShort((short)emoteIds[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadUShort();
                 if (_val1 < 0 || _val1 > 65535)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of emoteIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of emoteIds.");
                 }
 
                 emoteIds[_i1] = (short)_val1;

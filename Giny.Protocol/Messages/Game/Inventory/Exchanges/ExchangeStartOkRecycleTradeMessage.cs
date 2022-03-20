@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (percentToPrism < 0)
             {
-                throw new Exception("Forbidden value (" + percentToPrism + ") on element percentToPrism.");
+                throw new System.Exception("Forbidden value (" + percentToPrism + ") on element percentToPrism.");
             }
 
             writer.WriteShort((short)percentToPrism);
             if (percentToPlayer < 0)
             {
-                throw new Exception("Forbidden value (" + percentToPlayer + ") on element percentToPlayer.");
+                throw new System.Exception("Forbidden value (" + percentToPlayer + ") on element percentToPlayer.");
             }
 
             writer.WriteShort((short)percentToPlayer);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             percentToPrism = (short)reader.ReadShort();
             if (percentToPrism < 0)
             {
-                throw new Exception("Forbidden value (" + percentToPrism + ") on element of ExchangeStartOkRecycleTradeMessage.percentToPrism.");
+                throw new System.Exception("Forbidden value (" + percentToPrism + ") on element of ExchangeStartOkRecycleTradeMessage.percentToPrism.");
             }
 
             percentToPlayer = (short)reader.ReadShort();
             if (percentToPlayer < 0)
             {
-                throw new Exception("Forbidden value (" + percentToPlayer + ") on element of ExchangeStartOkRecycleTradeMessage.percentToPlayer.");
+                throw new System.Exception("Forbidden value (" + percentToPlayer + ") on element of ExchangeStartOkRecycleTradeMessage.percentToPlayer.");
             }
 
         }

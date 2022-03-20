@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
             if (waitTime < 0)
             {
-                throw new Exception("Forbidden value (" + waitTime + ") on element waitTime.");
+                throw new System.Exception("Forbidden value (" + waitTime + ") on element waitTime.");
             }
 
             writer.WriteVarInt((int)waitTime);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             id = (double)reader.ReadDouble();
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of GameFightTurnStartMessage.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of GameFightTurnStartMessage.id.");
             }
 
             waitTime = (int)reader.ReadVarUhInt();
             if (waitTime < 0)
             {
-                throw new Exception("Forbidden value (" + waitTime + ") on element of GameFightTurnStartMessage.waitTime.");
+                throw new System.Exception("Forbidden value (" + waitTime + ") on element of GameFightTurnStartMessage.waitTime.");
             }
 
         }

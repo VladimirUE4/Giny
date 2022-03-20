@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             context = (byte)reader.ReadByte();
             if (context < 0)
             {
-                throw new Exception("Forbidden value (" + context + ") on element of GameContextCreateMessage.context.");
+                throw new System.Exception("Forbidden value (" + context + ") on element of GameContextCreateMessage.context.");
             }
 
         }

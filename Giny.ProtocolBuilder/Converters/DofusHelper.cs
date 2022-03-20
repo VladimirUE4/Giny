@@ -14,6 +14,38 @@ namespace Giny.ProtocolBuilder.Converters
     /// </summary>
     public class DofusHelper
     {
+        public static string GetTypeFromDofusIOBeforePrep(string io)
+        {
+            switch (io)
+            {
+                case "writeInt":
+                    return "int";
+                case "writeShort":
+                    return "short";
+                case "writeByte":
+                    return "byte";
+                case "writeUTF":
+                    return "string";
+                case "writeVarLong":
+                    return "long";
+                case "writeVarInt":
+                    return "int";
+                case "writeBoolean":
+                    return "bool";
+                case "writeVarShort":
+                    return "short";
+                case "writeDouble":
+                    return "double";
+                case "writeUnsignedInt":
+                    return "uint";
+                case "writeUInt":
+                    return "uint";
+                case "writeFloat":
+                    return "float";
+            }
+
+            return null;
+        }
         public static string GetTypeFromDofusIO(string io)
         {
             switch (io)
@@ -53,7 +85,56 @@ namespace Giny.ProtocolBuilder.Converters
         /// </summary>
         /// <param name="file"></param>
         /// <param name="serializeMethod"></param>
-        public static List<AS3Variable> DeductFieldTypes(List<BaseExpression> expressions)
+        public static void DeductFieldTypes(AS3File file, List<BaseExpression> expressions)
+        {
+            foreach (var expression in expressions)
+            {
+                var methodCall = expression as MethodCallExpression;
+
+                if (methodCall != null)
+                {
+                    if (methodCall.Parameters.Count == 1)
+                    {
+                        var variableNameExpression = methodCall.Parameters.ElementAt(0).Key as VariableNameExpression;
+
+                        if (variableNameExpression != null)
+                        {
+                            var field = file.GetField(variableNameExpression.VariableName);
+
+                            if (field != null)
+                            {
+                                field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName));
+                            }
+                        }
+
+                        var arrayIndexer = methodCall.Parameters.ElementAt(0).Key as UnchangedExpression;
+
+
+                        if (arrayIndexer != null && arrayIndexer.Line.Contains("[") && arrayIndexer.Line.Contains("]"))
+                        {
+                            var variableName = arrayIndexer.Line.Split('[')[0].Trim();
+
+                            var field = file.GetField(variableName);
+
+                            if (field != null)
+                            {
+                                field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]");
+                            }
+                        }
+                    }
+                }
+
+                var forExpression = expression as ForExpression;
+
+                if (forExpression != null)
+                {
+                    DeductFieldTypes(file, forExpression.Expressions);
+                }
+
+            }
+        }
+
+        public static List<AS3Variable> DeductAllFieldTypes(List<BaseExpression> expressions)
         {
             List<AS3Variable> results = new List<AS3Variable>();
 
@@ -69,14 +150,10 @@ namespace Giny.ProtocolBuilder.Converters
 
                         if (variableNameExpression != null)
                         {
-                            results.Add(new AS3Variable(variableNameExpression.VariableName, DofusHelper.GetTypeFromDofusIO(methodCall.MethodName)));
+                            var ioType = DofusHelper.GetTypeFromDofusIOBeforePrep(methodCall.MethodName);
 
-                            /*  var field = file.GetField(variableNameExpression.VariableName);
-
-                              if (field != null)
-                              {
-                                  field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName));
-                              } */
+                            if (ioType != null)
+                                results.Add(new AS3Variable(variableNameExpression.VariableName, ioType));
                         }
 
                         var arrayIndexer = methodCall.Parameters.ElementAt(0).Key as UnchangedExpression;
@@ -86,15 +163,10 @@ namespace Giny.ProtocolBuilder.Converters
                         {
                             var variableName = arrayIndexer.Line.Split('[')[0].Trim();
 
-                            results.Add(new AS3Variable(variableName, DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]"));
+                            var ioType = DofusHelper.GetTypeFromDofusIOBeforePrep(methodCall.MethodName);
 
-
-                            /*  var field = file.GetField(variableName);
-
-                              if (field != null)
-                              {
-                                  field.ChangeType(DofusHelper.GetTypeFromDofusIO(methodCall.MethodName) + "[]");
-                              } */
+                            if (ioType != null)
+                                results.Add(new AS3Variable(variableName, ioType+"[]"));
                         }
                     }
                 }
@@ -103,13 +175,61 @@ namespace Giny.ProtocolBuilder.Converters
 
                 if (forExpression != null)
                 {
-                    results.AddRange(DeductFieldTypes(forExpression.Expressions));
-                    return results;
+                    results.AddRange(DeductAllFieldTypes(forExpression.Expressions));
                 }
 
             }
+
             return results;
         }
+
+        public static void DeductCtorFieldTypes(string baseName, AS3File current, List<AS3Variable> parameters, Dictionary<string,AS3File> context)
+        {
+            List<AS3Variable> results = new List<AS3Variable>();
+
+            var target = context[current.Extends];
+
+            var method = target.GetMethod("serializeAs_" + target.ClassName);
+
+            var targetResults = DeductAllFieldTypes(method.Expressions);
+
+            bool valid = true;
+
+            foreach (var parameter in parameters)
+            {
+                var tRes = targetResults.FirstOrDefault(x => x.Name == parameter.Name);
+
+                if (tRes != null)
+                {
+                    parameter.Type = tRes.Type;
+                }
+                else
+                {
+                    valid = false;
+                }
+            }
+
+            if (!valid)
+            {
+                if (target.Extends == baseName)
+                {
+                    return;
+                }
+
+                var target2 = context[target.Extends];
+
+                if (target2.Extends == baseName)
+                {
+                    return;
+                }
+                DeductCtorFieldTypes(baseName, target2, parameters, context);
+
+
+            }
+
+
+        }
+
         public static void ChangeTypeIdToProperty(List<BaseExpression> expressions)
         {
             List<BaseExpression> finalExpressions = new List<BaseExpression>();

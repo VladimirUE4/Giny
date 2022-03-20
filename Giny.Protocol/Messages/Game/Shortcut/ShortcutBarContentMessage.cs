@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             barType = (byte)reader.ReadByte();
             if (barType < 0)
             {
-                throw new Exception("Forbidden value (" + barType + ") on element of ShortcutBarContentMessage.barType.");
+                throw new System.Exception("Forbidden value (" + barType + ") on element of ShortcutBarContentMessage.barType.");
             }
 
             uint _shortcutsLen = (uint)reader.ReadUShort();

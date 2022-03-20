@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Types
         {
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element elementId.");
             }
 
             writer.WriteInt((int)elementId);
             if (elementCellId < 0 || elementCellId > 559)
             {
-                throw new Exception("Forbidden value (" + elementCellId + ") on element elementCellId.");
+                throw new System.Exception("Forbidden value (" + elementCellId + ") on element elementCellId.");
             }
 
             writer.WriteVarShort((short)elementCellId);
             if (elementState < 0)
             {
-                throw new Exception("Forbidden value (" + elementState + ") on element elementState.");
+                throw new System.Exception("Forbidden value (" + elementState + ") on element elementState.");
             }
 
             writer.WriteVarInt((int)elementState);
@@ -53,19 +52,19 @@ namespace Giny.Protocol.Types
             elementId = (int)reader.ReadInt();
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element of StatedElement.elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element of StatedElement.elementId.");
             }
 
             elementCellId = (short)reader.ReadVarUhShort();
             if (elementCellId < 0 || elementCellId > 559)
             {
-                throw new Exception("Forbidden value (" + elementCellId + ") on element of StatedElement.elementCellId.");
+                throw new System.Exception("Forbidden value (" + elementCellId + ") on element of StatedElement.elementCellId.");
             }
 
             elementState = (int)reader.ReadVarUhInt();
             if (elementState < 0)
             {
-                throw new Exception("Forbidden value (" + elementState + ") on element of StatedElement.elementState.");
+                throw new System.Exception("Forbidden value (" + elementState + ") on element of StatedElement.elementState.");
             }
 
             onCurrentMap = (bool)reader.ReadBoolean();

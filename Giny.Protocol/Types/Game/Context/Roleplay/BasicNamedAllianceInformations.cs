@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public BasicNamedAllianceInformations()
         {
         }
-        public BasicNamedAllianceInformations(string allianceName)
+        public BasicNamedAllianceInformations(string allianceName,int allianceId,string allianceTag)
         {
             this.allianceName = allianceName;
+            this.allianceId = allianceId;
+            this.allianceTag = allianceTag;
         }
         public override void Serialize(IDataWriter writer)
         {

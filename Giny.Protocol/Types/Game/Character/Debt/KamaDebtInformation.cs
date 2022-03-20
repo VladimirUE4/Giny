@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public KamaDebtInformation()
         {
         }
-        public KamaDebtInformation(long kamas)
+        public KamaDebtInformation(long kamas,double id,double timestamp)
         {
             this.kamas = kamas;
+            this.id = id;
+            this.timestamp = timestamp;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
 
             writer.WriteVarLong((long)kamas);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             kamas = (long)reader.ReadVarUhLong();
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element of KamaDebtInformation.kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element of KamaDebtInformation.kamas.");
             }
 
         }

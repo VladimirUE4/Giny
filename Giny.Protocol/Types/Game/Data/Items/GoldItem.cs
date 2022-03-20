@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -25,7 +24,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (sum < 0 || sum > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sum + ") on element sum.");
+                throw new System.Exception("Forbidden value (" + sum + ") on element sum.");
             }
 
             writer.WriteVarLong((long)sum);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Types
             sum = (long)reader.ReadVarUhLong();
             if (sum < 0 || sum > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sum + ") on element of GoldItem.sum.");
+                throw new System.Exception("Forbidden value (" + sum + ") on element of GoldItem.sum.");
             }
 
         }

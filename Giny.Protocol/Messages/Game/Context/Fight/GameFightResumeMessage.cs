@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -20,11 +19,17 @@ namespace Giny.Protocol.Messages
         public GameFightResumeMessage()
         {
         }
-        public GameFightResumeMessage(GameFightSpellCooldown[] spellCooldowns,byte summonCount,byte bombCount)
+        public GameFightResumeMessage(GameFightSpellCooldown[] spellCooldowns,byte summonCount,byte bombCount,FightDispellableEffectExtendedInformations[] effects,GameActionMark[] marks,short gameTurn,int fightStart,Idol[] idols,GameFightEffectTriggerCount[] fxTriggerCounts)
         {
             this.spellCooldowns = spellCooldowns;
             this.summonCount = summonCount;
             this.bombCount = bombCount;
+            this.effects = effects;
+            this.marks = marks;
+            this.gameTurn = gameTurn;
+            this.fightStart = fightStart;
+            this.idols = idols;
+            this.fxTriggerCounts = fxTriggerCounts;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -37,13 +42,13 @@ namespace Giny.Protocol.Messages
 
             if (summonCount < 0)
             {
-                throw new Exception("Forbidden value (" + summonCount + ") on element summonCount.");
+                throw new System.Exception("Forbidden value (" + summonCount + ") on element summonCount.");
             }
 
             writer.WriteByte((byte)summonCount);
             if (bombCount < 0)
             {
-                throw new Exception("Forbidden value (" + bombCount + ") on element bombCount.");
+                throw new System.Exception("Forbidden value (" + bombCount + ") on element bombCount.");
             }
 
             writer.WriteByte((byte)bombCount);
@@ -63,13 +68,13 @@ namespace Giny.Protocol.Messages
             summonCount = (byte)reader.ReadByte();
             if (summonCount < 0)
             {
-                throw new Exception("Forbidden value (" + summonCount + ") on element of GameFightResumeMessage.summonCount.");
+                throw new System.Exception("Forbidden value (" + summonCount + ") on element of GameFightResumeMessage.summonCount.");
             }
 
             bombCount = (byte)reader.ReadByte();
             if (bombCount < 0)
             {
-                throw new Exception("Forbidden value (" + bombCount + ") on element of GameFightResumeMessage.bombCount.");
+                throw new System.Exception("Forbidden value (" + bombCount + ") on element of GameFightResumeMessage.bombCount.");
             }
 
         }

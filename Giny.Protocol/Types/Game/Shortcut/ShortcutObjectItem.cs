@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,11 @@ namespace Giny.Protocol.Types
         public ShortcutObjectItem()
         {
         }
-        public ShortcutObjectItem(int itemUID,int itemGID)
+        public ShortcutObjectItem(int itemUID,int itemGID,byte slot)
         {
             this.itemUID = itemUID;
             this.itemGID = itemGID;
+            this.slot = slot;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -23,7 +22,7 @@ namespace Giny.Protocol.Messages
         public AbstractPartyMemberInFightMessage()
         {
         }
-        public AbstractPartyMemberInFightMessage(byte reason,long memberId,int memberAccountId,string memberName,short fightId,short timeBeforeFightStart)
+        public AbstractPartyMemberInFightMessage(byte reason,long memberId,int memberAccountId,string memberName,short fightId,short timeBeforeFightStart,int partyId)
         {
             this.reason = reason;
             this.memberId = memberId;
@@ -31,6 +30,7 @@ namespace Giny.Protocol.Messages
             this.memberName = memberName;
             this.fightId = fightId;
             this.timeBeforeFightStart = timeBeforeFightStart;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -38,20 +38,20 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)reason);
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element memberId.");
             }
 
             writer.WriteVarLong((long)memberId);
             if (memberAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + memberAccountId + ") on element memberAccountId.");
+                throw new System.Exception("Forbidden value (" + memberAccountId + ") on element memberAccountId.");
             }
 
             writer.WriteInt((int)memberAccountId);
             writer.WriteUTF((string)memberName);
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -63,26 +63,26 @@ namespace Giny.Protocol.Messages
             reason = (byte)reader.ReadByte();
             if (reason < 0)
             {
-                throw new Exception("Forbidden value (" + reason + ") on element of AbstractPartyMemberInFightMessage.reason.");
+                throw new System.Exception("Forbidden value (" + reason + ") on element of AbstractPartyMemberInFightMessage.reason.");
             }
 
             memberId = (long)reader.ReadVarUhLong();
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element of AbstractPartyMemberInFightMessage.memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element of AbstractPartyMemberInFightMessage.memberId.");
             }
 
             memberAccountId = (int)reader.ReadInt();
             if (memberAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + memberAccountId + ") on element of AbstractPartyMemberInFightMessage.memberAccountId.");
+                throw new System.Exception("Forbidden value (" + memberAccountId + ") on element of AbstractPartyMemberInFightMessage.memberAccountId.");
             }
 
             memberName = (string)reader.ReadUTF();
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of AbstractPartyMemberInFightMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of AbstractPartyMemberInFightMessage.fightId.");
             }
 
             timeBeforeFightStart = (short)reader.ReadVarShort();

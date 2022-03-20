@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,11 +17,13 @@ namespace Giny.Protocol.Types
         public HouseInformationsInside()
         {
         }
-        public HouseInformationsInside(HouseInstanceInformations houseInfos,short worldX,short worldY)
+        public HouseInformationsInside(HouseInstanceInformations houseInfos,short worldX,short worldY,int houseId,short modelId)
         {
             this.houseInfos = houseInfos;
             this.worldX = worldX;
             this.worldY = worldY;
+            this.houseId = houseId;
+            this.modelId = modelId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -31,13 +32,13 @@ namespace Giny.Protocol.Types
             houseInfos.Serialize(writer);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
@@ -51,13 +52,13 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of HouseInformationsInside.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of HouseInformationsInside.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of HouseInformationsInside.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of HouseInformationsInside.worldY.");
             }
 
         }

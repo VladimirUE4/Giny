@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Messages
         public PartyJoinMessage()
         {
         }
-        public PartyJoinMessage(byte partyType,long partyLeaderId,byte maxParticipants,PartyMemberInformations[] members,PartyGuestInformations[] guests,bool restricted,string partyName)
+        public PartyJoinMessage(byte partyType,long partyLeaderId,byte maxParticipants,PartyMemberInformations[] members,PartyGuestInformations[] guests,bool restricted,string partyName,int partyId)
         {
             this.partyType = partyType;
             this.partyLeaderId = partyLeaderId;
@@ -33,6 +32,7 @@ namespace Giny.Protocol.Messages
             this.guests = guests;
             this.restricted = restricted;
             this.partyName = partyName;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -40,13 +40,13 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)partyType);
             if (partyLeaderId < 0 || partyLeaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + partyLeaderId + ") on element partyLeaderId.");
+                throw new System.Exception("Forbidden value (" + partyLeaderId + ") on element partyLeaderId.");
             }
 
             writer.WriteVarLong((long)partyLeaderId);
             if (maxParticipants < 0)
             {
-                throw new Exception("Forbidden value (" + maxParticipants + ") on element maxParticipants.");
+                throw new System.Exception("Forbidden value (" + maxParticipants + ") on element maxParticipants.");
             }
 
             writer.WriteByte((byte)maxParticipants);
@@ -75,19 +75,19 @@ namespace Giny.Protocol.Messages
             partyType = (byte)reader.ReadByte();
             if (partyType < 0)
             {
-                throw new Exception("Forbidden value (" + partyType + ") on element of PartyJoinMessage.partyType.");
+                throw new System.Exception("Forbidden value (" + partyType + ") on element of PartyJoinMessage.partyType.");
             }
 
             partyLeaderId = (long)reader.ReadVarUhLong();
             if (partyLeaderId < 0 || partyLeaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + partyLeaderId + ") on element of PartyJoinMessage.partyLeaderId.");
+                throw new System.Exception("Forbidden value (" + partyLeaderId + ") on element of PartyJoinMessage.partyLeaderId.");
             }
 
             maxParticipants = (byte)reader.ReadByte();
             if (maxParticipants < 0)
             {
-                throw new Exception("Forbidden value (" + maxParticipants + ") on element of PartyJoinMessage.maxParticipants.");
+                throw new System.Exception("Forbidden value (" + maxParticipants + ") on element of PartyJoinMessage.maxParticipants.");
             }
 
             uint _membersLen = (uint)reader.ReadUShort();

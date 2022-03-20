@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (oldCellId < 0 || oldCellId > 559)
             {
-                throw new Exception("Forbidden value (" + oldCellId + ") on element oldCellId.");
+                throw new System.Exception("Forbidden value (" + oldCellId + ") on element oldCellId.");
             }
 
             writer.WriteVarShort((short)oldCellId);
             if (newCellId < 0 || newCellId > 559)
             {
-                throw new Exception("Forbidden value (" + newCellId + ") on element newCellId.");
+                throw new System.Exception("Forbidden value (" + newCellId + ") on element newCellId.");
             }
 
             writer.WriteVarShort((short)newCellId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             oldCellId = (short)reader.ReadVarUhShort();
             if (oldCellId < 0 || oldCellId > 559)
             {
-                throw new Exception("Forbidden value (" + oldCellId + ") on element of PaddockMoveItemRequestMessage.oldCellId.");
+                throw new System.Exception("Forbidden value (" + oldCellId + ") on element of PaddockMoveItemRequestMessage.oldCellId.");
             }
 
             newCellId = (short)reader.ReadVarUhShort();
             if (newCellId < 0 || newCellId > 559)
             {
-                throw new Exception("Forbidden value (" + newCellId + ") on element of PaddockMoveItemRequestMessage.newCellId.");
+                throw new System.Exception("Forbidden value (" + newCellId + ") on element of PaddockMoveItemRequestMessage.newCellId.");
             }
 
         }

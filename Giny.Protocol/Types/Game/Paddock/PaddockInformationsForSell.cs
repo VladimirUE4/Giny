@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -37,19 +36,19 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)guildOwner);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -57,7 +56,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)nbObject);
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -68,19 +67,19 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of PaddockInformationsForSell.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of PaddockInformationsForSell.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of PaddockInformationsForSell.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of PaddockInformationsForSell.worldY.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PaddockInformationsForSell.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PaddockInformationsForSell.subAreaId.");
             }
 
             nbMount = (byte)reader.ReadByte();
@@ -88,7 +87,7 @@ namespace Giny.Protocol.Types
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of PaddockInformationsForSell.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of PaddockInformationsForSell.price.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
         public GuildMember()
         {
         }
-        public GuildMember(byte breed,bool sex,short rank,long givenExperience,byte experienceGivenPercent,int rights,byte connected,byte alignmentSide,short hoursSinceLastConnection,short moodSmileyId,int accountId,int achievementPoints,PlayerStatus status,bool havenBagShared)
+        public GuildMember(byte breed,bool sex,short rank,long givenExperience,byte experienceGivenPercent,int rights,byte connected,byte alignmentSide,short hoursSinceLastConnection,short moodSmileyId,int accountId,int achievementPoints,PlayerStatus status,bool havenBagShared,long id,string name,short level)
         {
             this.breed = breed;
             this.sex = sex;
@@ -45,6 +44,9 @@ namespace Giny.Protocol.Types
             this.achievementPoints = achievementPoints;
             this.status = status;
             this.havenBagShared = havenBagShared;
+            this.id = id;
+            this.name = name;
+            this.level = level;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -56,25 +58,25 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)breed);
             if (rank < 0)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
             }
 
             writer.WriteVarShort((short)rank);
             if (givenExperience < 0 || givenExperience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + givenExperience + ") on element givenExperience.");
+                throw new System.Exception("Forbidden value (" + givenExperience + ") on element givenExperience.");
             }
 
             writer.WriteVarLong((long)givenExperience);
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
-                throw new Exception("Forbidden value (" + experienceGivenPercent + ") on element experienceGivenPercent.");
+                throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element experienceGivenPercent.");
             }
 
             writer.WriteByte((byte)experienceGivenPercent);
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
             }
 
             writer.WriteVarInt((int)rights);
@@ -82,19 +84,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)alignmentSide);
             if (hoursSinceLastConnection < 0 || hoursSinceLastConnection > 65535)
             {
-                throw new Exception("Forbidden value (" + hoursSinceLastConnection + ") on element hoursSinceLastConnection.");
+                throw new System.Exception("Forbidden value (" + hoursSinceLastConnection + ") on element hoursSinceLastConnection.");
             }
 
             writer.WriteShort((short)hoursSinceLastConnection);
             if (moodSmileyId < 0)
             {
-                throw new Exception("Forbidden value (" + moodSmileyId + ") on element moodSmileyId.");
+                throw new System.Exception("Forbidden value (" + moodSmileyId + ") on element moodSmileyId.");
             }
 
             writer.WriteVarShort((short)moodSmileyId);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
@@ -112,50 +114,50 @@ namespace Giny.Protocol.Types
             rank = (short)reader.ReadVarUhShort();
             if (rank < 0)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element of GuildMember.rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element of GuildMember.rank.");
             }
 
             givenExperience = (long)reader.ReadVarUhLong();
             if (givenExperience < 0 || givenExperience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + givenExperience + ") on element of GuildMember.givenExperience.");
+                throw new System.Exception("Forbidden value (" + givenExperience + ") on element of GuildMember.givenExperience.");
             }
 
             experienceGivenPercent = (byte)reader.ReadByte();
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
-                throw new Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildMember.experienceGivenPercent.");
+                throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildMember.experienceGivenPercent.");
             }
 
             rights = (int)reader.ReadVarUhInt();
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element of GuildMember.rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element of GuildMember.rights.");
             }
 
             connected = (byte)reader.ReadByte();
             if (connected < 0)
             {
-                throw new Exception("Forbidden value (" + connected + ") on element of GuildMember.connected.");
+                throw new System.Exception("Forbidden value (" + connected + ") on element of GuildMember.connected.");
             }
 
             alignmentSide = (byte)reader.ReadByte();
             hoursSinceLastConnection = (short)reader.ReadUShort();
             if (hoursSinceLastConnection < 0 || hoursSinceLastConnection > 65535)
             {
-                throw new Exception("Forbidden value (" + hoursSinceLastConnection + ") on element of GuildMember.hoursSinceLastConnection.");
+                throw new System.Exception("Forbidden value (" + hoursSinceLastConnection + ") on element of GuildMember.hoursSinceLastConnection.");
             }
 
             moodSmileyId = (short)reader.ReadVarUhShort();
             if (moodSmileyId < 0)
             {
-                throw new Exception("Forbidden value (" + moodSmileyId + ") on element of GuildMember.moodSmileyId.");
+                throw new System.Exception("Forbidden value (" + moodSmileyId + ") on element of GuildMember.moodSmileyId.");
             }
 
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of GuildMember.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of GuildMember.accountId.");
             }
 
             achievementPoints = (int)reader.ReadInt();

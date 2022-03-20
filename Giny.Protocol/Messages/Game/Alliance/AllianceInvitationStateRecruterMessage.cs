@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             invitationState = (byte)reader.ReadByte();
             if (invitationState < 0)
             {
-                throw new Exception("Forbidden value (" + invitationState + ") on element of AllianceInvitationStateRecruterMessage.invitationState.");
+                throw new System.Exception("Forbidden value (" + invitationState + ") on element of AllianceInvitationStateRecruterMessage.invitationState.");
             }
 
         }

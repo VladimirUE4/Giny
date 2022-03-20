@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -33,13 +32,13 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)name);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
@@ -51,13 +50,13 @@ namespace Giny.Protocol.Messages
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of ExchangeMountSterilizeFromPaddockMessage.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of ExchangeMountSterilizeFromPaddockMessage.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of ExchangeMountSterilizeFromPaddockMessage.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of ExchangeMountSterilizeFromPaddockMessage.worldY.");
             }
 
             sterilizator = (string)reader.ReadUTF();

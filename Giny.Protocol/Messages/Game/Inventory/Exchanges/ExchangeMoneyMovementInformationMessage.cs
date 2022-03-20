@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (limit < 0 || limit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + limit + ") on element limit.");
+                throw new System.Exception("Forbidden value (" + limit + ") on element limit.");
             }
 
             writer.WriteVarLong((long)limit);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             limit = (long)reader.ReadVarUhLong();
             if (limit < 0 || limit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + limit + ") on element of ExchangeMoneyMovementInformationMessage.limit.");
+                throw new System.Exception("Forbidden value (" + limit + ") on element of ExchangeMoneyMovementInformationMessage.limit.");
             }
 
         }

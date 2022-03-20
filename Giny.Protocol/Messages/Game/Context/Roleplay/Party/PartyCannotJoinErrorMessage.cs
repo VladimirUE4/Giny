@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyCannotJoinErrorMessage()
         {
         }
-        public PartyCannotJoinErrorMessage(byte reason)
+        public PartyCannotJoinErrorMessage(byte reason,int partyId)
         {
             this.reason = reason;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -33,7 +33,7 @@ namespace Giny.Protocol.Messages
             reason = (byte)reader.ReadByte();
             if (reason < 0)
             {
-                throw new Exception("Forbidden value (" + reason + ") on element of PartyCannotJoinExceptionMessage.reason.");
+                throw new System.Exception("Forbidden value (" + reason + ") on element of PartyCannotJoinSystem.ExceptionMessage.reason.");
             }
 
         }

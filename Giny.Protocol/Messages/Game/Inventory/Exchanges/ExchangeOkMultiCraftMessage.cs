@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (initiatorId < 0 || initiatorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + initiatorId + ") on element initiatorId.");
+                throw new System.Exception("Forbidden value (" + initiatorId + ") on element initiatorId.");
             }
 
             writer.WriteVarLong((long)initiatorId);
             if (otherId < 0 || otherId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + otherId + ") on element otherId.");
+                throw new System.Exception("Forbidden value (" + otherId + ") on element otherId.");
             }
 
             writer.WriteVarLong((long)otherId);
@@ -47,13 +46,13 @@ namespace Giny.Protocol.Messages
             initiatorId = (long)reader.ReadVarUhLong();
             if (initiatorId < 0 || initiatorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + initiatorId + ") on element of ExchangeOkMultiCraftMessage.initiatorId.");
+                throw new System.Exception("Forbidden value (" + initiatorId + ") on element of ExchangeOkMultiCraftMessage.initiatorId.");
             }
 
             otherId = (long)reader.ReadVarUhLong();
             if (otherId < 0 || otherId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + otherId + ") on element of ExchangeOkMultiCraftMessage.otherId.");
+                throw new System.Exception("Forbidden value (" + otherId + ") on element of ExchangeOkMultiCraftMessage.otherId.");
             }
 
             role = (byte)reader.ReadByte();

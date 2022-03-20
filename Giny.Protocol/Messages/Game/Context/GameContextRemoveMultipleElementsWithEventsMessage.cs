@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public GameContextRemoveMultipleElementsWithEventsMessage()
         {
         }
-        public GameContextRemoveMultipleElementsWithEventsMessage(byte[] elementEventIds)
+        public GameContextRemoveMultipleElementsWithEventsMessage(byte[] elementEventIds,double[] elementsIds)
         {
             this.elementEventIds = elementEventIds;
+            this.elementsIds = elementsIds;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -30,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (elementEventIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + elementEventIds[_i1] + ") on element 1 (starting at 1) of elementEventIds.");
+                    throw new System.Exception("Forbidden value (" + elementEventIds[_i1] + ") on element 1 (starting at 1) of elementEventIds.");
                 }
 
                 writer.WriteByte((byte)elementEventIds[_i1]);
@@ -48,7 +48,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadByte();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of elementEventIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of elementEventIds.");
                 }
 
                 elementEventIds[_i1] = (byte)_val1;

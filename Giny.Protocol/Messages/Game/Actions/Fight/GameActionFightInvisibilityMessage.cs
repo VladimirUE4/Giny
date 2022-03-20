@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,17 +18,19 @@ namespace Giny.Protocol.Messages
         public GameActionFightInvisibilityMessage()
         {
         }
-        public GameActionFightInvisibilityMessage(double targetId,byte state)
+        public GameActionFightInvisibilityMessage(double targetId,byte state,short actionId,double sourceId)
         {
             this.targetId = targetId;
             this.state = state;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
@@ -41,13 +42,13 @@ namespace Giny.Protocol.Messages
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameActionFightInvisibilityMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameActionFightInvisibilityMessage.targetId.");
             }
 
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of GameActionFightInvisibilityMessage.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of GameActionFightInvisibilityMessage.state.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -45,19 +44,19 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameFightOptionStateUpdateMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameFightOptionStateUpdateMessage.fightId.");
             }
 
             teamId = (byte)reader.ReadByte();
             if (teamId < 0)
             {
-                throw new Exception("Forbidden value (" + teamId + ") on element of GameFightOptionStateUpdateMessage.teamId.");
+                throw new System.Exception("Forbidden value (" + teamId + ") on element of GameFightOptionStateUpdateMessage.teamId.");
             }
 
             option = (byte)reader.ReadByte();
             if (option < 0)
             {
-                throw new Exception("Forbidden value (" + option + ") on element of GameFightOptionStateUpdateMessage.option.");
+                throw new System.Exception("Forbidden value (" + option + ") on element of GameFightOptionStateUpdateMessage.option.");
             }
 
             state = (bool)reader.ReadBoolean();

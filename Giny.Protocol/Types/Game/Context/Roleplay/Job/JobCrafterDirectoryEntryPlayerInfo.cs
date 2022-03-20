@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Types
         {
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -57,25 +56,25 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)isInWorkshop);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -88,7 +87,7 @@ namespace Giny.Protocol.Types
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of JobCrafterDirectoryEntryPlayerInfo.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of JobCrafterDirectoryEntryPlayerInfo.playerId.");
             }
 
             playerName = (string)reader.ReadUTF();
@@ -96,7 +95,7 @@ namespace Giny.Protocol.Types
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
             {
-                throw new Exception("Forbidden value (" + breed + ") on element of JobCrafterDirectoryEntryPlayerInfo.breed.");
+                throw new System.Exception("Forbidden value (" + breed + ") on element of JobCrafterDirectoryEntryPlayerInfo.breed.");
             }
 
             sex = (bool)reader.ReadBoolean();
@@ -104,25 +103,25 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of JobCrafterDirectoryEntryPlayerInfo.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of JobCrafterDirectoryEntryPlayerInfo.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of JobCrafterDirectoryEntryPlayerInfo.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of JobCrafterDirectoryEntryPlayerInfo.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of JobCrafterDirectoryEntryPlayerInfo.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of JobCrafterDirectoryEntryPlayerInfo.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of JobCrafterDirectoryEntryPlayerInfo.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of JobCrafterDirectoryEntryPlayerInfo.subAreaId.");
             }
 
             canCraftLegendary = (bool)reader.ReadBoolean();

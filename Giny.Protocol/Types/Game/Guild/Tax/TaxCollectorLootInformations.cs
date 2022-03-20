@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -31,25 +30,25 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
 
             writer.WriteVarLong((long)kamas);
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element experience.");
             }
 
             writer.WriteVarLong((long)experience);
             if (pods < 0)
             {
-                throw new Exception("Forbidden value (" + pods + ") on element pods.");
+                throw new System.Exception("Forbidden value (" + pods + ") on element pods.");
             }
 
             writer.WriteVarInt((int)pods);
             if (itemsValue < 0 || itemsValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + itemsValue + ") on element itemsValue.");
+                throw new System.Exception("Forbidden value (" + itemsValue + ") on element itemsValue.");
             }
 
             writer.WriteVarLong((long)itemsValue);
@@ -60,25 +59,25 @@ namespace Giny.Protocol.Types
             kamas = (long)reader.ReadVarUhLong();
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element of TaxCollectorLootInformations.kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element of TaxCollectorLootInformations.kamas.");
             }
 
             experience = (long)reader.ReadVarUhLong();
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element of TaxCollectorLootInformations.experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element of TaxCollectorLootInformations.experience.");
             }
 
             pods = (int)reader.ReadVarUhInt();
             if (pods < 0)
             {
-                throw new Exception("Forbidden value (" + pods + ") on element of TaxCollectorLootInformations.pods.");
+                throw new System.Exception("Forbidden value (" + pods + ") on element of TaxCollectorLootInformations.pods.");
             }
 
             itemsValue = (long)reader.ReadVarUhLong();
             if (itemsValue < 0 || itemsValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + itemsValue + ") on element of TaxCollectorLootInformations.itemsValue.");
+                throw new System.Exception("Forbidden value (" + itemsValue + ") on element of TaxCollectorLootInformations.itemsValue.");
             }
 
         }

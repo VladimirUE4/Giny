@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public FightTeamMemberWithAllianceCharacterInformations()
         {
         }
-        public FightTeamMemberWithAllianceCharacterInformations(BasicAllianceInformations allianceInfos)
+        public FightTeamMemberWithAllianceCharacterInformations(BasicAllianceInformations allianceInfos,double id,string name,short level)
         {
             this.allianceInfos = allianceInfos;
+            this.id = id;
+            this.name = name;
+            this.level = level;
         }
         public override void Serialize(IDataWriter writer)
         {

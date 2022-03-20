@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,17 +18,19 @@ namespace Giny.Protocol.Messages
         public HaapiBuyValidationMessage()
         {
         }
-        public HaapiBuyValidationMessage(long amount,string email)
+        public HaapiBuyValidationMessage(long amount,string email,byte action,byte code)
         {
             this.amount = amount;
             this.email = email;
+            this.action = action;
+            this.code = code;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element amount.");
             }
 
             writer.WriteVarLong((long)amount);
@@ -41,7 +42,7 @@ namespace Giny.Protocol.Messages
             amount = (long)reader.ReadVarUhLong();
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element of HaapiBuyValidationMessage.amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element of HaapiBuyValidationMessage.amount.");
             }
 
             email = (string)reader.ReadUTF();

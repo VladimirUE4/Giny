@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -43,20 +42,20 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)lang);
             if (community < 0)
             {
-                throw new Exception("Forbidden value (" + community + ") on element community.");
+                throw new System.Exception("Forbidden value (" + community + ") on element community.");
             }
 
             writer.WriteByte((byte)community);
             writer.WriteByte((byte)gameType);
             if (arenaLeaveBanTime < 0)
             {
-                throw new Exception("Forbidden value (" + arenaLeaveBanTime + ") on element arenaLeaveBanTime.");
+                throw new System.Exception("Forbidden value (" + arenaLeaveBanTime + ") on element arenaLeaveBanTime.");
             }
 
             writer.WriteVarShort((short)arenaLeaveBanTime);
             if (itemMaxLevel < 0)
             {
-                throw new Exception("Forbidden value (" + itemMaxLevel + ") on element itemMaxLevel.");
+                throw new System.Exception("Forbidden value (" + itemMaxLevel + ") on element itemMaxLevel.");
             }
 
             writer.WriteInt((int)itemMaxLevel);
@@ -70,20 +69,20 @@ namespace Giny.Protocol.Messages
             community = (byte)reader.ReadByte();
             if (community < 0)
             {
-                throw new Exception("Forbidden value (" + community + ") on element of ServerSettingsMessage.community.");
+                throw new System.Exception("Forbidden value (" + community + ") on element of ServerSettingsMessage.community.");
             }
 
             gameType = (byte)reader.ReadByte();
             arenaLeaveBanTime = (short)reader.ReadVarUhShort();
             if (arenaLeaveBanTime < 0)
             {
-                throw new Exception("Forbidden value (" + arenaLeaveBanTime + ") on element of ServerSettingsMessage.arenaLeaveBanTime.");
+                throw new System.Exception("Forbidden value (" + arenaLeaveBanTime + ") on element of ServerSettingsMessage.arenaLeaveBanTime.");
             }
 
             itemMaxLevel = (int)reader.ReadInt();
             if (itemMaxLevel < 0)
             {
-                throw new Exception("Forbidden value (" + itemMaxLevel + ") on element of ServerSettingsMessage.itemMaxLevel.");
+                throw new System.Exception("Forbidden value (" + itemMaxLevel + ") on element of ServerSettingsMessage.itemMaxLevel.");
             }
 
         }

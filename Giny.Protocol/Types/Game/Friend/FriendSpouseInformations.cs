@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -40,20 +39,20 @@ namespace Giny.Protocol.Types
         {
             if (spouseAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + spouseAccountId + ") on element spouseAccountId.");
+                throw new System.Exception("Forbidden value (" + spouseAccountId + ") on element spouseAccountId.");
             }
 
             writer.WriteInt((int)spouseAccountId);
             if (spouseId < 0 || spouseId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + spouseId + ") on element spouseId.");
+                throw new System.Exception("Forbidden value (" + spouseId + ") on element spouseId.");
             }
 
             writer.WriteVarLong((long)spouseId);
             writer.WriteUTF((string)spouseName);
             if (spouseLevel < 0)
             {
-                throw new Exception("Forbidden value (" + spouseLevel + ") on element spouseLevel.");
+                throw new System.Exception("Forbidden value (" + spouseLevel + ") on element spouseLevel.");
             }
 
             writer.WriteVarShort((short)spouseLevel);
@@ -68,20 +67,20 @@ namespace Giny.Protocol.Types
             spouseAccountId = (int)reader.ReadInt();
             if (spouseAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + spouseAccountId + ") on element of FriendSpouseInformations.spouseAccountId.");
+                throw new System.Exception("Forbidden value (" + spouseAccountId + ") on element of FriendSpouseInformations.spouseAccountId.");
             }
 
             spouseId = (long)reader.ReadVarUhLong();
             if (spouseId < 0 || spouseId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + spouseId + ") on element of FriendSpouseInformations.spouseId.");
+                throw new System.Exception("Forbidden value (" + spouseId + ") on element of FriendSpouseInformations.spouseId.");
             }
 
             spouseName = (string)reader.ReadUTF();
             spouseLevel = (short)reader.ReadVarUhShort();
             if (spouseLevel < 0)
             {
-                throw new Exception("Forbidden value (" + spouseLevel + ") on element of FriendSpouseInformations.spouseLevel.");
+                throw new System.Exception("Forbidden value (" + spouseLevel + ") on element of FriendSpouseInformations.spouseLevel.");
             }
 
             breed = (byte)reader.ReadByte();

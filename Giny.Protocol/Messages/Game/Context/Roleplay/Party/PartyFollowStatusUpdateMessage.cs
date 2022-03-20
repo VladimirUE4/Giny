@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -20,11 +19,12 @@ namespace Giny.Protocol.Messages
         public PartyFollowStatusUpdateMessage()
         {
         }
-        public PartyFollowStatusUpdateMessage(bool success,bool isFollowed,long followedId)
+        public PartyFollowStatusUpdateMessage(bool success,bool isFollowed,long followedId,int partyId)
         {
             this.success = success;
             this.isFollowed = isFollowed;
             this.followedId = followedId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -35,7 +35,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (followedId < 0 || followedId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + followedId + ") on element followedId.");
+                throw new System.Exception("Forbidden value (" + followedId + ") on element followedId.");
             }
 
             writer.WriteVarLong((long)followedId);
@@ -49,7 +49,7 @@ namespace Giny.Protocol.Messages
             followedId = (long)reader.ReadVarUhLong();
             if (followedId < 0 || followedId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + followedId + ") on element of PartyFollowStatusUpdateMessage.followedId.");
+                throw new System.Exception("Forbidden value (" + followedId + ") on element of PartyFollowStatusUpdateMessage.followedId.");
             }
 
         }

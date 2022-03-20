@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public PartyInvitationCancelledForGuestMessage()
         {
         }
-        public PartyInvitationCancelledForGuestMessage(long cancelerId)
+        public PartyInvitationCancelledForGuestMessage(long cancelerId,int partyId)
         {
             this.cancelerId = cancelerId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (cancelerId < 0 || cancelerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancelerId + ") on element cancelerId.");
+                throw new System.Exception("Forbidden value (" + cancelerId + ") on element cancelerId.");
             }
 
             writer.WriteVarLong((long)cancelerId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             cancelerId = (long)reader.ReadVarUhLong();
             if (cancelerId < 0 || cancelerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancelerId + ") on element of PartyInvitationCancelledForGuestMessage.cancelerId.");
+                throw new System.Exception("Forbidden value (" + cancelerId + ") on element of PartyInvitationCancelledForGuestMessage.cancelerId.");
             }
 
         }

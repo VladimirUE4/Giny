@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (newLevel < 0)
             {
-                throw new Exception("Forbidden value (" + newLevel + ") on element newLevel.");
+                throw new System.Exception("Forbidden value (" + newLevel + ") on element newLevel.");
             }
 
             writer.WriteVarShort((short)newLevel);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             newLevel = (short)reader.ReadVarUhShort();
             if (newLevel < 0)
             {
-                throw new Exception("Forbidden value (" + newLevel + ") on element of CharacterLevelUpMessage.newLevel.");
+                throw new System.Exception("Forbidden value (" + newLevel + ") on element of CharacterLevelUpMessage.newLevel.");
             }
 
         }

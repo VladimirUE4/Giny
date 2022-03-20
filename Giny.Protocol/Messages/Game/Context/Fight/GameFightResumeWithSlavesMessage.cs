@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,18 @@ namespace Giny.Protocol.Messages
         public GameFightResumeWithSlavesMessage()
         {
         }
-        public GameFightResumeWithSlavesMessage(GameFightResumeSlaveInfo[] slavesInfo)
+        public GameFightResumeWithSlavesMessage(GameFightResumeSlaveInfo[] slavesInfo,FightDispellableEffectExtendedInformations[] effects,GameActionMark[] marks,short gameTurn,int fightStart,Idol[] idols,GameFightEffectTriggerCount[] fxTriggerCounts,GameFightSpellCooldown[] spellCooldowns,byte summonCount,byte bombCount)
         {
             this.slavesInfo = slavesInfo;
+            this.effects = effects;
+            this.marks = marks;
+            this.gameTurn = gameTurn;
+            this.fightStart = fightStart;
+            this.idols = idols;
+            this.fxTriggerCounts = fxTriggerCounts;
+            this.spellCooldowns = spellCooldowns;
+            this.summonCount = summonCount;
+            this.bombCount = bombCount;
         }
         public override void Serialize(IDataWriter writer)
         {

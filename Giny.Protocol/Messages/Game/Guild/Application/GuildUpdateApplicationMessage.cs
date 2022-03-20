@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)applyText);
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of GuildUpdateApplicationMessage.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of GuildUpdateApplicationMessage.guildId.");
             }
 
         }

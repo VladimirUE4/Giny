@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (experiencePercent < 0)
             {
-                throw new Exception("Forbidden value (" + experiencePercent + ") on element experiencePercent.");
+                throw new System.Exception("Forbidden value (" + experiencePercent + ") on element experiencePercent.");
             }
 
             writer.WriteVarShort((short)experiencePercent);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             experiencePercent = (short)reader.ReadVarUhShort();
             if (experiencePercent < 0)
             {
-                throw new Exception("Forbidden value (" + experiencePercent + ") on element of ServerExperienceModificatorMessage.experiencePercent.");
+                throw new System.Exception("Forbidden value (" + experiencePercent + ") on element of ServerExperienceModificatorMessage.experiencePercent.");
             }
 
         }

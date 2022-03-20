@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (timestamp < 0 || timestamp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element timestamp.");
             }
 
             writer.WriteDouble((double)timestamp);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             timestamp = (double)reader.ReadDouble();
             if (timestamp < 0 || timestamp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element of BasicTimeMessage.timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element of BasicTimeMessage.timestamp.");
             }
 
             timezoneOffset = (short)reader.ReadShort();

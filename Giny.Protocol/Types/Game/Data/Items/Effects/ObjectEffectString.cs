@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public ObjectEffectString()
         {
         }
-        public ObjectEffectString(string value)
+        public ObjectEffectString(string value,short actionId)
         {
             this.value = value;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {

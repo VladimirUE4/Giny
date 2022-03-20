@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public GameActionFightTackledMessage()
         {
         }
-        public GameActionFightTackledMessage(double[] tacklersIds)
+        public GameActionFightTackledMessage(double[] tacklersIds,short actionId,double sourceId)
         {
             this.tacklersIds = tacklersIds;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -30,7 +31,7 @@ namespace Giny.Protocol.Messages
             {
                 if (tacklersIds[_i1] < -9.00719925474099E+15 || tacklersIds[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + tacklersIds[_i1] + ") on element 1 (starting at 1) of tacklersIds.");
+                    throw new System.Exception("Forbidden value (" + tacklersIds[_i1] + ") on element 1 (starting at 1) of tacklersIds.");
                 }
 
                 writer.WriteDouble((double)tacklersIds[_i1]);
@@ -48,7 +49,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (double)reader.ReadDouble();
                 if (_val1 < -9.00719925474099E+15 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of tacklersIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of tacklersIds.");
                 }
 
                 tacklersIds[_i1] = (double)_val1;

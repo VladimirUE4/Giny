@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ExchangeStartOkMountMessage()
         {
         }
-        public ExchangeStartOkMountMessage(MountClientData[] paddockedMountsDescription)
+        public ExchangeStartOkMountMessage(MountClientData[] paddockedMountsDescription,MountClientData[] stabledMountsDescription)
         {
             this.paddockedMountsDescription = paddockedMountsDescription;
+            this.stabledMountsDescription = stabledMountsDescription;
         }
         public override void Serialize(IDataWriter writer)
         {

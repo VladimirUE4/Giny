@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element allianceId.");
             }
 
             writer.WriteVarInt((int)allianceId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Types
             allianceId = (int)reader.ReadVarUhInt();
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element of BasicAllianceInformations.allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element of BasicAllianceInformations.allianceId.");
             }
 
             allianceTag = (string)reader.ReadUTF();

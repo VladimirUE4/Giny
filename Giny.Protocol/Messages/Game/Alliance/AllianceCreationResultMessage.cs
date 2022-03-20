@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             result = (byte)reader.ReadByte();
             if (result < 0)
             {
-                throw new Exception("Forbidden value (" + result + ") on element of AllianceCreationResultMessage.result.");
+                throw new System.Exception("Forbidden value (" + result + ") on element of AllianceCreationResultMessage.result.");
             }
 
         }

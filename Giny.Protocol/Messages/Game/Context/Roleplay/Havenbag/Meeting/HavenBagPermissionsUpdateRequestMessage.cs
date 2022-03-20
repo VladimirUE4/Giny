@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (permissions < 0)
             {
-                throw new Exception("Forbidden value (" + permissions + ") on element permissions.");
+                throw new System.Exception("Forbidden value (" + permissions + ") on element permissions.");
             }
 
             writer.WriteInt((int)permissions);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             permissions = (int)reader.ReadInt();
             if (permissions < 0)
             {
-                throw new Exception("Forbidden value (" + permissions + ") on element of HavenBagPermissionsUpdateRequestMessage.permissions.");
+                throw new System.Exception("Forbidden value (" + permissions + ") on element of HavenBagPermissionsUpdateRequestMessage.permissions.");
             }
 
         }

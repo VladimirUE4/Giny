@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public PaddockInstancesInformations()
         {
         }
-        public PaddockInstancesInformations(PaddockBuyableInformations[] paddocks)
+        public PaddockInstancesInformations(PaddockBuyableInformations[] paddocks,short maxOutdoorMount,short maxItems)
         {
             this.paddocks = paddocks;
+            this.maxOutdoorMount = maxOutdoorMount;
+            this.maxItems = maxItems;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,15 @@ namespace Giny.Protocol.Types
         public CharacterMinimalAllianceInformations()
         {
         }
-        public CharacterMinimalAllianceInformations(BasicAllianceInformations alliance)
+        public CharacterMinimalAllianceInformations(BasicAllianceInformations alliance,long id,string name,short level,EntityLook entityLook,byte breed,BasicGuildInformations guild)
         {
             this.alliance = alliance;
+            this.id = id;
+            this.name = name;
+            this.level = level;
+            this.entityLook = entityLook;
+            this.breed = breed;
+            this.guild = guild;
         }
         public override void Serialize(IDataWriter writer)
         {

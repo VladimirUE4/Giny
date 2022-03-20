@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public AchievementStartedObjective()
         {
         }
-        public AchievementStartedObjective(short value)
+        public AchievementStartedObjective(short value,int id,short maxValue)
         {
             this.value = value;
+            this.id = id;
+            this.maxValue = maxValue;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (value < 0)
             {
-                throw new Exception("Forbidden value (" + value + ") on element value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element value.");
             }
 
             writer.WriteVarShort((short)value);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             value = (short)reader.ReadVarUhShort();
             if (value < 0)
             {
-                throw new Exception("Forbidden value (" + value + ") on element of AchievementStartedObjective.value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element of AchievementStartedObjective.value.");
             }
 
         }

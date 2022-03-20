@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public SkillActionDescriptionTimed()
         {
         }
-        public SkillActionDescriptionTimed(byte time)
+        public SkillActionDescriptionTimed(byte time,short skillId)
         {
             this.time = time;
+            this.skillId = skillId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (time < 0 || time > 255)
             {
-                throw new Exception("Forbidden value (" + time + ") on element time.");
+                throw new System.Exception("Forbidden value (" + time + ") on element time.");
             }
 
             writer.WriteByte((byte)time);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             time = (byte)reader.ReadSByte();
             if (time < 0 || time > 255)
             {
-                throw new Exception("Forbidden value (" + time + ") on element of SkillActionDescriptionTimed.time.");
+                throw new System.Exception("Forbidden value (" + time + ") on element of SkillActionDescriptionTimed.time.");
             }
 
         }

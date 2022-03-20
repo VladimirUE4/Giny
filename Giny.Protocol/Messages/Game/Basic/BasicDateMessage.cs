@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (day < 0)
             {
-                throw new Exception("Forbidden value (" + day + ") on element day.");
+                throw new System.Exception("Forbidden value (" + day + ") on element day.");
             }
 
             writer.WriteByte((byte)day);
             if (month < 0)
             {
-                throw new Exception("Forbidden value (" + month + ") on element month.");
+                throw new System.Exception("Forbidden value (" + month + ") on element month.");
             }
 
             writer.WriteByte((byte)month);
             if (year < 0)
             {
-                throw new Exception("Forbidden value (" + year + ") on element year.");
+                throw new System.Exception("Forbidden value (" + year + ") on element year.");
             }
 
             writer.WriteShort((short)year);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             day = (byte)reader.ReadByte();
             if (day < 0)
             {
-                throw new Exception("Forbidden value (" + day + ") on element of BasicDateMessage.day.");
+                throw new System.Exception("Forbidden value (" + day + ") on element of BasicDateMessage.day.");
             }
 
             month = (byte)reader.ReadByte();
             if (month < 0)
             {
-                throw new Exception("Forbidden value (" + month + ") on element of BasicDateMessage.month.");
+                throw new System.Exception("Forbidden value (" + month + ") on element of BasicDateMessage.month.");
             }
 
             year = (short)reader.ReadShort();
             if (year < 0)
             {
-                throw new Exception("Forbidden value (" + year + ") on element of BasicDateMessage.year.");
+                throw new System.Exception("Forbidden value (" + year + ") on element of BasicDateMessage.year.");
             }
 
         }

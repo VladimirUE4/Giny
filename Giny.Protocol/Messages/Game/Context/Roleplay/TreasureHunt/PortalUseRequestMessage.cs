@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (portalId < 0)
             {
-                throw new Exception("Forbidden value (" + portalId + ") on element portalId.");
+                throw new System.Exception("Forbidden value (" + portalId + ") on element portalId.");
             }
 
             writer.WriteVarInt((int)portalId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             portalId = (int)reader.ReadVarUhInt();
             if (portalId < 0)
             {
-                throw new Exception("Forbidden value (" + portalId + ") on element of PortalUseRequestMessage.portalId.");
+                throw new System.Exception("Forbidden value (" + portalId + ") on element of PortalUseRequestMessage.portalId.");
             }
 
         }

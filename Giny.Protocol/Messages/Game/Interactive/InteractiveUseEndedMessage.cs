@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (elemId < 0)
             {
-                throw new Exception("Forbidden value (" + elemId + ") on element elemId.");
+                throw new System.Exception("Forbidden value (" + elemId + ") on element elemId.");
             }
 
             writer.WriteVarInt((int)elemId);
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarShort((short)skillId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             elemId = (int)reader.ReadVarUhInt();
             if (elemId < 0)
             {
-                throw new Exception("Forbidden value (" + elemId + ") on element of InteractiveUseEndedMessage.elemId.");
+                throw new System.Exception("Forbidden value (" + elemId + ") on element of InteractiveUseEndedMessage.elemId.");
             }
 
             skillId = (short)reader.ReadVarUhShort();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of InteractiveUseEndedMessage.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of InteractiveUseEndedMessage.skillId.");
             }
 
         }

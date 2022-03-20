@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Giny.AS3.Expressions
@@ -19,7 +20,7 @@ namespace Giny.AS3.Expressions
 
         public override void RenameVariable(string variableName, string newVariableName)
         {
-            Line = Line.Replace(variableName, newVariableName);
+            Line = Regex.Replace(Line, "(.*)\b"+variableName+"\b(.*)", newVariableName);
         }
         public override void RenameMethodCall(string methodName, string newMethodName)
         {

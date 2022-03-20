@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public EmotePlayMassiveMessage()
         {
         }
-        public EmotePlayMassiveMessage(double[] actorIds)
+        public EmotePlayMassiveMessage(double[] actorIds,short emoteId,double emoteStartTime)
         {
             this.actorIds = actorIds;
+            this.emoteId = emoteId;
+            this.emoteStartTime = emoteStartTime;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -30,7 +31,7 @@ namespace Giny.Protocol.Messages
             {
                 if (actorIds[_i1] < -9.00719925474099E+15 || actorIds[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + actorIds[_i1] + ") on element 1 (starting at 1) of actorIds.");
+                    throw new System.Exception("Forbidden value (" + actorIds[_i1] + ") on element 1 (starting at 1) of actorIds.");
                 }
 
                 writer.WriteDouble((double)actorIds[_i1]);
@@ -48,7 +49,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (double)reader.ReadDouble();
                 if (_val1 < -9.00719925474099E+15 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of actorIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of actorIds.");
                 }
 
                 actorIds[_i1] = (double)_val1;

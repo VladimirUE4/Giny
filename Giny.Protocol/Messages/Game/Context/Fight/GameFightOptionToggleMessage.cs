@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             option = (byte)reader.ReadByte();
             if (option < 0)
             {
-                throw new Exception("Forbidden value (" + option + ") on element of GameFightOptionToggleMessage.option.");
+                throw new System.Exception("Forbidden value (" + option + ") on element of GameFightOptionToggleMessage.option.");
             }
 
         }

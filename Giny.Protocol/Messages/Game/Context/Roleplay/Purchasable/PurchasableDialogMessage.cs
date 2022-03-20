@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -38,19 +37,19 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (purchasableId < 0 || purchasableId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + purchasableId + ") on element purchasableId.");
+                throw new System.Exception("Forbidden value (" + purchasableId + ") on element purchasableId.");
             }
 
             writer.WriteDouble((double)purchasableId);
             if (purchasableInstanceId < 0)
             {
-                throw new Exception("Forbidden value (" + purchasableInstanceId + ") on element purchasableInstanceId.");
+                throw new System.Exception("Forbidden value (" + purchasableInstanceId + ") on element purchasableInstanceId.");
             }
 
             writer.WriteInt((int)purchasableInstanceId);
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -63,19 +62,19 @@ namespace Giny.Protocol.Messages
             purchasableId = (double)reader.ReadDouble();
             if (purchasableId < 0 || purchasableId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + purchasableId + ") on element of PurchasableDialogMessage.purchasableId.");
+                throw new System.Exception("Forbidden value (" + purchasableId + ") on element of PurchasableDialogMessage.purchasableId.");
             }
 
             purchasableInstanceId = (int)reader.ReadInt();
             if (purchasableInstanceId < 0)
             {
-                throw new Exception("Forbidden value (" + purchasableInstanceId + ") on element of PurchasableDialogMessage.purchasableInstanceId.");
+                throw new System.Exception("Forbidden value (" + purchasableInstanceId + ") on element of PurchasableDialogMessage.purchasableInstanceId.");
             }
 
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of PurchasableDialogMessage.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of PurchasableDialogMessage.price.");
             }
 
         }

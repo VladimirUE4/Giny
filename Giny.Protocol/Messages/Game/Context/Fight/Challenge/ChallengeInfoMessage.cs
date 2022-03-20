@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,25 +31,25 @@ namespace Giny.Protocol.Messages
         {
             if (challengeId < 0)
             {
-                throw new Exception("Forbidden value (" + challengeId + ") on element challengeId.");
+                throw new System.Exception("Forbidden value (" + challengeId + ") on element challengeId.");
             }
 
             writer.WriteVarShort((short)challengeId);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
             if (xpBonus < 0)
             {
-                throw new Exception("Forbidden value (" + xpBonus + ") on element xpBonus.");
+                throw new System.Exception("Forbidden value (" + xpBonus + ") on element xpBonus.");
             }
 
             writer.WriteVarInt((int)xpBonus);
             if (dropBonus < 0)
             {
-                throw new Exception("Forbidden value (" + dropBonus + ") on element dropBonus.");
+                throw new System.Exception("Forbidden value (" + dropBonus + ") on element dropBonus.");
             }
 
             writer.WriteVarInt((int)dropBonus);
@@ -60,25 +59,25 @@ namespace Giny.Protocol.Messages
             challengeId = (short)reader.ReadVarUhShort();
             if (challengeId < 0)
             {
-                throw new Exception("Forbidden value (" + challengeId + ") on element of ChallengeInfoMessage.challengeId.");
+                throw new System.Exception("Forbidden value (" + challengeId + ") on element of ChallengeInfoMessage.challengeId.");
             }
 
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of ChallengeInfoMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of ChallengeInfoMessage.targetId.");
             }
 
             xpBonus = (int)reader.ReadVarUhInt();
             if (xpBonus < 0)
             {
-                throw new Exception("Forbidden value (" + xpBonus + ") on element of ChallengeInfoMessage.xpBonus.");
+                throw new System.Exception("Forbidden value (" + xpBonus + ") on element of ChallengeInfoMessage.xpBonus.");
             }
 
             dropBonus = (int)reader.ReadVarUhInt();
             if (dropBonus < 0)
             {
-                throw new Exception("Forbidden value (" + dropBonus + ") on element of ChallengeInfoMessage.dropBonus.");
+                throw new System.Exception("Forbidden value (" + dropBonus + ") on element of ChallengeInfoMessage.dropBonus.");
             }
 
         }

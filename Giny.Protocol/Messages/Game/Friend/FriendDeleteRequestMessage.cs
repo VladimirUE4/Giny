@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of FriendDeleteRequestMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of FriendDeleteRequestMessage.accountId.");
             }
 
         }

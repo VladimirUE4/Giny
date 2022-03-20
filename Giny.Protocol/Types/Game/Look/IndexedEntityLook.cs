@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             look.Serialize(writer);
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element index.");
             }
 
             writer.WriteByte((byte)index);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Types
             index = (byte)reader.ReadByte();
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element of IndexedEntityLook.index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element of IndexedEntityLook.index.");
             }
 
         }

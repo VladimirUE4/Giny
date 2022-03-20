@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,13 +26,13 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Types
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ObjectItemGenericQuantity.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ObjectItemGenericQuantity.objectGID.");
             }
 
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectItemGenericQuantity.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectItemGenericQuantity.quantity.");
             }
 
         }

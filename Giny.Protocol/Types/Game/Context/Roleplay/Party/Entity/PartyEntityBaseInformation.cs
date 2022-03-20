@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Types
         {
             if (indexId < 0)
             {
-                throw new Exception("Forbidden value (" + indexId + ") on element indexId.");
+                throw new System.Exception("Forbidden value (" + indexId + ") on element indexId.");
             }
 
             writer.WriteByte((byte)indexId);
             if (entityModelId < 0)
             {
-                throw new Exception("Forbidden value (" + entityModelId + ") on element entityModelId.");
+                throw new System.Exception("Forbidden value (" + entityModelId + ") on element entityModelId.");
             }
 
             writer.WriteByte((byte)entityModelId);
@@ -45,13 +44,13 @@ namespace Giny.Protocol.Types
             indexId = (byte)reader.ReadByte();
             if (indexId < 0)
             {
-                throw new Exception("Forbidden value (" + indexId + ") on element of PartyEntityBaseInformation.indexId.");
+                throw new System.Exception("Forbidden value (" + indexId + ") on element of PartyEntityBaseInformation.indexId.");
             }
 
             entityModelId = (byte)reader.ReadByte();
             if (entityModelId < 0)
             {
-                throw new Exception("Forbidden value (" + entityModelId + ") on element of PartyEntityBaseInformation.entityModelId.");
+                throw new System.Exception("Forbidden value (" + entityModelId + ") on element of PartyEntityBaseInformation.entityModelId.");
             }
 
             entityLook = new EntityLook();

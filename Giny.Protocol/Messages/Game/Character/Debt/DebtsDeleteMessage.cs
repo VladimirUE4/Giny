@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
             {
                 if (debts[_i2] < 0 || debts[_i2] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + debts[_i2] + ") on element 2 (starting at 1) of debts.");
+                    throw new System.Exception("Forbidden value (" + debts[_i2] + ") on element 2 (starting at 1) of debts.");
                 }
 
                 writer.WriteDouble((double)debts[_i2]);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             reason = (byte)reader.ReadByte();
             if (reason < 0)
             {
-                throw new Exception("Forbidden value (" + reason + ") on element of DebtsDeleteMessage.reason.");
+                throw new System.Exception("Forbidden value (" + reason + ") on element of DebtsDeleteMessage.reason.");
             }
 
             uint _debtsLen = (uint)reader.ReadUShort();
@@ -55,7 +54,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (double)reader.ReadDouble();
                 if (_val2 < 0 || _val2 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of debts.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of debts.");
                 }
 
                 debts[_i2] = (double)_val2;

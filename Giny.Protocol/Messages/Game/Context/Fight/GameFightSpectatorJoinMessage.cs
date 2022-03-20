@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,15 @@ namespace Giny.Protocol.Messages
         public GameFightSpectatorJoinMessage()
         {
         }
-        public GameFightSpectatorJoinMessage(NamedPartyTeam[] namedPartyTeams)
+        public GameFightSpectatorJoinMessage(NamedPartyTeam[] namedPartyTeams,bool isTeamPhase,bool canBeCancelled,bool canSayReady,bool isFightStarted,short timeMaxBeforeFightStart,byte fightType)
         {
             this.namedPartyTeams = namedPartyTeams;
+            this.isTeamPhase = isTeamPhase;
+            this.canBeCancelled = canBeCancelled;
+            this.canSayReady = canSayReady;
+            this.isFightStarted = isFightStarted;
+            this.timeMaxBeforeFightStart = timeMaxBeforeFightStart;
+            this.fightType = fightType;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (timeMaxBeforeFightStart < 0)
             {
-                throw new Exception("Forbidden value (" + timeMaxBeforeFightStart + ") on element timeMaxBeforeFightStart.");
+                throw new System.Exception("Forbidden value (" + timeMaxBeforeFightStart + ") on element timeMaxBeforeFightStart.");
             }
 
             writer.WriteShort((short)timeMaxBeforeFightStart);
@@ -58,13 +57,13 @@ namespace Giny.Protocol.Messages
             timeMaxBeforeFightStart = (short)reader.ReadShort();
             if (timeMaxBeforeFightStart < 0)
             {
-                throw new Exception("Forbidden value (" + timeMaxBeforeFightStart + ") on element of GameFightJoinMessage.timeMaxBeforeFightStart.");
+                throw new System.Exception("Forbidden value (" + timeMaxBeforeFightStart + ") on element of GameFightJoinMessage.timeMaxBeforeFightStart.");
             }
 
             fightType = (byte)reader.ReadByte();
             if (fightType < 0)
             {
-                throw new Exception("Forbidden value (" + fightType + ") on element of GameFightJoinMessage.fightType.");
+                throw new System.Exception("Forbidden value (" + fightType + ") on element of GameFightJoinMessage.fightType.");
             }
 
         }

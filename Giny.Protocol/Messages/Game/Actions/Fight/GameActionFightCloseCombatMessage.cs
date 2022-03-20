@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,23 @@ namespace Giny.Protocol.Messages
         public GameActionFightCloseCombatMessage()
         {
         }
-        public GameActionFightCloseCombatMessage(short weaponGenericId)
+        public GameActionFightCloseCombatMessage(short weaponGenericId,short actionId,double sourceId,double targetId,short destinationCellId,byte critical,bool silentCast,bool verboseCast)
         {
             this.weaponGenericId = weaponGenericId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
+            this.targetId = targetId;
+            this.destinationCellId = destinationCellId;
+            this.critical = critical;
+            this.silentCast = silentCast;
+            this.verboseCast = verboseCast;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (weaponGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + weaponGenericId + ") on element weaponGenericId.");
+                throw new System.Exception("Forbidden value (" + weaponGenericId + ") on element weaponGenericId.");
             }
 
             writer.WriteVarShort((short)weaponGenericId);
@@ -38,7 +44,7 @@ namespace Giny.Protocol.Messages
             weaponGenericId = (short)reader.ReadVarUhShort();
             if (weaponGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + weaponGenericId + ") on element of GameActionFightCloseCombatMessage.weaponGenericId.");
+                throw new System.Exception("Forbidden value (" + weaponGenericId + ") on element of GameActionFightCloseCombatMessage.weaponGenericId.");
             }
 
         }

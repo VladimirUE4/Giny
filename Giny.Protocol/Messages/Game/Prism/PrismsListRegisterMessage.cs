@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             listen = (byte)reader.ReadByte();
             if (listen < 0)
             {
-                throw new Exception("Forbidden value (" + listen + ") on element of PrismsListRegisterMessage.listen.");
+                throw new System.Exception("Forbidden value (" + listen + ") on element of PrismsListRegisterMessage.listen.");
             }
 
         }

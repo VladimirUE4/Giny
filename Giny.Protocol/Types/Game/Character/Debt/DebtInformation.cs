@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
             if (timestamp < 0 || timestamp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element timestamp.");
             }
 
             writer.WriteDouble((double)timestamp);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             id = (double)reader.ReadDouble();
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of DebtInformation.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of DebtInformation.id.");
             }
 
             timestamp = (double)reader.ReadDouble();
             if (timestamp < 0 || timestamp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element of DebtInformation.timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element of DebtInformation.timestamp.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -19,19 +18,21 @@ namespace Giny.Protocol.Types
         public IgnoredOnlineInformations()
         {
         }
-        public IgnoredOnlineInformations(long playerId,string playerName,byte breed,bool sex)
+        public IgnoredOnlineInformations(long playerId,string playerName,byte breed,bool sex,int accountId,AccountTagInformation accountTag)
         {
             this.playerId = playerId;
             this.playerName = playerName;
             this.breed = breed;
             this.sex = sex;
+            this.accountId = accountId;
+            this.accountTag = accountTag;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -45,14 +46,14 @@ namespace Giny.Protocol.Types
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of IgnoredOnlineInformations.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of IgnoredOnlineInformations.playerId.");
             }
 
             playerName = (string)reader.ReadUTF();
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
             {
-                throw new Exception("Forbidden value (" + breed + ") on element of IgnoredOnlineInformations.breed.");
+                throw new System.Exception("Forbidden value (" + breed + ") on element of IgnoredOnlineInformations.breed.");
             }
 
             sex = (bool)reader.ReadBoolean();

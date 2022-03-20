@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,21 @@ namespace Giny.Protocol.Types
         public CharacterMinimalPlusLookAndGradeInformations()
         {
         }
-        public CharacterMinimalPlusLookAndGradeInformations(int grade)
+        public CharacterMinimalPlusLookAndGradeInformations(int grade,long id,string name,short level,EntityLook entityLook,byte breed)
         {
             this.grade = grade;
+            this.id = id;
+            this.name = name;
+            this.level = level;
+            this.entityLook = entityLook;
+            this.breed = breed;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element grade.");
             }
 
             writer.WriteVarInt((int)grade);
@@ -36,7 +40,7 @@ namespace Giny.Protocol.Types
             grade = (int)reader.ReadVarUhInt();
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element of CharacterMinimalPlusLookAndGradeInformations.grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element of CharacterMinimalPlusLookAndGradeInformations.grade.");
             }
 
         }

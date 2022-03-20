@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,19 @@ namespace Giny.Protocol.Types
         public MapCoordinatesExtended()
         {
         }
-        public MapCoordinatesExtended(short subAreaId)
+        public MapCoordinatesExtended(short subAreaId,short worldX,short worldY,double mapId)
         {
             this.subAreaId = subAreaId;
+            this.worldX = worldX;
+            this.worldY = worldY;
+            this.mapId = mapId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -36,7 +38,7 @@ namespace Giny.Protocol.Types
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of MapCoordinatesExtended.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of MapCoordinatesExtended.subAreaId.");
             }
 
         }

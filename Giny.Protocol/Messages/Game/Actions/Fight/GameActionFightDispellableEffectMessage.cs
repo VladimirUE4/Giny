@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public GameActionFightDispellableEffectMessage()
         {
         }
-        public GameActionFightDispellableEffectMessage(AbstractFightDispellableEffect effect)
+        public GameActionFightDispellableEffectMessage(AbstractFightDispellableEffect effect,short actionId,double sourceId)
         {
             this.effect = effect;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {

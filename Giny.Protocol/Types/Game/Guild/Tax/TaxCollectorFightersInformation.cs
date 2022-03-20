@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
         {
             if (collectorId < 0 || collectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + collectorId + ") on element collectorId.");
+                throw new System.Exception("Forbidden value (" + collectorId + ") on element collectorId.");
             }
 
             writer.WriteDouble((double)collectorId);
@@ -56,7 +55,7 @@ namespace Giny.Protocol.Types
             collectorId = (double)reader.ReadDouble();
             if (collectorId < 0 || collectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + collectorId + ") on element of TaxCollectorFightersInformation.collectorId.");
+                throw new System.Exception("Forbidden value (" + collectorId + ") on element of TaxCollectorFightersInformation.collectorId.");
             }
 
             uint _allyCharactersInformationsLen = (uint)reader.ReadUShort();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteInt((int)spellId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             spellId = (int)reader.ReadInt();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of ForgettableSpellClientActionMessage.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of ForgettableSpellClientActionMessage.spellId.");
             }
 
             action = (byte)reader.ReadByte();
             if (action < 0)
             {
-                throw new Exception("Forbidden value (" + action + ") on element of ForgettableSpellClientActionMessage.action.");
+                throw new System.Exception("Forbidden value (" + action + ") on element of ForgettableSpellClientActionMessage.action.");
             }
 
         }

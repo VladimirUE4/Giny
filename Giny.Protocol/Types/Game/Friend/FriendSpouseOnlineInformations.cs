@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -19,12 +18,21 @@ namespace Giny.Protocol.Types
         public FriendSpouseOnlineInformations()
         {
         }
-        public FriendSpouseOnlineInformations(double mapId,short subAreaId,bool inFight,bool followSpouse)
+        public FriendSpouseOnlineInformations(double mapId,short subAreaId,bool inFight,bool followSpouse,int spouseAccountId,long spouseId,string spouseName,short spouseLevel,byte breed,byte sex,EntityLook spouseEntityLook,GuildInformations guildInfo,byte alignmentSide)
         {
             this.mapId = mapId;
             this.subAreaId = subAreaId;
             this.inFight = inFight;
             this.followSpouse = followSpouse;
+            this.spouseAccountId = spouseAccountId;
+            this.spouseId = spouseId;
+            this.spouseName = spouseName;
+            this.spouseLevel = spouseLevel;
+            this.breed = breed;
+            this.sex = sex;
+            this.spouseEntityLook = spouseEntityLook;
+            this.guildInfo = guildInfo;
+            this.alignmentSide = alignmentSide;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -35,13 +43,13 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -55,13 +63,13 @@ namespace Giny.Protocol.Types
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of FriendSpouseOnlineInformations.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of FriendSpouseOnlineInformations.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of FriendSpouseOnlineInformations.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of FriendSpouseOnlineInformations.subAreaId.");
             }
 
         }

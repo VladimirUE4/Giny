@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (bugdet < 0)
             {
-                throw new Exception("Forbidden value (" + bugdet + ") on element bugdet.");
+                throw new System.Exception("Forbidden value (" + bugdet + ") on element bugdet.");
             }
 
             writer.WriteVarInt((int)bugdet);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             bugdet = (int)reader.ReadVarUhInt();
             if (bugdet < 0)
             {
-                throw new Exception("Forbidden value (" + bugdet + ") on element of BreachBudgetMessage.bugdet.");
+                throw new System.Exception("Forbidden value (" + bugdet + ") on element of BreachBudgetMessage.bugdet.");
             }
 
         }

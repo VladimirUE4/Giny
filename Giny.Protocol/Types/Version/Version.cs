@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,25 +31,25 @@ namespace Giny.Protocol.Types
         {
             if (major < 0)
             {
-                throw new Exception("Forbidden value (" + major + ") on element major.");
+                throw new System.Exception("Forbidden value (" + major + ") on element major.");
             }
 
             writer.WriteByte((byte)major);
             if (minor < 0)
             {
-                throw new Exception("Forbidden value (" + minor + ") on element minor.");
+                throw new System.Exception("Forbidden value (" + minor + ") on element minor.");
             }
 
             writer.WriteByte((byte)minor);
             if (code < 0)
             {
-                throw new Exception("Forbidden value (" + code + ") on element code.");
+                throw new System.Exception("Forbidden value (" + code + ") on element code.");
             }
 
             writer.WriteByte((byte)code);
             if (build < 0)
             {
-                throw new Exception("Forbidden value (" + build + ") on element build.");
+                throw new System.Exception("Forbidden value (" + build + ") on element build.");
             }
 
             writer.WriteInt((int)build);
@@ -61,31 +60,31 @@ namespace Giny.Protocol.Types
             major = (byte)reader.ReadByte();
             if (major < 0)
             {
-                throw new Exception("Forbidden value (" + major + ") on element of Version.major.");
+                throw new System.Exception("Forbidden value (" + major + ") on element of Version.major.");
             }
 
             minor = (byte)reader.ReadByte();
             if (minor < 0)
             {
-                throw new Exception("Forbidden value (" + minor + ") on element of Version.minor.");
+                throw new System.Exception("Forbidden value (" + minor + ") on element of Version.minor.");
             }
 
             code = (byte)reader.ReadByte();
             if (code < 0)
             {
-                throw new Exception("Forbidden value (" + code + ") on element of Version.code.");
+                throw new System.Exception("Forbidden value (" + code + ") on element of Version.code.");
             }
 
             build = (int)reader.ReadInt();
             if (build < 0)
             {
-                throw new Exception("Forbidden value (" + build + ") on element of Version.build.");
+                throw new System.Exception("Forbidden value (" + build + ") on element of Version.build.");
             }
 
             buildType = (byte)reader.ReadByte();
             if (buildType < 0)
             {
-                throw new Exception("Forbidden value (" + buildType + ") on element of Version.buildType.");
+                throw new System.Exception("Forbidden value (" + buildType + ") on element of Version.buildType.");
             }
 
         }

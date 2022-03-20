@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             {
                 if (dungeonIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + dungeonIds[_i1] + ") on element 1 (starting at 1) of dungeonIds.");
+                    throw new System.Exception("Forbidden value (" + dungeonIds[_i1] + ") on element 1 (starting at 1) of dungeonIds.");
                 }
 
                 writer.WriteVarShort((short)dungeonIds[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of dungeonIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of dungeonIds.");
                 }
 
                 dungeonIds[_i1] = (short)_val1;

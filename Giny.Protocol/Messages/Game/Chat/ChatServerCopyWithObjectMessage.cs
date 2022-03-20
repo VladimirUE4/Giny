@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,15 @@ namespace Giny.Protocol.Messages
         public ChatServerCopyWithObjectMessage()
         {
         }
-        public ChatServerCopyWithObjectMessage(ObjectItem[] objects)
+        public ChatServerCopyWithObjectMessage(ObjectItem[] objects,byte channel,string content,int timestamp,string fingerprint,long receiverId,string receiverName)
         {
             this.objects = objects;
+            this.channel = channel;
+            this.content = content;
+            this.timestamp = timestamp;
+            this.fingerprint = fingerprint;
+            this.receiverId = receiverId;
+            this.receiverName = receiverName;
         }
         public override void Serialize(IDataWriter writer)
         {

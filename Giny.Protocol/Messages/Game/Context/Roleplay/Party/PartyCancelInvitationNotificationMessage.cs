@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,24 @@ namespace Giny.Protocol.Messages
         public PartyCancelInvitationNotificationMessage()
         {
         }
-        public PartyCancelInvitationNotificationMessage(long cancelerId,long guestId)
+        public PartyCancelInvitationNotificationMessage(long cancelerId,long guestId,int partyId)
         {
             this.cancelerId = cancelerId;
             this.guestId = guestId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (cancelerId < 0 || cancelerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancelerId + ") on element cancelerId.");
+                throw new System.Exception("Forbidden value (" + cancelerId + ") on element cancelerId.");
             }
 
             writer.WriteVarLong((long)cancelerId);
             if (guestId < 0 || guestId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + guestId + ") on element guestId.");
+                throw new System.Exception("Forbidden value (" + guestId + ") on element guestId.");
             }
 
             writer.WriteVarLong((long)guestId);
@@ -46,13 +46,13 @@ namespace Giny.Protocol.Messages
             cancelerId = (long)reader.ReadVarUhLong();
             if (cancelerId < 0 || cancelerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancelerId + ") on element of PartyCancelInvitationNotificationMessage.cancelerId.");
+                throw new System.Exception("Forbidden value (" + cancelerId + ") on element of PartyCancelInvitationNotificationMessage.cancelerId.");
             }
 
             guestId = (long)reader.ReadVarUhLong();
             if (guestId < 0 || guestId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + guestId + ") on element of PartyCancelInvitationNotificationMessage.guestId.");
+                throw new System.Exception("Forbidden value (" + guestId + ") on element of PartyCancelInvitationNotificationMessage.guestId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Types
             {
                 if (quantities[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + quantities[_i1] + ") on element 1 (starting at 1) of quantities.");
+                    throw new System.Exception("Forbidden value (" + quantities[_i1] + ") on element 1 (starting at 1) of quantities.");
                 }
 
                 writer.WriteVarInt((int)quantities[_i1]);
@@ -52,7 +51,7 @@ namespace Giny.Protocol.Types
             {
                 if (types[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + types[_i2] + ") on element 2 (starting at 1) of types.");
+                    throw new System.Exception("Forbidden value (" + types[_i2] + ") on element 2 (starting at 1) of types.");
                 }
 
                 writer.WriteVarInt((int)types[_i2]);
@@ -62,20 +61,20 @@ namespace Giny.Protocol.Types
             writer.WriteFloat((float)taxModificationPercentage);
             if (maxItemLevel < 0 || maxItemLevel > 255)
             {
-                throw new Exception("Forbidden value (" + maxItemLevel + ") on element maxItemLevel.");
+                throw new System.Exception("Forbidden value (" + maxItemLevel + ") on element maxItemLevel.");
             }
 
             writer.WriteByte((byte)maxItemLevel);
             if (maxItemPerAccount < 0)
             {
-                throw new Exception("Forbidden value (" + maxItemPerAccount + ") on element maxItemPerAccount.");
+                throw new System.Exception("Forbidden value (" + maxItemPerAccount + ") on element maxItemPerAccount.");
             }
 
             writer.WriteVarInt((int)maxItemPerAccount);
             writer.WriteInt((int)npcContextualId);
             if (unsoldDelay < 0)
             {
-                throw new Exception("Forbidden value (" + unsoldDelay + ") on element unsoldDelay.");
+                throw new System.Exception("Forbidden value (" + unsoldDelay + ") on element unsoldDelay.");
             }
 
             writer.WriteVarShort((short)unsoldDelay);
@@ -91,7 +90,7 @@ namespace Giny.Protocol.Types
                 _val1 = (uint)reader.ReadVarUhInt();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of quantities.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of quantities.");
                 }
 
                 quantities[_i1] = (int)_val1;
@@ -104,7 +103,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadVarUhInt();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of types.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of types.");
                 }
 
                 types[_i2] = (int)_val2;
@@ -115,20 +114,20 @@ namespace Giny.Protocol.Types
             maxItemLevel = (byte)reader.ReadSByte();
             if (maxItemLevel < 0 || maxItemLevel > 255)
             {
-                throw new Exception("Forbidden value (" + maxItemLevel + ") on element of SellerBuyerDescriptor.maxItemLevel.");
+                throw new System.Exception("Forbidden value (" + maxItemLevel + ") on element of SellerBuyerDescriptor.maxItemLevel.");
             }
 
             maxItemPerAccount = (int)reader.ReadVarUhInt();
             if (maxItemPerAccount < 0)
             {
-                throw new Exception("Forbidden value (" + maxItemPerAccount + ") on element of SellerBuyerDescriptor.maxItemPerAccount.");
+                throw new System.Exception("Forbidden value (" + maxItemPerAccount + ") on element of SellerBuyerDescriptor.maxItemPerAccount.");
             }
 
             npcContextualId = (int)reader.ReadInt();
             unsoldDelay = (short)reader.ReadVarUhShort();
             if (unsoldDelay < 0)
             {
-                throw new Exception("Forbidden value (" + unsoldDelay + ") on element of SellerBuyerDescriptor.unsoldDelay.");
+                throw new System.Exception("Forbidden value (" + unsoldDelay + ") on element of SellerBuyerDescriptor.unsoldDelay.");
             }
 
         }

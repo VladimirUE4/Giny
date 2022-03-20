@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (npcSellerId < -9.00719925474099E+15 || npcSellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + npcSellerId + ") on element npcSellerId.");
+                throw new System.Exception("Forbidden value (" + npcSellerId + ") on element npcSellerId.");
             }
 
             writer.WriteDouble((double)npcSellerId);
             if (tokenId < 0)
             {
-                throw new Exception("Forbidden value (" + tokenId + ") on element tokenId.");
+                throw new System.Exception("Forbidden value (" + tokenId + ") on element tokenId.");
             }
 
             writer.WriteVarShort((short)tokenId);
@@ -53,13 +52,13 @@ namespace Giny.Protocol.Messages
             npcSellerId = (double)reader.ReadDouble();
             if (npcSellerId < -9.00719925474099E+15 || npcSellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + npcSellerId + ") on element of ExchangeStartOkNpcShopMessage.npcSellerId.");
+                throw new System.Exception("Forbidden value (" + npcSellerId + ") on element of ExchangeStartOkNpcShopMessage.npcSellerId.");
             }
 
             tokenId = (short)reader.ReadVarUhShort();
             if (tokenId < 0)
             {
-                throw new Exception("Forbidden value (" + tokenId + ") on element of ExchangeStartOkNpcShopMessage.tokenId.");
+                throw new System.Exception("Forbidden value (" + tokenId + ") on element of ExchangeStartOkNpcShopMessage.tokenId.");
             }
 
             uint _objectsInfosLen = (uint)reader.ReadUShort();

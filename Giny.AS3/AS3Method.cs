@@ -82,6 +82,7 @@ namespace Giny.AS3
         {
             this.Modifiers = modifiers;
         }
+
         public void RenameMethodCall(string methodName, string newMethodName)
         {
             foreach (var expression in Expressions)
@@ -162,7 +163,7 @@ namespace Giny.AS3
         {
             return Name + "()";
         }
-        public static AS3Method RencapsulateMethod(AS3File file, string methodName, string newMethodName)
+        public static void DecapsulateMethod(AS3File file, string methodName)
         {
             var method = file.GetMethod(x => x.Name == methodName);
 
@@ -196,7 +197,7 @@ namespace Giny.AS3
 
             }
 
-            return new AS3Method(newMethodName, method.Parameters, method.ReturnType, expressions, method.Accessor, method.Modifiers);
+            method.Expressions = expressions;
         }
     }
 

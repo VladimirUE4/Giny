@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of PaddockBuyableInformations.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of PaddockBuyableInformations.price.");
             }
 
             locked = (bool)reader.ReadBoolean();

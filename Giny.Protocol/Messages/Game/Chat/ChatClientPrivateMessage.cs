@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ChatClientPrivateMessage()
         {
         }
-        public ChatClientPrivateMessage(AbstractPlayerSearchInformation receiver)
+        public ChatClientPrivateMessage(AbstractPlayerSearchInformation receiver,string content)
         {
             this.receiver = receiver;
+            this.content = content;
         }
         public override void Serialize(IDataWriter writer)
         {

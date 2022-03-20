@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -38,37 +37,37 @@ namespace Giny.Protocol.Messages
         {
             if (firstNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firstNameId + ") on element firstNameId.");
+                throw new System.Exception("Forbidden value (" + firstNameId + ") on element firstNameId.");
             }
 
             writer.WriteVarShort((short)firstNameId);
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
             }
 
             writer.WriteVarShort((short)lastNameId);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -79,37 +78,37 @@ namespace Giny.Protocol.Messages
             firstNameId = (short)reader.ReadVarUhShort();
             if (firstNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firstNameId + ") on element of TaxCollectorAttackedMessage.firstNameId.");
+                throw new System.Exception("Forbidden value (" + firstNameId + ") on element of TaxCollectorAttackedMessage.firstNameId.");
             }
 
             lastNameId = (short)reader.ReadVarUhShort();
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorAttackedMessage.lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorAttackedMessage.lastNameId.");
             }
 
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of TaxCollectorAttackedMessage.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of TaxCollectorAttackedMessage.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of TaxCollectorAttackedMessage.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of TaxCollectorAttackedMessage.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of TaxCollectorAttackedMessage.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of TaxCollectorAttackedMessage.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of TaxCollectorAttackedMessage.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of TaxCollectorAttackedMessage.subAreaId.");
             }
 
             guild = new BasicGuildInformations();

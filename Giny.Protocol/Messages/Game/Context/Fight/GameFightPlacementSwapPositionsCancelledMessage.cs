@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element requestId.");
             }
 
             writer.WriteInt((int)requestId);
             if (cancellerId < -9.00719925474099E+15 || cancellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancellerId + ") on element cancellerId.");
+                throw new System.Exception("Forbidden value (" + cancellerId + ") on element cancellerId.");
             }
 
             writer.WriteDouble((double)cancellerId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             requestId = (int)reader.ReadInt();
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsCancelledMessage.requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsCancelledMessage.requestId.");
             }
 
             cancellerId = (double)reader.ReadDouble();
             if (cancellerId < -9.00719925474099E+15 || cancellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + cancellerId + ") on element of GameFightPlacementSwapPositionsCancelledMessage.cancellerId.");
+                throw new System.Exception("Forbidden value (" + cancellerId + ") on element of GameFightPlacementSwapPositionsCancelledMessage.cancellerId.");
             }
 
         }

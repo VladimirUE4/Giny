@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element houseId.");
             }
 
             writer.WriteVarInt((int)houseId);
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element modelId.");
             }
 
             writer.WriteVarShort((short)modelId);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             houseId = (int)reader.ReadVarUhInt();
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element of HouseInformations.houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element of HouseInformations.houseId.");
             }
 
             modelId = (short)reader.ReadVarUhShort();
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element of HouseInformations.modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element of HouseInformations.modelId.");
             }
 
         }

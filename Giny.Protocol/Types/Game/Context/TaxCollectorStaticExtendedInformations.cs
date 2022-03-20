@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,13 @@ namespace Giny.Protocol.Types
         public TaxCollectorStaticExtendedInformations()
         {
         }
-        public TaxCollectorStaticExtendedInformations(AllianceInformations allianceIdentity)
+        public TaxCollectorStaticExtendedInformations(AllianceInformations allianceIdentity,short firstNameId,short lastNameId,GuildInformations guildIdentity,long callerId)
         {
             this.allianceIdentity = allianceIdentity;
+            this.firstNameId = firstNameId;
+            this.lastNameId = lastNameId;
+            this.guildIdentity = guildIdentity;
+            this.callerId = callerId;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ChatClientMultiMessage()
         {
         }
-        public ChatClientMultiMessage(byte channel)
+        public ChatClientMultiMessage(byte channel,string content)
         {
             this.channel = channel;
+            this.content = content;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -33,7 +33,7 @@ namespace Giny.Protocol.Messages
             channel = (byte)reader.ReadByte();
             if (channel < 0)
             {
-                throw new Exception("Forbidden value (" + channel + ") on element of ChatClientMultiMessage.channel.");
+                throw new System.Exception("Forbidden value (" + channel + ") on element of ChatClientMultiMessage.channel.");
             }
 
         }

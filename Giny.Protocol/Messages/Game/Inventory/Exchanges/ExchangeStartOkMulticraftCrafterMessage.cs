@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarInt((int)skillId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             skillId = (int)reader.ReadVarUhInt();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of ExchangeStartOkMulticraftCrafterMessage.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of ExchangeStartOkMulticraftCrafterMessage.skillId.");
             }
 
         }

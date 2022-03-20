@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element houseId.");
             }
 
             writer.WriteVarInt((int)houseId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             {
                 if (doorsOnMap[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + doorsOnMap[_i2] + ") on element 2 (starting at 1) of doorsOnMap.");
+                    throw new System.Exception("Forbidden value (" + doorsOnMap[_i2] + ") on element 2 (starting at 1) of doorsOnMap.");
                 }
 
                 writer.WriteInt((int)doorsOnMap[_i2]);
@@ -54,7 +53,7 @@ namespace Giny.Protocol.Messages
             houseId = (int)reader.ReadVarUhInt();
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element of HousePropertiesMessage.houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element of HousePropertiesMessage.houseId.");
             }
 
             uint _doorsOnMapLen = (uint)reader.ReadUShort();
@@ -64,7 +63,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadInt();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of doorsOnMap.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of doorsOnMap.");
                 }
 
                 doorsOnMap[_i2] = (int)_val2;

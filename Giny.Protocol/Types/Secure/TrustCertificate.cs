@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteInt((int)id);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
             id = (int)reader.ReadInt();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of TrustCertificate.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of TrustCertificate.id.");
             }
 
             hash = (string)reader.ReadUTF();

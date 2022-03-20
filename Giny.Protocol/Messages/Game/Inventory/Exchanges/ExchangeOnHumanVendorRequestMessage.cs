@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (humanVendorId < 0 || humanVendorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + humanVendorId + ") on element humanVendorId.");
+                throw new System.Exception("Forbidden value (" + humanVendorId + ") on element humanVendorId.");
             }
 
             writer.WriteVarLong((long)humanVendorId);
             if (humanVendorCell < 0 || humanVendorCell > 559)
             {
-                throw new Exception("Forbidden value (" + humanVendorCell + ") on element humanVendorCell.");
+                throw new System.Exception("Forbidden value (" + humanVendorCell + ") on element humanVendorCell.");
             }
 
             writer.WriteVarShort((short)humanVendorCell);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             humanVendorId = (long)reader.ReadVarUhLong();
             if (humanVendorId < 0 || humanVendorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + humanVendorId + ") on element of ExchangeOnHumanVendorRequestMessage.humanVendorId.");
+                throw new System.Exception("Forbidden value (" + humanVendorId + ") on element of ExchangeOnHumanVendorRequestMessage.humanVendorId.");
             }
 
             humanVendorCell = (short)reader.ReadVarUhShort();
             if (humanVendorCell < 0 || humanVendorCell > 559)
             {
-                throw new Exception("Forbidden value (" + humanVendorCell + ") on element of ExchangeOnHumanVendorRequestMessage.humanVendorCell.");
+                throw new System.Exception("Forbidden value (" + humanVendorCell + ") on element of ExchangeOnHumanVendorRequestMessage.humanVendorCell.");
             }
 
         }

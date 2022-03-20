@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         {
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element actionId.");
             }
 
             writer.WriteVarShort((short)actionId);
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             actionId = (short)reader.ReadVarUhShort();
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element of ObjectEffect.actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element of ObjectEffect.actionId.");
             }
 
         }

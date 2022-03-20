@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,20 +31,20 @@ namespace Giny.Protocol.Messages
         {
             if (mountUid < 0)
             {
-                throw new Exception("Forbidden value (" + mountUid + ") on element mountUid.");
+                throw new System.Exception("Forbidden value (" + mountUid + ") on element mountUid.");
             }
 
             writer.WriteVarInt((int)mountUid);
             writer.WriteByte((byte)mountLocation);
             if (mountFoodUid < 0)
             {
-                throw new Exception("Forbidden value (" + mountFoodUid + ") on element mountFoodUid.");
+                throw new System.Exception("Forbidden value (" + mountFoodUid + ") on element mountFoodUid.");
             }
 
             writer.WriteVarInt((int)mountFoodUid);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
@@ -55,20 +54,20 @@ namespace Giny.Protocol.Messages
             mountUid = (int)reader.ReadVarUhInt();
             if (mountUid < 0)
             {
-                throw new Exception("Forbidden value (" + mountUid + ") on element of MountFeedRequestMessage.mountUid.");
+                throw new System.Exception("Forbidden value (" + mountUid + ") on element of MountFeedRequestMessage.mountUid.");
             }
 
             mountLocation = (byte)reader.ReadByte();
             mountFoodUid = (int)reader.ReadVarUhInt();
             if (mountFoodUid < 0)
             {
-                throw new Exception("Forbidden value (" + mountFoodUid + ") on element of MountFeedRequestMessage.mountFoodUid.");
+                throw new System.Exception("Forbidden value (" + mountFoodUid + ") on element of MountFeedRequestMessage.mountFoodUid.");
             }
 
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of MountFeedRequestMessage.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of MountFeedRequestMessage.quantity.");
             }
 
         }

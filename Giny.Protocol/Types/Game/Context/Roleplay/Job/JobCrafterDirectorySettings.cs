@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Types
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
             if (minLevel < 0 || minLevel > 255)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element minLevel.");
             }
 
             writer.WriteByte((byte)minLevel);
@@ -45,13 +44,13 @@ namespace Giny.Protocol.Types
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectorySettings.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectorySettings.jobId.");
             }
 
             minLevel = (byte)reader.ReadSByte();
             if (minLevel < 0 || minLevel > 255)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element of JobCrafterDirectorySettings.minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element of JobCrafterDirectorySettings.minLevel.");
             }
 
             free = (bool)reader.ReadBoolean();

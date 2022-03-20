@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             outcome = (short)reader.ReadVarUhShort();
             if (outcome < 0)
             {
-                throw new Exception("Forbidden value (" + outcome + ") on element of NamedPartyTeamWithOutcome.outcome.");
+                throw new System.Exception("Forbidden value (" + outcome + ") on element of NamedPartyTeamWithOutcome.outcome.");
             }
 
         }

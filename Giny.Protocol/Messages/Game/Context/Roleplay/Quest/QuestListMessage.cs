@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             {
                 if (finishedQuestsIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + finishedQuestsIds[_i1] + ") on element 1 (starting at 1) of finishedQuestsIds.");
+                    throw new System.Exception("Forbidden value (" + finishedQuestsIds[_i1] + ") on element 1 (starting at 1) of finishedQuestsIds.");
                 }
 
                 writer.WriteVarShort((short)finishedQuestsIds[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
             {
                 if (finishedQuestsCounts[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + finishedQuestsCounts[_i2] + ") on element 2 (starting at 1) of finishedQuestsCounts.");
+                    throw new System.Exception("Forbidden value (" + finishedQuestsCounts[_i2] + ") on element 2 (starting at 1) of finishedQuestsCounts.");
                 }
 
                 writer.WriteVarShort((short)finishedQuestsCounts[_i2]);
@@ -64,7 +63,7 @@ namespace Giny.Protocol.Messages
             {
                 if (reinitDoneQuestsIds[_i4] < 0)
                 {
-                    throw new Exception("Forbidden value (" + reinitDoneQuestsIds[_i4] + ") on element 4 (starting at 1) of reinitDoneQuestsIds.");
+                    throw new System.Exception("Forbidden value (" + reinitDoneQuestsIds[_i4] + ") on element 4 (starting at 1) of reinitDoneQuestsIds.");
                 }
 
                 writer.WriteVarShort((short)reinitDoneQuestsIds[_i4]);
@@ -85,7 +84,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of finishedQuestsIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of finishedQuestsIds.");
                 }
 
                 finishedQuestsIds[_i1] = (short)_val1;
@@ -98,7 +97,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of finishedQuestsCounts.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of finishedQuestsCounts.");
                 }
 
                 finishedQuestsCounts[_i2] = (short)_val2;
@@ -120,7 +119,7 @@ namespace Giny.Protocol.Messages
                 _val4 = (uint)reader.ReadVarUhShort();
                 if (_val4 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of reinitDoneQuestsIds.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of reinitDoneQuestsIds.");
                 }
 
                 reinitDoneQuestsIds[_i4] = (short)_val4;

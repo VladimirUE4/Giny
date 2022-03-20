@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public GuildFightTakePlaceRequestMessage()
         {
         }
-        public GuildFightTakePlaceRequestMessage(long replacedCharacterId)
+        public GuildFightTakePlaceRequestMessage(long replacedCharacterId,double taxCollectorId)
         {
             this.replacedCharacterId = replacedCharacterId;
+            this.taxCollectorId = taxCollectorId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (replacedCharacterId < 0 || replacedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + replacedCharacterId + ") on element replacedCharacterId.");
+                throw new System.Exception("Forbidden value (" + replacedCharacterId + ") on element replacedCharacterId.");
             }
 
             writer.WriteVarLong((long)replacedCharacterId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             replacedCharacterId = (long)reader.ReadVarUhLong();
             if (replacedCharacterId < 0 || replacedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + replacedCharacterId + ") on element of GuildFightTakePlaceRequestMessage.replacedCharacterId.");
+                throw new System.Exception("Forbidden value (" + replacedCharacterId + ") on element of GuildFightTakePlaceRequestMessage.replacedCharacterId.");
             }
 
         }

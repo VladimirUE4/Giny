@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,18 @@ namespace Giny.Protocol.Messages
         public IdentificationAccountForceMessage()
         {
         }
-        public IdentificationAccountForceMessage(string forcedAccountLogin)
+        public IdentificationAccountForceMessage(string forcedAccountLogin,Version version,string lang,byte[] credentials,short serverId,bool autoconnect,bool useCertificate,bool useLoginToken,long sessionOptionalSalt,short[] failedAttempts)
         {
             this.forcedAccountLogin = forcedAccountLogin;
+            this.version = version;
+            this.lang = lang;
+            this.credentials = credentials;
+            this.serverId = serverId;
+            this.autoconnect = autoconnect;
+            this.useCertificate = useCertificate;
+            this.useLoginToken = useLoginToken;
+            this.sessionOptionalSalt = sessionOptionalSalt;
+            this.failedAttempts = failedAttempts;
         }
         public override void Serialize(IDataWriter writer)
         {

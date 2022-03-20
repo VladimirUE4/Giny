@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -47,7 +46,7 @@ namespace Giny.Protocol.Types
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ObjectItemMinimalInformation.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ObjectItemMinimalInformation.objectGID.");
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();

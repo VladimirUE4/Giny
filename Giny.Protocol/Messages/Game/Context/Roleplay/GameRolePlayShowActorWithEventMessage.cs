@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public GameRolePlayShowActorWithEventMessage()
         {
         }
-        public GameRolePlayShowActorWithEventMessage(byte actorEventId)
+        public GameRolePlayShowActorWithEventMessage(byte actorEventId,GameRolePlayActorInformations informations)
         {
             this.actorEventId = actorEventId;
+            this.informations = informations;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (actorEventId < 0)
             {
-                throw new Exception("Forbidden value (" + actorEventId + ") on element actorEventId.");
+                throw new System.Exception("Forbidden value (" + actorEventId + ") on element actorEventId.");
             }
 
             writer.WriteByte((byte)actorEventId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             actorEventId = (byte)reader.ReadByte();
             if (actorEventId < 0)
             {
-                throw new Exception("Forbidden value (" + actorEventId + ") on element of GameRolePlayShowActorWithEventMessage.actorEventId.");
+                throw new System.Exception("Forbidden value (" + actorEventId + ") on element of GameRolePlayShowActorWithEventMessage.actorEventId.");
             }
 
         }

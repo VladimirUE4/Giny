@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public CharacterCharacteristicValue()
         {
         }
-        public CharacterCharacteristicValue(int total)
+        public CharacterCharacteristicValue(int total,short characteristicId)
         {
             this.total = total;
+            this.characteristicId = characteristicId;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public InteractiveUseWithParamRequestMessage()
         {
         }
-        public InteractiveUseWithParamRequestMessage(int id)
+        public InteractiveUseWithParamRequestMessage(int id,int elemId,int skillInstanceUid)
         {
             this.id = id;
+            this.elemId = elemId;
+            this.skillInstanceUid = skillInstanceUid;
         }
         public override void Serialize(IDataWriter writer)
         {

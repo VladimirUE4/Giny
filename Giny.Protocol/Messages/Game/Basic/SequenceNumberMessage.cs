@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (number < 0 || number > 65535)
             {
-                throw new Exception("Forbidden value (" + number + ") on element number.");
+                throw new System.Exception("Forbidden value (" + number + ") on element number.");
             }
 
             writer.WriteShort((short)number);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             number = (short)reader.ReadUShort();
             if (number < 0 || number > 65535)
             {
-                throw new Exception("Forbidden value (" + number + ") on element of SequenceNumberMessage.number.");
+                throw new System.Exception("Forbidden value (" + number + ") on element of SequenceNumberMessage.number.");
             }
 
         }

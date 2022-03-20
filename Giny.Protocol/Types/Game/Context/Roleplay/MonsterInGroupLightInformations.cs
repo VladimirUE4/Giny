@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,13 +28,13 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)genericId);
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element grade.");
             }
 
             writer.WriteByte((byte)grade);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteShort((short)level);
@@ -46,13 +45,13 @@ namespace Giny.Protocol.Types
             grade = (byte)reader.ReadByte();
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element of MonsterInGroupLightInformations.grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element of MonsterInGroupLightInformations.grade.");
             }
 
             level = (short)reader.ReadShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of MonsterInGroupLightInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of MonsterInGroupLightInformations.level.");
             }
 
         }

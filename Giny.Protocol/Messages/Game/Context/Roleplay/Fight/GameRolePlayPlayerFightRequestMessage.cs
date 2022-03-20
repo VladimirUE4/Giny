@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteVarLong((long)targetId);
             if (targetCellId < -1 || targetCellId > 559)
             {
-                throw new Exception("Forbidden value (" + targetCellId + ") on element targetCellId.");
+                throw new System.Exception("Forbidden value (" + targetCellId + ") on element targetCellId.");
             }
 
             writer.WriteShort((short)targetCellId);
@@ -47,13 +46,13 @@ namespace Giny.Protocol.Messages
             targetId = (long)reader.ReadVarUhLong();
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameRolePlayPlayerFightRequestMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameRolePlayPlayerFightRequestMessage.targetId.");
             }
 
             targetCellId = (short)reader.ReadShort();
             if (targetCellId < -1 || targetCellId > 559)
             {
-                throw new Exception("Forbidden value (" + targetCellId + ") on element of GameRolePlayPlayerFightRequestMessage.targetCellId.");
+                throw new System.Exception("Forbidden value (" + targetCellId + ") on element of GameRolePlayPlayerFightRequestMessage.targetCellId.");
             }
 
             friendly = (bool)reader.ReadBoolean();

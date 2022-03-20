@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -20,24 +19,28 @@ namespace Giny.Protocol.Messages
         public MimicryObjectFeedAndAssociateRequestMessage()
         {
         }
-        public MimicryObjectFeedAndAssociateRequestMessage(int foodUID,byte foodPos,bool preview)
+        public MimicryObjectFeedAndAssociateRequestMessage(int foodUID,byte foodPos,bool preview,int symbioteUID,byte symbiotePos,int hostUID,byte hostPos)
         {
             this.foodUID = foodUID;
             this.foodPos = foodPos;
             this.preview = preview;
+            this.symbioteUID = symbioteUID;
+            this.symbiotePos = symbiotePos;
+            this.hostUID = hostUID;
+            this.hostPos = hostPos;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (foodUID < 0)
             {
-                throw new Exception("Forbidden value (" + foodUID + ") on element foodUID.");
+                throw new System.Exception("Forbidden value (" + foodUID + ") on element foodUID.");
             }
 
             writer.WriteVarInt((int)foodUID);
             if (foodPos < 0 || foodPos > 255)
             {
-                throw new Exception("Forbidden value (" + foodPos + ") on element foodPos.");
+                throw new System.Exception("Forbidden value (" + foodPos + ") on element foodPos.");
             }
 
             writer.WriteByte((byte)foodPos);
@@ -49,13 +52,13 @@ namespace Giny.Protocol.Messages
             foodUID = (int)reader.ReadVarUhInt();
             if (foodUID < 0)
             {
-                throw new Exception("Forbidden value (" + foodUID + ") on element of MimicryObjectFeedAndAssociateRequestMessage.foodUID.");
+                throw new System.Exception("Forbidden value (" + foodUID + ") on element of MimicryObjectFeedAndAssociateRequestMessage.foodUID.");
             }
 
             foodPos = (byte)reader.ReadSByte();
             if (foodPos < 0 || foodPos > 255)
             {
-                throw new Exception("Forbidden value (" + foodPos + ") on element of MimicryObjectFeedAndAssociateRequestMessage.foodPos.");
+                throw new System.Exception("Forbidden value (" + foodPos + ") on element of MimicryObjectFeedAndAssociateRequestMessage.foodPos.");
             }
 
             preview = (bool)reader.ReadBoolean();

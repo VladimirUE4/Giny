@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public CharacterReplayWithRemodelRequestMessage()
         {
         }
-        public CharacterReplayWithRemodelRequestMessage(RemodelingInformation remodel)
+        public CharacterReplayWithRemodelRequestMessage(RemodelingInformation remodel,long characterId)
         {
             this.remodel = remodel;
+            this.characterId = characterId;
         }
         public override void Serialize(IDataWriter writer)
         {

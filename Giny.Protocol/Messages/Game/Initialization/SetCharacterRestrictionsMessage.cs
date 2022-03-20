@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (actorId < -9.00719925474099E+15 || actorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + actorId + ") on element actorId.");
+                throw new System.Exception("Forbidden value (" + actorId + ") on element actorId.");
             }
 
             writer.WriteDouble((double)actorId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             actorId = (double)reader.ReadDouble();
             if (actorId < -9.00719925474099E+15 || actorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + actorId + ") on element of SetCharacterRestrictionsMessage.actorId.");
+                throw new System.Exception("Forbidden value (" + actorId + ") on element of SetCharacterRestrictionsMessage.actorId.");
             }
 
             restrictions = new ActorRestrictionsInformations();

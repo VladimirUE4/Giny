@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
 
             if (alreadyConnectedToServerId < 0)
             {
-                throw new Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element alreadyConnectedToServerId.");
+                throw new System.Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element alreadyConnectedToServerId.");
             }
 
             writer.WriteVarShort((short)alreadyConnectedToServerId);
@@ -56,7 +55,7 @@ namespace Giny.Protocol.Messages
             alreadyConnectedToServerId = (short)reader.ReadVarUhShort();
             if (alreadyConnectedToServerId < 0)
             {
-                throw new Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element of ServersListMessage.alreadyConnectedToServerId.");
+                throw new System.Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element of ServersListMessage.alreadyConnectedToServerId.");
             }
 
             canCreateNewCharacter = (bool)reader.ReadBoolean();

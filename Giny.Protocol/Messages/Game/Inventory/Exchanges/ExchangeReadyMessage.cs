@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteBoolean((bool)ready);
             if (step < 0)
             {
-                throw new Exception("Forbidden value (" + step + ") on element step.");
+                throw new System.Exception("Forbidden value (" + step + ") on element step.");
             }
 
             writer.WriteVarShort((short)step);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             step = (short)reader.ReadVarUhShort();
             if (step < 0)
             {
-                throw new Exception("Forbidden value (" + step + ") on element of ExchangeReadyMessage.step.");
+                throw new System.Exception("Forbidden value (" + step + ") on element of ExchangeReadyMessage.step.");
             }
 
         }

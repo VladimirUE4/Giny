@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Types
             teamId = (byte)reader.ReadByte();
             if (teamId < 0)
             {
-                throw new Exception("Forbidden value (" + teamId + ") on element of GameContextBasicSpawnInformation.teamId.");
+                throw new System.Exception("Forbidden value (" + teamId + ") on element of GameContextBasicSpawnInformation.teamId.");
             }
 
             alive = (bool)reader.ReadBoolean();

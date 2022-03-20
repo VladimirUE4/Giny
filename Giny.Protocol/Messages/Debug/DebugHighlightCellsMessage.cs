@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (color < -9.00719925474099E+15 || color > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + color + ") on element color.");
+                throw new System.Exception("Forbidden value (" + color + ") on element color.");
             }
 
             writer.WriteDouble((double)color);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Messages
             {
                 if (cells[_i2] < 0 || cells[_i2] > 559)
                 {
-                    throw new Exception("Forbidden value (" + cells[_i2] + ") on element 2 (starting at 1) of cells.");
+                    throw new System.Exception("Forbidden value (" + cells[_i2] + ") on element 2 (starting at 1) of cells.");
                 }
 
                 writer.WriteVarShort((short)cells[_i2]);
@@ -50,7 +49,7 @@ namespace Giny.Protocol.Messages
             color = (double)reader.ReadDouble();
             if (color < -9.00719925474099E+15 || color > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + color + ") on element of DebugHighlightCellsMessage.color.");
+                throw new System.Exception("Forbidden value (" + color + ") on element of DebugHighlightCellsMessage.color.");
             }
 
             uint _cellsLen = (uint)reader.ReadUShort();
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0 || _val2 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of cells.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of cells.");
                 }
 
                 cells[_i2] = (short)_val2;

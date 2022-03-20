@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (nbPaddockMax < 0)
             {
-                throw new Exception("Forbidden value (" + nbPaddockMax + ") on element nbPaddockMax.");
+                throw new System.Exception("Forbidden value (" + nbPaddockMax + ") on element nbPaddockMax.");
             }
 
             writer.WriteByte((byte)nbPaddockMax);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             nbPaddockMax = (byte)reader.ReadByte();
             if (nbPaddockMax < 0)
             {
-                throw new Exception("Forbidden value (" + nbPaddockMax + ") on element of GuildInformationsPaddocksMessage.nbPaddockMax.");
+                throw new System.Exception("Forbidden value (" + nbPaddockMax + ") on element of GuildInformationsPaddocksMessage.nbPaddockMax.");
             }
 
             uint _paddocksInformationsLen = (uint)reader.ReadUShort();

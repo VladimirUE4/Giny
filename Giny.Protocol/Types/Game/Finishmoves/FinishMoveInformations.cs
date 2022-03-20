@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (finishMoveId < 0)
             {
-                throw new Exception("Forbidden value (" + finishMoveId + ") on element finishMoveId.");
+                throw new System.Exception("Forbidden value (" + finishMoveId + ") on element finishMoveId.");
             }
 
             writer.WriteInt((int)finishMoveId);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
             finishMoveId = (int)reader.ReadInt();
             if (finishMoveId < 0)
             {
-                throw new Exception("Forbidden value (" + finishMoveId + ") on element of FinishMoveInformations.finishMoveId.");
+                throw new System.Exception("Forbidden value (" + finishMoveId + ") on element of FinishMoveInformations.finishMoveId.");
             }
 
             finishMoveState = (bool)reader.ReadBoolean();

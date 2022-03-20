@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,24 @@ namespace Giny.Protocol.Messages
         public ExchangePlayerMultiCraftRequestMessage()
         {
         }
-        public ExchangePlayerMultiCraftRequestMessage(long target,int skillId)
+        public ExchangePlayerMultiCraftRequestMessage(long target,int skillId,byte exchangeType)
         {
             this.target = target;
             this.skillId = skillId;
+            this.exchangeType = exchangeType;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (target < 0 || target > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + target + ") on element target.");
+                throw new System.Exception("Forbidden value (" + target + ") on element target.");
             }
 
             writer.WriteVarLong((long)target);
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarInt((int)skillId);
@@ -46,13 +46,13 @@ namespace Giny.Protocol.Messages
             target = (long)reader.ReadVarUhLong();
             if (target < 0 || target > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + target + ") on element of ExchangePlayerMultiCraftRequestMessage.target.");
+                throw new System.Exception("Forbidden value (" + target + ") on element of ExchangePlayerMultiCraftRequestMessage.target.");
             }
 
             skillId = (int)reader.ReadVarUhInt();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of ExchangePlayerMultiCraftRequestMessage.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of ExchangePlayerMultiCraftRequestMessage.skillId.");
             }
 
         }

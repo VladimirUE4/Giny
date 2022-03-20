@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,22 @@ namespace Giny.Protocol.Types
         public FightResultPlayerListEntry()
         {
         }
-        public FightResultPlayerListEntry(short level,FightResultAdditionalData[] additional)
+        public FightResultPlayerListEntry(short level,FightResultAdditionalData[] additional,short outcome,byte wave,FightLoot rewards,double id,bool alive)
         {
             this.level = level;
             this.additional = additional;
+            this.outcome = outcome;
+            this.wave = wave;
+            this.rewards = rewards;
+            this.id = id;
+            this.alive = alive;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -47,7 +51,7 @@ namespace Giny.Protocol.Types
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of FightResultPlayerListEntry.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of FightResultPlayerListEntry.level.");
             }
 
             uint _additionalLen = (uint)reader.ReadUShort();

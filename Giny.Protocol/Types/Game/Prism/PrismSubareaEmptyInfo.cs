@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element allianceId.");
             }
 
             writer.WriteVarInt((int)allianceId);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PrismSubareaEmptyInfo.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PrismSubareaEmptyInfo.subAreaId.");
             }
 
             allianceId = (int)reader.ReadVarUhInt();
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element of PrismSubareaEmptyInfo.allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element of PrismSubareaEmptyInfo.allianceId.");
             }
 
         }

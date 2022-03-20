@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,11 +17,14 @@ namespace Giny.Protocol.Types
         public GameRolePlayTaxCollectorInformations()
         {
         }
-        public GameRolePlayTaxCollectorInformations(TaxCollectorStaticInformations identification,byte guildLevel,int taxCollectorAttack)
+        public GameRolePlayTaxCollectorInformations(TaxCollectorStaticInformations identification,byte guildLevel,int taxCollectorAttack,double contextualId,EntityDispositionInformations disposition,EntityLook look)
         {
             this.identification = identification;
             this.guildLevel = guildLevel;
             this.taxCollectorAttack = taxCollectorAttack;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -31,7 +33,7 @@ namespace Giny.Protocol.Types
             identification.Serialize(writer);
             if (guildLevel < 0 || guildLevel > 255)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
             }
 
             writer.WriteByte((byte)guildLevel);
@@ -46,7 +48,7 @@ namespace Giny.Protocol.Types
             guildLevel = (byte)reader.ReadSByte();
             if (guildLevel < 0 || guildLevel > 255)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element of GameRolePlayTaxCollectorInformations.guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element of GameRolePlayTaxCollectorInformations.guildLevel.");
             }
 
             taxCollectorAttack = (int)reader.ReadInt();

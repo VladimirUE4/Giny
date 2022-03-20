@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -48,13 +47,13 @@ namespace Giny.Protocol.Messages
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PrismFightDefenderAddMessage.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PrismFightDefenderAddMessage.subAreaId.");
             }
 
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of PrismFightDefenderAddMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of PrismFightDefenderAddMessage.fightId.");
             }
 
             uint _id3 = (uint)reader.ReadUShort();

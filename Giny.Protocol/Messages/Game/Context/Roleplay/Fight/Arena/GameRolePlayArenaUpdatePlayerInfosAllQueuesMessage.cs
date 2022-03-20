@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,10 +18,11 @@ namespace Giny.Protocol.Messages
         public GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage()
         {
         }
-        public GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(ArenaRankInfos team,ArenaRankInfos duel)
+        public GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(ArenaRankInfos team,ArenaRankInfos duel,ArenaRankInfos solo)
         {
             this.team = team;
             this.duel = duel;
+            this.solo = solo;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (id < 1 || id > 2147483647)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteInt((int)id);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             id = (int)reader.ReadInt();
             if (id < 1 || id > 2147483647)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of CharacterSelectedForceMessage.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of CharacterSelectedForceMessage.id.");
             }
 
         }

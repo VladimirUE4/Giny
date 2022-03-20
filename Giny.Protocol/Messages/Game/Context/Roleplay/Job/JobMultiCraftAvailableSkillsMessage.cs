@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,17 +18,18 @@ namespace Giny.Protocol.Messages
         public JobMultiCraftAvailableSkillsMessage()
         {
         }
-        public JobMultiCraftAvailableSkillsMessage(long playerId,short[] skills)
+        public JobMultiCraftAvailableSkillsMessage(long playerId,short[] skills,bool enabled)
         {
             this.playerId = playerId;
             this.skills = skills;
+            this.enabled = enabled;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             {
                 if (skills[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + skills[_i2] + ") on element 2 (starting at 1) of skills.");
+                    throw new System.Exception("Forbidden value (" + skills[_i2] + ") on element 2 (starting at 1) of skills.");
                 }
 
                 writer.WriteVarShort((short)skills[_i2]);
@@ -52,7 +52,7 @@ namespace Giny.Protocol.Messages
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of JobMultiCraftAvailableSkillsMessage.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of JobMultiCraftAvailableSkillsMessage.playerId.");
             }
 
             uint _skillsLen = (uint)reader.ReadUShort();
@@ -62,7 +62,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of skills.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of skills.");
                 }
 
                 skills[_i2] = (short)_val2;

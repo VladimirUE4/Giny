@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -44,49 +43,49 @@ namespace Giny.Protocol.Messages
         {
             if (maxTaxCollectorsCount < 0)
             {
-                throw new Exception("Forbidden value (" + maxTaxCollectorsCount + ") on element maxTaxCollectorsCount.");
+                throw new System.Exception("Forbidden value (" + maxTaxCollectorsCount + ") on element maxTaxCollectorsCount.");
             }
 
             writer.WriteByte((byte)maxTaxCollectorsCount);
             if (taxCollectorsCount < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorsCount + ") on element taxCollectorsCount.");
+                throw new System.Exception("Forbidden value (" + taxCollectorsCount + ") on element taxCollectorsCount.");
             }
 
             writer.WriteByte((byte)taxCollectorsCount);
             if (taxCollectorLifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorLifePoints + ") on element taxCollectorLifePoints.");
+                throw new System.Exception("Forbidden value (" + taxCollectorLifePoints + ") on element taxCollectorLifePoints.");
             }
 
             writer.WriteVarShort((short)taxCollectorLifePoints);
             if (taxCollectorDamagesBonuses < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorDamagesBonuses + ") on element taxCollectorDamagesBonuses.");
+                throw new System.Exception("Forbidden value (" + taxCollectorDamagesBonuses + ") on element taxCollectorDamagesBonuses.");
             }
 
             writer.WriteVarShort((short)taxCollectorDamagesBonuses);
             if (taxCollectorPods < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorPods + ") on element taxCollectorPods.");
+                throw new System.Exception("Forbidden value (" + taxCollectorPods + ") on element taxCollectorPods.");
             }
 
             writer.WriteVarShort((short)taxCollectorPods);
             if (taxCollectorProspecting < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorProspecting + ") on element taxCollectorProspecting.");
+                throw new System.Exception("Forbidden value (" + taxCollectorProspecting + ") on element taxCollectorProspecting.");
             }
 
             writer.WriteVarShort((short)taxCollectorProspecting);
             if (taxCollectorWisdom < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorWisdom + ") on element taxCollectorWisdom.");
+                throw new System.Exception("Forbidden value (" + taxCollectorWisdom + ") on element taxCollectorWisdom.");
             }
 
             writer.WriteVarShort((short)taxCollectorWisdom);
             if (boostPoints < 0)
             {
-                throw new Exception("Forbidden value (" + boostPoints + ") on element boostPoints.");
+                throw new System.Exception("Forbidden value (" + boostPoints + ") on element boostPoints.");
             }
 
             writer.WriteVarShort((short)boostPoints);
@@ -95,7 +94,7 @@ namespace Giny.Protocol.Messages
             {
                 if (spellId[_i9] < 0)
                 {
-                    throw new Exception("Forbidden value (" + spellId[_i9] + ") on element 9 (starting at 1) of spellId.");
+                    throw new System.Exception("Forbidden value (" + spellId[_i9] + ") on element 9 (starting at 1) of spellId.");
                 }
 
                 writer.WriteVarShort((short)spellId[_i9]);
@@ -115,49 +114,49 @@ namespace Giny.Protocol.Messages
             maxTaxCollectorsCount = (byte)reader.ReadByte();
             if (maxTaxCollectorsCount < 0)
             {
-                throw new Exception("Forbidden value (" + maxTaxCollectorsCount + ") on element of GuildInfosUpgradeMessage.maxTaxCollectorsCount.");
+                throw new System.Exception("Forbidden value (" + maxTaxCollectorsCount + ") on element of GuildInfosUpgradeMessage.maxTaxCollectorsCount.");
             }
 
             taxCollectorsCount = (byte)reader.ReadByte();
             if (taxCollectorsCount < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorsCount + ") on element of GuildInfosUpgradeMessage.taxCollectorsCount.");
+                throw new System.Exception("Forbidden value (" + taxCollectorsCount + ") on element of GuildInfosUpgradeMessage.taxCollectorsCount.");
             }
 
             taxCollectorLifePoints = (short)reader.ReadVarUhShort();
             if (taxCollectorLifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorLifePoints + ") on element of GuildInfosUpgradeMessage.taxCollectorLifePoints.");
+                throw new System.Exception("Forbidden value (" + taxCollectorLifePoints + ") on element of GuildInfosUpgradeMessage.taxCollectorLifePoints.");
             }
 
             taxCollectorDamagesBonuses = (short)reader.ReadVarUhShort();
             if (taxCollectorDamagesBonuses < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorDamagesBonuses + ") on element of GuildInfosUpgradeMessage.taxCollectorDamagesBonuses.");
+                throw new System.Exception("Forbidden value (" + taxCollectorDamagesBonuses + ") on element of GuildInfosUpgradeMessage.taxCollectorDamagesBonuses.");
             }
 
             taxCollectorPods = (short)reader.ReadVarUhShort();
             if (taxCollectorPods < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorPods + ") on element of GuildInfosUpgradeMessage.taxCollectorPods.");
+                throw new System.Exception("Forbidden value (" + taxCollectorPods + ") on element of GuildInfosUpgradeMessage.taxCollectorPods.");
             }
 
             taxCollectorProspecting = (short)reader.ReadVarUhShort();
             if (taxCollectorProspecting < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorProspecting + ") on element of GuildInfosUpgradeMessage.taxCollectorProspecting.");
+                throw new System.Exception("Forbidden value (" + taxCollectorProspecting + ") on element of GuildInfosUpgradeMessage.taxCollectorProspecting.");
             }
 
             taxCollectorWisdom = (short)reader.ReadVarUhShort();
             if (taxCollectorWisdom < 0)
             {
-                throw new Exception("Forbidden value (" + taxCollectorWisdom + ") on element of GuildInfosUpgradeMessage.taxCollectorWisdom.");
+                throw new System.Exception("Forbidden value (" + taxCollectorWisdom + ") on element of GuildInfosUpgradeMessage.taxCollectorWisdom.");
             }
 
             boostPoints = (short)reader.ReadVarUhShort();
             if (boostPoints < 0)
             {
-                throw new Exception("Forbidden value (" + boostPoints + ") on element of GuildInfosUpgradeMessage.boostPoints.");
+                throw new System.Exception("Forbidden value (" + boostPoints + ") on element of GuildInfosUpgradeMessage.boostPoints.");
             }
 
             uint _spellIdLen = (uint)reader.ReadUShort();
@@ -167,7 +166,7 @@ namespace Giny.Protocol.Messages
                 _val9 = (uint)reader.ReadVarUhShort();
                 if (_val9 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val9 + ") on elements of spellId.");
+                    throw new System.Exception("Forbidden value (" + _val9 + ") on elements of spellId.");
                 }
 
                 spellId[_i9] = (short)_val9;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarShort((short)id);
@@ -52,7 +51,7 @@ namespace Giny.Protocol.Types
             id = (short)reader.ReadVarUhShort();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of Achievement.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of Achievement.id.");
             }
 
             uint _finishedObjectiveLen = (uint)reader.ReadUShort();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             writer.WriteVarShort((short)outcome);
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element wave.");
             }
 
             writer.WriteByte((byte)wave);
@@ -40,13 +39,13 @@ namespace Giny.Protocol.Types
             outcome = (short)reader.ReadVarUhShort();
             if (outcome < 0)
             {
-                throw new Exception("Forbidden value (" + outcome + ") on element of FightResultListEntry.outcome.");
+                throw new System.Exception("Forbidden value (" + outcome + ") on element of FightResultListEntry.outcome.");
             }
 
             wave = (byte)reader.ReadByte();
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element of FightResultListEntry.wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element of FightResultListEntry.wave.");
             }
 
             rewards = new FightLoot();

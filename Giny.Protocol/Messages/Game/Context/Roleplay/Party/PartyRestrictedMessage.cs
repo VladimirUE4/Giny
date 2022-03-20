@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyRestrictedMessage()
         {
         }
-        public PartyRestrictedMessage(bool restricted)
+        public PartyRestrictedMessage(bool restricted,int partyId)
         {
             this.restricted = restricted;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {

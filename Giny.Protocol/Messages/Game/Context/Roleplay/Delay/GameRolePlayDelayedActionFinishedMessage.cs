@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (delayedCharacterId < -9.00719925474099E+15 || delayedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayedCharacterId + ") on element delayedCharacterId.");
+                throw new System.Exception("Forbidden value (" + delayedCharacterId + ") on element delayedCharacterId.");
             }
 
             writer.WriteDouble((double)delayedCharacterId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             delayedCharacterId = (double)reader.ReadDouble();
             if (delayedCharacterId < -9.00719925474099E+15 || delayedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayedCharacterId + ") on element of GameRolePlayDelayedActionFinishedMessage.delayedCharacterId.");
+                throw new System.Exception("Forbidden value (" + delayedCharacterId + ") on element of GameRolePlayDelayedActionFinishedMessage.delayedCharacterId.");
             }
 
             delayTypeId = (byte)reader.ReadByte();
             if (delayTypeId < 0)
             {
-                throw new Exception("Forbidden value (" + delayTypeId + ") on element of GameRolePlayDelayedActionFinishedMessage.delayTypeId.");
+                throw new System.Exception("Forbidden value (" + delayTypeId + ") on element of GameRolePlayDelayedActionFinishedMessage.delayTypeId.");
             }
 
         }

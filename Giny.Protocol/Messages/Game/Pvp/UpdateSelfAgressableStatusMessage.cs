@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)status);
             if (probationTime < 0)
             {
-                throw new Exception("Forbidden value (" + probationTime + ") on element probationTime.");
+                throw new System.Exception("Forbidden value (" + probationTime + ") on element probationTime.");
             }
 
             writer.WriteInt((int)probationTime);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             status = (byte)reader.ReadByte();
             if (status < 0)
             {
-                throw new Exception("Forbidden value (" + status + ") on element of UpdateSelfAgressableStatusMessage.status.");
+                throw new System.Exception("Forbidden value (" + status + ") on element of UpdateSelfAgressableStatusMessage.status.");
             }
 
             probationTime = (int)reader.ReadInt();
             if (probationTime < 0)
             {
-                throw new Exception("Forbidden value (" + probationTime + ") on element of UpdateSelfAgressableStatusMessage.probationTime.");
+                throw new System.Exception("Forbidden value (" + probationTime + ") on element of UpdateSelfAgressableStatusMessage.probationTime.");
             }
 
         }

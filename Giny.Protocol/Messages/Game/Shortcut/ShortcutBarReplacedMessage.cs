@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             barType = (byte)reader.ReadByte();
             if (barType < 0)
             {
-                throw new Exception("Forbidden value (" + barType + ") on element of ShortcutBarReplacedMessage.barType.");
+                throw new System.Exception("Forbidden value (" + barType + ") on element of ShortcutBarReplacedMessage.barType.");
             }
 
             uint _id2 = (uint)reader.ReadUShort();

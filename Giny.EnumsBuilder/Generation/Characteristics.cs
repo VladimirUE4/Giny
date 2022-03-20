@@ -18,9 +18,20 @@ namespace Giny.EnumsBuilder.Generation
 
             StringBuilder sb = new StringBuilder();
 
+            List<string> keywords = new List<string>();
+
+
             foreach (var characteristic in characteristics)
             {
-                sb.AppendLine(ApplyRules(characteristic.keyword) + "=" + characteristic.id + ",");
+                string key = ApplyRules(characteristic.keyword);
+
+                if (keywords.Contains(key))
+                {
+                    key += characteristic.id;
+                }
+
+                sb.AppendLine(key + "=" + characteristic.id + ",");
+                keywords.Add(key);
             }
 
             return sb.ToString();

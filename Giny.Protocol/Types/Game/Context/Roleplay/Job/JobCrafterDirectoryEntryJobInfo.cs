@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,20 +29,20 @@ namespace Giny.Protocol.Types
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
             if (jobLevel < 1 || jobLevel > 200)
             {
-                throw new Exception("Forbidden value (" + jobLevel + ") on element jobLevel.");
+                throw new System.Exception("Forbidden value (" + jobLevel + ") on element jobLevel.");
             }
 
             writer.WriteByte((byte)jobLevel);
             writer.WriteBoolean((bool)free);
             if (minLevel < 0 || minLevel > 255)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element minLevel.");
             }
 
             writer.WriteByte((byte)minLevel);
@@ -53,20 +52,20 @@ namespace Giny.Protocol.Types
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectoryEntryJobInfo.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectoryEntryJobInfo.jobId.");
             }
 
             jobLevel = (byte)reader.ReadSByte();
             if (jobLevel < 1 || jobLevel > 200)
             {
-                throw new Exception("Forbidden value (" + jobLevel + ") on element of JobCrafterDirectoryEntryJobInfo.jobLevel.");
+                throw new System.Exception("Forbidden value (" + jobLevel + ") on element of JobCrafterDirectoryEntryJobInfo.jobLevel.");
             }
 
             free = (bool)reader.ReadBoolean();
             minLevel = (byte)reader.ReadSByte();
             if (minLevel < 0 || minLevel > 255)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element of JobCrafterDirectoryEntryJobInfo.minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element of JobCrafterDirectoryEntryJobInfo.minLevel.");
             }
 
         }

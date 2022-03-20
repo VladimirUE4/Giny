@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public CharacterCharacteristicForPreset()
         {
         }
-        public CharacterCharacteristicForPreset(short stuff)
+        public CharacterCharacteristicForPreset(short stuff,string keyword,short @base,short additionnal)
         {
             this.stuff = stuff;
+            this.keyword = keyword;
+            this.@base = @base;
+            this.additionnal = additionnal;
         }
         public override void Serialize(IDataWriter writer)
         {

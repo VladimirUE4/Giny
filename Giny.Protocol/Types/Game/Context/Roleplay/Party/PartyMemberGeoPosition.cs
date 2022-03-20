@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,31 +31,31 @@ namespace Giny.Protocol.Types
         {
             if (memberId < 0)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element memberId.");
             }
 
             writer.WriteInt((int)memberId);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -66,31 +65,31 @@ namespace Giny.Protocol.Types
             memberId = (int)reader.ReadInt();
             if (memberId < 0)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element of PartyMemberGeoPosition.memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element of PartyMemberGeoPosition.memberId.");
             }
 
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of PartyMemberGeoPosition.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of PartyMemberGeoPosition.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of PartyMemberGeoPosition.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of PartyMemberGeoPosition.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of PartyMemberGeoPosition.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of PartyMemberGeoPosition.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PartyMemberGeoPosition.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PartyMemberGeoPosition.subAreaId.");
             }
 
         }

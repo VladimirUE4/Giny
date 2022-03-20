@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public ForgettableSpellItem()
         {
         }
-        public ForgettableSpellItem(bool available)
+        public ForgettableSpellItem(bool available,int spellId,short spellLevel)
         {
             this.available = available;
+            this.spellId = spellId;
+            this.spellLevel = spellLevel;
         }
         public override void Serialize(IDataWriter writer)
         {

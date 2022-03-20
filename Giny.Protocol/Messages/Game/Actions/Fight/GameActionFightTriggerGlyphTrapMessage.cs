@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -21,12 +20,14 @@ namespace Giny.Protocol.Messages
         public GameActionFightTriggerGlyphTrapMessage()
         {
         }
-        public GameActionFightTriggerGlyphTrapMessage(short markId,short markImpactCell,double triggeringCharacterId,short triggeredSpellId)
+        public GameActionFightTriggerGlyphTrapMessage(short markId,short markImpactCell,double triggeringCharacterId,short triggeredSpellId,short actionId,double sourceId)
         {
             this.markId = markId;
             this.markImpactCell = markImpactCell;
             this.triggeringCharacterId = triggeringCharacterId;
             this.triggeredSpellId = triggeredSpellId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -34,19 +35,19 @@ namespace Giny.Protocol.Messages
             writer.WriteShort((short)markId);
             if (markImpactCell < 0)
             {
-                throw new Exception("Forbidden value (" + markImpactCell + ") on element markImpactCell.");
+                throw new System.Exception("Forbidden value (" + markImpactCell + ") on element markImpactCell.");
             }
 
             writer.WriteVarShort((short)markImpactCell);
             if (triggeringCharacterId < -9.00719925474099E+15 || triggeringCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + triggeringCharacterId + ") on element triggeringCharacterId.");
+                throw new System.Exception("Forbidden value (" + triggeringCharacterId + ") on element triggeringCharacterId.");
             }
 
             writer.WriteDouble((double)triggeringCharacterId);
             if (triggeredSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + triggeredSpellId + ") on element triggeredSpellId.");
+                throw new System.Exception("Forbidden value (" + triggeredSpellId + ") on element triggeredSpellId.");
             }
 
             writer.WriteVarShort((short)triggeredSpellId);
@@ -58,19 +59,19 @@ namespace Giny.Protocol.Messages
             markImpactCell = (short)reader.ReadVarUhShort();
             if (markImpactCell < 0)
             {
-                throw new Exception("Forbidden value (" + markImpactCell + ") on element of GameActionFightTriggerGlyphTrapMessage.markImpactCell.");
+                throw new System.Exception("Forbidden value (" + markImpactCell + ") on element of GameActionFightTriggerGlyphTrapMessage.markImpactCell.");
             }
 
             triggeringCharacterId = (double)reader.ReadDouble();
             if (triggeringCharacterId < -9.00719925474099E+15 || triggeringCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + triggeringCharacterId + ") on element of GameActionFightTriggerGlyphTrapMessage.triggeringCharacterId.");
+                throw new System.Exception("Forbidden value (" + triggeringCharacterId + ") on element of GameActionFightTriggerGlyphTrapMessage.triggeringCharacterId.");
             }
 
             triggeredSpellId = (short)reader.ReadVarUhShort();
             if (triggeredSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + triggeredSpellId + ") on element of GameActionFightTriggerGlyphTrapMessage.triggeredSpellId.");
+                throw new System.Exception("Forbidden value (" + triggeredSpellId + ") on element of GameActionFightTriggerGlyphTrapMessage.triggeredSpellId.");
             }
 
         }

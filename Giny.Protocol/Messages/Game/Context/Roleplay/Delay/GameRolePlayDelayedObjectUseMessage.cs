@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,19 @@ namespace Giny.Protocol.Messages
         public GameRolePlayDelayedObjectUseMessage()
         {
         }
-        public GameRolePlayDelayedObjectUseMessage(short objectGID)
+        public GameRolePlayDelayedObjectUseMessage(short objectGID,double delayedCharacterId,byte delayTypeId,double delayEndTime)
         {
             this.objectGID = objectGID;
+            this.delayedCharacterId = delayedCharacterId;
+            this.delayTypeId = delayTypeId;
+            this.delayEndTime = delayEndTime;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -38,7 +40,7 @@ namespace Giny.Protocol.Messages
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of GameRolePlayDelayedObjectUseMessage.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of GameRolePlayDelayedObjectUseMessage.objectGID.");
             }
 
         }

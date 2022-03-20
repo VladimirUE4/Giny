@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)delayTypeId);
             if (delayEndTime < 0 || delayEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayEndTime + ") on element delayEndTime.");
+                throw new System.Exception("Forbidden value (" + delayEndTime + ") on element delayEndTime.");
             }
 
             writer.WriteDouble((double)delayEndTime);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Types
             delayTypeId = (byte)reader.ReadByte();
             if (delayTypeId < 0)
             {
-                throw new Exception("Forbidden value (" + delayTypeId + ") on element of HumanOptionObjectUse.delayTypeId.");
+                throw new System.Exception("Forbidden value (" + delayTypeId + ") on element of HumanOptionObjectUse.delayTypeId.");
             }
 
             delayEndTime = (double)reader.ReadDouble();
             if (delayEndTime < 0 || delayEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayEndTime + ") on element of HumanOptionObjectUse.delayEndTime.");
+                throw new System.Exception("Forbidden value (" + delayEndTime + ") on element of HumanOptionObjectUse.delayEndTime.");
             }
 
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of HumanOptionObjectUse.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of HumanOptionObjectUse.objectGID.");
             }
 
         }

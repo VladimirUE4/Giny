@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteBoolean((bool)changeOrUse);
             if (codeSize < 0)
             {
-                throw new Exception("Forbidden value (" + codeSize + ") on element codeSize.");
+                throw new System.Exception("Forbidden value (" + codeSize + ") on element codeSize.");
             }
 
             writer.WriteByte((byte)codeSize);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             codeSize = (byte)reader.ReadByte();
             if (codeSize < 0)
             {
-                throw new Exception("Forbidden value (" + codeSize + ") on element of LockableShowCodeDialogMessage.codeSize.");
+                throw new System.Exception("Forbidden value (" + codeSize + ") on element of LockableShowCodeDialogMessage.codeSize.");
             }
 
         }

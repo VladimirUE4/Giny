@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,19 +27,19 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarInt((int)id);
             if (xpBoost < 0)
             {
-                throw new Exception("Forbidden value (" + xpBoost + ") on element xpBoost.");
+                throw new System.Exception("Forbidden value (" + xpBoost + ") on element xpBoost.");
             }
 
             writer.WriteVarShort((short)xpBoost);
             if (dropBoost < 0)
             {
-                throw new Exception("Forbidden value (" + dropBoost + ") on element dropBoost.");
+                throw new System.Exception("Forbidden value (" + dropBoost + ") on element dropBoost.");
             }
 
             writer.WriteVarShort((short)dropBoost);
@@ -50,19 +49,19 @@ namespace Giny.Protocol.Types
             id = (int)reader.ReadVarUhInt();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of MonsterBoosts.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of MonsterBoosts.id.");
             }
 
             xpBoost = (short)reader.ReadVarUhShort();
             if (xpBoost < 0)
             {
-                throw new Exception("Forbidden value (" + xpBoost + ") on element of MonsterBoosts.xpBoost.");
+                throw new System.Exception("Forbidden value (" + xpBoost + ") on element of MonsterBoosts.xpBoost.");
             }
 
             dropBoost = (short)reader.ReadVarUhShort();
             if (dropBoost < 0)
             {
-                throw new Exception("Forbidden value (" + dropBoost + ") on element of MonsterBoosts.dropBoost.");
+                throw new System.Exception("Forbidden value (" + dropBoost + ") on element of MonsterBoosts.dropBoost.");
             }
 
         }

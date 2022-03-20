@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of ObjectItemInRolePlay.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of ObjectItemInRolePlay.cellId.");
             }
 
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ObjectItemInRolePlay.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ObjectItemInRolePlay.objectGID.");
             }
 
         }

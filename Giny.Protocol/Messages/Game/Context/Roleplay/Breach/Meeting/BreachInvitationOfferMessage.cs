@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             host.Serialize(writer);
             if (timeLeftBeforeCancel < 0)
             {
-                throw new Exception("Forbidden value (" + timeLeftBeforeCancel + ") on element timeLeftBeforeCancel.");
+                throw new System.Exception("Forbidden value (" + timeLeftBeforeCancel + ") on element timeLeftBeforeCancel.");
             }
 
             writer.WriteVarInt((int)timeLeftBeforeCancel);
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Messages
             timeLeftBeforeCancel = (int)reader.ReadVarUhInt();
             if (timeLeftBeforeCancel < 0)
             {
-                throw new Exception("Forbidden value (" + timeLeftBeforeCancel + ") on element of BreachInvitationOfferMessage.timeLeftBeforeCancel.");
+                throw new System.Exception("Forbidden value (" + timeLeftBeforeCancel + ") on element of BreachInvitationOfferMessage.timeLeftBeforeCancel.");
             }
 
         }

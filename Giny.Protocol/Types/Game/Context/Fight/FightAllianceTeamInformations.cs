@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,15 @@ namespace Giny.Protocol.Types
         public FightAllianceTeamInformations()
         {
         }
-        public FightAllianceTeamInformations(byte relation)
+        public FightAllianceTeamInformations(byte relation,byte teamId,double leaderId,byte teamSide,byte teamTypeId,byte nbWaves,FightTeamMemberInformations[] teamMembers)
         {
             this.relation = relation;
+            this.teamId = teamId;
+            this.leaderId = leaderId;
+            this.teamSide = teamSide;
+            this.teamTypeId = teamTypeId;
+            this.nbWaves = nbWaves;
+            this.teamMembers = teamMembers;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -31,7 +36,7 @@ namespace Giny.Protocol.Types
             relation = (byte)reader.ReadByte();
             if (relation < 0)
             {
-                throw new Exception("Forbidden value (" + relation + ") on element of FightAllianceTeamInformations.relation.");
+                throw new System.Exception("Forbidden value (" + relation + ") on element of FightAllianceTeamInformations.relation.");
             }
 
         }

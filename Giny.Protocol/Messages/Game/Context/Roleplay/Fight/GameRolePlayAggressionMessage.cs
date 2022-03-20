@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (attackerId < 0 || attackerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + attackerId + ") on element attackerId.");
+                throw new System.Exception("Forbidden value (" + attackerId + ") on element attackerId.");
             }
 
             writer.WriteVarLong((long)attackerId);
             if (defenderId < 0 || defenderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + defenderId + ") on element defenderId.");
+                throw new System.Exception("Forbidden value (" + defenderId + ") on element defenderId.");
             }
 
             writer.WriteVarLong((long)defenderId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             attackerId = (long)reader.ReadVarUhLong();
             if (attackerId < 0 || attackerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + attackerId + ") on element of GameRolePlayAggressionMessage.attackerId.");
+                throw new System.Exception("Forbidden value (" + attackerId + ") on element of GameRolePlayAggressionMessage.attackerId.");
             }
 
             defenderId = (long)reader.ReadVarUhLong();
             if (defenderId < 0 || defenderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + defenderId + ") on element of GameRolePlayAggressionMessage.defenderId.");
+                throw new System.Exception("Forbidden value (" + defenderId + ") on element of GameRolePlayAggressionMessage.defenderId.");
             }
 
         }

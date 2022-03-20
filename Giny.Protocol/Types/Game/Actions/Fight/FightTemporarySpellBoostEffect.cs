@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,24 @@ namespace Giny.Protocol.Types
         public FightTemporarySpellBoostEffect()
         {
         }
-        public FightTemporarySpellBoostEffect(short boostedSpellId)
+        public FightTemporarySpellBoostEffect(short boostedSpellId,int uid,double targetId,short turnDuration,byte dispelable,short spellId,int effectId,int parentBoostUid,int delta)
         {
             this.boostedSpellId = boostedSpellId;
+            this.uid = uid;
+            this.targetId = targetId;
+            this.turnDuration = turnDuration;
+            this.dispelable = dispelable;
+            this.spellId = spellId;
+            this.effectId = effectId;
+            this.parentBoostUid = parentBoostUid;
+            this.delta = delta;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (boostedSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + boostedSpellId + ") on element boostedSpellId.");
+                throw new System.Exception("Forbidden value (" + boostedSpellId + ") on element boostedSpellId.");
             }
 
             writer.WriteVarShort((short)boostedSpellId);
@@ -36,7 +43,7 @@ namespace Giny.Protocol.Types
             boostedSpellId = (short)reader.ReadVarUhShort();
             if (boostedSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + boostedSpellId + ") on element of FightTemporarySpellBoostEffect.boostedSpellId.");
+                throw new System.Exception("Forbidden value (" + boostedSpellId + ") on element of FightTemporarySpellBoostEffect.boostedSpellId.");
             }
 
         }

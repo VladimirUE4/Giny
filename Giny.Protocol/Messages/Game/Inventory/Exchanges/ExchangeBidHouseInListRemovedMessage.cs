@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,13 +30,13 @@ namespace Giny.Protocol.Messages
             writer.WriteInt((int)itemUID);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element objectType.");
             }
 
             writer.WriteInt((int)objectType);
@@ -48,13 +47,13 @@ namespace Giny.Protocol.Messages
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ExchangeBidHouseInListRemovedMessage.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ExchangeBidHouseInListRemovedMessage.objectGID.");
             }
 
             objectType = (int)reader.ReadInt();
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element of ExchangeBidHouseInListRemovedMessage.objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element of ExchangeBidHouseInListRemovedMessage.objectType.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,14 +28,14 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
             writer.WriteUTF((string)guildName);
             if (guildLevel < 0 || guildLevel > 200)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
             }
 
             writer.WriteByte((byte)guildLevel);
@@ -47,14 +46,14 @@ namespace Giny.Protocol.Types
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of BasicGuildInformations.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of BasicGuildInformations.guildId.");
             }
 
             guildName = (string)reader.ReadUTF();
             guildLevel = (byte)reader.ReadSByte();
             if (guildLevel < 0 || guildLevel > 200)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element of BasicGuildInformations.guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element of BasicGuildInformations.guildLevel.");
             }
 
         }

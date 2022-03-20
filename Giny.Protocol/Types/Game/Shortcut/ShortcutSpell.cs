@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public ShortcutSpell()
         {
         }
-        public ShortcutSpell(short spellId)
+        public ShortcutSpell(short spellId,byte slot)
         {
             this.spellId = spellId;
+            this.slot = slot;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of ShortcutSpell.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of ShortcutSpell.spellId.");
             }
 
         }

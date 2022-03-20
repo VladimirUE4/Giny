@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (subscriptionEndDate < 0 || subscriptionEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionEndDate + ") on element subscriptionEndDate.");
+                throw new System.Exception("Forbidden value (" + subscriptionEndDate + ") on element subscriptionEndDate.");
             }
 
             writer.WriteDouble((double)subscriptionEndDate);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             subscriptionEndDate = (double)reader.ReadDouble();
             if (subscriptionEndDate < 0 || subscriptionEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionEndDate + ") on element of AccountInformationsUpdateMessage.subscriptionEndDate.");
+                throw new System.Exception("Forbidden value (" + subscriptionEndDate + ") on element of AccountInformationsUpdateMessage.subscriptionEndDate.");
             }
 
         }

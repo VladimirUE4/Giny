@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -20,18 +19,19 @@ namespace Giny.Protocol.Messages
         public TaxCollectorListMessage()
         {
         }
-        public TaxCollectorListMessage(byte nbcollectorMax,TaxCollectorFightersInformation[] fightersInformations,byte infoType)
+        public TaxCollectorListMessage(byte nbcollectorMax,TaxCollectorFightersInformation[] fightersInformations,byte infoType,TaxCollectorInformations[] informations)
         {
             this.nbcollectorMax = nbcollectorMax;
             this.fightersInformations = fightersInformations;
             this.infoType = infoType;
+            this.informations = informations;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (nbcollectorMax < 0)
             {
-                throw new Exception("Forbidden value (" + nbcollectorMax + ") on element nbcollectorMax.");
+                throw new System.Exception("Forbidden value (" + nbcollectorMax + ") on element nbcollectorMax.");
             }
 
             writer.WriteByte((byte)nbcollectorMax);
@@ -50,7 +50,7 @@ namespace Giny.Protocol.Messages
             nbcollectorMax = (byte)reader.ReadByte();
             if (nbcollectorMax < 0)
             {
-                throw new Exception("Forbidden value (" + nbcollectorMax + ") on element of TaxCollectorListMessage.nbcollectorMax.");
+                throw new System.Exception("Forbidden value (" + nbcollectorMax + ") on element of TaxCollectorListMessage.nbcollectorMax.");
             }
 
             uint _fightersInformationsLen = (uint)reader.ReadUShort();
@@ -64,7 +64,7 @@ namespace Giny.Protocol.Messages
             infoType = (byte)reader.ReadByte();
             if (infoType < 0)
             {
-                throw new Exception("Forbidden value (" + infoType + ") on element of TaxCollectorListMessage.infoType.");
+                throw new System.Exception("Forbidden value (" + infoType + ") on element of TaxCollectorListMessage.infoType.");
             }
 
         }

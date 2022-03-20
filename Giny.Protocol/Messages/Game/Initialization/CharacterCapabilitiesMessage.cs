@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (guildEmblemSymbolCategories < 0)
             {
-                throw new Exception("Forbidden value (" + guildEmblemSymbolCategories + ") on element guildEmblemSymbolCategories.");
+                throw new System.Exception("Forbidden value (" + guildEmblemSymbolCategories + ") on element guildEmblemSymbolCategories.");
             }
 
             writer.WriteVarInt((int)guildEmblemSymbolCategories);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             guildEmblemSymbolCategories = (int)reader.ReadVarUhInt();
             if (guildEmblemSymbolCategories < 0)
             {
-                throw new Exception("Forbidden value (" + guildEmblemSymbolCategories + ") on element of CharacterCapabilitiesMessage.guildEmblemSymbolCategories.");
+                throw new System.Exception("Forbidden value (" + guildEmblemSymbolCategories + ") on element of CharacterCapabilitiesMessage.guildEmblemSymbolCategories.");
             }
 
         }

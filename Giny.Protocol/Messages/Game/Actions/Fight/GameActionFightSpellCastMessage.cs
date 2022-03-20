@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -20,24 +19,31 @@ namespace Giny.Protocol.Messages
         public GameActionFightSpellCastMessage()
         {
         }
-        public GameActionFightSpellCastMessage(short spellId,short spellLevel,short[] portalsIds)
+        public GameActionFightSpellCastMessage(short spellId,short spellLevel,short[] portalsIds,short actionId,double sourceId,double targetId,short destinationCellId,byte critical,bool silentCast,bool verboseCast)
         {
             this.spellId = spellId;
             this.spellLevel = spellLevel;
             this.portalsIds = portalsIds;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
+            this.targetId = targetId;
+            this.destinationCellId = destinationCellId;
+            this.critical = critical;
+            this.silentCast = silentCast;
+            this.verboseCast = verboseCast;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
             if (spellLevel < 1 || spellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + spellLevel + ") on element spellLevel.");
+                throw new System.Exception("Forbidden value (" + spellLevel + ") on element spellLevel.");
             }
 
             writer.WriteShort((short)spellLevel);
@@ -55,13 +61,13 @@ namespace Giny.Protocol.Messages
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of GameActionFightSpellCastMessage.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of GameActionFightSpellCastMessage.spellId.");
             }
 
             spellLevel = (short)reader.ReadShort();
             if (spellLevel < 1 || spellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + spellLevel + ") on element of GameActionFightSpellCastMessage.spellLevel.");
+                throw new System.Exception("Forbidden value (" + spellLevel + ") on element of GameActionFightSpellCastMessage.spellLevel.");
             }
 
             uint _portalsIdsLen = (uint)reader.ReadUShort();

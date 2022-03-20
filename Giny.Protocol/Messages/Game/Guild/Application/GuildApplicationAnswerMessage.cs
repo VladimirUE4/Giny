@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteBoolean((bool)accepted);
             if (playerId < 0)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarInt((int)playerId);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             playerId = (int)reader.ReadVarUhInt();
             if (playerId < 0)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of GuildApplicationAnswerMessage.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of GuildApplicationAnswerMessage.playerId.");
             }
 
         }

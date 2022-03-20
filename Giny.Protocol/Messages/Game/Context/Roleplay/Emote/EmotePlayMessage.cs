@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,25 @@ namespace Giny.Protocol.Messages
         public EmotePlayMessage()
         {
         }
-        public EmotePlayMessage(double actorId,int accountId)
+        public EmotePlayMessage(double actorId,int accountId,short emoteId,double emoteStartTime)
         {
             this.actorId = actorId;
             this.accountId = accountId;
+            this.emoteId = emoteId;
+            this.emoteStartTime = emoteStartTime;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (actorId < -9.00719925474099E+15 || actorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + actorId + ") on element actorId.");
+                throw new System.Exception("Forbidden value (" + actorId + ") on element actorId.");
             }
 
             writer.WriteDouble((double)actorId);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
@@ -46,13 +47,13 @@ namespace Giny.Protocol.Messages
             actorId = (double)reader.ReadDouble();
             if (actorId < -9.00719925474099E+15 || actorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + actorId + ") on element of EmotePlayMessage.actorId.");
+                throw new System.Exception("Forbidden value (" + actorId + ") on element of EmotePlayMessage.actorId.");
             }
 
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of EmotePlayMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of EmotePlayMessage.accountId.");
             }
 
         }

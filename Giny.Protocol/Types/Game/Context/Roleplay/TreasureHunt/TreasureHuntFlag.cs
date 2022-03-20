@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
@@ -37,13 +36,13 @@ namespace Giny.Protocol.Types
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of TreasureHuntFlag.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of TreasureHuntFlag.mapId.");
             }
 
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of TreasureHuntFlag.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of TreasureHuntFlag.state.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public ShortcutObjectPreset()
         {
         }
-        public ShortcutObjectPreset(short presetId)
+        public ShortcutObjectPreset(short presetId,byte slot)
         {
             this.presetId = presetId;
+            this.slot = slot;
         }
         public override void Serialize(IDataWriter writer)
         {

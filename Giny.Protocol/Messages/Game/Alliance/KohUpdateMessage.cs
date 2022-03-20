@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -49,7 +48,7 @@ namespace Giny.Protocol.Messages
             {
                 if (allianceNbMembers[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + allianceNbMembers[_i2] + ") on element 2 (starting at 1) of allianceNbMembers.");
+                    throw new System.Exception("Forbidden value (" + allianceNbMembers[_i2] + ") on element 2 (starting at 1) of allianceNbMembers.");
                 }
 
                 writer.WriteVarShort((short)allianceNbMembers[_i2]);
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
             {
                 if (allianceRoundWeigth[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + allianceRoundWeigth[_i3] + ") on element 3 (starting at 1) of allianceRoundWeigth.");
+                    throw new System.Exception("Forbidden value (" + allianceRoundWeigth[_i3] + ") on element 3 (starting at 1) of allianceRoundWeigth.");
                 }
 
                 writer.WriteVarInt((int)allianceRoundWeigth[_i3]);
@@ -71,7 +70,7 @@ namespace Giny.Protocol.Messages
             {
                 if (allianceMatchScore[_i4] < 0)
                 {
-                    throw new Exception("Forbidden value (" + allianceMatchScore[_i4] + ") on element 4 (starting at 1) of allianceMatchScore.");
+                    throw new System.Exception("Forbidden value (" + allianceMatchScore[_i4] + ") on element 4 (starting at 1) of allianceMatchScore.");
                 }
 
                 writer.WriteByte((byte)allianceMatchScore[_i4]);
@@ -85,19 +84,19 @@ namespace Giny.Protocol.Messages
 
             if (allianceMapWinnerScore < 0)
             {
-                throw new Exception("Forbidden value (" + allianceMapWinnerScore + ") on element allianceMapWinnerScore.");
+                throw new System.Exception("Forbidden value (" + allianceMapWinnerScore + ") on element allianceMapWinnerScore.");
             }
 
             writer.WriteVarInt((int)allianceMapWinnerScore);
             if (allianceMapMyAllianceScore < 0)
             {
-                throw new Exception("Forbidden value (" + allianceMapMyAllianceScore + ") on element allianceMapMyAllianceScore.");
+                throw new System.Exception("Forbidden value (" + allianceMapMyAllianceScore + ") on element allianceMapMyAllianceScore.");
             }
 
             writer.WriteVarInt((int)allianceMapMyAllianceScore);
             if (nextTickTime < 0 || nextTickTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + nextTickTime + ") on element nextTickTime.");
+                throw new System.Exception("Forbidden value (" + nextTickTime + ") on element nextTickTime.");
             }
 
             writer.WriteDouble((double)nextTickTime);
@@ -124,7 +123,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of allianceNbMembers.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of allianceNbMembers.");
                 }
 
                 allianceNbMembers[_i2] = (short)_val2;
@@ -137,7 +136,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadVarUhInt();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of allianceRoundWeigth.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of allianceRoundWeigth.");
                 }
 
                 allianceRoundWeigth[_i3] = (int)_val3;
@@ -150,7 +149,7 @@ namespace Giny.Protocol.Messages
                 _val4 = (uint)reader.ReadByte();
                 if (_val4 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of allianceMatchScore.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of allianceMatchScore.");
                 }
 
                 allianceMatchScore[_i4] = (byte)_val4;
@@ -167,19 +166,19 @@ namespace Giny.Protocol.Messages
             allianceMapWinnerScore = (int)reader.ReadVarUhInt();
             if (allianceMapWinnerScore < 0)
             {
-                throw new Exception("Forbidden value (" + allianceMapWinnerScore + ") on element of KohUpdateMessage.allianceMapWinnerScore.");
+                throw new System.Exception("Forbidden value (" + allianceMapWinnerScore + ") on element of KohUpdateMessage.allianceMapWinnerScore.");
             }
 
             allianceMapMyAllianceScore = (int)reader.ReadVarUhInt();
             if (allianceMapMyAllianceScore < 0)
             {
-                throw new Exception("Forbidden value (" + allianceMapMyAllianceScore + ") on element of KohUpdateMessage.allianceMapMyAllianceScore.");
+                throw new System.Exception("Forbidden value (" + allianceMapMyAllianceScore + ") on element of KohUpdateMessage.allianceMapMyAllianceScore.");
             }
 
             nextTickTime = (double)reader.ReadDouble();
             if (nextTickTime < 0 || nextTickTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + nextTickTime + ") on element of KohUpdateMessage.nextTickTime.");
+                throw new System.Exception("Forbidden value (" + nextTickTime + ") on element of KohUpdateMessage.nextTickTime.");
             }
 
         }

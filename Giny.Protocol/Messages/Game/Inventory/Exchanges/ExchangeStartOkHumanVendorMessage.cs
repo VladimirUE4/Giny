@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (sellerId < -9.00719925474099E+15 || sellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sellerId + ") on element sellerId.");
+                throw new System.Exception("Forbidden value (" + sellerId + ") on element sellerId.");
             }
 
             writer.WriteDouble((double)sellerId);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             sellerId = (double)reader.ReadDouble();
             if (sellerId < -9.00719925474099E+15 || sellerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sellerId + ") on element of ExchangeStartOkHumanVendorMessage.sellerId.");
+                throw new System.Exception("Forbidden value (" + sellerId + ") on element of ExchangeStartOkHumanVendorMessage.sellerId.");
             }
 
             uint _objectsInfosLen = (uint)reader.ReadUShort();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public ObjectUseMultipleMessage()
         {
         }
-        public ObjectUseMultipleMessage(int quantity)
+        public ObjectUseMultipleMessage(int quantity,int objectUID)
         {
             this.quantity = quantity;
+            this.objectUID = objectUID;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectUseMultipleMessage.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectUseMultipleMessage.quantity.");
             }
 
         }

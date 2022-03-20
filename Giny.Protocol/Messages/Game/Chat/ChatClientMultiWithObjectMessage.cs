@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public ChatClientMultiWithObjectMessage()
         {
         }
-        public ChatClientMultiWithObjectMessage(ObjectItem[] objects)
+        public ChatClientMultiWithObjectMessage(ObjectItem[] objects,string content,byte channel)
         {
             this.objects = objects;
+            this.content = content;
+            this.channel = channel;
         }
         public override void Serialize(IDataWriter writer)
         {

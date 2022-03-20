@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         {
             if (questId < 0)
             {
-                throw new Exception("Forbidden value (" + questId + ") on element questId.");
+                throw new System.Exception("Forbidden value (" + questId + ") on element questId.");
             }
 
             writer.WriteVarShort((short)questId);
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             questId = (short)reader.ReadVarUhShort();
             if (questId < 0)
             {
-                throw new Exception("Forbidden value (" + questId + ") on element of QuestActiveInformations.questId.");
+                throw new System.Exception("Forbidden value (" + questId + ") on element of QuestActiveInformations.questId.");
             }
 
         }

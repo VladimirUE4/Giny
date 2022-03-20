@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)questType);
             if (startMapId < 0 || startMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + startMapId + ") on element startMapId.");
+                throw new System.Exception("Forbidden value (" + startMapId + ") on element startMapId.");
             }
 
             writer.WriteDouble((double)startMapId);
@@ -54,19 +53,19 @@ namespace Giny.Protocol.Messages
 
             if (totalStepCount < 0)
             {
-                throw new Exception("Forbidden value (" + totalStepCount + ") on element totalStepCount.");
+                throw new System.Exception("Forbidden value (" + totalStepCount + ") on element totalStepCount.");
             }
 
             writer.WriteByte((byte)totalStepCount);
             if (checkPointCurrent < 0)
             {
-                throw new Exception("Forbidden value (" + checkPointCurrent + ") on element checkPointCurrent.");
+                throw new System.Exception("Forbidden value (" + checkPointCurrent + ") on element checkPointCurrent.");
             }
 
             writer.WriteVarInt((int)checkPointCurrent);
             if (checkPointTotal < 0)
             {
-                throw new Exception("Forbidden value (" + checkPointTotal + ") on element checkPointTotal.");
+                throw new System.Exception("Forbidden value (" + checkPointTotal + ") on element checkPointTotal.");
             }
 
             writer.WriteVarInt((int)checkPointTotal);
@@ -86,13 +85,13 @@ namespace Giny.Protocol.Messages
             questType = (byte)reader.ReadByte();
             if (questType < 0)
             {
-                throw new Exception("Forbidden value (" + questType + ") on element of TreasureHuntMessage.questType.");
+                throw new System.Exception("Forbidden value (" + questType + ") on element of TreasureHuntMessage.questType.");
             }
 
             startMapId = (double)reader.ReadDouble();
             if (startMapId < 0 || startMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + startMapId + ") on element of TreasureHuntMessage.startMapId.");
+                throw new System.Exception("Forbidden value (" + startMapId + ") on element of TreasureHuntMessage.startMapId.");
             }
 
             uint _knownStepsListLen = (uint)reader.ReadUShort();
@@ -107,19 +106,19 @@ namespace Giny.Protocol.Messages
             totalStepCount = (byte)reader.ReadByte();
             if (totalStepCount < 0)
             {
-                throw new Exception("Forbidden value (" + totalStepCount + ") on element of TreasureHuntMessage.totalStepCount.");
+                throw new System.Exception("Forbidden value (" + totalStepCount + ") on element of TreasureHuntMessage.totalStepCount.");
             }
 
             checkPointCurrent = (int)reader.ReadVarUhInt();
             if (checkPointCurrent < 0)
             {
-                throw new Exception("Forbidden value (" + checkPointCurrent + ") on element of TreasureHuntMessage.checkPointCurrent.");
+                throw new System.Exception("Forbidden value (" + checkPointCurrent + ") on element of TreasureHuntMessage.checkPointCurrent.");
             }
 
             checkPointTotal = (int)reader.ReadVarUhInt();
             if (checkPointTotal < 0)
             {
-                throw new Exception("Forbidden value (" + checkPointTotal + ") on element of TreasureHuntMessage.checkPointTotal.");
+                throw new System.Exception("Forbidden value (" + checkPointTotal + ") on element of TreasureHuntMessage.checkPointTotal.");
             }
 
             availableRetryCount = (int)reader.ReadInt();

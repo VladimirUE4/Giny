@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,14 @@ namespace Giny.Protocol.Types
         public GameRolePlayHumanoidInformations()
         {
         }
-        public GameRolePlayHumanoidInformations(HumanInformations humanoidInfo,int accountId)
+        public GameRolePlayHumanoidInformations(HumanInformations humanoidInfo,int accountId,double contextualId,EntityDispositionInformations disposition,EntityLook look,string name)
         {
             this.humanoidInfo = humanoidInfo;
             this.accountId = accountId;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.name = name;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -29,7 +32,7 @@ namespace Giny.Protocol.Types
             humanoidInfo.Serialize(writer);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
@@ -43,7 +46,7 @@ namespace Giny.Protocol.Types
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of GameRolePlayHumanoidInformations.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of GameRolePlayHumanoidInformations.accountId.");
             }
 
         }

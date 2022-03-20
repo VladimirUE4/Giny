@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,24 @@ namespace Giny.Protocol.Messages
         public ExchangePodsModifiedMessage()
         {
         }
-        public ExchangePodsModifiedMessage(int currentWeight,int maxWeight)
+        public ExchangePodsModifiedMessage(int currentWeight,int maxWeight,bool remote)
         {
             this.currentWeight = currentWeight;
             this.maxWeight = maxWeight;
+            this.remote = remote;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (currentWeight < 0)
             {
-                throw new Exception("Forbidden value (" + currentWeight + ") on element currentWeight.");
+                throw new System.Exception("Forbidden value (" + currentWeight + ") on element currentWeight.");
             }
 
             writer.WriteVarInt((int)currentWeight);
             if (maxWeight < 0)
             {
-                throw new Exception("Forbidden value (" + maxWeight + ") on element maxWeight.");
+                throw new System.Exception("Forbidden value (" + maxWeight + ") on element maxWeight.");
             }
 
             writer.WriteVarInt((int)maxWeight);
@@ -46,13 +46,13 @@ namespace Giny.Protocol.Messages
             currentWeight = (int)reader.ReadVarUhInt();
             if (currentWeight < 0)
             {
-                throw new Exception("Forbidden value (" + currentWeight + ") on element of ExchangePodsModifiedMessage.currentWeight.");
+                throw new System.Exception("Forbidden value (" + currentWeight + ") on element of ExchangePodsModifiedMessage.currentWeight.");
             }
 
             maxWeight = (int)reader.ReadVarUhInt();
             if (maxWeight < 0)
             {
-                throw new Exception("Forbidden value (" + maxWeight + ") on element of ExchangePodsModifiedMessage.maxWeight.");
+                throw new System.Exception("Forbidden value (" + maxWeight + ") on element of ExchangePodsModifiedMessage.maxWeight.");
             }
 
         }

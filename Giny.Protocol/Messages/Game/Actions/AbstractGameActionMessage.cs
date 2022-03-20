@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element actionId.");
             }
 
             writer.WriteVarShort((short)actionId);
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element sourceId.");
             }
 
             writer.WriteDouble((double)sourceId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             actionId = (short)reader.ReadVarUhShort();
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element of AbstractGameActionMessage.actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element of AbstractGameActionMessage.actionId.");
             }
 
             sourceId = (double)reader.ReadDouble();
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element of AbstractGameActionMessage.sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element of AbstractGameActionMessage.sourceId.");
             }
 
         }

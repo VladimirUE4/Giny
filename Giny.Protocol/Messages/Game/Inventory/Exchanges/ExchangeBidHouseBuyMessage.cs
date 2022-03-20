@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element uid.");
             }
 
             writer.WriteVarInt((int)uid);
             if (qty < 0)
             {
-                throw new Exception("Forbidden value (" + qty + ") on element qty.");
+                throw new System.Exception("Forbidden value (" + qty + ") on element qty.");
             }
 
             writer.WriteVarInt((int)qty);
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             uid = (int)reader.ReadVarUhInt();
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element of ExchangeBidHouseBuyMessage.uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element of ExchangeBidHouseBuyMessage.uid.");
             }
 
             qty = (int)reader.ReadVarUhInt();
             if (qty < 0)
             {
-                throw new Exception("Forbidden value (" + qty + ") on element of ExchangeBidHouseBuyMessage.qty.");
+                throw new System.Exception("Forbidden value (" + qty + ") on element of ExchangeBidHouseBuyMessage.qty.");
             }
 
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of ExchangeBidHouseBuyMessage.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of ExchangeBidHouseBuyMessage.price.");
             }
 
         }

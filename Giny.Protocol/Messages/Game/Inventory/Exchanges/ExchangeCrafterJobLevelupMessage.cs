@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (crafterJobLevel < 0 || crafterJobLevel > 255)
             {
-                throw new Exception("Forbidden value (" + crafterJobLevel + ") on element crafterJobLevel.");
+                throw new System.Exception("Forbidden value (" + crafterJobLevel + ") on element crafterJobLevel.");
             }
 
             writer.WriteByte((byte)crafterJobLevel);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             crafterJobLevel = (byte)reader.ReadSByte();
             if (crafterJobLevel < 0 || crafterJobLevel > 255)
             {
-                throw new Exception("Forbidden value (" + crafterJobLevel + ") on element of ExchangeCrafterJobLevelupMessage.crafterJobLevel.");
+                throw new System.Exception("Forbidden value (" + crafterJobLevel + ") on element of ExchangeCrafterJobLevelupMessage.crafterJobLevel.");
             }
 
         }

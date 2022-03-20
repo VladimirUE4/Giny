@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,12 @@ namespace Giny.Protocol.Messages
         public GuildListApplicationAnswerMessage()
         {
         }
-        public GuildListApplicationAnswerMessage(GuildApplicationInformation[] applies)
+        public GuildListApplicationAnswerMessage(GuildApplicationInformation[] applies,double offset,uint count,uint total)
         {
             this.applies = applies;
+            this.offset = offset;
+            this.count = count;
+            this.total = total;
         }
         public override void Serialize(IDataWriter writer)
         {

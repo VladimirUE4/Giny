@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarShort((short)id);
             if (experience < 0)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element experience.");
             }
 
             writer.WriteVarInt((int)experience);
@@ -45,13 +44,13 @@ namespace Giny.Protocol.Types
             id = (short)reader.ReadVarUhShort();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of EntityInformation.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of EntityInformation.id.");
             }
 
             experience = (int)reader.ReadVarUhInt();
             if (experience < 0)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element of EntityInformation.experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element of EntityInformation.experience.");
             }
 
             status = (bool)reader.ReadBoolean();

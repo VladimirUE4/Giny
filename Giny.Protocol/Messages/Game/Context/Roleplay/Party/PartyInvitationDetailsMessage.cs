@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Messages
         public PartyInvitationDetailsMessage()
         {
         }
-        public PartyInvitationDetailsMessage(byte partyType,string partyName,long fromId,string fromName,long leaderId,PartyInvitationMemberInformations[] members,PartyGuestInformations[] guests)
+        public PartyInvitationDetailsMessage(byte partyType,string partyName,long fromId,string fromName,long leaderId,PartyInvitationMemberInformations[] members,PartyGuestInformations[] guests,int partyId)
         {
             this.partyType = partyType;
             this.partyName = partyName;
@@ -33,6 +32,7 @@ namespace Giny.Protocol.Messages
             this.leaderId = leaderId;
             this.members = members;
             this.guests = guests;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -41,14 +41,14 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)partyName);
             if (fromId < 0 || fromId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fromId + ") on element fromId.");
+                throw new System.Exception("Forbidden value (" + fromId + ") on element fromId.");
             }
 
             writer.WriteVarLong((long)fromId);
             writer.WriteUTF((string)fromName);
             if (leaderId < 0 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element leaderId.");
             }
 
             writer.WriteVarLong((long)leaderId);
@@ -75,21 +75,21 @@ namespace Giny.Protocol.Messages
             partyType = (byte)reader.ReadByte();
             if (partyType < 0)
             {
-                throw new Exception("Forbidden value (" + partyType + ") on element of PartyInvitationDetailsMessage.partyType.");
+                throw new System.Exception("Forbidden value (" + partyType + ") on element of PartyInvitationDetailsMessage.partyType.");
             }
 
             partyName = (string)reader.ReadUTF();
             fromId = (long)reader.ReadVarUhLong();
             if (fromId < 0 || fromId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fromId + ") on element of PartyInvitationDetailsMessage.fromId.");
+                throw new System.Exception("Forbidden value (" + fromId + ") on element of PartyInvitationDetailsMessage.fromId.");
             }
 
             fromName = (string)reader.ReadUTF();
             leaderId = (long)reader.ReadVarUhLong();
             if (leaderId < 0 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element of PartyInvitationDetailsMessage.leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element of PartyInvitationDetailsMessage.leaderId.");
             }
 
             uint _membersLen = (uint)reader.ReadUShort();

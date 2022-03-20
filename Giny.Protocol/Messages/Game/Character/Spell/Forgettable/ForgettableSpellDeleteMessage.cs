@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
             {
                 if (spells[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + spells[_i2] + ") on element 2 (starting at 1) of spells.");
+                    throw new System.Exception("Forbidden value (" + spells[_i2] + ") on element 2 (starting at 1) of spells.");
                 }
 
                 writer.WriteInt((int)spells[_i2]);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             reason = (byte)reader.ReadByte();
             if (reason < 0)
             {
-                throw new Exception("Forbidden value (" + reason + ") on element of ForgettableSpellDeleteMessage.reason.");
+                throw new System.Exception("Forbidden value (" + reason + ") on element of ForgettableSpellDeleteMessage.reason.");
             }
 
             uint _spellsLen = (uint)reader.ReadUShort();
@@ -55,7 +54,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadInt();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of spells.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of spells.");
                 }
 
                 spells[_i2] = (int)_val2;

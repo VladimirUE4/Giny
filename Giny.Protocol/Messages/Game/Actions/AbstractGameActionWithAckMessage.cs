@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public AbstractGameActionWithAckMessage()
         {
         }
-        public AbstractGameActionWithAckMessage(short waitAckId)
+        public AbstractGameActionWithAckMessage(short waitAckId,short actionId,double sourceId)
         {
             this.waitAckId = waitAckId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {

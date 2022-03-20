@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,25 +31,25 @@ namespace Giny.Protocol.Messages
         {
             if (experienceCharacter < 0 || experienceCharacter > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceCharacter + ") on element experienceCharacter.");
+                throw new System.Exception("Forbidden value (" + experienceCharacter + ") on element experienceCharacter.");
             }
 
             writer.WriteVarLong((long)experienceCharacter);
             if (experienceMount < 0 || experienceMount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceMount + ") on element experienceMount.");
+                throw new System.Exception("Forbidden value (" + experienceMount + ") on element experienceMount.");
             }
 
             writer.WriteVarLong((long)experienceMount);
             if (experienceGuild < 0 || experienceGuild > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceGuild + ") on element experienceGuild.");
+                throw new System.Exception("Forbidden value (" + experienceGuild + ") on element experienceGuild.");
             }
 
             writer.WriteVarLong((long)experienceGuild);
             if (experienceIncarnation < 0 || experienceIncarnation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceIncarnation + ") on element experienceIncarnation.");
+                throw new System.Exception("Forbidden value (" + experienceIncarnation + ") on element experienceIncarnation.");
             }
 
             writer.WriteVarLong((long)experienceIncarnation);
@@ -60,25 +59,25 @@ namespace Giny.Protocol.Messages
             experienceCharacter = (long)reader.ReadVarUhLong();
             if (experienceCharacter < 0 || experienceCharacter > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceCharacter + ") on element of CharacterExperienceGainMessage.experienceCharacter.");
+                throw new System.Exception("Forbidden value (" + experienceCharacter + ") on element of CharacterExperienceGainMessage.experienceCharacter.");
             }
 
             experienceMount = (long)reader.ReadVarUhLong();
             if (experienceMount < 0 || experienceMount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceMount + ") on element of CharacterExperienceGainMessage.experienceMount.");
+                throw new System.Exception("Forbidden value (" + experienceMount + ") on element of CharacterExperienceGainMessage.experienceMount.");
             }
 
             experienceGuild = (long)reader.ReadVarUhLong();
             if (experienceGuild < 0 || experienceGuild > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceGuild + ") on element of CharacterExperienceGainMessage.experienceGuild.");
+                throw new System.Exception("Forbidden value (" + experienceGuild + ") on element of CharacterExperienceGainMessage.experienceGuild.");
             }
 
             experienceIncarnation = (long)reader.ReadVarUhLong();
             if (experienceIncarnation < 0 || experienceIncarnation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceIncarnation + ") on element of CharacterExperienceGainMessage.experienceIncarnation.");
+                throw new System.Exception("Forbidden value (" + experienceIncarnation + ") on element of CharacterExperienceGainMessage.experienceIncarnation.");
             }
 
         }

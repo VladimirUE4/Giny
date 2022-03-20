@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,26 @@ namespace Giny.Protocol.Types
         public GameRolePlayGroupMonsterWaveInformations()
         {
         }
-        public GameRolePlayGroupMonsterWaveInformations(byte nbWaves,GroupMonsterStaticInformations[] alternatives)
+        public GameRolePlayGroupMonsterWaveInformations(byte nbWaves,GroupMonsterStaticInformations[] alternatives,double contextualId,EntityDispositionInformations disposition,EntityLook look,GroupMonsterStaticInformations staticInfos,byte lootShare,byte alignmentSide,bool keyRingBonus,bool hasHardcoreDrop,bool hasAVARewardToken)
         {
             this.nbWaves = nbWaves;
             this.alternatives = alternatives;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.staticInfos = staticInfos;
+            this.lootShare = lootShare;
+            this.alignmentSide = alignmentSide;
+            this.keyRingBonus = keyRingBonus;
+            this.hasHardcoreDrop = hasHardcoreDrop;
+            this.hasAVARewardToken = hasAVARewardToken;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (nbWaves < 0)
             {
-                throw new Exception("Forbidden value (" + nbWaves + ") on element nbWaves.");
+                throw new System.Exception("Forbidden value (" + nbWaves + ") on element nbWaves.");
             }
 
             writer.WriteByte((byte)nbWaves);
@@ -47,7 +55,7 @@ namespace Giny.Protocol.Types
             nbWaves = (byte)reader.ReadByte();
             if (nbWaves < 0)
             {
-                throw new Exception("Forbidden value (" + nbWaves + ") on element of GameRolePlayGroupMonsterWaveInformations.nbWaves.");
+                throw new System.Exception("Forbidden value (" + nbWaves + ") on element of GameRolePlayGroupMonsterWaveInformations.nbWaves.");
             }
 
             uint _alternativesLen = (uint)reader.ReadUShort();

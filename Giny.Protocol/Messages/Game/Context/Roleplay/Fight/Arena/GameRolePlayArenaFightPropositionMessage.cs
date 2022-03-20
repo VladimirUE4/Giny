@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             {
                 if (alliesId[_i2] < -9.00719925474099E+15 || alliesId[_i2] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + alliesId[_i2] + ") on element 2 (starting at 1) of alliesId.");
+                    throw new System.Exception("Forbidden value (" + alliesId[_i2] + ") on element 2 (starting at 1) of alliesId.");
                 }
 
                 writer.WriteDouble((double)alliesId[_i2]);
@@ -47,7 +46,7 @@ namespace Giny.Protocol.Messages
 
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element duration.");
             }
 
             writer.WriteVarShort((short)duration);
@@ -58,7 +57,7 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameRolePlayArenaFightPropositionMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameRolePlayArenaFightPropositionMessage.fightId.");
             }
 
             uint _alliesIdLen = (uint)reader.ReadUShort();
@@ -68,7 +67,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (double)reader.ReadDouble();
                 if (_val2 < -9.00719925474099E+15 || _val2 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of alliesId.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of alliesId.");
                 }
 
                 alliesId[_i2] = (double)_val2;
@@ -77,7 +76,7 @@ namespace Giny.Protocol.Messages
             duration = (short)reader.ReadVarUhShort();
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element of GameRolePlayArenaFightPropositionMessage.duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element of GameRolePlayArenaFightPropositionMessage.duration.");
             }
 
         }

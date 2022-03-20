@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (contextualId < -9.00719925474099E+15 || contextualId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + contextualId + ") on element contextualId.");
+                throw new System.Exception("Forbidden value (" + contextualId + ") on element contextualId.");
             }
 
             writer.WriteDouble((double)contextualId);
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             contextualId = (double)reader.ReadDouble();
             if (contextualId < -9.00719925474099E+15 || contextualId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + contextualId + ") on element of GameContextActorPositionInformations.contextualId.");
+                throw new System.Exception("Forbidden value (" + contextualId + ") on element of GameContextActorPositionInformations.contextualId.");
             }
 
             uint _id2 = (uint)reader.ReadUShort();

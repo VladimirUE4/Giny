@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,20 +31,20 @@ namespace Giny.Protocol.Messages
         {
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element msgId.");
             }
 
             writer.WriteVarShort((short)msgId);
             if (timeStamp < 0)
             {
-                throw new Exception("Forbidden value (" + timeStamp + ") on element timeStamp.");
+                throw new System.Exception("Forbidden value (" + timeStamp + ") on element timeStamp.");
             }
 
             writer.WriteInt((int)timeStamp);
             writer.WriteUTF((string)owner);
             if (objectGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + objectGenericId + ") on element objectGenericId.");
+                throw new System.Exception("Forbidden value (" + objectGenericId + ") on element objectGenericId.");
             }
 
             writer.WriteVarShort((short)objectGenericId);
@@ -55,20 +54,20 @@ namespace Giny.Protocol.Messages
             msgId = (short)reader.ReadVarUhShort();
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element of LivingObjectMessageMessage.msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element of LivingObjectMessageMessage.msgId.");
             }
 
             timeStamp = (int)reader.ReadInt();
             if (timeStamp < 0)
             {
-                throw new Exception("Forbidden value (" + timeStamp + ") on element of LivingObjectMessageMessage.timeStamp.");
+                throw new System.Exception("Forbidden value (" + timeStamp + ") on element of LivingObjectMessageMessage.timeStamp.");
             }
 
             owner = (string)reader.ReadUTF();
             objectGenericId = (short)reader.ReadVarUhShort();
             if (objectGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + objectGenericId + ") on element of LivingObjectMessageMessage.objectGenericId.");
+                throw new System.Exception("Forbidden value (" + objectGenericId + ") on element of LivingObjectMessageMessage.objectGenericId.");
             }
 
         }

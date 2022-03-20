@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (livingUID < 0)
             {
-                throw new Exception("Forbidden value (" + livingUID + ") on element livingUID.");
+                throw new System.Exception("Forbidden value (" + livingUID + ") on element livingUID.");
             }
 
             writer.WriteVarInt((int)livingUID);
             if (livingPosition < 0 || livingPosition > 255)
             {
-                throw new Exception("Forbidden value (" + livingPosition + ") on element livingPosition.");
+                throw new System.Exception("Forbidden value (" + livingPosition + ") on element livingPosition.");
             }
 
             writer.WriteByte((byte)livingPosition);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             livingUID = (int)reader.ReadVarUhInt();
             if (livingUID < 0)
             {
-                throw new Exception("Forbidden value (" + livingUID + ") on element of LivingObjectDissociateMessage.livingUID.");
+                throw new System.Exception("Forbidden value (" + livingUID + ") on element of LivingObjectDissociateMessage.livingUID.");
             }
 
             livingPosition = (byte)reader.ReadSByte();
             if (livingPosition < 0 || livingPosition > 255)
             {
-                throw new Exception("Forbidden value (" + livingPosition + ") on element of LivingObjectDissociateMessage.livingPosition.");
+                throw new System.Exception("Forbidden value (" + livingPosition + ") on element of LivingObjectDissociateMessage.livingPosition.");
             }
 
         }

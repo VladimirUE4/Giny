@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public SkillActionDescriptionCraft()
         {
         }
-        public SkillActionDescriptionCraft(byte probability)
+        public SkillActionDescriptionCraft(byte probability,short skillId)
         {
             this.probability = probability;
+            this.skillId = skillId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (probability < 0)
             {
-                throw new Exception("Forbidden value (" + probability + ") on element probability.");
+                throw new System.Exception("Forbidden value (" + probability + ") on element probability.");
             }
 
             writer.WriteByte((byte)probability);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             probability = (byte)reader.ReadByte();
             if (probability < 0)
             {
-                throw new Exception("Forbidden value (" + probability + ") on element of SkillActionDescriptionCraft.probability.");
+                throw new System.Exception("Forbidden value (" + probability + ") on element of SkillActionDescriptionCraft.probability.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -48,25 +47,25 @@ namespace Giny.Protocol.Types
 
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element objectUID.");
             }
 
             writer.WriteVarInt((int)objectUID);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
             }
 
             writer.WriteVarLong((long)objectPrice);
             if (publicPrice < 0 || publicPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + publicPrice + ") on element publicPrice.");
+                throw new System.Exception("Forbidden value (" + publicPrice + ") on element publicPrice.");
             }
 
             writer.WriteVarLong((long)publicPrice);
@@ -79,7 +78,7 @@ namespace Giny.Protocol.Types
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ObjectItemToSellInHumanVendorShop.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ObjectItemToSellInHumanVendorShop.objectGID.");
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
@@ -94,25 +93,25 @@ namespace Giny.Protocol.Types
             objectUID = (int)reader.ReadVarUhInt();
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element of ObjectItemToSellInHumanVendorShop.objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element of ObjectItemToSellInHumanVendorShop.objectUID.");
             }
 
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectItemToSellInHumanVendorShop.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectItemToSellInHumanVendorShop.quantity.");
             }
 
             objectPrice = (long)reader.ReadVarUhLong();
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSellInHumanVendorShop.objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSellInHumanVendorShop.objectPrice.");
             }
 
             publicPrice = (long)reader.ReadVarUhLong();
             if (publicPrice < 0 || publicPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + publicPrice + ") on element of ObjectItemToSellInHumanVendorShop.publicPrice.");
+                throw new System.Exception("Forbidden value (" + publicPrice + ") on element of ObjectItemToSellInHumanVendorShop.publicPrice.");
             }
 
         }

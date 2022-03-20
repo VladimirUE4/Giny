@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (replyId < 0)
             {
-                throw new Exception("Forbidden value (" + replyId + ") on element replyId.");
+                throw new System.Exception("Forbidden value (" + replyId + ") on element replyId.");
             }
 
             writer.WriteVarInt((int)replyId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             replyId = (int)reader.ReadVarUhInt();
             if (replyId < 0)
             {
-                throw new Exception("Forbidden value (" + replyId + ") on element of NpcDialogReplyMessage.replyId.");
+                throw new System.Exception("Forbidden value (" + replyId + ") on element of NpcDialogReplyMessage.replyId.");
             }
 
         }

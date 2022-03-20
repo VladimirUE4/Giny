@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (messageId < 0)
             {
-                throw new Exception("Forbidden value (" + messageId + ") on element messageId.");
+                throw new System.Exception("Forbidden value (" + messageId + ") on element messageId.");
             }
 
             writer.WriteVarInt((int)messageId);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             {
                 if (visibleReplies[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + visibleReplies[_i3] + ") on element 3 (starting at 1) of visibleReplies.");
+                    throw new System.Exception("Forbidden value (" + visibleReplies[_i3] + ") on element 3 (starting at 1) of visibleReplies.");
                 }
 
                 writer.WriteVarInt((int)visibleReplies[_i3]);
@@ -59,7 +58,7 @@ namespace Giny.Protocol.Messages
             messageId = (int)reader.ReadVarUhInt();
             if (messageId < 0)
             {
-                throw new Exception("Forbidden value (" + messageId + ") on element of NpcDialogQuestionMessage.messageId.");
+                throw new System.Exception("Forbidden value (" + messageId + ") on element of NpcDialogQuestionMessage.messageId.");
             }
 
             uint _dialogParamsLen = (uint)reader.ReadUShort();
@@ -77,7 +76,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadVarUhInt();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of visibleReplies.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of visibleReplies.");
                 }
 
                 visibleReplies[_i3] = (int)_val3;

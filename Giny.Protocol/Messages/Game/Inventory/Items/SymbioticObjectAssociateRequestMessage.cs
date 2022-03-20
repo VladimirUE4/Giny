@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,25 +31,25 @@ namespace Giny.Protocol.Messages
         {
             if (symbioteUID < 0)
             {
-                throw new Exception("Forbidden value (" + symbioteUID + ") on element symbioteUID.");
+                throw new System.Exception("Forbidden value (" + symbioteUID + ") on element symbioteUID.");
             }
 
             writer.WriteVarInt((int)symbioteUID);
             if (symbiotePos < 0 || symbiotePos > 255)
             {
-                throw new Exception("Forbidden value (" + symbiotePos + ") on element symbiotePos.");
+                throw new System.Exception("Forbidden value (" + symbiotePos + ") on element symbiotePos.");
             }
 
             writer.WriteByte((byte)symbiotePos);
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element hostUID.");
             }
 
             writer.WriteVarInt((int)hostUID);
             if (hostPos < 0 || hostPos > 255)
             {
-                throw new Exception("Forbidden value (" + hostPos + ") on element hostPos.");
+                throw new System.Exception("Forbidden value (" + hostPos + ") on element hostPos.");
             }
 
             writer.WriteByte((byte)hostPos);
@@ -60,25 +59,25 @@ namespace Giny.Protocol.Messages
             symbioteUID = (int)reader.ReadVarUhInt();
             if (symbioteUID < 0)
             {
-                throw new Exception("Forbidden value (" + symbioteUID + ") on element of SymbioticObjectAssociateRequestMessage.symbioteUID.");
+                throw new System.Exception("Forbidden value (" + symbioteUID + ") on element of SymbioticObjectAssociateRequestMessage.symbioteUID.");
             }
 
             symbiotePos = (byte)reader.ReadSByte();
             if (symbiotePos < 0 || symbiotePos > 255)
             {
-                throw new Exception("Forbidden value (" + symbiotePos + ") on element of SymbioticObjectAssociateRequestMessage.symbiotePos.");
+                throw new System.Exception("Forbidden value (" + symbiotePos + ") on element of SymbioticObjectAssociateRequestMessage.symbiotePos.");
             }
 
             hostUID = (int)reader.ReadVarUhInt();
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element of SymbioticObjectAssociateRequestMessage.hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element of SymbioticObjectAssociateRequestMessage.hostUID.");
             }
 
             hostPos = (byte)reader.ReadSByte();
             if (hostPos < 0 || hostPos > 255)
             {
-                throw new Exception("Forbidden value (" + hostPos + ") on element of SymbioticObjectAssociateRequestMessage.hostPos.");
+                throw new System.Exception("Forbidden value (" + hostPos + ") on element of SymbioticObjectAssociateRequestMessage.hostPos.");
             }
 
         }

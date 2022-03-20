@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
             }
 
             writer.WriteByte((byte)rights);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of AllianceChangeGuildRightsMessage.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of AllianceChangeGuildRightsMessage.guildId.");
             }
 
             rights = (byte)reader.ReadByte();
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element of AllianceChangeGuildRightsMessage.rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element of AllianceChangeGuildRightsMessage.rights.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (maxOutdoorMount < 0)
             {
-                throw new Exception("Forbidden value (" + maxOutdoorMount + ") on element maxOutdoorMount.");
+                throw new System.Exception("Forbidden value (" + maxOutdoorMount + ") on element maxOutdoorMount.");
             }
 
             writer.WriteVarShort((short)maxOutdoorMount);
             if (maxItems < 0)
             {
-                throw new Exception("Forbidden value (" + maxItems + ") on element maxItems.");
+                throw new System.Exception("Forbidden value (" + maxItems + ") on element maxItems.");
             }
 
             writer.WriteVarShort((short)maxItems);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             maxOutdoorMount = (short)reader.ReadVarUhShort();
             if (maxOutdoorMount < 0)
             {
-                throw new Exception("Forbidden value (" + maxOutdoorMount + ") on element of PaddockInformations.maxOutdoorMount.");
+                throw new System.Exception("Forbidden value (" + maxOutdoorMount + ") on element of PaddockInformations.maxOutdoorMount.");
             }
 
             maxItems = (short)reader.ReadVarUhShort();
             if (maxItems < 0)
             {
-                throw new Exception("Forbidden value (" + maxItems + ") on element of PaddockInformations.maxItems.");
+                throw new System.Exception("Forbidden value (" + maxItems + ") on element of PaddockInformations.maxItems.");
             }
 
         }

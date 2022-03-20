@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             type = (byte)reader.ReadByte();
             if (type < 0)
             {
-                throw new Exception("Forbidden value (" + type + ") on element of UpdateMountCharacteristic.type.");
+                throw new System.Exception("Forbidden value (" + type + ") on element of UpdateMountCharacteristic.type.");
             }
 
         }

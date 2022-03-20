@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -49,7 +48,7 @@ namespace Giny.Protocol.Types
             {
                 if (fightTeamsPositions[_i4] < 0 || fightTeamsPositions[_i4] > 559)
                 {
-                    throw new Exception("Forbidden value (" + fightTeamsPositions[_i4] + ") on element 4 (starting at 1) of fightTeamsPositions.");
+                    throw new System.Exception("Forbidden value (" + fightTeamsPositions[_i4] + ") on element 4 (starting at 1) of fightTeamsPositions.");
                 }
 
                 writer.WriteVarShort((short)fightTeamsPositions[_i4]);
@@ -71,13 +70,13 @@ namespace Giny.Protocol.Types
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of FightCommonInformations.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of FightCommonInformations.fightId.");
             }
 
             fightType = (byte)reader.ReadByte();
             if (fightType < 0)
             {
-                throw new Exception("Forbidden value (" + fightType + ") on element of FightCommonInformations.fightType.");
+                throw new System.Exception("Forbidden value (" + fightType + ") on element of FightCommonInformations.fightType.");
             }
 
             uint _fightTeamsLen = (uint)reader.ReadUShort();
@@ -96,7 +95,7 @@ namespace Giny.Protocol.Types
                 _val4 = (uint)reader.ReadVarUhShort();
                 if (_val4 < 0 || _val4 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of fightTeamsPositions.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of fightTeamsPositions.");
                 }
 
                 fightTeamsPositions[_i4] = (short)_val4;

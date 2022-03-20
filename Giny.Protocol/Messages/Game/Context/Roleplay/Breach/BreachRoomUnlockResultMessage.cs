@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (roomId < 0)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element roomId.");
             }
 
             writer.WriteByte((byte)roomId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             roomId = (byte)reader.ReadByte();
             if (roomId < 0)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element of BreachRoomUnlockResultMessage.roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element of BreachRoomUnlockResultMessage.roomId.");
             }
 
             result = (byte)reader.ReadByte();
             if (result < 0)
             {
-                throw new Exception("Forbidden value (" + result + ") on element of BreachRoomUnlockResultMessage.result.");
+                throw new System.Exception("Forbidden value (" + result + ") on element of BreachRoomUnlockResultMessage.result.");
             }
 
         }

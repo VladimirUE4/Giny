@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,14 @@ namespace Giny.Protocol.Messages
         public BreachGameFightEndMessage()
         {
         }
-        public BreachGameFightEndMessage(int budget)
+        public BreachGameFightEndMessage(int budget,int duration,short rewardRate,short lootShareLimitMalus,FightResultListEntry[] results,NamedPartyTeamWithOutcome[] namedPartyTeamsOutcomes)
         {
             this.budget = budget;
+            this.duration = duration;
+            this.rewardRate = rewardRate;
+            this.lootShareLimitMalus = lootShareLimitMalus;
+            this.results = results;
+            this.namedPartyTeamsOutcomes = namedPartyTeamsOutcomes;
         }
         public override void Serialize(IDataWriter writer)
         {

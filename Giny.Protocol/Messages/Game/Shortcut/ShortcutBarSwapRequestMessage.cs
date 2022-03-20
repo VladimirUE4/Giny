@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,13 +30,13 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)barType);
             if (firstSlot < 0 || firstSlot > 99)
             {
-                throw new Exception("Forbidden value (" + firstSlot + ") on element firstSlot.");
+                throw new System.Exception("Forbidden value (" + firstSlot + ") on element firstSlot.");
             }
 
             writer.WriteByte((byte)firstSlot);
             if (secondSlot < 0 || secondSlot > 99)
             {
-                throw new Exception("Forbidden value (" + secondSlot + ") on element secondSlot.");
+                throw new System.Exception("Forbidden value (" + secondSlot + ") on element secondSlot.");
             }
 
             writer.WriteByte((byte)secondSlot);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Messages
             barType = (byte)reader.ReadByte();
             if (barType < 0)
             {
-                throw new Exception("Forbidden value (" + barType + ") on element of ShortcutBarSwapRequestMessage.barType.");
+                throw new System.Exception("Forbidden value (" + barType + ") on element of ShortcutBarSwapRequestMessage.barType.");
             }
 
             firstSlot = (byte)reader.ReadByte();
             if (firstSlot < 0 || firstSlot > 99)
             {
-                throw new Exception("Forbidden value (" + firstSlot + ") on element of ShortcutBarSwapRequestMessage.firstSlot.");
+                throw new System.Exception("Forbidden value (" + firstSlot + ") on element of ShortcutBarSwapRequestMessage.firstSlot.");
             }
 
             secondSlot = (byte)reader.ReadByte();
             if (secondSlot < 0 || secondSlot > 99)
             {
-                throw new Exception("Forbidden value (" + secondSlot + ") on element of ShortcutBarSwapRequestMessage.secondSlot.");
+                throw new System.Exception("Forbidden value (" + secondSlot + ") on element of ShortcutBarSwapRequestMessage.secondSlot.");
             }
 
         }

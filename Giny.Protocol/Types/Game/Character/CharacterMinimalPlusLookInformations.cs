@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,13 @@ namespace Giny.Protocol.Types
         public CharacterMinimalPlusLookInformations()
         {
         }
-        public CharacterMinimalPlusLookInformations(EntityLook entityLook,byte breed)
+        public CharacterMinimalPlusLookInformations(EntityLook entityLook,byte breed,long id,string name,short level)
         {
             this.entityLook = entityLook;
             this.breed = breed;
+            this.id = id;
+            this.name = name;
+            this.level = level;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,23 +18,30 @@ namespace Giny.Protocol.Messages
         public PartyMemberInBreachFightMessage()
         {
         }
-        public PartyMemberInBreachFightMessage(int floor,byte room)
+        public PartyMemberInBreachFightMessage(int floor,byte room,int partyId,byte reason,long memberId,int memberAccountId,string memberName,short fightId,short timeBeforeFightStart)
         {
             this.floor = floor;
             this.room = room;
+            this.partyId = partyId;
+            this.reason = reason;
+            this.memberId = memberId;
+            this.memberAccountId = memberAccountId;
+            this.memberName = memberName;
+            this.fightId = fightId;
+            this.timeBeforeFightStart = timeBeforeFightStart;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (floor < 0)
             {
-                throw new Exception("Forbidden value (" + floor + ") on element floor.");
+                throw new System.Exception("Forbidden value (" + floor + ") on element floor.");
             }
 
             writer.WriteVarInt((int)floor);
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element room.");
             }
 
             writer.WriteByte((byte)room);
@@ -46,13 +52,13 @@ namespace Giny.Protocol.Messages
             floor = (int)reader.ReadVarUhInt();
             if (floor < 0)
             {
-                throw new Exception("Forbidden value (" + floor + ") on element of PartyMemberInBreachFightMessage.floor.");
+                throw new System.Exception("Forbidden value (" + floor + ") on element of PartyMemberInBreachFightMessage.floor.");
             }
 
             room = (byte)reader.ReadByte();
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element of PartyMemberInBreachFightMessage.room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element of PartyMemberInBreachFightMessage.room.");
             }
 
         }

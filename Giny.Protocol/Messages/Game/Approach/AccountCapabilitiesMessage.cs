@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -40,19 +39,19 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
             if (breedsVisible < 0)
             {
-                throw new Exception("Forbidden value (" + breedsVisible + ") on element breedsVisible.");
+                throw new System.Exception("Forbidden value (" + breedsVisible + ") on element breedsVisible.");
             }
 
             writer.WriteVarInt((int)breedsVisible);
             if (breedsAvailable < 0)
             {
-                throw new Exception("Forbidden value (" + breedsAvailable + ") on element breedsAvailable.");
+                throw new System.Exception("Forbidden value (" + breedsAvailable + ") on element breedsAvailable.");
             }
 
             writer.WriteVarInt((int)breedsAvailable);
@@ -66,19 +65,19 @@ namespace Giny.Protocol.Messages
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of AccountCapabilitiesMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of AccountCapabilitiesMessage.accountId.");
             }
 
             breedsVisible = (int)reader.ReadVarUhInt();
             if (breedsVisible < 0)
             {
-                throw new Exception("Forbidden value (" + breedsVisible + ") on element of AccountCapabilitiesMessage.breedsVisible.");
+                throw new System.Exception("Forbidden value (" + breedsVisible + ") on element of AccountCapabilitiesMessage.breedsVisible.");
             }
 
             breedsAvailable = (int)reader.ReadVarUhInt();
             if (breedsAvailable < 0)
             {
-                throw new Exception("Forbidden value (" + breedsAvailable + ") on element of AccountCapabilitiesMessage.breedsAvailable.");
+                throw new System.Exception("Forbidden value (" + breedsAvailable + ") on element of AccountCapabilitiesMessage.breedsAvailable.");
             }
 
             status = (byte)reader.ReadByte();

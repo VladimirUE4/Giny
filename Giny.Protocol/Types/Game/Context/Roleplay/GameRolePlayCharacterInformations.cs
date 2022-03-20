@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,15 @@ namespace Giny.Protocol.Types
         public GameRolePlayCharacterInformations()
         {
         }
-        public GameRolePlayCharacterInformations(ActorAlignmentInformations alignmentInfos)
+        public GameRolePlayCharacterInformations(ActorAlignmentInformations alignmentInfos,double contextualId,EntityDispositionInformations disposition,EntityLook look,string name,HumanInformations humanoidInfo,int accountId)
         {
             this.alignmentInfos = alignmentInfos;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.name = name;
+            this.humanoidInfo = humanoidInfo;
+            this.accountId = accountId;
         }
         public override void Serialize(IDataWriter writer)
         {

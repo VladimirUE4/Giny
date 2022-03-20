@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,19 +28,19 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element elementId.");
             }
 
             writer.WriteVarInt((int)elementId);
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarShort((short)skillId);
             if (skillEndTime < -9.00719925474099E+15 || skillEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + skillEndTime + ") on element skillEndTime.");
+                throw new System.Exception("Forbidden value (" + skillEndTime + ") on element skillEndTime.");
             }
 
             writer.WriteDouble((double)skillEndTime);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Types
             elementId = (int)reader.ReadVarUhInt();
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element of HumanOptionSkillUse.elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element of HumanOptionSkillUse.elementId.");
             }
 
             skillId = (short)reader.ReadVarUhShort();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of HumanOptionSkillUse.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of HumanOptionSkillUse.skillId.");
             }
 
             skillEndTime = (double)reader.ReadDouble();
             if (skillEndTime < -9.00719925474099E+15 || skillEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + skillEndTime + ") on element of HumanOptionSkillUse.skillEndTime.");
+                throw new System.Exception("Forbidden value (" + skillEndTime + ") on element of HumanOptionSkillUse.skillEndTime.");
             }
 
         }

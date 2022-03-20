@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (categoryId < 0)
             {
-                throw new Exception("Forbidden value (" + categoryId + ") on element categoryId.");
+                throw new System.Exception("Forbidden value (" + categoryId + ") on element categoryId.");
             }
 
             writer.WriteVarShort((short)categoryId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             categoryId = (short)reader.ReadVarUhShort();
             if (categoryId < 0)
             {
-                throw new Exception("Forbidden value (" + categoryId + ") on element of AchievementDetailedListRequestMessage.categoryId.");
+                throw new System.Exception("Forbidden value (" + categoryId + ") on element of AchievementDetailedListRequestMessage.categoryId.");
             }
 
         }

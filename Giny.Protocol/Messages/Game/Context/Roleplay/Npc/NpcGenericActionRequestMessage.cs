@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,13 +30,13 @@ namespace Giny.Protocol.Messages
             writer.WriteInt((int)npcId);
             if (npcActionId < 0)
             {
-                throw new Exception("Forbidden value (" + npcActionId + ") on element npcActionId.");
+                throw new System.Exception("Forbidden value (" + npcActionId + ") on element npcActionId.");
             }
 
             writer.WriteByte((byte)npcActionId);
             if (npcMapId < 0 || npcMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + npcMapId + ") on element npcMapId.");
+                throw new System.Exception("Forbidden value (" + npcMapId + ") on element npcMapId.");
             }
 
             writer.WriteDouble((double)npcMapId);
@@ -48,13 +47,13 @@ namespace Giny.Protocol.Messages
             npcActionId = (byte)reader.ReadByte();
             if (npcActionId < 0)
             {
-                throw new Exception("Forbidden value (" + npcActionId + ") on element of NpcGenericActionRequestMessage.npcActionId.");
+                throw new System.Exception("Forbidden value (" + npcActionId + ") on element of NpcGenericActionRequestMessage.npcActionId.");
             }
 
             npcMapId = (double)reader.ReadDouble();
             if (npcMapId < 0 || npcMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + npcMapId + ") on element of NpcGenericActionRequestMessage.npcMapId.");
+                throw new System.Exception("Forbidden value (" + npcMapId + ") on element of NpcGenericActionRequestMessage.npcMapId.");
             }
 
         }

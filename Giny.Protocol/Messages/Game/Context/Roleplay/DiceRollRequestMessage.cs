@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (dice < 0)
             {
-                throw new Exception("Forbidden value (" + dice + ") on element dice.");
+                throw new System.Exception("Forbidden value (" + dice + ") on element dice.");
             }
 
             writer.WriteVarInt((int)dice);
             if (faces < 0)
             {
-                throw new Exception("Forbidden value (" + faces + ") on element faces.");
+                throw new System.Exception("Forbidden value (" + faces + ") on element faces.");
             }
 
             writer.WriteVarInt((int)faces);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Messages
             dice = (int)reader.ReadVarUhInt();
             if (dice < 0)
             {
-                throw new Exception("Forbidden value (" + dice + ") on element of DiceRollRequestMessage.dice.");
+                throw new System.Exception("Forbidden value (" + dice + ") on element of DiceRollRequestMessage.dice.");
             }
 
             faces = (int)reader.ReadVarUhInt();
             if (faces < 0)
             {
-                throw new Exception("Forbidden value (" + faces + ") on element of DiceRollRequestMessage.faces.");
+                throw new System.Exception("Forbidden value (" + faces + ") on element of DiceRollRequestMessage.faces.");
             }
 
             channel = (byte)reader.ReadByte();
             if (channel < 0)
             {
-                throw new Exception("Forbidden value (" + channel + ") on element of DiceRollRequestMessage.channel.");
+                throw new System.Exception("Forbidden value (" + channel + ") on element of DiceRollRequestMessage.channel.");
             }
 
         }

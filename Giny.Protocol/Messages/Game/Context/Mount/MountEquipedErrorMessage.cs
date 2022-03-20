@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             errorType = (byte)reader.ReadByte();
             if (errorType < 0)
             {
-                throw new Exception("Forbidden value (" + errorType + ") on element of MountEquipedExceptionMessage.errorType.");
+                throw new System.Exception("Forbidden value (" + errorType + ") on element of MountEquipedSystem.ExceptionMessage.errorType.");
             }
 
         }

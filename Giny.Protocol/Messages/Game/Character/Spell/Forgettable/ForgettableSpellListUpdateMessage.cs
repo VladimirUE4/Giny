@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             action = (byte)reader.ReadByte();
             if (action < 0)
             {
-                throw new Exception("Forbidden value (" + action + ") on element of ForgettableSpellListUpdateMessage.action.");
+                throw new System.Exception("Forbidden value (" + action + ") on element of ForgettableSpellListUpdateMessage.action.");
             }
 
             uint _spellsLen = (uint)reader.ReadUShort();

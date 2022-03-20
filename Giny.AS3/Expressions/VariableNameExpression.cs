@@ -35,7 +35,6 @@ namespace Giny.AS3.Expressions
             {
                 VariableCallReferences[w] = new VariableNameExpression(tree2[w]);
             }
-            var test = GetVariableFullName();
         }
         public static bool IsValid(string line)
         {

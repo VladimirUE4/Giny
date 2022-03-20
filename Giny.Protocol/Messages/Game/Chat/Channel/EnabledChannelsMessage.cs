@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -50,7 +49,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadByte();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of channels.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of channels.");
                 }
 
                 channels[_i1] = (byte)_val1;
@@ -63,7 +62,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadByte();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of disallowed.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of disallowed.");
                 }
 
                 disallowed[_i2] = (byte)_val2;

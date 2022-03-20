@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,31 +33,31 @@ namespace Giny.Protocol.Messages
         {
             if (minLevel < 0)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element minLevel.");
             }
 
             writer.WriteVarShort((short)minLevel);
             if (maxLevel < 0)
             {
-                throw new Exception("Forbidden value (" + maxLevel + ") on element maxLevel.");
+                throw new System.Exception("Forbidden value (" + maxLevel + ") on element maxLevel.");
             }
 
             writer.WriteVarShort((short)maxLevel);
             if (areaId < 0)
             {
-                throw new Exception("Forbidden value (" + areaId + ") on element areaId.");
+                throw new System.Exception("Forbidden value (" + areaId + ") on element areaId.");
             }
 
             writer.WriteVarShort((short)areaId);
             if (activityCategoryId < 0)
             {
-                throw new Exception("Forbidden value (" + activityCategoryId + ") on element activityCategoryId.");
+                throw new System.Exception("Forbidden value (" + activityCategoryId + ") on element activityCategoryId.");
             }
 
             writer.WriteVarShort((short)activityCategoryId);
             if (nbCards < 0 || nbCards > 65535)
             {
-                throw new Exception("Forbidden value (" + nbCards + ") on element nbCards.");
+                throw new System.Exception("Forbidden value (" + nbCards + ") on element nbCards.");
             }
 
             writer.WriteShort((short)nbCards);
@@ -68,31 +67,31 @@ namespace Giny.Protocol.Messages
             minLevel = (short)reader.ReadVarUhShort();
             if (minLevel < 0)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element of ActivitySuggestionsRequestMessage.minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element of ActivitySuggestionsRequestMessage.minLevel.");
             }
 
             maxLevel = (short)reader.ReadVarUhShort();
             if (maxLevel < 0)
             {
-                throw new Exception("Forbidden value (" + maxLevel + ") on element of ActivitySuggestionsRequestMessage.maxLevel.");
+                throw new System.Exception("Forbidden value (" + maxLevel + ") on element of ActivitySuggestionsRequestMessage.maxLevel.");
             }
 
             areaId = (short)reader.ReadVarUhShort();
             if (areaId < 0)
             {
-                throw new Exception("Forbidden value (" + areaId + ") on element of ActivitySuggestionsRequestMessage.areaId.");
+                throw new System.Exception("Forbidden value (" + areaId + ") on element of ActivitySuggestionsRequestMessage.areaId.");
             }
 
             activityCategoryId = (short)reader.ReadVarUhShort();
             if (activityCategoryId < 0)
             {
-                throw new Exception("Forbidden value (" + activityCategoryId + ") on element of ActivitySuggestionsRequestMessage.activityCategoryId.");
+                throw new System.Exception("Forbidden value (" + activityCategoryId + ") on element of ActivitySuggestionsRequestMessage.activityCategoryId.");
             }
 
             nbCards = (short)reader.ReadUShort();
             if (nbCards < 0 || nbCards > 65535)
             {
-                throw new Exception("Forbidden value (" + nbCards + ") on element of ActivitySuggestionsRequestMessage.nbCards.");
+                throw new System.Exception("Forbidden value (" + nbCards + ") on element of ActivitySuggestionsRequestMessage.nbCards.");
             }
 
         }

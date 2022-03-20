@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public PartyMemberRemoveMessage()
         {
         }
-        public PartyMemberRemoveMessage(long leavingPlayerId)
+        public PartyMemberRemoveMessage(long leavingPlayerId,int partyId)
         {
             this.leavingPlayerId = leavingPlayerId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (leavingPlayerId < 0 || leavingPlayerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leavingPlayerId + ") on element leavingPlayerId.");
+                throw new System.Exception("Forbidden value (" + leavingPlayerId + ") on element leavingPlayerId.");
             }
 
             writer.WriteVarLong((long)leavingPlayerId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             leavingPlayerId = (long)reader.ReadVarUhLong();
             if (leavingPlayerId < 0 || leavingPlayerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leavingPlayerId + ") on element of PartyMemberRemoveMessage.leavingPlayerId.");
+                throw new System.Exception("Forbidden value (" + leavingPlayerId + ") on element of PartyMemberRemoveMessage.leavingPlayerId.");
             }
 
         }

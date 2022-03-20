@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarInt((int)id);
             if (maxValue < 0)
             {
-                throw new Exception("Forbidden value (" + maxValue + ") on element maxValue.");
+                throw new System.Exception("Forbidden value (" + maxValue + ") on element maxValue.");
             }
 
             writer.WriteVarShort((short)maxValue);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             id = (int)reader.ReadVarUhInt();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of AchievementObjective.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of AchievementObjective.id.");
             }
 
             maxValue = (short)reader.ReadVarUhShort();
             if (maxValue < 0)
             {
-                throw new Exception("Forbidden value (" + maxValue + ") on element of AchievementObjective.maxValue.");
+                throw new System.Exception("Forbidden value (" + maxValue + ") on element of AchievementObjective.maxValue.");
             }
 
         }

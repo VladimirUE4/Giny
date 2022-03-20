@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -21,19 +20,23 @@ namespace Giny.Protocol.Messages
         public ChatServerMessage()
         {
         }
-        public ChatServerMessage(double senderId,string senderName,string prefix,int senderAccountId)
+        public ChatServerMessage(double senderId,string senderName,string prefix,int senderAccountId,byte channel,string content,int timestamp,string fingerprint)
         {
             this.senderId = senderId;
             this.senderName = senderName;
             this.prefix = prefix;
             this.senderAccountId = senderAccountId;
+            this.channel = channel;
+            this.content = content;
+            this.timestamp = timestamp;
+            this.fingerprint = fingerprint;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (senderId < -9.00719925474099E+15 || senderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + senderId + ") on element senderId.");
+                throw new System.Exception("Forbidden value (" + senderId + ") on element senderId.");
             }
 
             writer.WriteDouble((double)senderId);
@@ -41,7 +44,7 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)prefix);
             if (senderAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + senderAccountId + ") on element senderAccountId.");
+                throw new System.Exception("Forbidden value (" + senderAccountId + ") on element senderAccountId.");
             }
 
             writer.WriteInt((int)senderAccountId);
@@ -52,7 +55,7 @@ namespace Giny.Protocol.Messages
             senderId = (double)reader.ReadDouble();
             if (senderId < -9.00719925474099E+15 || senderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + senderId + ") on element of ChatServerMessage.senderId.");
+                throw new System.Exception("Forbidden value (" + senderId + ") on element of ChatServerMessage.senderId.");
             }
 
             senderName = (string)reader.ReadUTF();
@@ -60,7 +63,7 @@ namespace Giny.Protocol.Messages
             senderAccountId = (int)reader.ReadInt();
             if (senderAccountId < 0)
             {
-                throw new Exception("Forbidden value (" + senderAccountId + ") on element of ChatServerMessage.senderAccountId.");
+                throw new System.Exception("Forbidden value (" + senderAccountId + ") on element of ChatServerMessage.senderAccountId.");
             }
 
         }

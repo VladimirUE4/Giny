@@ -49,6 +49,10 @@ namespace Giny.AS3.Expressions
 
         public override void RenameVariable(string variableName, string newVariableName)
         {
+            if (Target == "this." + variableName)
+            {
+                Target = "this." + newVariableName;
+            }
             if (Target == variableName)
             {
                 Target = newVariableName;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
         {
             if (serverId < 0)
             {
-                throw new Exception("Forbidden value (" + serverId + ") on element serverId.");
+                throw new System.Exception("Forbidden value (" + serverId + ") on element serverId.");
             }
 
             writer.WriteVarShort((short)serverId);
@@ -44,7 +43,7 @@ namespace Giny.Protocol.Messages
             {
                 if (ports[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + ports[_i3] + ") on element 3 (starting at 1) of ports.");
+                    throw new System.Exception("Forbidden value (" + ports[_i3] + ") on element 3 (starting at 1) of ports.");
                 }
 
                 writer.WriteVarShort((short)ports[_i3]);
@@ -65,7 +64,7 @@ namespace Giny.Protocol.Messages
             serverId = (short)reader.ReadVarUhShort();
             if (serverId < 0)
             {
-                throw new Exception("Forbidden value (" + serverId + ") on element of SelectedServerDataMessage.serverId.");
+                throw new System.Exception("Forbidden value (" + serverId + ") on element of SelectedServerDataMessage.serverId.");
             }
 
             address = (string)reader.ReadUTF();
@@ -76,7 +75,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadVarUhShort();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of ports.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of ports.");
                 }
 
                 ports[_i3] = (short)_val3;

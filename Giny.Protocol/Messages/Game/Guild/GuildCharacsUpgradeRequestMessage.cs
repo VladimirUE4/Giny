@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             charaTypeTarget = (byte)reader.ReadByte();
             if (charaTypeTarget < 0)
             {
-                throw new Exception("Forbidden value (" + charaTypeTarget + ") on element of GuildCharacsUpgradeRequestMessage.charaTypeTarget.");
+                throw new System.Exception("Forbidden value (" + charaTypeTarget + ") on element of GuildCharacsUpgradeRequestMessage.charaTypeTarget.");
             }
 
         }

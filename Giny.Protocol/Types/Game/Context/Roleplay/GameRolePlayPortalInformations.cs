@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public GameRolePlayPortalInformations()
         {
         }
-        public GameRolePlayPortalInformations(PortalInformation portal)
+        public GameRolePlayPortalInformations(PortalInformation portal,double contextualId,EntityDispositionInformations disposition,EntityLook look)
         {
             this.portal = portal;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
         }
         public override void Serialize(IDataWriter writer)
         {

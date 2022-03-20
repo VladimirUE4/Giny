@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (quantity < 0 || quantity > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarLong((long)quantity);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             quantity = (long)reader.ReadVarUhLong();
             if (quantity < 0 || quantity > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ExchangeCraftPaymentModificationRequestMessage.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ExchangeCraftPaymentModificationRequestMessage.quantity.");
             }
 
         }

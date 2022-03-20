@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)alignmentSide);
             if (alignmentWarEffort < 0 || alignmentWarEffort > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffort + ") on element alignmentWarEffort.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffort + ") on element alignmentWarEffort.");
             }
 
             writer.WriteVarLong((long)alignmentWarEffort);
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             alignmentWarEffort = (long)reader.ReadVarUhLong();
             if (alignmentWarEffort < 0 || alignmentWarEffort > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + alignmentWarEffort + ") on element of AlignmentWarEffortInformation.alignmentWarEffort.");
+                throw new System.Exception("Forbidden value (" + alignmentWarEffort + ") on element of AlignmentWarEffortInformation.alignmentWarEffort.");
             }
 
         }

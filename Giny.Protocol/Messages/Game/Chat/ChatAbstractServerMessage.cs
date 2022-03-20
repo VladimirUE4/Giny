@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)content);
             if (timestamp < 0)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element timestamp.");
             }
 
             writer.WriteInt((int)timestamp);
@@ -45,14 +44,14 @@ namespace Giny.Protocol.Messages
             channel = (byte)reader.ReadByte();
             if (channel < 0)
             {
-                throw new Exception("Forbidden value (" + channel + ") on element of ChatAbstractServerMessage.channel.");
+                throw new System.Exception("Forbidden value (" + channel + ") on element of ChatAbstractServerMessage.channel.");
             }
 
             content = (string)reader.ReadUTF();
             timestamp = (int)reader.ReadInt();
             if (timestamp < 0)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element of ChatAbstractServerMessage.timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element of ChatAbstractServerMessage.timestamp.");
             }
 
             fingerprint = (string)reader.ReadUTF();

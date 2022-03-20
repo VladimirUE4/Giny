@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (timeSpent < 0 || timeSpent > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timeSpent + ") on element timeSpent.");
+                throw new System.Exception("Forbidden value (" + timeSpent + ") on element timeSpent.");
             }
 
             writer.WriteDouble((double)timeSpent);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             timeSpent = (double)reader.ReadDouble();
             if (timeSpent < 0 || timeSpent > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + timeSpent + ") on element of BasicStatMessage.timeSpent.");
+                throw new System.Exception("Forbidden value (" + timeSpent + ") on element of BasicStatMessage.timeSpent.");
             }
 
             statId = (short)reader.ReadVarUhShort();
             if (statId < 0)
             {
-                throw new Exception("Forbidden value (" + statId + ") on element of BasicStatMessage.statId.");
+                throw new System.Exception("Forbidden value (" + statId + ") on element of BasicStatMessage.statId.");
             }
 
         }

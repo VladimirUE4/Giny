@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,19 @@ namespace Giny.Protocol.Types
         public IconNamedPreset()
         {
         }
-        public IconNamedPreset(short iconId,string name)
+        public IconNamedPreset(short iconId,string name,short id,Preset[] presets)
         {
             this.iconId = iconId;
             this.name = name;
+            this.id = id;
+            this.presets = presets;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element iconId.");
             }
 
             writer.WriteShort((short)iconId);
@@ -39,7 +40,7 @@ namespace Giny.Protocol.Types
             iconId = (short)reader.ReadShort();
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element of IconNamedPreset.iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element of IconNamedPreset.iconId.");
             }
 
             name = (string)reader.ReadUTF();

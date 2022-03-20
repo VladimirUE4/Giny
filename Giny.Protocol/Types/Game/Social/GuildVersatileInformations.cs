@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,25 +29,25 @@ namespace Giny.Protocol.Types
         {
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
             if (leaderId < 0 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element leaderId.");
             }
 
             writer.WriteVarLong((long)leaderId);
             if (guildLevel < 1 || guildLevel > 200)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element guildLevel.");
             }
 
             writer.WriteByte((byte)guildLevel);
             if (nbMembers < 1 || nbMembers > 240)
             {
-                throw new Exception("Forbidden value (" + nbMembers + ") on element nbMembers.");
+                throw new System.Exception("Forbidden value (" + nbMembers + ") on element nbMembers.");
             }
 
             writer.WriteByte((byte)nbMembers);
@@ -58,25 +57,25 @@ namespace Giny.Protocol.Types
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of GuildVersatileInformations.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of GuildVersatileInformations.guildId.");
             }
 
             leaderId = (long)reader.ReadVarUhLong();
             if (leaderId < 0 || leaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderId + ") on element of GuildVersatileInformations.leaderId.");
+                throw new System.Exception("Forbidden value (" + leaderId + ") on element of GuildVersatileInformations.leaderId.");
             }
 
             guildLevel = (byte)reader.ReadSByte();
             if (guildLevel < 1 || guildLevel > 200)
             {
-                throw new Exception("Forbidden value (" + guildLevel + ") on element of GuildVersatileInformations.guildLevel.");
+                throw new System.Exception("Forbidden value (" + guildLevel + ") on element of GuildVersatileInformations.guildLevel.");
             }
 
             nbMembers = (byte)reader.ReadSByte();
             if (nbMembers < 1 || nbMembers > 240)
             {
-                throw new Exception("Forbidden value (" + nbMembers + ") on element of GuildVersatileInformations.nbMembers.");
+                throw new System.Exception("Forbidden value (" + nbMembers + ") on element of GuildVersatileInformations.nbMembers.");
             }
 
         }

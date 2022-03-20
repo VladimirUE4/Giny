@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public ObjectEffectLadder()
         {
         }
-        public ObjectEffectLadder(int monsterCount)
+        public ObjectEffectLadder(int monsterCount,short actionId,short monsterFamilyId)
         {
             this.monsterCount = monsterCount;
+            this.actionId = actionId;
+            this.monsterFamilyId = monsterFamilyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (monsterCount < 0)
             {
-                throw new Exception("Forbidden value (" + monsterCount + ") on element monsterCount.");
+                throw new System.Exception("Forbidden value (" + monsterCount + ") on element monsterCount.");
             }
 
             writer.WriteVarInt((int)monsterCount);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             monsterCount = (int)reader.ReadVarUhInt();
             if (monsterCount < 0)
             {
-                throw new Exception("Forbidden value (" + monsterCount + ") on element of ObjectEffectLadder.monsterCount.");
+                throw new System.Exception("Forbidden value (" + monsterCount + ") on element of ObjectEffectLadder.monsterCount.");
             }
 
         }

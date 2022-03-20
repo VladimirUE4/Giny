@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,14 +29,14 @@ namespace Giny.Protocol.Messages
         {
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element paddockId.");
             }
 
             writer.WriteDouble((double)paddockId);
             writer.WriteBoolean((bool)bought);
             if (realPrice < 0 || realPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + realPrice + ") on element realPrice.");
+                throw new System.Exception("Forbidden value (" + realPrice + ") on element realPrice.");
             }
 
             writer.WriteVarLong((long)realPrice);
@@ -47,14 +46,14 @@ namespace Giny.Protocol.Messages
             paddockId = (double)reader.ReadDouble();
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element of PaddockBuyResultMessage.paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element of PaddockBuyResultMessage.paddockId.");
             }
 
             bought = (bool)reader.ReadBoolean();
             realPrice = (long)reader.ReadVarUhLong();
             if (realPrice < 0 || realPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + realPrice + ") on element of PaddockBuyResultMessage.realPrice.");
+                throw new System.Exception("Forbidden value (" + realPrice + ") on element of PaddockBuyResultMessage.realPrice.");
             }
 
         }

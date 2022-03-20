@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             {
                 if (packIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + packIds[_i1] + ") on element 1 (starting at 1) of packIds.");
+                    throw new System.Exception("Forbidden value (" + packIds[_i1] + ") on element 1 (starting at 1) of packIds.");
                 }
 
                 writer.WriteByte((byte)packIds[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadByte();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of packIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of packIds.");
                 }
 
                 packIds[_i1] = (byte)_val1;

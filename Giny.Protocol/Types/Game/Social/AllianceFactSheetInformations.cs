@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,20 @@ namespace Giny.Protocol.Types
         public AllianceFactSheetInformations()
         {
         }
-        public AllianceFactSheetInformations(int creationDate)
+        public AllianceFactSheetInformations(int creationDate,int allianceId,string allianceTag,string allianceName,GuildEmblem allianceEmblem)
         {
             this.creationDate = creationDate;
+            this.allianceId = allianceId;
+            this.allianceTag = allianceTag;
+            this.allianceName = allianceName;
+            this.allianceEmblem = allianceEmblem;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (creationDate < 0)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element creationDate.");
             }
 
             writer.WriteInt((int)creationDate);
@@ -36,7 +39,7 @@ namespace Giny.Protocol.Types
             creationDate = (int)reader.ReadInt();
             if (creationDate < 0)
             {
-                throw new Exception("Forbidden value (" + creationDate + ") on element of AllianceFactSheetInformations.creationDate.");
+                throw new System.Exception("Forbidden value (" + creationDate + ") on element of AllianceFactSheetInformations.creationDate.");
             }
 
         }

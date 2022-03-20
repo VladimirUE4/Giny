@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             {
                 if (titles[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + titles[_i1] + ") on element 1 (starting at 1) of titles.");
+                    throw new System.Exception("Forbidden value (" + titles[_i1] + ") on element 1 (starting at 1) of titles.");
                 }
 
                 writer.WriteVarShort((short)titles[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
             {
                 if (ornaments[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + ornaments[_i2] + ") on element 2 (starting at 1) of ornaments.");
+                    throw new System.Exception("Forbidden value (" + ornaments[_i2] + ") on element 2 (starting at 1) of ornaments.");
                 }
 
                 writer.WriteVarShort((short)ornaments[_i2]);
@@ -54,13 +53,13 @@ namespace Giny.Protocol.Messages
 
             if (activeTitle < 0)
             {
-                throw new Exception("Forbidden value (" + activeTitle + ") on element activeTitle.");
+                throw new System.Exception("Forbidden value (" + activeTitle + ") on element activeTitle.");
             }
 
             writer.WriteVarShort((short)activeTitle);
             if (activeOrnament < 0)
             {
-                throw new Exception("Forbidden value (" + activeOrnament + ") on element activeOrnament.");
+                throw new System.Exception("Forbidden value (" + activeOrnament + ") on element activeOrnament.");
             }
 
             writer.WriteVarShort((short)activeOrnament);
@@ -76,7 +75,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of titles.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of titles.");
                 }
 
                 titles[_i1] = (short)_val1;
@@ -89,7 +88,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of ornaments.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of ornaments.");
                 }
 
                 ornaments[_i2] = (short)_val2;
@@ -98,13 +97,13 @@ namespace Giny.Protocol.Messages
             activeTitle = (short)reader.ReadVarUhShort();
             if (activeTitle < 0)
             {
-                throw new Exception("Forbidden value (" + activeTitle + ") on element of TitlesAndOrnamentsListMessage.activeTitle.");
+                throw new System.Exception("Forbidden value (" + activeTitle + ") on element of TitlesAndOrnamentsListMessage.activeTitle.");
             }
 
             activeOrnament = (short)reader.ReadVarUhShort();
             if (activeOrnament < 0)
             {
-                throw new Exception("Forbidden value (" + activeOrnament + ") on element of TitlesAndOrnamentsListMessage.activeOrnament.");
+                throw new System.Exception("Forbidden value (" + activeOrnament + ") on element of TitlesAndOrnamentsListMessage.activeOrnament.");
             }
 
         }

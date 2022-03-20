@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)name);
             if (level < 1 || level > 200)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Types
             level = (short)reader.ReadVarUhShort();
             if (level < 1 || level > 200)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of SpawnCharacterInformation.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of SpawnCharacterInformation.level.");
             }
 
         }

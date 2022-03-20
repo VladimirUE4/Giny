@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,13 +31,13 @@ namespace Giny.Protocol.Messages
         {
             if (seasonId < 0)
             {
-                throw new Exception("Forbidden value (" + seasonId + ") on element seasonId.");
+                throw new System.Exception("Forbidden value (" + seasonId + ") on element seasonId.");
             }
 
             writer.WriteVarShort((short)seasonId);
             if (leagueId < 0)
             {
-                throw new Exception("Forbidden value (" + leagueId + ") on element leagueId.");
+                throw new System.Exception("Forbidden value (" + leagueId + ") on element leagueId.");
             }
 
             writer.WriteVarShort((short)leagueId);
@@ -50,13 +49,13 @@ namespace Giny.Protocol.Messages
             seasonId = (short)reader.ReadVarUhShort();
             if (seasonId < 0)
             {
-                throw new Exception("Forbidden value (" + seasonId + ") on element of GameRolePlayArenaLeagueRewardsMessage.seasonId.");
+                throw new System.Exception("Forbidden value (" + seasonId + ") on element of GameRolePlayArenaLeagueRewardsMessage.seasonId.");
             }
 
             leagueId = (short)reader.ReadVarUhShort();
             if (leagueId < 0)
             {
-                throw new Exception("Forbidden value (" + leagueId + ") on element of GameRolePlayArenaLeagueRewardsMessage.leagueId.");
+                throw new System.Exception("Forbidden value (" + leagueId + ") on element of GameRolePlayArenaLeagueRewardsMessage.leagueId.");
             }
 
             ladderPosition = (int)reader.ReadInt();

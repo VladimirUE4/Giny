@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             code = (byte)reader.ReadByte();
             if (code < 0)
             {
-                throw new Exception("Forbidden value (" + code + ") on element of PresetDeleteResultMessage.code.");
+                throw new System.Exception("Forbidden value (" + code + ") on element of PresetDeleteResultMessage.code.");
             }
 
         }

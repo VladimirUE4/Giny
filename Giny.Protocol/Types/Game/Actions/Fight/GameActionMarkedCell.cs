@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Types
         {
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Types
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of GameActionMarkedCell.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of GameActionMarkedCell.cellId.");
             }
 
             zoneSize = (byte)reader.ReadByte();

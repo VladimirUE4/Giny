@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (ids[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + ids[_i1] + ") on element 1 (starting at 1) of ids.");
+                    throw new System.Exception("Forbidden value (" + ids[_i1] + ") on element 1 (starting at 1) of ids.");
                 }
 
                 writer.WriteVarShort((short)ids[_i1]);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             {
                 if (avgPrices[_i2] < 0 || avgPrices[_i2] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + avgPrices[_i2] + ") on element 2 (starting at 1) of avgPrices.");
+                    throw new System.Exception("Forbidden value (" + avgPrices[_i2] + ") on element 2 (starting at 1) of avgPrices.");
                 }
 
                 writer.WriteVarLong((long)avgPrices[_i2]);
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of ids.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of ids.");
                 }
 
                 ids[_i1] = (short)_val1;
@@ -73,7 +72,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (double)reader.ReadVarUhLong();
                 if (_val2 < 0 || _val2 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of avgPrices.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of avgPrices.");
                 }
 
                 avgPrices[_i2] = (long)_val2;

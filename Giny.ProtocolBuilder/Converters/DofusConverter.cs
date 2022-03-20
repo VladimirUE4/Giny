@@ -21,6 +21,8 @@ namespace Giny.ProtocolBuilder.Converters
         {
 
         }
+
+      
         public override string GetConvertedType(AS3Type type)
         {
             if (type.RawType == "ByteArray")
@@ -44,13 +46,15 @@ namespace Giny.ProtocolBuilder.Converters
             return string.Join(Environment.NewLine, results);
         }
 
-        protected override AS3Field[] SelectFieldsToWrite()
+        protected override List<AS3Field> SelectFieldsToWrite()
         {
-            return File.GetFields(x => x.Accessor == AS3AccessorsEnum.@public && x.Modifiers == AS3ModifiersEnum.None);
+            return File.GetFields(x => x.Accessor == AS3AccessorsEnum.@public && x.Modifiers == AS3ModifiersEnum.None).ToList();
         }
-        protected override AS3Method[] SelectMethodsToWrite()
+        protected override List<AS3Method> SelectMethodsToWrite()
         {
-            return File.GetMethods(x => x.Accessor == AS3AccessorsEnum.@public);
+            return File.GetMethods(x => x.Accessor == AS3AccessorsEnum.@public).ToList();
         }
+
+        public abstract void PostPrepare();
     }
 }

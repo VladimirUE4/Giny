@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,14 +29,14 @@ namespace Giny.Protocol.Types
         {
             if (symbolShape < 0)
             {
-                throw new Exception("Forbidden value (" + symbolShape + ") on element symbolShape.");
+                throw new System.Exception("Forbidden value (" + symbolShape + ") on element symbolShape.");
             }
 
             writer.WriteVarShort((short)symbolShape);
             writer.WriteInt((int)symbolColor);
             if (backgroundShape < 0)
             {
-                throw new Exception("Forbidden value (" + backgroundShape + ") on element backgroundShape.");
+                throw new System.Exception("Forbidden value (" + backgroundShape + ") on element backgroundShape.");
             }
 
             writer.WriteByte((byte)backgroundShape);
@@ -48,14 +47,14 @@ namespace Giny.Protocol.Types
             symbolShape = (short)reader.ReadVarUhShort();
             if (symbolShape < 0)
             {
-                throw new Exception("Forbidden value (" + symbolShape + ") on element of GuildEmblem.symbolShape.");
+                throw new System.Exception("Forbidden value (" + symbolShape + ") on element of GuildEmblem.symbolShape.");
             }
 
             symbolColor = (int)reader.ReadInt();
             backgroundShape = (byte)reader.ReadByte();
             if (backgroundShape < 0)
             {
-                throw new Exception("Forbidden value (" + backgroundShape + ") on element of GuildEmblem.backgroundShape.");
+                throw new System.Exception("Forbidden value (" + backgroundShape + ") on element of GuildEmblem.backgroundShape.");
             }
 
             backgroundColor = (int)reader.ReadInt();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (entityId < -9.00719925474099E+15 || entityId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + entityId + ") on element entityId.");
+                throw new System.Exception("Forbidden value (" + entityId + ") on element entityId.");
             }
 
             writer.WriteDouble((double)entityId);
             if (textId < 0)
             {
-                throw new Exception("Forbidden value (" + textId + ") on element textId.");
+                throw new System.Exception("Forbidden value (" + textId + ") on element textId.");
             }
 
             writer.WriteVarShort((short)textId);
@@ -53,13 +52,13 @@ namespace Giny.Protocol.Messages
             entityId = (double)reader.ReadDouble();
             if (entityId < -9.00719925474099E+15 || entityId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + entityId + ") on element of EntityTalkMessage.entityId.");
+                throw new System.Exception("Forbidden value (" + entityId + ") on element of EntityTalkMessage.entityId.");
             }
 
             textId = (short)reader.ReadVarUhShort();
             if (textId < 0)
             {
-                throw new Exception("Forbidden value (" + textId + ") on element of EntityTalkMessage.textId.");
+                throw new System.Exception("Forbidden value (" + textId + ") on element of EntityTalkMessage.textId.");
             }
 
             uint _parametersLen = (uint)reader.ReadUShort();

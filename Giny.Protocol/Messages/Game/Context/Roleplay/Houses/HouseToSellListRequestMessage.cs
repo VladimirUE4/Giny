@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (pageIndex < 0)
             {
-                throw new Exception("Forbidden value (" + pageIndex + ") on element pageIndex.");
+                throw new System.Exception("Forbidden value (" + pageIndex + ") on element pageIndex.");
             }
 
             writer.WriteVarShort((short)pageIndex);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             pageIndex = (short)reader.ReadVarUhShort();
             if (pageIndex < 0)
             {
-                throw new Exception("Forbidden value (" + pageIndex + ") on element of HouseToSellListRequestMessage.pageIndex.");
+                throw new System.Exception("Forbidden value (" + pageIndex + ") on element of HouseToSellListRequestMessage.pageIndex.");
             }
 
         }

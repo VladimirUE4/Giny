@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -33,7 +32,7 @@ namespace Giny.Protocol.Messages
             {
                 if (chosenIdols[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + chosenIdols[_i1] + ") on element 1 (starting at 1) of chosenIdols.");
+                    throw new System.Exception("Forbidden value (" + chosenIdols[_i1] + ") on element 1 (starting at 1) of chosenIdols.");
                 }
 
                 writer.WriteVarShort((short)chosenIdols[_i1]);
@@ -44,7 +43,7 @@ namespace Giny.Protocol.Messages
             {
                 if (partyChosenIdols[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + partyChosenIdols[_i2] + ") on element 2 (starting at 1) of partyChosenIdols.");
+                    throw new System.Exception("Forbidden value (" + partyChosenIdols[_i2] + ") on element 2 (starting at 1) of partyChosenIdols.");
                 }
 
                 writer.WriteVarShort((short)partyChosenIdols[_i2]);
@@ -71,7 +70,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of chosenIdols.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of chosenIdols.");
                 }
 
                 chosenIdols[_i1] = (short)_val1;
@@ -84,7 +83,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of partyChosenIdols.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of partyChosenIdols.");
                 }
 
                 partyChosenIdols[_i2] = (short)_val2;

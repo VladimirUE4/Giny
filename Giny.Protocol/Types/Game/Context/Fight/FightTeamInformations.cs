@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,14 @@ namespace Giny.Protocol.Types
         public FightTeamInformations()
         {
         }
-        public FightTeamInformations(FightTeamMemberInformations[] teamMembers)
+        public FightTeamInformations(FightTeamMemberInformations[] teamMembers,byte teamId,double leaderId,byte teamSide,byte teamTypeId,byte nbWaves)
         {
             this.teamMembers = teamMembers;
+            this.teamId = teamId;
+            this.leaderId = leaderId;
+            this.teamSide = teamSide;
+            this.teamTypeId = teamTypeId;
+            this.nbWaves = nbWaves;
         }
         public override void Serialize(IDataWriter writer)
         {

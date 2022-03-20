@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public AcquaintanceInformation()
         {
         }
-        public AcquaintanceInformation(byte playerState)
+        public AcquaintanceInformation(byte playerState,int accountId,AccountTagInformation accountTag)
         {
             this.playerState = playerState;
+            this.accountId = accountId;
+            this.accountTag = accountTag;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -31,7 +32,7 @@ namespace Giny.Protocol.Types
             playerState = (byte)reader.ReadByte();
             if (playerState < 0)
             {
-                throw new Exception("Forbidden value (" + playerState + ") on element of AcquaintanceInformation.playerState.");
+                throw new System.Exception("Forbidden value (" + playerState + ") on element of AcquaintanceInformation.playerState.");
             }
 
         }

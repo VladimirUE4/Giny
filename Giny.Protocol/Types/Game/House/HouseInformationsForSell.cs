@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -50,14 +49,14 @@ namespace Giny.Protocol.Types
         {
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
             writer.WriteBoolean((bool)secondHand);
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element modelId.");
             }
 
             writer.WriteVarInt((int)modelId);
@@ -66,19 +65,19 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)ownerCharacterName);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -93,7 +92,7 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)isLocked);
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -104,14 +103,14 @@ namespace Giny.Protocol.Types
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseInformationsForSell.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseInformationsForSell.instanceId.");
             }
 
             secondHand = (bool)reader.ReadBoolean();
             modelId = (int)reader.ReadVarUhInt();
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element of HouseInformationsForSell.modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element of HouseInformationsForSell.modelId.");
             }
 
             ownerTag = new AccountTagInformation();
@@ -121,19 +120,19 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of HouseInformationsForSell.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of HouseInformationsForSell.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of HouseInformationsForSell.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of HouseInformationsForSell.worldY.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of HouseInformationsForSell.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of HouseInformationsForSell.subAreaId.");
             }
 
             nbRoom = (byte)reader.ReadByte();
@@ -150,7 +149,7 @@ namespace Giny.Protocol.Types
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of HouseInformationsForSell.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of HouseInformationsForSell.price.");
             }
 
         }

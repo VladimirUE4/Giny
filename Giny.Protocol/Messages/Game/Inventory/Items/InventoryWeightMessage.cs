@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (inventoryWeight < 0)
             {
-                throw new Exception("Forbidden value (" + inventoryWeight + ") on element inventoryWeight.");
+                throw new System.Exception("Forbidden value (" + inventoryWeight + ") on element inventoryWeight.");
             }
 
             writer.WriteVarInt((int)inventoryWeight);
             if (shopWeight < 0)
             {
-                throw new Exception("Forbidden value (" + shopWeight + ") on element shopWeight.");
+                throw new System.Exception("Forbidden value (" + shopWeight + ") on element shopWeight.");
             }
 
             writer.WriteVarInt((int)shopWeight);
             if (weightMax < 0)
             {
-                throw new Exception("Forbidden value (" + weightMax + ") on element weightMax.");
+                throw new System.Exception("Forbidden value (" + weightMax + ") on element weightMax.");
             }
 
             writer.WriteVarInt((int)weightMax);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             inventoryWeight = (int)reader.ReadVarUhInt();
             if (inventoryWeight < 0)
             {
-                throw new Exception("Forbidden value (" + inventoryWeight + ") on element of InventoryWeightMessage.inventoryWeight.");
+                throw new System.Exception("Forbidden value (" + inventoryWeight + ") on element of InventoryWeightMessage.inventoryWeight.");
             }
 
             shopWeight = (int)reader.ReadVarUhInt();
             if (shopWeight < 0)
             {
-                throw new Exception("Forbidden value (" + shopWeight + ") on element of InventoryWeightMessage.shopWeight.");
+                throw new System.Exception("Forbidden value (" + shopWeight + ") on element of InventoryWeightMessage.shopWeight.");
             }
 
             weightMax = (int)reader.ReadVarUhInt();
             if (weightMax < 0)
             {
-                throw new Exception("Forbidden value (" + weightMax + ") on element of InventoryWeightMessage.weightMax.");
+                throw new System.Exception("Forbidden value (" + weightMax + ") on element of InventoryWeightMessage.weightMax.");
             }
 
         }

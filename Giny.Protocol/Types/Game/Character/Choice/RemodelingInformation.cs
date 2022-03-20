@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)sex);
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
             }
 
             writer.WriteVarShort((short)cosmeticId);
@@ -55,7 +54,7 @@ namespace Giny.Protocol.Types
             cosmeticId = (short)reader.ReadVarUhShort();
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element of RemodelingInformation.cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element of RemodelingInformation.cosmeticId.");
             }
 
             uint _colorsLen = (uint)reader.ReadUShort();

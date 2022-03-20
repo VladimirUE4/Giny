@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
         {
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element uid.");
             }
 
             writer.WriteInt((int)uid);
@@ -55,7 +54,7 @@ namespace Giny.Protocol.Types
             uid = (int)reader.ReadInt();
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element of StartupActionAddObject.uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element of StartupActionAddObject.uid.");
             }
 
             title = (string)reader.ReadUTF();

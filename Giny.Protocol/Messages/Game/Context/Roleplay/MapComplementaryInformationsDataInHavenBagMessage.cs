@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -21,12 +20,22 @@ namespace Giny.Protocol.Messages
         public MapComplementaryInformationsDataInHavenBagMessage()
         {
         }
-        public MapComplementaryInformationsDataInHavenBagMessage(CharacterMinimalInformations ownerInformations,byte theme,byte roomId,byte maxRoomId)
+        public MapComplementaryInformationsDataInHavenBagMessage(CharacterMinimalInformations ownerInformations,byte theme,byte roomId,byte maxRoomId,short subAreaId,double mapId,HouseInformations[] houses,GameRolePlayActorInformations[] actors,InteractiveElement[] interactiveElements,StatedElement[] statedElements,MapObstacle[] obstacles,FightCommonInformations[] fights,bool hasAggressiveMonsters,FightStartingPositions fightStartPositions)
         {
             this.ownerInformations = ownerInformations;
             this.theme = theme;
             this.roomId = roomId;
             this.maxRoomId = maxRoomId;
+            this.subAreaId = subAreaId;
+            this.mapId = mapId;
+            this.houses = houses;
+            this.actors = actors;
+            this.interactiveElements = interactiveElements;
+            this.statedElements = statedElements;
+            this.obstacles = obstacles;
+            this.fights = fights;
+            this.hasAggressiveMonsters = hasAggressiveMonsters;
+            this.fightStartPositions = fightStartPositions;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -35,13 +44,13 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)theme);
             if (roomId < 0)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element roomId.");
             }
 
             writer.WriteByte((byte)roomId);
             if (maxRoomId < 0)
             {
-                throw new Exception("Forbidden value (" + maxRoomId + ") on element maxRoomId.");
+                throw new System.Exception("Forbidden value (" + maxRoomId + ") on element maxRoomId.");
             }
 
             writer.WriteByte((byte)maxRoomId);
@@ -55,13 +64,13 @@ namespace Giny.Protocol.Messages
             roomId = (byte)reader.ReadByte();
             if (roomId < 0)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element of MapComplementaryInformationsDataInHavenBagMessage.roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element of MapComplementaryInformationsDataInHavenBagMessage.roomId.");
             }
 
             maxRoomId = (byte)reader.ReadByte();
             if (maxRoomId < 0)
             {
-                throw new Exception("Forbidden value (" + maxRoomId + ") on element of MapComplementaryInformationsDataInHavenBagMessage.maxRoomId.");
+                throw new System.Exception("Forbidden value (" + maxRoomId + ") on element of MapComplementaryInformationsDataInHavenBagMessage.maxRoomId.");
             }
 
         }

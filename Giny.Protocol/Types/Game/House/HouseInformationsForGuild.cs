@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         public HouseInformationsForGuild()
         {
         }
-        public HouseInformationsForGuild(int instanceId,bool secondHand,AccountTagInformation ownerTag,short worldX,short worldY,double mapId,short subAreaId,int[] skillListIds,int guildshareParams)
+        public HouseInformationsForGuild(int instanceId,bool secondHand,AccountTagInformation ownerTag,short worldX,short worldY,double mapId,short subAreaId,int[] skillListIds,int guildshareParams,int houseId,short modelId)
         {
             this.instanceId = instanceId;
             this.secondHand = secondHand;
@@ -35,13 +34,15 @@ namespace Giny.Protocol.Types
             this.subAreaId = subAreaId;
             this.skillListIds = skillListIds;
             this.guildshareParams = guildshareParams;
+            this.houseId = houseId;
+            this.modelId = modelId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
@@ -49,25 +50,25 @@ namespace Giny.Protocol.Types
             ownerTag.Serialize(writer);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -79,7 +80,7 @@ namespace Giny.Protocol.Types
 
             if (guildshareParams < 0)
             {
-                throw new Exception("Forbidden value (" + guildshareParams + ") on element guildshareParams.");
+                throw new System.Exception("Forbidden value (" + guildshareParams + ") on element guildshareParams.");
             }
 
             writer.WriteVarInt((int)guildshareParams);
@@ -91,7 +92,7 @@ namespace Giny.Protocol.Types
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseInformationsForGuild.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseInformationsForGuild.instanceId.");
             }
 
             secondHand = (bool)reader.ReadBoolean();
@@ -100,25 +101,25 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of HouseInformationsForGuild.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of HouseInformationsForGuild.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of HouseInformationsForGuild.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of HouseInformationsForGuild.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of HouseInformationsForGuild.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of HouseInformationsForGuild.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of HouseInformationsForGuild.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of HouseInformationsForGuild.subAreaId.");
             }
 
             uint _skillListIdsLen = (uint)reader.ReadUShort();
@@ -132,7 +133,7 @@ namespace Giny.Protocol.Types
             guildshareParams = (int)reader.ReadVarUhInt();
             if (guildshareParams < 0)
             {
-                throw new Exception("Forbidden value (" + guildshareParams + ") on element of HouseInformationsForGuild.guildshareParams.");
+                throw new System.Exception("Forbidden value (" + guildshareParams + ") on element of HouseInformationsForGuild.guildshareParams.");
             }
 
         }

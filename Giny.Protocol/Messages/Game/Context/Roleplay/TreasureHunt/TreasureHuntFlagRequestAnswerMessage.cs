@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)result);
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element index.");
             }
 
             writer.WriteByte((byte)index);
@@ -42,19 +41,19 @@ namespace Giny.Protocol.Messages
             questType = (byte)reader.ReadByte();
             if (questType < 0)
             {
-                throw new Exception("Forbidden value (" + questType + ") on element of TreasureHuntFlagRequestAnswerMessage.questType.");
+                throw new System.Exception("Forbidden value (" + questType + ") on element of TreasureHuntFlagRequestAnswerMessage.questType.");
             }
 
             result = (byte)reader.ReadByte();
             if (result < 0)
             {
-                throw new Exception("Forbidden value (" + result + ") on element of TreasureHuntFlagRequestAnswerMessage.result.");
+                throw new System.Exception("Forbidden value (" + result + ") on element of TreasureHuntFlagRequestAnswerMessage.result.");
             }
 
             index = (byte)reader.ReadByte();
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element of TreasureHuntFlagRequestAnswerMessage.index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element of TreasureHuntFlagRequestAnswerMessage.index.");
             }
 
         }

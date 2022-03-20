@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Types
         {
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element actionId.");
             }
 
             writer.WriteVarShort((short)actionId);
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element sourceId.");
             }
 
             writer.WriteDouble((double)sourceId);
@@ -46,13 +45,13 @@ namespace Giny.Protocol.Types
             actionId = (short)reader.ReadVarUhShort();
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element of FightDispellableEffectExtendedInformations.actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element of FightDispellableEffectExtendedInformations.actionId.");
             }
 
             sourceId = (double)reader.ReadDouble();
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element of FightDispellableEffectExtendedInformations.sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element of FightDispellableEffectExtendedInformations.sourceId.");
             }
 
             uint _id3 = (uint)reader.ReadUShort();

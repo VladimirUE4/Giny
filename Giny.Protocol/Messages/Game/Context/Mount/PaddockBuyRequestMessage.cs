@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (proposedPrice < 0 || proposedPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + proposedPrice + ") on element proposedPrice.");
+                throw new System.Exception("Forbidden value (" + proposedPrice + ") on element proposedPrice.");
             }
 
             writer.WriteVarLong((long)proposedPrice);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             proposedPrice = (long)reader.ReadVarUhLong();
             if (proposedPrice < 0 || proposedPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + proposedPrice + ") on element of PaddockBuyRequestMessage.proposedPrice.");
+                throw new System.Exception("Forbidden value (" + proposedPrice + ") on element of PaddockBuyRequestMessage.proposedPrice.");
             }
 
         }

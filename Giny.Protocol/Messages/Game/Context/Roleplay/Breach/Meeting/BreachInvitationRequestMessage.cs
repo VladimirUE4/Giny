@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             {
                 if (guests[_i1] < 0 || guests[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + guests[_i1] + ") on element 1 (starting at 1) of guests.");
+                    throw new System.Exception("Forbidden value (" + guests[_i1] + ") on element 1 (starting at 1) of guests.");
                 }
 
                 writer.WriteVarLong((long)guests[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (double)reader.ReadVarUhLong();
                 if (_val1 < 0 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of guests.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of guests.");
                 }
 
                 guests[_i1] = (long)_val1;

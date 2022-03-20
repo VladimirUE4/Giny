@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element hostUID.");
             }
 
             writer.WriteVarInt((int)hostUID);
             if (hostPos < 0 || hostPos > 255)
             {
-                throw new Exception("Forbidden value (" + hostPos + ") on element hostPos.");
+                throw new System.Exception("Forbidden value (" + hostPos + ") on element hostPos.");
             }
 
             writer.WriteByte((byte)hostPos);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             hostUID = (int)reader.ReadVarUhInt();
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element of MimicryObjectEraseRequestMessage.hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element of MimicryObjectEraseRequestMessage.hostUID.");
             }
 
             hostPos = (byte)reader.ReadSByte();
             if (hostPos < 0 || hostPos > 255)
             {
-                throw new Exception("Forbidden value (" + hostPos + ") on element of MimicryObjectEraseRequestMessage.hostPos.");
+                throw new System.Exception("Forbidden value (" + hostPos + ") on element of MimicryObjectEraseRequestMessage.hostPos.");
             }
 
         }

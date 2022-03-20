@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
         {
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element elementId.");
             }
 
             writer.WriteInt((int)elementId);
@@ -62,7 +61,7 @@ namespace Giny.Protocol.Types
             elementId = (int)reader.ReadInt();
             if (elementId < 0)
             {
-                throw new Exception("Forbidden value (" + elementId + ") on element of InteractiveElement.elementId.");
+                throw new System.Exception("Forbidden value (" + elementId + ") on element of InteractiveElement.elementId.");
             }
 
             elementTypeId = (int)reader.ReadInt();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public PartyIdol()
         {
         }
-        public PartyIdol(long[] ownersIds)
+        public PartyIdol(long[] ownersIds,short id,short xpBonusPercent,short dropBonusPercent)
         {
             this.ownersIds = ownersIds;
+            this.id = id;
+            this.xpBonusPercent = xpBonusPercent;
+            this.dropBonusPercent = dropBonusPercent;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -28,7 +30,7 @@ namespace Giny.Protocol.Types
             {
                 if (ownersIds[_i1] < 0 || ownersIds[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + ownersIds[_i1] + ") on element 1 (starting at 1) of ownersIds.");
+                    throw new System.Exception("Forbidden value (" + ownersIds[_i1] + ") on element 1 (starting at 1) of ownersIds.");
                 }
 
                 writer.WriteVarLong((long)ownersIds[_i1]);
@@ -46,7 +48,7 @@ namespace Giny.Protocol.Types
                 _val1 = (double)reader.ReadVarUhLong();
                 if (_val1 < 0 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of ownersIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of ownersIds.");
                 }
 
                 ownersIds[_i1] = (long)_val1;

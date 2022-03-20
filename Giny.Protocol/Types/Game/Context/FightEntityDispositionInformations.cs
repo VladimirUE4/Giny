@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public FightEntityDispositionInformations()
         {
         }
-        public FightEntityDispositionInformations(double carryingCharacterId)
+        public FightEntityDispositionInformations(double carryingCharacterId,short cellId,byte direction)
         {
             this.carryingCharacterId = carryingCharacterId;
+            this.cellId = cellId;
+            this.direction = direction;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (carryingCharacterId < -9.00719925474099E+15 || carryingCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + carryingCharacterId + ") on element carryingCharacterId.");
+                throw new System.Exception("Forbidden value (" + carryingCharacterId + ") on element carryingCharacterId.");
             }
 
             writer.WriteDouble((double)carryingCharacterId);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             carryingCharacterId = (double)reader.ReadDouble();
             if (carryingCharacterId < -9.00719925474099E+15 || carryingCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + carryingCharacterId + ") on element of FightEntityDispositionInformations.carryingCharacterId.");
+                throw new System.Exception("Forbidden value (" + carryingCharacterId + ") on element of FightEntityDispositionInformations.carryingCharacterId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -56,7 +55,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
@@ -68,7 +67,7 @@ namespace Giny.Protocol.Types
             {
                 if (selectedLanguages[_i5] < 0)
                 {
-                    throw new Exception("Forbidden value (" + selectedLanguages[_i5] + ") on element 5 (starting at 1) of selectedLanguages.");
+                    throw new System.Exception("Forbidden value (" + selectedLanguages[_i5] + ") on element 5 (starting at 1) of selectedLanguages.");
                 }
 
                 writer.WriteVarInt((int)selectedLanguages[_i5]);
@@ -79,7 +78,7 @@ namespace Giny.Protocol.Types
             {
                 if (selectedCriterion[_i6] < 0)
                 {
-                    throw new Exception("Forbidden value (" + selectedCriterion[_i6] + ") on element 6 (starting at 1) of selectedCriterion.");
+                    throw new System.Exception("Forbidden value (" + selectedCriterion[_i6] + ") on element 6 (starting at 1) of selectedCriterion.");
                 }
 
                 writer.WriteVarInt((int)selectedCriterion[_i6]);
@@ -87,20 +86,20 @@ namespace Giny.Protocol.Types
 
             if (minLevel < 0)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element minLevel.");
             }
 
             writer.WriteShort((short)minLevel);
             if (minSuccess < 0)
             {
-                throw new Exception("Forbidden value (" + minSuccess + ") on element minSuccess.");
+                throw new System.Exception("Forbidden value (" + minSuccess + ") on element minSuccess.");
             }
 
             writer.WriteVarInt((int)minSuccess);
             writer.WriteUTF((string)lastEditPlayerName);
             if (lastEditDate < -9.00719925474099E+15 || lastEditDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + lastEditDate + ") on element lastEditDate.");
+                throw new System.Exception("Forbidden value (" + lastEditDate + ") on element lastEditDate.");
             }
 
             writer.WriteDouble((double)lastEditDate);
@@ -117,13 +116,13 @@ namespace Giny.Protocol.Types
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of GuildRecruitmentInformation.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of GuildRecruitmentInformation.guildId.");
             }
 
             recruitmentType = (byte)reader.ReadByte();
             if (recruitmentType < 0)
             {
-                throw new Exception("Forbidden value (" + recruitmentType + ") on element of GuildRecruitmentInformation.recruitmentType.");
+                throw new System.Exception("Forbidden value (" + recruitmentType + ") on element of GuildRecruitmentInformation.recruitmentType.");
             }
 
             recruitmentTitle = (string)reader.ReadUTF();
@@ -135,7 +134,7 @@ namespace Giny.Protocol.Types
                 _val5 = (uint)reader.ReadVarUhInt();
                 if (_val5 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val5 + ") on elements of selectedLanguages.");
+                    throw new System.Exception("Forbidden value (" + _val5 + ") on elements of selectedLanguages.");
                 }
 
                 selectedLanguages[_i5] = (int)_val5;
@@ -148,7 +147,7 @@ namespace Giny.Protocol.Types
                 _val6 = (uint)reader.ReadVarUhInt();
                 if (_val6 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val6 + ") on elements of selectedCriterion.");
+                    throw new System.Exception("Forbidden value (" + _val6 + ") on elements of selectedCriterion.");
                 }
 
                 selectedCriterion[_i6] = (int)_val6;
@@ -157,20 +156,20 @@ namespace Giny.Protocol.Types
             minLevel = (short)reader.ReadShort();
             if (minLevel < 0)
             {
-                throw new Exception("Forbidden value (" + minLevel + ") on element of GuildRecruitmentInformation.minLevel.");
+                throw new System.Exception("Forbidden value (" + minLevel + ") on element of GuildRecruitmentInformation.minLevel.");
             }
 
             minSuccess = (int)reader.ReadVarUhInt();
             if (minSuccess < 0)
             {
-                throw new Exception("Forbidden value (" + minSuccess + ") on element of GuildRecruitmentInformation.minSuccess.");
+                throw new System.Exception("Forbidden value (" + minSuccess + ") on element of GuildRecruitmentInformation.minSuccess.");
             }
 
             lastEditPlayerName = (string)reader.ReadUTF();
             lastEditDate = (double)reader.ReadDouble();
             if (lastEditDate < -9.00719925474099E+15 || lastEditDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + lastEditDate + ") on element of GuildRecruitmentInformation.lastEditDate.");
+                throw new System.Exception("Forbidden value (" + lastEditDate + ") on element of GuildRecruitmentInformation.lastEditDate.");
             }
 
         }

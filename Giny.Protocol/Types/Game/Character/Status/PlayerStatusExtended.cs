@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public PlayerStatusExtended()
         {
         }
-        public PlayerStatusExtended(string message)
+        public PlayerStatusExtended(string message,byte statusId)
         {
             this.message = message;
+            this.statusId = statusId;
         }
         public override void Serialize(IDataWriter writer)
         {

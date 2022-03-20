@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteVarLong((long)targetId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PrismFightSwapRequestMessage.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PrismFightSwapRequestMessage.subAreaId.");
             }
 
             targetId = (long)reader.ReadVarUhLong();
             if (targetId < 0 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of PrismFightSwapRequestMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of PrismFightSwapRequestMessage.targetId.");
             }
 
         }

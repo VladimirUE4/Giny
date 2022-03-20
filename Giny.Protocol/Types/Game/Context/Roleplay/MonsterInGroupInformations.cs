@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public MonsterInGroupInformations()
         {
         }
-        public MonsterInGroupInformations(EntityLook look)
+        public MonsterInGroupInformations(EntityLook look,int genericId,byte grade,short level)
         {
             this.look = look;
+            this.genericId = genericId;
+            this.grade = grade;
+            this.level = level;
         }
         public override void Serialize(IDataWriter writer)
         {

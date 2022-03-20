@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             {
                 if (controlledSubareaIds[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + controlledSubareaIds[_i3] + ") on element 3 (starting at 1) of controlledSubareaIds.");
+                    throw new System.Exception("Forbidden value (" + controlledSubareaIds[_i3] + ") on element 3 (starting at 1) of controlledSubareaIds.");
                 }
 
                 writer.WriteVarShort((short)controlledSubareaIds[_i3]);
@@ -53,7 +52,7 @@ namespace Giny.Protocol.Messages
 
             if (leaderCharacterId < 0 || leaderCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderCharacterId + ") on element leaderCharacterId.");
+                throw new System.Exception("Forbidden value (" + leaderCharacterId + ") on element leaderCharacterId.");
             }
 
             writer.WriteVarLong((long)leaderCharacterId);
@@ -81,7 +80,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadVarUhShort();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of controlledSubareaIds.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of controlledSubareaIds.");
                 }
 
                 controlledSubareaIds[_i3] = (short)_val3;
@@ -90,7 +89,7 @@ namespace Giny.Protocol.Messages
             leaderCharacterId = (long)reader.ReadVarUhLong();
             if (leaderCharacterId < 0 || leaderCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + leaderCharacterId + ") on element of AllianceFactsMessage.leaderCharacterId.");
+                throw new System.Exception("Forbidden value (" + leaderCharacterId + ") on element of AllianceFactsMessage.leaderCharacterId.");
             }
 
             leaderCharacterName = (string)reader.ReadUTF();

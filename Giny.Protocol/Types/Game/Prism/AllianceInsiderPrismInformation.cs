@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,32 +19,37 @@ namespace Giny.Protocol.Types
         public AllianceInsiderPrismInformation()
         {
         }
-        public AllianceInsiderPrismInformation(int lastTimeSlotModificationDate,int lastTimeSlotModificationAuthorGuildId,long lastTimeSlotModificationAuthorId,string lastTimeSlotModificationAuthorName,ObjectItem[] modulesObjects)
+        public AllianceInsiderPrismInformation(int lastTimeSlotModificationDate,int lastTimeSlotModificationAuthorGuildId,long lastTimeSlotModificationAuthorId,string lastTimeSlotModificationAuthorName,ObjectItem[] modulesObjects,byte typeId,byte state,int nextVulnerabilityDate,int placementDate,int rewardTokenCount)
         {
             this.lastTimeSlotModificationDate = lastTimeSlotModificationDate;
             this.lastTimeSlotModificationAuthorGuildId = lastTimeSlotModificationAuthorGuildId;
             this.lastTimeSlotModificationAuthorId = lastTimeSlotModificationAuthorId;
             this.lastTimeSlotModificationAuthorName = lastTimeSlotModificationAuthorName;
             this.modulesObjects = modulesObjects;
+            this.typeId = typeId;
+            this.state = state;
+            this.nextVulnerabilityDate = nextVulnerabilityDate;
+            this.placementDate = placementDate;
+            this.rewardTokenCount = rewardTokenCount;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (lastTimeSlotModificationDate < 0)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationDate + ") on element lastTimeSlotModificationDate.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationDate + ") on element lastTimeSlotModificationDate.");
             }
 
             writer.WriteInt((int)lastTimeSlotModificationDate);
             if (lastTimeSlotModificationAuthorGuildId < 0)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationAuthorGuildId + ") on element lastTimeSlotModificationAuthorGuildId.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationAuthorGuildId + ") on element lastTimeSlotModificationAuthorGuildId.");
             }
 
             writer.WriteVarInt((int)lastTimeSlotModificationAuthorGuildId);
             if (lastTimeSlotModificationAuthorId < 0 || lastTimeSlotModificationAuthorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationAuthorId + ") on element lastTimeSlotModificationAuthorId.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationAuthorId + ") on element lastTimeSlotModificationAuthorId.");
             }
 
             writer.WriteVarLong((long)lastTimeSlotModificationAuthorId);
@@ -64,19 +68,19 @@ namespace Giny.Protocol.Types
             lastTimeSlotModificationDate = (int)reader.ReadInt();
             if (lastTimeSlotModificationDate < 0)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationDate + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationDate.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationDate + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationDate.");
             }
 
             lastTimeSlotModificationAuthorGuildId = (int)reader.ReadVarUhInt();
             if (lastTimeSlotModificationAuthorGuildId < 0)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationAuthorGuildId + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationAuthorGuildId.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationAuthorGuildId + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationAuthorGuildId.");
             }
 
             lastTimeSlotModificationAuthorId = (long)reader.ReadVarUhLong();
             if (lastTimeSlotModificationAuthorId < 0 || lastTimeSlotModificationAuthorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + lastTimeSlotModificationAuthorId + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationAuthorId.");
+                throw new System.Exception("Forbidden value (" + lastTimeSlotModificationAuthorId + ") on element of AllianceInsiderPrismInformation.lastTimeSlotModificationAuthorId.");
             }
 
             lastTimeSlotModificationAuthorName = (string)reader.ReadUTF();

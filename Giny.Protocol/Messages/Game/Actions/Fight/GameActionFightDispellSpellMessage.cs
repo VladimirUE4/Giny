@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,20 @@ namespace Giny.Protocol.Messages
         public GameActionFightDispellSpellMessage()
         {
         }
-        public GameActionFightDispellSpellMessage(short spellId)
+        public GameActionFightDispellSpellMessage(short spellId,short actionId,double sourceId,double targetId,bool verboseCast)
         {
             this.spellId = spellId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
+            this.targetId = targetId;
+            this.verboseCast = verboseCast;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
@@ -38,7 +41,7 @@ namespace Giny.Protocol.Messages
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of GameActionFightDispellSpellMessage.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of GameActionFightDispellSpellMessage.spellId.");
             }
 
         }

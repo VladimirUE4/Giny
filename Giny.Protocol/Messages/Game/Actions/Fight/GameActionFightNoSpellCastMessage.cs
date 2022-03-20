@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (spellLevelId < 0)
             {
-                throw new Exception("Forbidden value (" + spellLevelId + ") on element spellLevelId.");
+                throw new System.Exception("Forbidden value (" + spellLevelId + ") on element spellLevelId.");
             }
 
             writer.WriteVarInt((int)spellLevelId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             spellLevelId = (int)reader.ReadVarUhInt();
             if (spellLevelId < 0)
             {
-                throw new Exception("Forbidden value (" + spellLevelId + ") on element of GameActionFightNoSpellCastMessage.spellLevelId.");
+                throw new System.Exception("Forbidden value (" + spellLevelId + ") on element of GameActionFightNoSpellCastMessage.spellLevelId.");
             }
 
         }

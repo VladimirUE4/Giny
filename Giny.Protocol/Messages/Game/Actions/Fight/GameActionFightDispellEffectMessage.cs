@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,20 @@ namespace Giny.Protocol.Messages
         public GameActionFightDispellEffectMessage()
         {
         }
-        public GameActionFightDispellEffectMessage(int boostUID)
+        public GameActionFightDispellEffectMessage(int boostUID,short actionId,double sourceId,double targetId,bool verboseCast)
         {
             this.boostUID = boostUID;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
+            this.targetId = targetId;
+            this.verboseCast = verboseCast;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (boostUID < 0)
             {
-                throw new Exception("Forbidden value (" + boostUID + ") on element boostUID.");
+                throw new System.Exception("Forbidden value (" + boostUID + ") on element boostUID.");
             }
 
             writer.WriteInt((int)boostUID);
@@ -38,7 +41,7 @@ namespace Giny.Protocol.Messages
             boostUID = (int)reader.ReadInt();
             if (boostUID < 0)
             {
-                throw new Exception("Forbidden value (" + boostUID + ") on element of GameActionFightDispellEffectMessage.boostUID.");
+                throw new System.Exception("Forbidden value (" + boostUID + ") on element of GameActionFightDispellEffectMessage.boostUID.");
             }
 
         }

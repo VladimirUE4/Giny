@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,13 +19,15 @@ namespace Giny.Protocol.Types
         public AccountHouseInformations()
         {
         }
-        public AccountHouseInformations(HouseInstanceInformations houseInfos,short worldX,short worldY,double mapId,short subAreaId)
+        public AccountHouseInformations(HouseInstanceInformations houseInfos,short worldX,short worldY,double mapId,short subAreaId,int houseId,short modelId)
         {
             this.houseInfos = houseInfos;
             this.worldX = worldX;
             this.worldY = worldY;
             this.mapId = mapId;
             this.subAreaId = subAreaId;
+            this.houseId = houseId;
+            this.modelId = modelId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -35,25 +36,25 @@ namespace Giny.Protocol.Types
             houseInfos.Serialize(writer);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -67,25 +68,25 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of AccountHouseInformations.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of AccountHouseInformations.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of AccountHouseInformations.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of AccountHouseInformations.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of AccountHouseInformations.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of AccountHouseInformations.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of AccountHouseInformations.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of AccountHouseInformations.subAreaId.");
             }
 
         }

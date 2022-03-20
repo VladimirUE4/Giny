@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -22,7 +21,7 @@ namespace Giny.Protocol.Types
         public FightTeamLightInformations()
         {
         }
-        public FightTeamLightInformations(byte teamMembersCount,int meanLevel,bool hasFriend,bool hasGuildMember,bool hasAllianceMember,bool hasGroupMember,bool hasMyTaxCollector)
+        public FightTeamLightInformations(byte teamMembersCount,int meanLevel,bool hasFriend,bool hasGuildMember,bool hasAllianceMember,bool hasGroupMember,bool hasMyTaxCollector,byte teamId,double leaderId,byte teamSide,byte teamTypeId,byte nbWaves)
         {
             this.teamMembersCount = teamMembersCount;
             this.meanLevel = meanLevel;
@@ -31,6 +30,11 @@ namespace Giny.Protocol.Types
             this.hasAllianceMember = hasAllianceMember;
             this.hasGroupMember = hasGroupMember;
             this.hasMyTaxCollector = hasMyTaxCollector;
+            this.teamId = teamId;
+            this.leaderId = leaderId;
+            this.teamSide = teamSide;
+            this.teamTypeId = teamTypeId;
+            this.nbWaves = nbWaves;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -44,13 +48,13 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (teamMembersCount < 0)
             {
-                throw new Exception("Forbidden value (" + teamMembersCount + ") on element teamMembersCount.");
+                throw new System.Exception("Forbidden value (" + teamMembersCount + ") on element teamMembersCount.");
             }
 
             writer.WriteByte((byte)teamMembersCount);
             if (meanLevel < 0)
             {
-                throw new Exception("Forbidden value (" + meanLevel + ") on element meanLevel.");
+                throw new System.Exception("Forbidden value (" + meanLevel + ") on element meanLevel.");
             }
 
             writer.WriteVarInt((int)meanLevel);
@@ -67,13 +71,13 @@ namespace Giny.Protocol.Types
             teamMembersCount = (byte)reader.ReadByte();
             if (teamMembersCount < 0)
             {
-                throw new Exception("Forbidden value (" + teamMembersCount + ") on element of FightTeamLightInformations.teamMembersCount.");
+                throw new System.Exception("Forbidden value (" + teamMembersCount + ") on element of FightTeamLightInformations.teamMembersCount.");
             }
 
             meanLevel = (int)reader.ReadVarUhInt();
             if (meanLevel < 0)
             {
-                throw new Exception("Forbidden value (" + meanLevel + ") on element of FightTeamLightInformations.meanLevel.");
+                throw new System.Exception("Forbidden value (" + meanLevel + ") on element of FightTeamLightInformations.meanLevel.");
             }
 
         }

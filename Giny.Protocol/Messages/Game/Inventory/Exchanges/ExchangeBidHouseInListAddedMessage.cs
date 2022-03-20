@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,13 +34,13 @@ namespace Giny.Protocol.Messages
             writer.WriteInt((int)itemUID);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element objectType.");
             }
 
             writer.WriteInt((int)objectType);
@@ -57,7 +56,7 @@ namespace Giny.Protocol.Messages
             {
                 if (prices[_i5] < 0 || prices[_i5] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + prices[_i5] + ") on element 5 (starting at 1) of prices.");
+                    throw new System.Exception("Forbidden value (" + prices[_i5] + ") on element 5 (starting at 1) of prices.");
                 }
 
                 writer.WriteVarLong((long)prices[_i5]);
@@ -73,13 +72,13 @@ namespace Giny.Protocol.Messages
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ExchangeBidHouseInListAddedMessage.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ExchangeBidHouseInListAddedMessage.objectGID.");
             }
 
             objectType = (int)reader.ReadInt();
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element of ExchangeBidHouseInListAddedMessage.objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element of ExchangeBidHouseInListAddedMessage.objectType.");
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
@@ -98,7 +97,7 @@ namespace Giny.Protocol.Messages
                 _val5 = (double)reader.ReadVarUhLong();
                 if (_val5 < 0 || _val5 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val5 + ") on elements of prices.");
+                    throw new System.Exception("Forbidden value (" + _val5 + ") on elements of prices.");
                 }
 
                 prices[_i5] = (long)_val5;

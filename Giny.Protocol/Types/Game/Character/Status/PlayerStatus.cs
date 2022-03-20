@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             statusId = (byte)reader.ReadByte();
             if (statusId < 0)
             {
-                throw new Exception("Forbidden value (" + statusId + ") on element of PlayerStatus.statusId.");
+                throw new System.Exception("Forbidden value (" + statusId + ") on element of PlayerStatus.statusId.");
             }
 
         }

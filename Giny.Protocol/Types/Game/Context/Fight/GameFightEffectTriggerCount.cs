@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,19 +27,19 @@ namespace Giny.Protocol.Types
         {
             if (effectId < 0)
             {
-                throw new Exception("Forbidden value (" + effectId + ") on element effectId.");
+                throw new System.Exception("Forbidden value (" + effectId + ") on element effectId.");
             }
 
             writer.WriteVarInt((int)effectId);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
             if (count < 0)
             {
-                throw new Exception("Forbidden value (" + count + ") on element count.");
+                throw new System.Exception("Forbidden value (" + count + ") on element count.");
             }
 
             writer.WriteByte((byte)count);
@@ -50,19 +49,19 @@ namespace Giny.Protocol.Types
             effectId = (int)reader.ReadVarUhInt();
             if (effectId < 0)
             {
-                throw new Exception("Forbidden value (" + effectId + ") on element of GameFightEffectTriggerCount.effectId.");
+                throw new System.Exception("Forbidden value (" + effectId + ") on element of GameFightEffectTriggerCount.effectId.");
             }
 
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameFightEffectTriggerCount.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameFightEffectTriggerCount.targetId.");
             }
 
             count = (byte)reader.ReadByte();
             if (count < 0)
             {
-                throw new Exception("Forbidden value (" + count + ") on element of GameFightEffectTriggerCount.count.");
+                throw new System.Exception("Forbidden value (" + count + ") on element of GameFightEffectTriggerCount.count.");
             }
 
         }

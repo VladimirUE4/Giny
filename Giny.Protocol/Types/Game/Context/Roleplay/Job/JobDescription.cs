@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Types
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of JobDescription.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of JobDescription.jobId.");
             }
 
             uint _skillsLen = (uint)reader.ReadUShort();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,22 @@ namespace Giny.Protocol.Types
         public GameFightFighterMonsterLightInformations()
         {
         }
-        public GameFightFighterMonsterLightInformations(short creatureGenericId)
+        public GameFightFighterMonsterLightInformations(short creatureGenericId,double id,byte wave,short level,byte breed,bool sex,bool alive)
         {
             this.creatureGenericId = creatureGenericId;
+            this.id = id;
+            this.wave = wave;
+            this.level = level;
+            this.breed = breed;
+            this.sex = sex;
+            this.alive = alive;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (creatureGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + creatureGenericId + ") on element creatureGenericId.");
+                throw new System.Exception("Forbidden value (" + creatureGenericId + ") on element creatureGenericId.");
             }
 
             writer.WriteVarShort((short)creatureGenericId);
@@ -36,7 +41,7 @@ namespace Giny.Protocol.Types
             creatureGenericId = (short)reader.ReadVarUhShort();
             if (creatureGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + creatureGenericId + ") on element of GameFightFighterMonsterLightInformations.creatureGenericId.");
+                throw new System.Exception("Forbidden value (" + creatureGenericId + ") on element of GameFightFighterMonsterLightInformations.creatureGenericId.");
             }
 
         }

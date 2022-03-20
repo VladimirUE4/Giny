@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (donation < 0 || donation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + donation + ") on element donation.");
+                throw new System.Exception("Forbidden value (" + donation + ") on element donation.");
             }
 
             writer.WriteVarLong((long)donation);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             donation = (long)reader.ReadVarUhLong();
             if (donation < 0 || donation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + donation + ") on element of AlignmentWarEffortDonateRequestMessage.donation.");
+                throw new System.Exception("Forbidden value (" + donation + ") on element of AlignmentWarEffortDonateRequestMessage.donation.");
             }
 
         }

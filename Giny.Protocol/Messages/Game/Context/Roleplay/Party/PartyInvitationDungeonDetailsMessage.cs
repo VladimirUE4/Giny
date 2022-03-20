@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,17 +18,25 @@ namespace Giny.Protocol.Messages
         public PartyInvitationDungeonDetailsMessage()
         {
         }
-        public PartyInvitationDungeonDetailsMessage(short dungeonId,bool[] playersDungeonReady)
+        public PartyInvitationDungeonDetailsMessage(short dungeonId,bool[] playersDungeonReady,int partyId,byte partyType,string partyName,long fromId,string fromName,long leaderId,PartyInvitationMemberInformations[] members,PartyGuestInformations[] guests)
         {
             this.dungeonId = dungeonId;
             this.playersDungeonReady = playersDungeonReady;
+            this.partyId = partyId;
+            this.partyType = partyType;
+            this.partyName = partyName;
+            this.fromId = fromId;
+            this.fromName = fromName;
+            this.leaderId = leaderId;
+            this.members = members;
+            this.guests = guests;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
             }
 
             writer.WriteVarShort((short)dungeonId);
@@ -47,7 +54,7 @@ namespace Giny.Protocol.Messages
             dungeonId = (short)reader.ReadVarUhShort();
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element of PartyInvitationDungeonDetailsMessage.dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element of PartyInvitationDungeonDetailsMessage.dungeonId.");
             }
 
             uint _playersDungeonReadyLen = (uint)reader.ReadUShort();

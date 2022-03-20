@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -51,13 +50,13 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)applyText);
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element guildId.");
             }
 
             writer.WriteVarInt((int)guildId);
             if (timeSpent < 0)
             {
-                throw new Exception("Forbidden value (" + timeSpent + ") on element timeSpent.");
+                throw new System.Exception("Forbidden value (" + timeSpent + ") on element timeSpent.");
             }
 
             writer.WriteVarInt((int)timeSpent);
@@ -78,13 +77,13 @@ namespace Giny.Protocol.Messages
             guildId = (int)reader.ReadVarUhInt();
             if (guildId < 0)
             {
-                throw new Exception("Forbidden value (" + guildId + ") on element of GuildSubmitApplicationMessage.guildId.");
+                throw new System.Exception("Forbidden value (" + guildId + ") on element of GuildSubmitApplicationMessage.guildId.");
             }
 
             timeSpent = (int)reader.ReadVarUhInt();
             if (timeSpent < 0)
             {
-                throw new Exception("Forbidden value (" + timeSpent + ") on element of GuildSubmitApplicationMessage.timeSpent.");
+                throw new System.Exception("Forbidden value (" + timeSpent + ") on element of GuildSubmitApplicationMessage.timeSpent.");
             }
 
             filterLanguage = (string)reader.ReadUTF();

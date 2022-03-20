@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (roomId < 0 || roomId > 255)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element roomId.");
             }
 
             writer.WriteByte((byte)roomId);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Types
             roomId = (byte)reader.ReadSByte();
             if (roomId < 0 || roomId > 255)
             {
-                throw new Exception("Forbidden value (" + roomId + ") on element of HavenBagRoomPreviewInformation.roomId.");
+                throw new System.Exception("Forbidden value (" + roomId + ") on element of HavenBagRoomPreviewInformation.roomId.");
             }
 
             themeId = (byte)reader.ReadByte();

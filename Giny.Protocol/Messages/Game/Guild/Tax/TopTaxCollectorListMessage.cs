@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public TopTaxCollectorListMessage()
         {
         }
-        public TopTaxCollectorListMessage(bool isDungeon)
+        public TopTaxCollectorListMessage(bool isDungeon,TaxCollectorInformations[] informations)
         {
             this.isDungeon = isDungeon;
+            this.informations = informations;
         }
         public override void Serialize(IDataWriter writer)
         {

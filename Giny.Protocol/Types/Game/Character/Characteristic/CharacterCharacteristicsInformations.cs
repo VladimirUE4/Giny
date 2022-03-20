@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -42,38 +41,38 @@ namespace Giny.Protocol.Types
         {
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element experience.");
             }
 
             writer.WriteVarLong((long)experience);
             if (experienceLevelFloor < 0 || experienceLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceLevelFloor + ") on element experienceLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceLevelFloor + ") on element experienceLevelFloor.");
             }
 
             writer.WriteVarLong((long)experienceLevelFloor);
             if (experienceNextLevelFloor < 0 || experienceNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceNextLevelFloor + ") on element experienceNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceNextLevelFloor + ") on element experienceNextLevelFloor.");
             }
 
             writer.WriteVarLong((long)experienceNextLevelFloor);
             if (experienceBonusLimit < 0 || experienceBonusLimit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceBonusLimit + ") on element experienceBonusLimit.");
+                throw new System.Exception("Forbidden value (" + experienceBonusLimit + ") on element experienceBonusLimit.");
             }
 
             writer.WriteVarLong((long)experienceBonusLimit);
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
 
             writer.WriteVarLong((long)kamas);
             alignmentInfos.Serialize(writer);
             if (criticalHitWeapon < 0)
             {
-                throw new Exception("Forbidden value (" + criticalHitWeapon + ") on element criticalHitWeapon.");
+                throw new System.Exception("Forbidden value (" + criticalHitWeapon + ") on element criticalHitWeapon.");
             }
 
             writer.WriteVarShort((short)criticalHitWeapon);
@@ -92,7 +91,7 @@ namespace Giny.Protocol.Types
 
             if (probationTime < 0)
             {
-                throw new Exception("Forbidden value (" + probationTime + ") on element probationTime.");
+                throw new System.Exception("Forbidden value (" + probationTime + ") on element probationTime.");
             }
 
             writer.WriteInt((int)probationTime);
@@ -105,31 +104,31 @@ namespace Giny.Protocol.Types
             experience = (long)reader.ReadVarUhLong();
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element of CharacterCharacteristicsInformations.experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element of CharacterCharacteristicsInformations.experience.");
             }
 
             experienceLevelFloor = (long)reader.ReadVarUhLong();
             if (experienceLevelFloor < 0 || experienceLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceLevelFloor + ") on element of CharacterCharacteristicsInformations.experienceLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceLevelFloor + ") on element of CharacterCharacteristicsInformations.experienceLevelFloor.");
             }
 
             experienceNextLevelFloor = (long)reader.ReadVarUhLong();
             if (experienceNextLevelFloor < 0 || experienceNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceNextLevelFloor + ") on element of CharacterCharacteristicsInformations.experienceNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceNextLevelFloor + ") on element of CharacterCharacteristicsInformations.experienceNextLevelFloor.");
             }
 
             experienceBonusLimit = (long)reader.ReadVarUhLong();
             if (experienceBonusLimit < 0 || experienceBonusLimit > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceBonusLimit + ") on element of CharacterCharacteristicsInformations.experienceBonusLimit.");
+                throw new System.Exception("Forbidden value (" + experienceBonusLimit + ") on element of CharacterCharacteristicsInformations.experienceBonusLimit.");
             }
 
             kamas = (long)reader.ReadVarUhLong();
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element of CharacterCharacteristicsInformations.kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element of CharacterCharacteristicsInformations.kamas.");
             }
 
             alignmentInfos = new ActorExtendedAlignmentInformations();
@@ -137,7 +136,7 @@ namespace Giny.Protocol.Types
             criticalHitWeapon = (short)reader.ReadVarUhShort();
             if (criticalHitWeapon < 0)
             {
-                throw new Exception("Forbidden value (" + criticalHitWeapon + ") on element of CharacterCharacteristicsInformations.criticalHitWeapon.");
+                throw new System.Exception("Forbidden value (" + criticalHitWeapon + ") on element of CharacterCharacteristicsInformations.criticalHitWeapon.");
             }
 
             uint _characteristicsLen = (uint)reader.ReadUShort();
@@ -160,7 +159,7 @@ namespace Giny.Protocol.Types
             probationTime = (int)reader.ReadInt();
             if (probationTime < 0)
             {
-                throw new Exception("Forbidden value (" + probationTime + ") on element of CharacterCharacteristicsInformations.probationTime.");
+                throw new System.Exception("Forbidden value (" + probationTime + ") on element of CharacterCharacteristicsInformations.probationTime.");
             }
 
         }

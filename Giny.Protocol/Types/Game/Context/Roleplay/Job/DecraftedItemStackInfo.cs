@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
         {
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element objectUID.");
             }
 
             writer.WriteVarInt((int)objectUID);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Types
             {
                 if (runesId[_i4] < 0)
                 {
-                    throw new Exception("Forbidden value (" + runesId[_i4] + ") on element 4 (starting at 1) of runesId.");
+                    throw new System.Exception("Forbidden value (" + runesId[_i4] + ") on element 4 (starting at 1) of runesId.");
                 }
 
                 writer.WriteVarShort((short)runesId[_i4]);
@@ -54,7 +53,7 @@ namespace Giny.Protocol.Types
             {
                 if (runesQty[_i5] < 0)
                 {
-                    throw new Exception("Forbidden value (" + runesQty[_i5] + ") on element 5 (starting at 1) of runesQty.");
+                    throw new System.Exception("Forbidden value (" + runesQty[_i5] + ") on element 5 (starting at 1) of runesQty.");
                 }
 
                 writer.WriteVarInt((int)runesQty[_i5]);
@@ -68,7 +67,7 @@ namespace Giny.Protocol.Types
             objectUID = (int)reader.ReadVarUhInt();
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element of DecraftedItemStackInfo.objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element of DecraftedItemStackInfo.objectUID.");
             }
 
             bonusMin = (float)reader.ReadFloat();
@@ -80,7 +79,7 @@ namespace Giny.Protocol.Types
                 _val4 = (uint)reader.ReadVarUhShort();
                 if (_val4 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of runesId.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of runesId.");
                 }
 
                 runesId[_i4] = (short)_val4;
@@ -93,7 +92,7 @@ namespace Giny.Protocol.Types
                 _val5 = (uint)reader.ReadVarUhInt();
                 if (_val5 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val5 + ") on elements of runesQty.");
+                    throw new System.Exception("Forbidden value (" + _val5 + ") on elements of runesQty.");
                 }
 
                 runesQty[_i5] = (int)_val5;

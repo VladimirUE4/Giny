@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
         {
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element duration.");
             }
 
             writer.WriteInt((int)duration);
@@ -62,7 +61,7 @@ namespace Giny.Protocol.Messages
             duration = (int)reader.ReadInt();
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element of GameFightEndMessage.duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element of GameFightEndMessage.duration.");
             }
 
             rewardRate = (short)reader.ReadVarShort();

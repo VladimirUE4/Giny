@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -33,13 +32,13 @@ namespace Giny.Protocol.Messages
             writer.WriteUTF((string)content);
             if (timestamp < 0)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element timestamp.");
             }
 
             writer.WriteInt((int)timestamp);
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element memberId.");
             }
 
             writer.WriteVarLong((long)memberId);
@@ -51,13 +50,13 @@ namespace Giny.Protocol.Messages
             timestamp = (int)reader.ReadInt();
             if (timestamp < 0)
             {
-                throw new Exception("Forbidden value (" + timestamp + ") on element of SocialNoticeMessage.timestamp.");
+                throw new System.Exception("Forbidden value (" + timestamp + ") on element of SocialNoticeMessage.timestamp.");
             }
 
             memberId = (long)reader.ReadVarUhLong();
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element of SocialNoticeMessage.memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element of SocialNoticeMessage.memberId.");
             }
 
             memberName = (string)reader.ReadUTF();

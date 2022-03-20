@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public GameFightTurnResumeMessage()
         {
         }
-        public GameFightTurnResumeMessage(int remainingTime)
+        public GameFightTurnResumeMessage(int remainingTime,double id,int waitTime)
         {
             this.remainingTime = remainingTime;
+            this.id = id;
+            this.waitTime = waitTime;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (remainingTime < 0)
             {
-                throw new Exception("Forbidden value (" + remainingTime + ") on element remainingTime.");
+                throw new System.Exception("Forbidden value (" + remainingTime + ") on element remainingTime.");
             }
 
             writer.WriteVarInt((int)remainingTime);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             remainingTime = (int)reader.ReadVarUhInt();
             if (remainingTime < 0)
             {
-                throw new Exception("Forbidden value (" + remainingTime + ") on element of GameFightTurnResumeMessage.remainingTime.");
+                throw new System.Exception("Forbidden value (" + remainingTime + ") on element of GameFightTurnResumeMessage.remainingTime.");
             }
 
         }

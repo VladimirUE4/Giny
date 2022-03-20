@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             craftResult = (byte)reader.ReadByte();
             if (craftResult < 0)
             {
-                throw new Exception("Forbidden value (" + craftResult + ") on element of ExchangeCraftResultMessage.craftResult.");
+                throw new System.Exception("Forbidden value (" + craftResult + ") on element of ExchangeCraftResultMessage.craftResult.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
         public ObjectEffectMount()
         {
         }
-        public ObjectEffectMount(long id,long expirationDate,int model,string name,string owner,byte level,bool sex,bool isRideable,bool isFeconded,bool isFecondationReady,int reproductionCount,int reproductionCountMax,ObjectEffectInteger[] effects,int[] capacities)
+        public ObjectEffectMount(long id,long expirationDate,int model,string name,string owner,byte level,bool sex,bool isRideable,bool isFeconded,bool isFecondationReady,int reproductionCount,int reproductionCountMax,ObjectEffectInteger[] effects,int[] capacities,short actionId)
         {
             this.id = id;
             this.expirationDate = expirationDate;
@@ -45,6 +44,7 @@ namespace Giny.Protocol.Types
             this.reproductionCountMax = reproductionCountMax;
             this.effects = effects;
             this.capacities = capacities;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -57,19 +57,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarLong((long)id);
             if (expirationDate < 0 || expirationDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + expirationDate + ") on element expirationDate.");
+                throw new System.Exception("Forbidden value (" + expirationDate + ") on element expirationDate.");
             }
 
             writer.WriteVarLong((long)expirationDate);
             if (model < 0)
             {
-                throw new Exception("Forbidden value (" + model + ") on element model.");
+                throw new System.Exception("Forbidden value (" + model + ") on element model.");
             }
 
             writer.WriteVarInt((int)model);
@@ -77,14 +77,14 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)owner);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteByte((byte)level);
             writer.WriteVarInt((int)reproductionCount);
             if (reproductionCountMax < 0)
             {
-                throw new Exception("Forbidden value (" + reproductionCountMax + ") on element reproductionCountMax.");
+                throw new System.Exception("Forbidden value (" + reproductionCountMax + ") on element reproductionCountMax.");
             }
 
             writer.WriteVarInt((int)reproductionCountMax);
@@ -99,7 +99,7 @@ namespace Giny.Protocol.Types
             {
                 if (capacities[_i14] < 0)
                 {
-                    throw new Exception("Forbidden value (" + capacities[_i14] + ") on element 14 (starting at 1) of capacities.");
+                    throw new System.Exception("Forbidden value (" + capacities[_i14] + ") on element 14 (starting at 1) of capacities.");
                 }
 
                 writer.WriteVarInt((int)capacities[_i14]);
@@ -119,19 +119,19 @@ namespace Giny.Protocol.Types
             id = (long)reader.ReadVarUhLong();
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of ObjectEffectMount.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of ObjectEffectMount.id.");
             }
 
             expirationDate = (long)reader.ReadVarUhLong();
             if (expirationDate < 0 || expirationDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + expirationDate + ") on element of ObjectEffectMount.expirationDate.");
+                throw new System.Exception("Forbidden value (" + expirationDate + ") on element of ObjectEffectMount.expirationDate.");
             }
 
             model = (int)reader.ReadVarUhInt();
             if (model < 0)
             {
-                throw new Exception("Forbidden value (" + model + ") on element of ObjectEffectMount.model.");
+                throw new System.Exception("Forbidden value (" + model + ") on element of ObjectEffectMount.model.");
             }
 
             name = (string)reader.ReadUTF();
@@ -139,14 +139,14 @@ namespace Giny.Protocol.Types
             level = (byte)reader.ReadByte();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of ObjectEffectMount.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of ObjectEffectMount.level.");
             }
 
             reproductionCount = (int)reader.ReadVarInt();
             reproductionCountMax = (int)reader.ReadVarUhInt();
             if (reproductionCountMax < 0)
             {
-                throw new Exception("Forbidden value (" + reproductionCountMax + ") on element of ObjectEffectMount.reproductionCountMax.");
+                throw new System.Exception("Forbidden value (" + reproductionCountMax + ") on element of ObjectEffectMount.reproductionCountMax.");
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
@@ -164,7 +164,7 @@ namespace Giny.Protocol.Types
                 _val14 = (uint)reader.ReadVarUhInt();
                 if (_val14 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val14 + ") on elements of capacities.");
+                    throw new System.Exception("Forbidden value (" + _val14 + ") on elements of capacities.");
                 }
 
                 capacities[_i14] = (int)_val14;

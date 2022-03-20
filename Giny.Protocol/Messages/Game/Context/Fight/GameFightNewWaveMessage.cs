@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteByte((byte)id);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Messages
             id = (byte)reader.ReadByte();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of GameFightNewWaveMessage.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of GameFightNewWaveMessage.id.");
             }
 
             teamId = (byte)reader.ReadByte();
             if (teamId < 0)
             {
-                throw new Exception("Forbidden value (" + teamId + ") on element of GameFightNewWaveMessage.teamId.");
+                throw new System.Exception("Forbidden value (" + teamId + ") on element of GameFightNewWaveMessage.teamId.");
             }
 
             nbTurnBeforeNextWave = (short)reader.ReadShort();

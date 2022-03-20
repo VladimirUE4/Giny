@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (setId < 0)
             {
-                throw new Exception("Forbidden value (" + setId + ") on element setId.");
+                throw new System.Exception("Forbidden value (" + setId + ") on element setId.");
             }
 
             writer.WriteVarShort((short)setId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             {
                 if (setObjects[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + setObjects[_i2] + ") on element 2 (starting at 1) of setObjects.");
+                    throw new System.Exception("Forbidden value (" + setObjects[_i2] + ") on element 2 (starting at 1) of setObjects.");
                 }
 
                 writer.WriteVarShort((short)setObjects[_i2]);
@@ -61,7 +60,7 @@ namespace Giny.Protocol.Messages
             setId = (short)reader.ReadVarUhShort();
             if (setId < 0)
             {
-                throw new Exception("Forbidden value (" + setId + ") on element of SetUpdateMessage.setId.");
+                throw new System.Exception("Forbidden value (" + setId + ") on element of SetUpdateMessage.setId.");
             }
 
             uint _setObjectsLen = (uint)reader.ReadUShort();
@@ -71,7 +70,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of setObjects.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of setObjects.");
                 }
 
                 setObjects[_i2] = (short)_val2;

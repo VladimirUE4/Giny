@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
             if (time < -9.00719925474099E+15 || time > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + time + ") on element time.");
+                throw new System.Exception("Forbidden value (" + time + ") on element time.");
             }
 
             writer.WriteDouble((double)time);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             id = (double)reader.ReadDouble();
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of MountInformationRequestMessage.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of MountInformationRequestMessage.id.");
             }
 
             time = (double)reader.ReadDouble();
             if (time < -9.00719925474099E+15 || time > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + time + ") on element of MountInformationRequestMessage.time.");
+                throw new System.Exception("Forbidden value (" + time + ") on element of MountInformationRequestMessage.time.");
             }
 
         }

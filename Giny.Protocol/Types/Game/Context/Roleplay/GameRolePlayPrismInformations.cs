@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public GameRolePlayPrismInformations()
         {
         }
-        public GameRolePlayPrismInformations(PrismInformation prism)
+        public GameRolePlayPrismInformations(PrismInformation prism,double contextualId,EntityDispositionInformations disposition,EntityLook look)
         {
             this.prism = prism;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
         }
         public override void Serialize(IDataWriter writer)
         {

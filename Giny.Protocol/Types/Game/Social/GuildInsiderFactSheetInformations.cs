@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,11 +17,20 @@ namespace Giny.Protocol.Types
         public GuildInsiderFactSheetInformations()
         {
         }
-        public GuildInsiderFactSheetInformations(string leaderName,short nbConnectedMembers,byte nbTaxCollectors)
+        public GuildInsiderFactSheetInformations(string leaderName,short nbConnectedMembers,byte nbTaxCollectors,int guildId,string guildName,byte guildLevel,GuildEmblem guildEmblem,long leaderId,short nbMembers,short lastActivityDay,GuildRecruitmentInformation recruitment,int nbPendingApply)
         {
             this.leaderName = leaderName;
             this.nbConnectedMembers = nbConnectedMembers;
             this.nbTaxCollectors = nbTaxCollectors;
+            this.guildId = guildId;
+            this.guildName = guildName;
+            this.guildLevel = guildLevel;
+            this.guildEmblem = guildEmblem;
+            this.leaderId = leaderId;
+            this.nbMembers = nbMembers;
+            this.lastActivityDay = lastActivityDay;
+            this.recruitment = recruitment;
+            this.nbPendingApply = nbPendingApply;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -30,13 +38,13 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)leaderName);
             if (nbConnectedMembers < 0)
             {
-                throw new Exception("Forbidden value (" + nbConnectedMembers + ") on element nbConnectedMembers.");
+                throw new System.Exception("Forbidden value (" + nbConnectedMembers + ") on element nbConnectedMembers.");
             }
 
             writer.WriteVarShort((short)nbConnectedMembers);
             if (nbTaxCollectors < 0)
             {
-                throw new Exception("Forbidden value (" + nbTaxCollectors + ") on element nbTaxCollectors.");
+                throw new System.Exception("Forbidden value (" + nbTaxCollectors + ") on element nbTaxCollectors.");
             }
 
             writer.WriteByte((byte)nbTaxCollectors);
@@ -48,13 +56,13 @@ namespace Giny.Protocol.Types
             nbConnectedMembers = (short)reader.ReadVarUhShort();
             if (nbConnectedMembers < 0)
             {
-                throw new Exception("Forbidden value (" + nbConnectedMembers + ") on element of GuildInsiderFactSheetInformations.nbConnectedMembers.");
+                throw new System.Exception("Forbidden value (" + nbConnectedMembers + ") on element of GuildInsiderFactSheetInformations.nbConnectedMembers.");
             }
 
             nbTaxCollectors = (byte)reader.ReadByte();
             if (nbTaxCollectors < 0)
             {
-                throw new Exception("Forbidden value (" + nbTaxCollectors + ") on element of GuildInsiderFactSheetInformations.nbTaxCollectors.");
+                throw new System.Exception("Forbidden value (" + nbTaxCollectors + ") on element of GuildInsiderFactSheetInformations.nbTaxCollectors.");
             }
 
         }

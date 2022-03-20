@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             dialogType = (byte)reader.ReadByte();
             if (dialogType < 0)
             {
-                throw new Exception("Forbidden value (" + dialogType + ") on element of LeaveDialogMessage.dialogType.");
+                throw new System.Exception("Forbidden value (" + dialogType + ") on element of LeaveDialogMessage.dialogType.");
             }
 
         }

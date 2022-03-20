@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -54,19 +53,19 @@ namespace Giny.Protocol.Types
 
             if (victoryCount < 0)
             {
-                throw new Exception("Forbidden value (" + victoryCount + ") on element victoryCount.");
+                throw new System.Exception("Forbidden value (" + victoryCount + ") on element victoryCount.");
             }
 
             writer.WriteVarShort((short)victoryCount);
             if (fightcount < 0)
             {
-                throw new Exception("Forbidden value (" + fightcount + ") on element fightcount.");
+                throw new System.Exception("Forbidden value (" + fightcount + ") on element fightcount.");
             }
 
             writer.WriteVarShort((short)fightcount);
             if (numFightNeededForLadder < 0)
             {
-                throw new Exception("Forbidden value (" + numFightNeededForLadder + ") on element numFightNeededForLadder.");
+                throw new System.Exception("Forbidden value (" + numFightNeededForLadder + ") on element numFightNeededForLadder.");
             }
 
             writer.WriteShort((short)numFightNeededForLadder);
@@ -98,19 +97,19 @@ namespace Giny.Protocol.Types
             victoryCount = (short)reader.ReadVarUhShort();
             if (victoryCount < 0)
             {
-                throw new Exception("Forbidden value (" + victoryCount + ") on element of ArenaRankInfos.victoryCount.");
+                throw new System.Exception("Forbidden value (" + victoryCount + ") on element of ArenaRankInfos.victoryCount.");
             }
 
             fightcount = (short)reader.ReadVarUhShort();
             if (fightcount < 0)
             {
-                throw new Exception("Forbidden value (" + fightcount + ") on element of ArenaRankInfos.fightcount.");
+                throw new System.Exception("Forbidden value (" + fightcount + ") on element of ArenaRankInfos.fightcount.");
             }
 
             numFightNeededForLadder = (short)reader.ReadShort();
             if (numFightNeededForLadder < 0)
             {
-                throw new Exception("Forbidden value (" + numFightNeededForLadder + ") on element of ArenaRankInfos.numFightNeededForLadder.");
+                throw new System.Exception("Forbidden value (" + numFightNeededForLadder + ") on element of ArenaRankInfos.numFightNeededForLadder.");
             }
 
         }

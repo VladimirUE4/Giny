@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (nuggetsForPrism < 0)
             {
-                throw new Exception("Forbidden value (" + nuggetsForPrism + ") on element nuggetsForPrism.");
+                throw new System.Exception("Forbidden value (" + nuggetsForPrism + ") on element nuggetsForPrism.");
             }
 
             writer.WriteVarInt((int)nuggetsForPrism);
             if (nuggetsForPlayer < 0)
             {
-                throw new Exception("Forbidden value (" + nuggetsForPlayer + ") on element nuggetsForPlayer.");
+                throw new System.Exception("Forbidden value (" + nuggetsForPlayer + ") on element nuggetsForPlayer.");
             }
 
             writer.WriteVarInt((int)nuggetsForPlayer);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             nuggetsForPrism = (int)reader.ReadVarUhInt();
             if (nuggetsForPrism < 0)
             {
-                throw new Exception("Forbidden value (" + nuggetsForPrism + ") on element of RecycleResultMessage.nuggetsForPrism.");
+                throw new System.Exception("Forbidden value (" + nuggetsForPrism + ") on element of RecycleResultMessage.nuggetsForPrism.");
             }
 
             nuggetsForPlayer = (int)reader.ReadVarUhInt();
             if (nuggetsForPlayer < 0)
             {
-                throw new Exception("Forbidden value (" + nuggetsForPlayer + ") on element of RecycleResultMessage.nuggetsForPlayer.");
+                throw new System.Exception("Forbidden value (" + nuggetsForPlayer + ") on element of RecycleResultMessage.nuggetsForPlayer.");
             }
 
         }

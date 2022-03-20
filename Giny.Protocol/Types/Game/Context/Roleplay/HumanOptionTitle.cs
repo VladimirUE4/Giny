@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (titleId < 0)
             {
-                throw new Exception("Forbidden value (" + titleId + ") on element titleId.");
+                throw new System.Exception("Forbidden value (" + titleId + ") on element titleId.");
             }
 
             writer.WriteVarShort((short)titleId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Types
             titleId = (short)reader.ReadVarUhShort();
             if (titleId < 0)
             {
-                throw new Exception("Forbidden value (" + titleId + ") on element of HumanOptionTitle.titleId.");
+                throw new System.Exception("Forbidden value (" + titleId + ") on element of HumanOptionTitle.titleId.");
             }
 
             titleParam = (string)reader.ReadUTF();

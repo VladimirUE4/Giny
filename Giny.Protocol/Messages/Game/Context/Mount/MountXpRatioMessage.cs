@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (ratio < 0)
             {
-                throw new Exception("Forbidden value (" + ratio + ") on element ratio.");
+                throw new System.Exception("Forbidden value (" + ratio + ") on element ratio.");
             }
 
             writer.WriteByte((byte)ratio);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             ratio = (byte)reader.ReadByte();
             if (ratio < 0)
             {
-                throw new Exception("Forbidden value (" + ratio + ") on element of MountXpRatioMessage.ratio.");
+                throw new System.Exception("Forbidden value (" + ratio + ") on element of MountXpRatioMessage.ratio.");
             }
 
         }

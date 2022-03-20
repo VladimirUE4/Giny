@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             moduleToUse = (byte)reader.ReadByte();
             if (moduleToUse < 0)
             {
-                throw new Exception("Forbidden value (" + moduleToUse + ") on element of PrismUseRequestMessage.moduleToUse.");
+                throw new System.Exception("Forbidden value (" + moduleToUse + ") on element of PrismUseRequestMessage.moduleToUse.");
             }
 
         }

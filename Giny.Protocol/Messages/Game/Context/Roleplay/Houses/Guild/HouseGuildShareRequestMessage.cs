@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,20 +31,20 @@ namespace Giny.Protocol.Messages
         {
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element houseId.");
             }
 
             writer.WriteVarInt((int)houseId);
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
             writer.WriteBoolean((bool)enable);
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
             }
 
             writer.WriteVarInt((int)rights);
@@ -55,20 +54,20 @@ namespace Giny.Protocol.Messages
             houseId = (int)reader.ReadVarUhInt();
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element of HouseGuildShareRequestMessage.houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element of HouseGuildShareRequestMessage.houseId.");
             }
 
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseGuildShareRequestMessage.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseGuildShareRequestMessage.instanceId.");
             }
 
             enable = (bool)reader.ReadBoolean();
             rights = (int)reader.ReadVarUhInt();
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element of HouseGuildShareRequestMessage.rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element of HouseGuildShareRequestMessage.rights.");
             }
 
         }

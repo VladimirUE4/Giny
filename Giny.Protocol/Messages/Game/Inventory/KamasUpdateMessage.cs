@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (kamasTotal < 0 || kamasTotal > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamasTotal + ") on element kamasTotal.");
+                throw new System.Exception("Forbidden value (" + kamasTotal + ") on element kamasTotal.");
             }
 
             writer.WriteVarLong((long)kamasTotal);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             kamasTotal = (long)reader.ReadVarUhLong();
             if (kamasTotal < 0 || kamasTotal > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamasTotal + ") on element of KamasUpdateMessage.kamasTotal.");
+                throw new System.Exception("Forbidden value (" + kamasTotal + ") on element of KamasUpdateMessage.kamasTotal.");
             }
 
         }

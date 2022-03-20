@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element requestId.");
             }
 
             writer.WriteInt((int)requestId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             requestId = (int)reader.ReadInt();
             if (requestId < 0)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsAcceptMessage.requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element of GameFightPlacementSwapPositionsAcceptMessage.requestId.");
             }
 
         }

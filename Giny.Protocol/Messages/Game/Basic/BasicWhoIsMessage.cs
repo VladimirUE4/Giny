@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -54,14 +53,14 @@ namespace Giny.Protocol.Messages
             accountTag.Serialize(writer);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
             writer.WriteUTF((string)playerName);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -90,14 +89,14 @@ namespace Giny.Protocol.Messages
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of BasicWhoIsMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of BasicWhoIsMessage.accountId.");
             }
 
             playerName = (string)reader.ReadUTF();
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of BasicWhoIsMessage.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of BasicWhoIsMessage.playerId.");
             }
 
             areaId = (short)reader.ReadShort();
@@ -115,7 +114,7 @@ namespace Giny.Protocol.Messages
             playerState = (byte)reader.ReadByte();
             if (playerState < 0)
             {
-                throw new Exception("Forbidden value (" + playerState + ") on element of BasicWhoIsMessage.playerState.");
+                throw new System.Exception("Forbidden value (" + playerState + ") on element of BasicWhoIsMessage.playerState.");
             }
 
         }

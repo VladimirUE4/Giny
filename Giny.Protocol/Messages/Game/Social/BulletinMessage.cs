@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,20 @@ namespace Giny.Protocol.Messages
         public BulletinMessage()
         {
         }
-        public BulletinMessage(int lastNotifiedTimestamp)
+        public BulletinMessage(int lastNotifiedTimestamp,string content,int timestamp,long memberId,string memberName)
         {
             this.lastNotifiedTimestamp = lastNotifiedTimestamp;
+            this.content = content;
+            this.timestamp = timestamp;
+            this.memberId = memberId;
+            this.memberName = memberName;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (lastNotifiedTimestamp < 0)
             {
-                throw new Exception("Forbidden value (" + lastNotifiedTimestamp + ") on element lastNotifiedTimestamp.");
+                throw new System.Exception("Forbidden value (" + lastNotifiedTimestamp + ") on element lastNotifiedTimestamp.");
             }
 
             writer.WriteInt((int)lastNotifiedTimestamp);
@@ -38,7 +41,7 @@ namespace Giny.Protocol.Messages
             lastNotifiedTimestamp = (int)reader.ReadInt();
             if (lastNotifiedTimestamp < 0)
             {
-                throw new Exception("Forbidden value (" + lastNotifiedTimestamp + ") on element of BulletinMessage.lastNotifiedTimestamp.");
+                throw new System.Exception("Forbidden value (" + lastNotifiedTimestamp + ") on element of BulletinMessage.lastNotifiedTimestamp.");
             }
 
         }

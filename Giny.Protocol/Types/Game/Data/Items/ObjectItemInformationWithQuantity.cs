@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public ObjectItemInformationWithQuantity()
         {
         }
-        public ObjectItemInformationWithQuantity(int quantity)
+        public ObjectItemInformationWithQuantity(int quantity,short objectGID,ObjectEffect[] effects)
         {
             this.quantity = quantity;
+            this.objectGID = objectGID;
+            this.effects = effects;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectItemInformationWithQuantity.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectItemInformationWithQuantity.quantity.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element houseId.");
             }
 
             writer.WriteVarInt((int)houseId);
             if (houseInstanceId < 0)
             {
-                throw new Exception("Forbidden value (" + houseInstanceId + ") on element houseInstanceId.");
+                throw new System.Exception("Forbidden value (" + houseInstanceId + ") on element houseInstanceId.");
             }
 
             writer.WriteInt((int)houseInstanceId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             houseId = (int)reader.ReadVarUhInt();
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element of HouseTeleportRequestMessage.houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element of HouseTeleportRequestMessage.houseId.");
             }
 
             houseInstanceId = (int)reader.ReadInt();
             if (houseInstanceId < 0)
             {
-                throw new Exception("Forbidden value (" + houseInstanceId + ") on element of HouseTeleportRequestMessage.houseInstanceId.");
+                throw new System.Exception("Forbidden value (" + houseInstanceId + ") on element of HouseTeleportRequestMessage.houseInstanceId.");
             }
 
         }

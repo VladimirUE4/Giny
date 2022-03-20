@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,14 @@ namespace Giny.Protocol.Types
         public CharacterBaseInformations()
         {
         }
-        public CharacterBaseInformations(bool sex)
+        public CharacterBaseInformations(bool sex,long id,string name,short level,EntityLook entityLook,byte breed)
         {
             this.sex = sex;
+            this.id = id;
+            this.name = name;
+            this.level = level;
+            this.entityLook = entityLook;
+            this.breed = breed;
         }
         public override void Serialize(IDataWriter writer)
         {

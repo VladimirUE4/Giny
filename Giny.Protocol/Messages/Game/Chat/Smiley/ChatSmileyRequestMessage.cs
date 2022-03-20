@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element smileyId.");
             }
 
             writer.WriteVarShort((short)smileyId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             smileyId = (short)reader.ReadVarUhShort();
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element of ChatSmileyRequestMessage.smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element of ChatSmileyRequestMessage.smileyId.");
             }
 
         }

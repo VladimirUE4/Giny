@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,15 @@ namespace Giny.Protocol.Types
         public GameFightFighterNamedLightInformations()
         {
         }
-        public GameFightFighterNamedLightInformations(string name)
+        public GameFightFighterNamedLightInformations(string name,double id,byte wave,short level,byte breed,bool sex,bool alive)
         {
             this.name = name;
+            this.id = id;
+            this.wave = wave;
+            this.level = level;
+            this.breed = breed;
+            this.sex = sex;
+            this.alive = alive;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public ExchangeCraftResultWithObjectIdMessage()
         {
         }
-        public ExchangeCraftResultWithObjectIdMessage(short objectGenericId)
+        public ExchangeCraftResultWithObjectIdMessage(short objectGenericId,byte craftResult)
         {
             this.objectGenericId = objectGenericId;
+            this.craftResult = craftResult;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (objectGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + objectGenericId + ") on element objectGenericId.");
+                throw new System.Exception("Forbidden value (" + objectGenericId + ") on element objectGenericId.");
             }
 
             writer.WriteVarShort((short)objectGenericId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             objectGenericId = (short)reader.ReadVarUhShort();
             if (objectGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + objectGenericId + ") on element of ExchangeCraftResultWithObjectIdMessage.objectGenericId.");
+                throw new System.Exception("Forbidden value (" + objectGenericId + ") on element of ExchangeCraftResultWithObjectIdMessage.objectGenericId.");
             }
 
         }

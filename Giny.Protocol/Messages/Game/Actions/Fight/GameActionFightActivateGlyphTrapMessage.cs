@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,10 +18,12 @@ namespace Giny.Protocol.Messages
         public GameActionFightActivateGlyphTrapMessage()
         {
         }
-        public GameActionFightActivateGlyphTrapMessage(short markId,bool active)
+        public GameActionFightActivateGlyphTrapMessage(short markId,bool active,short actionId,double sourceId)
         {
             this.markId = markId;
             this.active = active;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {

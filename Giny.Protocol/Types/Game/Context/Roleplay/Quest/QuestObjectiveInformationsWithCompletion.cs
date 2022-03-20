@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,23 +16,26 @@ namespace Giny.Protocol.Types
         public QuestObjectiveInformationsWithCompletion()
         {
         }
-        public QuestObjectiveInformationsWithCompletion(short curCompletion,short maxCompletion)
+        public QuestObjectiveInformationsWithCompletion(short curCompletion,short maxCompletion,short objectiveId,bool objectiveStatus,string[] dialogParams)
         {
             this.curCompletion = curCompletion;
             this.maxCompletion = maxCompletion;
+            this.objectiveId = objectiveId;
+            this.objectiveStatus = objectiveStatus;
+            this.dialogParams = dialogParams;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (curCompletion < 0)
             {
-                throw new Exception("Forbidden value (" + curCompletion + ") on element curCompletion.");
+                throw new System.Exception("Forbidden value (" + curCompletion + ") on element curCompletion.");
             }
 
             writer.WriteVarShort((short)curCompletion);
             if (maxCompletion < 0)
             {
-                throw new Exception("Forbidden value (" + maxCompletion + ") on element maxCompletion.");
+                throw new System.Exception("Forbidden value (" + maxCompletion + ") on element maxCompletion.");
             }
 
             writer.WriteVarShort((short)maxCompletion);
@@ -44,13 +46,13 @@ namespace Giny.Protocol.Types
             curCompletion = (short)reader.ReadVarUhShort();
             if (curCompletion < 0)
             {
-                throw new Exception("Forbidden value (" + curCompletion + ") on element of QuestObjectiveInformationsWithCompletion.curCompletion.");
+                throw new System.Exception("Forbidden value (" + curCompletion + ") on element of QuestObjectiveInformationsWithCompletion.curCompletion.");
             }
 
             maxCompletion = (short)reader.ReadVarUhShort();
             if (maxCompletion < 0)
             {
-                throw new Exception("Forbidden value (" + maxCompletion + ") on element of QuestObjectiveInformationsWithCompletion.maxCompletion.");
+                throw new System.Exception("Forbidden value (" + maxCompletion + ") on element of QuestObjectiveInformationsWithCompletion.maxCompletion.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (legendaryId < 0)
             {
-                throw new Exception("Forbidden value (" + legendaryId + ") on element legendaryId.");
+                throw new System.Exception("Forbidden value (" + legendaryId + ") on element legendaryId.");
             }
 
             writer.WriteVarShort((short)legendaryId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             legendaryId = (short)reader.ReadVarUhShort();
             if (legendaryId < 0)
             {
-                throw new Exception("Forbidden value (" + legendaryId + ") on element of TreasureHuntLegendaryRequestMessage.legendaryId.");
+                throw new System.Exception("Forbidden value (" + legendaryId + ") on element of TreasureHuntLegendaryRequestMessage.legendaryId.");
             }
 
         }

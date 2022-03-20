@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (partyId < 0)
             {
-                throw new Exception("Forbidden value (" + partyId + ") on element partyId.");
+                throw new System.Exception("Forbidden value (" + partyId + ") on element partyId.");
             }
 
             writer.WriteVarInt((int)partyId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             partyId = (int)reader.ReadVarUhInt();
             if (partyId < 0)
             {
-                throw new Exception("Forbidden value (" + partyId + ") on element of AbstractPartyMessage.partyId.");
+                throw new System.Exception("Forbidden value (" + partyId + ") on element of AbstractPartyMessage.partyId.");
             }
 
         }

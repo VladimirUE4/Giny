@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public ContactLookRequestByNameMessage()
         {
         }
-        public ContactLookRequestByNameMessage(string playerName)
+        public ContactLookRequestByNameMessage(string playerName,byte requestId,byte contactType)
         {
             this.playerName = playerName;
+            this.requestId = requestId;
+            this.contactType = contactType;
         }
         public override void Serialize(IDataWriter writer)
         {

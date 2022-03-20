@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public GroupMonsterStaticInformationsWithAlternatives()
         {
         }
-        public GroupMonsterStaticInformationsWithAlternatives(AlternativeMonstersInGroupLightInformations[] alternatives)
+        public GroupMonsterStaticInformationsWithAlternatives(AlternativeMonstersInGroupLightInformations[] alternatives,MonsterInGroupLightInformations mainCreatureLightInfos,MonsterInGroupInformations[] underlings)
         {
             this.alternatives = alternatives;
+            this.mainCreatureLightInfos = mainCreatureLightInfos;
+            this.underlings = underlings;
         }
         public override void Serialize(IDataWriter writer)
         {

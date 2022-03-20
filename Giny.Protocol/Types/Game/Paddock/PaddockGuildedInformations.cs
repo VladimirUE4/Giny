@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,12 @@ namespace Giny.Protocol.Types
         public PaddockGuildedInformations()
         {
         }
-        public PaddockGuildedInformations(bool deserted,GuildInformations guildInfo)
+        public PaddockGuildedInformations(bool deserted,GuildInformations guildInfo,long price,bool locked)
         {
             this.deserted = deserted;
             this.guildInfo = guildInfo;
+            this.price = price;
+            this.locked = locked;
         }
         public override void Serialize(IDataWriter writer)
         {

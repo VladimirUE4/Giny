@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             idolSource = (byte)reader.ReadByte();
             if (idolSource < 0)
             {
-                throw new Exception("Forbidden value (" + idolSource + ") on element of IdolFightPreparationUpdateMessage.idolSource.");
+                throw new System.Exception("Forbidden value (" + idolSource + ") on element of IdolFightPreparationUpdateMessage.idolSource.");
             }
 
             uint _idolsLen = (uint)reader.ReadUShort();

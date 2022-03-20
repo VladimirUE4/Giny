@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         {
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarShort((short)skillId);
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             skillId = (short)reader.ReadVarUhShort();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of SkillActionDescription.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of SkillActionDescription.skillId.");
             }
 
         }

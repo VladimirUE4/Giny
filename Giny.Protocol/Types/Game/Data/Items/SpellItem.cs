@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)spellId);
             if (spellLevel < 1 || spellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + spellLevel + ") on element spellLevel.");
+                throw new System.Exception("Forbidden value (" + spellLevel + ") on element spellLevel.");
             }
 
             writer.WriteShort((short)spellLevel);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Types
             spellLevel = (short)reader.ReadShort();
             if (spellLevel < 1 || spellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + spellLevel + ") on element of SpellItem.spellLevel.");
+                throw new System.Exception("Forbidden value (" + spellLevel + ") on element of SpellItem.spellLevel.");
             }
 
         }

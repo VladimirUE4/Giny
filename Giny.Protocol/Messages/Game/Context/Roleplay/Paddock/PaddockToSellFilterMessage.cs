@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)atLeastNbMachine);
             if (maxPrice < 0 || maxPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + maxPrice + ") on element maxPrice.");
+                throw new System.Exception("Forbidden value (" + maxPrice + ") on element maxPrice.");
             }
 
             writer.WriteVarLong((long)maxPrice);
@@ -51,13 +50,13 @@ namespace Giny.Protocol.Messages
             maxPrice = (long)reader.ReadVarUhLong();
             if (maxPrice < 0 || maxPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + maxPrice + ") on element of PaddockToSellFilterMessage.maxPrice.");
+                throw new System.Exception("Forbidden value (" + maxPrice + ") on element of PaddockToSellFilterMessage.maxPrice.");
             }
 
             orderBy = (byte)reader.ReadByte();
             if (orderBy < 0)
             {
-                throw new Exception("Forbidden value (" + orderBy + ") on element of PaddockToSellFilterMessage.orderBy.");
+                throw new System.Exception("Forbidden value (" + orderBy + ") on element of PaddockToSellFilterMessage.orderBy.");
             }
 
         }

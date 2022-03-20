@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -33,25 +32,25 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)type);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
             if (cost < 0)
             {
-                throw new Exception("Forbidden value (" + cost + ") on element cost.");
+                throw new System.Exception("Forbidden value (" + cost + ") on element cost.");
             }
 
             writer.WriteVarShort((short)cost);
@@ -61,31 +60,31 @@ namespace Giny.Protocol.Types
             type = (byte)reader.ReadByte();
             if (type < 0)
             {
-                throw new Exception("Forbidden value (" + type + ") on element of TeleportDestination.type.");
+                throw new System.Exception("Forbidden value (" + type + ") on element of TeleportDestination.type.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of TeleportDestination.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of TeleportDestination.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of TeleportDestination.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of TeleportDestination.subAreaId.");
             }
 
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of TeleportDestination.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of TeleportDestination.level.");
             }
 
             cost = (short)reader.ReadVarUhShort();
             if (cost < 0)
             {
-                throw new Exception("Forbidden value (" + cost + ") on element of TeleportDestination.cost.");
+                throw new System.Exception("Forbidden value (" + cost + ") on element of TeleportDestination.cost.");
             }
 
         }

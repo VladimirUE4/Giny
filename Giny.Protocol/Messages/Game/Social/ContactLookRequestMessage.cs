@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (requestId < 0 || requestId > 255)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element requestId.");
             }
 
             writer.WriteByte((byte)requestId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             requestId = (byte)reader.ReadSByte();
             if (requestId < 0 || requestId > 255)
             {
-                throw new Exception("Forbidden value (" + requestId + ") on element of ContactLookRequestMessage.requestId.");
+                throw new System.Exception("Forbidden value (" + requestId + ") on element of ContactLookRequestMessage.requestId.");
             }
 
             contactType = (byte)reader.ReadByte();
             if (contactType < 0)
             {
-                throw new Exception("Forbidden value (" + contactType + ") on element of ContactLookRequestMessage.contactType.");
+                throw new System.Exception("Forbidden value (" + contactType + ") on element of ContactLookRequestMessage.contactType.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -35,7 +34,7 @@ namespace Giny.Protocol.Messages
             type = (byte)reader.ReadByte();
             if (type < 0)
             {
-                throw new Exception("Forbidden value (" + type + ") on element of CompassUpdateMessage.type.");
+                throw new System.Exception("Forbidden value (" + type + ") on element of CompassUpdateMessage.type.");
             }
 
             uint _id2 = (uint)reader.ReadUShort();

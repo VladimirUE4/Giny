@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (ids[_i1] < -9.00719925474099E+15 || ids[_i1] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + ids[_i1] + ") on element 1 (starting at 1) of ids.");
+                    throw new System.Exception("Forbidden value (" + ids[_i1] + ") on element 1 (starting at 1) of ids.");
                 }
 
                 writer.WriteDouble((double)ids[_i1]);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             {
                 if (deadsIds[_i2] < -9.00719925474099E+15 || deadsIds[_i2] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + deadsIds[_i2] + ") on element 2 (starting at 1) of deadsIds.");
+                    throw new System.Exception("Forbidden value (" + deadsIds[_i2] + ") on element 2 (starting at 1) of deadsIds.");
                 }
 
                 writer.WriteDouble((double)deadsIds[_i2]);
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (double)reader.ReadDouble();
                 if (_val1 < -9.00719925474099E+15 || _val1 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of ids.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of ids.");
                 }
 
                 ids[_i1] = (double)_val1;
@@ -73,7 +72,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (double)reader.ReadDouble();
                 if (_val2 < -9.00719925474099E+15 || _val2 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of deadsIds.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of deadsIds.");
                 }
 
                 deadsIds[_i2] = (double)_val2;

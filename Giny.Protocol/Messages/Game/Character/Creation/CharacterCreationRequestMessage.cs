@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
 
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element cosmeticId.");
             }
 
             writer.WriteVarShort((short)cosmeticId);
@@ -53,7 +52,7 @@ namespace Giny.Protocol.Messages
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
             {
-                throw new Exception("Forbidden value (" + breed + ") on element of CharacterCreationRequestMessage.breed.");
+                throw new System.Exception("Forbidden value (" + breed + ") on element of CharacterCreationRequestMessage.breed.");
             }
 
             sex = (bool)reader.ReadBoolean();
@@ -65,7 +64,7 @@ namespace Giny.Protocol.Messages
             cosmeticId = (short)reader.ReadVarUhShort();
             if (cosmeticId < 0)
             {
-                throw new Exception("Forbidden value (" + cosmeticId + ") on element of CharacterCreationRequestMessage.cosmeticId.");
+                throw new System.Exception("Forbidden value (" + cosmeticId + ") on element of CharacterCreationRequestMessage.cosmeticId.");
             }
 
         }

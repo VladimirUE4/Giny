@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,18 +17,23 @@ namespace Giny.Protocol.Types
         public FightResultTaxCollectorListEntry()
         {
         }
-        public FightResultTaxCollectorListEntry(byte level,BasicGuildInformations guildInfo,int experienceForGuild)
+        public FightResultTaxCollectorListEntry(byte level,BasicGuildInformations guildInfo,int experienceForGuild,short outcome,byte wave,FightLoot rewards,double id,bool alive)
         {
             this.level = level;
             this.guildInfo = guildInfo;
             this.experienceForGuild = experienceForGuild;
+            this.outcome = outcome;
+            this.wave = wave;
+            this.rewards = rewards;
+            this.id = id;
+            this.alive = alive;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (level < 1 || level > 200)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteByte((byte)level);
@@ -42,7 +46,7 @@ namespace Giny.Protocol.Types
             level = (byte)reader.ReadSByte();
             if (level < 1 || level > 200)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of FightResultTaxCollectorListEntry.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of FightResultTaxCollectorListEntry.level.");
             }
 
             guildInfo = new BasicGuildInformations();

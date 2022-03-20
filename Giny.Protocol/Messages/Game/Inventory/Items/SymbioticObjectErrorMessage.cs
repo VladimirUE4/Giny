@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public SymbioticObjectErrorMessage()
         {
         }
-        public SymbioticObjectErrorMessage(byte errorCode)
+        public SymbioticObjectErrorMessage(byte errorCode,byte reason)
         {
             this.errorCode = errorCode;
+            this.reason = reason;
         }
         public override void Serialize(IDataWriter writer)
         {

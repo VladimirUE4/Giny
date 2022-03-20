@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyLoyaltyStatusMessage()
         {
         }
-        public PartyLoyaltyStatusMessage(bool loyal)
+        public PartyLoyaltyStatusMessage(bool loyal,int partyId)
         {
             this.loyal = loyal;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {

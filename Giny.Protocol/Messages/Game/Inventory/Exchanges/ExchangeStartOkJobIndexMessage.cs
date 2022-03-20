@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             {
                 if (jobs[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + jobs[_i1] + ") on element 1 (starting at 1) of jobs.");
+                    throw new System.Exception("Forbidden value (" + jobs[_i1] + ") on element 1 (starting at 1) of jobs.");
                 }
 
                 writer.WriteVarInt((int)jobs[_i1]);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhInt();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of jobs.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of jobs.");
                 }
 
                 jobs[_i1] = (int)_val1;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
             basicInfos.Serialize(writer);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Types
             movementType = (byte)reader.ReadByte();
             if (movementType < 0)
             {
-                throw new Exception("Forbidden value (" + movementType + ") on element of TaxCollectorMovement.movementType.");
+                throw new System.Exception("Forbidden value (" + movementType + ") on element of TaxCollectorMovement.movementType.");
             }
 
             basicInfos = new TaxCollectorBasicInformations();
@@ -51,7 +50,7 @@ namespace Giny.Protocol.Types
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of TaxCollectorMovement.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of TaxCollectorMovement.playerId.");
             }
 
             playerName = (string)reader.ReadUTF();

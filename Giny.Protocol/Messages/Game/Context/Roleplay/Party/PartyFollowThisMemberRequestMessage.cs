@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public PartyFollowThisMemberRequestMessage()
         {
         }
-        public PartyFollowThisMemberRequestMessage(bool enabled)
+        public PartyFollowThisMemberRequestMessage(bool enabled,int partyId,long playerId)
         {
             this.enabled = enabled;
+            this.partyId = partyId;
+            this.playerId = playerId;
         }
         public override void Serialize(IDataWriter writer)
         {

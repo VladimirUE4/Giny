@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectoryRemoveMessage.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of JobCrafterDirectoryRemoveMessage.jobId.");
             }
 
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of JobCrafterDirectoryRemoveMessage.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of JobCrafterDirectoryRemoveMessage.playerId.");
             }
 
         }

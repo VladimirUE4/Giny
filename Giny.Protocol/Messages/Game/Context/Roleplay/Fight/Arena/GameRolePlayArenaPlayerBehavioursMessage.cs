@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
 
             if (banDuration < 0)
             {
-                throw new Exception("Forbidden value (" + banDuration + ") on element banDuration.");
+                throw new System.Exception("Forbidden value (" + banDuration + ") on element banDuration.");
             }
 
             writer.WriteInt((int)banDuration);
@@ -70,7 +69,7 @@ namespace Giny.Protocol.Messages
             banDuration = (int)reader.ReadInt();
             if (banDuration < 0)
             {
-                throw new Exception("Forbidden value (" + banDuration + ") on element of GameRolePlayArenaPlayerBehavioursMessage.banDuration.");
+                throw new System.Exception("Forbidden value (" + banDuration + ") on element of GameRolePlayArenaPlayerBehavioursMessage.banDuration.");
             }
 
         }

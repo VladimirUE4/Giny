@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element objectUID.");
             }
 
             writer.WriteVarInt((int)objectUID);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Messages
             objectUID = (int)reader.ReadVarUhInt();
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element of ObjectQuantityMessage.objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element of ObjectQuantityMessage.objectUID.");
             }
 
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectQuantityMessage.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectQuantityMessage.quantity.");
             }
 
             origin = (byte)reader.ReadByte();
             if (origin < 0)
             {
-                throw new Exception("Forbidden value (" + origin + ") on element of ObjectQuantityMessage.origin.");
+                throw new System.Exception("Forbidden value (" + origin + ") on element of ObjectQuantityMessage.origin.");
             }
 
         }

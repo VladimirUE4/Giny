@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,31 +31,31 @@ namespace Giny.Protocol.Types
         {
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element jobId.");
             }
 
             writer.WriteByte((byte)jobId);
             if (jobLevel < 0 || jobLevel > 255)
             {
-                throw new Exception("Forbidden value (" + jobLevel + ") on element jobLevel.");
+                throw new System.Exception("Forbidden value (" + jobLevel + ") on element jobLevel.");
             }
 
             writer.WriteByte((byte)jobLevel);
             if (jobXP < 0 || jobXP > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXP + ") on element jobXP.");
+                throw new System.Exception("Forbidden value (" + jobXP + ") on element jobXP.");
             }
 
             writer.WriteVarLong((long)jobXP);
             if (jobXpLevelFloor < 0 || jobXpLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXpLevelFloor + ") on element jobXpLevelFloor.");
+                throw new System.Exception("Forbidden value (" + jobXpLevelFloor + ") on element jobXpLevelFloor.");
             }
 
             writer.WriteVarLong((long)jobXpLevelFloor);
             if (jobXpNextLevelFloor < 0 || jobXpNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXpNextLevelFloor + ") on element jobXpNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + jobXpNextLevelFloor + ") on element jobXpNextLevelFloor.");
             }
 
             writer.WriteVarLong((long)jobXpNextLevelFloor);
@@ -66,31 +65,31 @@ namespace Giny.Protocol.Types
             jobId = (byte)reader.ReadByte();
             if (jobId < 0)
             {
-                throw new Exception("Forbidden value (" + jobId + ") on element of JobExperience.jobId.");
+                throw new System.Exception("Forbidden value (" + jobId + ") on element of JobExperience.jobId.");
             }
 
             jobLevel = (byte)reader.ReadSByte();
             if (jobLevel < 0 || jobLevel > 255)
             {
-                throw new Exception("Forbidden value (" + jobLevel + ") on element of JobExperience.jobLevel.");
+                throw new System.Exception("Forbidden value (" + jobLevel + ") on element of JobExperience.jobLevel.");
             }
 
             jobXP = (long)reader.ReadVarUhLong();
             if (jobXP < 0 || jobXP > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXP + ") on element of JobExperience.jobXP.");
+                throw new System.Exception("Forbidden value (" + jobXP + ") on element of JobExperience.jobXP.");
             }
 
             jobXpLevelFloor = (long)reader.ReadVarUhLong();
             if (jobXpLevelFloor < 0 || jobXpLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXpLevelFloor + ") on element of JobExperience.jobXpLevelFloor.");
+                throw new System.Exception("Forbidden value (" + jobXpLevelFloor + ") on element of JobExperience.jobXpLevelFloor.");
             }
 
             jobXpNextLevelFloor = (long)reader.ReadVarUhLong();
             if (jobXpNextLevelFloor < 0 || jobXpNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + jobXpNextLevelFloor + ") on element of JobExperience.jobXpNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + jobXpNextLevelFloor + ") on element of JobExperience.jobXpNextLevelFloor.");
             }
 
         }

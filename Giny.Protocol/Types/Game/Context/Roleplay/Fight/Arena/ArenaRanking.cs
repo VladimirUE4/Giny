@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
             }
 
             writer.WriteVarShort((short)rank);
             if (bestRank < 0 || bestRank > 20000)
             {
-                throw new Exception("Forbidden value (" + bestRank + ") on element bestRank.");
+                throw new System.Exception("Forbidden value (" + bestRank + ") on element bestRank.");
             }
 
             writer.WriteVarShort((short)bestRank);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             rank = (short)reader.ReadVarUhShort();
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element of ArenaRanking.rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element of ArenaRanking.rank.");
             }
 
             bestRank = (short)reader.ReadVarUhShort();
             if (bestRank < 0 || bestRank > 20000)
             {
-                throw new Exception("Forbidden value (" + bestRank + ") on element of ArenaRanking.bestRank.");
+                throw new System.Exception("Forbidden value (" + bestRank + ") on element of ArenaRanking.bestRank.");
             }
 
         }

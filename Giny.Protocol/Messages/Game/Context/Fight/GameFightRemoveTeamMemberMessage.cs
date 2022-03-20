@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,14 +29,14 @@ namespace Giny.Protocol.Messages
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
             writer.WriteByte((byte)teamId);
             if (charId < -9.00719925474099E+15 || charId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + charId + ") on element charId.");
+                throw new System.Exception("Forbidden value (" + charId + ") on element charId.");
             }
 
             writer.WriteDouble((double)charId);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Messages
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameFightRemoveTeamMemberMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameFightRemoveTeamMemberMessage.fightId.");
             }
 
             teamId = (byte)reader.ReadByte();
             if (teamId < 0)
             {
-                throw new Exception("Forbidden value (" + teamId + ") on element of GameFightRemoveTeamMemberMessage.teamId.");
+                throw new System.Exception("Forbidden value (" + teamId + ") on element of GameFightRemoveTeamMemberMessage.teamId.");
             }
 
             charId = (double)reader.ReadDouble();
             if (charId < -9.00719925474099E+15 || charId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + charId + ") on element of GameFightRemoveTeamMemberMessage.charId.");
+                throw new System.Exception("Forbidden value (" + charId + ") on element of GameFightRemoveTeamMemberMessage.charId.");
             }
 
         }

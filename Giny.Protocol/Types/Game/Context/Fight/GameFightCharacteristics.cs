@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Types
             characteristics.Serialize(writer);
             if (summoner < -9.00719925474099E+15 || summoner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + summoner + ") on element summoner.");
+                throw new System.Exception("Forbidden value (" + summoner + ") on element summoner.");
             }
 
             writer.WriteDouble((double)summoner);
@@ -45,14 +44,14 @@ namespace Giny.Protocol.Types
             summoner = (double)reader.ReadDouble();
             if (summoner < -9.00719925474099E+15 || summoner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + summoner + ") on element of GameFightCharacteristics.summoner.");
+                throw new System.Exception("Forbidden value (" + summoner + ") on element of GameFightCharacteristics.summoner.");
             }
 
             summoned = (bool)reader.ReadBoolean();
             invisibilityState = (byte)reader.ReadByte();
             if (invisibilityState < 0)
             {
-                throw new Exception("Forbidden value (" + invisibilityState + ") on element of GameFightCharacteristics.invisibilityState.");
+                throw new System.Exception("Forbidden value (" + invisibilityState + ") on element of GameFightCharacteristics.invisibilityState.");
             }
 
         }

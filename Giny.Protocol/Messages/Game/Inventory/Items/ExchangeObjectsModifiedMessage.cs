@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ExchangeObjectsModifiedMessage()
         {
         }
-        public ExchangeObjectsModifiedMessage(ObjectItem[] @object)
+        public ExchangeObjectsModifiedMessage(ObjectItem[] @object,bool remote)
         {
             this.@object = @object;
+            this.remote = remote;
         }
         public override void Serialize(IDataWriter writer)
         {

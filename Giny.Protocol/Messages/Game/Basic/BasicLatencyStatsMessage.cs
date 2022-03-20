@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (latency < 0 || latency > 65535)
             {
-                throw new Exception("Forbidden value (" + latency + ") on element latency.");
+                throw new System.Exception("Forbidden value (" + latency + ") on element latency.");
             }
 
             writer.WriteShort((short)latency);
             if (sampleCount < 0)
             {
-                throw new Exception("Forbidden value (" + sampleCount + ") on element sampleCount.");
+                throw new System.Exception("Forbidden value (" + sampleCount + ") on element sampleCount.");
             }
 
             writer.WriteVarShort((short)sampleCount);
             if (max < 0)
             {
-                throw new Exception("Forbidden value (" + max + ") on element max.");
+                throw new System.Exception("Forbidden value (" + max + ") on element max.");
             }
 
             writer.WriteVarShort((short)max);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             latency = (short)reader.ReadUShort();
             if (latency < 0 || latency > 65535)
             {
-                throw new Exception("Forbidden value (" + latency + ") on element of BasicLatencyStatsMessage.latency.");
+                throw new System.Exception("Forbidden value (" + latency + ") on element of BasicLatencyStatsMessage.latency.");
             }
 
             sampleCount = (short)reader.ReadVarUhShort();
             if (sampleCount < 0)
             {
-                throw new Exception("Forbidden value (" + sampleCount + ") on element of BasicLatencyStatsMessage.sampleCount.");
+                throw new System.Exception("Forbidden value (" + sampleCount + ") on element of BasicLatencyStatsMessage.sampleCount.");
             }
 
             max = (short)reader.ReadVarUhShort();
             if (max < 0)
             {
-                throw new Exception("Forbidden value (" + max + ") on element of BasicLatencyStatsMessage.max.");
+                throw new System.Exception("Forbidden value (" + max + ") on element of BasicLatencyStatsMessage.max.");
             }
 
         }

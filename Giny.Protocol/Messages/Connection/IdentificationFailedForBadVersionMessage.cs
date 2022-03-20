@@ -17,9 +17,10 @@ namespace Giny.Protocol.Messages
         public IdentificationFailedForBadVersionMessage()
         {
         }
-        public IdentificationFailedForBadVersionMessage(Version requiredVersion)
+        public IdentificationFailedForBadVersionMessage(Version requiredVersion,byte reason)
         {
             this.requiredVersion = requiredVersion;
+            this.reason = reason;
         }
         public override void Serialize(IDataWriter writer)
         {

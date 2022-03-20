@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ExchangeCraftResultWithObjectDescMessage()
         {
         }
-        public ExchangeCraftResultWithObjectDescMessage(ObjectItemNotInContainer objectInfo)
+        public ExchangeCraftResultWithObjectDescMessage(ObjectItemNotInContainer objectInfo,byte craftResult)
         {
             this.objectInfo = objectInfo;
+            this.craftResult = craftResult;
         }
         public override void Serialize(IDataWriter writer)
         {

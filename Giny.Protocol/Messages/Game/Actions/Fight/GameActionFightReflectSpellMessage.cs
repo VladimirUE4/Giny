@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public GameActionFightReflectSpellMessage()
         {
         }
-        public GameActionFightReflectSpellMessage(double targetId)
+        public GameActionFightReflectSpellMessage(double targetId,short actionId,double sourceId)
         {
             this.targetId = targetId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of GameActionFightReflectSpellMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of GameActionFightReflectSpellMessage.targetId.");
             }
 
         }

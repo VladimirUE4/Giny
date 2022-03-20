@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,11 +17,12 @@ namespace Giny.Protocol.Types
         public ItemsPreset()
         {
         }
-        public ItemsPreset(ItemForPreset[] items,bool mountEquipped,EntityLook look)
+        public ItemsPreset(ItemForPreset[] items,bool mountEquipped,EntityLook look,short id)
         {
             this.items = items;
             this.mountEquipped = mountEquipped;
             this.look = look;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {

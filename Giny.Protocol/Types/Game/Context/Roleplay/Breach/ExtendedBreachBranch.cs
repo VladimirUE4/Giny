@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,11 +17,18 @@ namespace Giny.Protocol.Types
         public ExtendedBreachBranch()
         {
         }
-        public ExtendedBreachBranch(BreachReward[] rewards,int modifier,int prize)
+        public ExtendedBreachBranch(BreachReward[] rewards,int modifier,int prize,byte room,int element,MonsterInGroupLightInformations[] bosses,double map,short score,short relativeScore,MonsterInGroupLightInformations[] monsters)
         {
             this.rewards = rewards;
             this.modifier = modifier;
             this.prize = prize;
+            this.room = room;
+            this.element = element;
+            this.bosses = bosses;
+            this.map = map;
+            this.score = score;
+            this.relativeScore = relativeScore;
+            this.monsters = monsters;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -36,7 +42,7 @@ namespace Giny.Protocol.Types
             writer.WriteVarInt((int)modifier);
             if (prize < 0)
             {
-                throw new Exception("Forbidden value (" + prize + ") on element prize.");
+                throw new System.Exception("Forbidden value (" + prize + ") on element prize.");
             }
 
             writer.WriteVarInt((int)prize);
@@ -57,7 +63,7 @@ namespace Giny.Protocol.Types
             prize = (int)reader.ReadVarUhInt();
             if (prize < 0)
             {
-                throw new Exception("Forbidden value (" + prize + ") on element of ExtendedBreachBranch.prize.");
+                throw new System.Exception("Forbidden value (" + prize + ") on element of ExtendedBreachBranch.prize.");
             }
 
         }

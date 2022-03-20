@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)state);
             if (phenixMapId < 0 || phenixMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + phenixMapId + ") on element phenixMapId.");
+                throw new System.Exception("Forbidden value (" + phenixMapId + ") on element phenixMapId.");
             }
 
             writer.WriteDouble((double)phenixMapId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of GameRolePlayPlayerLifeStatusMessage.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of GameRolePlayPlayerLifeStatusMessage.state.");
             }
 
             phenixMapId = (double)reader.ReadDouble();
             if (phenixMapId < 0 || phenixMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + phenixMapId + ") on element of GameRolePlayPlayerLifeStatusMessage.phenixMapId.");
+                throw new System.Exception("Forbidden value (" + phenixMapId + ") on element of GameRolePlayPlayerLifeStatusMessage.phenixMapId.");
             }
 
         }

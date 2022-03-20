@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,12 @@ namespace Giny.Protocol.Types
         public HouseOnMapInformations()
         {
         }
-        public HouseOnMapInformations(int[] doorsOnMap,HouseInstanceInformations[] houseInstances)
+        public HouseOnMapInformations(int[] doorsOnMap,HouseInstanceInformations[] houseInstances,int houseId,short modelId)
         {
             this.doorsOnMap = doorsOnMap;
             this.houseInstances = houseInstances;
+            this.houseId = houseId;
+            this.modelId = modelId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -30,7 +31,7 @@ namespace Giny.Protocol.Types
             {
                 if (doorsOnMap[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + doorsOnMap[_i1] + ") on element 1 (starting at 1) of doorsOnMap.");
+                    throw new System.Exception("Forbidden value (" + doorsOnMap[_i1] + ") on element 1 (starting at 1) of doorsOnMap.");
                 }
 
                 writer.WriteInt((int)doorsOnMap[_i1]);
@@ -55,7 +56,7 @@ namespace Giny.Protocol.Types
                 _val1 = (uint)reader.ReadInt();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of doorsOnMap.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of doorsOnMap.");
                 }
 
                 doorsOnMap[_i1] = (int)_val1;

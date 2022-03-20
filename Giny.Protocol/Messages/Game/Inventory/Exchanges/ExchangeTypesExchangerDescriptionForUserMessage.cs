@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element objectType.");
             }
 
             writer.WriteInt((int)objectType);
@@ -37,7 +36,7 @@ namespace Giny.Protocol.Messages
             {
                 if (typeDescription[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + typeDescription[_i2] + ") on element 2 (starting at 1) of typeDescription.");
+                    throw new System.Exception("Forbidden value (" + typeDescription[_i2] + ") on element 2 (starting at 1) of typeDescription.");
                 }
 
                 writer.WriteVarInt((int)typeDescription[_i2]);
@@ -50,7 +49,7 @@ namespace Giny.Protocol.Messages
             objectType = (int)reader.ReadInt();
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element of ExchangeTypesExchangerDescriptionForUserMessage.objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element of ExchangeTypesExchangerDescriptionForUserMessage.objectType.");
             }
 
             uint _typeDescriptionLen = (uint)reader.ReadUShort();
@@ -60,7 +59,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhInt();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of typeDescription.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of typeDescription.");
                 }
 
                 typeDescription[_i2] = (int)_val2;

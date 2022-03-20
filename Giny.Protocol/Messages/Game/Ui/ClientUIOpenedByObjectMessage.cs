@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public ClientUIOpenedByObjectMessage()
         {
         }
-        public ClientUIOpenedByObjectMessage(int uid)
+        public ClientUIOpenedByObjectMessage(int uid,byte type)
         {
             this.uid = uid;
+            this.type = type;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element uid.");
             }
 
             writer.WriteVarInt((int)uid);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             uid = (int)reader.ReadVarUhInt();
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element of ClientUIOpenedByObjectMessage.uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element of ClientUIOpenedByObjectMessage.uid.");
             }
 
         }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Giny.ProtocolBuilder.Templates
+namespace Giny.ProtocolBuilder
 {
     public class TemplateHost : ITextTemplatingEngineHost, ITextTemplatingSessionHost
     {

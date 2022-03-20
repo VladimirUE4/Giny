@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
             {
                 if (ports[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + ports[_i2] + ") on element 2 (starting at 1) of ports.");
+                    throw new System.Exception("Forbidden value (" + ports[_i2] + ") on element 2 (starting at 1) of ports.");
                 }
 
                 writer.WriteVarShort((short)ports[_i2]);
@@ -59,7 +58,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of ports.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of ports.");
                 }
 
                 ports[_i2] = (short)_val2;

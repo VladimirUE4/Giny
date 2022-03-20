@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,13 +30,13 @@ namespace Giny.Protocol.Messages
             writer.WriteBoolean((bool)bsell);
             if (ownerId < 0)
             {
-                throw new Exception("Forbidden value (" + ownerId + ") on element ownerId.");
+                throw new System.Exception("Forbidden value (" + ownerId + ") on element ownerId.");
             }
 
             writer.WriteVarInt((int)ownerId);
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -48,13 +47,13 @@ namespace Giny.Protocol.Messages
             ownerId = (int)reader.ReadVarUhInt();
             if (ownerId < 0)
             {
-                throw new Exception("Forbidden value (" + ownerId + ") on element of PaddockSellBuyDialogMessage.ownerId.");
+                throw new System.Exception("Forbidden value (" + ownerId + ") on element of PaddockSellBuyDialogMessage.ownerId.");
             }
 
             price = (long)reader.ReadVarUhLong();
             if (price < 0 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of PaddockSellBuyDialogMessage.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of PaddockSellBuyDialogMessage.price.");
             }
 
         }

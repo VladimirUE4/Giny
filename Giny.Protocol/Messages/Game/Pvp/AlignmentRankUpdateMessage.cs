@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (alignmentRank < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentRank + ") on element alignmentRank.");
+                throw new System.Exception("Forbidden value (" + alignmentRank + ") on element alignmentRank.");
             }
 
             writer.WriteByte((byte)alignmentRank);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             alignmentRank = (byte)reader.ReadByte();
             if (alignmentRank < 0)
             {
-                throw new Exception("Forbidden value (" + alignmentRank + ") on element of AlignmentRankUpdateMessage.alignmentRank.");
+                throw new System.Exception("Forbidden value (" + alignmentRank + ") on element of AlignmentRankUpdateMessage.alignmentRank.");
             }
 
             verbose = (bool)reader.ReadBoolean();

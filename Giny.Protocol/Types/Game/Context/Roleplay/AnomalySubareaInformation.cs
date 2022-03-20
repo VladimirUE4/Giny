@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Types
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)hasAnomaly);
             if (anomalyClosingTime < 0 || anomalyClosingTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + anomalyClosingTime + ") on element anomalyClosingTime.");
+                throw new System.Exception("Forbidden value (" + anomalyClosingTime + ") on element anomalyClosingTime.");
             }
 
             writer.WriteVarLong((long)anomalyClosingTime);
@@ -48,7 +47,7 @@ namespace Giny.Protocol.Types
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of AnomalySubareaInformation.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of AnomalySubareaInformation.subAreaId.");
             }
 
             rewardRate = (short)reader.ReadVarShort();
@@ -56,7 +55,7 @@ namespace Giny.Protocol.Types
             anomalyClosingTime = (long)reader.ReadVarUhLong();
             if (anomalyClosingTime < 0 || anomalyClosingTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + anomalyClosingTime + ") on element of AnomalySubareaInformation.anomalyClosingTime.");
+                throw new System.Exception("Forbidden value (" + anomalyClosingTime + ") on element of AnomalySubareaInformation.anomalyClosingTime.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             writer.WriteShort((short)presetId);
             if (symbolId < 0)
             {
-                throw new Exception("Forbidden value (" + symbolId + ") on element symbolId.");
+                throw new System.Exception("Forbidden value (" + symbolId + ") on element symbolId.");
             }
 
             writer.WriteByte((byte)symbolId);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Messages
             symbolId = (byte)reader.ReadByte();
             if (symbolId < 0)
             {
-                throw new Exception("Forbidden value (" + symbolId + ") on element of IconPresetSaveRequestMessage.symbolId.");
+                throw new System.Exception("Forbidden value (" + symbolId + ") on element of IconPresetSaveRequestMessage.symbolId.");
             }
 
             updateData = (bool)reader.ReadBoolean();

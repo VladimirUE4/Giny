@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,14 @@ namespace Giny.Protocol.Messages
         public SelectedServerDataExtendedMessage()
         {
         }
-        public SelectedServerDataExtendedMessage(GameServerInformations[] servers)
+        public SelectedServerDataExtendedMessage(GameServerInformations[] servers,short serverId,string address,short[] ports,bool canCreateNewCharacter,byte[] ticket)
         {
             this.servers = servers;
+            this.serverId = serverId;
+            this.address = address;
+            this.ports = ports;
+            this.canCreateNewCharacter = canCreateNewCharacter;
+            this.ticket = ticket;
         }
         public override void Serialize(IDataWriter writer)
         {

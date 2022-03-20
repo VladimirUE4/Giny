@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (cell < 0 || cell > 559)
             {
-                throw new Exception("Forbidden value (" + cell + ") on element cell.");
+                throw new System.Exception("Forbidden value (" + cell + ") on element cell.");
             }
 
             writer.WriteVarShort((short)cell);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             cell = (short)reader.ReadVarUhShort();
             if (cell < 0 || cell > 559)
             {
-                throw new Exception("Forbidden value (" + cell + ") on element of ObjectGroundRemovedMessage.cell.");
+                throw new System.Exception("Forbidden value (" + cell + ") on element of ObjectGroundRemovedMessage.cell.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public SpellsPreset()
         {
         }
-        public SpellsPreset(SpellForPreset[] spells)
+        public SpellsPreset(SpellForPreset[] spells,short id)
         {
             this.spells = spells;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {

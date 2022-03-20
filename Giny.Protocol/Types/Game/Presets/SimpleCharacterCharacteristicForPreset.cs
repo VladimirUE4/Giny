@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,7 +17,7 @@ namespace Giny.Protocol.Types
         public SimpleCharacterCharacteristicForPreset()
         {
         }
-        public SimpleCharacterCharacteristicForPreset(string keyword,short @base, short additionnal)
+        public SimpleCharacterCharacteristicForPreset(string keyword,short @base,short additionnal)
         {
             this.keyword = keyword;
             this.@base = @base;

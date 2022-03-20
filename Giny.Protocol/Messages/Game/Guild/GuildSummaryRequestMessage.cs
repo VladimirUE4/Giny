@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         public GuildSummaryRequestMessage()
         {
         }
-        public GuildSummaryRequestMessage(string nameFilter,bool hideFullFilter,int[] criterionFilter,int[] languagesFilter,byte[] recruitmentTypeFilter,short minLevelFilter,short maxLevelFilter,short minPlayerLevelFilter,short maxPlayerLevelFilter,int minSuccessFilter,int maxSuccessFilter,byte sortType,bool sortDescending)
+        public GuildSummaryRequestMessage(string nameFilter,bool hideFullFilter,int[] criterionFilter,int[] languagesFilter,byte[] recruitmentTypeFilter,short minLevelFilter,short maxLevelFilter,short minPlayerLevelFilter,short maxPlayerLevelFilter,int minSuccessFilter,int maxSuccessFilter,byte sortType,bool sortDescending,double offset,uint count)
         {
             this.nameFilter = nameFilter;
             this.hideFullFilter = hideFullFilter;
@@ -45,6 +44,8 @@ namespace Giny.Protocol.Messages
             this.maxSuccessFilter = maxSuccessFilter;
             this.sortType = sortType;
             this.sortDescending = sortDescending;
+            this.offset = offset;
+            this.count = count;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -59,7 +60,7 @@ namespace Giny.Protocol.Messages
             {
                 if (criterionFilter[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + criterionFilter[_i3] + ") on element 3 (starting at 1) of criterionFilter.");
+                    throw new System.Exception("Forbidden value (" + criterionFilter[_i3] + ") on element 3 (starting at 1) of criterionFilter.");
                 }
 
                 writer.WriteVarInt((int)criterionFilter[_i3]);
@@ -70,7 +71,7 @@ namespace Giny.Protocol.Messages
             {
                 if (languagesFilter[_i4] < 0)
                 {
-                    throw new Exception("Forbidden value (" + languagesFilter[_i4] + ") on element 4 (starting at 1) of languagesFilter.");
+                    throw new System.Exception("Forbidden value (" + languagesFilter[_i4] + ") on element 4 (starting at 1) of languagesFilter.");
                 }
 
                 writer.WriteVarInt((int)languagesFilter[_i4]);
@@ -84,37 +85,37 @@ namespace Giny.Protocol.Messages
 
             if (minLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minLevelFilter + ") on element minLevelFilter.");
+                throw new System.Exception("Forbidden value (" + minLevelFilter + ") on element minLevelFilter.");
             }
 
             writer.WriteShort((short)minLevelFilter);
             if (maxLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxLevelFilter + ") on element maxLevelFilter.");
+                throw new System.Exception("Forbidden value (" + maxLevelFilter + ") on element maxLevelFilter.");
             }
 
             writer.WriteShort((short)maxLevelFilter);
             if (minPlayerLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minPlayerLevelFilter + ") on element minPlayerLevelFilter.");
+                throw new System.Exception("Forbidden value (" + minPlayerLevelFilter + ") on element minPlayerLevelFilter.");
             }
 
             writer.WriteShort((short)minPlayerLevelFilter);
             if (maxPlayerLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxPlayerLevelFilter + ") on element maxPlayerLevelFilter.");
+                throw new System.Exception("Forbidden value (" + maxPlayerLevelFilter + ") on element maxPlayerLevelFilter.");
             }
 
             writer.WriteShort((short)maxPlayerLevelFilter);
             if (minSuccessFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minSuccessFilter + ") on element minSuccessFilter.");
+                throw new System.Exception("Forbidden value (" + minSuccessFilter + ") on element minSuccessFilter.");
             }
 
             writer.WriteVarInt((int)minSuccessFilter);
             if (maxSuccessFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxSuccessFilter + ") on element maxSuccessFilter.");
+                throw new System.Exception("Forbidden value (" + maxSuccessFilter + ") on element maxSuccessFilter.");
             }
 
             writer.WriteVarInt((int)maxSuccessFilter);
@@ -137,7 +138,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadVarUhInt();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of criterionFilter.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of criterionFilter.");
                 }
 
                 criterionFilter[_i3] = (int)_val3;
@@ -150,7 +151,7 @@ namespace Giny.Protocol.Messages
                 _val4 = (uint)reader.ReadVarUhInt();
                 if (_val4 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val4 + ") on elements of languagesFilter.");
+                    throw new System.Exception("Forbidden value (" + _val4 + ") on elements of languagesFilter.");
                 }
 
                 languagesFilter[_i4] = (int)_val4;
@@ -163,7 +164,7 @@ namespace Giny.Protocol.Messages
                 _val5 = (uint)reader.ReadByte();
                 if (_val5 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val5 + ") on elements of recruitmentTypeFilter.");
+                    throw new System.Exception("Forbidden value (" + _val5 + ") on elements of recruitmentTypeFilter.");
                 }
 
                 recruitmentTypeFilter[_i5] = (byte)_val5;
@@ -172,43 +173,43 @@ namespace Giny.Protocol.Messages
             minLevelFilter = (short)reader.ReadShort();
             if (minLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minLevelFilter + ") on element of GuildSummaryRequestMessage.minLevelFilter.");
+                throw new System.Exception("Forbidden value (" + minLevelFilter + ") on element of GuildSummaryRequestMessage.minLevelFilter.");
             }
 
             maxLevelFilter = (short)reader.ReadShort();
             if (maxLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxLevelFilter + ") on element of GuildSummaryRequestMessage.maxLevelFilter.");
+                throw new System.Exception("Forbidden value (" + maxLevelFilter + ") on element of GuildSummaryRequestMessage.maxLevelFilter.");
             }
 
             minPlayerLevelFilter = (short)reader.ReadShort();
             if (minPlayerLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minPlayerLevelFilter + ") on element of GuildSummaryRequestMessage.minPlayerLevelFilter.");
+                throw new System.Exception("Forbidden value (" + minPlayerLevelFilter + ") on element of GuildSummaryRequestMessage.minPlayerLevelFilter.");
             }
 
             maxPlayerLevelFilter = (short)reader.ReadShort();
             if (maxPlayerLevelFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxPlayerLevelFilter + ") on element of GuildSummaryRequestMessage.maxPlayerLevelFilter.");
+                throw new System.Exception("Forbidden value (" + maxPlayerLevelFilter + ") on element of GuildSummaryRequestMessage.maxPlayerLevelFilter.");
             }
 
             minSuccessFilter = (int)reader.ReadVarUhInt();
             if (minSuccessFilter < 0)
             {
-                throw new Exception("Forbidden value (" + minSuccessFilter + ") on element of GuildSummaryRequestMessage.minSuccessFilter.");
+                throw new System.Exception("Forbidden value (" + minSuccessFilter + ") on element of GuildSummaryRequestMessage.minSuccessFilter.");
             }
 
             maxSuccessFilter = (int)reader.ReadVarUhInt();
             if (maxSuccessFilter < 0)
             {
-                throw new Exception("Forbidden value (" + maxSuccessFilter + ") on element of GuildSummaryRequestMessage.maxSuccessFilter.");
+                throw new System.Exception("Forbidden value (" + maxSuccessFilter + ") on element of GuildSummaryRequestMessage.maxSuccessFilter.");
             }
 
             sortType = (byte)reader.ReadByte();
             if (sortType < 0)
             {
-                throw new Exception("Forbidden value (" + sortType + ") on element of GuildSummaryRequestMessage.sortType.");
+                throw new System.Exception("Forbidden value (" + sortType + ") on element of GuildSummaryRequestMessage.sortType.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element index.");
             }
 
             writer.WriteVarShort((short)index);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             index = (short)reader.ReadVarUhShort();
             if (index < 0)
             {
-                throw new Exception("Forbidden value (" + index + ") on element of NotificationUpdateFlagMessage.index.");
+                throw new System.Exception("Forbidden value (" + index + ") on element of NotificationUpdateFlagMessage.index.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             type = (byte)reader.ReadByte();
             if (type < 0)
             {
-                throw new Exception("Forbidden value (" + type + ") on element of AtlasPointsInformations.type.");
+                throw new System.Exception("Forbidden value (" + type + ") on element of AtlasPointsInformations.type.");
             }
 
             uint _coordsLen = (uint)reader.ReadUShort();

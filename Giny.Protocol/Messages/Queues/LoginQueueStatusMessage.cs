@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (position < 0 || position > 65535)
             {
-                throw new Exception("Forbidden value (" + position + ") on element position.");
+                throw new System.Exception("Forbidden value (" + position + ") on element position.");
             }
 
             writer.WriteShort((short)position);
             if (total < 0 || total > 65535)
             {
-                throw new Exception("Forbidden value (" + total + ") on element total.");
+                throw new System.Exception("Forbidden value (" + total + ") on element total.");
             }
 
             writer.WriteShort((short)total);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             position = (short)reader.ReadUShort();
             if (position < 0 || position > 65535)
             {
-                throw new Exception("Forbidden value (" + position + ") on element of LoginQueueStatusMessage.position.");
+                throw new System.Exception("Forbidden value (" + position + ") on element of LoginQueueStatusMessage.position.");
             }
 
             total = (short)reader.ReadUShort();
             if (total < 0 || total > 65535)
             {
-                throw new Exception("Forbidden value (" + total + ") on element of LoginQueueStatusMessage.total.");
+                throw new System.Exception("Forbidden value (" + total + ") on element of LoginQueueStatusMessage.total.");
             }
 
         }

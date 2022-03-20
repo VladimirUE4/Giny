@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -34,14 +33,14 @@ namespace Giny.Protocol.Types
         {
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
             writer.WriteByte((byte)fightType);
             if (fightStart < 0)
             {
-                throw new Exception("Forbidden value (" + fightStart + ") on element fightStart.");
+                throw new System.Exception("Forbidden value (" + fightStart + ") on element fightStart.");
             }
 
             writer.WriteInt((int)fightStart);
@@ -62,19 +61,19 @@ namespace Giny.Protocol.Types
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of FightExternalInformations.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of FightExternalInformations.fightId.");
             }
 
             fightType = (byte)reader.ReadByte();
             if (fightType < 0)
             {
-                throw new Exception("Forbidden value (" + fightType + ") on element of FightExternalInformations.fightType.");
+                throw new System.Exception("Forbidden value (" + fightType + ") on element of FightExternalInformations.fightType.");
             }
 
             fightStart = (int)reader.ReadInt();
             if (fightStart < 0)
             {
-                throw new Exception("Forbidden value (" + fightStart + ") on element of FightExternalInformations.fightStart.");
+                throw new System.Exception("Forbidden value (" + fightStart + ") on element of FightExternalInformations.fightStart.");
             }
 
             fightSpectatorLocked = (bool)reader.ReadBoolean();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -25,7 +24,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (creatureGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + creatureGenericId + ") on element creatureGenericId.");
+                throw new System.Exception("Forbidden value (" + creatureGenericId + ") on element creatureGenericId.");
             }
 
             writer.WriteVarShort((short)creatureGenericId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Types
             creatureGenericId = (short)reader.ReadVarUhShort();
             if (creatureGenericId < 0)
             {
-                throw new Exception("Forbidden value (" + creatureGenericId + ") on element of BaseSpawnMonsterInformation.creatureGenericId.");
+                throw new System.Exception("Forbidden value (" + creatureGenericId + ") on element of BaseSpawnMonsterInformation.creatureGenericId.");
             }
 
         }

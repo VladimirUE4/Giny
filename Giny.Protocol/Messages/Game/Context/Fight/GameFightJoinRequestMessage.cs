@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (fighterId < -9.00719925474099E+15 || fighterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fighterId + ") on element fighterId.");
+                throw new System.Exception("Forbidden value (" + fighterId + ") on element fighterId.");
             }
 
             writer.WriteDouble((double)fighterId);
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             fighterId = (double)reader.ReadDouble();
             if (fighterId < -9.00719925474099E+15 || fighterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fighterId + ") on element of GameFightJoinRequestMessage.fighterId.");
+                throw new System.Exception("Forbidden value (" + fighterId + ") on element of GameFightJoinRequestMessage.fighterId.");
             }
 
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of GameFightJoinRequestMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of GameFightJoinRequestMessage.fightId.");
             }
 
         }

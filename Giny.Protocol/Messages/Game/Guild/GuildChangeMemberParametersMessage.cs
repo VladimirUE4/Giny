@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,25 +31,25 @@ namespace Giny.Protocol.Messages
         {
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element memberId.");
             }
 
             writer.WriteVarLong((long)memberId);
             if (rank < 0)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
             }
 
             writer.WriteVarShort((short)rank);
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
-                throw new Exception("Forbidden value (" + experienceGivenPercent + ") on element experienceGivenPercent.");
+                throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element experienceGivenPercent.");
             }
 
             writer.WriteByte((byte)experienceGivenPercent);
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
             }
 
             writer.WriteVarInt((int)rights);
@@ -60,25 +59,25 @@ namespace Giny.Protocol.Messages
             memberId = (long)reader.ReadVarUhLong();
             if (memberId < 0 || memberId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + memberId + ") on element of GuildChangeMemberParametersMessage.memberId.");
+                throw new System.Exception("Forbidden value (" + memberId + ") on element of GuildChangeMemberParametersMessage.memberId.");
             }
 
             rank = (short)reader.ReadVarUhShort();
             if (rank < 0)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element of GuildChangeMemberParametersMessage.rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element of GuildChangeMemberParametersMessage.rank.");
             }
 
             experienceGivenPercent = (byte)reader.ReadByte();
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
-                throw new Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildChangeMemberParametersMessage.experienceGivenPercent.");
+                throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildChangeMemberParametersMessage.experienceGivenPercent.");
             }
 
             rights = (int)reader.ReadVarUhInt();
             if (rights < 0)
             {
-                throw new Exception("Forbidden value (" + rights + ") on element of GuildChangeMemberParametersMessage.rights.");
+                throw new System.Exception("Forbidden value (" + rights + ") on element of GuildChangeMemberParametersMessage.rights.");
             }
 
         }

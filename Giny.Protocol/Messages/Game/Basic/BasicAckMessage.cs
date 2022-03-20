@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (seq < 0)
             {
-                throw new Exception("Forbidden value (" + seq + ") on element seq.");
+                throw new System.Exception("Forbidden value (" + seq + ") on element seq.");
             }
 
             writer.WriteVarInt((int)seq);
             if (lastPacketId < 0)
             {
-                throw new Exception("Forbidden value (" + lastPacketId + ") on element lastPacketId.");
+                throw new System.Exception("Forbidden value (" + lastPacketId + ") on element lastPacketId.");
             }
 
             writer.WriteVarShort((short)lastPacketId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             seq = (int)reader.ReadVarUhInt();
             if (seq < 0)
             {
-                throw new Exception("Forbidden value (" + seq + ") on element of BasicAckMessage.seq.");
+                throw new System.Exception("Forbidden value (" + seq + ") on element of BasicAckMessage.seq.");
             }
 
             lastPacketId = (short)reader.ReadVarUhShort();
             if (lastPacketId < 0)
             {
-                throw new Exception("Forbidden value (" + lastPacketId + ") on element of BasicAckMessage.lastPacketId.");
+                throw new System.Exception("Forbidden value (" + lastPacketId + ") on element of BasicAckMessage.lastPacketId.");
             }
 
         }

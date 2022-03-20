@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -33,7 +32,7 @@ namespace Giny.Protocol.Messages
             {
                 if (cellIds[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + cellIds[_i1] + ") on element 1 (starting at 1) of cellIds.");
+                    throw new System.Exception("Forbidden value (" + cellIds[_i1] + ") on element 1 (starting at 1) of cellIds.");
                 }
 
                 writer.WriteVarShort((short)cellIds[_i1]);
@@ -50,7 +49,7 @@ namespace Giny.Protocol.Messages
             {
                 if (orientations[_i3] < 0)
                 {
-                    throw new Exception("Forbidden value (" + orientations[_i3] + ") on element 3 (starting at 1) of orientations.");
+                    throw new System.Exception("Forbidden value (" + orientations[_i3] + ") on element 3 (starting at 1) of orientations.");
                 }
 
                 writer.WriteByte((byte)orientations[_i3]);
@@ -69,7 +68,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of cellIds.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of cellIds.");
                 }
 
                 cellIds[_i1] = (short)_val1;
@@ -90,7 +89,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (uint)reader.ReadByte();
                 if (_val3 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of orientations.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of orientations.");
                 }
 
                 orientations[_i3] = (byte)_val3;

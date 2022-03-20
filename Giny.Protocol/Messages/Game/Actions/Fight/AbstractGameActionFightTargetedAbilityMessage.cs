@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -22,13 +21,15 @@ namespace Giny.Protocol.Messages
         public AbstractGameActionFightTargetedAbilityMessage()
         {
         }
-        public AbstractGameActionFightTargetedAbilityMessage(double targetId,short destinationCellId,byte critical,bool silentCast,bool verboseCast)
+        public AbstractGameActionFightTargetedAbilityMessage(double targetId,short destinationCellId,byte critical,bool silentCast,bool verboseCast,short actionId,double sourceId)
         {
             this.targetId = targetId;
             this.destinationCellId = destinationCellId;
             this.critical = critical;
             this.silentCast = silentCast;
             this.verboseCast = verboseCast;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -39,13 +40,13 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
             if (destinationCellId < -1 || destinationCellId > 559)
             {
-                throw new Exception("Forbidden value (" + destinationCellId + ") on element destinationCellId.");
+                throw new System.Exception("Forbidden value (" + destinationCellId + ") on element destinationCellId.");
             }
 
             writer.WriteShort((short)destinationCellId);
@@ -60,19 +61,19 @@ namespace Giny.Protocol.Messages
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of AbstractGameActionFightTargetedAbilityMessage.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of AbstractGameActionFightTargetedAbilityMessage.targetId.");
             }
 
             destinationCellId = (short)reader.ReadShort();
             if (destinationCellId < -1 || destinationCellId > 559)
             {
-                throw new Exception("Forbidden value (" + destinationCellId + ") on element of AbstractGameActionFightTargetedAbilityMessage.destinationCellId.");
+                throw new System.Exception("Forbidden value (" + destinationCellId + ") on element of AbstractGameActionFightTargetedAbilityMessage.destinationCellId.");
             }
 
             critical = (byte)reader.ReadByte();
             if (critical < 0)
             {
-                throw new Exception("Forbidden value (" + critical + ") on element of AbstractGameActionFightTargetedAbilityMessage.critical.");
+                throw new System.Exception("Forbidden value (" + critical + ") on element of AbstractGameActionFightTargetedAbilityMessage.critical.");
             }
 
         }

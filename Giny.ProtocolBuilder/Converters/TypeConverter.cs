@@ -15,7 +15,6 @@ namespace Giny.ProtocolBuilder.Converters
 
         public override string[] Imports => new string[]
         {
-            "System",
             "System.Collections.Generic",
             "Giny.Core.IO.Interfaces",
             "Giny.Protocol",
@@ -36,16 +35,38 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return base.GetExtends();
         }
-        public override void Prepare(IEnumerable<AS3File> context)
+        public override void Prepare(Dictionary<string, AS3File> context)
         {
+            if (GetClassName() == "GameRolePlayGroupMonsterInformations")
+            {
+                var variable = new AS3Variable("staticInfos", "GroupMonsterStaticInformations");
+
+                AS3Field field = new AS3Field(variable,
+                    AS3AccessorsEnum.@public, AS3ModifiersEnum.None, new EmptyExpression());
+
+                FieldsToWrite.Add(field);
+                File.Fields.Add(field);// append field
+
+                var ctor = MethodsToWrite.FirstOrDefault(x => x.IsConstructor && x.Parameters.Count > 0);
+
+                ctor.Parameters.Add(variable);
+            }
+
+
             base.Prepare(context);
 
-            if (GetExtends() == string.Empty)
+        }
+        public override void PostPrepare()
+        {
+            base.PostPrepare();
+
+            if (GetExtends() == BaseClassName)
             {
                 GetMethodToWrite("Serialize").SetModifiers(AS3ModifiersEnum.@virtual);
                 GetMethodToWrite("Deserialize").SetModifiers(AS3ModifiersEnum.@virtual);
             }
         }
+
         public string GetTypeProtocolId()
         {
             int protocolId = (int)File.GetField("protocolId").GetValue<ConstantExpression>().Value;

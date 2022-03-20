@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (pageIndex < 0)
             {
-                throw new Exception("Forbidden value (" + pageIndex + ") on element pageIndex.");
+                throw new System.Exception("Forbidden value (" + pageIndex + ") on element pageIndex.");
             }
 
             writer.WriteVarShort((short)pageIndex);
             if (totalPage < 0)
             {
-                throw new Exception("Forbidden value (" + totalPage + ") on element totalPage.");
+                throw new System.Exception("Forbidden value (" + totalPage + ") on element totalPage.");
             }
 
             writer.WriteVarShort((short)totalPage);
@@ -53,13 +52,13 @@ namespace Giny.Protocol.Messages
             pageIndex = (short)reader.ReadVarUhShort();
             if (pageIndex < 0)
             {
-                throw new Exception("Forbidden value (" + pageIndex + ") on element of PaddockToSellListMessage.pageIndex.");
+                throw new System.Exception("Forbidden value (" + pageIndex + ") on element of PaddockToSellListMessage.pageIndex.");
             }
 
             totalPage = (short)reader.ReadVarUhShort();
             if (totalPage < 0)
             {
-                throw new Exception("Forbidden value (" + totalPage + ") on element of PaddockToSellListMessage.totalPage.");
+                throw new System.Exception("Forbidden value (" + totalPage + ") on element of PaddockToSellListMessage.totalPage.");
             }
 
             uint _paddockListLen = (uint)reader.ReadUShort();

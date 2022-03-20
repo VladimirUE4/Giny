@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (objectValue < 0 || objectValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectValue + ") on element objectValue.");
+                throw new System.Exception("Forbidden value (" + objectValue + ") on element objectValue.");
             }
 
             writer.WriteVarLong((long)objectValue);
             if (totalTaxValue < 0 || totalTaxValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + totalTaxValue + ") on element totalTaxValue.");
+                throw new System.Exception("Forbidden value (" + totalTaxValue + ") on element totalTaxValue.");
             }
 
             writer.WriteVarLong((long)totalTaxValue);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             objectValue = (long)reader.ReadVarUhLong();
             if (objectValue < 0 || objectValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectValue + ") on element of ExchangeReplyTaxVendorMessage.objectValue.");
+                throw new System.Exception("Forbidden value (" + objectValue + ") on element of ExchangeReplyTaxVendorMessage.objectValue.");
             }
 
             totalTaxValue = (long)reader.ReadVarUhLong();
             if (totalTaxValue < 0 || totalTaxValue > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + totalTaxValue + ") on element of ExchangeReplyTaxVendorMessage.totalTaxValue.");
+                throw new System.Exception("Forbidden value (" + totalTaxValue + ") on element of ExchangeReplyTaxVendorMessage.totalTaxValue.");
             }
 
         }

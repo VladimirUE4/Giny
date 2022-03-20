@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         {
             if (slot < 0 || slot > 99)
             {
-                throw new Exception("Forbidden value (" + slot + ") on element slot.");
+                throw new System.Exception("Forbidden value (" + slot + ") on element slot.");
             }
 
             writer.WriteByte((byte)slot);
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             slot = (byte)reader.ReadByte();
             if (slot < 0 || slot > 99)
             {
-                throw new Exception("Forbidden value (" + slot + ") on element of Shortcut.slot.");
+                throw new System.Exception("Forbidden value (" + slot + ") on element of Shortcut.slot.");
             }
 
         }

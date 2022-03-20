@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,19 @@ namespace Giny.Protocol.Messages
         public LocalizedChatSmileyMessage()
         {
         }
-        public LocalizedChatSmileyMessage(short cellId)
+        public LocalizedChatSmileyMessage(short cellId,double entityId,short smileyId,int accountId)
         {
             this.cellId = cellId;
+            this.entityId = entityId;
+            this.smileyId = smileyId;
+            this.accountId = accountId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
@@ -38,7 +40,7 @@ namespace Giny.Protocol.Messages
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of LocalizedChatSmileyMessage.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of LocalizedChatSmileyMessage.cellId.");
             }
 
         }

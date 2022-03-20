@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public GameActionFightUnmarkCellsMessage()
         {
         }
-        public GameActionFightUnmarkCellsMessage(short markId)
+        public GameActionFightUnmarkCellsMessage(short markId,short actionId,double sourceId)
         {
             this.markId = markId;
+            this.actionId = actionId;
+            this.sourceId = sourceId;
         }
         public override void Serialize(IDataWriter writer)
         {

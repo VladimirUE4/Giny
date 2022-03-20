@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (charId < -9.00719925474099E+15 || charId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + charId + ") on element charId.");
+                throw new System.Exception("Forbidden value (" + charId + ") on element charId.");
             }
 
             writer.WriteDouble((double)charId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             charId = (double)reader.ReadDouble();
             if (charId < -9.00719925474099E+15 || charId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + charId + ") on element of GameFightLeaveMessage.charId.");
+                throw new System.Exception("Forbidden value (" + charId + ") on element of GameFightLeaveMessage.charId.");
             }
 
         }

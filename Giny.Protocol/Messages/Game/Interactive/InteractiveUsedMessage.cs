@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,25 +33,25 @@ namespace Giny.Protocol.Messages
         {
             if (entityId < 0 || entityId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + entityId + ") on element entityId.");
+                throw new System.Exception("Forbidden value (" + entityId + ") on element entityId.");
             }
 
             writer.WriteVarLong((long)entityId);
             if (elemId < 0)
             {
-                throw new Exception("Forbidden value (" + elemId + ") on element elemId.");
+                throw new System.Exception("Forbidden value (" + elemId + ") on element elemId.");
             }
 
             writer.WriteVarInt((int)elemId);
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element skillId.");
             }
 
             writer.WriteVarShort((short)skillId);
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element duration.");
             }
 
             writer.WriteVarShort((short)duration);
@@ -63,25 +62,25 @@ namespace Giny.Protocol.Messages
             entityId = (long)reader.ReadVarUhLong();
             if (entityId < 0 || entityId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + entityId + ") on element of InteractiveUsedMessage.entityId.");
+                throw new System.Exception("Forbidden value (" + entityId + ") on element of InteractiveUsedMessage.entityId.");
             }
 
             elemId = (int)reader.ReadVarUhInt();
             if (elemId < 0)
             {
-                throw new Exception("Forbidden value (" + elemId + ") on element of InteractiveUsedMessage.elemId.");
+                throw new System.Exception("Forbidden value (" + elemId + ") on element of InteractiveUsedMessage.elemId.");
             }
 
             skillId = (short)reader.ReadVarUhShort();
             if (skillId < 0)
             {
-                throw new Exception("Forbidden value (" + skillId + ") on element of InteractiveUsedMessage.skillId.");
+                throw new System.Exception("Forbidden value (" + skillId + ") on element of InteractiveUsedMessage.skillId.");
             }
 
             duration = (short)reader.ReadVarUhShort();
             if (duration < 0)
             {
-                throw new Exception("Forbidden value (" + duration + ") on element of InteractiveUsedMessage.duration.");
+                throw new System.Exception("Forbidden value (" + duration + ") on element of InteractiveUsedMessage.duration.");
             }
 
             canMove = (bool)reader.ReadBoolean();

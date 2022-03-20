@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             status = (byte)reader.ReadByte();
             if (status < 0)
             {
-                throw new Exception("Forbidden value (" + status + ") on element of CurrentServerStatusUpdateMessage.status.");
+                throw new System.Exception("Forbidden value (" + status + ") on element of CurrentServerStatusUpdateMessage.status.");
             }
 
         }

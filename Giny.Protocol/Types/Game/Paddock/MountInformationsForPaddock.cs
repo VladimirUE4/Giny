@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
         {
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element modelId.");
             }
 
             writer.WriteVarShort((short)modelId);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Types
             modelId = (short)reader.ReadVarUhShort();
             if (modelId < 0)
             {
-                throw new Exception("Forbidden value (" + modelId + ") on element of MountInformationsForPaddock.modelId.");
+                throw new System.Exception("Forbidden value (" + modelId + ") on element of MountInformationsForPaddock.modelId.");
             }
 
             name = (string)reader.ReadUTF();

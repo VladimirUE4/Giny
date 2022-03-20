@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
         {
             if (objectiveId < 0)
             {
-                throw new Exception("Forbidden value (" + objectiveId + ") on element objectiveId.");
+                throw new System.Exception("Forbidden value (" + objectiveId + ") on element objectiveId.");
             }
 
             writer.WriteVarShort((short)objectiveId);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Types
             objectiveId = (short)reader.ReadVarUhShort();
             if (objectiveId < 0)
             {
-                throw new Exception("Forbidden value (" + objectiveId + ") on element of QuestObjectiveInformations.objectiveId.");
+                throw new System.Exception("Forbidden value (" + objectiveId + ") on element of QuestObjectiveInformations.objectiveId.");
             }
 
             objectiveStatus = (bool)reader.ReadBoolean();

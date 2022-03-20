@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -27,7 +26,7 @@ namespace Giny.Protocol.Types
             writer.WriteUTF((string)collectorCallerName);
             if (date < 0)
             {
-                throw new Exception("Forbidden value (" + date + ") on element date.");
+                throw new System.Exception("Forbidden value (" + date + ") on element date.");
             }
 
             writer.WriteInt((int)date);
@@ -38,7 +37,7 @@ namespace Giny.Protocol.Types
             date = (int)reader.ReadInt();
             if (date < 0)
             {
-                throw new Exception("Forbidden value (" + date + ") on element of AdditionalTaxCollectorInformations.date.");
+                throw new System.Exception("Forbidden value (" + date + ") on element of AdditionalTaxCollectorInformations.date.");
             }
 
         }

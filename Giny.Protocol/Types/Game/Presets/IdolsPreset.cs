@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,18 @@ namespace Giny.Protocol.Types
         public IdolsPreset()
         {
         }
-        public IdolsPreset(short iconId,short[] idolIds)
+        public IdolsPreset(short iconId,short[] idolIds,short id)
         {
             this.iconId = iconId;
             this.idolIds = idolIds;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element iconId.");
             }
 
             writer.WriteShort((short)iconId);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             {
                 if (idolIds[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + idolIds[_i2] + ") on element 2 (starting at 1) of idolIds.");
+                    throw new System.Exception("Forbidden value (" + idolIds[_i2] + ") on element 2 (starting at 1) of idolIds.");
                 }
 
                 writer.WriteVarShort((short)idolIds[_i2]);
@@ -50,7 +50,7 @@ namespace Giny.Protocol.Types
             iconId = (short)reader.ReadShort();
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element of IdolsPreset.iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element of IdolsPreset.iconId.");
             }
 
             uint _idolIdsLen = (uint)reader.ReadUShort();
@@ -60,7 +60,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of idolIds.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of idolIds.");
                 }
 
                 idolIds[_i2] = (short)_val2;

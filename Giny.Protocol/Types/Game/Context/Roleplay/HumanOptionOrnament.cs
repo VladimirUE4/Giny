@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -31,13 +30,13 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (ornamentId < 0)
             {
-                throw new Exception("Forbidden value (" + ornamentId + ") on element ornamentId.");
+                throw new System.Exception("Forbidden value (" + ornamentId + ") on element ornamentId.");
             }
 
             writer.WriteVarShort((short)ornamentId);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -50,13 +49,13 @@ namespace Giny.Protocol.Types
             ornamentId = (short)reader.ReadVarUhShort();
             if (ornamentId < 0)
             {
-                throw new Exception("Forbidden value (" + ornamentId + ") on element of HumanOptionOrnament.ornamentId.");
+                throw new System.Exception("Forbidden value (" + ornamentId + ") on element of HumanOptionOrnament.ornamentId.");
             }
 
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of HumanOptionOrnament.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of HumanOptionOrnament.level.");
             }
 
             leagueId = (short)reader.ReadVarShort();

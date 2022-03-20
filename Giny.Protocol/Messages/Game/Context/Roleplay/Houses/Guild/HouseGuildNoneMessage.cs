@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,13 +29,13 @@ namespace Giny.Protocol.Messages
         {
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element houseId.");
             }
 
             writer.WriteVarInt((int)houseId);
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
@@ -47,13 +46,13 @@ namespace Giny.Protocol.Messages
             houseId = (int)reader.ReadVarUhInt();
             if (houseId < 0)
             {
-                throw new Exception("Forbidden value (" + houseId + ") on element of HouseGuildNoneMessage.houseId.");
+                throw new System.Exception("Forbidden value (" + houseId + ") on element of HouseGuildNoneMessage.houseId.");
             }
 
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseGuildNoneMessage.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseGuildNoneMessage.instanceId.");
             }
 
             secondHand = (bool)reader.ReadBoolean();

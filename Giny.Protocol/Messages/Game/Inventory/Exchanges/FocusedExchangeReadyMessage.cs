@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public FocusedExchangeReadyMessage()
         {
         }
-        public FocusedExchangeReadyMessage(int focusActionId)
+        public FocusedExchangeReadyMessage(int focusActionId,bool ready,short step)
         {
             this.focusActionId = focusActionId;
+            this.ready = ready;
+            this.step = step;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (focusActionId < 0)
             {
-                throw new Exception("Forbidden value (" + focusActionId + ") on element focusActionId.");
+                throw new System.Exception("Forbidden value (" + focusActionId + ") on element focusActionId.");
             }
 
             writer.WriteVarInt((int)focusActionId);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             focusActionId = (int)reader.ReadVarUhInt();
             if (focusActionId < 0)
             {
-                throw new Exception("Forbidden value (" + focusActionId + ") on element of FocusedExchangeReadyMessage.focusActionId.");
+                throw new System.Exception("Forbidden value (" + focusActionId + ") on element of FocusedExchangeReadyMessage.focusActionId.");
             }
 
         }

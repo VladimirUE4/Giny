@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public FullStatsPreset()
         {
         }
-        public FullStatsPreset(CharacterCharacteristicForPreset[] stats)
+        public FullStatsPreset(CharacterCharacteristicForPreset[] stats,short id)
         {
             this.stats = stats;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {

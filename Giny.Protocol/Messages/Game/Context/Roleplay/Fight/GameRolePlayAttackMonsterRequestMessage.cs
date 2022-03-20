@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (monsterGroupId < -9.00719925474099E+15 || monsterGroupId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + monsterGroupId + ") on element monsterGroupId.");
+                throw new System.Exception("Forbidden value (" + monsterGroupId + ") on element monsterGroupId.");
             }
 
             writer.WriteDouble((double)monsterGroupId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             monsterGroupId = (double)reader.ReadDouble();
             if (monsterGroupId < -9.00719925474099E+15 || monsterGroupId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + monsterGroupId + ") on element of GameRolePlayAttackMonsterRequestMessage.monsterGroupId.");
+                throw new System.Exception("Forbidden value (" + monsterGroupId + ") on element of GameRolePlayAttackMonsterRequestMessage.monsterGroupId.");
             }
 
         }

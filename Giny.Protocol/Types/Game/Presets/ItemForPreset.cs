@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,13 +28,13 @@ namespace Giny.Protocol.Types
             writer.WriteShort((short)position);
             if (objGid < 0)
             {
-                throw new Exception("Forbidden value (" + objGid + ") on element objGid.");
+                throw new System.Exception("Forbidden value (" + objGid + ") on element objGid.");
             }
 
             writer.WriteVarShort((short)objGid);
             if (objUid < 0)
             {
-                throw new Exception("Forbidden value (" + objUid + ") on element objUid.");
+                throw new System.Exception("Forbidden value (" + objUid + ") on element objUid.");
             }
 
             writer.WriteVarInt((int)objUid);
@@ -45,19 +44,19 @@ namespace Giny.Protocol.Types
             position = (short)reader.ReadShort();
             if (position < 0)
             {
-                throw new Exception("Forbidden value (" + position + ") on element of ItemForPreset.position.");
+                throw new System.Exception("Forbidden value (" + position + ") on element of ItemForPreset.position.");
             }
 
             objGid = (short)reader.ReadVarUhShort();
             if (objGid < 0)
             {
-                throw new Exception("Forbidden value (" + objGid + ") on element of ItemForPreset.objGid.");
+                throw new System.Exception("Forbidden value (" + objGid + ") on element of ItemForPreset.objGid.");
             }
 
             objUid = (int)reader.ReadVarUhInt();
             if (objUid < 0)
             {
-                throw new Exception("Forbidden value (" + objUid + ") on element of ItemForPreset.objUid.");
+                throw new System.Exception("Forbidden value (" + objUid + ") on element of ItemForPreset.objUid.");
             }
 
         }

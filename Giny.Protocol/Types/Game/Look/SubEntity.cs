@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)bindingPointCategory);
             if (bindingPointIndex < 0)
             {
-                throw new Exception("Forbidden value (" + bindingPointIndex + ") on element bindingPointIndex.");
+                throw new System.Exception("Forbidden value (" + bindingPointIndex + ") on element bindingPointIndex.");
             }
 
             writer.WriteByte((byte)bindingPointIndex);
@@ -40,13 +39,13 @@ namespace Giny.Protocol.Types
             bindingPointCategory = (byte)reader.ReadByte();
             if (bindingPointCategory < 0)
             {
-                throw new Exception("Forbidden value (" + bindingPointCategory + ") on element of SubEntity.bindingPointCategory.");
+                throw new System.Exception("Forbidden value (" + bindingPointCategory + ") on element of SubEntity.bindingPointCategory.");
             }
 
             bindingPointIndex = (byte)reader.ReadByte();
             if (bindingPointIndex < 0)
             {
-                throw new Exception("Forbidden value (" + bindingPointIndex + ") on element of SubEntity.bindingPointIndex.");
+                throw new System.Exception("Forbidden value (" + bindingPointIndex + ") on element of SubEntity.bindingPointIndex.");
             }
 
             subEntityLook = new EntityLook();

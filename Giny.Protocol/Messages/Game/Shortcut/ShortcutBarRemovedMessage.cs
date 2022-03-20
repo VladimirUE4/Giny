@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)barType);
             if (slot < 0 || slot > 99)
             {
-                throw new Exception("Forbidden value (" + slot + ") on element slot.");
+                throw new System.Exception("Forbidden value (" + slot + ") on element slot.");
             }
 
             writer.WriteByte((byte)slot);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Messages
             barType = (byte)reader.ReadByte();
             if (barType < 0)
             {
-                throw new Exception("Forbidden value (" + barType + ") on element of ShortcutBarRemovedMessage.barType.");
+                throw new System.Exception("Forbidden value (" + barType + ") on element of ShortcutBarRemovedMessage.barType.");
             }
 
             slot = (byte)reader.ReadByte();
             if (slot < 0 || slot > 99)
             {
-                throw new Exception("Forbidden value (" + slot + ") on element of ShortcutBarRemovedMessage.slot.");
+                throw new System.Exception("Forbidden value (" + slot + ") on element of ShortcutBarRemovedMessage.slot.");
             }
 
         }

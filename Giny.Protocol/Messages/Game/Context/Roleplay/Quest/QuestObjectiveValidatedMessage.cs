@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (questId < 0)
             {
-                throw new Exception("Forbidden value (" + questId + ") on element questId.");
+                throw new System.Exception("Forbidden value (" + questId + ") on element questId.");
             }
 
             writer.WriteVarShort((short)questId);
             if (objectiveId < 0)
             {
-                throw new Exception("Forbidden value (" + objectiveId + ") on element objectiveId.");
+                throw new System.Exception("Forbidden value (" + objectiveId + ") on element objectiveId.");
             }
 
             writer.WriteVarShort((short)objectiveId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             questId = (short)reader.ReadVarUhShort();
             if (questId < 0)
             {
-                throw new Exception("Forbidden value (" + questId + ") on element of QuestObjectiveValidatedMessage.questId.");
+                throw new System.Exception("Forbidden value (" + questId + ") on element of QuestObjectiveValidatedMessage.questId.");
             }
 
             objectiveId = (short)reader.ReadVarUhShort();
             if (objectiveId < 0)
             {
-                throw new Exception("Forbidden value (" + objectiveId + ") on element of QuestObjectiveValidatedMessage.objectiveId.");
+                throw new System.Exception("Forbidden value (" + objectiveId + ") on element of QuestObjectiveValidatedMessage.objectiveId.");
             }
 
         }

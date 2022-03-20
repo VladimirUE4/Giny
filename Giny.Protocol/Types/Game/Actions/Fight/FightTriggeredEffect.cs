@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -19,12 +18,19 @@ namespace Giny.Protocol.Types
         public FightTriggeredEffect()
         {
         }
-        public FightTriggeredEffect(int param1,int param2,int param3,short delay)
+        public FightTriggeredEffect(int param1,int param2,int param3,short delay,int uid,double targetId,short turnDuration,byte dispelable,short spellId,int effectId,int parentBoostUid)
         {
             this.param1 = param1;
             this.param2 = param2;
             this.param3 = param3;
             this.delay = delay;
+            this.uid = uid;
+            this.targetId = targetId;
+            this.turnDuration = turnDuration;
+            this.dispelable = dispelable;
+            this.spellId = spellId;
+            this.effectId = effectId;
+            this.parentBoostUid = parentBoostUid;
         }
         public override void Serialize(IDataWriter writer)
         {

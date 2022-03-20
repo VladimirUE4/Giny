@@ -2,7 +2,6 @@
 using Giny.Core;
 using Giny.Core.Extensions;
 using Giny.ProtocolBuilder.Converters;
-using Giny.ProtocolBuilder.Templates;
 using Microsoft.VisualStudio.TextTemplating;
 using System;
 using System.CodeDom.Compiler;
@@ -75,28 +74,41 @@ namespace Giny.ProtocolBuilder.Profiles
 
         public void Generate()
         {
-            var files = Directory.EnumerateFiles(InputPath, "*.*", SearchOption.AllDirectories).Select(x => new AS3File(x, ParseMethods));
+            Dictionary<string, AS3File> files = new Dictionary<string, AS3File>();
 
-            foreach (var as3File in files)
+            foreach (var file in Directory.EnumerateFiles(InputPath, "*.*", SearchOption.AllDirectories).Select(x => new AS3File(x, ParseMethods)))
             {
+                files.Add(file.ClassName, file);
+            }
+
+            var converters = files.Values.Where(x => !Skip(x)).Select(x => CreateDofusConverter(x)).ToArray();
+
+            foreach (var converter in converters)
+            {
+                Logger.Write("Preparing " + converter.File.ClassName, Channels.Log);
+                converter.Prepare(files);
+            }
+
+            foreach (var converter in converters)
+            {
+                Logger.Write("Post Preparing " + converter.File.ClassName, Channels.Log);
+                converter.PostPrepare();
+            }
+
+            var text = File.ReadAllText(TemplatePath);
+            var engine = new Engine();
+            var host = new TemplateHost(TemplatePath);
+
+            foreach (var converter in converters)
+            {
+                var as3File = converter.File;
+
                 Logger.Write("Written : " + Path.GetFileNameWithoutExtension(as3File.FilePath), Channels.Log);
 
-                if (Skip(as3File))
-                {
-                    Logger.Write(as3File.FileName + " skipped.", Channels.Warning);
-                    continue;
-                }
                 var directoryPath = Path.Combine(OutputDirectory, GetRelativeOutputPath(as3File));
 
-                var engine = new Engine();
-                var host = new TemplateHost(TemplatePath);
-
-                var converter = CreateDofusConverter(as3File);
-                converter.Prepare(files);
-               
                 host.Session["Converter"] = converter;
 
-                var text = File.ReadAllText(TemplatePath);
                 var output = engine.ProcessTemplate(text, host);
 
                 foreach (CompilerError error in host.Errors)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteVarInt((int)mountId);
             if (reactionType < 0)
             {
-                throw new Exception("Forbidden value (" + reactionType + ") on element reactionType.");
+                throw new System.Exception("Forbidden value (" + reactionType + ") on element reactionType.");
             }
 
             writer.WriteByte((byte)reactionType);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             reactionType = (byte)reader.ReadByte();
             if (reactionType < 0)
             {
-                throw new Exception("Forbidden value (" + reactionType + ") on element of MountEmoteIconUsedOkMessage.reactionType.");
+                throw new System.Exception("Forbidden value (" + reactionType + ") on element of MountEmoteIconUsedOkMessage.reactionType.");
             }
 
         }

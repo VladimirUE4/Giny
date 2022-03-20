@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public CurrentMapInstanceMessage()
         {
         }
-        public CurrentMapInstanceMessage(double instantiatedMapId)
+        public CurrentMapInstanceMessage(double instantiatedMapId,double mapId,string mapKey)
         {
             this.instantiatedMapId = instantiatedMapId;
+            this.mapId = mapId;
+            this.mapKey = mapKey;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (instantiatedMapId < 0 || instantiatedMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + instantiatedMapId + ") on element instantiatedMapId.");
+                throw new System.Exception("Forbidden value (" + instantiatedMapId + ") on element instantiatedMapId.");
             }
 
             writer.WriteDouble((double)instantiatedMapId);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             instantiatedMapId = (double)reader.ReadDouble();
             if (instantiatedMapId < 0 || instantiatedMapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + instantiatedMapId + ") on element of CurrentMapInstanceMessage.instantiatedMapId.");
+                throw new System.Exception("Forbidden value (" + instantiatedMapId + ") on element of CurrentMapInstanceMessage.instantiatedMapId.");
             }
 
         }

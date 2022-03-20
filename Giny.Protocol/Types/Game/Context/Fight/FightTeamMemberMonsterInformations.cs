@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,10 +16,11 @@ namespace Giny.Protocol.Types
         public FightTeamMemberMonsterInformations()
         {
         }
-        public FightTeamMemberMonsterInformations(int monsterId,byte grade)
+        public FightTeamMemberMonsterInformations(int monsterId,byte grade,double id)
         {
             this.monsterId = monsterId;
             this.grade = grade;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -28,7 +28,7 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)monsterId);
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element grade.");
             }
 
             writer.WriteByte((byte)grade);
@@ -40,7 +40,7 @@ namespace Giny.Protocol.Types
             grade = (byte)reader.ReadByte();
             if (grade < 0)
             {
-                throw new Exception("Forbidden value (" + grade + ") on element of FightTeamMemberMonsterInformations.grade.");
+                throw new System.Exception("Forbidden value (" + grade + ") on element of FightTeamMemberMonsterInformations.grade.");
             }
 
         }

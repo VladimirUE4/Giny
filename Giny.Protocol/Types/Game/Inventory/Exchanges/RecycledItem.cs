@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,13 +25,13 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarShort((short)id);
             if (qty < 0 || qty > 4294967295)
             {
-                throw new Exception("Forbidden value (" + qty + ") on element qty.");
+                throw new System.Exception("Forbidden value (" + qty + ") on element qty.");
             }
 
             writer.WriteUInt((uint)qty);
@@ -42,13 +41,13 @@ namespace Giny.Protocol.Types
             id = (short)reader.ReadVarUhShort();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of RecycledItem.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of RecycledItem.id.");
             }
 
             qty = (uint)reader.ReadUInt();
             if (qty < 0 || qty > 4294967295)
             {
-                throw new Exception("Forbidden value (" + qty + ") on element of RecycledItem.qty.");
+                throw new System.Exception("Forbidden value (" + qty + ") on element of RecycledItem.qty.");
             }
 
         }

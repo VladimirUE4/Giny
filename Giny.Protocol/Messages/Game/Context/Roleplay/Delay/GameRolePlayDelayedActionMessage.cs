@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,14 +29,14 @@ namespace Giny.Protocol.Messages
         {
             if (delayedCharacterId < -9.00719925474099E+15 || delayedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayedCharacterId + ") on element delayedCharacterId.");
+                throw new System.Exception("Forbidden value (" + delayedCharacterId + ") on element delayedCharacterId.");
             }
 
             writer.WriteDouble((double)delayedCharacterId);
             writer.WriteByte((byte)delayTypeId);
             if (delayEndTime < 0 || delayEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayEndTime + ") on element delayEndTime.");
+                throw new System.Exception("Forbidden value (" + delayEndTime + ") on element delayEndTime.");
             }
 
             writer.WriteDouble((double)delayEndTime);
@@ -47,19 +46,19 @@ namespace Giny.Protocol.Messages
             delayedCharacterId = (double)reader.ReadDouble();
             if (delayedCharacterId < -9.00719925474099E+15 || delayedCharacterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayedCharacterId + ") on element of GameRolePlayDelayedActionMessage.delayedCharacterId.");
+                throw new System.Exception("Forbidden value (" + delayedCharacterId + ") on element of GameRolePlayDelayedActionMessage.delayedCharacterId.");
             }
 
             delayTypeId = (byte)reader.ReadByte();
             if (delayTypeId < 0)
             {
-                throw new Exception("Forbidden value (" + delayTypeId + ") on element of GameRolePlayDelayedActionMessage.delayTypeId.");
+                throw new System.Exception("Forbidden value (" + delayTypeId + ") on element of GameRolePlayDelayedActionMessage.delayTypeId.");
             }
 
             delayEndTime = (double)reader.ReadDouble();
             if (delayEndTime < 0 || delayEndTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + delayEndTime + ") on element of GameRolePlayDelayedActionMessage.delayEndTime.");
+                throw new System.Exception("Forbidden value (" + delayEndTime + ") on element of GameRolePlayDelayedActionMessage.delayEndTime.");
             }
 
         }

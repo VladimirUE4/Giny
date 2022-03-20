@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,20 @@ namespace Giny.Protocol.Types
         public FightResultFighterListEntry()
         {
         }
-        public FightResultFighterListEntry(double id,bool alive)
+        public FightResultFighterListEntry(double id,bool alive,short outcome,byte wave,FightLoot rewards)
         {
             this.id = id;
             this.alive = alive;
+            this.outcome = outcome;
+            this.wave = wave;
+            this.rewards = rewards;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
@@ -39,7 +41,7 @@ namespace Giny.Protocol.Types
             id = (double)reader.ReadDouble();
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of FightResultFighterListEntry.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of FightResultFighterListEntry.id.");
             }
 
             alive = (bool)reader.ReadBoolean();

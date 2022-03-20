@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (lifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + lifePoints + ") on element lifePoints.");
+                throw new System.Exception("Forbidden value (" + lifePoints + ") on element lifePoints.");
             }
 
             writer.WriteVarInt((int)lifePoints);
             if (maxLifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + maxLifePoints + ") on element maxLifePoints.");
+                throw new System.Exception("Forbidden value (" + maxLifePoints + ") on element maxLifePoints.");
             }
 
             writer.WriteVarInt((int)maxLifePoints);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             lifePoints = (int)reader.ReadVarUhInt();
             if (lifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + lifePoints + ") on element of UpdateLifePointsMessage.lifePoints.");
+                throw new System.Exception("Forbidden value (" + lifePoints + ") on element of UpdateLifePointsMessage.lifePoints.");
             }
 
             maxLifePoints = (int)reader.ReadVarUhInt();
             if (maxLifePoints < 0)
             {
-                throw new Exception("Forbidden value (" + maxLifePoints + ") on element of UpdateLifePointsMessage.maxLifePoints.");
+                throw new System.Exception("Forbidden value (" + maxLifePoints + ") on element of UpdateLifePointsMessage.maxLifePoints.");
             }
 
         }

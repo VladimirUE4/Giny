@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element msgId.");
             }
 
             writer.WriteVarShort((short)msgId);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
 
             if (livingObject < 0)
             {
-                throw new Exception("Forbidden value (" + livingObject + ") on element livingObject.");
+                throw new System.Exception("Forbidden value (" + livingObject + ") on element livingObject.");
             }
 
             writer.WriteVarInt((int)livingObject);
@@ -53,7 +52,7 @@ namespace Giny.Protocol.Messages
             msgId = (short)reader.ReadVarUhShort();
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element of LivingObjectMessageRequestMessage.msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element of LivingObjectMessageRequestMessage.msgId.");
             }
 
             uint _parametersLen = (uint)reader.ReadUShort();
@@ -67,7 +66,7 @@ namespace Giny.Protocol.Messages
             livingObject = (int)reader.ReadVarUhInt();
             if (livingObject < 0)
             {
-                throw new Exception("Forbidden value (" + livingObject + ") on element of LivingObjectMessageRequestMessage.livingObject.");
+                throw new System.Exception("Forbidden value (" + livingObject + ") on element of LivingObjectMessageRequestMessage.livingObject.");
             }
 
         }

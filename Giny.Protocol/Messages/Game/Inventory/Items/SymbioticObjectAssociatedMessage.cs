@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element hostUID.");
             }
 
             writer.WriteVarInt((int)hostUID);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             hostUID = (int)reader.ReadVarUhInt();
             if (hostUID < 0)
             {
-                throw new Exception("Forbidden value (" + hostUID + ") on element of SymbioticObjectAssociatedMessage.hostUID.");
+                throw new System.Exception("Forbidden value (" + hostUID + ") on element of SymbioticObjectAssociatedMessage.hostUID.");
             }
 
         }

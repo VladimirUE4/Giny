@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public CharactersListWithRemodelingMessage()
         {
         }
-        public CharactersListWithRemodelingMessage(CharacterToRemodelInformations[] charactersToRemodel)
+        public CharactersListWithRemodelingMessage(CharacterToRemodelInformations[] charactersToRemodel,CharacterBaseInformations[] characters,bool hasStartupActions)
         {
             this.charactersToRemodel = charactersToRemodel;
+            this.characters = characters;
+            this.hasStartupActions = hasStartupActions;
         }
         public override void Serialize(IDataWriter writer)
         {

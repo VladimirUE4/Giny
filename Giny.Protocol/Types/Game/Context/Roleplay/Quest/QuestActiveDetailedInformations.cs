@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,18 @@ namespace Giny.Protocol.Types
         public QuestActiveDetailedInformations()
         {
         }
-        public QuestActiveDetailedInformations(short stepId,QuestObjectiveInformations[] objectives)
+        public QuestActiveDetailedInformations(short stepId,QuestObjectiveInformations[] objectives,short questId)
         {
             this.stepId = stepId;
             this.objectives = objectives;
+            this.questId = questId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (stepId < 0)
             {
-                throw new Exception("Forbidden value (" + stepId + ") on element stepId.");
+                throw new System.Exception("Forbidden value (" + stepId + ") on element stepId.");
             }
 
             writer.WriteVarShort((short)stepId);
@@ -47,7 +47,7 @@ namespace Giny.Protocol.Types
             stepId = (short)reader.ReadVarUhShort();
             if (stepId < 0)
             {
-                throw new Exception("Forbidden value (" + stepId + ") on element of QuestActiveDetailedInformations.stepId.");
+                throw new System.Exception("Forbidden value (" + stepId + ") on element of QuestActiveDetailedInformations.stepId.");
             }
 
             uint _objectivesLen = (uint)reader.ReadUShort();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,14 +27,14 @@ namespace Giny.Protocol.Types
         {
             if (cellId < 0)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
             writer.WriteInt((int)funitureId);
             if (orientation < 0)
             {
-                throw new Exception("Forbidden value (" + orientation + ") on element orientation.");
+                throw new System.Exception("Forbidden value (" + orientation + ") on element orientation.");
             }
 
             writer.WriteByte((byte)orientation);
@@ -45,14 +44,14 @@ namespace Giny.Protocol.Types
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of HavenBagFurnitureInformation.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of HavenBagFurnitureInformation.cellId.");
             }
 
             funitureId = (int)reader.ReadInt();
             orientation = (byte)reader.ReadByte();
             if (orientation < 0)
             {
-                throw new Exception("Forbidden value (" + orientation + ") on element of HavenBagFurnitureInformation.orientation.");
+                throw new System.Exception("Forbidden value (" + orientation + ") on element of HavenBagFurnitureInformation.orientation.");
             }
 
         }

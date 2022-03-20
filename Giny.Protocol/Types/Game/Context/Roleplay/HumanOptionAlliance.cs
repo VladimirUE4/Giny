@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Types
             aggressable = (byte)reader.ReadByte();
             if (aggressable < 0)
             {
-                throw new Exception("Forbidden value (" + aggressable + ") on element of HumanOptionAlliance.aggressable.");
+                throw new System.Exception("Forbidden value (" + aggressable + ") on element of HumanOptionAlliance.aggressable.");
             }
 
         }

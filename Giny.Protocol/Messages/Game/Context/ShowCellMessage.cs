@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element sourceId.");
             }
 
             writer.WriteDouble((double)sourceId);
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element cellId.");
             }
 
             writer.WriteVarShort((short)cellId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             sourceId = (double)reader.ReadDouble();
             if (sourceId < -9.00719925474099E+15 || sourceId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + sourceId + ") on element of ShowCellMessage.sourceId.");
+                throw new System.Exception("Forbidden value (" + sourceId + ") on element of ShowCellMessage.sourceId.");
             }
 
             cellId = (short)reader.ReadVarUhShort();
             if (cellId < 0 || cellId > 559)
             {
-                throw new Exception("Forbidden value (" + cellId + ") on element of ShowCellMessage.cellId.");
+                throw new System.Exception("Forbidden value (" + cellId + ") on element of ShowCellMessage.cellId.");
             }
 
         }

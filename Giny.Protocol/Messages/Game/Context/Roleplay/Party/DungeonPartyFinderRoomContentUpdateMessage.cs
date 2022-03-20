@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element dungeonId.");
             }
 
             writer.WriteVarShort((short)dungeonId);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             {
                 if (removedPlayersIds[_i3] < 0 || removedPlayersIds[_i3] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + removedPlayersIds[_i3] + ") on element 3 (starting at 1) of removedPlayersIds.");
+                    throw new System.Exception("Forbidden value (" + removedPlayersIds[_i3] + ") on element 3 (starting at 1) of removedPlayersIds.");
                 }
 
                 writer.WriteVarLong((long)removedPlayersIds[_i3]);
@@ -59,7 +58,7 @@ namespace Giny.Protocol.Messages
             dungeonId = (short)reader.ReadVarUhShort();
             if (dungeonId < 0)
             {
-                throw new Exception("Forbidden value (" + dungeonId + ") on element of DungeonPartyFinderRoomContentUpdateMessage.dungeonId.");
+                throw new System.Exception("Forbidden value (" + dungeonId + ") on element of DungeonPartyFinderRoomContentUpdateMessage.dungeonId.");
             }
 
             uint _addedPlayersLen = (uint)reader.ReadUShort();
@@ -77,7 +76,7 @@ namespace Giny.Protocol.Messages
                 _val3 = (double)reader.ReadVarUhLong();
                 if (_val3 < 0 || _val3 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val3 + ") on elements of removedPlayersIds.");
+                    throw new System.Exception("Forbidden value (" + _val3 + ") on elements of removedPlayersIds.");
                 }
 
                 removedPlayersIds[_i3] = (long)_val3;

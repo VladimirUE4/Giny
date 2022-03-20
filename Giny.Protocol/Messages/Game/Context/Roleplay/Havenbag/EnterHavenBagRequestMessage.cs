@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (havenBagOwner < 0 || havenBagOwner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + havenBagOwner + ") on element havenBagOwner.");
+                throw new System.Exception("Forbidden value (" + havenBagOwner + ") on element havenBagOwner.");
             }
 
             writer.WriteVarLong((long)havenBagOwner);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             havenBagOwner = (long)reader.ReadVarUhLong();
             if (havenBagOwner < 0 || havenBagOwner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + havenBagOwner + ") on element of EnterHavenBagRequestMessage.havenBagOwner.");
+                throw new System.Exception("Forbidden value (" + havenBagOwner + ") on element of EnterHavenBagRequestMessage.havenBagOwner.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -36,13 +35,13 @@ namespace Giny.Protocol.Types
         {
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element uid.");
             }
 
             writer.WriteVarInt((int)uid);
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element targetId.");
             }
 
             writer.WriteDouble((double)targetId);
@@ -50,19 +49,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)dispelable);
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
             if (effectId < 0)
             {
-                throw new Exception("Forbidden value (" + effectId + ") on element effectId.");
+                throw new System.Exception("Forbidden value (" + effectId + ") on element effectId.");
             }
 
             writer.WriteVarInt((int)effectId);
             if (parentBoostUid < 0)
             {
-                throw new Exception("Forbidden value (" + parentBoostUid + ") on element parentBoostUid.");
+                throw new System.Exception("Forbidden value (" + parentBoostUid + ") on element parentBoostUid.");
             }
 
             writer.WriteVarInt((int)parentBoostUid);
@@ -72,38 +71,38 @@ namespace Giny.Protocol.Types
             uid = (int)reader.ReadVarUhInt();
             if (uid < 0)
             {
-                throw new Exception("Forbidden value (" + uid + ") on element of AbstractFightDispellableEffect.uid.");
+                throw new System.Exception("Forbidden value (" + uid + ") on element of AbstractFightDispellableEffect.uid.");
             }
 
             targetId = (double)reader.ReadDouble();
             if (targetId < -9.00719925474099E+15 || targetId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + targetId + ") on element of AbstractFightDispellableEffect.targetId.");
+                throw new System.Exception("Forbidden value (" + targetId + ") on element of AbstractFightDispellableEffect.targetId.");
             }
 
             turnDuration = (short)reader.ReadShort();
             dispelable = (byte)reader.ReadByte();
             if (dispelable < 0)
             {
-                throw new Exception("Forbidden value (" + dispelable + ") on element of AbstractFightDispellableEffect.dispelable.");
+                throw new System.Exception("Forbidden value (" + dispelable + ") on element of AbstractFightDispellableEffect.dispelable.");
             }
 
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of AbstractFightDispellableEffect.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of AbstractFightDispellableEffect.spellId.");
             }
 
             effectId = (int)reader.ReadVarUhInt();
             if (effectId < 0)
             {
-                throw new Exception("Forbidden value (" + effectId + ") on element of AbstractFightDispellableEffect.effectId.");
+                throw new System.Exception("Forbidden value (" + effectId + ") on element of AbstractFightDispellableEffect.effectId.");
             }
 
             parentBoostUid = (int)reader.ReadVarUhInt();
             if (parentBoostUid < 0)
             {
-                throw new Exception("Forbidden value (" + parentBoostUid + ") on element of AbstractFightDispellableEffect.parentBoostUid.");
+                throw new System.Exception("Forbidden value (" + parentBoostUid + ") on element of AbstractFightDispellableEffect.parentBoostUid.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,13 +31,13 @@ namespace Giny.Protocol.Types
         {
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
             }
 
             writer.WriteVarShort((short)rank);
             if (leagueId < 0)
             {
-                throw new Exception("Forbidden value (" + leagueId + ") on element leagueId.");
+                throw new System.Exception("Forbidden value (" + leagueId + ") on element leagueId.");
             }
 
             writer.WriteVarShort((short)leagueId);
@@ -51,13 +50,13 @@ namespace Giny.Protocol.Types
             rank = (short)reader.ReadVarUhShort();
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element of ArenaLeagueRanking.rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element of ArenaLeagueRanking.rank.");
             }
 
             leagueId = (short)reader.ReadVarUhShort();
             if (leagueId < 0)
             {
-                throw new Exception("Forbidden value (" + leagueId + ") on element of ArenaLeagueRanking.leagueId.");
+                throw new System.Exception("Forbidden value (" + leagueId + ") on element of ArenaLeagueRanking.leagueId.");
             }
 
             leaguePoints = (short)reader.ReadVarShort();

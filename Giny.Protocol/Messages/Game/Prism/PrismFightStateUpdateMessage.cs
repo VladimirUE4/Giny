@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element state.");
             }
 
             writer.WriteByte((byte)state);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of PrismFightStateUpdateMessage.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of PrismFightStateUpdateMessage.state.");
             }
 
         }

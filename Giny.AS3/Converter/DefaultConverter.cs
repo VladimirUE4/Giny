@@ -27,10 +27,11 @@ namespace Giny.AS3.Converter
         {
 
         }
-        public override void Prepare(IEnumerable<AS3File> context)
+        public override void Prepare(Dictionary<string, AS3File> context)
         {
 
         }
+
         public override string GetNamespace()
         {
             return File.Package;
@@ -133,13 +134,13 @@ namespace Giny.AS3.Converter
             return sb.ToString();
         }
 
-        protected override AS3Method[] SelectMethodsToWrite()
+        protected override List<AS3Method> SelectMethodsToWrite()
         {
-            return File.Methods;
+            return File.Methods.ToList();
         }
-        protected override AS3Field[] SelectFieldsToWrite()
+        protected override List<AS3Field> SelectFieldsToWrite()
         {
-            return File.Fields;
+            return File.Fields.ToList();
         }
 
         protected override string GetType(AS3Type type)
@@ -178,7 +179,7 @@ namespace Giny.AS3.Converter
 
         protected override string GetThrowExpression(ThrowExpression ex)
         {
-            return ex.Line.Replace("Error", "Exception");
+            return ex.Line.Replace("Error", "System.Exception");
         }
 
         protected override string GetNumericIncrementationExpression(NumericIncrementationExpression expression)

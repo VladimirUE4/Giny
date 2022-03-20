@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             {
                 if (keyMovements[_i1] < 0)
                 {
-                    throw new Exception("Forbidden value (" + keyMovements[_i1] + ") on element 1 (starting at 1) of keyMovements.");
+                    throw new System.Exception("Forbidden value (" + keyMovements[_i1] + ") on element 1 (starting at 1) of keyMovements.");
                 }
 
                 writer.WriteShort((short)keyMovements[_i1]);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
 
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
@@ -54,7 +53,7 @@ namespace Giny.Protocol.Messages
                 _val1 = (uint)reader.ReadShort();
                 if (_val1 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of keyMovements.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of keyMovements.");
                 }
 
                 keyMovements[_i1] = (short)_val1;
@@ -63,7 +62,7 @@ namespace Giny.Protocol.Messages
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of GameMapMovementRequestMessage.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of GameMapMovementRequestMessage.mapId.");
             }
 
         }

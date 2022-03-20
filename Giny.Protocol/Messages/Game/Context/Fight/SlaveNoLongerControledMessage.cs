@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (masterId < -9.00719925474099E+15 || masterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + masterId + ") on element masterId.");
+                throw new System.Exception("Forbidden value (" + masterId + ") on element masterId.");
             }
 
             writer.WriteDouble((double)masterId);
             if (slaveId < -9.00719925474099E+15 || slaveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + slaveId + ") on element slaveId.");
+                throw new System.Exception("Forbidden value (" + slaveId + ") on element slaveId.");
             }
 
             writer.WriteDouble((double)slaveId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             masterId = (double)reader.ReadDouble();
             if (masterId < -9.00719925474099E+15 || masterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + masterId + ") on element of SlaveNoLongerControledMessage.masterId.");
+                throw new System.Exception("Forbidden value (" + masterId + ") on element of SlaveNoLongerControledMessage.masterId.");
             }
 
             slaveId = (double)reader.ReadDouble();
             if (slaveId < -9.00719925474099E+15 || slaveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + slaveId + ") on element of SlaveNoLongerControledMessage.slaveId.");
+                throw new System.Exception("Forbidden value (" + slaveId + ") on element of SlaveNoLongerControledMessage.slaveId.");
             }
 
         }

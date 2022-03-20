@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
         {
             if (bonesId < 0)
             {
-                throw new Exception("Forbidden value (" + bonesId + ") on element bonesId.");
+                throw new System.Exception("Forbidden value (" + bonesId + ") on element bonesId.");
             }
 
             writer.WriteVarShort((short)bonesId);
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Types
             {
                 if (skins[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + skins[_i2] + ") on element 2 (starting at 1) of skins.");
+                    throw new System.Exception("Forbidden value (" + skins[_i2] + ") on element 2 (starting at 1) of skins.");
                 }
 
                 writer.WriteVarShort((short)skins[_i2]);
@@ -75,7 +74,7 @@ namespace Giny.Protocol.Types
             bonesId = (short)reader.ReadVarUhShort();
             if (bonesId < 0)
             {
-                throw new Exception("Forbidden value (" + bonesId + ") on element of EntityLook.bonesId.");
+                throw new System.Exception("Forbidden value (" + bonesId + ") on element of EntityLook.bonesId.");
             }
 
             uint _skinsLen = (uint)reader.ReadUShort();
@@ -85,7 +84,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of skins.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of skins.");
                 }
 
                 skins[_i2] = (short)_val2;

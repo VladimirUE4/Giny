@@ -19,6 +19,11 @@ namespace Giny.AS3.Expressions
             get;
             private set;
         }
+        public VariableDeclarationExpression(AS3Variable variable, BaseExpression value) : base(variable.ToString() + "=" + value.ToString())
+        {
+            this.Variable = variable;
+            this.Value = value;
+        }
         public VariableDeclarationExpression(AS3File file, string line, int i) : base(line)
         {
             this.Variable = new AS3Variable(Regex.Match(line, @"\w+(?=.?:)").Value, Regex.Match(line, @"(?<=:)(\w+)").Value);

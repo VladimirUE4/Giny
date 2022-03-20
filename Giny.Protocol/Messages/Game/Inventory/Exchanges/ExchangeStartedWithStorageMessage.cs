@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public ExchangeStartedWithStorageMessage()
         {
         }
-        public ExchangeStartedWithStorageMessage(int storageMaxSlot)
+        public ExchangeStartedWithStorageMessage(int storageMaxSlot,byte exchangeType)
         {
             this.storageMaxSlot = storageMaxSlot;
+            this.exchangeType = exchangeType;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (storageMaxSlot < 0)
             {
-                throw new Exception("Forbidden value (" + storageMaxSlot + ") on element storageMaxSlot.");
+                throw new System.Exception("Forbidden value (" + storageMaxSlot + ") on element storageMaxSlot.");
             }
 
             writer.WriteVarInt((int)storageMaxSlot);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             storageMaxSlot = (int)reader.ReadVarUhInt();
             if (storageMaxSlot < 0)
             {
-                throw new Exception("Forbidden value (" + storageMaxSlot + ") on element of ExchangeStartedWithStorageMessage.storageMaxSlot.");
+                throw new System.Exception("Forbidden value (" + storageMaxSlot + ") on element of ExchangeStartedWithStorageMessage.storageMaxSlot.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,26 @@ namespace Giny.Protocol.Types
         public ExtendedLockedBreachBranch()
         {
         }
-        public ExtendedLockedBreachBranch(int unlockPrice)
+        public ExtendedLockedBreachBranch(int unlockPrice,byte room,int element,MonsterInGroupLightInformations[] bosses,double map,short score,short relativeScore,MonsterInGroupLightInformations[] monsters,BreachReward[] rewards,int modifier,int prize)
         {
             this.unlockPrice = unlockPrice;
+            this.room = room;
+            this.element = element;
+            this.bosses = bosses;
+            this.map = map;
+            this.score = score;
+            this.relativeScore = relativeScore;
+            this.monsters = monsters;
+            this.rewards = rewards;
+            this.modifier = modifier;
+            this.prize = prize;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (unlockPrice < 0)
             {
-                throw new Exception("Forbidden value (" + unlockPrice + ") on element unlockPrice.");
+                throw new System.Exception("Forbidden value (" + unlockPrice + ") on element unlockPrice.");
             }
 
             writer.WriteVarInt((int)unlockPrice);
@@ -36,7 +45,7 @@ namespace Giny.Protocol.Types
             unlockPrice = (int)reader.ReadVarUhInt();
             if (unlockPrice < 0)
             {
-                throw new Exception("Forbidden value (" + unlockPrice + ") on element of ExtendedLockedBreachBranch.unlockPrice.");
+                throw new System.Exception("Forbidden value (" + unlockPrice + ") on element of ExtendedLockedBreachBranch.unlockPrice.");
             }
 
         }

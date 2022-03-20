@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Types
         {
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element spellId.");
             }
 
             writer.WriteVarShort((short)spellId);
@@ -43,7 +42,7 @@ namespace Giny.Protocol.Types
             spellId = (short)reader.ReadVarUhShort();
             if (spellId < 0)
             {
-                throw new Exception("Forbidden value (" + spellId + ") on element of SpellForPreset.spellId.");
+                throw new System.Exception("Forbidden value (" + spellId + ") on element of SpellForPreset.spellId.");
             }
 
             uint _shortcutsLen = (uint)reader.ReadUShort();

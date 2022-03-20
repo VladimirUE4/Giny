@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -40,20 +39,20 @@ namespace Giny.Protocol.Types
         {
             if (markAuthorId < -9.00719925474099E+15 || markAuthorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + markAuthorId + ") on element markAuthorId.");
+                throw new System.Exception("Forbidden value (" + markAuthorId + ") on element markAuthorId.");
             }
 
             writer.WriteDouble((double)markAuthorId);
             writer.WriteByte((byte)markTeamId);
             if (markSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + markSpellId + ") on element markSpellId.");
+                throw new System.Exception("Forbidden value (" + markSpellId + ") on element markSpellId.");
             }
 
             writer.WriteInt((int)markSpellId);
             if (markSpellLevel < 1 || markSpellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + markSpellLevel + ") on element markSpellLevel.");
+                throw new System.Exception("Forbidden value (" + markSpellLevel + ") on element markSpellLevel.");
             }
 
             writer.WriteShort((short)markSpellLevel);
@@ -61,7 +60,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)markType);
             if (markimpactCell < -1 || markimpactCell > 559)
             {
-                throw new Exception("Forbidden value (" + markimpactCell + ") on element markimpactCell.");
+                throw new System.Exception("Forbidden value (" + markimpactCell + ") on element markimpactCell.");
             }
 
             writer.WriteShort((short)markimpactCell);
@@ -79,25 +78,25 @@ namespace Giny.Protocol.Types
             markAuthorId = (double)reader.ReadDouble();
             if (markAuthorId < -9.00719925474099E+15 || markAuthorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + markAuthorId + ") on element of GameActionMark.markAuthorId.");
+                throw new System.Exception("Forbidden value (" + markAuthorId + ") on element of GameActionMark.markAuthorId.");
             }
 
             markTeamId = (byte)reader.ReadByte();
             if (markTeamId < 0)
             {
-                throw new Exception("Forbidden value (" + markTeamId + ") on element of GameActionMark.markTeamId.");
+                throw new System.Exception("Forbidden value (" + markTeamId + ") on element of GameActionMark.markTeamId.");
             }
 
             markSpellId = (int)reader.ReadInt();
             if (markSpellId < 0)
             {
-                throw new Exception("Forbidden value (" + markSpellId + ") on element of GameActionMark.markSpellId.");
+                throw new System.Exception("Forbidden value (" + markSpellId + ") on element of GameActionMark.markSpellId.");
             }
 
             markSpellLevel = (short)reader.ReadShort();
             if (markSpellLevel < 1 || markSpellLevel > 32767)
             {
-                throw new Exception("Forbidden value (" + markSpellLevel + ") on element of GameActionMark.markSpellLevel.");
+                throw new System.Exception("Forbidden value (" + markSpellLevel + ") on element of GameActionMark.markSpellLevel.");
             }
 
             markId = (short)reader.ReadShort();
@@ -105,7 +104,7 @@ namespace Giny.Protocol.Types
             markimpactCell = (short)reader.ReadShort();
             if (markimpactCell < -1 || markimpactCell > 559)
             {
-                throw new Exception("Forbidden value (" + markimpactCell + ") on element of GameActionMark.markimpactCell.");
+                throw new System.Exception("Forbidden value (" + markimpactCell + ") on element of GameActionMark.markimpactCell.");
             }
 
             uint _cellsLen = (uint)reader.ReadUShort();

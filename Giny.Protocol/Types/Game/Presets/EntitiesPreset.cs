@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,18 @@ namespace Giny.Protocol.Types
         public EntitiesPreset()
         {
         }
-        public EntitiesPreset(short iconId,short[] entityIds)
+        public EntitiesPreset(short iconId,short[] entityIds,short id)
         {
             this.iconId = iconId;
             this.entityIds = entityIds;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element iconId.");
             }
 
             writer.WriteShort((short)iconId);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             {
                 if (entityIds[_i2] < 0)
                 {
-                    throw new Exception("Forbidden value (" + entityIds[_i2] + ") on element 2 (starting at 1) of entityIds.");
+                    throw new System.Exception("Forbidden value (" + entityIds[_i2] + ") on element 2 (starting at 1) of entityIds.");
                 }
 
                 writer.WriteVarShort((short)entityIds[_i2]);
@@ -50,7 +50,7 @@ namespace Giny.Protocol.Types
             iconId = (short)reader.ReadShort();
             if (iconId < 0)
             {
-                throw new Exception("Forbidden value (" + iconId + ") on element of EntitiesPreset.iconId.");
+                throw new System.Exception("Forbidden value (" + iconId + ") on element of EntitiesPreset.iconId.");
             }
 
             uint _entityIdsLen = (uint)reader.ReadUShort();
@@ -60,7 +60,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of entityIds.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of entityIds.");
                 }
 
                 entityIds[_i2] = (short)_val2;

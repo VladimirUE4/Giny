@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element paddockId.");
             }
 
             writer.WriteDouble((double)paddockId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             paddockId = (double)reader.ReadDouble();
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element of GuildPaddockTeleportRequestMessage.paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element of GuildPaddockTeleportRequestMessage.paddockId.");
             }
 
         }

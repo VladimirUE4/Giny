@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public AchievementAchievedRewardable()
         {
         }
-        public AchievementAchievedRewardable(short finishedlevel)
+        public AchievementAchievedRewardable(short finishedlevel,short id,long achievedBy)
         {
             this.finishedlevel = finishedlevel;
+            this.id = id;
+            this.achievedBy = achievedBy;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (finishedlevel < 0 || finishedlevel > 200)
             {
-                throw new Exception("Forbidden value (" + finishedlevel + ") on element finishedlevel.");
+                throw new System.Exception("Forbidden value (" + finishedlevel + ") on element finishedlevel.");
             }
 
             writer.WriteVarShort((short)finishedlevel);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             finishedlevel = (short)reader.ReadVarUhShort();
             if (finishedlevel < 0 || finishedlevel > 200)
             {
-                throw new Exception("Forbidden value (" + finishedlevel + ") on element of AchievementAchievedRewardable.finishedlevel.");
+                throw new System.Exception("Forbidden value (" + finishedlevel + ") on element of AchievementAchievedRewardable.finishedlevel.");
             }
 
         }

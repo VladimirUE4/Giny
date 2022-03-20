@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,15 @@ namespace Giny.Protocol.Types
         public GameRolePlayNpcWithQuestInformations()
         {
         }
-        public GameRolePlayNpcWithQuestInformations(GameRolePlayNpcQuestFlag questFlag)
+        public GameRolePlayNpcWithQuestInformations(GameRolePlayNpcQuestFlag questFlag,double contextualId,EntityDispositionInformations disposition,EntityLook look,short npcId,bool sex,short specialArtworkId)
         {
             this.questFlag = questFlag;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.npcId = npcId;
+            this.sex = sex;
+            this.specialArtworkId = specialArtworkId;
         }
         public override void Serialize(IDataWriter writer)
         {

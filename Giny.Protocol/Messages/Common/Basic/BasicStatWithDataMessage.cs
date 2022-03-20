@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public BasicStatWithDataMessage()
         {
         }
-        public BasicStatWithDataMessage(StatisticData[] datas)
+        public BasicStatWithDataMessage(StatisticData[] datas,double timeSpent,short statId)
         {
             this.datas = datas;
+            this.timeSpent = timeSpent;
+            this.statId = statId;
         }
         public override void Serialize(IDataWriter writer)
         {

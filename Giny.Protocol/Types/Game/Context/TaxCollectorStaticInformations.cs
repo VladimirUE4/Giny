@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,20 +29,20 @@ namespace Giny.Protocol.Types
         {
             if (firstNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firstNameId + ") on element firstNameId.");
+                throw new System.Exception("Forbidden value (" + firstNameId + ") on element firstNameId.");
             }
 
             writer.WriteVarShort((short)firstNameId);
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
             }
 
             writer.WriteVarShort((short)lastNameId);
             guildIdentity.Serialize(writer);
             if (callerId < 0 || callerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + callerId + ") on element callerId.");
+                throw new System.Exception("Forbidden value (" + callerId + ") on element callerId.");
             }
 
             writer.WriteVarLong((long)callerId);
@@ -53,13 +52,13 @@ namespace Giny.Protocol.Types
             firstNameId = (short)reader.ReadVarUhShort();
             if (firstNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firstNameId + ") on element of TaxCollectorStaticInformations.firstNameId.");
+                throw new System.Exception("Forbidden value (" + firstNameId + ") on element of TaxCollectorStaticInformations.firstNameId.");
             }
 
             lastNameId = (short)reader.ReadVarUhShort();
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorStaticInformations.lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorStaticInformations.lastNameId.");
             }
 
             guildIdentity = new GuildInformations();
@@ -67,7 +66,7 @@ namespace Giny.Protocol.Types
             callerId = (long)reader.ReadVarUhLong();
             if (callerId < 0 || callerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + callerId + ") on element of TaxCollectorStaticInformations.callerId.");
+                throw new System.Exception("Forbidden value (" + callerId + ") on element of TaxCollectorStaticInformations.callerId.");
             }
 
         }

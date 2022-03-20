@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (xp < -9.00719925474099E+15 || xp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + xp + ") on element xp.");
+                throw new System.Exception("Forbidden value (" + xp + ") on element xp.");
             }
 
             writer.WriteDouble((double)xp);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             xp = (double)reader.ReadDouble();
             if (xp < -9.00719925474099E+15 || xp > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + xp + ") on element of AlignmentWarEffortDonatePreviewMessage.xp.");
+                throw new System.Exception("Forbidden value (" + xp + ") on element of AlignmentWarEffortDonatePreviewMessage.xp.");
             }
 
         }

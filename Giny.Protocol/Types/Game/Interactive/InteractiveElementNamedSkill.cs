@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,18 @@ namespace Giny.Protocol.Types
         public InteractiveElementNamedSkill()
         {
         }
-        public InteractiveElementNamedSkill(int nameId)
+        public InteractiveElementNamedSkill(int nameId,int skillId,int skillInstanceUid)
         {
             this.nameId = nameId;
+            this.skillId = skillId;
+            this.skillInstanceUid = skillInstanceUid;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (nameId < 0)
             {
-                throw new Exception("Forbidden value (" + nameId + ") on element nameId.");
+                throw new System.Exception("Forbidden value (" + nameId + ") on element nameId.");
             }
 
             writer.WriteVarInt((int)nameId);
@@ -36,7 +37,7 @@ namespace Giny.Protocol.Types
             nameId = (int)reader.ReadVarUhInt();
             if (nameId < 0)
             {
-                throw new Exception("Forbidden value (" + nameId + ") on element of InteractiveElementNamedSkill.nameId.");
+                throw new System.Exception("Forbidden value (" + nameId + ") on element of InteractiveElementNamedSkill.nameId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (owner < 0 || owner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + owner + ") on element owner.");
+                throw new System.Exception("Forbidden value (" + owner + ") on element owner.");
             }
 
             writer.WriteVarLong((long)owner);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             owner = (long)reader.ReadVarUhLong();
             if (owner < 0 || owner > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + owner + ") on element of BreachEnterMessage.owner.");
+                throw new System.Exception("Forbidden value (" + owner + ") on element of BreachEnterMessage.owner.");
             }
 
         }

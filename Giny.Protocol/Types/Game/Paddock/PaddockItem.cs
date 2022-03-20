@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,11 @@ namespace Giny.Protocol.Types
         public PaddockItem()
         {
         }
-        public PaddockItem(ItemDurability durability)
+        public PaddockItem(ItemDurability durability,short cellId,short objectGID)
         {
             this.durability = durability;
+            this.cellId = cellId;
+            this.objectGID = objectGID;
         }
         public override void Serialize(IDataWriter writer)
         {

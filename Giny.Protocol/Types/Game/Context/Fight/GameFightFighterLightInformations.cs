@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -38,19 +37,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteDouble((double)id);
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element wave.");
             }
 
             writer.WriteByte((byte)wave);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -64,19 +63,19 @@ namespace Giny.Protocol.Types
             id = (double)reader.ReadDouble();
             if (id < -9.00719925474099E+15 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of GameFightFighterLightInformations.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of GameFightFighterLightInformations.id.");
             }
 
             wave = (byte)reader.ReadByte();
             if (wave < 0)
             {
-                throw new Exception("Forbidden value (" + wave + ") on element of GameFightFighterLightInformations.wave.");
+                throw new System.Exception("Forbidden value (" + wave + ") on element of GameFightFighterLightInformations.wave.");
             }
 
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of GameFightFighterLightInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of GameFightFighterLightInformations.level.");
             }
 
             breed = (byte)reader.ReadByte();

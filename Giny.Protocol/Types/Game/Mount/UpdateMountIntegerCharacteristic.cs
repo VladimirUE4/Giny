@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,10 @@ namespace Giny.Protocol.Types
         public UpdateMountIntegerCharacteristic()
         {
         }
-        public UpdateMountIntegerCharacteristic(int value)
+        public UpdateMountIntegerCharacteristic(int value,byte type)
         {
             this.value = value;
+            this.type = type;
         }
         public override void Serialize(IDataWriter writer)
         {

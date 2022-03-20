@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (recruterId < 0 || recruterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + recruterId + ") on element recruterId.");
+                throw new System.Exception("Forbidden value (" + recruterId + ") on element recruterId.");
             }
 
             writer.WriteVarLong((long)recruterId);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             recruterId = (long)reader.ReadVarUhLong();
             if (recruterId < 0 || recruterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + recruterId + ") on element of GuildInvitedMessage.recruterId.");
+                throw new System.Exception("Forbidden value (" + recruterId + ") on element of GuildInvitedMessage.recruterId.");
             }
 
             recruterName = (string)reader.ReadUTF();

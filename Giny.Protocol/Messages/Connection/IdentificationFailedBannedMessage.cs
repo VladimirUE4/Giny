@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public IdentificationFailedBannedMessage()
         {
         }
-        public IdentificationFailedBannedMessage(double banEndDate)
+        public IdentificationFailedBannedMessage(double banEndDate,byte reason)
         {
             this.banEndDate = banEndDate;
+            this.reason = reason;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (banEndDate < 0 || banEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + banEndDate + ") on element banEndDate.");
+                throw new System.Exception("Forbidden value (" + banEndDate + ") on element banEndDate.");
             }
 
             writer.WriteDouble((double)banEndDate);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             banEndDate = (double)reader.ReadDouble();
             if (banEndDate < 0 || banEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + banEndDate + ") on element of IdentificationFailedBannedMessage.banEndDate.");
+                throw new System.Exception("Forbidden value (" + banEndDate + ") on element of IdentificationFailedBannedMessage.banEndDate.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public ShowCellSpectatorMessage()
         {
         }
-        public ShowCellSpectatorMessage(string playerName)
+        public ShowCellSpectatorMessage(string playerName,double sourceId,short cellId)
         {
             this.playerName = playerName;
+            this.sourceId = sourceId;
+            this.cellId = cellId;
         }
         public override void Serialize(IDataWriter writer)
         {

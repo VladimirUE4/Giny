@@ -21,6 +21,10 @@ namespace Giny.AS3
             this.Name = name;
             this.Type = new AS3Type(rawType);
         }
+        public override string ToString()
+        {
+            return Type.RawType + " " + Name;
+        }
     }
     public class AS3Type
     {
@@ -74,6 +78,13 @@ namespace Giny.AS3
         {
             get;
             private set;
+        }
+        public AS3Field(AS3Variable variable, AS3AccessorsEnum accessors, AS3ModifiersEnum modifiers, BaseExpression value)
+        {
+            this.Variable = variable;
+            this.Accessor = accessors;
+            this.Modifiers = modifiers;
+            this.Value = value;
         }
         public AS3Field(AS3File file, string line, int i)
         {

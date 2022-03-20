@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (fightCount < 0)
             {
-                throw new Exception("Forbidden value (" + fightCount + ") on element fightCount.");
+                throw new System.Exception("Forbidden value (" + fightCount + ") on element fightCount.");
             }
 
             writer.WriteVarShort((short)fightCount);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             fightCount = (short)reader.ReadVarUhShort();
             if (fightCount < 0)
             {
-                throw new Exception("Forbidden value (" + fightCount + ") on element of MapFightCountMessage.fightCount.");
+                throw new System.Exception("Forbidden value (" + fightCount + ") on element of MapFightCountMessage.fightCount.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarInt((int)id);
@@ -46,7 +45,7 @@ namespace Giny.Protocol.Types
             writer.WriteVarInt((int)remainingQty);
             if (price < 0)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarInt((int)price);
@@ -57,7 +56,7 @@ namespace Giny.Protocol.Types
             id = (int)reader.ReadVarUhInt();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of BreachReward.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of BreachReward.id.");
             }
 
             uint _buyLocksLen = (uint)reader.ReadUShort();
@@ -67,7 +66,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadByte();
                 if (_val2 < 0)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of buyLocks.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of buyLocks.");
                 }
 
                 buyLocks[_i2] = (byte)_val2;
@@ -78,7 +77,7 @@ namespace Giny.Protocol.Types
             price = (int)reader.ReadVarUhInt();
             if (price < 0)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of BreachReward.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of BreachReward.price.");
             }
 
         }

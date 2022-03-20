@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public PartyLeaderUpdateMessage()
         {
         }
-        public PartyLeaderUpdateMessage(long partyLeaderId)
+        public PartyLeaderUpdateMessage(long partyLeaderId,int partyId)
         {
             this.partyLeaderId = partyLeaderId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (partyLeaderId < 0 || partyLeaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + partyLeaderId + ") on element partyLeaderId.");
+                throw new System.Exception("Forbidden value (" + partyLeaderId + ") on element partyLeaderId.");
             }
 
             writer.WriteVarLong((long)partyLeaderId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             partyLeaderId = (long)reader.ReadVarUhLong();
             if (partyLeaderId < 0 || partyLeaderId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + partyLeaderId + ") on element of PartyLeaderUpdateMessage.partyLeaderId.");
+                throw new System.Exception("Forbidden value (" + partyLeaderId + ") on element of PartyLeaderUpdateMessage.partyLeaderId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)sequenceType);
             if (authorId < -9.00719925474099E+15 || authorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + authorId + ") on element authorId.");
+                throw new System.Exception("Forbidden value (" + authorId + ") on element authorId.");
             }
 
             writer.WriteDouble((double)authorId);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Messages
             authorId = (double)reader.ReadDouble();
             if (authorId < -9.00719925474099E+15 || authorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + authorId + ") on element of SequenceStartMessage.authorId.");
+                throw new System.Exception("Forbidden value (" + authorId + ") on element of SequenceStartMessage.authorId.");
             }
 
         }

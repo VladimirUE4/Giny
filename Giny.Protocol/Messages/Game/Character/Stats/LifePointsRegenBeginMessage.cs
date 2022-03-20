@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (regenRate < 0 || regenRate > 255)
             {
-                throw new Exception("Forbidden value (" + regenRate + ") on element regenRate.");
+                throw new System.Exception("Forbidden value (" + regenRate + ") on element regenRate.");
             }
 
             writer.WriteByte((byte)regenRate);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             regenRate = (byte)reader.ReadSByte();
             if (regenRate < 0 || regenRate > 255)
             {
-                throw new Exception("Forbidden value (" + regenRate + ") on element of LifePointsRegenBeginMessage.regenRate.");
+                throw new System.Exception("Forbidden value (" + regenRate + ") on element of LifePointsRegenBeginMessage.regenRate.");
             }
 
         }

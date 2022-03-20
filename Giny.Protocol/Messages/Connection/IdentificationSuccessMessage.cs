@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -55,38 +54,38 @@ namespace Giny.Protocol.Messages
             accountTag.Serialize(writer);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
             if (communityId < 0)
             {
-                throw new Exception("Forbidden value (" + communityId + ") on element communityId.");
+                throw new System.Exception("Forbidden value (" + communityId + ") on element communityId.");
             }
 
             writer.WriteByte((byte)communityId);
             writer.WriteUTF((string)secretQuestion);
             if (accountCreation < 0 || accountCreation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + accountCreation + ") on element accountCreation.");
+                throw new System.Exception("Forbidden value (" + accountCreation + ") on element accountCreation.");
             }
 
             writer.WriteDouble((double)accountCreation);
             if (subscriptionElapsedDuration < 0 || subscriptionElapsedDuration > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionElapsedDuration + ") on element subscriptionElapsedDuration.");
+                throw new System.Exception("Forbidden value (" + subscriptionElapsedDuration + ") on element subscriptionElapsedDuration.");
             }
 
             writer.WriteDouble((double)subscriptionElapsedDuration);
             if (subscriptionEndDate < 0 || subscriptionEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionEndDate + ") on element subscriptionEndDate.");
+                throw new System.Exception("Forbidden value (" + subscriptionEndDate + ") on element subscriptionEndDate.");
             }
 
             writer.WriteDouble((double)subscriptionEndDate);
             if (havenbagAvailableRoom < 0 || havenbagAvailableRoom > 255)
             {
-                throw new Exception("Forbidden value (" + havenbagAvailableRoom + ") on element havenbagAvailableRoom.");
+                throw new System.Exception("Forbidden value (" + havenbagAvailableRoom + ") on element havenbagAvailableRoom.");
             }
 
             writer.WriteByte((byte)havenbagAvailableRoom);
@@ -103,38 +102,38 @@ namespace Giny.Protocol.Messages
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of IdentificationSuccessMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of IdentificationSuccessMessage.accountId.");
             }
 
             communityId = (byte)reader.ReadByte();
             if (communityId < 0)
             {
-                throw new Exception("Forbidden value (" + communityId + ") on element of IdentificationSuccessMessage.communityId.");
+                throw new System.Exception("Forbidden value (" + communityId + ") on element of IdentificationSuccessMessage.communityId.");
             }
 
             secretQuestion = (string)reader.ReadUTF();
             accountCreation = (double)reader.ReadDouble();
             if (accountCreation < 0 || accountCreation > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + accountCreation + ") on element of IdentificationSuccessMessage.accountCreation.");
+                throw new System.Exception("Forbidden value (" + accountCreation + ") on element of IdentificationSuccessMessage.accountCreation.");
             }
 
             subscriptionElapsedDuration = (double)reader.ReadDouble();
             if (subscriptionElapsedDuration < 0 || subscriptionElapsedDuration > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionElapsedDuration + ") on element of IdentificationSuccessMessage.subscriptionElapsedDuration.");
+                throw new System.Exception("Forbidden value (" + subscriptionElapsedDuration + ") on element of IdentificationSuccessMessage.subscriptionElapsedDuration.");
             }
 
             subscriptionEndDate = (double)reader.ReadDouble();
             if (subscriptionEndDate < 0 || subscriptionEndDate > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + subscriptionEndDate + ") on element of IdentificationSuccessMessage.subscriptionEndDate.");
+                throw new System.Exception("Forbidden value (" + subscriptionEndDate + ") on element of IdentificationSuccessMessage.subscriptionEndDate.");
             }
 
             havenbagAvailableRoom = (byte)reader.ReadSByte();
             if (havenbagAvailableRoom < 0 || havenbagAvailableRoom > 255)
             {
-                throw new Exception("Forbidden value (" + havenbagAvailableRoom + ") on element of IdentificationSuccessMessage.havenbagAvailableRoom.");
+                throw new System.Exception("Forbidden value (" + havenbagAvailableRoom + ") on element of IdentificationSuccessMessage.havenbagAvailableRoom.");
             }
 
         }

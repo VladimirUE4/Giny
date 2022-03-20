@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -18,30 +17,31 @@ namespace Giny.Protocol.Types
         public ObjectEffectDuration()
         {
         }
-        public ObjectEffectDuration(short days,byte hours,byte minutes)
+        public ObjectEffectDuration(short days,byte hours,byte minutes,short actionId)
         {
             this.days = days;
             this.hours = hours;
             this.minutes = minutes;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (days < 0)
             {
-                throw new Exception("Forbidden value (" + days + ") on element days.");
+                throw new System.Exception("Forbidden value (" + days + ") on element days.");
             }
 
             writer.WriteVarShort((short)days);
             if (hours < 0)
             {
-                throw new Exception("Forbidden value (" + hours + ") on element hours.");
+                throw new System.Exception("Forbidden value (" + hours + ") on element hours.");
             }
 
             writer.WriteByte((byte)hours);
             if (minutes < 0)
             {
-                throw new Exception("Forbidden value (" + minutes + ") on element minutes.");
+                throw new System.Exception("Forbidden value (" + minutes + ") on element minutes.");
             }
 
             writer.WriteByte((byte)minutes);
@@ -52,19 +52,19 @@ namespace Giny.Protocol.Types
             days = (short)reader.ReadVarUhShort();
             if (days < 0)
             {
-                throw new Exception("Forbidden value (" + days + ") on element of ObjectEffectDuration.days.");
+                throw new System.Exception("Forbidden value (" + days + ") on element of ObjectEffectDuration.days.");
             }
 
             hours = (byte)reader.ReadByte();
             if (hours < 0)
             {
-                throw new Exception("Forbidden value (" + hours + ") on element of ObjectEffectDuration.hours.");
+                throw new System.Exception("Forbidden value (" + hours + ") on element of ObjectEffectDuration.hours.");
             }
 
             minutes = (byte)reader.ReadByte();
             if (minutes < 0)
             {
-                throw new Exception("Forbidden value (" + minutes + ") on element of ObjectEffectDuration.minutes.");
+                throw new System.Exception("Forbidden value (" + minutes + ") on element of ObjectEffectDuration.minutes.");
             }
 
         }

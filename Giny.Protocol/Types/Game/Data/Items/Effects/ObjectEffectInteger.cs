@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public ObjectEffectInteger()
         {
         }
-        public ObjectEffectInteger(int value)
+        public ObjectEffectInteger(int value,short actionId)
         {
             this.value = value;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (value < 0)
             {
-                throw new Exception("Forbidden value (" + value + ") on element value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element value.");
             }
 
             writer.WriteVarInt((int)value);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             value = (int)reader.ReadVarUhInt();
             if (value < 0)
             {
-                throw new Exception("Forbidden value (" + value + ") on element of ObjectEffectInteger.value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element of ObjectEffectInteger.value.");
             }
 
         }

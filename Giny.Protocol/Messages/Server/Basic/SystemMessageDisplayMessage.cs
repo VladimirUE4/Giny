@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -31,7 +30,7 @@ namespace Giny.Protocol.Messages
             writer.WriteBoolean((bool)hangUp);
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element msgId.");
             }
 
             writer.WriteVarShort((short)msgId);
@@ -49,7 +48,7 @@ namespace Giny.Protocol.Messages
             msgId = (short)reader.ReadVarUhShort();
             if (msgId < 0)
             {
-                throw new Exception("Forbidden value (" + msgId + ") on element of SystemMessageDisplayMessage.msgId.");
+                throw new System.Exception("Forbidden value (" + msgId + ") on element of SystemMessageDisplayMessage.msgId.");
             }
 
             uint _parametersLen = (uint)reader.ReadUShort();

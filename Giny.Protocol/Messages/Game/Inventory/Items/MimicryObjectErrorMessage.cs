@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,11 @@ namespace Giny.Protocol.Messages
         public MimicryObjectErrorMessage()
         {
         }
-        public MimicryObjectErrorMessage(bool preview)
+        public MimicryObjectErrorMessage(bool preview,byte reason,byte errorCode)
         {
             this.preview = preview;
+            this.reason = reason;
+            this.errorCode = errorCode;
         }
         public override void Serialize(IDataWriter writer)
         {

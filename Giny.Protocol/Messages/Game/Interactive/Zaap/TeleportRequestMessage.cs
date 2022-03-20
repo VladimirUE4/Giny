@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)destinationType);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
@@ -42,19 +41,19 @@ namespace Giny.Protocol.Messages
             sourceType = (byte)reader.ReadByte();
             if (sourceType < 0)
             {
-                throw new Exception("Forbidden value (" + sourceType + ") on element of TeleportRequestMessage.sourceType.");
+                throw new System.Exception("Forbidden value (" + sourceType + ") on element of TeleportRequestMessage.sourceType.");
             }
 
             destinationType = (byte)reader.ReadByte();
             if (destinationType < 0)
             {
-                throw new Exception("Forbidden value (" + destinationType + ") on element of TeleportRequestMessage.destinationType.");
+                throw new System.Exception("Forbidden value (" + destinationType + ") on element of TeleportRequestMessage.destinationType.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of TeleportRequestMessage.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of TeleportRequestMessage.mapId.");
             }
 
         }

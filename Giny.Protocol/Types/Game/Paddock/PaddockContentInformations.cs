@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -22,7 +21,7 @@ namespace Giny.Protocol.Types
         public PaddockContentInformations()
         {
         }
-        public PaddockContentInformations(double paddockId,short worldX,short worldY,double mapId,short subAreaId,bool abandonned,MountInformationsForPaddock[] mountsInformations)
+        public PaddockContentInformations(double paddockId,short worldX,short worldY,double mapId,short subAreaId,bool abandonned,MountInformationsForPaddock[] mountsInformations,short maxOutdoorMount,short maxItems)
         {
             this.paddockId = paddockId;
             this.worldX = worldX;
@@ -31,37 +30,39 @@ namespace Giny.Protocol.Types
             this.subAreaId = subAreaId;
             this.abandonned = abandonned;
             this.mountsInformations = mountsInformations;
+            this.maxOutdoorMount = maxOutdoorMount;
+            this.maxItems = maxItems;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element paddockId.");
             }
 
             writer.WriteDouble((double)paddockId);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -80,31 +81,31 @@ namespace Giny.Protocol.Types
             paddockId = (double)reader.ReadDouble();
             if (paddockId < 0 || paddockId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + paddockId + ") on element of PaddockContentInformations.paddockId.");
+                throw new System.Exception("Forbidden value (" + paddockId + ") on element of PaddockContentInformations.paddockId.");
             }
 
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of PaddockContentInformations.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of PaddockContentInformations.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of PaddockContentInformations.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of PaddockContentInformations.worldY.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of PaddockContentInformations.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of PaddockContentInformations.mapId.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PaddockContentInformations.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PaddockContentInformations.subAreaId.");
             }
 
             abandonned = (bool)reader.ReadBoolean();

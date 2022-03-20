@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element objectType.");
             }
 
             writer.WriteInt((int)objectType);
@@ -45,7 +44,7 @@ namespace Giny.Protocol.Messages
             objectType = (int)reader.ReadInt();
             if (objectType < 0)
             {
-                throw new Exception("Forbidden value (" + objectType + ") on element of ExchangeTypesItemsExchangerDescriptionForUserMessage.objectType.");
+                throw new System.Exception("Forbidden value (" + objectType + ") on element of ExchangeTypesItemsExchangerDescriptionForUserMessage.objectType.");
             }
 
             uint _itemTypeDescriptionsLen = (uint)reader.ReadUShort();

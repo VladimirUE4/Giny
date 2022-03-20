@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element fightId.");
             }
 
             writer.WriteVarShort((short)fightId);
             if (fighterToRemoveId < 0 || fighterToRemoveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fighterToRemoveId + ") on element fighterToRemoveId.");
+                throw new System.Exception("Forbidden value (" + fighterToRemoveId + ") on element fighterToRemoveId.");
             }
 
             writer.WriteVarLong((long)fighterToRemoveId);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of PrismFightAttackerRemoveMessage.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of PrismFightAttackerRemoveMessage.subAreaId.");
             }
 
             fightId = (short)reader.ReadVarUhShort();
             if (fightId < 0)
             {
-                throw new Exception("Forbidden value (" + fightId + ") on element of PrismFightAttackerRemoveMessage.fightId.");
+                throw new System.Exception("Forbidden value (" + fightId + ") on element of PrismFightAttackerRemoveMessage.fightId.");
             }
 
             fighterToRemoveId = (long)reader.ReadVarUhLong();
             if (fighterToRemoveId < 0 || fighterToRemoveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + fighterToRemoveId + ") on element of PrismFightAttackerRemoveMessage.fighterToRemoveId.");
+                throw new System.Exception("Forbidden value (" + fighterToRemoveId + ") on element of PrismFightAttackerRemoveMessage.fighterToRemoveId.");
             }
 
         }

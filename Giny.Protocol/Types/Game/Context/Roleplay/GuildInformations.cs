@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,9 +15,12 @@ namespace Giny.Protocol.Types
         public GuildInformations()
         {
         }
-        public GuildInformations(GuildEmblem guildEmblem)
+        public GuildInformations(GuildEmblem guildEmblem,int guildId,string guildName,byte guildLevel)
         {
             this.guildEmblem = guildEmblem;
+            this.guildId = guildId;
+            this.guildName = guildName;
+            this.guildLevel = guildLevel;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)waitTimeForPlacement);
             if (nbPositionForDefensors < 0)
             {
-                throw new Exception("Forbidden value (" + nbPositionForDefensors + ") on element nbPositionForDefensors.");
+                throw new System.Exception("Forbidden value (" + nbPositionForDefensors + ") on element nbPositionForDefensors.");
             }
 
             writer.WriteByte((byte)nbPositionForDefensors);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Types
             nbPositionForDefensors = (byte)reader.ReadByte();
             if (nbPositionForDefensors < 0)
             {
-                throw new Exception("Forbidden value (" + nbPositionForDefensors + ") on element of ProtectedEntityWaitingForHelpInfo.nbPositionForDefensors.");
+                throw new System.Exception("Forbidden value (" + nbPositionForDefensors + ") on element of ProtectedEntityWaitingForHelpInfo.nbPositionForDefensors.");
             }
 
         }

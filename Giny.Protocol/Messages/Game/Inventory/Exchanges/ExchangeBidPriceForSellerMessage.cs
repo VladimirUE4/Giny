@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -19,10 +18,12 @@ namespace Giny.Protocol.Messages
         public ExchangeBidPriceForSellerMessage()
         {
         }
-        public ExchangeBidPriceForSellerMessage(bool allIdentical,long[] minimalPrices)
+        public ExchangeBidPriceForSellerMessage(bool allIdentical,long[] minimalPrices,short genericId,long averagePrice)
         {
             this.allIdentical = allIdentical;
             this.minimalPrices = minimalPrices;
+            this.genericId = genericId;
+            this.averagePrice = averagePrice;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -33,7 +34,7 @@ namespace Giny.Protocol.Messages
             {
                 if (minimalPrices[_i2] < 0 || minimalPrices[_i2] > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + minimalPrices[_i2] + ") on element 2 (starting at 1) of minimalPrices.");
+                    throw new System.Exception("Forbidden value (" + minimalPrices[_i2] + ") on element 2 (starting at 1) of minimalPrices.");
                 }
 
                 writer.WriteVarLong((long)minimalPrices[_i2]);
@@ -52,7 +53,7 @@ namespace Giny.Protocol.Messages
                 _val2 = (double)reader.ReadVarUhLong();
                 if (_val2 < 0 || _val2 > 9.00719925474099E+15)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of minimalPrices.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of minimalPrices.");
                 }
 
                 minimalPrices[_i2] = (long)_val2;

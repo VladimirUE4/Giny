@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyNameSetErrorMessage()
         {
         }
-        public PartyNameSetErrorMessage(byte result)
+        public PartyNameSetErrorMessage(byte result,int partyId)
         {
             this.result = result;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -33,7 +33,7 @@ namespace Giny.Protocol.Messages
             result = (byte)reader.ReadByte();
             if (result < 0)
             {
-                throw new Exception("Forbidden value (" + result + ") on element of PartyNameSetExceptionMessage.result.");
+                throw new System.Exception("Forbidden value (" + result + ") on element of PartyNameSetSystem.ExceptionMessage.result.");
             }
 
         }

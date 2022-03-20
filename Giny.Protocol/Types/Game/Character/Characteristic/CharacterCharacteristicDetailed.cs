@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,13 +19,14 @@ namespace Giny.Protocol.Types
         public CharacterCharacteristicDetailed()
         {
         }
-        public CharacterCharacteristicDetailed(short @base, short additional,short objectsAndMountBonus,short alignGiftBonus,short contextModif)
+        public CharacterCharacteristicDetailed(short @base,short additional,short objectsAndMountBonus,short alignGiftBonus,short contextModif,short characteristicId)
         {
             this.@base = @base;
             this.additional = additional;
             this.objectsAndMountBonus = objectsAndMountBonus;
             this.alignGiftBonus = alignGiftBonus;
             this.contextModif = contextModif;
+            this.characteristicId = characteristicId;
         }
         public override void Serialize(IDataWriter writer)
         {

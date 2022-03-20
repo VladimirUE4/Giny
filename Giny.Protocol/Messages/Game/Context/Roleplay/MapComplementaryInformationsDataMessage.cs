@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
         {
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element mapId.");
             }
 
             writer.WriteDouble((double)mapId);
@@ -110,13 +109,13 @@ namespace Giny.Protocol.Messages
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of MapComplementaryInformationsDataMessage.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of MapComplementaryInformationsDataMessage.subAreaId.");
             }
 
             mapId = (double)reader.ReadDouble();
             if (mapId < 0 || mapId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + mapId + ") on element of MapComplementaryInformationsDataMessage.mapId.");
+                throw new System.Exception("Forbidden value (" + mapId + ") on element of MapComplementaryInformationsDataMessage.mapId.");
             }
 
             uint _housesLen = (uint)reader.ReadUShort();

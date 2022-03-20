@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,12 @@ namespace Giny.Protocol.Messages
         public MapRunningFightDetailsExtendedMessage()
         {
         }
-        public MapRunningFightDetailsExtendedMessage(NamedPartyTeam[] namedPartyTeams)
+        public MapRunningFightDetailsExtendedMessage(NamedPartyTeam[] namedPartyTeams,short fightId,GameFightFighterLightInformations[] attackers,GameFightFighterLightInformations[] defenders)
         {
             this.namedPartyTeams = namedPartyTeams;
+            this.fightId = fightId;
+            this.attackers = attackers;
+            this.defenders = defenders;
         }
         public override void Serialize(IDataWriter writer)
         {

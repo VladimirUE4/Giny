@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public ServerSessionConstantLong()
         {
         }
-        public ServerSessionConstantLong(double value)
+        public ServerSessionConstantLong(double value,short id)
         {
             this.value = value;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (value < -9.00719925474099E+15 || value > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + value + ") on element value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element value.");
             }
 
             writer.WriteDouble((double)value);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             value = (double)reader.ReadDouble();
             if (value < -9.00719925474099E+15 || value > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + value + ") on element of ServerSessionConstantLong.value.");
+                throw new System.Exception("Forbidden value (" + value + ") on element of ServerSessionConstantLong.value.");
             }
 
         }

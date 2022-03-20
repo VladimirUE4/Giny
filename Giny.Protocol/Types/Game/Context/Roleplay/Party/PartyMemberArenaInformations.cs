@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,34 @@ namespace Giny.Protocol.Types
         public PartyMemberArenaInformations()
         {
         }
-        public PartyMemberArenaInformations(short rank)
+        public PartyMemberArenaInformations(short rank,long id,string name,short level,EntityLook entityLook,byte breed,bool sex,int lifePoints,int maxLifePoints,short prospecting,byte regenRate,short initiative,byte alignmentSide,short worldX,short worldY,double mapId,short subAreaId,PlayerStatus status,PartyEntityBaseInformation[] entities)
         {
             this.rank = rank;
+            this.id = id;
+            this.name = name;
+            this.level = level;
+            this.entityLook = entityLook;
+            this.breed = breed;
+            this.sex = sex;
+            this.lifePoints = lifePoints;
+            this.maxLifePoints = maxLifePoints;
+            this.prospecting = prospecting;
+            this.regenRate = regenRate;
+            this.initiative = initiative;
+            this.alignmentSide = alignmentSide;
+            this.worldX = worldX;
+            this.worldY = worldY;
+            this.mapId = mapId;
+            this.subAreaId = subAreaId;
+            this.status = status;
+            this.entities = entities;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
             }
 
             writer.WriteVarShort((short)rank);
@@ -36,7 +53,7 @@ namespace Giny.Protocol.Types
             rank = (short)reader.ReadVarUhShort();
             if (rank < 0 || rank > 20000)
             {
-                throw new Exception("Forbidden value (" + rank + ") on element of PartyMemberArenaInformations.rank.");
+                throw new System.Exception("Forbidden value (" + rank + ") on element of PartyMemberArenaInformations.rank.");
             }
 
         }

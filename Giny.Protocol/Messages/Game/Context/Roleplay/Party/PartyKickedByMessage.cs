@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public PartyKickedByMessage()
         {
         }
-        public PartyKickedByMessage(long kickerId)
+        public PartyKickedByMessage(long kickerId,int partyId)
         {
             this.kickerId = kickerId;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (kickerId < 0 || kickerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kickerId + ") on element kickerId.");
+                throw new System.Exception("Forbidden value (" + kickerId + ") on element kickerId.");
             }
 
             writer.WriteVarLong((long)kickerId);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             kickerId = (long)reader.ReadVarUhLong();
             if (kickerId < 0 || kickerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kickerId + ") on element of PartyKickedByMessage.kickerId.");
+                throw new System.Exception("Forbidden value (" + kickerId + ") on element of PartyKickedByMessage.kickerId.");
             }
 
         }

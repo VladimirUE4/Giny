@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -36,13 +35,13 @@ namespace Giny.Protocol.Types
         {
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element room.");
             }
 
             writer.WriteByte((byte)room);
             if (element < 0)
             {
-                throw new Exception("Forbidden value (" + element + ") on element element.");
+                throw new System.Exception("Forbidden value (" + element + ") on element element.");
             }
 
             writer.WriteInt((int)element);
@@ -54,7 +53,7 @@ namespace Giny.Protocol.Types
 
             if (map < 0 || map > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + map + ") on element map.");
+                throw new System.Exception("Forbidden value (" + map + ") on element map.");
             }
 
             writer.WriteDouble((double)map);
@@ -74,13 +73,13 @@ namespace Giny.Protocol.Types
             room = (byte)reader.ReadByte();
             if (room < 0)
             {
-                throw new Exception("Forbidden value (" + room + ") on element of BreachBranch.room.");
+                throw new System.Exception("Forbidden value (" + room + ") on element of BreachBranch.room.");
             }
 
             element = (int)reader.ReadInt();
             if (element < 0)
             {
-                throw new Exception("Forbidden value (" + element + ") on element of BreachBranch.element.");
+                throw new System.Exception("Forbidden value (" + element + ") on element of BreachBranch.element.");
             }
 
             uint _bossesLen = (uint)reader.ReadUShort();
@@ -94,7 +93,7 @@ namespace Giny.Protocol.Types
             map = (double)reader.ReadDouble();
             if (map < 0 || map > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + map + ") on element of BreachBranch.map.");
+                throw new System.Exception("Forbidden value (" + map + ") on element of BreachBranch.map.");
             }
 
             score = (short)reader.ReadShort();

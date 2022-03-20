@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public CharacterFirstSelectionMessage()
         {
         }
-        public CharacterFirstSelectionMessage(bool doTutorial)
+        public CharacterFirstSelectionMessage(bool doTutorial,long id)
         {
             this.doTutorial = doTutorial;
+            this.id = id;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public ExchangeLeaveMessage()
         {
         }
-        public ExchangeLeaveMessage(bool success)
+        public ExchangeLeaveMessage(bool success,byte dialogType)
         {
             this.success = success;
+            this.dialogType = dialogType;
         }
         public override void Serialize(IDataWriter writer)
         {

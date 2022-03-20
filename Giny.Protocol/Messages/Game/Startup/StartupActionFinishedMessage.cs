@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)_box0);
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element actionId.");
             }
 
             writer.WriteInt((int)actionId);
@@ -47,7 +46,7 @@ namespace Giny.Protocol.Messages
             actionId = (int)reader.ReadInt();
             if (actionId < 0)
             {
-                throw new Exception("Forbidden value (" + actionId + ") on element of StartupActionFinishedMessage.actionId.");
+                throw new System.Exception("Forbidden value (" + actionId + ") on element of StartupActionFinishedMessage.actionId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (cinematicId < 0)
             {
-                throw new Exception("Forbidden value (" + cinematicId + ") on element cinematicId.");
+                throw new System.Exception("Forbidden value (" + cinematicId + ") on element cinematicId.");
             }
 
             writer.WriteVarShort((short)cinematicId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             cinematicId = (short)reader.ReadVarUhShort();
             if (cinematicId < 0)
             {
-                throw new Exception("Forbidden value (" + cinematicId + ") on element of CinematicMessage.cinematicId.");
+                throw new System.Exception("Forbidden value (" + cinematicId + ") on element of CinematicMessage.cinematicId.");
             }
 
         }

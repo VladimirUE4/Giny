@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,17 @@ namespace Giny.Protocol.Types
         public ShortcutSmiley()
         {
         }
-        public ShortcutSmiley(short smileyId)
+        public ShortcutSmiley(short smileyId,byte slot)
         {
             this.smileyId = smileyId;
+            this.slot = slot;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element smileyId.");
             }
 
             writer.WriteVarShort((short)smileyId);
@@ -36,7 +36,7 @@ namespace Giny.Protocol.Types
             smileyId = (short)reader.ReadVarUhShort();
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element of ShortcutSmiley.smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element of ShortcutSmiley.smileyId.");
             }
 
         }

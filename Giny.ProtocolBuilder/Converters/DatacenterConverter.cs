@@ -38,9 +38,9 @@ namespace Giny.ProtocolBuilder.Converters
         {
             return "IIndexedData";
         }
-        protected override AS3Method[] SelectMethodsToWrite()
+        protected override List<AS3Method> SelectMethodsToWrite()
         {
-            return new AS3Method[0];
+            return new List<AS3Method>();
         }
         public string GetD2OModule()
         {
@@ -140,10 +140,14 @@ namespace Giny.ProtocolBuilder.Converters
             }
             return sb.ToString();
         }
-        protected override AS3Field[] SelectFieldsToWrite()
+        protected override List<AS3Field> SelectFieldsToWrite()
         {
-            return File.GetFields(x => (AS3AccessorsEnum.@public).HasFlag(x.Accessor) && x.Modifiers == AS3ModifiersEnum.None);
+            return File.GetFields(x => (AS3AccessorsEnum.@public).HasFlag(x.Accessor) && x.Modifiers == AS3ModifiersEnum.None).ToList();
         }
 
+        public override void PostPrepare()
+        {
+            
+        }
     }
 }

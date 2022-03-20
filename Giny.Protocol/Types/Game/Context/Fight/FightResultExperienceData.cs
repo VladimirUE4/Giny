@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -60,43 +59,43 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element experience.");
             }
 
             writer.WriteVarLong((long)experience);
             if (experienceLevelFloor < 0 || experienceLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceLevelFloor + ") on element experienceLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceLevelFloor + ") on element experienceLevelFloor.");
             }
 
             writer.WriteVarLong((long)experienceLevelFloor);
             if (experienceNextLevelFloor < 0 || experienceNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceNextLevelFloor + ") on element experienceNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceNextLevelFloor + ") on element experienceNextLevelFloor.");
             }
 
             writer.WriteVarLong((long)experienceNextLevelFloor);
             if (experienceFightDelta < 0 || experienceFightDelta > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceFightDelta + ") on element experienceFightDelta.");
+                throw new System.Exception("Forbidden value (" + experienceFightDelta + ") on element experienceFightDelta.");
             }
 
             writer.WriteVarLong((long)experienceFightDelta);
             if (experienceForGuild < 0 || experienceForGuild > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForGuild + ") on element experienceForGuild.");
+                throw new System.Exception("Forbidden value (" + experienceForGuild + ") on element experienceForGuild.");
             }
 
             writer.WriteVarLong((long)experienceForGuild);
             if (experienceForMount < 0 || experienceForMount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForMount + ") on element experienceForMount.");
+                throw new System.Exception("Forbidden value (" + experienceForMount + ") on element experienceForMount.");
             }
 
             writer.WriteVarLong((long)experienceForMount);
             if (rerollExperienceMul < 0)
             {
-                throw new Exception("Forbidden value (" + rerollExperienceMul + ") on element rerollExperienceMul.");
+                throw new System.Exception("Forbidden value (" + rerollExperienceMul + ") on element rerollExperienceMul.");
             }
 
             writer.WriteByte((byte)rerollExperienceMul);
@@ -115,43 +114,43 @@ namespace Giny.Protocol.Types
             experience = (long)reader.ReadVarUhLong();
             if (experience < 0 || experience > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experience + ") on element of FightResultExperienceData.experience.");
+                throw new System.Exception("Forbidden value (" + experience + ") on element of FightResultExperienceData.experience.");
             }
 
             experienceLevelFloor = (long)reader.ReadVarUhLong();
             if (experienceLevelFloor < 0 || experienceLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceLevelFloor + ") on element of FightResultExperienceData.experienceLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceLevelFloor + ") on element of FightResultExperienceData.experienceLevelFloor.");
             }
 
             experienceNextLevelFloor = (long)reader.ReadVarUhLong();
             if (experienceNextLevelFloor < 0 || experienceNextLevelFloor > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceNextLevelFloor + ") on element of FightResultExperienceData.experienceNextLevelFloor.");
+                throw new System.Exception("Forbidden value (" + experienceNextLevelFloor + ") on element of FightResultExperienceData.experienceNextLevelFloor.");
             }
 
             experienceFightDelta = (long)reader.ReadVarUhLong();
             if (experienceFightDelta < 0 || experienceFightDelta > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceFightDelta + ") on element of FightResultExperienceData.experienceFightDelta.");
+                throw new System.Exception("Forbidden value (" + experienceFightDelta + ") on element of FightResultExperienceData.experienceFightDelta.");
             }
 
             experienceForGuild = (long)reader.ReadVarUhLong();
             if (experienceForGuild < 0 || experienceForGuild > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForGuild + ") on element of FightResultExperienceData.experienceForGuild.");
+                throw new System.Exception("Forbidden value (" + experienceForGuild + ") on element of FightResultExperienceData.experienceForGuild.");
             }
 
             experienceForMount = (long)reader.ReadVarUhLong();
             if (experienceForMount < 0 || experienceForMount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + experienceForMount + ") on element of FightResultExperienceData.experienceForMount.");
+                throw new System.Exception("Forbidden value (" + experienceForMount + ") on element of FightResultExperienceData.experienceForMount.");
             }
 
             rerollExperienceMul = (byte)reader.ReadByte();
             if (rerollExperienceMul < 0)
             {
-                throw new Exception("Forbidden value (" + rerollExperienceMul + ") on element of FightResultExperienceData.rerollExperienceMul.");
+                throw new System.Exception("Forbidden value (" + rerollExperienceMul + ") on element of FightResultExperienceData.rerollExperienceMul.");
             }
 
         }

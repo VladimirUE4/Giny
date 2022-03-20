@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -33,7 +32,7 @@ namespace Giny.Protocol.Types
             base.Serialize(writer);
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element objectGID.");
             }
 
             writer.WriteVarShort((short)objectGID);
@@ -46,19 +45,19 @@ namespace Giny.Protocol.Types
 
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element objectUID.");
             }
 
             writer.WriteVarInt((int)objectUID);
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element quantity.");
             }
 
             writer.WriteVarInt((int)quantity);
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
             }
 
             writer.WriteVarLong((long)objectPrice);
@@ -71,7 +70,7 @@ namespace Giny.Protocol.Types
             objectGID = (short)reader.ReadVarUhShort();
             if (objectGID < 0)
             {
-                throw new Exception("Forbidden value (" + objectGID + ") on element of ObjectItemToSell.objectGID.");
+                throw new System.Exception("Forbidden value (" + objectGID + ") on element of ObjectItemToSell.objectGID.");
             }
 
             uint _effectsLen = (uint)reader.ReadUShort();
@@ -86,19 +85,19 @@ namespace Giny.Protocol.Types
             objectUID = (int)reader.ReadVarUhInt();
             if (objectUID < 0)
             {
-                throw new Exception("Forbidden value (" + objectUID + ") on element of ObjectItemToSell.objectUID.");
+                throw new System.Exception("Forbidden value (" + objectUID + ") on element of ObjectItemToSell.objectUID.");
             }
 
             quantity = (int)reader.ReadVarUhInt();
             if (quantity < 0)
             {
-                throw new Exception("Forbidden value (" + quantity + ") on element of ObjectItemToSell.quantity.");
+                throw new System.Exception("Forbidden value (" + quantity + ") on element of ObjectItemToSell.quantity.");
             }
 
             objectPrice = (long)reader.ReadVarUhLong();
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSell.objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSell.objectPrice.");
             }
 
         }

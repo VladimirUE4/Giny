@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -42,14 +41,14 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element instanceId.");
             }
 
             writer.WriteInt((int)instanceId);
             ownerTag.Serialize(writer);
             if (price < -9.00719925474099E+15 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element price.");
             }
 
             writer.WriteVarLong((long)price);
@@ -64,7 +63,7 @@ namespace Giny.Protocol.Types
             instanceId = (int)reader.ReadInt();
             if (instanceId < 0)
             {
-                throw new Exception("Forbidden value (" + instanceId + ") on element of HouseInstanceInformations.instanceId.");
+                throw new System.Exception("Forbidden value (" + instanceId + ") on element of HouseInstanceInformations.instanceId.");
             }
 
             ownerTag = new AccountTagInformation();
@@ -72,7 +71,7 @@ namespace Giny.Protocol.Types
             price = (long)reader.ReadVarLong();
             if (price < -9.00719925474099E+15 || price > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + price + ") on element of HouseInstanceInformations.price.");
+                throw new System.Exception("Forbidden value (" + price + ") on element of HouseInstanceInformations.price.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (kickedId < 0)
             {
-                throw new Exception("Forbidden value (" + kickedId + ") on element kickedId.");
+                throw new System.Exception("Forbidden value (" + kickedId + ") on element kickedId.");
             }
 
             writer.WriteVarInt((int)kickedId);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             kickedId = (int)reader.ReadVarUhInt();
             if (kickedId < 0)
             {
-                throw new Exception("Forbidden value (" + kickedId + ") on element of AllianceKickRequestMessage.kickedId.");
+                throw new System.Exception("Forbidden value (" + kickedId + ") on element of AllianceKickRequestMessage.kickedId.");
             }
 
         }

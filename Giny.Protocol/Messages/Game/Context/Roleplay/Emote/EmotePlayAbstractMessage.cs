@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (emoteId < 0 || emoteId > 65535)
             {
-                throw new Exception("Forbidden value (" + emoteId + ") on element emoteId.");
+                throw new System.Exception("Forbidden value (" + emoteId + ") on element emoteId.");
             }
 
             writer.WriteShort((short)emoteId);
             if (emoteStartTime < -9.00719925474099E+15 || emoteStartTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + emoteStartTime + ") on element emoteStartTime.");
+                throw new System.Exception("Forbidden value (" + emoteStartTime + ") on element emoteStartTime.");
             }
 
             writer.WriteDouble((double)emoteStartTime);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             emoteId = (short)reader.ReadUShort();
             if (emoteId < 0 || emoteId > 65535)
             {
-                throw new Exception("Forbidden value (" + emoteId + ") on element of EmotePlayAbstractMessage.emoteId.");
+                throw new System.Exception("Forbidden value (" + emoteId + ") on element of EmotePlayAbstractMessage.emoteId.");
             }
 
             emoteStartTime = (double)reader.ReadDouble();
             if (emoteStartTime < -9.00719925474099E+15 || emoteStartTime > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + emoteStartTime + ") on element of EmotePlayAbstractMessage.emoteStartTime.");
+                throw new System.Exception("Forbidden value (" + emoteStartTime + ") on element of EmotePlayAbstractMessage.emoteStartTime.");
             }
 
         }

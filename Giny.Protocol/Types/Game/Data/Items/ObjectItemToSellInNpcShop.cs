@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -17,17 +16,19 @@ namespace Giny.Protocol.Types
         public ObjectItemToSellInNpcShop()
         {
         }
-        public ObjectItemToSellInNpcShop(long objectPrice,string buyCriterion)
+        public ObjectItemToSellInNpcShop(long objectPrice,string buyCriterion,short objectGID,ObjectEffect[] effects)
         {
             this.objectPrice = objectPrice;
             this.buyCriterion = buyCriterion;
+            this.objectGID = objectGID;
+            this.effects = effects;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element objectPrice.");
             }
 
             writer.WriteVarLong((long)objectPrice);
@@ -39,7 +40,7 @@ namespace Giny.Protocol.Types
             objectPrice = (long)reader.ReadVarUhLong();
             if (objectPrice < 0 || objectPrice > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSellInNpcShop.objectPrice.");
+                throw new System.Exception("Forbidden value (" + objectPrice + ") on element of ObjectItemToSellInNpcShop.objectPrice.");
             }
 
             buyCriterion = (string)reader.ReadUTF();

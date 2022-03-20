@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,13 +27,13 @@ namespace Giny.Protocol.Messages
         {
             if (taxCollectorId < 0 || taxCollectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + taxCollectorId + ") on element taxCollectorId.");
+                throw new System.Exception("Forbidden value (" + taxCollectorId + ") on element taxCollectorId.");
             }
 
             writer.WriteDouble((double)taxCollectorId);
             if (characterId < 0 || characterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + characterId + ") on element characterId.");
+                throw new System.Exception("Forbidden value (" + characterId + ") on element characterId.");
             }
 
             writer.WriteVarLong((long)characterId);
@@ -44,13 +43,13 @@ namespace Giny.Protocol.Messages
             taxCollectorId = (double)reader.ReadDouble();
             if (taxCollectorId < 0 || taxCollectorId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + taxCollectorId + ") on element of GuildFightLeaveRequestMessage.taxCollectorId.");
+                throw new System.Exception("Forbidden value (" + taxCollectorId + ") on element of GuildFightLeaveRequestMessage.taxCollectorId.");
             }
 
             characterId = (long)reader.ReadVarUhLong();
             if (characterId < 0 || characterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + characterId + ") on element of GuildFightLeaveRequestMessage.characterId.");
+                throw new System.Exception("Forbidden value (" + characterId + ") on element of GuildFightLeaveRequestMessage.characterId.");
             }
 
         }

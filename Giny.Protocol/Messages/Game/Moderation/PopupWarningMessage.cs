@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,7 +29,7 @@ namespace Giny.Protocol.Messages
         {
             if (lockDuration < 0 || lockDuration > 255)
             {
-                throw new Exception("Forbidden value (" + lockDuration + ") on element lockDuration.");
+                throw new System.Exception("Forbidden value (" + lockDuration + ") on element lockDuration.");
             }
 
             writer.WriteByte((byte)lockDuration);
@@ -42,7 +41,7 @@ namespace Giny.Protocol.Messages
             lockDuration = (byte)reader.ReadSByte();
             if (lockDuration < 0 || lockDuration > 255)
             {
-                throw new Exception("Forbidden value (" + lockDuration + ") on element of PopupWarningMessage.lockDuration.");
+                throw new System.Exception("Forbidden value (" + lockDuration + ") on element of PopupWarningMessage.lockDuration.");
             }
 
             author = (string)reader.ReadUTF();

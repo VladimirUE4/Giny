@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Types
             {
                 if (positionsForChallengers[_i1] < 0 || positionsForChallengers[_i1] > 559)
                 {
-                    throw new Exception("Forbidden value (" + positionsForChallengers[_i1] + ") on element 1 (starting at 1) of positionsForChallengers.");
+                    throw new System.Exception("Forbidden value (" + positionsForChallengers[_i1] + ") on element 1 (starting at 1) of positionsForChallengers.");
                 }
 
                 writer.WriteVarShort((short)positionsForChallengers[_i1]);
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Types
             {
                 if (positionsForDefenders[_i2] < 0 || positionsForDefenders[_i2] > 559)
                 {
-                    throw new Exception("Forbidden value (" + positionsForDefenders[_i2] + ") on element 2 (starting at 1) of positionsForDefenders.");
+                    throw new System.Exception("Forbidden value (" + positionsForDefenders[_i2] + ") on element 2 (starting at 1) of positionsForDefenders.");
                 }
 
                 writer.WriteVarShort((short)positionsForDefenders[_i2]);
@@ -58,7 +57,7 @@ namespace Giny.Protocol.Types
                 _val1 = (uint)reader.ReadVarUhShort();
                 if (_val1 < 0 || _val1 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val1 + ") on elements of positionsForChallengers.");
+                    throw new System.Exception("Forbidden value (" + _val1 + ") on elements of positionsForChallengers.");
                 }
 
                 positionsForChallengers[_i1] = (short)_val1;
@@ -71,7 +70,7 @@ namespace Giny.Protocol.Types
                 _val2 = (uint)reader.ReadVarUhShort();
                 if (_val2 < 0 || _val2 > 559)
                 {
-                    throw new Exception("Forbidden value (" + _val2 + ") on elements of positionsForDefenders.");
+                    throw new System.Exception("Forbidden value (" + _val2 + ") on elements of positionsForDefenders.");
                 }
 
                 positionsForDefenders[_i2] = (short)_val2;

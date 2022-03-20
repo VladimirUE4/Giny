@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,13 +19,15 @@ namespace Giny.Protocol.Types
         public FriendInformations()
         {
         }
-        public FriendInformations(byte playerState,short lastConnection,int achievementPoints,short leagueId,int ladderPosition)
+        public FriendInformations(byte playerState,short lastConnection,int achievementPoints,short leagueId,int ladderPosition,int accountId,AccountTagInformation accountTag)
         {
             this.playerState = playerState;
             this.lastConnection = lastConnection;
             this.achievementPoints = achievementPoints;
             this.leagueId = leagueId;
             this.ladderPosition = ladderPosition;
+            this.accountId = accountId;
+            this.accountTag = accountTag;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -34,7 +35,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)playerState);
             if (lastConnection < 0)
             {
-                throw new Exception("Forbidden value (" + lastConnection + ") on element lastConnection.");
+                throw new System.Exception("Forbidden value (" + lastConnection + ") on element lastConnection.");
             }
 
             writer.WriteVarShort((short)lastConnection);
@@ -48,13 +49,13 @@ namespace Giny.Protocol.Types
             playerState = (byte)reader.ReadByte();
             if (playerState < 0)
             {
-                throw new Exception("Forbidden value (" + playerState + ") on element of FriendInformations.playerState.");
+                throw new System.Exception("Forbidden value (" + playerState + ") on element of FriendInformations.playerState.");
             }
 
             lastConnection = (short)reader.ReadVarUhShort();
             if (lastConnection < 0)
             {
-                throw new Exception("Forbidden value (" + lastConnection + ") on element of FriendInformations.lastConnection.");
+                throw new System.Exception("Forbidden value (" + lastConnection + ") on element of FriendInformations.lastConnection.");
             }
 
             achievementPoints = (int)reader.ReadInt();

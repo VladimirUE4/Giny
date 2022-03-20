@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             origin = (byte)reader.ReadByte();
             if (origin < 0)
             {
-                throw new Exception("Forbidden value (" + origin + ") on element of ObjectAddedMessage.origin.");
+                throw new System.Exception("Forbidden value (" + origin + ") on element of ObjectAddedMessage.origin.");
             }
 
         }

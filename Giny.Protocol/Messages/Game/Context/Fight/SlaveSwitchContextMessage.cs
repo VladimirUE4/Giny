@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -36,19 +35,19 @@ namespace Giny.Protocol.Messages
         {
             if (masterId < -9.00719925474099E+15 || masterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + masterId + ") on element masterId.");
+                throw new System.Exception("Forbidden value (" + masterId + ") on element masterId.");
             }
 
             writer.WriteDouble((double)masterId);
             if (slaveId < -9.00719925474099E+15 || slaveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + slaveId + ") on element slaveId.");
+                throw new System.Exception("Forbidden value (" + slaveId + ") on element slaveId.");
             }
 
             writer.WriteDouble((double)slaveId);
             if (slaveTurn < 0)
             {
-                throw new Exception("Forbidden value (" + slaveTurn + ") on element slaveTurn.");
+                throw new System.Exception("Forbidden value (" + slaveTurn + ") on element slaveTurn.");
             }
 
             writer.WriteVarShort((short)slaveTurn);
@@ -75,19 +74,19 @@ namespace Giny.Protocol.Messages
             masterId = (double)reader.ReadDouble();
             if (masterId < -9.00719925474099E+15 || masterId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + masterId + ") on element of SlaveSwitchContextMessage.masterId.");
+                throw new System.Exception("Forbidden value (" + masterId + ") on element of SlaveSwitchContextMessage.masterId.");
             }
 
             slaveId = (double)reader.ReadDouble();
             if (slaveId < -9.00719925474099E+15 || slaveId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + slaveId + ") on element of SlaveSwitchContextMessage.slaveId.");
+                throw new System.Exception("Forbidden value (" + slaveId + ") on element of SlaveSwitchContextMessage.slaveId.");
             }
 
             slaveTurn = (short)reader.ReadVarUhShort();
             if (slaveTurn < 0)
             {
-                throw new Exception("Forbidden value (" + slaveTurn + ") on element of SlaveSwitchContextMessage.slaveTurn.");
+                throw new System.Exception("Forbidden value (" + slaveTurn + ") on element of SlaveSwitchContextMessage.slaveTurn.");
             }
 
             uint _slaveSpellsLen = (uint)reader.ReadUShort();

@@ -52,7 +52,7 @@ namespace Giny.AS3
             get;
             private set;
         }
-        public AS3Field[] Fields
+        public List<AS3Field> Fields
         {
             get;
             private set;
@@ -125,9 +125,20 @@ namespace Giny.AS3
             return methods.ToArray();
         }
 
-        public AS3Field[] GetFields(Predicate<AS3Field> predicate)
+        public void RenameField(string oldName, string newName)
         {
-            return Array.FindAll(Fields, predicate);
+            var field = Fields.FirstOrDefault(x => x.Name == oldName);
+
+            if (field != null)
+            {
+                field.Variable.Name = newName;
+            }
+
+        }
+
+        public IEnumerable<AS3Field> GetFields(Func<AS3Field, bool> predicate)
+        {
+            return Fields.Where(predicate);
         }
         public AS3Field GetField(string name)
         {
@@ -145,7 +156,7 @@ namespace Giny.AS3
         {
             return Array.FindAll(Methods, predicate);
         }
-        private AS3Field[] InitFields()
+        private List<AS3Field> InitFields()
         {
             List<AS3Field> fields = new List<AS3Field>();
 
@@ -157,7 +168,7 @@ namespace Giny.AS3
                 }
             }
 
-            return fields.ToArray();
+            return fields;
         }
         private AS3AccessorsEnum InitClassAccessor()
         {
@@ -258,12 +269,12 @@ namespace Giny.AS3
         public AS3Method CreateConstructor(AS3AccessorsEnum accessor)
         {
 
-            var fields = GetFields(x => x.Accessor == accessor && x.Modifiers == AS3ModifiersEnum.None);
+            var fields = GetFields(x => x.Accessor == accessor && x.Modifiers == AS3ModifiersEnum.None).ToArray();
 
             AS3Variable[] parameters = new AS3Variable[fields.Length];
             BaseExpression[] expressions = new BaseExpression[fields.Length];
 
-            for (int i = 0; i < fields.Length; i++)
+            for (int i = 0; i < fields.Count(); i++)
             {
                 parameters[i] = fields[i].Variable;
                 expressions[i] = new AssignationExpression("this." + fields[i].Name, new VariableNameExpression(fields[i].Name));
@@ -295,7 +306,7 @@ namespace Giny.AS3
                 stringBuilder.AppendLine("-" + string.Join(Environment.NewLine + "-", Imports));
 
             stringBuilder.AppendLine("Methods: " + Methods.Length);
-            stringBuilder.AppendLine("Fields: " + Fields.Length);
+            stringBuilder.AppendLine("Fields: " + Fields.Count);
             return stringBuilder.ToString();
 
         }

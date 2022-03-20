@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,21 @@ namespace Giny.Protocol.Types
         public ObjectItemToSellInBid()
         {
         }
-        public ObjectItemToSellInBid(int unsoldDelay)
+        public ObjectItemToSellInBid(int unsoldDelay,short objectGID,ObjectEffect[] effects,int objectUID,int quantity,long objectPrice)
         {
             this.unsoldDelay = unsoldDelay;
+            this.objectGID = objectGID;
+            this.effects = effects;
+            this.objectUID = objectUID;
+            this.quantity = quantity;
+            this.objectPrice = objectPrice;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (unsoldDelay < 0)
             {
-                throw new Exception("Forbidden value (" + unsoldDelay + ") on element unsoldDelay.");
+                throw new System.Exception("Forbidden value (" + unsoldDelay + ") on element unsoldDelay.");
             }
 
             writer.WriteInt((int)unsoldDelay);
@@ -36,7 +40,7 @@ namespace Giny.Protocol.Types
             unsoldDelay = (int)reader.ReadInt();
             if (unsoldDelay < 0)
             {
-                throw new Exception("Forbidden value (" + unsoldDelay + ") on element of ObjectItemToSellInBid.unsoldDelay.");
+                throw new System.Exception("Forbidden value (" + unsoldDelay + ") on element of ObjectItemToSellInBid.unsoldDelay.");
             }
 
         }

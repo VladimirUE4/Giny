@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,17 @@ namespace Giny.Protocol.Messages
         public ExchangePlayerRequestMessage()
         {
         }
-        public ExchangePlayerRequestMessage(long target)
+        public ExchangePlayerRequestMessage(long target,byte exchangeType)
         {
             this.target = target;
+            this.exchangeType = exchangeType;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (target < 0 || target > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + target + ") on element target.");
+                throw new System.Exception("Forbidden value (" + target + ") on element target.");
             }
 
             writer.WriteVarLong((long)target);
@@ -38,7 +38,7 @@ namespace Giny.Protocol.Messages
             target = (long)reader.ReadVarUhLong();
             if (target < 0 || target > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + target + ") on element of ExchangePlayerRequestMessage.target.");
+                throw new System.Exception("Forbidden value (" + target + ") on element of ExchangePlayerRequestMessage.target.");
             }
 
         }

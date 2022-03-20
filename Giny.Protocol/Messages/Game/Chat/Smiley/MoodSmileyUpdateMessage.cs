@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -30,19 +29,19 @@ namespace Giny.Protocol.Messages
         {
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteInt((int)accountId);
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarLong((long)playerId);
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element smileyId.");
             }
 
             writer.WriteVarShort((short)smileyId);
@@ -52,19 +51,19 @@ namespace Giny.Protocol.Messages
             accountId = (int)reader.ReadInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of MoodSmileyUpdateMessage.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of MoodSmileyUpdateMessage.accountId.");
             }
 
             playerId = (long)reader.ReadVarUhLong();
             if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of MoodSmileyUpdateMessage.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of MoodSmileyUpdateMessage.playerId.");
             }
 
             smileyId = (short)reader.ReadVarUhShort();
             if (smileyId < 0)
             {
-                throw new Exception("Forbidden value (" + smileyId + ") on element of MoodSmileyUpdateMessage.smileyId.");
+                throw new System.Exception("Forbidden value (" + smileyId + ") on element of MoodSmileyUpdateMessage.smileyId.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,19 +27,19 @@ namespace Giny.Protocol.Types
         {
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarShort((short)id);
             if (xpBonusPercent < 0)
             {
-                throw new Exception("Forbidden value (" + xpBonusPercent + ") on element xpBonusPercent.");
+                throw new System.Exception("Forbidden value (" + xpBonusPercent + ") on element xpBonusPercent.");
             }
 
             writer.WriteVarShort((short)xpBonusPercent);
             if (dropBonusPercent < 0)
             {
-                throw new Exception("Forbidden value (" + dropBonusPercent + ") on element dropBonusPercent.");
+                throw new System.Exception("Forbidden value (" + dropBonusPercent + ") on element dropBonusPercent.");
             }
 
             writer.WriteVarShort((short)dropBonusPercent);
@@ -50,19 +49,19 @@ namespace Giny.Protocol.Types
             id = (short)reader.ReadVarUhShort();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of Idol.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of Idol.id.");
             }
 
             xpBonusPercent = (short)reader.ReadVarUhShort();
             if (xpBonusPercent < 0)
             {
-                throw new Exception("Forbidden value (" + xpBonusPercent + ") on element of Idol.xpBonusPercent.");
+                throw new System.Exception("Forbidden value (" + xpBonusPercent + ") on element of Idol.xpBonusPercent.");
             }
 
             dropBonusPercent = (short)reader.ReadVarUhShort();
             if (dropBonusPercent < 0)
             {
-                throw new Exception("Forbidden value (" + dropBonusPercent + ") on element of Idol.dropBonusPercent.");
+                throw new System.Exception("Forbidden value (" + dropBonusPercent + ") on element of Idol.dropBonusPercent.");
             }
 
         }

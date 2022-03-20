@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyModifiableStatusMessage()
         {
         }
-        public PartyModifiableStatusMessage(bool enabled)
+        public PartyModifiableStatusMessage(bool enabled,int partyId)
         {
             this.enabled = enabled;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {

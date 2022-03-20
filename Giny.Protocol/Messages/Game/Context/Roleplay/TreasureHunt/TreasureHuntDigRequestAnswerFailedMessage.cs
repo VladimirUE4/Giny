@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,16 +17,18 @@ namespace Giny.Protocol.Messages
         public TreasureHuntDigRequestAnswerFailedMessage()
         {
         }
-        public TreasureHuntDigRequestAnswerFailedMessage(byte wrongFlagCount)
+        public TreasureHuntDigRequestAnswerFailedMessage(byte wrongFlagCount,byte questType,byte result)
         {
             this.wrongFlagCount = wrongFlagCount;
+            this.questType = questType;
+            this.result = result;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (wrongFlagCount < 0)
             {
-                throw new Exception("Forbidden value (" + wrongFlagCount + ") on element wrongFlagCount.");
+                throw new System.Exception("Forbidden value (" + wrongFlagCount + ") on element wrongFlagCount.");
             }
 
             writer.WriteByte((byte)wrongFlagCount);
@@ -38,7 +39,7 @@ namespace Giny.Protocol.Messages
             wrongFlagCount = (byte)reader.ReadByte();
             if (wrongFlagCount < 0)
             {
-                throw new Exception("Forbidden value (" + wrongFlagCount + ") on element of TreasureHuntDigRequestAnswerFailedMessage.wrongFlagCount.");
+                throw new System.Exception("Forbidden value (" + wrongFlagCount + ") on element of TreasureHuntDigRequestAnswerFailedMessage.wrongFlagCount.");
             }
 
         }

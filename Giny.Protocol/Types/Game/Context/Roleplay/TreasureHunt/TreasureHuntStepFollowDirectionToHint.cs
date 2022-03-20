@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)direction);
             if (npcId < 0)
             {
-                throw new Exception("Forbidden value (" + npcId + ") on element npcId.");
+                throw new System.Exception("Forbidden value (" + npcId + ") on element npcId.");
             }
 
             writer.WriteVarShort((short)npcId);
@@ -39,13 +38,13 @@ namespace Giny.Protocol.Types
             direction = (byte)reader.ReadByte();
             if (direction < 0)
             {
-                throw new Exception("Forbidden value (" + direction + ") on element of TreasureHuntStepFollowDirectionToHint.direction.");
+                throw new System.Exception("Forbidden value (" + direction + ") on element of TreasureHuntStepFollowDirectionToHint.direction.");
             }
 
             npcId = (short)reader.ReadVarUhShort();
             if (npcId < 0)
             {
-                throw new Exception("Forbidden value (" + npcId + ") on element of TreasureHuntStepFollowDirectionToHint.npcId.");
+                throw new System.Exception("Forbidden value (" + npcId + ") on element of TreasureHuntStepFollowDirectionToHint.npcId.");
             }
 
         }

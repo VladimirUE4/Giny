@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Messages
             level = (byte)reader.ReadByte();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of DebugInClientMessage.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of DebugInClientMessage.level.");
             }
 
             message = (string)reader.ReadUTF();

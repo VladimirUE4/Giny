@@ -31,28 +31,16 @@ namespace Giny.ProtocolBuilder.Converters
             if (ctor.Parameters.Count > 0)
             {
                 AS3Method emptyCtor = File.CreateEmptyConstructor();
-
                 results.Add(emptyCtor);
             }
             results.Add(ctor);
 
             return results.ToArray();
         }
-        private AS3Method GetSerializeMethod()
-        {
-            AS3Method serializeMethod = File.GetMethod("serializeAs_" + GetClassName());
-            serializeMethod.Rename("Serialize");
-            return serializeMethod;
-        }
 
 
-        private AS3Method GetDeserializeMethod()
-        {
-            AS3Method deserializeMethod = AS3Method.RencapsulateMethod(File, "deserializeAs_" + GetClassName(), "Deserialize");
-            return deserializeMethod;
-        }
 
-        private List<AS3Variable> GetParametersInBase(AS3File current, IEnumerable<AS3File> context)
+        private List<AS3Variable> GetCtorParametersInBase(AS3File current, Dictionary<string, AS3File> context)
         {
             var targetName = current.Extends;
 
@@ -61,14 +49,15 @@ namespace Giny.ProtocolBuilder.Converters
                 return new List<AS3Variable>();
             }
 
-            var target = context.FirstOrDefault(x => x.ClassName == targetName);
+            var target = context[targetName];
 
             var targetCtor = target.GetMethods(x => x.Name == "init" + target.ClassName).FirstOrDefault();
 
-            var results = GetParametersInBase(target, context);
+            var results = GetCtorParametersInBase(target, context);
 
             if (targetCtor != null)
             {
+                DofusHelper.DeductCtorFieldTypes(BaseClassName, current, targetCtor.Parameters, context);
                 results.AddRange(targetCtor.Parameters); // deduct type aled.
             }
 
@@ -77,37 +66,65 @@ namespace Giny.ProtocolBuilder.Converters
         }
 
 
-        public override void Prepare(IEnumerable<AS3File> context)
+        public void BuildConstructor(Dictionary<string, AS3File> context)
         {
             if (File.Extends != BaseClassName)
             {
-                var ctor = MethodToWrite.FirstOrDefault(x => x.IsConstructor && x.Parameters.Count > 0);
+                var ctor = MethodsToWrite.FirstOrDefault(x => x.IsConstructor && x.Parameters.Count > 0);
 
                 if (ctor == null)
                 {
                     ctor = File.CreateEmptyConstructor();
                 }
-                var additionalParameters = GetParametersInBase(this.File, context);
+                var additionalParameters = GetCtorParametersInBase(this.File, context);
 
                 if (additionalParameters.Count > 0)
                 {
                     ctor.Parameters.AddRange(additionalParameters);
 
-                    foreach (var additional in additionalParameters)
-                    {
-                        VariableNameExpression expr = new VariableNameExpression(additional.Name);
-                        ctor.Expressions.Add(new AssignationExpression("this." + additional.Name, expr));
-                    }
-                    var test = ctor.Expressions;
+                   
+                }
 
+
+                foreach (var parameter in ctor.Parameters.ToArray().Reverse())
+                {
+                    var count = ctor.Parameters.Count(x => x.Name == parameter.Name);
+
+                    if (count > 1)
+                    {
+                        ctor.Parameters.Remove(parameter);
+                    }
+                }
+
+                ctor.Expressions.Clear();
+
+                foreach (var param in ctor.Parameters)
+                {
+                    VariableNameExpression expr = new VariableNameExpression(param.Name);
+                    ctor.Expressions.Add(new AssignationExpression("this." + param.Name, expr));
                 }
 
             }
+        }
 
+        private void GlobalVariableRename(string oldName, string newName)
+        {
+            File.RenameField(oldName, newName);
 
-            var serializeMethod = GetMethodToWrite("Serialize");
-            var deserializeMethod = GetMethodToWrite("Deserialize");
+            foreach (var method in MethodsToWrite)
+            {
+                method.RenameVariable(oldName, newName);
+            }
+        }
+        public override void PostPrepare()
+        {
+            GlobalVariableRename("lock", "@lock");
+            GlobalVariableRename("base", "@base");
 
+            var serializeMethod = GetMethodToWrite("serializeAs_" + GetClassName());
+            var deserializeMethod = GetMethodToWrite("deserializeAs_" + GetClassName());
+
+            serializeMethod.Rename("Serialize");
             serializeMethod.RenameVariable("NaN", "double.NaN");
             serializeMethod.RenameVariable("super", "base");
             serializeMethod.RenameVariable("output", "writer");
@@ -130,18 +147,14 @@ namespace Giny.ProtocolBuilder.Converters
             serializeMethod.ReplaceUnchangedExpression("getTypeId()", "TypeId");
 
             serializeMethod.SetModifiers(AS3ModifiersEnum.@override);
+
             DofusHelper.IOWriteCastRecursively(serializeMethod.Expressions);
-            var fieldTypes = DofusHelper.DeductFieldTypes(serializeMethod.Expressions); // order is importants!
-
-
-            foreach (var variable in fieldTypes) // a test
-            {
-                File.GetField(variable.Name).ChangeType(variable.Type.RawType);
-            }
-
+            DofusHelper.DeductFieldTypes(File, serializeMethod.Expressions); // order is importants!
             DofusHelper.RenameDofusTypesSerializeMethodsRecursively(serializeMethod.Expressions);
             DofusHelper.RenameSerializeAs_(serializeMethod.Expressions);
             DofusHelper.ChangeTypeIdToProperty(serializeMethod.Expressions);
+
+            deserializeMethod.Rename("Deserialize");
 
             deserializeMethod.RenameMethodCall("readByte", "ReadByte");
 
@@ -176,19 +189,26 @@ namespace Giny.ProtocolBuilder.Converters
             DofusHelper.CreateGenericTypeForProtocolInstance(deserializeMethod.Expressions);
             DofusHelper.CastEnumsComparaisons(deserializeMethod.Expressions);
         }
-        protected override AS3Method[] SelectMethodsToWrite()
+        public override void Prepare(Dictionary<string, AS3File> context)
         {
-            return
+            AS3Method.DecapsulateMethod(File, "deserializeAs_" + GetClassName());
+            BuildConstructor(context);
+        }
+        protected override List<AS3Method> SelectMethodsToWrite()
+        {
+            var results =
                 GetCtors().
                 Concat(new AS3Method[]
                 {
-                    GetSerializeMethod(),
-                    GetDeserializeMethod()}
-                )
-                .ToArray();
+                   File.GetMethod("serializeAs_" + GetClassName()),
+                   File.GetMethod("deserializeAs_" + GetClassName())
+                })
+                ;
+
+            return results.ToList();
         }
 
-        protected override AS3Field[] SelectFieldsToWrite()
+        protected override List<AS3Field> SelectFieldsToWrite()
         {
             return base.SelectFieldsToWrite();
         }

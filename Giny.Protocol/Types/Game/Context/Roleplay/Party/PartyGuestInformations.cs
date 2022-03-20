@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -38,13 +37,13 @@ namespace Giny.Protocol.Types
         {
             if (guestId < 0 || guestId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + guestId + ") on element guestId.");
+                throw new System.Exception("Forbidden value (" + guestId + ") on element guestId.");
             }
 
             writer.WriteVarLong((long)guestId);
             if (hostId < 0 || hostId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + hostId + ") on element hostId.");
+                throw new System.Exception("Forbidden value (" + hostId + ") on element hostId.");
             }
 
             writer.WriteVarLong((long)hostId);
@@ -67,13 +66,13 @@ namespace Giny.Protocol.Types
             guestId = (long)reader.ReadVarUhLong();
             if (guestId < 0 || guestId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + guestId + ") on element of PartyGuestInformations.guestId.");
+                throw new System.Exception("Forbidden value (" + guestId + ") on element of PartyGuestInformations.guestId.");
             }
 
             hostId = (long)reader.ReadVarUhLong();
             if (hostId < 0 || hostId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + hostId + ") on element of PartyGuestInformations.hostId.");
+                throw new System.Exception("Forbidden value (" + hostId + ") on element of PartyGuestInformations.hostId.");
             }
 
             name = (string)reader.ReadUTF();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -19,19 +18,31 @@ namespace Giny.Protocol.Types
         public GameFightCharacterInformations()
         {
         }
-        public GameFightCharacterInformations(short level,ActorAlignmentInformations alignmentInfos,byte breed,bool sex)
+        public GameFightCharacterInformations(short level,ActorAlignmentInformations alignmentInfos,byte breed,bool sex,double contextualId,EntityDispositionInformations disposition,EntityLook look,GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions,string name,PlayerStatus status,short leagueId,int ladderPosition,bool hiddenInPrefight)
         {
             this.level = level;
             this.alignmentInfos = alignmentInfos;
             this.breed = breed;
             this.sex = sex;
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.spawnInfo = spawnInfo;
+            this.wave = wave;
+            this.stats = stats;
+            this.previousPositions = previousPositions;
+            this.name = name;
+            this.status = status;
+            this.leagueId = leagueId;
+            this.ladderPosition = ladderPosition;
+            this.hiddenInPrefight = hiddenInPrefight;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarShort((short)level);
@@ -45,7 +56,7 @@ namespace Giny.Protocol.Types
             level = (short)reader.ReadVarUhShort();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of GameFightCharacterInformations.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of GameFightCharacterInformations.level.");
             }
 
             alignmentInfos = new ActorAlignmentInformations();

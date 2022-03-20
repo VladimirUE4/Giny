@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,10 @@ namespace Giny.Protocol.Messages
         public PartyNameSetRequestMessage()
         {
         }
-        public PartyNameSetRequestMessage(string partyName)
+        public PartyNameSetRequestMessage(string partyName,int partyId)
         {
             this.partyName = partyName;
+            this.partyId = partyId;
         }
         public override void Serialize(IDataWriter writer)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -34,19 +33,19 @@ namespace Giny.Protocol.Messages
         {
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element kamas.");
             }
 
             writer.WriteVarLong((long)kamas);
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element amount.");
             }
 
             writer.WriteVarLong((long)amount);
             if (rate < 0)
             {
-                throw new Exception("Forbidden value (" + rate + ") on element rate.");
+                throw new System.Exception("Forbidden value (" + rate + ") on element rate.");
             }
 
             writer.WriteVarShort((short)rate);
@@ -58,25 +57,25 @@ namespace Giny.Protocol.Messages
             kamas = (long)reader.ReadVarUhLong();
             if (kamas < 0 || kamas > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + kamas + ") on element of HaapiConfirmationMessage.kamas.");
+                throw new System.Exception("Forbidden value (" + kamas + ") on element of HaapiConfirmationMessage.kamas.");
             }
 
             amount = (long)reader.ReadVarUhLong();
             if (amount < 0 || amount > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + amount + ") on element of HaapiConfirmationMessage.amount.");
+                throw new System.Exception("Forbidden value (" + amount + ") on element of HaapiConfirmationMessage.amount.");
             }
 
             rate = (short)reader.ReadVarUhShort();
             if (rate < 0)
             {
-                throw new Exception("Forbidden value (" + rate + ") on element of HaapiConfirmationMessage.rate.");
+                throw new System.Exception("Forbidden value (" + rate + ") on element of HaapiConfirmationMessage.rate.");
             }
 
             action = (byte)reader.ReadByte();
             if (action < 0)
             {
-                throw new Exception("Forbidden value (" + action + ") on element of HaapiConfirmationMessage.action.");
+                throw new System.Exception("Forbidden value (" + action + ") on element of HaapiConfirmationMessage.action.");
             }
 
             transaction = (string)reader.ReadUTF();

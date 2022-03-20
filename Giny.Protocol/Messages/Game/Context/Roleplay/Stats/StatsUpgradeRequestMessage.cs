@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -32,7 +31,7 @@ namespace Giny.Protocol.Messages
             writer.WriteByte((byte)statId);
             if (boostPoint < 0)
             {
-                throw new Exception("Forbidden value (" + boostPoint + ") on element boostPoint.");
+                throw new System.Exception("Forbidden value (" + boostPoint + ") on element boostPoint.");
             }
 
             writer.WriteVarShort((short)boostPoint);
@@ -43,13 +42,13 @@ namespace Giny.Protocol.Messages
             statId = (byte)reader.ReadByte();
             if (statId < 0)
             {
-                throw new Exception("Forbidden value (" + statId + ") on element of StatsUpgradeRequestMessage.statId.");
+                throw new System.Exception("Forbidden value (" + statId + ") on element of StatsUpgradeRequestMessage.statId.");
             }
 
             boostPoint = (short)reader.ReadVarUhShort();
             if (boostPoint < 0)
             {
-                throw new Exception("Forbidden value (" + boostPoint + ") on element of StatsUpgradeRequestMessage.boostPoint.");
+                throw new System.Exception("Forbidden value (" + boostPoint + ") on element of StatsUpgradeRequestMessage.boostPoint.");
             }
 
         }

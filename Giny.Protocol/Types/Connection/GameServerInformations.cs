@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -44,7 +43,7 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)_box0);
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarShort((short)id);
@@ -53,19 +52,19 @@ namespace Giny.Protocol.Types
             writer.WriteByte((byte)completion);
             if (charactersCount < 0)
             {
-                throw new Exception("Forbidden value (" + charactersCount + ") on element charactersCount.");
+                throw new System.Exception("Forbidden value (" + charactersCount + ") on element charactersCount.");
             }
 
             writer.WriteByte((byte)charactersCount);
             if (charactersSlots < 0)
             {
-                throw new Exception("Forbidden value (" + charactersSlots + ") on element charactersSlots.");
+                throw new System.Exception("Forbidden value (" + charactersSlots + ") on element charactersSlots.");
             }
 
             writer.WriteByte((byte)charactersSlots);
             if (date < -9.00719925474099E+15 || date > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + date + ") on element date.");
+                throw new System.Exception("Forbidden value (" + date + ") on element date.");
             }
 
             writer.WriteDouble((double)date);
@@ -78,38 +77,38 @@ namespace Giny.Protocol.Types
             id = (short)reader.ReadVarUhShort();
             if (id < 0)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of GameServerInformations.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of GameServerInformations.id.");
             }
 
             type = (byte)reader.ReadByte();
             status = (byte)reader.ReadByte();
             if (status < 0)
             {
-                throw new Exception("Forbidden value (" + status + ") on element of GameServerInformations.status.");
+                throw new System.Exception("Forbidden value (" + status + ") on element of GameServerInformations.status.");
             }
 
             completion = (byte)reader.ReadByte();
             if (completion < 0)
             {
-                throw new Exception("Forbidden value (" + completion + ") on element of GameServerInformations.completion.");
+                throw new System.Exception("Forbidden value (" + completion + ") on element of GameServerInformations.completion.");
             }
 
             charactersCount = (byte)reader.ReadByte();
             if (charactersCount < 0)
             {
-                throw new Exception("Forbidden value (" + charactersCount + ") on element of GameServerInformations.charactersCount.");
+                throw new System.Exception("Forbidden value (" + charactersCount + ") on element of GameServerInformations.charactersCount.");
             }
 
             charactersSlots = (byte)reader.ReadByte();
             if (charactersSlots < 0)
             {
-                throw new Exception("Forbidden value (" + charactersSlots + ") on element of GameServerInformations.charactersSlots.");
+                throw new System.Exception("Forbidden value (" + charactersSlots + ") on element of GameServerInformations.charactersSlots.");
             }
 
             date = (double)reader.ReadDouble();
             if (date < -9.00719925474099E+15 || date > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + date + ") on element of GameServerInformations.date.");
+                throw new System.Exception("Forbidden value (" + date + ") on element of GameServerInformations.date.");
             }
 
         }

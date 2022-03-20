@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -38,13 +37,13 @@ namespace Giny.Protocol.Messages
             step = (byte)reader.ReadByte();
             if (step < 0)
             {
-                throw new Exception("Forbidden value (" + step + ") on element of GameRolePlayArenaRegistrationStatusMessage.step.");
+                throw new System.Exception("Forbidden value (" + step + ") on element of GameRolePlayArenaRegistrationStatusMessage.step.");
             }
 
             battleMode = (int)reader.ReadInt();
             if (battleMode < 0)
             {
-                throw new Exception("Forbidden value (" + battleMode + ") on element of GameRolePlayArenaRegistrationStatusMessage.battleMode.");
+                throw new System.Exception("Forbidden value (" + battleMode + ") on element of GameRolePlayArenaRegistrationStatusMessage.battleMode.");
             }
 
         }

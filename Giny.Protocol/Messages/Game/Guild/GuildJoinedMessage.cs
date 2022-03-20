@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -29,7 +28,7 @@ namespace Giny.Protocol.Messages
             guildInfo.Serialize(writer);
             if (memberRights < 0)
             {
-                throw new Exception("Forbidden value (" + memberRights + ") on element memberRights.");
+                throw new System.Exception("Forbidden value (" + memberRights + ") on element memberRights.");
             }
 
             writer.WriteVarInt((int)memberRights);
@@ -41,7 +40,7 @@ namespace Giny.Protocol.Messages
             memberRights = (int)reader.ReadVarUhInt();
             if (memberRights < 0)
             {
-                throw new Exception("Forbidden value (" + memberRights + ") on element of GuildJoinedMessage.memberRights.");
+                throw new System.Exception("Forbidden value (" + memberRights + ") on element of GuildJoinedMessage.memberRights.");
             }
 
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -16,16 +15,22 @@ namespace Giny.Protocol.Types
         public CharacterUsableCharacteristicDetailed()
         {
         }
-        public CharacterUsableCharacteristicDetailed(short used)
+        public CharacterUsableCharacteristicDetailed(short used,short characteristicId,short @base,short additional,short objectsAndMountBonus,short alignGiftBonus,short contextModif)
         {
             this.used = used;
+            this.characteristicId = characteristicId;
+            this.@base = @base;
+            this.additional = additional;
+            this.objectsAndMountBonus = objectsAndMountBonus;
+            this.alignGiftBonus = alignGiftBonus;
+            this.contextModif = contextModif;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (used < 0)
             {
-                throw new Exception("Forbidden value (" + used + ") on element used.");
+                throw new System.Exception("Forbidden value (" + used + ") on element used.");
             }
 
             writer.WriteVarShort((short)used);
@@ -36,7 +41,7 @@ namespace Giny.Protocol.Types
             used = (short)reader.ReadVarUhShort();
             if (used < 0)
             {
-                throw new Exception("Forbidden value (" + used + ") on element of CharacterUsableCharacteristicDetailed.used.");
+                throw new System.Exception("Forbidden value (" + used + ") on element of CharacterUsableCharacteristicDetailed.used.");
             }
 
         }

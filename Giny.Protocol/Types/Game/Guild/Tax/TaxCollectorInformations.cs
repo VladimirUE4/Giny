@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -42,38 +41,38 @@ namespace Giny.Protocol.Types
         {
             if (uniqueId < 0 || uniqueId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + uniqueId + ") on element uniqueId.");
+                throw new System.Exception("Forbidden value (" + uniqueId + ") on element uniqueId.");
             }
 
             writer.WriteDouble((double)uniqueId);
             if (firtNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firtNameId + ") on element firtNameId.");
+                throw new System.Exception("Forbidden value (" + firtNameId + ") on element firtNameId.");
             }
 
             writer.WriteVarShort((short)firtNameId);
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element lastNameId.");
             }
 
             writer.WriteVarShort((short)lastNameId);
             additionalInfos.Serialize(writer);
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element worldX.");
             }
 
             writer.WriteShort((short)worldX);
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element worldY.");
             }
 
             writer.WriteShort((short)worldY);
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element subAreaId.");
             }
 
             writer.WriteVarShort((short)subAreaId);
@@ -94,19 +93,19 @@ namespace Giny.Protocol.Types
             uniqueId = (double)reader.ReadDouble();
             if (uniqueId < 0 || uniqueId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + uniqueId + ") on element of TaxCollectorInformations.uniqueId.");
+                throw new System.Exception("Forbidden value (" + uniqueId + ") on element of TaxCollectorInformations.uniqueId.");
             }
 
             firtNameId = (short)reader.ReadVarUhShort();
             if (firtNameId < 0)
             {
-                throw new Exception("Forbidden value (" + firtNameId + ") on element of TaxCollectorInformations.firtNameId.");
+                throw new System.Exception("Forbidden value (" + firtNameId + ") on element of TaxCollectorInformations.firtNameId.");
             }
 
             lastNameId = (short)reader.ReadVarUhShort();
             if (lastNameId < 0)
             {
-                throw new Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorInformations.lastNameId.");
+                throw new System.Exception("Forbidden value (" + lastNameId + ") on element of TaxCollectorInformations.lastNameId.");
             }
 
             additionalInfos = new AdditionalTaxCollectorInformations();
@@ -114,25 +113,25 @@ namespace Giny.Protocol.Types
             worldX = (short)reader.ReadShort();
             if (worldX < -255 || worldX > 255)
             {
-                throw new Exception("Forbidden value (" + worldX + ") on element of TaxCollectorInformations.worldX.");
+                throw new System.Exception("Forbidden value (" + worldX + ") on element of TaxCollectorInformations.worldX.");
             }
 
             worldY = (short)reader.ReadShort();
             if (worldY < -255 || worldY > 255)
             {
-                throw new Exception("Forbidden value (" + worldY + ") on element of TaxCollectorInformations.worldY.");
+                throw new System.Exception("Forbidden value (" + worldY + ") on element of TaxCollectorInformations.worldY.");
             }
 
             subAreaId = (short)reader.ReadVarUhShort();
             if (subAreaId < 0)
             {
-                throw new Exception("Forbidden value (" + subAreaId + ") on element of TaxCollectorInformations.subAreaId.");
+                throw new System.Exception("Forbidden value (" + subAreaId + ") on element of TaxCollectorInformations.subAreaId.");
             }
 
             state = (byte)reader.ReadByte();
             if (state < 0)
             {
-                throw new Exception("Forbidden value (" + state + ") on element of TaxCollectorInformations.state.");
+                throw new System.Exception("Forbidden value (" + state + ") on element of TaxCollectorInformations.state.");
             }
 
             look = new EntityLook();

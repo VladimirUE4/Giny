@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -30,25 +29,25 @@ namespace Giny.Protocol.Types
         {
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element allianceId.");
             }
 
             writer.WriteVarInt((int)allianceId);
             if (nbGuilds < 0)
             {
-                throw new Exception("Forbidden value (" + nbGuilds + ") on element nbGuilds.");
+                throw new System.Exception("Forbidden value (" + nbGuilds + ") on element nbGuilds.");
             }
 
             writer.WriteVarShort((short)nbGuilds);
             if (nbMembers < 0)
             {
-                throw new Exception("Forbidden value (" + nbMembers + ") on element nbMembers.");
+                throw new System.Exception("Forbidden value (" + nbMembers + ") on element nbMembers.");
             }
 
             writer.WriteVarShort((short)nbMembers);
             if (nbSubarea < 0)
             {
-                throw new Exception("Forbidden value (" + nbSubarea + ") on element nbSubarea.");
+                throw new System.Exception("Forbidden value (" + nbSubarea + ") on element nbSubarea.");
             }
 
             writer.WriteVarShort((short)nbSubarea);
@@ -58,25 +57,25 @@ namespace Giny.Protocol.Types
             allianceId = (int)reader.ReadVarUhInt();
             if (allianceId < 0)
             {
-                throw new Exception("Forbidden value (" + allianceId + ") on element of AllianceVersatileInformations.allianceId.");
+                throw new System.Exception("Forbidden value (" + allianceId + ") on element of AllianceVersatileInformations.allianceId.");
             }
 
             nbGuilds = (short)reader.ReadVarUhShort();
             if (nbGuilds < 0)
             {
-                throw new Exception("Forbidden value (" + nbGuilds + ") on element of AllianceVersatileInformations.nbGuilds.");
+                throw new System.Exception("Forbidden value (" + nbGuilds + ") on element of AllianceVersatileInformations.nbGuilds.");
             }
 
             nbMembers = (short)reader.ReadVarUhShort();
             if (nbMembers < 0)
             {
-                throw new Exception("Forbidden value (" + nbMembers + ") on element of AllianceVersatileInformations.nbMembers.");
+                throw new System.Exception("Forbidden value (" + nbMembers + ") on element of AllianceVersatileInformations.nbMembers.");
             }
 
             nbSubarea = (short)reader.ReadVarUhShort();
             if (nbSubarea < 0)
             {
-                throw new Exception("Forbidden value (" + nbSubarea + ") on element of AllianceVersatileInformations.nbSubarea.");
+                throw new System.Exception("Forbidden value (" + nbSubarea + ") on element of AllianceVersatileInformations.nbSubarea.");
             }
 
         }

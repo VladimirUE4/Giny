@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,13 @@ namespace Giny.Protocol.Messages
         public GuildInAllianceFactsMessage()
         {
         }
-        public GuildInAllianceFactsMessage(BasicNamedAllianceInformations allianceInfos)
+        public GuildInAllianceFactsMessage(BasicNamedAllianceInformations allianceInfos,GuildFactSheetInformations infos,int creationDate,short nbTaxCollectors,CharacterMinimalGuildPublicInformations[] members)
         {
             this.allianceInfos = allianceInfos;
+            this.infos = infos;
+            this.creationDate = creationDate;
+            this.nbTaxCollectors = nbTaxCollectors;
+            this.members = members;
         }
         public override void Serialize(IDataWriter writer)
         {

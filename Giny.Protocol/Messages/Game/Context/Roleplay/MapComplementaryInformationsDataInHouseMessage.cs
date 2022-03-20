@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -18,9 +17,19 @@ namespace Giny.Protocol.Messages
         public MapComplementaryInformationsDataInHouseMessage()
         {
         }
-        public MapComplementaryInformationsDataInHouseMessage(HouseInformationsInside currentHouse)
+        public MapComplementaryInformationsDataInHouseMessage(HouseInformationsInside currentHouse,short subAreaId,double mapId,HouseInformations[] houses,GameRolePlayActorInformations[] actors,InteractiveElement[] interactiveElements,StatedElement[] statedElements,MapObstacle[] obstacles,FightCommonInformations[] fights,bool hasAggressiveMonsters,FightStartingPositions fightStartPositions)
         {
             this.currentHouse = currentHouse;
+            this.subAreaId = subAreaId;
+            this.mapId = mapId;
+            this.houses = houses;
+            this.actors = actors;
+            this.interactiveElements = interactiveElements;
+            this.statedElements = statedElements;
+            this.obstacles = obstacles;
+            this.fights = fights;
+            this.hasAggressiveMonsters = hasAggressiveMonsters;
+            this.fightStartPositions = fightStartPositions;
         }
         public override void Serialize(IDataWriter writer)
         {

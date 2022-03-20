@@ -10,17 +10,17 @@ namespace Giny.AS3.Converter
 {
     public abstract class AS3Converter
     {
-        protected AS3Field[] FieldsToWrite
+        protected List<AS3Field> FieldsToWrite
         {
             get;
             private set;
         }
-        protected AS3Method[] MethodToWrite
+        protected List<AS3Method> MethodsToWrite
         {
             get;
             private set;
         }
-        protected AS3File File
+        public AS3File File
         {
             get;
             private set;
@@ -34,10 +34,11 @@ namespace Giny.AS3.Converter
         {
             this.File = file;
             this.FieldsToWrite = SelectFieldsToWrite();
-            this.MethodToWrite = SelectMethodsToWrite();
+            this.MethodsToWrite = SelectMethodsToWrite();
         }
 
-        public abstract void Prepare(IEnumerable<AS3File> context);
+
+        public abstract void Prepare(Dictionary<string, AS3File> context);
 
         public abstract string GetNamespace();
 
@@ -51,7 +52,7 @@ namespace Giny.AS3.Converter
 
         protected AS3Method GetMethodToWrite(string name)
         {
-            return MethodToWrite.FirstOrDefault(x => x.Name == name);
+            return MethodsToWrite.FirstOrDefault(x => x.Name == name);
         }
         public string GetIndentedFields()
         {
@@ -67,7 +68,7 @@ namespace Giny.AS3.Converter
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var method in MethodToWrite)
+            foreach (var method in MethodsToWrite)
             {
                 Append(GetMethodSignature(method), sb);
                 WriteBlock(method.Expressions, sb);
@@ -87,9 +88,9 @@ namespace Giny.AS3.Converter
 
         protected abstract string GetField(AS3Field field);
 
-        protected abstract AS3Method[] SelectMethodsToWrite();
+        protected abstract List<AS3Method> SelectMethodsToWrite();
 
-        protected abstract AS3Field[] SelectFieldsToWrite();
+        protected abstract List<AS3Field> SelectFieldsToWrite();
 
         protected void Append(string content, StringBuilder sb)
         {

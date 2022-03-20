@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -28,7 +27,7 @@ namespace Giny.Protocol.Messages
         {
             if (uniqueId < 0 || uniqueId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + uniqueId + ") on element uniqueId.");
+                throw new System.Exception("Forbidden value (" + uniqueId + ") on element uniqueId.");
             }
 
             writer.WriteDouble((double)uniqueId);
@@ -39,7 +38,7 @@ namespace Giny.Protocol.Messages
             uniqueId = (double)reader.ReadDouble();
             if (uniqueId < 0 || uniqueId > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + uniqueId + ") on element of TaxCollectorStateUpdateMessage.uniqueId.");
+                throw new System.Exception("Forbidden value (" + uniqueId + ") on element of TaxCollectorStateUpdateMessage.uniqueId.");
             }
 
             state = (byte)reader.ReadByte();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -20,44 +19,45 @@ namespace Giny.Protocol.Types
         public ObjectEffectDate()
         {
         }
-        public ObjectEffectDate(short year,byte month,byte day,byte hour,byte minute)
+        public ObjectEffectDate(short year,byte month,byte day,byte hour,byte minute,short actionId)
         {
             this.year = year;
             this.month = month;
             this.day = day;
             this.hour = hour;
             this.minute = minute;
+            this.actionId = actionId;
         }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
             if (year < 0)
             {
-                throw new Exception("Forbidden value (" + year + ") on element year.");
+                throw new System.Exception("Forbidden value (" + year + ") on element year.");
             }
 
             writer.WriteVarShort((short)year);
             if (month < 0)
             {
-                throw new Exception("Forbidden value (" + month + ") on element month.");
+                throw new System.Exception("Forbidden value (" + month + ") on element month.");
             }
 
             writer.WriteByte((byte)month);
             if (day < 0)
             {
-                throw new Exception("Forbidden value (" + day + ") on element day.");
+                throw new System.Exception("Forbidden value (" + day + ") on element day.");
             }
 
             writer.WriteByte((byte)day);
             if (hour < 0)
             {
-                throw new Exception("Forbidden value (" + hour + ") on element hour.");
+                throw new System.Exception("Forbidden value (" + hour + ") on element hour.");
             }
 
             writer.WriteByte((byte)hour);
             if (minute < 0)
             {
-                throw new Exception("Forbidden value (" + minute + ") on element minute.");
+                throw new System.Exception("Forbidden value (" + minute + ") on element minute.");
             }
 
             writer.WriteByte((byte)minute);
@@ -68,31 +68,31 @@ namespace Giny.Protocol.Types
             year = (short)reader.ReadVarUhShort();
             if (year < 0)
             {
-                throw new Exception("Forbidden value (" + year + ") on element of ObjectEffectDate.year.");
+                throw new System.Exception("Forbidden value (" + year + ") on element of ObjectEffectDate.year.");
             }
 
             month = (byte)reader.ReadByte();
             if (month < 0)
             {
-                throw new Exception("Forbidden value (" + month + ") on element of ObjectEffectDate.month.");
+                throw new System.Exception("Forbidden value (" + month + ") on element of ObjectEffectDate.month.");
             }
 
             day = (byte)reader.ReadByte();
             if (day < 0)
             {
-                throw new Exception("Forbidden value (" + day + ") on element of ObjectEffectDate.day.");
+                throw new System.Exception("Forbidden value (" + day + ") on element of ObjectEffectDate.day.");
             }
 
             hour = (byte)reader.ReadByte();
             if (hour < 0)
             {
-                throw new Exception("Forbidden value (" + hour + ") on element of ObjectEffectDate.hour.");
+                throw new System.Exception("Forbidden value (" + hour + ") on element of ObjectEffectDate.hour.");
             }
 
             minute = (byte)reader.ReadByte();
             if (minute < 0)
             {
-                throw new Exception("Forbidden value (" + minute + ") on element of ObjectEffectDate.minute.");
+                throw new System.Exception("Forbidden value (" + minute + ") on element of ObjectEffectDate.minute.");
             }
 
         }

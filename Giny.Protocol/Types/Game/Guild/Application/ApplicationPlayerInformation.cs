@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -40,7 +39,7 @@ namespace Giny.Protocol.Types
         {
             if (playerId < 0)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
             writer.WriteVarInt((int)playerId);
@@ -49,13 +48,13 @@ namespace Giny.Protocol.Types
             writer.WriteBoolean((bool)sex);
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element level.");
             }
 
             writer.WriteVarInt((int)level);
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element accountId.");
             }
 
             writer.WriteVarInt((int)accountId);
@@ -68,27 +67,27 @@ namespace Giny.Protocol.Types
             playerId = (int)reader.ReadVarUhInt();
             if (playerId < 0)
             {
-                throw new Exception("Forbidden value (" + playerId + ") on element of ApplicationPlayerInformation.playerId.");
+                throw new System.Exception("Forbidden value (" + playerId + ") on element of ApplicationPlayerInformation.playerId.");
             }
 
             playerName = (string)reader.ReadUTF();
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
             {
-                throw new Exception("Forbidden value (" + breed + ") on element of ApplicationPlayerInformation.breed.");
+                throw new System.Exception("Forbidden value (" + breed + ") on element of ApplicationPlayerInformation.breed.");
             }
 
             sex = (bool)reader.ReadBoolean();
             level = (int)reader.ReadVarUhInt();
             if (level < 0)
             {
-                throw new Exception("Forbidden value (" + level + ") on element of ApplicationPlayerInformation.level.");
+                throw new System.Exception("Forbidden value (" + level + ") on element of ApplicationPlayerInformation.level.");
             }
 
             accountId = (int)reader.ReadVarUhInt();
             if (accountId < 0)
             {
-                throw new Exception("Forbidden value (" + accountId + ") on element of ApplicationPlayerInformation.accountId.");
+                throw new System.Exception("Forbidden value (" + accountId + ") on element of ApplicationPlayerInformation.accountId.");
             }
 
             accountTag = (string)reader.ReadUTF();

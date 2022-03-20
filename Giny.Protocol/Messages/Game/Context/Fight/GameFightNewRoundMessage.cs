@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.Network.Messages;
 using Giny.Protocol.Types;
@@ -26,7 +25,7 @@ namespace Giny.Protocol.Messages
         {
             if (roundNumber < 0)
             {
-                throw new Exception("Forbidden value (" + roundNumber + ") on element roundNumber.");
+                throw new System.Exception("Forbidden value (" + roundNumber + ") on element roundNumber.");
             }
 
             writer.WriteVarInt((int)roundNumber);
@@ -36,7 +35,7 @@ namespace Giny.Protocol.Messages
             roundNumber = (int)reader.ReadVarUhInt();
             if (roundNumber < 0)
             {
-                throw new Exception("Forbidden value (" + roundNumber + ") on element of GameFightNewRoundMessage.roundNumber.");
+                throw new System.Exception("Forbidden value (" + roundNumber + ") on element of GameFightNewRoundMessage.roundNumber.");
             }
 
         }

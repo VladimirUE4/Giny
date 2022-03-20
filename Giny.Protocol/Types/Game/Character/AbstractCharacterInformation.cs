@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Giny.Core.IO.Interfaces;
 using Giny.Protocol;
@@ -24,7 +23,7 @@ namespace Giny.Protocol.Types
         {
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element id.");
             }
 
             writer.WriteVarLong((long)id);
@@ -34,7 +33,7 @@ namespace Giny.Protocol.Types
             id = (long)reader.ReadVarUhLong();
             if (id < 0 || id > 9.00719925474099E+15)
             {
-                throw new Exception("Forbidden value (" + id + ") on element of AbstractCharacterInformation.id.");
+                throw new System.Exception("Forbidden value (" + id + ") on element of AbstractCharacterInformation.id.");
             }
 
         }
