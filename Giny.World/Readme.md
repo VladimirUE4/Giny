@@ -2,6 +2,7 @@
 # Giny.World
 
 ## En cours 
+* Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
 * ProgressLogger + Logger.log interactions... (back)
 * CharacterCreationRequestMessage automatiser 
@@ -9,10 +10,6 @@
 colors = new int[5];
 ```
 * Une map position manquante ??? ankama ??
-* MapSynchronizer.cs 
-```csharp 
-Logger.Write("Unknown element id " + graphicalElement.ElementId, Channels.Warning);
- ```
 * CriticalHitProbability (overflow > short.max) lors du db sync.
 * EntityLookManager (parsing du [0])
 ```csharp
@@ -22,8 +19,6 @@ if (str.StartsWith("["))
 }
             
  ```
-* 
-* Revoir les stats ? en faire un Dictionnary<CharacteristicEnum,CharacterCharacteristic> ? 
 * Supprimer le systeme de quête custom (et tout le contenu custom hors modules.)
 * Revoir tools & modules
 
