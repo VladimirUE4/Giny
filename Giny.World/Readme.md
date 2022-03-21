@@ -3,16 +3,11 @@
 
 ## En cours 
 
-* PartyNewMemberMessage.cs
 * MimicryHandler.cs
 * https://github.com/Skinz3/Giny/blob/00ea079bcc63b918f0eb71068ce57471efc23312/Giny.Protocol/Messages/Game/Inventory/Items/MimicryObjectAssociatedMessage.cs (Where is ctor?)
 * Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
 * ProgressLogger + Logger.log interactions... (back)
-* CharacterCreationRequestMessage automatiser 
-```csharp 
-colors = new int[5];
-```
 * Une map position manquante ??? ankama ??
 * CriticalHitProbability (overflow > short.max) lors du db sync.
 * EntityLookManager (parsing du [0])
