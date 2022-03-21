@@ -34,7 +34,7 @@ namespace Giny.DatabaseSynchronizer
 
             Logger.Write("Building Maps...");
 
-            foreach (var file in Directory.GetFiles(Path.Combine(ConfigFile.Instance.ClientPath, MAPS_PATH)))
+            foreach (var file in Directory.GetFiles(Path.Combine(Program.ClientPath, MAPS_PATH)))
             {
                 if (Path.GetExtension(file) == ".ele")
                 {

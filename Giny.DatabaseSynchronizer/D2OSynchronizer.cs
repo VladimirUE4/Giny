@@ -31,9 +31,9 @@ namespace Giny.DatabaseSynchronizer
     {
         public static List<D2OReader> d2oReaders = new List<D2OReader>();
 
-        public static void Synchronize(bool buildTables)
+        public static void Synchronize()
         {
-            string d2oDirectory = Path.Combine(ConfigFile.Instance.ClientPath, ClientConstants.D2oDirectory);
+            string d2oDirectory = Path.Combine(Program.ClientPath, ClientConstants.D2oDirectory);
 
             foreach (var file in Directory.GetFiles(d2oDirectory))
             {
@@ -41,18 +41,15 @@ namespace Giny.DatabaseSynchronizer
                     d2oReaders.Add(new D2OReader(file));
             }
 
-            if (buildTables)
+            foreach (var tableType in DatabaseManager.Instance.TableTypes)
             {
-                foreach (var tableType in DatabaseManager.Instance.TableTypes)
-                {
-                    var attribute = tableType.GetCustomAttribute<D2OClassAttribute>();
+                var attribute = tableType.GetCustomAttribute<D2OClassAttribute>();
 
-                    if (attribute != null)
-                    {
-                        var reader = d2oReaders.FirstOrDefault(x => x.Classes.Values.Any(j => j.Name == attribute.Name));
-                        Logger.Write("Building " + tableType.Name + "...");
-                        BuildFromObjects(reader.EnumerateObjects().Where(x => x.GetType().Name == attribute.Name), tableType);
-                    }
+                if (attribute != null)
+                {
+                    var reader = d2oReaders.FirstOrDefault(x => x.Classes.Values.Any(j => j.Name == attribute.Name));
+                    Logger.Write("Building " + tableType.Name + "...");
+                    BuildFromObjects(reader.EnumerateObjects().Where(x => x.GetType().Name == attribute.Name), tableType);
                 }
             }
 

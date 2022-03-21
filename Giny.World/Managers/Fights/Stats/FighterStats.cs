@@ -311,16 +311,21 @@ namespace Giny.World.Managers.Fights.Stats
             this.Initialize();
         }
 
+       
         [WIP]
         public GameFightCharacteristics GetGameFightCharacteristics(Fighter owner, CharacterFighter target)
         {
- 
+
             Fighter summoner = owner.GetSummoner();
 
-            var summonerId = summoner != null ? summoner.Id : 0;
+            bool summoned = summoner != null;
+            var summonerId = summoned ? summoner.Id : 0;
 
-            return new GameFightCharacteristics(new CharacterCharacteristics(owner.Stats.GetCharacterCharacteristics()), summonerId, summoner != null,
-                (byte)InvisibilityState);
+            return new GameFightCharacteristics(new CharacterCharacteristics(owner.Stats.GetCharacterCharacteristics()),
+                summonerId, summoned,
+                (byte)owner.GetInvisibilityStateFor(target));
+
+
             if (!owner.Fight.Started)
             {
                 /*  return new GameFightMinimalStatsPreparation()

@@ -1,5 +1,6 @@
 ﻿using Giny.Core;
 using Giny.Core.IO;
+using Giny.IO;
 using Giny.IO.D2I;
 using Giny.IO.D2O;
 using Giny.ORM;
@@ -22,6 +23,7 @@ using Giny.World.Records.Tinsel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -32,68 +34,61 @@ namespace Giny.DatabaseSynchronizer
 {
     class Program
     {
-        public const bool BUILD_D2O_TABLES = true;
-
-        public const bool BUILD_MAPS = true;
-
-        public const string D2I_FILE_PATH_FR = "i18n_fr.d2i";
-        public const string D2I_FILE_PATH_EN = "i18n_en.d2i";
-
         public static D2IFile D2IFileFR;
         public static D2IFile D2IFileEN;
+
+        public static string ClientPath;
 
         static void Main(string[] args)
         {
             Logger.DrawLogo();
 
-            ConfigFile.LoadConfig();
+            ClientPath = ConfigurationManager.AppSettings["clientPath"];
 
-            D2IFileFR = new D2IFile(D2I_FILE_PATH_FR);
-            D2IFileEN = new D2IFile(D2I_FILE_PATH_EN);
+            if (!Directory.Exists(ClientPath))
+            {
+                Logger.Write("Unable to locate dofus client. Edit App.config", Channels.Warning);
+                Console.ReadLine();
+                return;
+            }
+
+            D2IFileFR = new D2IFile(Path.Combine(ClientPath, ClientConstants.i18nPathFR));
+            D2IFileEN = new D2IFile(Path.Combine(ClientPath, ClientConstants.i18nPathEN));
 
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(BreedRecord)),
               "127.0.0.1", "giny_world", "root", "");
 
-            if (BUILD_D2O_TABLES)
-            {
-                DatabaseManager.Instance.DropTableIfExists<RecipeRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SubareaRecord>();
-                DatabaseManager.Instance.DropTableIfExists<ItemSetRecord>();
-                DatabaseManager.Instance.DropTableIfExists<IdolRecord>();
-                DatabaseManager.Instance.DropTableIfExists<BreedRecord>();
-                DatabaseManager.Instance.DropTableIfExists<ExperienceRecord>();
-                DatabaseManager.Instance.DropTableIfExists<HeadRecord>();
-                DatabaseManager.Instance.DropTableIfExists<EffectRecord>();
-                DatabaseManager.Instance.DropTableIfExists<MapScrollActionRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SpellRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SpellVariantRecord>();
-                DatabaseManager.Instance.DropTableIfExists<ItemRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SpellStateRecord>();
-                DatabaseManager.Instance.DropTableIfExists<WeaponRecord>();
-                DatabaseManager.Instance.DropTableIfExists<LivingObjectRecord>();
-                DatabaseManager.Instance.DropTableIfExists<EmoteRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SpellLevelRecord>();
-                DatabaseManager.Instance.DropTableIfExists<OrnamentRecord>();
-                DatabaseManager.Instance.DropTableIfExists<TitleRecord>();
-                DatabaseManager.Instance.DropTableIfExists<MonsterRecord>();
-                DatabaseManager.Instance.DropTableIfExists<SkillRecord>();
-                DatabaseManager.Instance.DropTableIfExists<MapPositionRecord>();
-                DatabaseManager.Instance.DropTableIfExists<NpcRecord>();
-                DatabaseManager.Instance.DropTableIfExists<ChallengeRecord>();
-            }
-
-            if (BUILD_MAPS)
-            {
-                DatabaseManager.Instance.DropTableIfExists<MapRecord>();
-            }
-
+            DatabaseManager.Instance.DropTableIfExists<RecipeRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SubareaRecord>();
+            DatabaseManager.Instance.DropTableIfExists<ItemSetRecord>();
+            DatabaseManager.Instance.DropTableIfExists<IdolRecord>();
+            DatabaseManager.Instance.DropTableIfExists<BreedRecord>();
+            DatabaseManager.Instance.DropTableIfExists<ExperienceRecord>();
+            DatabaseManager.Instance.DropTableIfExists<HeadRecord>();
+            DatabaseManager.Instance.DropTableIfExists<EffectRecord>();
+            DatabaseManager.Instance.DropTableIfExists<MapScrollActionRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SpellRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SpellVariantRecord>();
+            DatabaseManager.Instance.DropTableIfExists<ItemRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SpellStateRecord>();
+            DatabaseManager.Instance.DropTableIfExists<WeaponRecord>();
+            DatabaseManager.Instance.DropTableIfExists<LivingObjectRecord>();
+            DatabaseManager.Instance.DropTableIfExists<EmoteRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SpellLevelRecord>();
+            DatabaseManager.Instance.DropTableIfExists<OrnamentRecord>();
+            DatabaseManager.Instance.DropTableIfExists<TitleRecord>();
+            DatabaseManager.Instance.DropTableIfExists<MonsterRecord>();
+            DatabaseManager.Instance.DropTableIfExists<SkillRecord>();
+            DatabaseManager.Instance.DropTableIfExists<MapPositionRecord>();
+            DatabaseManager.Instance.DropTableIfExists<NpcRecord>();
+            DatabaseManager.Instance.DropTableIfExists<ChallengeRecord>();
+            DatabaseManager.Instance.DropTableIfExists<MapRecord>();
 
             DatabaseManager.Instance.CreateAllTablesIfNotExists();
 
-            D2OSynchronizer.Synchronize(BUILD_D2O_TABLES);
+            D2OSynchronizer.Synchronize();
 
-            if (BUILD_MAPS)
-                MapSynchronizer.Synchronize();
+            MapSynchronizer.Synchronize();
 
             Logger.WriteColor1("Build finished.");
             Console.Read();
