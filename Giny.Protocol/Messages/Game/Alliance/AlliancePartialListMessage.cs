@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public AlliancePartialListMessage()
         {
         }
+        public AlliancePartialListMessage(AllianceFactSheetInformations[] alliances)
+        {
+            this.alliances = alliances;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

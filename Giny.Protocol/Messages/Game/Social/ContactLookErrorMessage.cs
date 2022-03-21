@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ContactLookErrorMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9873;
+        public new const ushort Id = 9873;
         public override ushort MessageId => Id;
 
         public int requestId;

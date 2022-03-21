@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PlayerStatusUpdateErrorMessage : NetworkMessage  
     { 
-        public  const ushort Id = 111;
+        public new const ushort Id = 111;
         public override ushort MessageId => Id;
 
 

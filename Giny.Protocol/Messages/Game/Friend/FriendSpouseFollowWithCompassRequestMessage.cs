@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendSpouseFollowWithCompassRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8825;
+        public new const ushort Id = 8825;
         public override ushort MessageId => Id;
 
         public bool enable;

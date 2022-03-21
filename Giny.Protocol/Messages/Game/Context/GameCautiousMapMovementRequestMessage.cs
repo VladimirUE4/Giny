@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public GameCautiousMapMovementRequestMessage()
         {
         }
+        public GameCautiousMapMovementRequestMessage(short[] keyMovements,double mapId)
+        {
+            this.keyMovements = keyMovements;
+            this.mapId = mapId;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

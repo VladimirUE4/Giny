@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class InteractiveMapUpdateMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8375;
+        public new const ushort Id = 8375;
         public override ushort MessageId => Id;
 
         public InteractiveElement[] interactiveElements;

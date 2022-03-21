@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public HouseLockFromInsideRequestMessage()
         {
         }
+        public HouseLockFromInsideRequestMessage(string code)
+        {
+            this.code = code;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

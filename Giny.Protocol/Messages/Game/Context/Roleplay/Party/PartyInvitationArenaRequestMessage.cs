@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public PartyInvitationArenaRequestMessage()
         {
         }
+        public PartyInvitationArenaRequestMessage(AbstractPlayerSearchInformation target)
+        {
+            this.target = target;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ReloginTokenRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 2403;
+        public new const ushort Id = 2403;
         public override ushort MessageId => Id;
 
 

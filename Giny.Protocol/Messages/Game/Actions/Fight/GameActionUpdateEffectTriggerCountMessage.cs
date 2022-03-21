@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionUpdateEffectTriggerCountMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6461;
+        public new const ushort Id = 6461;
         public override ushort MessageId => Id;
 
         public GameFightEffectTriggerCount[] targetIds;

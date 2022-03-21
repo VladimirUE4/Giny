@@ -24,11 +24,6 @@ namespace Giny.ProtocolBuilder.Profiles
         {
             get;
         }
-        private string OutputPath
-        {
-            get;
-            set;
-        }
         public abstract string OutputDirectory
         {
             get;

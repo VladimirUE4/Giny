@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildJoinedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1218;
+        public new const ushort Id = 1218;
         public override ushort MessageId => Id;
 
         public GuildInformations guildInfo;

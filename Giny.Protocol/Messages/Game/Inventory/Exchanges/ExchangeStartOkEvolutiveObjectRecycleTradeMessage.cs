@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartOkEvolutiveObjectRecycleTradeMessage : NetworkMessage  
     { 
-        public  const ushort Id = 7744;
+        public new const ushort Id = 7744;
         public override ushort MessageId => Id;
 
 

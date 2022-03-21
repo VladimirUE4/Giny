@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IgnoredDeleteResultMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9652;
+        public new const ushort Id = 9652;
         public override ushort MessageId => Id;
 
         public bool success;

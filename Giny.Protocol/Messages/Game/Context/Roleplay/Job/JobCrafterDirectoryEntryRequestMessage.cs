@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobCrafterDirectoryEntryRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 3858;
+        public new const ushort Id = 3858;
         public override ushort MessageId => Id;
 
         public long playerId;

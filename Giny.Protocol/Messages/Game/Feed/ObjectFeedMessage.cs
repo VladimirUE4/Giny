@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectFeedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5845;
+        public new const ushort Id = 5845;
         public override ushort MessageId => Id;
 
         public int objectUID;
@@ -48,6 +48,7 @@ namespace Giny.Protocol.Messages
             }
 
             uint _mealLen = (uint)reader.ReadUShort();
+            meal = new ObjectItemQuantity[_mealLen];
             for (uint _i2 = 0;_i2 < _mealLen;_i2++)
             {
                 _item2 = new ObjectItemQuantity();

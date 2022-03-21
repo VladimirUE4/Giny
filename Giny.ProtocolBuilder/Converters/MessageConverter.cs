@@ -44,16 +44,37 @@ namespace Giny.ProtocolBuilder.Converters
 
                 method.Expressions.Clear();
 
-                AS3Variable v1 = new AS3Variable("_contentLen", "int");
-                MethodCallExpression e1 = new MethodCallExpression(File, "reader.ReadVarInt()", 0);
-                VariableDeclarationExpression line1 = new VariableDeclarationExpression(v1, e1);
+                VariableDeclarationExpression l1 = new VariableDeclarationExpression(new AS3Variable("_contentLen", "int"),
+                    new MethodCallExpression(File, "reader.ReadVarInt()", 0));
 
+                AssignationExpression l2 = new AssignationExpression("content",
+                    new MethodCallExpression(File, "reader.ReadBytes(_contentLen)", 0));
 
-                MethodCallExpression e2 = new MethodCallExpression(File, "reader.ReadBytes(_contentLen)", 0);
-                AssignationExpression line2 = new AssignationExpression("content", e2);
+                method.Expressions.Add(l1);
+                method.Expressions.Add(l2);
+            }
 
-                method.Expressions.Add(line1);
-                method.Expressions.Add(line2);
+            if (GetClassName() == "ObjectFeedMessage")
+            {
+                var method = GetMethodToWrite("Deserialize");
+
+                var reference = method.Expressions.OfType<VariableDeclarationExpression>().FirstOrDefault(x => x.Variable.Name == "_mealLen");
+
+                if (reference == null)
+                {
+                    throw new FormatException("Unable to apply custom rule to ObjectFeedMessage.");
+                }
+
+                var index = method.Expressions.IndexOf(reference) + 1;
+
+                AssignationExpression expr = new AssignationExpression("meal", new UnchangedExpression("new ObjectItemQuantity[_mealLen]"));
+                method.Expressions.Insert(4, expr);
+            }
+            if (GetClassName() == "CharacterCreationRequestMessage")
+            {
+                var method = GetMethodToWrite("Deserialize");
+                AssignationExpression expr = new AssignationExpression("colors", new UnchangedExpression("new int[5]"));
+                method.Expressions.Insert(0, expr);
             }
         }
 

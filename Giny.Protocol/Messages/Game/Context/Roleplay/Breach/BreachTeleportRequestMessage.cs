@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachTeleportRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 2818;
+        public new const ushort Id = 2818;
         public override ushort MessageId => Id;
 
 

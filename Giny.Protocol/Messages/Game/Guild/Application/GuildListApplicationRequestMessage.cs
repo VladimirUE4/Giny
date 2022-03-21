@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public GuildListApplicationRequestMessage()
         {
         }
+        public GuildListApplicationRequestMessage(double offset,uint count)
+        {
+            this.offset = offset;
+            this.count = count;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -16,6 +16,14 @@ namespace Giny.Protocol.Messages
         public ExchangeBidHouseInListUpdatedMessage()
         {
         }
+        public ExchangeBidHouseInListUpdatedMessage(int itemUID,short objectGID,int objectType,ObjectEffect[] effects,long[] prices)
+        {
+            this.itemUID = itemUID;
+            this.objectGID = objectGID;
+            this.objectType = objectType;
+            this.effects = effects;
+            this.prices = prices;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

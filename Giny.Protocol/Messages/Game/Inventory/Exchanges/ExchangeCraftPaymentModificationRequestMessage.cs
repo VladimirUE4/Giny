@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeCraftPaymentModificationRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5785;
+        public new const ushort Id = 5785;
         public override ushort MessageId => Id;
 
         public long quantity;

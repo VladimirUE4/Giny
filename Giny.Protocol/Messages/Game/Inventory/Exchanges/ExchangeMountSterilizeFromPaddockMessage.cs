@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMountSterilizeFromPaddockMessage : NetworkMessage  
     { 
-        public  const ushort Id = 2234;
+        public new const ushort Id = 2234;
         public override ushort MessageId => Id;
 
         public string name;

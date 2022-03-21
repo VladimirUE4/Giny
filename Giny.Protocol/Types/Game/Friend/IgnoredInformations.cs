@@ -14,6 +14,11 @@ namespace Giny.Protocol.Types
         public IgnoredInformations()
         {
         }
+        public IgnoredInformations(int accountId,AccountTagInformation accountTag)
+        {
+            this.accountId = accountId;
+            this.accountTag = accountTag;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

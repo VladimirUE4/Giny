@@ -14,6 +14,10 @@ namespace Giny.Protocol.Types
         public ShortcutObject()
         {
         }
+        public ShortcutObject(byte slot)
+        {
+            this.slot = slot;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuestModeMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9430;
+        public new const ushort Id = 9430;
         public override ushort MessageId => Id;
 
         public bool active;

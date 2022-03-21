@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public WrapperObjectErrorMessage()
         {
         }
+        public WrapperObjectErrorMessage(byte reason,byte errorCode)
+        {
+            this.reason = reason;
+            this.errorCode = errorCode;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

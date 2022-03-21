@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public AdminQuietCommandMessage()
         {
         }
+        public AdminQuietCommandMessage(string content)
+        {
+            this.content = content;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public ExchangeMountsStableBornAddMessage()
         {
         }
+        public ExchangeMountsStableBornAddMessage(MountClientData[] mountDescription)
+        {
+            this.mountDescription = mountDescription;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

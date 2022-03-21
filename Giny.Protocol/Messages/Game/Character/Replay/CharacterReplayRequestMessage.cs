@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterReplayRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9614;
+        public new const ushort Id = 9614;
         public override ushort MessageId => Id;
 
         public long characterId;

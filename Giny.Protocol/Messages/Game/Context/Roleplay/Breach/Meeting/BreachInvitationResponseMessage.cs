@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachInvitationResponseMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6585;
+        public new const ushort Id = 6585;
         public override ushort MessageId => Id;
 
         public CharacterMinimalInformations guest;

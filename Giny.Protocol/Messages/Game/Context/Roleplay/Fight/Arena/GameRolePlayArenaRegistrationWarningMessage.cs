@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayArenaRegistrationWarningMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1528;
+        public new const ushort Id = 1528;
         public override ushort MessageId => Id;
 
         public int battleMode;

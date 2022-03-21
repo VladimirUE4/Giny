@@ -16,6 +16,12 @@ namespace Giny.Protocol.Messages
         public ExchangeObjectModifyPricedMessage()
         {
         }
+        public ExchangeObjectModifyPricedMessage(int objectUID,int quantity,long price)
+        {
+            this.objectUID = objectUID;
+            this.quantity = quantity;
+            this.price = price;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public GuildMembershipMessage()
         {
         }
+        public GuildMembershipMessage(GuildInformations guildInfo,int memberRights)
+        {
+            this.guildInfo = guildInfo;
+            this.memberRights = memberRights;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

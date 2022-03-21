@@ -16,6 +16,13 @@ namespace Giny.Protocol.Messages
         public GuildMotdMessage()
         {
         }
+        public GuildMotdMessage(string content,int timestamp,long memberId,string memberName)
+        {
+            this.content = content;
+            this.timestamp = timestamp;
+            this.memberId = memberId;
+            this.memberName = memberName;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

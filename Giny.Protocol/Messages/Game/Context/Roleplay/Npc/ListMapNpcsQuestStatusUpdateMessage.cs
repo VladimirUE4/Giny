@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ListMapNpcsQuestStatusUpdateMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5996;
+        public new const ushort Id = 5996;
         public override ushort MessageId => Id;
 
         public MapNpcQuestInfo[] mapInfo;

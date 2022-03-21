@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeShopStockMovementRemovedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 7025;
+        public new const ushort Id = 7025;
         public override ushort MessageId => Id;
 
         public int objectId;

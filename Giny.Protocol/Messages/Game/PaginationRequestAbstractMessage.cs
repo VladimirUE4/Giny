@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PaginationRequestAbstractMessage : NetworkMessage  
     { 
-        public  const ushort Id = 789;
+        public new const ushort Id = 789;
         public override ushort MessageId => Id;
 
         public double offset;

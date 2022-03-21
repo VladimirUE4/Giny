@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdolPartyLostMessage : NetworkMessage  
     { 
-        public  const ushort Id = 7502;
+        public new const ushort Id = 7502;
         public override ushort MessageId => Id;
 
         public short idolId;

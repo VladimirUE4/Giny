@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TreasureHuntRequestAnswerMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1019;
+        public new const ushort Id = 1019;
         public override ushort MessageId => Id;
 
         public byte questType;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DebtsDeleteMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5619;
+        public new const ushort Id = 5619;
         public override ushort MessageId => Id;
 
         public byte reason;

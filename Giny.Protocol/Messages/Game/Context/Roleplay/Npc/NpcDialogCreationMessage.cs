@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NpcDialogCreationMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5848;
+        public new const ushort Id = 5848;
         public override ushort MessageId => Id;
 
         public double mapId;

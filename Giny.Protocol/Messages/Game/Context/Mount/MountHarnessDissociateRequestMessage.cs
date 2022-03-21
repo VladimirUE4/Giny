@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountHarnessDissociateRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9897;
+        public new const ushort Id = 9897;
         public override ushort MessageId => Id;
 
 

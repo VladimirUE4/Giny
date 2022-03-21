@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public PartyLeaveRequestMessage()
         {
         }
+        public PartyLeaveRequestMessage(int partyId)
+        {
+            this.partyId = partyId;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

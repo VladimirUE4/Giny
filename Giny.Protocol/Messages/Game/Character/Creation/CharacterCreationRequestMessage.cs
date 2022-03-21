@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterCreationRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5026;
+        public new const ushort Id = 5026;
         public override ushort MessageId => Id;
 
         public string name;
@@ -48,6 +48,7 @@ namespace Giny.Protocol.Messages
         }
         public override void Deserialize(IDataReader reader)
         {
+            colors = new int[5];
             name = (string)reader.ReadUTF();
             breed = (byte)reader.ReadByte();
             if (breed < (byte)PlayableBreedEnum.Feca || breed > (byte)PlayableBreedEnum.Ouginak)
@@ -56,9 +57,6 @@ namespace Giny.Protocol.Messages
             }
 
             sex = (bool)reader.ReadBoolean();
-
-            colors = new int[5];
-
             for (uint _i4 = 0;_i4 < 5;_i4++)
             {
                 colors[_i4] = reader.ReadInt();

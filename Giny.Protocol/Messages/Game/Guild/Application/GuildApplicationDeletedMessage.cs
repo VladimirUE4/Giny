@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildApplicationDeletedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5546;
+        public new const ushort Id = 5546;
         public override ushort MessageId => Id;
 
         public bool deleted;

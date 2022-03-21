@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LivingObjectMessageMessage : NetworkMessage  
     { 
-        public  const ushort Id = 2593;
+        public new const ushort Id = 2593;
         public override ushort MessageId => Id;
 
         public short msgId;

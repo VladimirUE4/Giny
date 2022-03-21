@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class EditHavenBagRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8749;
+        public new const ushort Id = 8749;
         public override ushort MessageId => Id;
 
 

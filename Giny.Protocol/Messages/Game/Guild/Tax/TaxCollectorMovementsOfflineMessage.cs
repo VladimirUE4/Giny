@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TaxCollectorMovementsOfflineMessage : NetworkMessage  
     { 
-        public  const ushort Id = 3016;
+        public new const ushort Id = 3016;
         public override ushort MessageId => Id;
 
         public TaxCollectorMovement[] movements;

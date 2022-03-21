@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ActivityLockRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 579;
+        public new const ushort Id = 579;
         public override ushort MessageId => Id;
 
         public short activityId;

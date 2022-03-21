@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class UpdateSpellModifierMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1672;
+        public new const ushort Id = 1672;
         public override ushort MessageId => Id;
 
         public double actorId;

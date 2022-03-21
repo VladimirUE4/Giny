@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMoneyMovementInformationMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6336;
+        public new const ushort Id = 6336;
         public override ushort MessageId => Id;
 
         public long limit;

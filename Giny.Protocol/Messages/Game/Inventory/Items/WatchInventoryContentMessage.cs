@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public WatchInventoryContentMessage()
         {
         }
+        public WatchInventoryContentMessage(ObjectItem[] objects,long kamas)
+        {
+            this.objects = objects;
+            this.kamas = kamas;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

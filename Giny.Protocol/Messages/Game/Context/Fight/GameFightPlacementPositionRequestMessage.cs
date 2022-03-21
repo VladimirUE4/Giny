@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightPlacementPositionRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5499;
+        public new const ushort Id = 5499;
         public override ushort MessageId => Id;
 
         public short cellId;

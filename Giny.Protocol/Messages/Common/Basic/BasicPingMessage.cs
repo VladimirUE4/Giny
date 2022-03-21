@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicPingMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8161;
+        public new const ushort Id = 8161;
         public override ushort MessageId => Id;
 
         public bool quiet;

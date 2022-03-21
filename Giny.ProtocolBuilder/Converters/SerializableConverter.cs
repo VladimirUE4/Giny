@@ -38,8 +38,6 @@ namespace Giny.ProtocolBuilder.Converters
             return results.ToArray();
         }
 
-
-
         private List<AS3Variable> GetCtorParametersInBase(AS3File current, Dictionary<string, AS3File> context)
         {
             var targetName = current.Extends;
@@ -58,7 +56,7 @@ namespace Giny.ProtocolBuilder.Converters
             if (targetCtor != null)
             {
                 DofusHelper.DeductCtorFieldTypes(BaseClassName, current, targetCtor.Parameters, context);
-                results.AddRange(targetCtor.Parameters); 
+                results.AddRange(targetCtor.Parameters);
             }
 
             return results;
@@ -70,7 +68,9 @@ namespace Giny.ProtocolBuilder.Converters
             {
                 var ctor = MethodsToWrite.FirstOrDefault(x => x.IsConstructor && x.Parameters.Count > 0);
 
-                if (ctor == null)
+                bool addCtor = ctor == null;
+
+                if (addCtor)
                 {
                     ctor = File.CreateEmptyConstructor();
                 }
@@ -98,6 +98,11 @@ namespace Giny.ProtocolBuilder.Converters
                 {
                     VariableNameExpression expr = new VariableNameExpression(param.Name);
                     ctor.Expressions.Add(new AssignationExpression("this." + param.Name, expr));
+                }
+
+                if (addCtor && ctor.Parameters.Count > 0)
+                {
+                    MethodsToWrite.Insert(1, ctor);
                 }
 
             }

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterNameSuggestionSuccessMessage : NetworkMessage  
     { 
-        public  const ushort Id = 428;
+        public new const ushort Id = 428;
         public override ushort MessageId => Id;
 
         public string suggestion;

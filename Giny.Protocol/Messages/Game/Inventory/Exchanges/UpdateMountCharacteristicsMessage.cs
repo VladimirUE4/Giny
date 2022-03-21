@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class UpdateMountCharacteristicsMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9937;
+        public new const ushort Id = 9937;
         public override ushort MessageId => Id;
 
         public int rideId;

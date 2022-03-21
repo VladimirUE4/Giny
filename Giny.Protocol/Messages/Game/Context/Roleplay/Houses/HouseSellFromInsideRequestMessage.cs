@@ -16,6 +16,12 @@ namespace Giny.Protocol.Messages
         public HouseSellFromInsideRequestMessage()
         {
         }
+        public HouseSellFromInsideRequestMessage(int instanceId,long amount,bool forSale)
+        {
+            this.instanceId = instanceId;
+            this.amount = amount;
+            this.forSale = forSale;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuidedModeQuitRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6012;
+        public new const ushort Id = 6012;
         public override ushort MessageId => Id;
 
 

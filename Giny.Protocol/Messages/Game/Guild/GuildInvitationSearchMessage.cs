@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildInvitationSearchMessage : NetworkMessage  
     { 
-        public  const ushort Id = 5666;
+        public new const ushort Id = 5666;
         public override ushort MessageId => Id;
 
         public AbstractPlayerSearchInformation target;

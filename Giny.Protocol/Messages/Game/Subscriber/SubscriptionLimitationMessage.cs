@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SubscriptionLimitationMessage : NetworkMessage  
     { 
-        public  const ushort Id = 969;
+        public new const ushort Id = 969;
         public override ushort MessageId => Id;
 
         public byte reason;

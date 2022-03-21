@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public PartyNewMemberMessage()
         {
         }
+        public PartyNewMemberMessage(int partyId,PartyMemberInformations memberInformations)
+        {
+            this.partyId = partyId;
+            this.memberInformations = memberInformations;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

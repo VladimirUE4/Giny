@@ -16,6 +16,12 @@ namespace Giny.Protocol.Messages
         public IdolsPresetSaveRequestMessage()
         {
         }
+        public IdolsPresetSaveRequestMessage(short presetId,byte symbolId,bool updateData)
+        {
+            this.presetId = presetId;
+            this.symbolId = symbolId;
+            this.updateData = updateData;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

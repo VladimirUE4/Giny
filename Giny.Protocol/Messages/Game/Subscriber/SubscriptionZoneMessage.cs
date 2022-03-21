@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SubscriptionZoneMessage : NetworkMessage  
     { 
-        public  const ushort Id = 3082;
+        public new const ushort Id = 3082;
         public override ushort MessageId => Id;
 
         public bool active;

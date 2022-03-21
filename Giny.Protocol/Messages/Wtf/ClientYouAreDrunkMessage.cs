@@ -16,6 +16,11 @@ namespace Giny.Protocol.Messages
         public ClientYouAreDrunkMessage()
         {
         }
+        public ClientYouAreDrunkMessage(byte level,string message)
+        {
+            this.level = level;
+            this.message = message;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

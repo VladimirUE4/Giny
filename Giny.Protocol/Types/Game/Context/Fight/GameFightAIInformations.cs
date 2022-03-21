@@ -14,6 +14,16 @@ namespace Giny.Protocol.Types
         public GameFightAIInformations()
         {
         }
+        public GameFightAIInformations(double contextualId,EntityDispositionInformations disposition,EntityLook look,GameContextBasicSpawnInformation spawnInfo,byte wave,GameFightCharacteristics stats,short[] previousPositions)
+        {
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+            this.spawnInfo = spawnInfo;
+            this.wave = wave;
+            this.stats = stats;
+            this.previousPositions = previousPositions;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

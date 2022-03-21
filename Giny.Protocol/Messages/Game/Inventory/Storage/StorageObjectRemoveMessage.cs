@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class StorageObjectRemoveMessage : NetworkMessage  
     { 
-        public  const ushort Id = 4970;
+        public new const ushort Id = 4970;
         public override ushort MessageId => Id;
 
         public int objectUID;

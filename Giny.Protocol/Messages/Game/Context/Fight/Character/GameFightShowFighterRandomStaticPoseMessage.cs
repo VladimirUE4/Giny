@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public GameFightShowFighterRandomStaticPoseMessage()
         {
         }
+        public GameFightShowFighterRandomStaticPoseMessage(GameFightFighterInformations informations)
+        {
+            this.informations = informations;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

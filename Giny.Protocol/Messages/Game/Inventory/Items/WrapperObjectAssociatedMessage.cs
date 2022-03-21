@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public WrapperObjectAssociatedMessage()
         {
         }
+        public WrapperObjectAssociatedMessage(int hostUID)
+        {
+            this.hostUID = hostUID;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

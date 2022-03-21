@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AnomalySubareaInformationResponseMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6030;
+        public new const ushort Id = 6030;
         public override ushort MessageId => Id;
 
         public AnomalySubareaInformation[] subareas;

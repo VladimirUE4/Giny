@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PresetSavedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 4820;
+        public new const ushort Id = 4820;
         public override ushort MessageId => Id;
 
         public short presetId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AcquaintanceSearchMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9528;
+        public new const ushort Id = 9528;
         public override ushort MessageId => Id;
 
         public AccountTagInformation tag;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class WarnOnPermaDeathMessage : NetworkMessage  
     { 
-        public  const ushort Id = 9760;
+        public new const ushort Id = 9760;
         public override ushort MessageId => Id;
 
         public bool enable;

@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public AllianceMotdSetErrorMessage()
         {
         }
+        public AllianceMotdSetErrorMessage(byte reason)
+        {
+            this.reason = reason;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

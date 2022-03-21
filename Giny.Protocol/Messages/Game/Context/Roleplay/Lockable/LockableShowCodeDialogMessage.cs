@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LockableShowCodeDialogMessage : NetworkMessage  
     { 
-        public  const ushort Id = 3045;
+        public new const ushort Id = 3045;
         public override ushort MessageId => Id;
 
         public bool changeOrUse;

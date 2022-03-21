@@ -16,6 +16,10 @@ namespace Giny.Protocol.Messages
         public PrismsListUpdateMessage()
         {
         }
+        public PrismsListUpdateMessage(PrismSubareaEmptyInfo[] prisms)
+        {
+            this.prisms = prisms;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

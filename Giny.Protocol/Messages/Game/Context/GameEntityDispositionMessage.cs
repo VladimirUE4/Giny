@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameEntityDispositionMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8701;
+        public new const ushort Id = 8701;
         public override ushort MessageId => Id;
 
         public IdentifiedEntityDispositionInformations disposition;

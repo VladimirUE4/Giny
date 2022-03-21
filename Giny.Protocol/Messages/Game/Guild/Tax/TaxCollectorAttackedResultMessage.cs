@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TaxCollectorAttackedResultMessage : NetworkMessage  
     { 
-        public  const ushort Id = 7270;
+        public new const ushort Id = 7270;
         public override ushort MessageId => Id;
 
         public bool deadOrAlive;

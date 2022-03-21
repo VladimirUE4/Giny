@@ -16,6 +16,14 @@ namespace Giny.Protocol.Messages
         public GameActionFightTriggerEffectMessage()
         {
         }
+        public GameActionFightTriggerEffectMessage(short actionId,double sourceId,double targetId,bool verboseCast,int boostUID)
+        {
+            this.actionId = actionId;
+            this.sourceId = sourceId;
+            this.targetId = targetId;
+            this.verboseCast = verboseCast;
+            this.boostUID = boostUID;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

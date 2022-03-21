@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PopupWarningCloseRequestMessage : NetworkMessage  
     { 
-        public  const ushort Id = 3461;
+        public new const ushort Id = 3461;
         public override ushort MessageId => Id;
 
 

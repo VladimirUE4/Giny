@@ -14,6 +14,12 @@ namespace Giny.Protocol.Types
         public GameRolePlayActorInformations()
         {
         }
+        public GameRolePlayActorInformations(double contextualId,EntityDispositionInformations disposition,EntityLook look)
+        {
+            this.contextualId = contextualId;
+            this.disposition = disposition;
+            this.look = look;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

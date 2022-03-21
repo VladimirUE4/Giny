@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class QuestValidatedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1984;
+        public new const ushort Id = 1984;
         public override ushort MessageId => Id;
 
         public short questId;

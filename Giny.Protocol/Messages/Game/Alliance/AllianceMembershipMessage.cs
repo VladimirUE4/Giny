@@ -16,6 +16,12 @@ namespace Giny.Protocol.Messages
         public AllianceMembershipMessage()
         {
         }
+        public AllianceMembershipMessage(AllianceInformations allianceInfo,bool enabled,int leadingGuildId)
+        {
+            this.allianceInfo = allianceInfo;
+            this.enabled = enabled;
+            this.leadingGuildId = leadingGuildId;
+        }
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);

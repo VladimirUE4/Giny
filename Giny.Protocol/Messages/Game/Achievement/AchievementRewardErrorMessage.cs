@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AchievementRewardErrorMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8883;
+        public new const ushort Id = 8883;
         public override ushort MessageId => Id;
 
         public short achievementId;

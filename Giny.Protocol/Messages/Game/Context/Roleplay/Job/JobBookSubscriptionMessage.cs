@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobBookSubscriptionMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8266;
+        public new const ushort Id = 8266;
         public override ushort MessageId => Id;
 
         public JobBookSubscription[] subscriptions;

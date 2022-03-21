@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceModificationNameAndTagValidMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8950;
+        public new const ushort Id = 8950;
         public override ushort MessageId => Id;
 
         public string allianceName;

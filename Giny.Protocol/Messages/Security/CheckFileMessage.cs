@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CheckFileMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6281;
+        public new const ushort Id = 6281;
         public override ushort MessageId => Id;
 
         public string filenameHash;

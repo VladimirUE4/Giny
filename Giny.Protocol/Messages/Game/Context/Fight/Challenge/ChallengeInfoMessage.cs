@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChallengeInfoMessage : NetworkMessage  
     { 
-        public  const ushort Id = 638;
+        public new const ushort Id = 638;
         public override ushort MessageId => Id;
 
         public short challengeId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GoldAddedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 1408;
+        public new const ushort Id = 1408;
         public override ushort MessageId => Id;
 
         public GoldItem gold;

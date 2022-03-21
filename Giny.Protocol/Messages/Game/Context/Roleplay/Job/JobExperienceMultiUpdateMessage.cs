@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class JobExperienceMultiUpdateMessage : NetworkMessage  
     { 
-        public  const ushort Id = 4771;
+        public new const ushort Id = 4771;
         public override ushort MessageId => Id;
 
         public JobExperience[] experiencesUpdate;

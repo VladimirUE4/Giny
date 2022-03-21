@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlmanachCalendarDateMessage : NetworkMessage  
     { 
-        public  const ushort Id = 2577;
+        public new const ushort Id = 2577;
         public override ushort MessageId => Id;
 
         public int date;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStoppedMessage : NetworkMessage  
     { 
-        public  const ushort Id = 8743;
+        public new const ushort Id = 8743;
         public override ushort MessageId => Id;
 
         public long id;

@@ -98,10 +98,7 @@ namespace Giny.World.Handlers.Roleplay.Items
                 client.Character.Inventory.RemoveItem(message.symbioteUID, 1);
                 client.Character.Inventory.AddItem(result);
 
-                client.Send(new MimicryObjectAssociatedMessage()
-                {
-                    hostUID = result.UId,
-                }); 
+                client.Send(new MimicryObjectAssociatedMessage(result.UId));
             }
         }
     }
