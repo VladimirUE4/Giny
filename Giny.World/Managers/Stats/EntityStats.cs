@@ -49,7 +49,7 @@ namespace Giny.World.Managers.Stats
             get;
             set;
         }
-       
+
         public int MissingLife
         {
             get
@@ -151,21 +151,31 @@ namespace Giny.World.Managers.Stats
             return Strength.Total() + Chance.Total() + Intelligence.Total() + Agility.Total();
         }
 
-        public virtual CharacterCharacteristic[] GetCharacterCharacteristics()
+        public virtual CharacterCharacteristic[] GetCharacterCharacteristics(CharacteristicEnum[] selected = null)
         {
             List<CharacterCharacteristic> results = new List<CharacterCharacteristic>();
 
-            foreach (KeyValuePair<CharacteristicEnum,Characteristic> stat in this.GetCharacteristics())
+            if (selected == null)
             {
-                var characterCharacteristic = stat.Value.GetCharacterCharacteristicDetailed(stat.Key);
-                results.Add(characterCharacteristic);
+                foreach (KeyValuePair<CharacteristicEnum, Characteristic> stat in this.GetCharacteristics())
+                {
+                    var characterCharacteristic = stat.Value.GetCharacterCharacteristicDetailed(stat.Key);
+                    results.Add(characterCharacteristic);
+                }
             }
-
+            else
+            {
+                foreach (KeyValuePair<CharacteristicEnum, Characteristic> stat in this.GetCharacteristics().Where(x => selected.Contains(x.Key)))
+                {
+                    var characterCharacteristic = stat.Value.GetCharacterCharacteristicDetailed(stat.Key);
+                    results.Add(characterCharacteristic);
+                }
+            }
             results.Add(new CharacterCharacteristicValue(LifePoints, (short)CharacteristicEnum.LIFE_POINTS));
             results.Add(new CharacterCharacteristicValue(MaxLifePoints, (short)CharacteristicEnum.MAX_LIFE_POINTS));
             results.Add(new CharacterCharacteristicValue(MaxEnergyPoints, (short)CharacteristicEnum.MAX_ENERGY_POINTS));
             results.Add(new CharacterCharacteristicValue(Energy, (short)CharacteristicEnum.ENERGY_POINTS));
-         
+
             return results.ToArray();
         }
         public CharacterCharacteristicsInformations GetCharacterCharacteristicsInformations(Character character)
@@ -279,10 +289,10 @@ namespace Giny.World.Managers.Stats
             return stats;
         }
 
-        public Dictionary<CharacteristicEnum,Characteristic> GetCharacteristics()
+        public Dictionary<CharacteristicEnum, Characteristic> GetCharacteristics()
         {
             return Characteristics;
         }
-        
+
     }
 }

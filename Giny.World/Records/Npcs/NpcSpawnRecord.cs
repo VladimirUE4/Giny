@@ -87,6 +87,10 @@ namespace Giny.World.Records.Npcs
 
         public static long PopNextId()
         {
+            if (NpcSpawns.Count == 0)
+            {
+                return 1;
+            }
             return NpcSpawns.Keys.OrderByDescending(x => x).First() + 1;
         }
         public static NpcSpawnRecord GetNpcSpawnRecord(long spawnId)

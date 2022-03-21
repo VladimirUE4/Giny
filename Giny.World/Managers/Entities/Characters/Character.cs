@@ -840,6 +840,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new CharacterStatsListMessage(Record.Stats.GetCharacterCharacteristicsInformations(this)));
         }
+     
         public void OnStatUpgradeResult(StatsUpgradeResultEnum result, short nbCharacBoost)
         {
             Client.Send(new StatsUpgradeResultMessage((byte)result, nbCharacBoost));

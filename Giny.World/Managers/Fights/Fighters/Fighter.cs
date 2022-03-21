@@ -462,6 +462,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                         this.LooseMp(this, mpCost, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_USE);
 
+
                         IsMoving = false;
                     }
                     else
@@ -489,22 +490,27 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             Stats.UseMp(amount);
             OnPointsVariation(source.Id, action, (short)(-amount));
-        }
-        public void LooseAp(Fighter source, short amount, ActionsEnum action)
-        {
-            Stats.UseAp(amount);
-            OnPointsVariation(source.Id, action, (short)(-amount));
-        }
-        public void GainAp(Fighter source, short delta)
-        {
-            Stats.GainAp(delta);
-            OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
+            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS, CharacteristicEnum.MAX_MOVEMENT_POINTS);
         }
         public void GainMp(Fighter source, short delta)
         {
             Stats.GainMp(delta);
             OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_WIN, delta);
+            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS, CharacteristicEnum.MAX_MOVEMENT_POINTS);
         }
+        public void LooseAp(Fighter source, short amount, ActionsEnum action)
+        {
+            Stats.UseAp(amount);
+            OnPointsVariation(source.Id, action, (short)(-amount));
+            RefreshStats(CharacteristicEnum.ACTION_POINTS, CharacteristicEnum.MAX_ACTION_POINTS);
+        }
+        public void GainAp(Fighter source, short delta)
+        {
+            Stats.GainAp(delta);
+            OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
+            RefreshStats(CharacteristicEnum.MAX_ACTION_POINTS, CharacteristicEnum.MAX_ACTION_POINTS);
+        }
+       
 
         private void OnPointsVariation(int sourceId, ActionsEnum action, short delta)
         {
@@ -516,10 +522,12 @@ namespace Giny.World.Managers.Fights.Fighters
                 targetId = Id,
             });
 
+
             switch (action)
             {
                 case ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_LOST:
                     TriggerBuffs(TriggerTypeEnum.OnMPLost, null);
+
                     break;
                 case ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_LOST:
                     TriggerBuffs(TriggerTypeEnum.OnAPLost, null);
@@ -763,8 +771,20 @@ namespace Giny.World.Managers.Fights.Fighters
             }
         }
 
-
-
+        public void RefreshStats(params CharacteristicEnum[] characteristics)
+        {
+            foreach (CharacterFighter target in Fight.GetAllConnectedFighters())
+            {
+                target.Character.Client.Send(new RefreshCharacterStatsMessage(Id, Stats.GetGameFightCharacteristics(this, target, characteristics)));
+            }
+        }
+        public void RefreshStats()
+        {
+            foreach (CharacterFighter target in Fight.GetAllConnectedFighters())
+            {
+                target.Character.Client.Send(new RefreshCharacterStatsMessage(Id, Stats.GetGameFightCharacteristics(this, target)));
+            }
+        }
         public void ShowFighter(CharacterFighter fighter)
         {
             fighter.Character.Client.Send(new GameFightShowFighterMessage(GetFightFighterInformations(fighter)));

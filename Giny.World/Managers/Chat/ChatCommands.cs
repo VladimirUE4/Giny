@@ -469,6 +469,9 @@ namespace Giny.World.Managers.Chat
         [ChatCommand("test", ServerRoleEnum.Administrator)]
         public static void TestCommand(WorldClient client)
         {
+            client.Character.RefreshStats();
+            return;
+
             var item = client.Character.Inventory.GetEquipedItems().FirstOrDefault(x => x.Record.TypeEnum == ItemTypeEnum.RING);
 
             client.Character.Inventory.Unequip(item.PositionEnum);
@@ -477,7 +480,7 @@ namespace Giny.World.Managers.Chat
 
             item.UpdateElement();
 
-
+        
             client.Character.Inventory.OnItemModified(item);
             return;
             IEnumerable<MonsterRecord> records = MonsterRecord.GetMonsterRecords().Where(x => x.IsBoss == true).Shuffle().Take(8);
