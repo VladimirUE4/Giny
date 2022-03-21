@@ -77,13 +77,13 @@ namespace Giny.World.Managers.Fights
             return fight;
         }
 
-        public FightContextual CreateFightContextual(Character source, short? targetObjective, string message)
+        public FightContextual CreateFightContextual(Character source)
         {
             FightTeam blueTeam = new FightTeam(TeamEnum.TEAM_DEFENDER, source.Map.BlueCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_MONSTER);
             FightTeam redTeam = new FightTeam(TeamEnum.TEAM_CHALLENGER, source.Map.RedCells, AlignmentSideEnum.ALIGNMENT_WITHOUT, TeamTypeEnum.TEAM_TYPE_PLAYER);
 
             var map = MapRecord.GetMap(source.Record.MapId);
-            var fight = new FightContextual(source, PopId(),targetObjective, message, map, blueTeam, redTeam, source.GetCell());
+            var fight = new FightContextual(source, PopId(),map, blueTeam, redTeam, source.GetCell());
             Fights.TryAdd(fight.Id, fight);
 
 

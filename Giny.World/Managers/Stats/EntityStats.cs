@@ -151,7 +151,7 @@ namespace Giny.World.Managers.Stats
             return Strength.Total() + Chance.Total() + Intelligence.Total() + Agility.Total();
         }
 
-        public CharacterCharacteristic[] GetCharacterCharacteristics()
+        public virtual CharacterCharacteristic[] GetCharacterCharacteristics()
         {
             List<CharacterCharacteristic> results = new List<CharacterCharacteristic>();
 

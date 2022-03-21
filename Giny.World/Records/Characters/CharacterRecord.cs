@@ -177,12 +177,6 @@ namespace Giny.World.Records.Characters
             get;
             set;
         }
-        [Update]
-        public List<short> DoneObjectives
-        {
-            get;
-            set;
-        }
         [Ignore]
         public int? FightId
         {
@@ -262,8 +256,6 @@ namespace Giny.World.Records.Characters
                 KnownTitles = new List<short>(),
                 Jobs = CharacterJob.New().ToArray(),
                 GuildId = 0,
-                DoneObjectives = new List<short>(),
-
             };
         }
         public static CharacterRecord GetCharacterRecord(long id)

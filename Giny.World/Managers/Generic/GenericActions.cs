@@ -167,12 +167,6 @@ namespace Giny.World.Managers.Generic
             character.OpenRuneTradeExchange();
         }
 
-        [GenericActionHandler(GenericActionEnum.Reach)]
-        public static void HandleReach(Character character, IGenericActionParameter parameter)
-        {
-            character.ReachObjective(short.Parse(parameter.Param1), parameter.Param2);
-
-        }
         [GenericActionHandler(GenericActionEnum.AddExperience)]
         public static void HandleAddExperience(Character character, IGenericActionParameter parameter)
         {
@@ -187,20 +181,11 @@ namespace Giny.World.Managers.Generic
         [GenericActionHandler(GenericActionEnum.Fight)]
         public static void HandleFight(Character character, IGenericActionParameter parameter)
         {
-            short? targetObjective = null;
-
-            string message = parameter.Param3;
-
-            if (!string.IsNullOrEmpty(parameter.Param2))
-            {
-                targetObjective = short.Parse(parameter.Param2);
-            }
-
             IEnumerable<MonsterRecord> records = parameter.Param1.Split(',').Select(x => MonsterRecord.GetMonsterRecord(short.Parse(x)));
 
             if (records.Count() > 0)
             {
-                FightContextual fight = FightManager.Instance.CreateFightContextual(character, targetObjective, message);
+                FightContextual fight = FightManager.Instance.CreateFightContextual(character);
 
                 var cell = character.Map.RandomWalkableCell();
 

@@ -1,13 +1,9 @@
-﻿using Giny.Core.DesignPattern;
-using Giny.Protocol.Enums;
+﻿using Giny.Protocol.Enums;
 using Giny.Protocol.Types;
 using Giny.World.Managers.Entities.Characters;
 using Giny.World.Managers.Fights.Fighters;
 using Giny.World.Managers.Fights.Results;
-using Giny.World.Managers.Formulas;
-using Giny.World.Managers.Monsters;
 using Giny.World.Records.Maps;
-using Giny.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +20,9 @@ namespace Giny.World.Managers.Fights
 
         public override bool SpawnJoin => true;
 
-        private short? TargetObjective
-        {
-            get;
-            set;
-        }
-        private string ObjectiveMessage
-        {
-            get;
-            set;
-        }
-        public FightContextual(Character origin, int id, short? targetObjective, string objectiveMessage, MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
+        public FightContextual(Character origin, int id,  MapRecord map, FightTeam blueTeam, FightTeam redTeam, CellRecord cell)
             : base(origin, id, map, blueTeam, redTeam, cell)
         {
-            this.TargetObjective = targetObjective;
-            this.ObjectiveMessage = objectiveMessage;
         }
 
         public override FightCommonInformations GetFightCommonInformations()
@@ -60,10 +44,7 @@ namespace Giny.World.Managers.Fights
         {
             if (Winners == GetTeam(TeamTypeEnum.TEAM_TYPE_PLAYER))
             {
-                if (TargetObjective.HasValue)
-                {
-                    Origin.ReachObjective(TargetObjective.Value, ObjectiveMessage);
-                }
+              // do stuff
             }
         }
 
