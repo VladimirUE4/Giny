@@ -17,13 +17,7 @@ namespace Giny.World.Handlers.Roleplay.Items
     {
         public static void SendMimicryObjectErrorMessage(WorldClient client, MimicryErrorEnum error)
         {
-            client.Send(new MimicryObjectErrorMessage()
-            {
-                errorCode = (byte)error,
-                preview = true,
-                reason = (byte)ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR,
-
-            });
+            client.Send(new MimicryObjectErrorMessage(true, (byte)ObjectErrorEnum.SYMBIOTIC_OBJECT_ERROR, (byte)error));
         }
 
         [MessageHandler]
@@ -107,7 +101,7 @@ namespace Giny.World.Handlers.Roleplay.Items
                 client.Send(new MimicryObjectAssociatedMessage()
                 {
                     hostUID = result.UId,
-                });
+                }); 
             }
         }
     }

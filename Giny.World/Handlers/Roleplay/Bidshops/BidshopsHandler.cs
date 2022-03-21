@@ -54,11 +54,7 @@ namespace Giny.World.Handlers.Roleplay.Bidshops
         {
             long price = BidshopsManager.Instance.GetAveragePrice(message.genId);
 
-            client.Send(new ObjectAveragePricesMessage()
-            {
-                ids = new short[] { message.genId },
-                avgPrices = new long[] { price },
-            });
+            client.Send(new ObjectAveragePricesMessage(new short[] { message.genId }, new long[] { price }));
         }
 
         [MessageHandler]
@@ -66,11 +62,7 @@ namespace Giny.World.Handlers.Roleplay.Bidshops
         {
             var objectPrices = BidshopsManager.Instance.GetAveragePrices();
 
-            client.Send(new ObjectAveragePricesMessage()
-            {
-                ids = objectPrices.Keys.ToArray(),
-                avgPrices = objectPrices.Values.ToArray(),
-            });
+            client.Send(new ObjectAveragePricesMessage(objectPrices.Keys.ToArray(), objectPrices.Values.ToArray()));
         }
     }
 }

@@ -391,11 +391,7 @@ namespace Giny.World.Managers.Fights
                 Idols = Origin.IdolsInventory;
 
             }
-            this.Send(new IdolFightPreparationUpdateMessage()
-            {
-                idols = Idols.GetActiveIdols().Select(x => x.GetIdol()).ToArray(),
-                idolSource = 0,
-            });
+            this.Send(new IdolFightPreparationUpdateMessage(0, Idols.GetActiveIdols().Select(x => x.GetIdol()).ToArray()));
         }
 
         private void ShowBladesOnMap()
@@ -520,8 +516,6 @@ namespace Giny.World.Managers.Fights
 
         public abstract void OnFightStarted();
 
-
-
         private void StartFight()
         {
             this.StartAcknowledged = true;
@@ -629,28 +623,24 @@ namespace Giny.World.Managers.Fights
 
         private void DecrementBuffsDelay()
         {
-
-
-
             foreach (var buff in Buffs.OfType<TriggerBuff>().Where(x => x.HasDelay() && x.TurnIndex == GetTurnIndex()).ToArray())
             {
                 if (buff.DecrementDelay())
                 {
                     buff.Apply();
-                    buff.Target.RemoveAndDispellBuff(buff);
+                    buff.Target.RemoveAndDispellBuff(buff.GetSource(), buff);
                 }
             }
         }
         private void DecrementBuffsDuration()
         {
-
             foreach (var buff in Buffs.ToArray().Where(x => x.TurnIndex == GetTurnIndex()))
             {
                 if (!buff.HasDelay())
                 {
                     if (buff.DecrementDuration() && buff.Target.HasBuff(buff))
                     {
-                        buff.Target.RemoveAndDispellBuff(buff);
+                        buff.Target.RemoveAndDispellBuff(buff.GetSource(), buff);
                     }
                 }
             }
@@ -847,13 +837,7 @@ namespace Giny.World.Managers.Fights
             foreach (var fighter in GetAllConnectedFighters())
             {
                 var gameActionMark = GetGameActionMark(fighter, mark);
-
-                fighter.Send(new GameActionFightMarkCellsMessage()
-                {
-                    actionId = 0,
-                    mark = gameActionMark,
-                    sourceId = mark.Source.Id
-                });
+                fighter.Send(new GameActionFightMarkCellsMessage(gameActionMark, 0, mark.Source.Id));
             }
 
             mark.OnAdded();
@@ -862,12 +846,7 @@ namespace Giny.World.Managers.Fights
         {
             this.Marks.Remove(mark);
 
-            this.Send(new GameActionFightUnmarkCellsMessage()
-            {
-                actionId = 0,
-                markId = (short)mark.Id,
-                sourceId = mark.Source.Id,
-            });
+            this.Send(new GameActionFightUnmarkCellsMessage((short)mark.Id, 0, mark.Source.Id));
 
             mark.OnRemoved();
         }
@@ -905,12 +884,8 @@ namespace Giny.World.Managers.Fights
 
             foreach (var target in GetAllConnectedFighters())
             {
-                target.Send(new GameActionFightSummonMessage()
-                {
-                    actionId = 0,
-                    sourceId = source.Id,
-                    summons = summons.Select(x => x.GetFightFighterInformations(target)).ToArray(),
-                });
+                target.Send(new GameActionFightSummonMessage(summons.Select(x => x.GetFightFighterInformations(target)).ToArray(),
+                0, source.Id));
             }
 
 

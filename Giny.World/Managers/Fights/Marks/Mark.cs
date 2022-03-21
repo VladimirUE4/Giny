@@ -178,7 +178,7 @@ namespace Giny.World.Managers.Fights.Marks
 
                 foreach (var buff in buffs.ToArray())
                 {
-                    fighter.RemoveAndDispellBuff(buff);
+                    fighter.RemoveAndDispellBuff(Source, buff);
                 }
             }
 

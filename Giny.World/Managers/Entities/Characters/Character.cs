@@ -1004,13 +1004,7 @@ namespace Giny.World.Managers.Entities.Characters
                 }
                 else
                 {
-                    this.SendMap(new EmotePlayMessage()
-                    {
-                        accountId = Client.Account.Id,
-                        actorId = Id,
-                        emoteId = emoteId,
-                        emoteStartTime = 0,
-                    });
+                    this.SendMap(new EmotePlayMessage(Id, Client.Account.Id, emoteId, 0));
                 }
             }
         }
@@ -1056,13 +1050,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             if (CharacterLoadingComplete)
             {
-                this.SendMap(new CharacterLevelUpInformationMessage()
-                {
-                    id = Id,
-                    name = Name,
-                    newLevel = Level,
-                });
-
+                this.SendMap(new CharacterLevelUpInformationMessage(Name, Id, Level));
                 Client.Send(new CharacterLevelUpMessage(Level));
 
             }
@@ -1143,15 +1131,12 @@ namespace Giny.World.Managers.Entities.Characters
             }
         */
 
+        [WIP]
         public void RefreshArenaInfos()
         {
             var infos = new ArenaRankInfos(new ArenaRanking(1, 2), new ArenaLeagueRanking(1, 1, 200, 100, 1), 1, 2, 3);
-            Client.Send(new GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage()
-            {
-                duel = infos,
-                solo = infos,
-                team = infos,
-            });
+            Client.Send(new GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(infos, infos, infos));
+           
         }
         [WIP]
         public void OnEnterMap()
@@ -1673,11 +1658,7 @@ namespace Giny.World.Managers.Entities.Characters
 
             if (Fighting)
             {
-                Fighter.Fight.Send(new IdolFightPreparationUpdateMessage()
-                {
-                    idols = IdolsInventory.GetActiveIdols().Select(x => x.GetIdol()).ToArray(),
-                    idolSource = 0,
-                });
+                Fighter.Fight.Send(new IdolFightPreparationUpdateMessage(0, IdolsInventory.GetActiveIdols().Select(x => x.GetIdol()).ToArray()));
             }
 
 
@@ -1692,17 +1673,9 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public PartyGuestInformations GetPartyGuestInformations(Party party)
         {
-            return new PartyGuestInformations()
-            {
-                breed = Record.BreedId,
-                entities = new PartyEntityBaseInformation[0],
-                guestId = Id,
-                guestLook = Look.ToEntityLook(),
-                hostId = party.Leader.Id,
-                name = Name,
-                sex = Record.Sex,
-                status = GetPlayerStatus(),
-            };
+            return new PartyGuestInformations(Id,party.Leader.Id,Name,Look.ToEntityLook(),Record.BreedId,Record.Sex,GetPlayerStatus(),
+                new PartyEntityBaseInformation[0]);
+
         }
         public void OnPartyJoinError(int partyId, PartyJoinErrorEnum reason)
         {
@@ -1771,11 +1744,7 @@ namespace Giny.World.Managers.Entities.Characters
 
             this.AddHumanOption(HumanOptionsManager.Instance.CreateHumanOptionGuild(), true);
 
-            Client.Send(new GuildJoinedMessage()
-            {
-                guildInfo = Guild.GetGuildInformations(),
-                memberRights = memberRecord.Rank
-            });
+            Client.Send(new GuildJoinedMessage(Guild.GetGuildInformations(), memberRecord.Rank));
         }
         public void OnGuildKick(Guild guild)
         {
@@ -1786,7 +1755,6 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new GuildLeftMessage());
         }
 
-       
         public CharacterMinimalInformations GetCharacterMinimalInformations()
         {
             return new CharacterMinimalInformations(Level, Id, Name);

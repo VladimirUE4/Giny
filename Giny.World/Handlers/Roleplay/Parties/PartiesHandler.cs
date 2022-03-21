@@ -35,17 +35,9 @@ namespace Giny.World.Handlers.Roleplay.Parties
 
             if (party != null)
             {
-                client.Send(new PartyInvitationDetailsMessage()
-                {
-                    fromId = party.Leader.Id,
-                    fromName = party.Leader.Name,
-                    guests = party.GetPartyGuestsInformations(),
-                    leaderId = party.Leader.Id,
-                    members = party.GetPartyInvitationMembersInformations(),
-                    partyId = party.Id,
-                    partyName = party.PartyName,
-                    partyType = (byte)party.Type,
-                });
+                client.Send(new PartyInvitationDetailsMessage((byte)party.Type, party.PartyName, party.Leader.Id,
+                    party.Leader.Name, party.Leader.Id, party.GetPartyInvitationMembersInformations(),
+                    party.GetPartyGuestsInformations(), party.Id));
             }
             else
             {

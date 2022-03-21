@@ -34,7 +34,7 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                 {
                     foreach (var oldBuff in target.GetBuffs<DisableStateBuff>().Where(x => x.StateId == stateId).ToArray())
                     {
-                        target.RemoveAndDispellBuff(oldBuff);
+                        target.RemoveAndDispellBuff(Source, oldBuff);
                     }
 
                     int id = target.BuffIdProvider.Pop();

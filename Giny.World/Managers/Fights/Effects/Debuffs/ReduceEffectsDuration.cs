@@ -29,13 +29,13 @@ namespace Giny.World.Managers.Fights.Effects.Debuffs
                     buff.Duration -= delta;
 
                     if (buff.Duration <= 0)
-                        target.RemoveAndDispellBuff(buff);
+                        target.RemoveAndDispellBuff(Source, buff);
                 }
 
                 target.OnEffectDurationReduced(Source, Effect.EffectId, delta);
             }
 
-          
+
         }
     }
 }

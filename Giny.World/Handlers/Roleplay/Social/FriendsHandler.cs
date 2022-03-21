@@ -15,10 +15,7 @@ namespace Giny.World.Handlers.Social
         [MessageHandler]
         public static void HandleAcquaintancesGetList(AcquaintancesGetListMessage message, WorldClient client)
         {
-            client.Send(new AcquaintancesListMessage()
-            {
-                acquaintanceList = new AcquaintanceInformation[0]
-            });
+            client.Send(new AcquaintancesListMessage(new AcquaintanceInformation[0]));
         }
         [MessageHandler]
         public static void HandleFriendsGetList(FriendsGetListMessage message, WorldClient client)

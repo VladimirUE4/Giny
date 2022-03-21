@@ -58,14 +58,12 @@ namespace Giny.ProtocolBuilder.Converters
             if (targetCtor != null)
             {
                 DofusHelper.DeductCtorFieldTypes(BaseClassName, current, targetCtor.Parameters, context);
-                results.AddRange(targetCtor.Parameters); // deduct type aled.
+                results.AddRange(targetCtor.Parameters); 
             }
 
             return results;
 
         }
-
-
         public void BuildConstructor(Dictionary<string, AS3File> context)
         {
             if (File.Extends != BaseClassName)
@@ -81,8 +79,6 @@ namespace Giny.ProtocolBuilder.Converters
                 if (additionalParameters.Count > 0)
                 {
                     ctor.Parameters.AddRange(additionalParameters);
-
-                   
                 }
 
 

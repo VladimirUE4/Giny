@@ -570,9 +570,9 @@ namespace Giny.World.Managers.Fights.Fighters
 
         public abstract void OnTurnBegin();
 
-        public void RemoveAndDispellBuff(Buff buff)
+        public void RemoveAndDispellBuff(Fighter source, Buff buff)
         {
-            this.RemoveBuff(buff);
+            this.RemoveBuff(source, buff);
             buff.Dispell();
         }
 
@@ -582,23 +582,17 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var buff in buffs.ToArray())
             {
-                RemoveAndDispellBuff(buff);
+                RemoveAndDispellBuff(source, buff);
 
-                if (buff.Cast.GetParent() != null) 
+                if (buff.Cast.GetParent() != null)
                 {
                     // DOFUS EBENE -> do not remove parent
                     //RemoveSpellEffects(source, buff.Cast.GetParent().SpellId);
                 }
             }
 
-            Fight.Send(new GameActionFightDispellSpellMessage()
-            {
-                actionId = 0,
-                sourceId = source.Id,
-                spellId = spellId,
-                targetId = Id,
-                verboseCast = true
-            });
+            Fight.Send(new GameActionFightDispellSpellMessage(spellId, 0, source.Id,
+                Id, true));
         }
 
         public bool HasBuff(Buff buff)
@@ -606,19 +600,12 @@ namespace Giny.World.Managers.Fights.Fighters
             return Buffs.Contains(buff);
         }
 
-        public void RemoveBuff(Buff buff)
+        public void RemoveBuff(Fighter source, Buff buff)
         {
             this.Buffs.Remove(buff);
             Fight.Buffs.Remove(buff);
 
-            Fight.Send(new GameActionFightDispellEffectMessage()
-            {
-                actionId = (short)ActionsEnum.ACTION_CHARACTER_BOOST_DISPELLED,
-                boostUID = buff.Id,
-                sourceId = buff.Target.Id, // ?
-                targetId = buff.Target.Id,
-                verboseCast = true,
-            });
+            Fight.Send(new GameActionFightDispellEffectMessage(buff.Id, 0, source.Id, buff.Target.Id, true));
 
             BuffIdProvider.Push(buff.Id);
         }
@@ -628,7 +615,7 @@ namespace Giny.World.Managers.Fights.Fighters
             if (BuffMaxStackReached(buff)) // WIP censer cumuler la durée ?
             {
                 Buff oldBuff = Buffs.FirstOrDefault(x => IsSimilar(x, buff));
-                RemoveAndDispellBuff(oldBuff);
+                RemoveAndDispellBuff(this, oldBuff);
             }
 
             Fight.Buffs.Add(buff);
@@ -669,7 +656,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             IEnumerable<TriggerBuff> buffs = GetBuffs<TriggerBuff>().Where(
                 x => x.Triggers.Any(x => x.Type == type && x.Value == triggerParam) && !x.HasDelay() && x.CanTrigger()).ToArray();
-           
+
             foreach (var buff in buffs)
             {
                 buff.LastTriggeredSequence = Fight.SequenceManager.CurrentSequence;
@@ -965,7 +952,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
             foreach (var buff in GetBuffs<InvisibilityBuff>().ToArray())
             {
-                RemoveAndDispellBuff(buff);
+                RemoveAndDispellBuff(this, buff);
             }
 
         }
@@ -1336,7 +1323,7 @@ namespace Giny.World.Managers.Fights.Fighters
         private void InflictPushDamages(Fighter source, int n, bool headOn)
         {
             double num1 = headOn ? 4 : 8d;
-            double num2 = ((source.Level / 2d) + (source.Stats[CharacteristicEnum.PUSH_DAMAGE_BONUS].TotalInContext() 
+            double num2 = ((source.Level / 2d) + (source.Stats[CharacteristicEnum.PUSH_DAMAGE_BONUS].TotalInContext()
                 - this.Stats[CharacteristicEnum.PUSH_DAMAGE_REDUCTION].TotalInContext()) + 32d)
                  * (n / (double)num1);
 
@@ -1664,7 +1651,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             foreach (var buff in GetBuffs<StateBuff>().Where(x => x.Record.Id == stateId).ToArray())
             {
-                RemoveAndDispellBuff(buff);
+                RemoveAndDispellBuff(source, buff);
             }
         }
         public virtual bool CanUsePortal()
@@ -1754,7 +1741,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
         }
 
-        private void DispellShieldBuffs(int amount)
+        private void DispellShieldBuffs(Fighter source, int amount)
         {
             short num = (short)amount;
 
@@ -1765,7 +1752,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 if (buff.Delta <= 0)
                 {
                     num = (short)(-buff.Delta);
-                    RemoveBuff(buff);
+                    RemoveBuff(source, buff);
                 }
                 else
                 {
@@ -1865,7 +1852,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                     }
 
-                    DispellShieldBuffs(shieldLoss);
+                    DispellShieldBuffs(damage.Source, shieldLoss);
                 }
                 else
                 {
@@ -1886,7 +1873,7 @@ namespace Giny.World.Managers.Fights.Fighters
 
                     Stats.RemoveShield(delta);
 
-                    DispellShieldBuffs(shieldLoss);
+                    DispellShieldBuffs(damage.Source, shieldLoss);
                 }
             }
             else
@@ -2104,7 +2091,7 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             foreach (var buff in Buffs.Where(x => x.Cast.Source == source && x.Dispellable <= dispellable).ToArray())
             {
-                RemoveAndDispellBuff(buff);
+                RemoveAndDispellBuff(source, buff);
             }
         }
         public void RemoveAllCastedBuffs()
@@ -2160,13 +2147,8 @@ namespace Giny.World.Managers.Fights.Fighters
 
             Carried = target;
 
-            Fight.Send(new GameActionFightCarryCharacterMessage()
-            {
-                actionId = (short)ActionsEnum.ACTION_CARRY_CHARACTER,
-                cellId = target.Cell.Id,
-                sourceId = Id,
-                targetId = target.Id
-            });
+            Fight.Send(new GameActionFightCarryCharacterMessage(target.Id,
+                target.Cell.Id, (short)ActionsEnum.ACTION_CARRY_CHARACTER, Id));
         }
         public void Throw(CellRecord cell, bool drop)
         {
@@ -2182,23 +2164,12 @@ namespace Giny.World.Managers.Fights.Fighters
 
                 if (!drop)
                 {
-                    Fight.Send(new GameActionFightThrowCharacterMessage()
-                    {
-                        actionId = (short)ActionsEnum.ACTION_THROW_CARRIED_CHARACTER,
-                        cellId = cell.Id,
-                        sourceId = Id,
-                        targetId = Carried.Id,
-                    });
+                    Fight.Send(new GameActionFightThrowCharacterMessage(Carried.Id, cell.Id, (short)ActionsEnum.ACTION_THROW_CARRIED_CHARACTER,
+                        Id));
                 }
                 else
                 {
-                    Fight.Send(new GameActionFightDropCharacterMessage()
-                    {
-                        actionId = (short)ActionsEnum.ACTION_NO_MORE_CARRIED,
-                        cellId = cell.Id,
-                        sourceId = Id,
-                        targetId = Carried.Id
-                    });
+                    Fight.Send(new GameActionFightDropCharacterMessage(Carried.Id, cell.Id, (short)ActionsEnum.ACTION_NO_MORE_CARRIED, Id));
                 }
 
                 Carried = null;
