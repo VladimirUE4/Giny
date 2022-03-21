@@ -3,7 +3,7 @@
 
 ## En cours 
 
-* MimicryHandler.cs
+
 * https://github.com/Skinz3/Giny/blob/00ea079bcc63b918f0eb71068ce57471efc23312/Giny.Protocol/Messages/Game/Inventory/Items/MimicryObjectAssociatedMessage.cs (Where is ctor?)
 * Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
