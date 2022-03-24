@@ -70,7 +70,7 @@ namespace Giny.World.Handlers.Roleplay.Guilds
 
                 if (member != null)
                 {
-                    client.Character.Guild.ChangeParameters(member, message.experienceGivenPercent, message.rank, message.rights);
+                    client.Character.Guild.ChangeParameters(member, message.experienceGivenPercent, message.rankId);
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace Giny.World.Handlers.Roleplay.Guilds
         [MessageHandler]
         public static void HandleGuildInvitation(GuildInvitationMessage message, WorldClient client)
         {
-            if (client.Character.GuildMember.HasRight(GuildRightsBitEnum.GUILD_RIGHT_INVITE_NEW_MEMBERS))
+            if (client.Character.GuildMember.HasRight(GuildRightsEnum.RIGHT_MANAGE_APPLY_AND_INVITATION))
             {
                 var target = WorldServer.Instance.GetOnlineClient(x => x.Character.Id == message.targetId);
 

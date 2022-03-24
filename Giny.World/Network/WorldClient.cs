@@ -206,7 +206,7 @@ namespace Giny.World.Network
 
         public void SendServerOptionalFeatures(params OptionalFeaturesEnum[] optionalFeaturesEnum)
         {
-            Send(new ServerOptionalFeaturesMessage(optionalFeaturesEnum.Select(x => (byte)x).ToArray()));
+            Send(new ServerOptionalFeaturesMessage(optionalFeaturesEnum.Select(x => (int)x).ToArray()));
         }
 
         public void SendBasicTime()

@@ -620,7 +620,7 @@ namespace Giny.World.Managers.Entities.Characters
             Client.Send(new GuildMembershipMessage()
             {
                 guildInfo = Guild.GetGuildInformations(),
-                memberRights = (int)GuildMember.Rights,
+                rankId = GuildMember.Rank,
             });
         }
         public CharacterJob GetJob(JobTypeEnum jobType)
@@ -840,7 +840,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new CharacterStatsListMessage(Record.Stats.GetCharacterCharacteristicsInformations(this)));
         }
-     
+
         public void OnStatUpgradeResult(StatsUpgradeResultEnum result, short nbCharacBoost)
         {
             Client.Send(new StatsUpgradeResultMessage((byte)result, nbCharacBoost));
@@ -1137,7 +1137,7 @@ namespace Giny.World.Managers.Entities.Characters
         {
             var infos = new ArenaRankInfos(new ArenaRanking(1, 2), new ArenaLeagueRanking(1, 1, 200, 100, 1), 1, 2, 3);
             Client.Send(new GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(infos, infos, infos));
-           
+
         }
         [WIP]
         public void OnEnterMap()
@@ -1231,7 +1231,7 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public void CurrentMapMessage(long mapId)
         {
-            Client.Send(new CurrentMapMessage(mapId, MapsManager.MAP_KEY));
+            Client.Send(new CurrentMapMessage(mapId));
         }
         public override GameRolePlayActorInformations GetActorInformations()
         {
@@ -1674,7 +1674,7 @@ namespace Giny.World.Managers.Entities.Characters
         }
         public PartyGuestInformations GetPartyGuestInformations(Party party)
         {
-            return new PartyGuestInformations(Id,party.Leader.Id,Name,Look.ToEntityLook(),Record.BreedId,Record.Sex,GetPlayerStatus(),
+            return new PartyGuestInformations(Id, party.Leader.Id, Name, Look.ToEntityLook(), Record.BreedId, Record.Sex, GetPlayerStatus(),
                 new PartyEntityBaseInformation[0]);
 
         }

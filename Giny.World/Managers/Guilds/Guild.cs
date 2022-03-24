@@ -94,10 +94,10 @@ namespace Giny.World.Managers.Guilds
 
         public void Leave(Character source, GuildMemberRecord member)
         {
-            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS)
-            {
-                return;
-            }
+            /* if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS)
+             {
+                 return;
+             } */
             if (source.Guild != this)
             {
                 return;
@@ -182,18 +182,15 @@ namespace Giny.World.Managers.Guilds
          * 1 meneur
          * 2 bras droit
          */
-        //[WIP]
-        public void ChangeParameters(GuildMemberRecord member, byte experienceGivenPercent, short rank, int rights)
+        [WIP]
+        public void ChangeParameters(GuildMemberRecord member, byte experienceGivenPercent, int rank)
         {
-            if (member.Rights == GuildRightsBitEnum.GUILD_RIGHT_BOSS && rank != 1)
-            {
-                return;
-            }
+
             if (member.Rank == 1)
             {
                 return;
             }
-            member.Rights = (GuildRightsBitEnum)rights;
+            //      member.Rights = (GuildRightsBitEnum)rights;
             member.ExperienceGivenPercent = experienceGivenPercent;
             member.Rank = rank;
             Record.UpdateElement();

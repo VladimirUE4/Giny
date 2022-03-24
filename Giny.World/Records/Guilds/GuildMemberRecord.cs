@@ -25,7 +25,7 @@ namespace Giny.World.Records.Guilds
             set;
         }
         [ProtoMember(2)]
-        public short Rank
+        public int Rank
         {
             get;
             set;
@@ -43,7 +43,7 @@ namespace Giny.World.Records.Guilds
             set;
         }
         [ProtoMember(5)]
-        public GuildRightsBitEnum Rights
+        public GuildRightsEnum Rights
         {
             get;
             set;
@@ -59,6 +59,7 @@ namespace Giny.World.Records.Guilds
         {
 
         }
+        [WIP]
         public GuildMemberRecord(Character character, bool owner)
         {
             CharacterId = character.Id;
@@ -66,7 +67,7 @@ namespace Giny.World.Records.Guilds
             GivenExperience = 0;
             MoodSmileyId = 0;
             Rank = (short)(owner ? 1 : 0);
-            Rights = owner ? GuildRightsBitEnum.GUILD_RIGHT_BOSS : GuildRightsBitEnum.GUILD_RIGHT_NONE;
+            Rights = owner ? GuildRightsEnum.RIGHT_MANAGE_RANKS_AND_RIGHTS : 0;
         }
 
         [WIP]
@@ -100,9 +101,9 @@ namespace Giny.World.Records.Guilds
             };
         }
 
-        public bool HasRight(GuildRightsBitEnum rights)
+        public bool HasRight(GuildRightsEnum rights)
         {
-            return Rights.HasFlag(rights) || Rights.HasFlag(GuildRightsBitEnum.GUILD_RIGHT_BOSS);
+            return Rights.HasFlag(rights) || Rights.HasFlag(GuildRightsEnum.RIGHT_MANAGE_RANKS_AND_RIGHTS);
         }
     }
 }
