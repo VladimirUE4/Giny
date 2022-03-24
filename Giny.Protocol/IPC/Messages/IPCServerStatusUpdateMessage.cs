@@ -12,8 +12,7 @@ namespace Giny.Protocol.IPC.Messages
 {
     public class IPCServerStatusUpdateMessage : IPCMessage
     {
-        public const ushort Id = 11;
-
+        public const ushort Id = 32767;
         public override ushort MessageId
         {
             get
@@ -39,6 +38,8 @@ namespace Giny.Protocol.IPC.Messages
 
         public override void Deserialize(IDataReader reader)
         {
+            
+
             this.status = (ServerStatusEnum)reader.ReadByte();
         }
     }

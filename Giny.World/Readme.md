@@ -92,6 +92,10 @@ lifePoints : 1050 + 0 + 0 - actionPoints : 7 + 0 + 4 - statsPoints : 0 + 0 + 0 -
 
 ## En cours 
 
+* Giny.Zaap
+* GG WP protocol builder message,types,enums :)
+* DatabaseSynchronizer, automatiser les champs manquant lors de la génération du Datacenter
+* Verifier que message Id IPC toujours valide (near ushort.maxValue)
 * GuildMemberRecord.cs public GuildMember ToGuildMember(Guild guild) Guilds.
 * Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
@@ -110,6 +114,7 @@ if (str.StartsWith("["))
 
 ## Todo list (non prioritaire)
 
+- [ ] Migrage vers .NET Core 6.0
 - [x] Mimibiotes
 - [ ] Dragodindes 
 - [ ] Succès  

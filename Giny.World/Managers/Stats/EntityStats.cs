@@ -216,8 +216,6 @@ namespace Giny.World.Managers.Stats
         }
         public static EntityStats New(short level, byte breedId)
         {
-            BreedRecord breed = BreedRecord.GetBreed(breedId);
-
             var stats = new EntityStats()
             {
                 LifePoints = BreedManager.BreedDefaultLife,

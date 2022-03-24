@@ -863,7 +863,6 @@ namespace Giny.World.Managers.Fights.Fighters
         public virtual bool CastSpell(short spellId, short cellId)
         {
             Spell spell = GetSpell(spellId);
-            CellRecord cell = Fight.Map.GetCell(cellId);
 
             if (spell != null)
             {

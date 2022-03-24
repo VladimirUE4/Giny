@@ -10,7 +10,7 @@ namespace Giny.Protocol.IPC.Messages
 {
     public class ResetWorldRequestMessage : IPCMessage
     {
-        public const ushort Id = 12;
+        public const ushort Id = 32764;
 
         public override ushort MessageId
         {

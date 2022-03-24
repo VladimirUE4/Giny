@@ -72,7 +72,16 @@ namespace Giny.ProtocolBuilder.Converters
             int protocolId = (int)File.GetField("protocolId").GetValue<ConstantExpression>().Value;
             StringBuilder sb = new StringBuilder();
             string modifier = this.GetExtends() == string.Empty ? "virtual" : "override";
-            Append(string.Format("public const ushort Id = {0};", protocolId), sb);
+
+            if (GetExtends() == string.Empty)
+            {
+                Append(string.Format("public const ushort Id = {0};", protocolId), sb);
+            }
+            else
+            {
+                Append(string.Format("public new const ushort Id = {0};", protocolId), sb);
+            }
+
             Append("public " + modifier + " ushort TypeId => Id;", sb);
             return sb.ToString();
         }
