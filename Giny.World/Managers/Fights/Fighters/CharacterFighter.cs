@@ -321,7 +321,7 @@ namespace Giny.World.Managers.Fights.Fighters
                 },
 
                 stats = Stats.GetGameFightCharacteristics(this, target),
-                alignmentInfos = new ActorAlignmentInformations(),//todo
+                alignmentInfos = Character.GetActorAlignmentInformations(),
                 breed = Character.Breed.Id,
                 hiddenInPrefight = false,
                 ladderPosition = 0,

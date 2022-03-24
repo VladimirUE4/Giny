@@ -37,12 +37,7 @@ namespace Giny.World.Managers.Dialogs
             SendGuildInvitationRecruter(Source, GuildInvitationStateEnum.GUILD_INVITATION_SENT);
             Target.Client.Send(new GuildInvitationStateRecrutedMessage((byte)GuildInvitationStateEnum.GUILD_INVITATION_SENT));
 
-            Target.Client.Send(new GuildInvitedMessage()
-            {
-                recruterName = Source.Name,
-                recruterId = Source.Id,
-                guildInfo = Source.Guild.GetBasicGuildInformations(),
-            });
+            Target.Client.Send(new GuildInvitedMessage(Source.Id, Source.Name, Source.Guild.GetBasicGuildInformations()));
 
             base.OnOpen();
         }
@@ -55,11 +50,7 @@ namespace Giny.World.Managers.Dialogs
 
         private void SendGuildInvitationRecruter(Character character, GuildInvitationStateEnum state)
         {
-            character.Client.Send(new GuildInvitationStateRecruterMessage()
-            {
-                invitationState = (byte)state,
-                recrutedName = Target.Name
-            });
+            character.Client.Send(new GuildInvitationStateRecruterMessage(Target.Name, (byte)state));
         }
     }
 }

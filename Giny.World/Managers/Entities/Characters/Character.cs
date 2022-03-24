@@ -1233,18 +1233,16 @@ namespace Giny.World.Managers.Entities.Characters
         {
             Client.Send(new CurrentMapMessage(mapId));
         }
+        public ActorAlignmentInformations GetActorAlignmentInformations()
+        {
+            return new ActorAlignmentInformations(0, 0, 0, 0);
+        }
         public override GameRolePlayActorInformations GetActorInformations()
         {
-            return new GameRolePlayCharacterInformations()
-            {
-                accountId = Record.AccountId,
-                alignmentInfos = new ActorAlignmentInformations(0, 0, 0, 0),
-                contextualId = Id,
-                disposition = new EntityDispositionInformations(CellId, (byte)Direction),
-                humanoidInfo = new HumanInformations(GetActorRestrictions(), Record.Sex, HumanOptions.Select(x => x.GetHumanOption(this)).ToArray()),
-                look = Look.ToEntityLook(),
-                name = Name,
-            };
+            return new GameRolePlayCharacterInformations(GetActorAlignmentInformations(),
+                 Id, new EntityDispositionInformations(CellId, (byte)Direction),
+                 Look.ToEntityLook(), Name, new HumanInformations(GetActorRestrictions(), Record.Sex, HumanOptions.Select(x => x.GetHumanOption(this)).ToArray()),
+                 Record.AccountId);
         }
         public bool LearnOrnament(short id, bool notify)
         {

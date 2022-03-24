@@ -90,8 +90,9 @@ lifePoints : 1050 + 0 + 0 - actionPoints : 7 + 0 + 4 - statsPoints : 0 + 0 + 0 -
 
 # Giny.World
 
-## En cours 
+## En cours (prioritaire)
 
+* Revoir les guildes (refacto coté client)
 * Giny.Zaap
 * GG WP protocol builder message,types,enums :)
 * DatabaseSynchronizer, automatiser les champs manquant lors de la génération du Datacenter

@@ -46,7 +46,7 @@ namespace Giny.Auth.Handlers
         [MessageHandler]
         public static void HandleAccountRequestMessage(AccountRequestMessage message, IPCClient client)
         {
-            AccountRecord accountRecord = TicketsManager.Instance.Get(message.ticket);
+            AccountRecord accountRecord = TicketsManager.Instance.RetreiveAccount(message.ticket);
 
             AccountMessage resultMessage = null;
 

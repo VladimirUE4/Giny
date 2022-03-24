@@ -26,10 +26,7 @@ namespace Giny.World.Managers.Dialogs
         }
         public override void Open()
         {
-            Character.Client.Send(new DocumentReadingBeginMessage()
-            {
-                documentId = (short)DocumentId,
-            });
+            Character.Client.Send(new DocumentReadingBeginMessage((short)DocumentId));
         }
     }
 }

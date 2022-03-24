@@ -55,59 +55,24 @@ namespace Giny.World.Managers.Chat
 
         public ChatServerCopyWithObjectMessage GetServerCopyWithObjectMessage(ChatActivableChannelsEnum channel, ObjectItem[] items, string message, WorldClient target)
         {
-            return new ChatServerCopyWithObjectMessage()
-            {
-                receiverId = target.Character.Id,
-                receiverName = target.Character.Name,
-                channel = (byte)channel,
-                content = message,
-                fingerprint = string.Empty,
-                objects = items,
-                timestamp = DateTime.Now.GetUnixTimeStamp(),
-            };
+            return new ChatServerCopyWithObjectMessage(items, (byte)channel, message, DateTime.Now.GetUnixTimeStamp(),
+                 string.Empty, target.Character.Id, target.Character.Name);
         }
         public ChatServerWithObjectMessage GetChatServerWithObjectMessage(ChatActivableChannelsEnum channel, ObjectItem[] items, string message, WorldClient client)
         {
-
-            return new ChatServerWithObjectMessage()
-            {
-                senderAccountId = client.Account.Id,
-                channel = (byte)channel,
-                content = message,
-                fingerprint = string.Empty,
-                objects = items,
-                prefix = string.Empty,
-                senderId = client.Character.Id,
-                senderName = client.Character.Name,
-                timestamp = DateTime.Now.GetUnixTimeStamp(),
-            };
+            return new ChatServerWithObjectMessage(items, (byte)channel, message, DateTime.Now.GetUnixTimeStamp(),
+                 string.Empty, client.Character.Id, client.Character.Name, string.Empty, client.Account.Id);
         }
         public ChatServerMessage GetChatServerMessage(ChatActivableChannelsEnum channel, string message, WorldClient client)
         {
-            return new ChatServerMessage()
-            {
-                channel = (byte)channel,
-                content = message,
-                fingerprint = string.Empty,
-                prefix = string.Empty,
-                senderAccountId = client.Account.Id,
-                senderId = client.Character.Id,
-                senderName = client.Character.Name,
-                timestamp = DateTime.Now.GetUnixTimeStamp(),
-            };
+            return new ChatServerMessage(client.Character.Id, client.Character.Name, string.Empty,
+                client.Account.Id, (byte)channel, message, DateTime.Now.GetUnixTimeStamp(), string.Empty);
         }
 
         public ChatServerCopyMessage GetChatServerCopyMessage(ChatActivableChannelsEnum channel, string message, WorldClient target)
         {
-            return new ChatServerCopyMessage()
-            {
-                channel = (byte)channel,
-                content = message,
-                fingerprint = string.Empty,
-                timestamp = DateTime.Now.GetUnixTimeStamp(),
-                receiverId = target.Character.Id,
-                receiverName = target.Character.Name,
-            };
+            return new ChatServerCopyMessage(target.Character.Id, target.Character.Name, (byte)channel,
+                 message, DateTime.Now.GetUnixTimeStamp(), string.Empty);
         }
     }
 }

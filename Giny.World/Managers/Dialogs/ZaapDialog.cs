@@ -26,12 +26,8 @@ namespace Giny.World.Managers.Dialogs
 
         public override void Open()
         {
-            this.Character.Client.Send(new ZaapDestinationsMessage()
-            {
-                type = (byte)TeleporterType,
-                spawnMapId = Character.Record.SpawnPointMapId,
-                destinations = Destinations.Values.ToArray(),
-            });
+            this.Character.Client.Send(new ZaapDestinationsMessage(Character.Record.SpawnPointMapId,
+              (byte)TeleporterType, Destinations.Values.ToArray()));
         }
 
         public override void Teleport(MapRecord map)

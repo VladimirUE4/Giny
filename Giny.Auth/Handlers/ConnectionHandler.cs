@@ -92,7 +92,7 @@ namespace Giny.Auth.Handlers
         private static void SelectServer(AuthClient client, IPCClient worldServer)
         {
             client.GenerateTicket();
-            TicketsManager.Instance.Add(client.Ticket, client.Account);
+            TicketsManager.Instance.PushAccount(client.Ticket, client.Account);
             client.Send(new SelectedServerDataMessage(worldServer.WorldServerRecord.Id, worldServer.WorldServerRecord.Host,
                 new short[] { worldServer.WorldServerRecord.Port }, true, client.EncryptTicket()));
             client.Disconnect();

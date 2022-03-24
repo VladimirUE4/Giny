@@ -13,27 +13,32 @@ namespace Giny.Auth.Managers
 {
     public class TicketsManager : Singleton<TicketsManager>
     {
-        private ConcurrentDictionary<string, AccountRecord> m_accounts = new ConcurrentDictionary<string, AccountRecord>();
+        private ConcurrentDictionary<string, AccountRecord> Accounts
+        {
+            get;
+            set;
+        } = new ConcurrentDictionary<string, AccountRecord>();
 
-        public void Add(string ticket, AccountRecord account)
+        public void PushAccount(string ticket, AccountRecord account)
         {
-            lock (m_accounts)
-                this.m_accounts.TryAdd(ticket, account);
+            Accounts.TryAdd(ticket, account);
         }
-        public AccountRecord Get(string ticket)
+        public AccountRecord RetreiveAccount(string ticket)
         {
-            lock (m_accounts)
+            if (Accounts.ContainsKey(ticket))
             {
-                if (m_accounts.ContainsKey(ticket))
+                var result = Accounts[ticket];
+                bool success = Accounts.TryRemove(ticket);
+
+                if (!success)
                 {
-                    var result = m_accounts[ticket];
-                    m_accounts.TryRemove(ticket);
-                    return result;
+                    throw new ApplicationException("Unable to remove account ticket.");
                 }
-                else
-                {
-                    return null;
-                }
+                return result;
+            }
+            else
+            {
+                return null;
             }
         }
     }

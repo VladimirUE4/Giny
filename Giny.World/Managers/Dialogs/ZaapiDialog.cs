@@ -26,11 +26,7 @@ namespace Giny.World.Managers.Dialogs
 
         public override void Open()
         {
-            this.Character.Client.Send(new TeleportDestinationsMessage()
-            {
-                type = (byte)TeleporterType,
-                destinations = Destinations.Values.ToArray(),
-            });
+            this.Character.Client.Send(new TeleportDestinationsMessage((byte)TeleporterType, Destinations.Values.ToArray()));
         }
 
         public override void Teleport(MapRecord map)

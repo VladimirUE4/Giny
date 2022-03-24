@@ -18,12 +18,7 @@ namespace Giny.World.Managers.Dialogs.DialogBox
         }
         protected override void OnOpen()
         {
-            this.Send(new ExchangeRequestedTradeMessage()
-            {
-                exchangeType = (byte)ExchangeTypeEnum.PLAYER_TRADE,
-                source = Source.Id,
-                target = Target.Id,
-            });
+            this.Send(new ExchangeRequestedTradeMessage(Source.Id, Target.Id, (byte)ExchangeTypeEnum.PLAYER_TRADE));
         }
         protected override void OnAccept()
         {
@@ -33,11 +28,7 @@ namespace Giny.World.Managers.Dialogs.DialogBox
         }
         protected override void OnDeny()
         {
-            Send(new ExchangeLeaveMessage()
-            {
-                dialogType = (byte)DialogTypeEnum.DIALOG_EXCHANGE,
-                success = false,
-            });
+            Send(new ExchangeLeaveMessage(false, (byte)DialogTypeEnum.DIALOG_EXCHANGE));
         }
         protected override void OnCancel()
         {
