@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AccountTagInformation  
     { 
-        public const ushort Id = 7636;
+        public const ushort Id = 7235;
         public virtual ushort TypeId => Id;
 
         public string nickname;

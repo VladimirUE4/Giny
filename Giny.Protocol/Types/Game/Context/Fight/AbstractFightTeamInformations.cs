@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractFightTeamInformations  
     { 
-        public const ushort Id = 3071;
+        public const ushort Id = 7711;
         public virtual ushort TypeId => Id;
 
         public byte teamId;

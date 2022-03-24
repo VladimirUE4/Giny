@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayArenaFightAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5799;
+        public new const ushort Id = 8880;
         public override ushort MessageId => Id;
 
         public short fightId;

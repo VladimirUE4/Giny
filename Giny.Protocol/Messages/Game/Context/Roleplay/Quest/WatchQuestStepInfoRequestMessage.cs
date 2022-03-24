@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class WatchQuestStepInfoRequestMessage : QuestStepInfoRequestMessage  
     { 
-        public  const ushort Id = 8640;
+        public  const ushort Id = 4046;
         public override ushort MessageId => Id;
 
         public long playerId;

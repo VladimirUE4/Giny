@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameContextMoveMultipleElementsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2401;
+        public new const ushort Id = 5560;
         public override ushort MessageId => Id;
 
         public EntityMovementInformations[] movements;

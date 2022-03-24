@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ZaapDestinationsMessage : TeleportDestinationsMessage  
     { 
-        public  const ushort Id = 4167;
+        public  const ushort Id = 4986;
         public override ushort MessageId => Id;
 
         public double spawnMapId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMountsTakenFromPaddockMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2526;
+        public new const ushort Id = 836;
         public override ushort MessageId => Id;
 
         public string name;

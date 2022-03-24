@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AtlasPointsInformations  
     { 
-        public const ushort Id = 4410;
+        public const ushort Id = 6354;
         public virtual ushort TypeId => Id;
 
         public byte type;

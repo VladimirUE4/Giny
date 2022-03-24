@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ErrorMapNotFoundMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1147;
+        public new const ushort Id = 6809;
         public override ushort MessageId => Id;
 
         public double mapId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterLevelUpInformationMessage : CharacterLevelUpMessage  
     { 
-        public  const ushort Id = 2461;
+        public  const ushort Id = 9230;
         public override ushort MessageId => Id;
 
         public string name;

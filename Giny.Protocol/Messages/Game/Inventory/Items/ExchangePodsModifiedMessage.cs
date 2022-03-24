@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangePodsModifiedMessage : ExchangeObjectMessage  
     { 
-        public  const ushort Id = 7130;
+        public  const ushort Id = 3914;
         public override ushort MessageId => Id;
 
         public int currentWeight;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameContextRemoveMultipleElementsWithEventsMessage : GameContextRemoveMultipleElementsMessage  
     { 
-        public  const ushort Id = 7428;
+        public  const ushort Id = 409;
         public override ushort MessageId => Id;
 
         public byte[] elementEventIds;

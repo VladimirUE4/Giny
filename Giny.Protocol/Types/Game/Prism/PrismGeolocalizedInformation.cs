@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PrismGeolocalizedInformation : PrismSubareaEmptyInfo  
     { 
-        public const ushort Id = 2406;
+        public const ushort Id = 6582;
         public override ushort TypeId => Id;
 
         public short worldX;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AtlasPointInformationsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6676;
+        public new const ushort Id = 5051;
         public override ushort MessageId => Id;
 
         public AtlasPointsInformations type;

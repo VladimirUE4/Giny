@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildInvitationStateRecrutedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 621;
+        public new const ushort Id = 3106;
         public override ushort MessageId => Id;
 
         public byte invitationState;

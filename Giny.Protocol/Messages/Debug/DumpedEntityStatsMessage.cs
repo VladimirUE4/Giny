@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DumpedEntityStatsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3665;
+        public new const ushort Id = 120;
         public override ushort MessageId => Id;
 
         public double actorId;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class TaxCollectorWaitingForHelpInformations : TaxCollectorComplementaryInformations  
     { 
-        public const ushort Id = 3199;
+        public const ushort Id = 3393;
         public override ushort TypeId => Id;
 
         public ProtectedEntityWaitingForHelpInfo waitingForHelpInfo;

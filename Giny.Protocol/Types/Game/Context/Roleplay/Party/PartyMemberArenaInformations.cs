@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyMemberArenaInformations : PartyMemberInformations  
     { 
-        public const ushort Id = 2694;
+        public const ushort Id = 5261;
         public override ushort TypeId => Id;
 
         public short rank;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class SellerBuyerDescriptor  
     { 
-        public const ushort Id = 5475;
+        public const ushort Id = 632;
         public virtual ushort TypeId => Id;
 
         public int[] quantities;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FriendDeleteResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8619;
+        public new const ushort Id = 7028;
         public override ushort MessageId => Id;
 
         public bool success;

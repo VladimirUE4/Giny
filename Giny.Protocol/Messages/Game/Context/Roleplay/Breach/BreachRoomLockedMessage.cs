@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachRoomLockedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7221;
+        public new const ushort Id = 7818;
         public override ushort MessageId => Id;
 
 

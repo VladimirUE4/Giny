@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeMultiCraftCrafterCanUseHisRessourcesMessage : NetworkMessage  
     { 
-        public new const ushort Id = 264;
+        public new const ushort Id = 4359;
         public override ushort MessageId => Id;
 
         public bool allowed;

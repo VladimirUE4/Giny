@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class MapObstacle  
     { 
-        public const ushort Id = 5512;
+        public const ushort Id = 7300;
         public virtual ushort TypeId => Id;
 
         public short obstacleCellId;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightMonsterInformations : GameFightAIInformations  
     { 
-        public const ushort Id = 1922;
+        public const ushort Id = 9097;
         public override ushort TypeId => Id;
 
         public short creatureGenericId;

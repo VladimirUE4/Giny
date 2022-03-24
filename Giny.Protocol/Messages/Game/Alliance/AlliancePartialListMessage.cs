@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlliancePartialListMessage : AllianceListMessage  
     { 
-        public  const ushort Id = 2592;
+        public  const ushort Id = 822;
         public override ushort MessageId => Id;
 
 

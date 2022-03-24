@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class RecycledItem  
     { 
-        public const ushort Id = 161;
+        public const ushort Id = 2393;
         public virtual ushort TypeId => Id;
 
         public short id;

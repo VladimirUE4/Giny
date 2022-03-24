@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectLadder : ObjectEffectCreature  
     { 
-        public const ushort Id = 7384;
+        public const ushort Id = 508;
         public override ushort TypeId => Id;
 
         public int monsterCount;

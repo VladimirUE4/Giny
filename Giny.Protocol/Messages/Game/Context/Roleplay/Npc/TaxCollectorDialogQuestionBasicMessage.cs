@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TaxCollectorDialogQuestionBasicMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1694;
+        public new const ushort Id = 2837;
         public override ushort MessageId => Id;
 
         public BasicGuildInformations guildInfo;

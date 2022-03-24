@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatAbstractClientMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1037;
+        public new const ushort Id = 9074;
         public override ushort MessageId => Id;
 
         public string content;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HaapiBufferListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 518;
+        public new const ushort Id = 5285;
         public override ushort MessageId => Id;
 
         public BufferInformation[] buffers;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class FocusedExchangeReadyMessage : ExchangeReadyMessage  
     { 
-        public  const ushort Id = 2904;
+        public  const ushort Id = 4485;
         public override ushort MessageId => Id;
 
         public int focusActionId;

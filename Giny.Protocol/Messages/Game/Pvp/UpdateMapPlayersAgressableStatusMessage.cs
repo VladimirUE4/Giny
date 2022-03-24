@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class UpdateMapPlayersAgressableStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3658;
+        public new const ushort Id = 4601;
         public override ushort MessageId => Id;
 
         public long[] playerIds;

@@ -93,8 +93,8 @@ namespace Giny.World.Records.Guilds
                 level = ExperienceManager.Instance.GetCharacterLevel(record.Experience),
                 moodSmileyId = MoodSmileyId,
                 name = record.Name,
-                rank = Rank,
-                rights = (int)Rights,
+                rankId = Rank,
+                note = new PlayerNote("test", 0),
                 sex = record.Sex,
                 status = connected ? client.Character.GetPlayerStatus() : new PlayerStatus()
             };

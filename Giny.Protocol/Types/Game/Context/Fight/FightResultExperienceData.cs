@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightResultExperienceData : FightResultAdditionalData  
     { 
-        public const ushort Id = 9530;
+        public const ushort Id = 2223;
         public override ushort TypeId => Id;
 
         public long experience;

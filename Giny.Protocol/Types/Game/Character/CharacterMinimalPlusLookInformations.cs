@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalPlusLookInformations : CharacterMinimalInformations  
     { 
-        public const ushort Id = 9551;
+        public const ushort Id = 6908;
         public override ushort TypeId => Id;
 
         public EntityLook entityLook;

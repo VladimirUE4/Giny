@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockBuyableInformations  
     { 
-        public const ushort Id = 3536;
+        public const ushort Id = 1474;
         public virtual ushort TypeId => Id;
 
         public long price;

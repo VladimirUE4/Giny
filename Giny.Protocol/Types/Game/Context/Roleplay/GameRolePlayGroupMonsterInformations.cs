@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayGroupMonsterInformations : GameRolePlayActorInformations  
     { 
-        public const ushort Id = 3148;
+        public const ushort Id = 1305;
         public override ushort TypeId => Id;
 
         public byte lootShare;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeItemAutoCraftStopedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 470;
+        public new const ushort Id = 321;
         public override ushort MessageId => Id;
 
         public byte reason;

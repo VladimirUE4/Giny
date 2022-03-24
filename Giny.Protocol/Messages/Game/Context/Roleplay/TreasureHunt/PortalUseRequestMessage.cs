@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PortalUseRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1831;
+        public new const ushort Id = 7046;
         public override ushort MessageId => Id;
 
         public int portalId;

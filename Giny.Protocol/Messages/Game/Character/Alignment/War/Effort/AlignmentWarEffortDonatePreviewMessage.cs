@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlignmentWarEffortDonatePreviewMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2736;
+        public new const ushort Id = 9897;
         public override ushort MessageId => Id;
 
         public double xp;

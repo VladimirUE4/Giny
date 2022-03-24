@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterUsableCharacteristicDetailed : CharacterCharacteristicDetailed  
     { 
-        public const ushort Id = 9575;
+        public const ushort Id = 3142;
         public override ushort TypeId => Id;
 
         public short used;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameFightSpectatorJoinMessage : GameFightJoinMessage  
     { 
-        public  const ushort Id = 6927;
+        public  const ushort Id = 4519;
         public override ushort MessageId => Id;
 
         public NamedPartyTeam[] namedPartyTeams;

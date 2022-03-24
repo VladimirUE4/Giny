@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PlayerStatusExtended : PlayerStatus  
     { 
-        public const ushort Id = 1176;
+        public const ushort Id = 1136;
         public override ushort TypeId => Id;
 
         public string message;

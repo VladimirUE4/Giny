@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class UpdateMountIntegerCharacteristic : UpdateMountCharacteristic  
     { 
-        public const ushort Id = 305;
+        public const ushort Id = 7155;
         public override ushort TypeId => Id;
 
         public int value;

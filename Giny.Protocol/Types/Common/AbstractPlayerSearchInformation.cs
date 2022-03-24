@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AbstractPlayerSearchInformation  
     { 
-        public const ushort Id = 1294;
+        public const ushort Id = 4580;
         public virtual ushort TypeId => Id;
 
 

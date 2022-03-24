@@ -9,17 +9,17 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildMembershipMessage : GuildJoinedMessage  
     { 
-        public  const ushort Id = 6499;
+        public  const ushort Id = 2565;
         public override ushort MessageId => Id;
 
 
         public GuildMembershipMessage()
         {
         }
-        public GuildMembershipMessage(GuildInformations guildInfo,int memberRights)
+        public GuildMembershipMessage(GuildInformations guildInfo,int rankId)
         {
             this.guildInfo = guildInfo;
-            this.memberRights = memberRights;
+            this.rankId = rankId;
         }
         public override void Serialize(IDataWriter writer)
         {

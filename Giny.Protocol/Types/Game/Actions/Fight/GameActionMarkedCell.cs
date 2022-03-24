@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameActionMarkedCell  
     { 
-        public const ushort Id = 2389;
+        public const ushort Id = 4763;
         public virtual ushort TypeId => Id;
 
         public short cellId;

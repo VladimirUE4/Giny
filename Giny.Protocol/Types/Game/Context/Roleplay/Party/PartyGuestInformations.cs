@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyGuestInformations  
     { 
-        public const ushort Id = 1057;
+        public const ushort Id = 3541;
         public virtual ushort TypeId => Id;
 
         public long guestId;

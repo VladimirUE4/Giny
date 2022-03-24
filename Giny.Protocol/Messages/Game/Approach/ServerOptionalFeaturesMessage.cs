@@ -9,15 +9,15 @@ namespace Giny.Protocol.Messages
 { 
     public class ServerOptionalFeaturesMessage : NetworkMessage  
     { 
-        public new const ushort Id = 189;
+        public new const ushort Id = 7447;
         public override ushort MessageId => Id;
 
-        public byte[] features;
+        public int[] features;
 
         public ServerOptionalFeaturesMessage()
         {
         }
-        public ServerOptionalFeaturesMessage(byte[] features)
+        public ServerOptionalFeaturesMessage(int[] features)
         {
             this.features = features;
         }
@@ -31,7 +31,7 @@ namespace Giny.Protocol.Messages
                     throw new System.Exception("Forbidden value (" + features[_i1] + ") on element 1 (starting at 1) of features.");
                 }
 
-                writer.WriteByte((byte)features[_i1]);
+                writer.WriteInt((int)features[_i1]);
             }
 
         }
@@ -39,16 +39,16 @@ namespace Giny.Protocol.Messages
         {
             uint _val1 = 0;
             uint _featuresLen = (uint)reader.ReadUShort();
-            features = new byte[_featuresLen];
+            features = new int[_featuresLen];
             for (uint _i1 = 0;_i1 < _featuresLen;_i1++)
             {
-                _val1 = (uint)reader.ReadByte();
+                _val1 = (uint)reader.ReadInt();
                 if (_val1 < 0)
                 {
                     throw new System.Exception("Forbidden value (" + _val1 + ") on elements of features.");
                 }
 
-                features[_i1] = (byte)_val1;
+                features[_i1] = (int)_val1;
             }
 
         }

@@ -9,17 +9,17 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayArenaFighterStatusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5125;
+        public new const ushort Id = 9616;
         public override ushort MessageId => Id;
 
         public short fightId;
-        public double playerId;
+        public long playerId;
         public bool accepted;
 
         public GameRolePlayArenaFighterStatusMessage()
         {
         }
-        public GameRolePlayArenaFighterStatusMessage(short fightId,double playerId,bool accepted)
+        public GameRolePlayArenaFighterStatusMessage(short fightId,long playerId,bool accepted)
         {
             this.fightId = fightId;
             this.playerId = playerId;
@@ -33,12 +33,12 @@ namespace Giny.Protocol.Messages
             }
 
             writer.WriteVarShort((short)fightId);
-            if (playerId < -9.00719925474099E+15 || playerId > 9.00719925474099E+15)
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
-            writer.WriteDouble((double)playerId);
+            writer.WriteVarLong((long)playerId);
             writer.WriteBoolean((bool)accepted);
         }
         public override void Deserialize(IDataReader reader)
@@ -49,8 +49,8 @@ namespace Giny.Protocol.Messages
                 throw new System.Exception("Forbidden value (" + fightId + ") on element of GameRolePlayArenaFighterStatusMessage.fightId.");
             }
 
-            playerId = (double)reader.ReadDouble();
-            if (playerId < -9.00719925474099E+15 || playerId > 9.00719925474099E+15)
+            playerId = (long)reader.ReadVarUhLong();
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element of GameRolePlayArenaFighterStatusMessage.playerId.");
             }

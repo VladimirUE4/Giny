@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class BasicGuildInformations : AbstractSocialGroupInfos  
     { 
-        public const ushort Id = 4374;
+        public const ushort Id = 9709;
         public override ushort TypeId => Id;
 
         public int guildId;

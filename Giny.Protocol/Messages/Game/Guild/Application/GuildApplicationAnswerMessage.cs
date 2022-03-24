@@ -9,16 +9,16 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildApplicationAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5404;
+        public new const ushort Id = 507;
         public override ushort MessageId => Id;
 
         public bool accepted;
-        public int playerId;
+        public long playerId;
 
         public GuildApplicationAnswerMessage()
         {
         }
-        public GuildApplicationAnswerMessage(bool accepted,int playerId)
+        public GuildApplicationAnswerMessage(bool accepted,long playerId)
         {
             this.accepted = accepted;
             this.playerId = playerId;
@@ -26,18 +26,18 @@ namespace Giny.Protocol.Messages
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteBoolean((bool)accepted);
-            if (playerId < 0)
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
-            writer.WriteVarInt((int)playerId);
+            writer.WriteVarLong((long)playerId);
         }
         public override void Deserialize(IDataReader reader)
         {
             accepted = (bool)reader.ReadBoolean();
-            playerId = (int)reader.ReadVarUhInt();
-            if (playerId < 0)
+            playerId = (long)reader.ReadVarUhLong();
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element of GuildApplicationAnswerMessage.playerId.");
             }

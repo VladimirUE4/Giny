@@ -7,15 +7,15 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterMinimalGuildPublicInformations : CharacterMinimalInformations  
     { 
-        public const ushort Id = 393;
+        public const ushort Id = 7655;
         public override ushort TypeId => Id;
 
-        public int rank;
+        public GuildRankPublicInformation rank;
 
         public CharacterMinimalGuildPublicInformations()
         {
         }
-        public CharacterMinimalGuildPublicInformations(int rank,long id,string name,short level)
+        public CharacterMinimalGuildPublicInformations(GuildRankPublicInformation rank,long id,string name,short level)
         {
             this.rank = rank;
             this.id = id;
@@ -25,22 +25,13 @@ namespace Giny.Protocol.Types
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            if (rank < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
-            }
-
-            writer.WriteVarInt((int)rank);
+            rank.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            rank = (int)reader.ReadVarUhInt();
-            if (rank < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rank + ") on element of CharacterMinimalGuildPublicInformations.rank.");
-            }
-
+            rank = new GuildRankPublicInformation();
+            rank.Deserialize(reader);
         }
 
 

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PrismsListUpdateMessage : PrismsListMessage  
     { 
-        public  const ushort Id = 2634;
+        public  const ushort Id = 7086;
         public override ushort MessageId => Id;
 
 

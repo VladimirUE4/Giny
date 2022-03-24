@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTemporarySpellImmunityEffect : AbstractFightDispellableEffect  
     { 
-        public const ushort Id = 4141;
+        public const ushort Id = 1925;
         public override ushort TypeId => Id;
 
         public int immuneSpellId;

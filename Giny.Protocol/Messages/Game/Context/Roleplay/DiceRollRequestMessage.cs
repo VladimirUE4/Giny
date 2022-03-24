@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DiceRollRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 932;
+        public new const ushort Id = 6852;
         public override ushort MessageId => Id;
 
         public int dice;

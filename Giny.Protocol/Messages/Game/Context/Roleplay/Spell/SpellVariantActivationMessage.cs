@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SpellVariantActivationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8666;
+        public new const ushort Id = 6118;
         public override ushort MessageId => Id;
 
         public short spellId;

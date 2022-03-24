@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 using System;
 
 namespace Giny.Protocol.Enums
@@ -35,12 +42,8 @@ namespace Giny.Protocol.Enums
         NPC_TRADE_RHINEETLE = 28,
         EVOLUTIVE_OBJECT_ELEMENTARY_RECYCLE = 29,
         NPC_RIDE_CAPABILITY_TRADE = 30,
+        GUILD_CHEST = 31,
 
     }
 }
-
-
-
-
-
 

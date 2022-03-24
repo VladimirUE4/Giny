@@ -69,6 +69,10 @@ namespace Giny.World.Records.Npcs
 
         public static long PopNextId()
         {
+            if (NpcsActions.Count == 0)
+            {
+                return 1;
+            }
             return NpcsActions.Keys.OrderByDescending(x => x).First() + 1;
         }
 

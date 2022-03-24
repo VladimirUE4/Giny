@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class MonsterInGroupLightInformations  
     { 
-        public const ushort Id = 4246;
+        public const ushort Id = 502;
         public virtual ushort TypeId => Id;
 
         public int genericId;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameActionMark  
     { 
-        public const ushort Id = 158;
+        public const ushort Id = 5902;
         public virtual ushort TypeId => Id;
 
         public double markAuthorId;

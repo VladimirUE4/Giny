@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class DebugHighlightCellsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 307;
+        public new const ushort Id = 7356;
         public override ushort MessageId => Id;
 
         public double color;

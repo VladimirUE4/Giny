@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class SkillActionDescriptionTimed : SkillActionDescription  
     { 
-        public const ushort Id = 9286;
+        public const ushort Id = 687;
         public override ushort TypeId => Id;
 
         public byte time;

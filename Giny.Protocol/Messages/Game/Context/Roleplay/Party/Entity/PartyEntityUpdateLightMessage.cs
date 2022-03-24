@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyEntityUpdateLightMessage : PartyUpdateLightMessage  
     { 
-        public  const ushort Id = 6677;
+        public  const ushort Id = 4442;
         public override ushort MessageId => Id;
 
         public byte indexId;

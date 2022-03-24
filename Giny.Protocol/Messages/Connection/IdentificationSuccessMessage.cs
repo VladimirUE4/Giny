@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationSuccessMessage : NetworkMessage  
     { 
-        public new const ushort Id = 331;
+        public new const ushort Id = 6384;
         public override ushort MessageId => Id;
 
         public string login;
@@ -24,11 +24,12 @@ namespace Giny.Protocol.Messages
         public double subscriptionEndDate;
         public bool wasAlreadyConnected;
         public byte havenbagAvailableRoom;
+        public bool isAccountForced;
 
         public IdentificationSuccessMessage()
         {
         }
-        public IdentificationSuccessMessage(string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom)
+        public IdentificationSuccessMessage(string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom,bool isAccountForced)
         {
             this.login = login;
             this.accountTag = accountTag;
@@ -42,6 +43,7 @@ namespace Giny.Protocol.Messages
             this.subscriptionEndDate = subscriptionEndDate;
             this.wasAlreadyConnected = wasAlreadyConnected;
             this.havenbagAvailableRoom = havenbagAvailableRoom;
+            this.isAccountForced = isAccountForced;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -49,6 +51,7 @@ namespace Giny.Protocol.Messages
             _box0 = BooleanByteWrapper.SetFlag(_box0,0,hasRights);
             _box0 = BooleanByteWrapper.SetFlag(_box0,1,hasConsoleRight);
             _box0 = BooleanByteWrapper.SetFlag(_box0,2,wasAlreadyConnected);
+            _box0 = BooleanByteWrapper.SetFlag(_box0,3,isAccountForced);
             writer.WriteByte((byte)_box0);
             writer.WriteUTF((string)login);
             accountTag.Serialize(writer);
@@ -96,6 +99,7 @@ namespace Giny.Protocol.Messages
             hasRights = BooleanByteWrapper.GetFlag(_box0,0);
             hasConsoleRight = BooleanByteWrapper.GetFlag(_box0,1);
             wasAlreadyConnected = BooleanByteWrapper.GetFlag(_box0,2);
+            isAccountForced = BooleanByteWrapper.GetFlag(_box0,3);
             login = (string)reader.ReadUTF();
             accountTag = new AccountTagInformation();
             accountTag.Deserialize(reader);

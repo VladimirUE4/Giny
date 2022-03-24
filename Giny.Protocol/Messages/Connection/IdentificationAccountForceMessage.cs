@@ -9,17 +9,17 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationAccountForceMessage : IdentificationMessage  
     { 
-        public  const ushort Id = 2449;
+        public  const ushort Id = 247;
         public override ushort MessageId => Id;
 
-        public string forcedAccountLogin;
+        public string forcerAccountLogin;
 
         public IdentificationAccountForceMessage()
         {
         }
-        public IdentificationAccountForceMessage(string forcedAccountLogin,Version version,string lang,byte[] credentials,short serverId,bool autoconnect,bool useCertificate,bool useLoginToken,long sessionOptionalSalt,short[] failedAttempts)
+        public IdentificationAccountForceMessage(string forcerAccountLogin,Version version,string lang,byte[] credentials,short serverId,bool autoconnect,bool useCertificate,bool useLoginToken,long sessionOptionalSalt,short[] failedAttempts)
         {
-            this.forcedAccountLogin = forcedAccountLogin;
+            this.forcerAccountLogin = forcerAccountLogin;
             this.version = version;
             this.lang = lang;
             this.credentials = credentials;
@@ -33,12 +33,12 @@ namespace Giny.Protocol.Messages
         public override void Serialize(IDataWriter writer)
         {
             base.Serialize(writer);
-            writer.WriteUTF((string)forcedAccountLogin);
+            writer.WriteUTF((string)forcerAccountLogin);
         }
         public override void Deserialize(IDataReader reader)
         {
             base.Deserialize(reader);
-            forcedAccountLogin = (string)reader.ReadUTF();
+            forcerAccountLogin = (string)reader.ReadUTF();
         }
 
 

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CharacterExperienceGainMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4524;
+        public new const ushort Id = 1383;
         public override ushort MessageId => Id;
 
         public long experienceCharacter;

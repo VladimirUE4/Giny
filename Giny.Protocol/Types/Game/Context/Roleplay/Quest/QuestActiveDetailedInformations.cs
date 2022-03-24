@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class QuestActiveDetailedInformations : QuestActiveInformations  
     { 
-        public const ushort Id = 2409;
+        public const ushort Id = 3883;
         public override ushort TypeId => Id;
 
         public short stepId;

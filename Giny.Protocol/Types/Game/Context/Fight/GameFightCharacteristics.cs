@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightCharacteristics  
     { 
-        public const ushort Id = 7425;
+        public const ushort Id = 3807;
         public virtual ushort TypeId => Id;
 
         public CharacterCharacteristics characteristics;

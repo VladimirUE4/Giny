@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class RecycleResultMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2853;
+        public new const ushort Id = 1416;
         public override ushort MessageId => Id;
 
         public int nuggetsForPrism;

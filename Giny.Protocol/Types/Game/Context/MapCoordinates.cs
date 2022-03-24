@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class MapCoordinates  
     { 
-        public const ushort Id = 3568;
+        public const ushort Id = 5479;
         public virtual ushort TypeId => Id;
 
         public short worldX;

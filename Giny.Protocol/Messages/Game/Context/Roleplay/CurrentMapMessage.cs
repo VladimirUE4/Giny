@@ -9,19 +9,17 @@ namespace Giny.Protocol.Messages
 { 
     public class CurrentMapMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9325;
+        public new const ushort Id = 3871;
         public override ushort MessageId => Id;
 
         public double mapId;
-        public string mapKey;
 
         public CurrentMapMessage()
         {
         }
-        public CurrentMapMessage(double mapId,string mapKey)
+        public CurrentMapMessage(double mapId)
         {
             this.mapId = mapId;
-            this.mapKey = mapKey;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -31,7 +29,6 @@ namespace Giny.Protocol.Messages
             }
 
             writer.WriteDouble((double)mapId);
-            writer.WriteUTF((string)mapKey);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -41,7 +38,6 @@ namespace Giny.Protocol.Messages
                 throw new System.Exception("Forbidden value (" + mapId + ") on element of CurrentMapMessage.mapId.");
             }
 
-            mapKey = (string)reader.ReadUTF();
         }
 
 

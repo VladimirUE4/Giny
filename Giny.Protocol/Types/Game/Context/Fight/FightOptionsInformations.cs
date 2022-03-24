@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightOptionsInformations  
     { 
-        public const ushort Id = 5639;
+        public const ushort Id = 4873;
         public virtual ushort TypeId => Id;
 
         public bool isSecret;

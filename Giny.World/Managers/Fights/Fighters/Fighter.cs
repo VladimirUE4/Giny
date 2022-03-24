@@ -490,25 +490,25 @@ namespace Giny.World.Managers.Fights.Fighters
         {
             Stats.UseMp(amount);
             OnPointsVariation(source.Id, action, (short)(-amount));
-            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS, CharacteristicEnum.MAX_MOVEMENT_POINTS);
+            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS);
         }
         public void GainMp(Fighter source, short delta)
         {
             Stats.GainMp(delta);
             OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_MOVEMENT_POINTS_WIN, delta);
-            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS, CharacteristicEnum.MAX_MOVEMENT_POINTS);
+            RefreshStats(CharacteristicEnum.MOVEMENT_POINTS);
         }
         public void LooseAp(Fighter source, short amount, ActionsEnum action)
         {
             Stats.UseAp(amount);
             OnPointsVariation(source.Id, action, (short)(-amount));
-            RefreshStats(CharacteristicEnum.ACTION_POINTS, CharacteristicEnum.MAX_ACTION_POINTS);
+            RefreshStats(CharacteristicEnum.ACTION_POINTS);
         }
         public void GainAp(Fighter source, short delta)
         {
             Stats.GainAp(delta);
             OnPointsVariation(source.Id, ActionsEnum.ACTION_CHARACTER_ACTION_POINTS_WIN, delta);
-            RefreshStats(CharacteristicEnum.MAX_ACTION_POINTS, CharacteristicEnum.MAX_ACTION_POINTS);
+            RefreshStats(CharacteristicEnum.MAX_ACTION_POINTS);
         }
        
 

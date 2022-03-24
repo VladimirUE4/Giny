@@ -9,23 +9,21 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildChangeMemberParametersMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3633;
+        public new const ushort Id = 9008;
         public override ushort MessageId => Id;
 
         public long memberId;
-        public short rank;
+        public int rankId;
         public byte experienceGivenPercent;
-        public int rights;
 
         public GuildChangeMemberParametersMessage()
         {
         }
-        public GuildChangeMemberParametersMessage(long memberId,short rank,byte experienceGivenPercent,int rights)
+        public GuildChangeMemberParametersMessage(long memberId,int rankId,byte experienceGivenPercent)
         {
             this.memberId = memberId;
-            this.rank = rank;
+            this.rankId = rankId;
             this.experienceGivenPercent = experienceGivenPercent;
-            this.rights = rights;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -35,24 +33,18 @@ namespace Giny.Protocol.Messages
             }
 
             writer.WriteVarLong((long)memberId);
-            if (rank < 0)
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element rankId.");
             }
 
-            writer.WriteVarShort((short)rank);
+            writer.WriteVarInt((int)rankId);
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
                 throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element experienceGivenPercent.");
             }
 
             writer.WriteByte((byte)experienceGivenPercent);
-            if (rights < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
-            }
-
-            writer.WriteVarInt((int)rights);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -62,22 +54,16 @@ namespace Giny.Protocol.Messages
                 throw new System.Exception("Forbidden value (" + memberId + ") on element of GuildChangeMemberParametersMessage.memberId.");
             }
 
-            rank = (short)reader.ReadVarUhShort();
-            if (rank < 0)
+            rankId = (int)reader.ReadVarUhInt();
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + rank + ") on element of GuildChangeMemberParametersMessage.rank.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element of GuildChangeMemberParametersMessage.rankId.");
             }
 
             experienceGivenPercent = (byte)reader.ReadByte();
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
                 throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildChangeMemberParametersMessage.experienceGivenPercent.");
-            }
-
-            rights = (int)reader.ReadVarUhInt();
-            if (rights < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rights + ") on element of GuildChangeMemberParametersMessage.rights.");
             }
 
         }

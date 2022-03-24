@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class IdentifiedEntityDispositionInformations : EntityDispositionInformations  
     { 
-        public const ushort Id = 8490;
+        public const ushort Id = 4549;
         public override ushort TypeId => Id;
 
         public double id;

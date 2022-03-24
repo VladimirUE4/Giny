@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameRolePlayNpcQuestFlag  
     { 
-        public const ushort Id = 3944;
+        public const ushort Id = 3057;
         public virtual ushort TypeId => Id;
 
         public short[] questsToValidId;

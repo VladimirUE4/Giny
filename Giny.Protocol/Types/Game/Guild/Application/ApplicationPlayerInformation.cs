@@ -7,10 +7,10 @@ namespace Giny.Protocol.Types
 { 
     public class ApplicationPlayerInformation  
     { 
-        public const ushort Id = 3872;
+        public const ushort Id = 6686;
         public virtual ushort TypeId => Id;
 
-        public int playerId;
+        public long playerId;
         public string playerName;
         public byte breed;
         public bool sex;
@@ -23,7 +23,7 @@ namespace Giny.Protocol.Types
         public ApplicationPlayerInformation()
         {
         }
-        public ApplicationPlayerInformation(int playerId,string playerName,byte breed,bool sex,int level,int accountId,string accountTag,string accountNickname,PlayerStatus status)
+        public ApplicationPlayerInformation(long playerId,string playerName,byte breed,bool sex,int level,int accountId,string accountTag,string accountNickname,PlayerStatus status)
         {
             this.playerId = playerId;
             this.playerName = playerName;
@@ -37,12 +37,12 @@ namespace Giny.Protocol.Types
         }
         public virtual void Serialize(IDataWriter writer)
         {
-            if (playerId < 0)
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element playerId.");
             }
 
-            writer.WriteVarInt((int)playerId);
+            writer.WriteVarLong((long)playerId);
             writer.WriteUTF((string)playerName);
             writer.WriteByte((byte)breed);
             writer.WriteBoolean((bool)sex);
@@ -64,8 +64,8 @@ namespace Giny.Protocol.Types
         }
         public virtual void Deserialize(IDataReader reader)
         {
-            playerId = (int)reader.ReadVarUhInt();
-            if (playerId < 0)
+            playerId = (long)reader.ReadVarUhLong();
+            if (playerId < 0 || playerId > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + playerId + ") on element of ApplicationPlayerInformation.playerId.");
             }

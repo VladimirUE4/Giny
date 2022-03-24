@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectAveragePricesErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9392;
+        public new const ushort Id = 6484;
         public override ushort MessageId => Id;
 
 

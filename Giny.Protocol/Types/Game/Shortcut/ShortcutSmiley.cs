@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ShortcutSmiley : Shortcut  
     { 
-        public const ushort Id = 4590;
+        public const ushort Id = 4874;
         public override ushort TypeId => Id;
 
         public short smileyId;

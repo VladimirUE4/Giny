@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameFightFighterInformations : GameContextActorInformations  
     { 
-        public const ushort Id = 5068;
+        public const ushort Id = 8525;
         public override ushort TypeId => Id;
 
         public GameContextBasicSpawnInformation spawnInfo;

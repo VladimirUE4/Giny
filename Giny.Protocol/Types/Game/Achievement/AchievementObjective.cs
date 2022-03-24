@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AchievementObjective  
     { 
-        public const ushort Id = 8917;
+        public const ushort Id = 6663;
         public virtual ushort TypeId => Id;
 
         public int id;

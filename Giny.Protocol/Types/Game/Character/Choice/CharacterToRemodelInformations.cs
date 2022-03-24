@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterToRemodelInformations : CharacterRemodelingInformation  
     { 
-        public const ushort Id = 2646;
+        public const ushort Id = 2999;
         public override ushort TypeId => Id;
 
         public byte possibleChangeMask;

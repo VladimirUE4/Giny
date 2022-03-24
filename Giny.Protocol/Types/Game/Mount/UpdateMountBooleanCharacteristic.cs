@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class UpdateMountBooleanCharacteristic : UpdateMountCharacteristic  
     { 
-        public const ushort Id = 1756;
+        public const ushort Id = 7582;
         public override ushort TypeId => Id;
 
         public bool value;

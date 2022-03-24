@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AcquaintanceSearchErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6994;
+        public new const ushort Id = 8412;
         public override ushort MessageId => Id;
 
         public byte reason;

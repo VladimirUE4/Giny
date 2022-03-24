@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CurrentMapInstanceMessage : CurrentMapMessage  
     { 
-        public  const ushort Id = 7422;
+        public  const ushort Id = 7813;
         public override ushort MessageId => Id;
 
         public double instantiatedMapId;
@@ -17,11 +17,10 @@ namespace Giny.Protocol.Messages
         public CurrentMapInstanceMessage()
         {
         }
-        public CurrentMapInstanceMessage(double instantiatedMapId,double mapId,string mapKey)
+        public CurrentMapInstanceMessage(double instantiatedMapId,double mapId)
         {
             this.instantiatedMapId = instantiatedMapId;
             this.mapId = mapId;
-            this.mapKey = mapKey;
         }
         public override void Serialize(IDataWriter writer)
         {

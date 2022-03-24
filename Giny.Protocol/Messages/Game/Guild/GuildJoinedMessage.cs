@@ -9,38 +9,38 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildJoinedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1218;
+        public new const ushort Id = 2641;
         public override ushort MessageId => Id;
 
         public GuildInformations guildInfo;
-        public int memberRights;
+        public int rankId;
 
         public GuildJoinedMessage()
         {
         }
-        public GuildJoinedMessage(GuildInformations guildInfo,int memberRights)
+        public GuildJoinedMessage(GuildInformations guildInfo,int rankId)
         {
             this.guildInfo = guildInfo;
-            this.memberRights = memberRights;
+            this.rankId = rankId;
         }
         public override void Serialize(IDataWriter writer)
         {
             guildInfo.Serialize(writer);
-            if (memberRights < 0)
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + memberRights + ") on element memberRights.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element rankId.");
             }
 
-            writer.WriteVarInt((int)memberRights);
+            writer.WriteVarInt((int)rankId);
         }
         public override void Deserialize(IDataReader reader)
         {
             guildInfo = new GuildInformations();
             guildInfo.Deserialize(reader);
-            memberRights = (int)reader.ReadVarUhInt();
-            if (memberRights < 0)
+            rankId = (int)reader.ReadVarUhInt();
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + memberRights + ") on element of GuildJoinedMessage.memberRights.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element of GuildJoinedMessage.rankId.");
             }
 
         }

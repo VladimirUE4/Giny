@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanInformations  
     { 
-        public const ushort Id = 7547;
+        public const ushort Id = 4912;
         public virtual ushort TypeId => Id;
 
         public ActorRestrictionsInformations restrictions;

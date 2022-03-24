@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GuildInsiderFactSheetInformations : GuildFactSheetInformations  
     { 
-        public const ushort Id = 8132;
+        public const ushort Id = 5698;
         public override ushort TypeId => Id;
 
         public string leaderName;

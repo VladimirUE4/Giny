@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class JobCrafterDirectoryEntryPlayerInfo  
     { 
-        public const ushort Id = 4905;
+        public const ushort Id = 6128;
         public virtual ushort TypeId => Id;
 
         public long playerId;

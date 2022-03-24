@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockGuildedInformations : PaddockBuyableInformations  
     { 
-        public const ushort Id = 6908;
+        public const ushort Id = 1293;
         public override ushort TypeId => Id;
 
         public bool deserted;

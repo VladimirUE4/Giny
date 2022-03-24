@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayShowActorWithEventMessage : GameRolePlayShowActorMessage  
     { 
-        public  const ushort Id = 2684;
+        public  const ushort Id = 4614;
         public override ushort MessageId => Id;
 
         public byte actorEventId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PrismFightAttackerAddMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3086;
+        public new const ushort Id = 5938;
         public override ushort MessageId => Id;
 
         public short subAreaId;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ArenaLeagueRanking  
     { 
-        public const ushort Id = 2820;
+        public const ushort Id = 6285;
         public virtual ushort TypeId => Id;
 
         public short rank;

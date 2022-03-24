@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AccessoryPreviewErrorMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2038;
+        public new const ushort Id = 6646;
         public override ushort MessageId => Id;
 
         public byte error;

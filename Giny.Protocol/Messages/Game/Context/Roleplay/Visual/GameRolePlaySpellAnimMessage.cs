@@ -9,23 +9,25 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlaySpellAnimMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8430;
+        public new const ushort Id = 6811;
         public override ushort MessageId => Id;
 
         public long casterId;
         public short targetCellId;
         public short spellId;
         public short spellLevel;
+        public short direction;
 
         public GameRolePlaySpellAnimMessage()
         {
         }
-        public GameRolePlaySpellAnimMessage(long casterId,short targetCellId,short spellId,short spellLevel)
+        public GameRolePlaySpellAnimMessage(long casterId,short targetCellId,short spellId,short spellLevel,short direction)
         {
             this.casterId = casterId;
             this.targetCellId = targetCellId;
             this.spellId = spellId;
             this.spellLevel = spellLevel;
+            this.direction = direction;
         }
         public override void Serialize(IDataWriter writer)
         {
@@ -53,6 +55,12 @@ namespace Giny.Protocol.Messages
             }
 
             writer.WriteShort((short)spellLevel);
+            if (direction < -1 || direction > 8)
+            {
+                throw new System.Exception("Forbidden value (" + direction + ") on element direction.");
+            }
+
+            writer.WriteShort((short)direction);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -78,6 +86,12 @@ namespace Giny.Protocol.Messages
             if (spellLevel < 1 || spellLevel > 32767)
             {
                 throw new System.Exception("Forbidden value (" + spellLevel + ") on element of GameRolePlaySpellAnimMessage.spellLevel.");
+            }
+
+            direction = (short)reader.ReadShort();
+            if (direction < -1 || direction > 8)
+            {
+                throw new System.Exception("Forbidden value (" + direction + ") on element of GameRolePlaySpellAnimMessage.direction.");
             }
 
         }

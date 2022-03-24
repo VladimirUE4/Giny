@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ItemDurability  
     { 
-        public const ushort Id = 2055;
+        public const ushort Id = 6808;
         public virtual ushort TypeId => Id;
 
         public short durability;

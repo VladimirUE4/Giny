@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ActorOrientation  
     { 
-        public const ushort Id = 6459;
+        public const ushort Id = 6283;
         public virtual ushort TypeId => Id;
 
         public double id;

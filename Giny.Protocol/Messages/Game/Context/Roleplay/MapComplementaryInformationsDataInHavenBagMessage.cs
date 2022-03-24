@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapComplementaryInformationsDataInHavenBagMessage : MapComplementaryInformationsDataMessage  
     { 
-        public  const ushort Id = 3738;
+        public  const ushort Id = 2912;
         public override ushort MessageId => Id;
 
         public CharacterMinimalInformations ownerInformations;

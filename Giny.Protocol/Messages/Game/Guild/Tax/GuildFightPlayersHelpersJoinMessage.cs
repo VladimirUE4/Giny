@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildFightPlayersHelpersJoinMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4751;
+        public new const ushort Id = 8503;
         public override ushort MessageId => Id;
 
         public double fightId;

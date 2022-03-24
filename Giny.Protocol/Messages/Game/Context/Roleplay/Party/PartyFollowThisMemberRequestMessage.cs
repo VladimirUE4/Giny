@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyFollowThisMemberRequestMessage : PartyFollowMemberRequestMessage  
     { 
-        public  const ushort Id = 4755;
+        public  const ushort Id = 2208;
         public override ushort MessageId => Id;
 
         public bool enabled;

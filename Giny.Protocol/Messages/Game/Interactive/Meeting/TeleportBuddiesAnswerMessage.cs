@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TeleportBuddiesAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3499;
+        public new const ushort Id = 9417;
         public override ushort MessageId => Id;
 
         public bool accept;

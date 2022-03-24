@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class DebtInformation  
     { 
-        public const ushort Id = 9735;
+        public const ushort Id = 149;
         public virtual ushort TypeId => Id;
 
         public double id;

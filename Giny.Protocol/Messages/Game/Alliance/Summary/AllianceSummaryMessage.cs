@@ -7,36 +7,41 @@ using Giny.Protocol.Enums;
 
 namespace Giny.Protocol.Messages
 { 
-    public class AllianceVersatileInfoListMessage : NetworkMessage  
+    public class AllianceSummaryMessage : PaginationAnswerAbstractMessage  
     { 
-        public new const ushort Id = 9853;
+        public  const ushort Id = 172;
         public override ushort MessageId => Id;
 
-        public AllianceVersatileInformations[] alliances;
+        public AllianceFactSheetInformations[] alliances;
 
-        public AllianceVersatileInfoListMessage()
+        public AllianceSummaryMessage()
         {
         }
-        public AllianceVersatileInfoListMessage(AllianceVersatileInformations[] alliances)
+        public AllianceSummaryMessage(AllianceFactSheetInformations[] alliances,double offset,uint count,uint total)
         {
             this.alliances = alliances;
+            this.offset = offset;
+            this.count = count;
+            this.total = total;
         }
         public override void Serialize(IDataWriter writer)
         {
+            base.Serialize(writer);
             writer.WriteShort((short)alliances.Length);
             for (uint _i1 = 0;_i1 < alliances.Length;_i1++)
             {
-                (alliances[_i1] as AllianceVersatileInformations).Serialize(writer);
+                (alliances[_i1] as AllianceFactSheetInformations).Serialize(writer);
             }
 
         }
         public override void Deserialize(IDataReader reader)
         {
-            AllianceVersatileInformations _item1 = null;
+            AllianceFactSheetInformations _item1 = null;
+            base.Deserialize(reader);
             uint _alliancesLen = (uint)reader.ReadUShort();
             for (uint _i1 = 0;_i1 < _alliancesLen;_i1++)
             {
-                _item1 = new AllianceVersatileInformations();
+                _item1 = new AllianceFactSheetInformations();
                 _item1.Deserialize(reader);
                 alliances[_i1] = _item1;
             }

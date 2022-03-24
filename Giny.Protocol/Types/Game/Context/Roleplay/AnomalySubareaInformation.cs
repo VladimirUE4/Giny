@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AnomalySubareaInformation  
     { 
-        public const ushort Id = 8338;
+        public const ushort Id = 6099;
         public virtual ushort TypeId => Id;
 
         public short subAreaId;

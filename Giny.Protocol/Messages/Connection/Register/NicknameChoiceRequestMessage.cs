@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NicknameChoiceRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3297;
+        public new const ushort Id = 8378;
         public override ushort MessageId => Id;
 
         public string nickname;

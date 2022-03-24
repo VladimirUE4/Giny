@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartOkRecycleTradeMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9169;
+        public new const ushort Id = 6635;
         public override ushort MessageId => Id;
 
         public short percentToPrism;

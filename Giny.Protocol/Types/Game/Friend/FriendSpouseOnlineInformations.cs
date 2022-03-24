@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FriendSpouseOnlineInformations : FriendSpouseInformations  
     { 
-        public const ushort Id = 1910;
+        public const ushort Id = 3147;
         public override ushort TypeId => Id;
 
         public double mapId;

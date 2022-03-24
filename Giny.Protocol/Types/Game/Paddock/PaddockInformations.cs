@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockInformations  
     { 
-        public const ushort Id = 1965;
+        public const ushort Id = 5079;
         public virtual ushort TypeId => Id;
 
         public short maxOutdoorMount;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class TreasureHuntStep  
     { 
-        public const ushort Id = 7141;
+        public const ushort Id = 725;
         public virtual ushort TypeId => Id;
 
 

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class Item  
     { 
-        public const ushort Id = 842;
+        public const ushort Id = 42;
         public virtual ushort TypeId => Id;
 
 

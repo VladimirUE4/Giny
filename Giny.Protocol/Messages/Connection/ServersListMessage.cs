@@ -9,20 +9,18 @@ namespace Giny.Protocol.Messages
 { 
     public class ServersListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 786;
+        public new const ushort Id = 4863;
         public override ushort MessageId => Id;
 
         public GameServerInformations[] servers;
-        public short alreadyConnectedToServerId;
         public bool canCreateNewCharacter;
 
         public ServersListMessage()
         {
         }
-        public ServersListMessage(GameServerInformations[] servers,short alreadyConnectedToServerId,bool canCreateNewCharacter)
+        public ServersListMessage(GameServerInformations[] servers,bool canCreateNewCharacter)
         {
             this.servers = servers;
-            this.alreadyConnectedToServerId = alreadyConnectedToServerId;
             this.canCreateNewCharacter = canCreateNewCharacter;
         }
         public override void Serialize(IDataWriter writer)
@@ -33,12 +31,6 @@ namespace Giny.Protocol.Messages
                 (servers[_i1] as GameServerInformations).Serialize(writer);
             }
 
-            if (alreadyConnectedToServerId < 0)
-            {
-                throw new System.Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element alreadyConnectedToServerId.");
-            }
-
-            writer.WriteVarShort((short)alreadyConnectedToServerId);
             writer.WriteBoolean((bool)canCreateNewCharacter);
         }
         public override void Deserialize(IDataReader reader)
@@ -50,12 +42,6 @@ namespace Giny.Protocol.Messages
                 _item1 = new GameServerInformations();
                 _item1.Deserialize(reader);
                 servers[_i1] = _item1;
-            }
-
-            alreadyConnectedToServerId = (short)reader.ReadVarUhShort();
-            if (alreadyConnectedToServerId < 0)
-            {
-                throw new System.Exception("Forbidden value (" + alreadyConnectedToServerId + ") on element of ServersListMessage.alreadyConnectedToServerId.");
             }
 
             canCreateNewCharacter = (bool)reader.ReadBoolean();

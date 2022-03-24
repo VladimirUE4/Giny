@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CinematicMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5054;
+        public new const ushort Id = 7716;
         public override ushort MessageId => Id;
 
         public short cinematicId;

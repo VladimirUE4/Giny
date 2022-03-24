@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PrismSubareaEmptyInfo  
     { 
-        public const ushort Id = 6884;
+        public const ushort Id = 3717;
         public virtual ushort TypeId => Id;
 
         public short subAreaId;

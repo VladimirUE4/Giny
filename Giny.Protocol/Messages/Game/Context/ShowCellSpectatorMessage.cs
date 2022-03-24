@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ShowCellSpectatorMessage : ShowCellMessage  
     { 
-        public  const ushort Id = 6320;
+        public  const ushort Id = 4547;
         public override ushort MessageId => Id;
 
         public string playerName;

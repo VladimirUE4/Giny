@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyPledgeLoyaltyRequestMessage : AbstractPartyMessage  
     { 
-        public  const ushort Id = 8034;
+        public  const ushort Id = 8399;
         public override ushort MessageId => Id;
 
         public bool loyal;

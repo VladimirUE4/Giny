@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PrismFightersInformation  
     { 
-        public const ushort Id = 8909;
+        public const ushort Id = 9984;
         public virtual ushort TypeId => Id;
 
         public short subAreaId;

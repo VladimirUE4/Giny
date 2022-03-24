@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ItemForPreset  
     { 
-        public const ushort Id = 4107;
+        public const ushort Id = 7757;
         public virtual ushort TypeId => Id;
 
         public short position;

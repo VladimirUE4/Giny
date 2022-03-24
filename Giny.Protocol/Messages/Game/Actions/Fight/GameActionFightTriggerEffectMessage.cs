@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightTriggerEffectMessage : GameActionFightDispellEffectMessage  
     { 
-        public  const ushort Id = 6409;
+        public  const ushort Id = 6678;
         public override ushort MessageId => Id;
 
 

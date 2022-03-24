@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PurchasableDialogMessage : NetworkMessage  
     { 
-        public new const ushort Id = 582;
+        public new const ushort Id = 9506;
         public override ushort MessageId => Id;
 
         public bool buyOrSell;

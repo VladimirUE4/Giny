@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ShortcutSpell : Shortcut  
     { 
-        public const ushort Id = 445;
+        public const ushort Id = 6385;
         public override ushort TypeId => Id;
 
         public short spellId;

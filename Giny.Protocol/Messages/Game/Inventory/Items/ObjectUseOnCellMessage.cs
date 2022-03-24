@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectUseOnCellMessage : ObjectUseMessage  
     { 
-        public  const ushort Id = 5623;
+        public  const ushort Id = 1222;
         public override ushort MessageId => Id;
 
         public short cells;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TopTaxCollectorListMessage : AbstractTaxCollectorListMessage  
     { 
-        public  const ushort Id = 3617;
+        public  const ushort Id = 448;
         public override ushort MessageId => Id;
 
         public bool isDungeon;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage : GameRolePlayArenaUpdatePlayerInfosMessage  
     { 
-        public  const ushort Id = 6540;
+        public  const ushort Id = 3033;
         public override ushort MessageId => Id;
 
         public ArenaRankInfos team;

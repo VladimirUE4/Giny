@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatSmileyExtraPackListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8664;
+        public new const ushort Id = 1279;
         public override ushort MessageId => Id;
 
         public byte[] packIds;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PlayerSearchTagInformation : AbstractPlayerSearchInformation  
     { 
-        public const ushort Id = 3556;
+        public const ushort Id = 9839;
         public override ushort TypeId => Id;
 
         public AccountTagInformation tag;

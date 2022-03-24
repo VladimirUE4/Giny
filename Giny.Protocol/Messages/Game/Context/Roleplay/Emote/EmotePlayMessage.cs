@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class EmotePlayMessage : EmotePlayAbstractMessage  
     { 
-        public  const ushort Id = 9462;
+        public  const ushort Id = 792;
         public override ushort MessageId => Id;
 
         public double actorId;

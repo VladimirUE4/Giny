@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GuildInAllianceVersatileInformations : GuildVersatileInformations  
     { 
-        public const ushort Id = 9740;
+        public const ushort Id = 3145;
         public override ushort TypeId => Id;
 
         public int allianceId;

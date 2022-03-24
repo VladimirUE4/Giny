@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class IdentificationSuccessWithLoginTokenMessage : IdentificationSuccessMessage  
     { 
-        public  const ushort Id = 2204;
+        public  const ushort Id = 427;
         public override ushort MessageId => Id;
 
         public string loginToken;
@@ -17,7 +17,7 @@ namespace Giny.Protocol.Messages
         public IdentificationSuccessWithLoginTokenMessage()
         {
         }
-        public IdentificationSuccessWithLoginTokenMessage(string loginToken,string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom)
+        public IdentificationSuccessWithLoginTokenMessage(string loginToken,string login,AccountTagInformation accountTag,int accountId,byte communityId,bool hasRights,bool hasConsoleRight,string secretQuestion,double accountCreation,double subscriptionElapsedDuration,double subscriptionEndDate,bool wasAlreadyConnected,byte havenbagAvailableRoom,bool isAccountForced)
         {
             this.loginToken = loginToken;
             this.login = login;
@@ -32,6 +32,7 @@ namespace Giny.Protocol.Messages
             this.subscriptionEndDate = subscriptionEndDate;
             this.wasAlreadyConnected = wasAlreadyConnected;
             this.havenbagAvailableRoom = havenbagAvailableRoom;
+            this.isAccountForced = isAccountForced;
         }
         public override void Serialize(IDataWriter writer)
         {

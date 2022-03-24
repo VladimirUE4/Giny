@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ObjectGroundRemovedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7554;
+        public new const ushort Id = 5373;
         public override ushort MessageId => Id;
 
         public short cell;

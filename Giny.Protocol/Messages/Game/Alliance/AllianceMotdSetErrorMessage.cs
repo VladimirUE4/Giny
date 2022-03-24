@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AllianceMotdSetErrorMessage : SocialNoticeSetErrorMessage  
     { 
-        public  const ushort Id = 9723;
+        public  const ushort Id = 2004;
         public override ushort MessageId => Id;
 
 

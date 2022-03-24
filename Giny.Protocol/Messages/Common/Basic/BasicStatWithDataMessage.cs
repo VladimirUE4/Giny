@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BasicStatWithDataMessage : BasicStatMessage  
     { 
-        public  const ushort Id = 1144;
+        public  const ushort Id = 5377;
         public override ushort MessageId => Id;
 
         public StatisticData[] datas;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TeleportToBuddyAnswerMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5687;
+        public new const ushort Id = 582;
         public override ushort MessageId => Id;
 
         public short dungeonId;

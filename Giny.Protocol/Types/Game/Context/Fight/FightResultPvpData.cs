@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightResultPvpData : FightResultAdditionalData  
     { 
-        public const ushort Id = 9919;
+        public const ushort Id = 9448;
         public override ushort TypeId => Id;
 
         public byte grade;

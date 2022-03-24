@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOptionEmote : HumanOption  
     { 
-        public const ushort Id = 3456;
+        public const ushort Id = 3948;
         public override ushort TypeId => Id;
 
         public short emoteId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildMemberWarnOnConnectionStateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2986;
+        public new const ushort Id = 5224;
         public override ushort MessageId => Id;
 
         public bool enable;

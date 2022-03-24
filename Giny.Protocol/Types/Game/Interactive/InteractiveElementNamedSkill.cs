@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class InteractiveElementNamedSkill : InteractiveElementSkill  
     { 
-        public const ushort Id = 3340;
+        public const ushort Id = 8189;
         public override ushort TypeId => Id;
 
         public int nameId;

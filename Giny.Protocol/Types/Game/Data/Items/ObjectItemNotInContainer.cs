@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItemNotInContainer : Item  
     { 
-        public const ushort Id = 8362;
+        public const ushort Id = 1294;
         public override ushort TypeId => Id;
 
         public short objectGID;

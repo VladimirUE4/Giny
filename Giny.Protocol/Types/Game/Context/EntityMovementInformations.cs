@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class EntityMovementInformations  
     { 
-        public const ushort Id = 7283;
+        public const ushort Id = 2953;
         public virtual ushort TypeId => Id;
 
         public int id;

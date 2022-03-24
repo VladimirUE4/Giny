@@ -24,8 +24,7 @@ namespace Giny.ProtocolBuilder
             Stopwatch stopwatch = Stopwatch.StartNew();
 
 
-            //  BuildEnums();
-
+            BuildEnums();
             BuildMessages();
             BuildTypes();
 

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ForgettableSpellListUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9946;
+        public new const ushort Id = 584;
         public override ushort MessageId => Id;
 
         public byte action;

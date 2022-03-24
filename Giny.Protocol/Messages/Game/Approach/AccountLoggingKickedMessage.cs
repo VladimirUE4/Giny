@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AccountLoggingKickedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7661;
+        public new const ushort Id = 3647;
         public override ushort MessageId => Id;
 
         public short days;

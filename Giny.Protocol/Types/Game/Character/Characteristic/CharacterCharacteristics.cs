@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterCharacteristics  
     { 
-        public const ushort Id = 5368;
+        public const ushort Id = 9333;
         public virtual ushort TypeId => Id;
 
         public CharacterCharacteristic[] characteristics;

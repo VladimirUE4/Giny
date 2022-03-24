@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 using System;
 
 namespace Giny.Protocol.Enums
@@ -13,12 +20,8 @@ namespace Giny.Protocol.Enums
         INFO_TAX_COLLECTOR_ALLIANCE = 7,
         INFO_TAX_COLLECTOR_LEAVE = 8,
         INFO_RECRUITMENT = 9,
+        INFO_LOGBOOK = 10,
 
     }
 }
-
-
-
-
-
 

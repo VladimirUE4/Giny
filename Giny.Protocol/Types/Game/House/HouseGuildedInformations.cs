@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class HouseGuildedInformations : HouseInstanceInformations  
     { 
-        public const ushort Id = 856;
+        public const ushort Id = 7677;
         public override ushort TypeId => Id;
 
         public GuildInformations guildInfo;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class StatedElement  
     { 
-        public const ushort Id = 7058;
+        public const ushort Id = 9515;
         public virtual ushort TypeId => Id;
 
         public int elementId;

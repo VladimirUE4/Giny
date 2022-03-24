@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LeaveDialogMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2209;
+        public new const ushort Id = 5131;
         public override ushort MessageId => Id;
 
         public byte dialogType;

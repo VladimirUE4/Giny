@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameServerInformations  
     { 
-        public const ushort Id = 5238;
+        public const ushort Id = 7410;
         public virtual ushort TypeId => Id;
 
         public short id;

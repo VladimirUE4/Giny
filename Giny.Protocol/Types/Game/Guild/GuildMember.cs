@@ -7,15 +7,14 @@ namespace Giny.Protocol.Types
 { 
     public class GuildMember : CharacterMinimalInformations  
     { 
-        public const ushort Id = 5491;
+        public const ushort Id = 9147;
         public override ushort TypeId => Id;
 
         public byte breed;
         public bool sex;
-        public short rank;
+        public int rankId;
         public long givenExperience;
         public byte experienceGivenPercent;
-        public int rights;
         public byte connected;
         public byte alignmentSide;
         public short hoursSinceLastConnection;
@@ -24,18 +23,18 @@ namespace Giny.Protocol.Types
         public int achievementPoints;
         public PlayerStatus status;
         public bool havenBagShared;
+        public PlayerNote note;
 
         public GuildMember()
         {
         }
-        public GuildMember(byte breed,bool sex,short rank,long givenExperience,byte experienceGivenPercent,int rights,byte connected,byte alignmentSide,short hoursSinceLastConnection,short moodSmileyId,int accountId,int achievementPoints,PlayerStatus status,bool havenBagShared,long id,string name,short level)
+        public GuildMember(byte breed,bool sex,int rankId,long givenExperience,byte experienceGivenPercent,byte connected,byte alignmentSide,short hoursSinceLastConnection,short moodSmileyId,int accountId,int achievementPoints,PlayerStatus status,bool havenBagShared,PlayerNote note,long id,string name,short level)
         {
             this.breed = breed;
             this.sex = sex;
-            this.rank = rank;
+            this.rankId = rankId;
             this.givenExperience = givenExperience;
             this.experienceGivenPercent = experienceGivenPercent;
-            this.rights = rights;
             this.connected = connected;
             this.alignmentSide = alignmentSide;
             this.hoursSinceLastConnection = hoursSinceLastConnection;
@@ -44,6 +43,7 @@ namespace Giny.Protocol.Types
             this.achievementPoints = achievementPoints;
             this.status = status;
             this.havenBagShared = havenBagShared;
+            this.note = note;
             this.id = id;
             this.name = name;
             this.level = level;
@@ -56,12 +56,12 @@ namespace Giny.Protocol.Types
             _box0 = BooleanByteWrapper.SetFlag(_box0,1,havenBagShared);
             writer.WriteByte((byte)_box0);
             writer.WriteByte((byte)breed);
-            if (rank < 0)
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + rank + ") on element rank.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element rankId.");
             }
 
-            writer.WriteVarShort((short)rank);
+            writer.WriteVarInt((int)rankId);
             if (givenExperience < 0 || givenExperience > 9.00719925474099E+15)
             {
                 throw new System.Exception("Forbidden value (" + givenExperience + ") on element givenExperience.");
@@ -74,12 +74,6 @@ namespace Giny.Protocol.Types
             }
 
             writer.WriteByte((byte)experienceGivenPercent);
-            if (rights < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rights + ") on element rights.");
-            }
-
-            writer.WriteVarInt((int)rights);
             writer.WriteByte((byte)connected);
             writer.WriteByte((byte)alignmentSide);
             if (hoursSinceLastConnection < 0 || hoursSinceLastConnection > 65535)
@@ -103,6 +97,7 @@ namespace Giny.Protocol.Types
             writer.WriteInt((int)achievementPoints);
             writer.WriteShort((short)status.TypeId);
             status.Serialize(writer);
+            note.Serialize(writer);
         }
         public override void Deserialize(IDataReader reader)
         {
@@ -111,10 +106,10 @@ namespace Giny.Protocol.Types
             sex = BooleanByteWrapper.GetFlag(_box0,0);
             havenBagShared = BooleanByteWrapper.GetFlag(_box0,1);
             breed = (byte)reader.ReadByte();
-            rank = (short)reader.ReadVarUhShort();
-            if (rank < 0)
+            rankId = (int)reader.ReadVarUhInt();
+            if (rankId < 0)
             {
-                throw new System.Exception("Forbidden value (" + rank + ") on element of GuildMember.rank.");
+                throw new System.Exception("Forbidden value (" + rankId + ") on element of GuildMember.rankId.");
             }
 
             givenExperience = (long)reader.ReadVarUhLong();
@@ -127,12 +122,6 @@ namespace Giny.Protocol.Types
             if (experienceGivenPercent < 0 || experienceGivenPercent > 100)
             {
                 throw new System.Exception("Forbidden value (" + experienceGivenPercent + ") on element of GuildMember.experienceGivenPercent.");
-            }
-
-            rights = (int)reader.ReadVarUhInt();
-            if (rights < 0)
-            {
-                throw new System.Exception("Forbidden value (" + rights + ") on element of GuildMember.rights.");
             }
 
             connected = (byte)reader.ReadByte();
@@ -161,9 +150,11 @@ namespace Giny.Protocol.Types
             }
 
             achievementPoints = (int)reader.ReadInt();
-            uint _id13 = (uint)reader.ReadUShort();
-            status = ProtocolTypeManager.GetInstance<PlayerStatus>((short)_id13);
+            uint _id12 = (uint)reader.ReadUShort();
+            status = ProtocolTypeManager.GetInstance<PlayerStatus>((short)_id12);
             status.Deserialize(reader);
+            note = new PlayerNote();
+            note.Deserialize(reader);
         }
 
 

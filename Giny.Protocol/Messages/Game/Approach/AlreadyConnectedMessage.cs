@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AlreadyConnectedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5949;
+        public new const ushort Id = 6242;
         public override ushort MessageId => Id;
 
 

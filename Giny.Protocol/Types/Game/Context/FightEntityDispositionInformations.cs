@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightEntityDispositionInformations : EntityDispositionInformations  
     { 
-        public const ushort Id = 7794;
+        public const ushort Id = 827;
         public override ushort TypeId => Id;
 
         public double carryingCharacterId;

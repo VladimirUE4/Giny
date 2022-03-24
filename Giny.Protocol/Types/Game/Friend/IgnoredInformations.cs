@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class IgnoredInformations : AbstractContactInformations  
     { 
-        public const ushort Id = 1909;
+        public const ushort Id = 7442;
         public override ushort TypeId => Id;
 
 

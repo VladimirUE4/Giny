@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class LeagueFriendInformations : AbstractContactInformations  
     { 
-        public const ushort Id = 107;
+        public const ushort Id = 8933;
         public override ushort TypeId => Id;
 
         public long playerId;

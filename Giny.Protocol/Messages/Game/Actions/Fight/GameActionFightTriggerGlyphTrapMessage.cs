@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightTriggerGlyphTrapMessage : AbstractGameActionMessage  
     { 
-        public  const ushort Id = 1777;
+        public  const ushort Id = 7749;
         public override ushort MessageId => Id;
 
         public short markId;

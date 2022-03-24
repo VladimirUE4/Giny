@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightResultTaxCollectorListEntry : FightResultFighterListEntry  
     { 
-        public const ushort Id = 1517;
+        public const ushort Id = 1668;
         public override ushort TypeId => Id;
 
         public byte level;

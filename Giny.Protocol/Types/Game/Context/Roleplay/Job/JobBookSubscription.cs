@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class JobBookSubscription  
     { 
-        public const ushort Id = 6658;
+        public const ushort Id = 2471;
         public virtual ushort TypeId => Id;
 
         public byte jobId;

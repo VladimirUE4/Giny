@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class Version  
     { 
-        public const ushort Id = 3781;
+        public const ushort Id = 1212;
         public virtual ushort TypeId => Id;
 
         public byte major;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class HavenBagFurnitureInformation  
     { 
-        public const ushort Id = 3647;
+        public const ushort Id = 3895;
         public virtual ushort TypeId => Id;
 
         public short cellId;

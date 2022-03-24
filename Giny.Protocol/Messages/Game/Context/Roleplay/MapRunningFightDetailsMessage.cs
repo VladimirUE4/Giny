@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapRunningFightDetailsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3380;
+        public new const ushort Id = 7296;
         public override ushort MessageId => Id;
 
         public short fightId;

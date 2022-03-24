@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HaapiValidationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8710;
+        public new const ushort Id = 1415;
         public override ushort MessageId => Id;
 
         public byte action;

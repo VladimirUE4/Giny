@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PlayerSearchCharacterNameInformation : AbstractPlayerSearchInformation  
     { 
-        public const ushort Id = 6431;
+        public const ushort Id = 8198;
         public override ushort TypeId => Id;
 
         public string name;

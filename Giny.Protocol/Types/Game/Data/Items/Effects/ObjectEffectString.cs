@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectString : ObjectEffect  
     { 
-        public const ushort Id = 576;
+        public const ushort Id = 205;
         public override ushort TypeId => Id;
 
         public string value;

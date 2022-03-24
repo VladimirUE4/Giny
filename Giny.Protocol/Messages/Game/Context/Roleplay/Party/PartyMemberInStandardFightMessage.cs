@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyMemberInStandardFightMessage : AbstractPartyMemberInFightMessage  
     { 
-        public  const ushort Id = 6653;
+        public  const ushort Id = 4603;
         public override ushort MessageId => Id;
 
         public MapCoordinatesExtended fightMap;

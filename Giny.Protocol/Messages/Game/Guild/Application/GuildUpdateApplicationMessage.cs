@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildUpdateApplicationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6940;
+        public new const ushort Id = 2139;
         public override ushort MessageId => Id;
 
         public string applyText;

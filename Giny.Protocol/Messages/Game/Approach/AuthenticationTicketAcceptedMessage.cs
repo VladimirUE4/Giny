@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class AuthenticationTicketAcceptedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6407;
+        public new const ushort Id = 3733;
         public override ushort MessageId => Id;
 
 

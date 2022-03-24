@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class TreasureHuntStepFollowDirectionToHint : TreasureHuntStep  
     { 
-        public const ushort Id = 4752;
+        public const ushort Id = 895;
         public override ushort TypeId => Id;
 
         public byte direction;

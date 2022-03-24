@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterSpellModification  
     { 
-        public const ushort Id = 4425;
+        public const ushort Id = 5654;
         public virtual ushort TypeId => Id;
 
         public byte modificationType;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MountToggleRidingRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8445;
+        public new const ushort Id = 1968;
         public override ushort MessageId => Id;
 
 

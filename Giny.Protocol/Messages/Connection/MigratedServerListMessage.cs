@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MigratedServerListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 970;
+        public new const ushort Id = 664;
         public override ushort MessageId => Id;
 
         public short[] migratedServerIds;

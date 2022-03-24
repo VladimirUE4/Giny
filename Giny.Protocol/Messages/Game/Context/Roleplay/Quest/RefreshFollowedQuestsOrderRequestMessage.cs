@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class RefreshFollowedQuestsOrderRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1088;
+        public new const ushort Id = 6506;
         public override ushort MessageId => Id;
 
         public short[] quests;

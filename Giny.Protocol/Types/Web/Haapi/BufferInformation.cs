@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class BufferInformation  
     { 
-        public const ushort Id = 3684;
+        public const ushort Id = 6358;
         public virtual ushort TypeId => Id;
 
         public long id;

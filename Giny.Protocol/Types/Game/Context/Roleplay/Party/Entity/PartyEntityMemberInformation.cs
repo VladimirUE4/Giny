@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PartyEntityMemberInformation : PartyEntityBaseInformation  
     { 
-        public const ushort Id = 2136;
+        public const ushort Id = 8077;
         public override ushort TypeId => Id;
 
         public short initiative;

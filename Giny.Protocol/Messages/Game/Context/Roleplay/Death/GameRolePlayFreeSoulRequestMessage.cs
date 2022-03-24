@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameRolePlayFreeSoulRequestMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2760;
+        public new const ushort Id = 9510;
         public override ushort MessageId => Id;
 
 

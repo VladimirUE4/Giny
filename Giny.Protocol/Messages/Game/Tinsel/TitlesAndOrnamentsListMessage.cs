@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class TitlesAndOrnamentsListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6204;
+        public new const ushort Id = 3990;
         public override ushort MessageId => Id;
 
         public short[] titles;

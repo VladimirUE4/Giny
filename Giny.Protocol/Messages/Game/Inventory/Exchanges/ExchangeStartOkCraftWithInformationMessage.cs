@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartOkCraftWithInformationMessage : ExchangeStartOkCraftMessage  
     { 
-        public  const ushort Id = 9154;
+        public  const ushort Id = 1180;
         public override ushort MessageId => Id;
 
         public int skillId;

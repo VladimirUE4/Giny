@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class GameContextActorPositionInformations  
     { 
-        public const ushort Id = 1244;
+        public const ushort Id = 261;
         public virtual ushort TypeId => Id;
 
         public double contextualId;

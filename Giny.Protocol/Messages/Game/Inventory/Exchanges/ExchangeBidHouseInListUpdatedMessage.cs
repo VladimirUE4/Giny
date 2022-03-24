@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeBidHouseInListUpdatedMessage : ExchangeBidHouseInListAddedMessage  
     { 
-        public  const ushort Id = 5031;
+        public  const ushort Id = 5004;
         public override ushort MessageId => Id;
 
 

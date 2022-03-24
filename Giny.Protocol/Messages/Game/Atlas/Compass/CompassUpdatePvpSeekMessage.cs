@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CompassUpdatePvpSeekMessage : CompassUpdateMessage  
     { 
-        public  const ushort Id = 5714;
+        public  const ushort Id = 8299;
         public override ushort MessageId => Id;
 
         public long memberId;

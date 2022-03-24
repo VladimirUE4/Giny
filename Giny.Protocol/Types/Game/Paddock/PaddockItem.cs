@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class PaddockItem : ObjectItemInRolePlay  
     { 
-        public const ushort Id = 5575;
+        public const ushort Id = 7089;
         public override ushort TypeId => Id;
 
         public ItemDurability durability;

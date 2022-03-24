@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class HumanOptionAlliance : HumanOption  
     { 
-        public const ushort Id = 3939;
+        public const ushort Id = 6829;
         public override ushort TypeId => Id;
 
         public AllianceInformations allianceInformations;

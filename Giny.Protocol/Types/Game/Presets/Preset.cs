@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class Preset  
     { 
-        public const ushort Id = 6024;
+        public const ushort Id = 4056;
         public virtual ushort TypeId => Id;
 
         public short id;

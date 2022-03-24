@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class RefreshCharacterStatsMessage : NetworkMessage  
     { 
-        public new const ushort Id = 154;
+        public new const ushort Id = 8208;
         public override ushort MessageId => Id;
 
         public double fighterId;

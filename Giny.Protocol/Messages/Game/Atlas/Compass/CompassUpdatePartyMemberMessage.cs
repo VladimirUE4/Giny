@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class CompassUpdatePartyMemberMessage : CompassUpdateMessage  
     { 
-        public  const ushort Id = 9272;
+        public  const ushort Id = 598;
         public override ushort MessageId => Id;
 
         public long memberId;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTeamMemberEntityInformation : FightTeamMemberInformations  
     { 
-        public const ushort Id = 5487;
+        public const ushort Id = 9031;
         public override ushort TypeId => Id;
 
         public byte entityModelId;

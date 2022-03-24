@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyInvitationCancelledForGuestMessage : AbstractPartyMessage  
     { 
-        public  const ushort Id = 1943;
+        public  const ushort Id = 3125;
         public override ushort MessageId => Id;
 
         public long cancelerId;

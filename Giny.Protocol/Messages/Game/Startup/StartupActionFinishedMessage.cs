@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class StartupActionFinishedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 6394;
+        public new const ushort Id = 193;
         public override ushort MessageId => Id;
 
         public bool success;

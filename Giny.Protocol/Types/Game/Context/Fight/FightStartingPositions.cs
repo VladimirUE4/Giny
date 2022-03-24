@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightStartingPositions  
     { 
-        public const ushort Id = 9707;
+        public const ushort Id = 4728;
         public virtual ushort TypeId => Id;
 
         public short[] positionsForChallengers;

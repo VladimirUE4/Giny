@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class JobExperience  
     { 
-        public const ushort Id = 1579;
+        public const ushort Id = 2255;
         public virtual ushort TypeId => Id;
 
         public byte jobId;

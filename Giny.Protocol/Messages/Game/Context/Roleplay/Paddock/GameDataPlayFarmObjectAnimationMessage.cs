@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameDataPlayFarmObjectAnimationMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7212;
+        public new const ushort Id = 1970;
         public override ushort MessageId => Id;
 
         public short[] cellId;

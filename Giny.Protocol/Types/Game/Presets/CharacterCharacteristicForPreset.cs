@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterCharacteristicForPreset : SimpleCharacterCharacteristicForPreset  
     { 
-        public const ushort Id = 4303;
+        public const ushort Id = 1673;
         public override ushort TypeId => Id;
 
         public short stuff;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapObstacleUpdateMessage : NetworkMessage  
     { 
-        public new const ushort Id = 9984;
+        public new const ushort Id = 7517;
         public override ushort MessageId => Id;
 
         public MapObstacle[] obstacles;

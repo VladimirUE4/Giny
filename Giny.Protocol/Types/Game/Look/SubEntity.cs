@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class SubEntity  
     { 
-        public const ushort Id = 8670;
+        public const ushort Id = 3179;
         public virtual ushort TypeId => Id;
 
         public byte bindingPointCategory;

@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectEffectMinMax : ObjectEffect  
     { 
-        public const ushort Id = 5720;
+        public const ushort Id = 9563;
         public override ushort TypeId => Id;
 
         public int min;

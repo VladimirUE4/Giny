@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class MapComplementaryInformationsDataInHouseMessage : MapComplementaryInformationsDataMessage  
     { 
-        public  const ushort Id = 2024;
+        public  const ushort Id = 7853;
         public override ushort MessageId => Id;
 
         public HouseInformationsInside currentHouse;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatKolizeumServerMessage : ChatServerMessage  
     { 
-        public  const ushort Id = 4380;
+        public  const ushort Id = 1773;
         public override ushort MessageId => Id;
 
         public short originServerId;

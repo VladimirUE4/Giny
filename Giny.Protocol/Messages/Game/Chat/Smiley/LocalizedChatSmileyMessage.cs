@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class LocalizedChatSmileyMessage : ChatSmileyMessage  
     { 
-        public  const ushort Id = 5134;
+        public  const ushort Id = 5993;
         public override ushort MessageId => Id;
 
         public short cellId;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class InventoryWeightMessage : NetworkMessage  
     { 
-        public new const ushort Id = 3751;
+        public new const ushort Id = 4739;
         public override ushort MessageId => Id;
 
         public int inventoryWeight;

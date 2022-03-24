@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class ObjectItem : Item  
     { 
-        public const ushort Id = 2916;
+        public const ushort Id = 8568;
         public override ushort TypeId => Id;
 
         public short position;

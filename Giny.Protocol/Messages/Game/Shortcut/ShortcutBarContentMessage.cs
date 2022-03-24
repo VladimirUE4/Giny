@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ShortcutBarContentMessage : NetworkMessage  
     { 
-        public new const ushort Id = 7910;
+        public new const ushort Id = 3367;
         public override ushort MessageId => Id;
 
         public byte barType;

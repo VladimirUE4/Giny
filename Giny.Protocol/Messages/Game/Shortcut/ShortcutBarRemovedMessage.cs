@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ShortcutBarRemovedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 5087;
+        public new const ushort Id = 9231;
         public override ushort MessageId => Id;
 
         public byte barType;

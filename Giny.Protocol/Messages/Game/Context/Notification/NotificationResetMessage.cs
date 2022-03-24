@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class NotificationResetMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1;
+        public new const ushort Id = 9892;
         public override ushort MessageId => Id;
 
 

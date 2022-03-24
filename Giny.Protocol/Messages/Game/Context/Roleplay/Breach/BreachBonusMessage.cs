@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BreachBonusMessage : NetworkMessage  
     { 
-        public new const ushort Id = 1689;
+        public new const ushort Id = 1240;
         public override ushort MessageId => Id;
 
         public ObjectEffectInteger bonus;

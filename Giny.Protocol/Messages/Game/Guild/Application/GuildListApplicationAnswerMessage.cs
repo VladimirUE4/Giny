@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildListApplicationAnswerMessage : PaginationAnswerAbstractMessage  
     { 
-        public  const ushort Id = 1223;
+        public  const ushort Id = 169;
         public override ushort MessageId => Id;
 
         public GuildApplicationInformation[] applies;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class BulletinMessage : SocialNoticeMessage  
     { 
-        public  const ushort Id = 9541;
+        public  const ushort Id = 5239;
         public override ushort MessageId => Id;
 
         public int lastNotifiedTimestamp;

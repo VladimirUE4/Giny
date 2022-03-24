@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ChatClientMultiWithObjectMessage : ChatClientMultiMessage  
     { 
-        public  const ushort Id = 1682;
+        public  const ushort Id = 4323;
         public override ushort MessageId => Id;
 
         public ObjectItem[] objects;

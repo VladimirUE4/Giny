@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class FightTemporarySpellBoostEffect : FightTemporaryBoostEffect  
     { 
-        public const ushort Id = 540;
+        public const ushort Id = 3626;
         public override ushort TypeId => Id;
 
         public short boostedSpellId;

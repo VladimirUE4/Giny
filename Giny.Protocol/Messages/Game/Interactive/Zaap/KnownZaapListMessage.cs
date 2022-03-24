@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class KnownZaapListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4096;
+        public new const ushort Id = 1272;
         public override ushort MessageId => Id;
 
         public double[] destinations;

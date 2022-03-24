@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SpellListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4091;
+        public new const ushort Id = 967;
         public override ushort MessageId => Id;
 
         public bool spellPrevisualization;

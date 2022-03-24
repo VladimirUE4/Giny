@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SelectedServerRefusedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 8116;
+        public new const ushort Id = 2315;
         public override ushort MessageId => Id;
 
         public short serverId;

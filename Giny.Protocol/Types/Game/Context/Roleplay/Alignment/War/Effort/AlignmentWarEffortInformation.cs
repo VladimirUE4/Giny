@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AlignmentWarEffortInformation  
     { 
-        public const ushort Id = 3356;
+        public const ushort Id = 9705;
         public virtual ushort TypeId => Id;
 
         public byte alignmentSide;

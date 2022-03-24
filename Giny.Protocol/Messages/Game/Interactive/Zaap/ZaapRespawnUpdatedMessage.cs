@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ZaapRespawnUpdatedMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2988;
+        public new const ushort Id = 5168;
         public override ushort MessageId => Id;
 
         public double mapId;

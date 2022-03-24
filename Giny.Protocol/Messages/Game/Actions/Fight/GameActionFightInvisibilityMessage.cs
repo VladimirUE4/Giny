@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GameActionFightInvisibilityMessage : AbstractGameActionMessage  
     { 
-        public  const ushort Id = 7441;
+        public  const ushort Id = 2092;
         public override ushort MessageId => Id;
 
         public double targetId;

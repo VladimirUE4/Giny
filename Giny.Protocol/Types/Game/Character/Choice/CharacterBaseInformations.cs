@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class CharacterBaseInformations : CharacterMinimalPlusLookInformations  
     { 
-        public const ushort Id = 8097;
+        public const ushort Id = 1839;
         public override ushort TypeId => Id;
 
         public bool sex;

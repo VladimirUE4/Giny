@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class GuildSummaryMessage : PaginationAnswerAbstractMessage  
     { 
-        public  const ushort Id = 4399;
+        public  const ushort Id = 912;
         public override ushort MessageId => Id;
 
         public GuildFactSheetInformations[] guilds;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeStartedTaxCollectorShopMessage : NetworkMessage  
     { 
-        public new const ushort Id = 2236;
+        public new const ushort Id = 1974;
         public override ushort MessageId => Id;
 
         public ObjectItem[] objects;

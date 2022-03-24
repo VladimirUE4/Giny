@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class AcquaintanceOnlineInformation : AcquaintanceInformation  
     { 
-        public const ushort Id = 4750;
+        public const ushort Id = 4753;
         public override ushort TypeId => Id;
 
         public long playerId;

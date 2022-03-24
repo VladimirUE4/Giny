@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class ExchangeRequestedTradeMessage : ExchangeRequestedMessage  
     { 
-        public  const ushort Id = 9612;
+        public  const ushort Id = 6276;
         public override ushort MessageId => Id;
 
         public long source;

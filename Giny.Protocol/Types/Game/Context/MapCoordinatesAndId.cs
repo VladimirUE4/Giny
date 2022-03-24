@@ -7,7 +7,7 @@ namespace Giny.Protocol.Types
 { 
     public class MapCoordinatesAndId : MapCoordinates  
     { 
-        public const ushort Id = 1741;
+        public const ushort Id = 1303;
         public override ushort TypeId => Id;
 
         public double mapId;

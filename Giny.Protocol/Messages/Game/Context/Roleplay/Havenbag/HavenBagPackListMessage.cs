@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class HavenBagPackListMessage : NetworkMessage  
     { 
-        public new const ushort Id = 268;
+        public new const ushort Id = 8638;
         public override ushort MessageId => Id;
 
         public byte[] packIds;

@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class PartyKickedByMessage : AbstractPartyMessage  
     { 
-        public  const ushort Id = 8439;
+        public  const ushort Id = 2835;
         public override ushort MessageId => Id;
 
         public long kickerId;

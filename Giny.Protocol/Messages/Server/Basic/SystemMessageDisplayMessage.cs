@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class SystemMessageDisplayMessage : NetworkMessage  
     { 
-        public new const ushort Id = 4698;
+        public new const ushort Id = 5519;
         public override ushort MessageId => Id;
 
         public bool hangUp;
