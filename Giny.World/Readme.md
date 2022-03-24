@@ -142,10 +142,10 @@ if (str.StartsWith("["))
 - [x] Challenges (en cours)
 - [ ] Taxe de vente HDV
 - [ ] Fixer apparences living objets 
-- [ ] Finir guildes (percepteurs entre autre)
+- [ ] Terminer les guildes (percepteurs entre autre)
 - [ ] Bug items lors équipement (possibilité de ne pas respecter criterias)
 - [ ] Criterias (OR AND)
-- [ ] weapons GetCriticalEffects( gérer dommage dice.
+- [ ] weapons GetCriticalEffects( gérer dommage dice)
 - [ ] Parchemin caracteristique wtf effets sur les grands parchemins
 - [ ] Invisibility a tests
 - [ ] Panache Reroll VIP StackOverflow

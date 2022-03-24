@@ -84,3 +84,20 @@ static infos a rajouter (non static)
 * Utiliser le module database patcher
 
 
+## Edit client to get protocol values
+````pcode
+ getlex QName(PackageNamespace("com.ankamagames.jerakine.logger"),"Log")
+pushstring "test"
+callproperty QName(PackageNamespace(""),"getLogger"), 1
+setlocal2
+getlocal2
+pushstring "Value is "
+getlocal0
+getproperty QName(PackageNamespace(""),"total")
+add
+pushstring ", length "
+add
+pushstring "..."
+add
+callpropvoid QName(Namespace("com.ankamagames.jerakine.logger:Logger"),"warn"), 1
+````
