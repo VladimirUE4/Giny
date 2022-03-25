@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("FinishMove", "")]
+{    [D2OClass("FinishMove", "")]
     public class FinishMove : IDataObject , IIndexedData
-    {
-        public const string MODULE = "FinishMoves";
+    {        public const string MODULE = "FinishMoves";
 
         public int Id => (int)id;
 
@@ -93,11 +91,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

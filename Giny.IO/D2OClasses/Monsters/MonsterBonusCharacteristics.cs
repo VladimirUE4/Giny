@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MonsterBonusCharacteristics", "")]
+{    [D2OClass("MonsterBonusCharacteristics", "")]
     public class MonsterBonusCharacteristics : IDataObject , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public int lifePoints;
@@ -236,7 +234,7 @@ namespace Giny.IO.D2OClasses
             }
         }
         [D2OIgnore]
-        public int APRemoval
+        public int _APRemoval
         {
             get
             {
@@ -248,11 +246,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

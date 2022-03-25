@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("ServerTemporisSeason", "")]
+{    [D2OClass("ServerTemporisSeason", "")]
     public class ServerTemporisSeason : IDataObject , IIndexedData
-    {
-        public const string MODULE = "ServerTemporisSeasons";
+    {        public const string MODULE = "ServerTemporisSeasons";
 
         public int Id => throw new NotImplementedException();
 
@@ -80,11 +78,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

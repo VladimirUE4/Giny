@@ -5,20 +5,11 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("QuestBonus", "")]
+{    [D2OClass("QuestBonus", "")]
     public class QuestBonus : Bonus , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
 
 
-    }
-}
-
-
-
-
-
-
+    }}

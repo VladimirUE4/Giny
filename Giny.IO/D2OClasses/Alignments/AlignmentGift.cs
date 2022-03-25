@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("AlignmentGift", "")]
+{    [D2OClass("AlignmentGift", "")]
     public class AlignmentGift : IDataObject , IIndexedData
-    {
-        public const string MODULE = "AlignmentGift";
+    {        public const string MODULE = "AlignmentGift";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

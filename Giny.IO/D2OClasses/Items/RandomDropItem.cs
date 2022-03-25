@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("RandomDropItem", "")]
+{    [D2OClass("RandomDropItem", "")]
     public class RandomDropItem : IDataObject , IIndexedData
     {
-
         public int Id => (int)id;
 
         public uint id;
@@ -79,11 +77,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

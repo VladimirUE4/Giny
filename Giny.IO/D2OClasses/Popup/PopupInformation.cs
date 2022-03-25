@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("PopupInformation", "")]
+{    [D2OClass("PopupInformation", "")]
     public class PopupInformation : IDataObject , IIndexedData
-    {
-        public const string MODULE = "PopupInformations";
+    {        public const string MODULE = "PopupInformations";
 
         public int Id => (int)id;
 
@@ -132,11 +130,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

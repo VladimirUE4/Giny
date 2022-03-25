@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("AchievementReward", "")]
+{    [D2OClass("AchievementReward", "")]
     public class AchievementReward : IDataObject , IIndexedData
-    {
-        public const string MODULE = "AchievementRewards";
+    {        public const string MODULE = "AchievementRewards";
 
         public int Id => (int)id;
 
@@ -171,11 +169,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

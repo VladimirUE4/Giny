@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("AchievementProgressStep", "")]
+{    [D2OClass("AchievementProgressStep", "")]
     public class AchievementProgressStep : IDataObject , IIndexedData
-    {
-        public const string MODULE = "AchievementProgressSteps";
+    {        public const string MODULE = "AchievementProgressSteps";
 
         public int Id => (int)id;
 
@@ -80,11 +78,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

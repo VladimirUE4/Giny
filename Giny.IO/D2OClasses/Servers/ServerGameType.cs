@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("ServerGameType", "")]
+{    [D2OClass("ServerGameType", "")]
     public class ServerGameType : IDataObject , IIndexedData
-    {
-        public const string MODULE = "ServerGameTypes";
+    {        public const string MODULE = "ServerGameTypes";
 
         public int Id => (int)id;
 
@@ -80,11 +78,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

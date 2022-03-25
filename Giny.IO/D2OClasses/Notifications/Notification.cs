@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Notification", "")]
+{    [D2OClass("Notification", "")]
     public class Notification : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Notifications";
+    {        public const string MODULE = "Notifications";
 
         public int Id => (int)id;
 
@@ -93,11 +91,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

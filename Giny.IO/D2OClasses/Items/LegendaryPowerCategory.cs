@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("LegendaryPowerCategory", "")]
+{    [D2OClass("LegendaryPowerCategory", "")]
     public class LegendaryPowerCategory : IDataObject , IIndexedData
-    {
-        public const string MODULE = "LegendaryPowersCategories";
+    {        public const string MODULE = "LegendaryPowersCategories";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

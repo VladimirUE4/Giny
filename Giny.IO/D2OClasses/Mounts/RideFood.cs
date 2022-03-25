@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("RideFood", "")]
+{    [D2OClass("RideFood", "")]
     public class RideFood : IDataObject , IIndexedData
-    {
-        public const string MODULE = "RideFood";
+    {        public const string MODULE = "RideFood";
 
         public int Id => throw new NotImplementedException();
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

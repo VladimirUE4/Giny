@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MapReference", "")]
+{    [D2OClass("MapReference", "")]
     public class MapReference : IDataObject , IIndexedData
-    {
-        public const string MODULE = "MapReferences";
+    {        public const string MODULE = "MapReferences";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

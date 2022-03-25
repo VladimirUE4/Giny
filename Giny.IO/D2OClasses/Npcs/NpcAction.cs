@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("NpcAction", "")]
+{    [D2OClass("NpcAction", "")]
     public class NpcAction : IDataObject , IIndexedData
-    {
-        public const string MODULE = "NpcActions";
+    {        public const string MODULE = "NpcActions";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

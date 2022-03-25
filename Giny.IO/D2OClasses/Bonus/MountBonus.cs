@@ -5,20 +5,11 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MountBonus", "")]
+{    [D2OClass("MountBonus", "")]
     public class MountBonus : Bonus , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
 
 
-    }
-}
-
-
-
-
-
-
+    }}

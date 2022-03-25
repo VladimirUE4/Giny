@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Emoticon", "")]
+{    [D2OClass("Emoticon", "")]
     public class Emoticon : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Emoticons";
+    {        public const string MODULE = "Emoticons";
 
         public int Id => (int)id;
 
@@ -184,11 +182,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

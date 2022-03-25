@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Area", "")]
+{    [D2OClass("Area", "")]
     public class Area : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Areas";
+    {        public const string MODULE = "Areas";
 
         public int Id => (int)id;
 
@@ -132,11 +130,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

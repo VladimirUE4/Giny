@@ -5,20 +5,11 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("ArenaDuelRankCriterion", "")]
+{    [D2OClass("ArenaDuelRankCriterion", "")]
     public class ArenaDuelRankCriterion : ItemCriterion , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
 
 
-    }
-}
-
-
-
-
-
-
+    }}

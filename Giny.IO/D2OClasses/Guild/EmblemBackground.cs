@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EmblemBackground", "")]
+{    [D2OClass("EmblemBackground", "")]
     public class EmblemBackground : IDataObject , IIndexedData
-    {
-        public const string MODULE = "EmblemBackgrounds";
+    {        public const string MODULE = "EmblemBackgrounds";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SoundUiHook", "")]
+{    [D2OClass("SoundUiHook", "")]
     public class SoundUiHook : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SoundUiHook";
+    {        public const string MODULE = "SoundUiHook";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

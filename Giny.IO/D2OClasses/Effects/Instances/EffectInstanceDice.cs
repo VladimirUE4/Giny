@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceDice", "")]
+{    [D2OClass("EffectInstanceDice", "")]
     public class EffectInstanceDice : EffectInstanceInteger , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint diceNum;
@@ -40,11 +38,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

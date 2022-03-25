@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Effect", "")]
+{    [D2OClass("Effect", "")]
     public class Effect : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Effects";
+    {        public const string MODULE = "Effects";
 
         public int Id => (int)id;
 
@@ -275,11 +273,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

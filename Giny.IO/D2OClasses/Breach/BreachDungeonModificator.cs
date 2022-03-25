@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("BreachDungeonModificator", "")]
+{    [D2OClass("BreachDungeonModificator", "")]
     public class BreachDungeonModificator : IDataObject , IIndexedData
-    {
-        public const string MODULE = "BreachDungeonModificators";
+    {        public const string MODULE = "BreachDungeonModificators";
 
         public int Id => (int)id;
 
@@ -106,11 +104,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

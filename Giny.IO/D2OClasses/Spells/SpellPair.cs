@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SpellPair", "")]
+{    [D2OClass("SpellPair", "")]
     public class SpellPair : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SpellPairs";
+    {        public const string MODULE = "SpellPairs";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

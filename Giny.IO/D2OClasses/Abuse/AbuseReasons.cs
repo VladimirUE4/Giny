@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("AbuseReasons", "")]
+{    [D2OClass("AbuseReasons", "")]
     public class AbuseReasons : IDataObject , IIndexedData
-    {
-        public const string MODULE = "AbuseReasons";
+    {        public const string MODULE = "AbuseReasons";
 
         public int Id => throw new NotImplementedException();
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("HavenbagFurniture", "")]
+{    [D2OClass("HavenbagFurniture", "")]
     public class HavenbagFurniture : IDataObject , IIndexedData
-    {
-        public const string MODULE = "HavenbagFurnitures";
+    {        public const string MODULE = "HavenbagFurnitures";
 
         public int Id => throw new NotImplementedException();
 
@@ -158,11 +156,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

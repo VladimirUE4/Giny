@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstance", "")]
+{    [D2OClass("EffectInstance", "")]
     public class EffectInstance : IDataObject , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint effectUid;
@@ -39,6 +37,7 @@ namespace Giny.IO.D2OClasses
         public object zoneStopAtTarget;
         public int effectElement;
         public int spellId;
+        public string rawZone;
 
         [D2OIgnore]
         public uint EffectUid
@@ -364,12 +363,17 @@ namespace Giny.IO.D2OClasses
                 spellId = value;
             }
         }
+        [D2OIgnore]
+        public string RawZone
+        {
+            get
+            {
+                return rawZone;
+            }
+            set
+            {
+                rawZone = value;
+            }
+        }
 
-    }
-}
-
-
-
-
-
-
+    }}

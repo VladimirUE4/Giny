@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SpeakingItemText", "")]
+{    [D2OClass("SpeakingItemText", "")]
     public class SpeakingItemText : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SpeakingItemsText";
+    {        public const string MODULE = "SpeakingItemsText";
 
         public int Id => throw new NotImplementedException();
 
@@ -93,11 +91,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

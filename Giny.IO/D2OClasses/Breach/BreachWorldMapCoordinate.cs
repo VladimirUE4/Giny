@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("BreachWorldMapCoordinate", "")]
+{    [D2OClass("BreachWorldMapCoordinate", "")]
     public class BreachWorldMapCoordinate : IDataObject , IIndexedData
-    {
-        public const string MODULE = "BreachWorldMapCoordinates";
+    {        public const string MODULE = "BreachWorldMapCoordinates";
 
         public int Id => (int)id;
 
@@ -93,11 +91,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

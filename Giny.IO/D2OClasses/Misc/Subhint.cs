@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Subhint", "")]
+{    [D2OClass("Subhint", "")]
     public class Subhint : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Subhints";
+    {        public const string MODULE = "Subhints";
 
         public int Id => throw new NotImplementedException();
 
@@ -236,11 +234,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

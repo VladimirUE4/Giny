@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SpeakingItemsTrigger", "")]
+{    [D2OClass("SpeakingItemsTrigger", "")]
     public class SpeakingItemsTrigger : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SpeakingItemsTriggers";
+    {        public const string MODULE = "SpeakingItemsTriggers";
 
         public int Id => throw new NotImplementedException();
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("PlaylistSound", "")]
+{    [D2OClass("PlaylistSound", "")]
     public class PlaylistSound : IDataObject , IIndexedData
-    {
-        public const string MODULE = "PlaylistSounds";
+    {        public const string MODULE = "PlaylistSounds";
 
         public int Id => throw new NotImplementedException();
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

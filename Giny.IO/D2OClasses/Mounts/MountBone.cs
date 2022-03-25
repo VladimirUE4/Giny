@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MountBone", "")]
+{    [D2OClass("MountBone", "")]
     public class MountBone : IDataObject , IIndexedData
-    {
-        public const string MODULE = "MountBones";
+    {        public const string MODULE = "MountBones";
 
         public int Id => (int)id;
 
@@ -28,11 +26,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

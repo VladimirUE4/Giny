@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceDuration", "")]
+{    [D2OClass("EffectInstanceDuration", "")]
     public class EffectInstanceDuration : EffectInstance , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint days;
@@ -53,11 +51,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

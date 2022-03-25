@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("BonusCriterion", "")]
+{    [D2OClass("BonusCriterion", "")]
     public class BonusCriterion : IDataObject , IIndexedData
-    {
-        public const string MODULE = "BonusesCriterions";
+    {        public const string MODULE = "BonusesCriterions";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

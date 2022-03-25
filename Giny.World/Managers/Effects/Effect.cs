@@ -70,7 +70,7 @@ namespace Giny.World.Managers.Effects
             set;
         }
         [ProtoMember(11)]
-        public int Random
+        public double Random
         {
             get;
             set;

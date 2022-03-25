@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("TaxCollectorName", "")]
+{    [D2OClass("TaxCollectorName", "")]
     public class TaxCollectorName : IDataObject , IIndexedData
-    {
-        public const string MODULE = "TaxCollectorNames";
+    {        public const string MODULE = "TaxCollectorNames";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

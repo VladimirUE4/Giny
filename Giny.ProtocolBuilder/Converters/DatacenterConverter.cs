@@ -94,6 +94,10 @@ namespace Giny.ProtocolBuilder.Converters
 
             foreach (var field in FieldsToWrite)
             {
+                if (field.Name == "APRemoval")
+                {
+
+                }
                 string variableName = VerifyVariableName(field.Name);
 
                 if (variableName.StartsWith("_"))
@@ -117,6 +121,11 @@ namespace Giny.ProtocolBuilder.Converters
                 if (variableName == File.ClassName)
                 {
                     variableName += "_";
+                }
+
+                if (variableName == field.Name)
+                {
+                    variableName = "_" + variableName;
                 }
 
                 Append("[D2OIgnore]", sb);
@@ -147,7 +156,32 @@ namespace Giny.ProtocolBuilder.Converters
 
         public override void PostPrepare()
         {
-            
+            if (GetClassName() == "EffectInstance")
+            {
+                AddPrivateField("_rawZone");
+            }
+
+            if (GetClassName() == "CensoredContent")
+            {
+                AddPrivateField("_type");
+                AddPrivateField("_oldValue");
+                AddPrivateField("_newValue");
+                AddPrivateField("_lang");
+            }
+
+            if (GetClassName() == "Hint")
+            {
+                AddPrivateField("_categoryId");
+            }
+
+        }
+
+        private void AddPrivateField(string name)
+        {
+            var field = File.GetField(name);
+            field.Variable.Name = field.Name.Replace("_", "");
+            field.Accessor = AS3AccessorsEnum.@public;
+            FieldsToWrite.Add(field);
         }
     }
 }

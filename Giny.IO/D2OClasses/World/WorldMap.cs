@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("WorldMap", "")]
+{    [D2OClass("WorldMap", "")]
     public class WorldMap : IDataObject , IIndexedData
-    {
-        public const string MODULE = "WorldMaps";
+    {        public const string MODULE = "WorldMaps";
 
         public int Id => (int)id;
 
@@ -197,11 +195,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

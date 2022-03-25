@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Phoenix", "")]
+{    [D2OClass("Phoenix", "")]
     public class Phoenix : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Phoenixes";
+    {        public const string MODULE = "Phoenixes";
 
         public int Id => throw new NotImplementedException();
 
@@ -28,11 +26,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

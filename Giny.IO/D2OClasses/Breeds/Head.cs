@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Head", "")]
+{    [D2OClass("Head", "")]
     public class Head : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Heads";
+    {        public const string MODULE = "Heads";
 
         public int Id => (int)id;
 
@@ -106,11 +104,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

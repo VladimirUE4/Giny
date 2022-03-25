@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("CompanionSpell", "")]
+{    [D2OClass("CompanionSpell", "")]
     public class CompanionSpell : IDataObject , IIndexedData
-    {
-        public const string MODULE = "CompanionSpells";
+    {        public const string MODULE = "CompanionSpells";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

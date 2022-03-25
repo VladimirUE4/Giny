@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("PopupButton", "")]
+{    [D2OClass("PopupButton", "")]
     public class PopupButton : IDataObject , IIndexedData
     {
-
         public int Id => (int)id;
 
         public int id;
@@ -92,11 +90,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,20 +5,11 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SmileyPackItemCriterion", "")]
+{    [D2OClass("SmileyPackItemCriterion", "")]
     public class SmileyPackItemCriterion : ItemCriterion , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
 
 
-    }
-}
-
-
-
-
-
-
+    }}

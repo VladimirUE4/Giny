@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("GuildRight", "")]
+{    [D2OClass("GuildRight", "")]
     public class GuildRight : IDataObject , IIndexedData
-    {
-        public const string MODULE = "GuildRights";
+    {        public const string MODULE = "GuildRights";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

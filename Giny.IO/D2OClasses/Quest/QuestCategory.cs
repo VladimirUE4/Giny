@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("QuestCategory", "")]
+{    [D2OClass("QuestCategory", "")]
     public class QuestCategory : IDataObject , IIndexedData
-    {
-        public const string MODULE = "QuestCategory";
+    {        public const string MODULE = "QuestCategory";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

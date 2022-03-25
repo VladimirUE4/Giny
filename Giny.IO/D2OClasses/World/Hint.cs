@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Hint", "")]
+{    [D2OClass("Hint", "")]
     public class Hint : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Hints";
+    {        public const string MODULE = "Hints";
 
         public int Id => (int)id;
 
@@ -24,6 +22,7 @@ namespace Giny.IO.D2OClasses
         public int subareaId;
         public int worldMapId;
         public uint level;
+        public uint categoryId;
 
         [D2OIgnore]
         public int Id_
@@ -157,12 +156,17 @@ namespace Giny.IO.D2OClasses
                 level = value;
             }
         }
+        [D2OIgnore]
+        public uint CategoryId
+        {
+            get
+            {
+                return categoryId;
+            }
+            set
+            {
+                categoryId = value;
+            }
+        }
 
-    }
-}
-
-
-
-
-
-
+    }}

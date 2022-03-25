@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("ChatChannel", "")]
+{    [D2OClass("ChatChannel", "")]
     public class ChatChannel : IDataObject , IIndexedData
-    {
-        public const string MODULE = "ChatChannels";
+    {        public const string MODULE = "ChatChannels";
 
         public int Id => (int)id;
 
@@ -106,11 +104,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

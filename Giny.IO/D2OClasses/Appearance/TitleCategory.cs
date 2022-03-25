@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("TitleCategory", "")]
+{    [D2OClass("TitleCategory", "")]
     public class TitleCategory : IDataObject , IIndexedData
-    {
-        public const string MODULE = "TitleCategories";
+    {        public const string MODULE = "TitleCategories";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

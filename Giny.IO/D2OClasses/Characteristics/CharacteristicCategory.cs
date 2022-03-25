@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("CharacteristicCategory", "")]
+{    [D2OClass("CharacteristicCategory", "")]
     public class CharacteristicCategory : IDataObject , IIndexedData
-    {
-        public const string MODULE = "CharacteristicCategories";
+    {        public const string MODULE = "CharacteristicCategories";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

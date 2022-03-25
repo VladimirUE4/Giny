@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceMinMax", "")]
+{    [D2OClass("EffectInstanceMinMax", "")]
     public class EffectInstanceMinMax : EffectInstance , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint min;
@@ -40,11 +38,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

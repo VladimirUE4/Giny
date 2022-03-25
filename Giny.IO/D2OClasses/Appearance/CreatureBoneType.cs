@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("CreatureBoneType", "")]
+{    [D2OClass("CreatureBoneType", "")]
     public class CreatureBoneType : IDataObject , IIndexedData
-    {
-        public const string MODULE = "CreatureBonesTypes";
+    {        public const string MODULE = "CreatureBonesTypes";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

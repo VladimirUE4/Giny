@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceLadder", "")]
+{    [D2OClass("EffectInstanceLadder", "")]
     public class EffectInstanceLadder : EffectInstanceCreature , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint monsterCount;
@@ -27,11 +25,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

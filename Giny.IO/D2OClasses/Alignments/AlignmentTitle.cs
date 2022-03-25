@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("AlignmentTitle", "")]
+{    [D2OClass("AlignmentTitle", "")]
     public class AlignmentTitle : IDataObject , IIndexedData
-    {
-        public const string MODULE = "AlignmentTitles";
+    {        public const string MODULE = "AlignmentTitles";
 
         public int Id => throw new NotImplementedException();
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

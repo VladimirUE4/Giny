@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("IdolsPresetIcon", "")]
+{    [D2OClass("IdolsPresetIcon", "")]
     public class IdolsPresetIcon : IDataObject , IIndexedData
-    {
-        public const string MODULE = "IdolsPresetIcons";
+    {        public const string MODULE = "IdolsPresetIcons";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("NpcMessage", "")]
+{    [D2OClass("NpcMessage", "")]
     public class NpcMessage : IDataObject , IIndexedData
-    {
-        public const string MODULE = "NpcMessages";
+    {        public const string MODULE = "NpcMessages";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

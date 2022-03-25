@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceMount", "")]
+{    [D2OClass("EffectInstanceMount", "")]
     public class EffectInstanceMount : EffectInstance , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public double id;
@@ -196,11 +194,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

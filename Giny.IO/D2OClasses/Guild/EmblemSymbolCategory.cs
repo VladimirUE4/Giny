@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EmblemSymbolCategory", "")]
+{    [D2OClass("EmblemSymbolCategory", "")]
     public class EmblemSymbolCategory : IDataObject , IIndexedData
-    {
-        public const string MODULE = "EmblemSymbolCategories";
+    {        public const string MODULE = "EmblemSymbolCategories";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

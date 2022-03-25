@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MapPosition", "")]
+{    [D2OClass("MapPosition", "")]
     public class MapPosition : IDataObject , IIndexedData
-    {
-        public const string MODULE = "MapPositions";
+    {        public const string MODULE = "MapPositions";
 
         public int Id => throw new NotImplementedException();
 
@@ -223,11 +221,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

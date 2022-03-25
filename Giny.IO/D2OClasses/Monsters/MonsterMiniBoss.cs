@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MonsterMiniBoss", "")]
+{    [D2OClass("MonsterMiniBoss", "")]
     public class MonsterMiniBoss : IDataObject , IIndexedData
-    {
-        public const string MODULE = "MonsterMiniBoss";
+    {        public const string MODULE = "MonsterMiniBoss";
 
         public int Id => (int)id;
 
@@ -41,11 +39,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

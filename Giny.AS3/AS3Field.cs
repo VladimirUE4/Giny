@@ -67,12 +67,12 @@ namespace Giny.AS3
         public AS3AccessorsEnum Accessor
         {
             get;
-            private set;
+            set;
         }
         public AS3ModifiersEnum Modifiers
         {
             get;
-            private set;
+            set;
         }
         public BaseExpression Value
         {

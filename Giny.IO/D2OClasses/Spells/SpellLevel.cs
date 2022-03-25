@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SpellLevel", "")]
+{    [D2OClass("SpellLevel", "")]
     public class SpellLevel : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SpellLevels";
+    {        public const string MODULE = "SpellLevels";
 
         public int Id => (int)id;
 
@@ -418,11 +416,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

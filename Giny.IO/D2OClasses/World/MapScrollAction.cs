@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MapScrollAction", "")]
+{    [D2OClass("MapScrollAction", "")]
     public class MapScrollAction : IDataObject , IIndexedData
-    {
-        public const string MODULE = "MapScrollActions";
+    {        public const string MODULE = "MapScrollActions";
 
         public int Id => throw new NotImplementedException();
 
@@ -132,11 +130,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

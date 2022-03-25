@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceCreature", "")]
+{    [D2OClass("EffectInstanceCreature", "")]
     public class EffectInstanceCreature : EffectInstance , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint monsterFamilyId;
@@ -27,11 +25,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

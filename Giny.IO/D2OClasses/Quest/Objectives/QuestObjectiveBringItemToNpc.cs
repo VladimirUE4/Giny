@@ -5,20 +5,11 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("QuestObjectiveBringItemToNpc", "")]
+{    [D2OClass("QuestObjectiveBringItemToNpc", "")]
     public class QuestObjectiveBringItemToNpc : QuestObjective , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
 
 
-    }
-}
-
-
-
-
-
-
+    }}

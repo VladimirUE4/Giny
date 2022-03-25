@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("Job", "")]
+{    [D2OClass("Job", "")]
     public class Job : IDataObject , IIndexedData
-    {
-        public const string MODULE = "Jobs";
+    {        public const string MODULE = "Jobs";
 
         public int Id => (int)id;
 
@@ -67,11 +65,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("CensoredWord", "")]
+{    [D2OClass("CensoredWord", "")]
     public class CensoredWord : IDataObject , IIndexedData
-    {
-        public const string MODULE = "CensoredWords";
+    {        public const string MODULE = "CensoredWords";
 
         public int Id => (int)id;
 
@@ -80,11 +78,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EmblemSymbol", "")]
+{    [D2OClass("EmblemSymbol", "")]
     public class EmblemSymbol : IDataObject , IIndexedData
-    {
-        public const string MODULE = "EmblemSymbols";
+    {        public const string MODULE = "EmblemSymbols";
 
         public int Id => (int)id;
 
@@ -93,11 +91,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

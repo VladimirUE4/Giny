@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("SpellVariant", "")]
+{    [D2OClass("SpellVariant", "")]
     public class SpellVariant : IDataObject , IIndexedData
-    {
-        public const string MODULE = "SpellVariants";
+    {        public const string MODULE = "SpellVariants";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

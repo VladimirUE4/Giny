@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("ForgettableSpell", "")]
+{    [D2OClass("ForgettableSpell", "")]
     public class ForgettableSpell : IDataObject , IIndexedData
-    {
-        public const string MODULE = "ForgettableSpells";
+    {        public const string MODULE = "ForgettableSpells";
 
         public int Id => (int)id;
 
@@ -54,11 +52,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

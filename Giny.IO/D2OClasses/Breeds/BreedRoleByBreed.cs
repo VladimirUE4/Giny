@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("BreedRoleByBreed", "")]
+{    [D2OClass("BreedRoleByBreed", "")]
     public class BreedRoleByBreed : IDataObject , IIndexedData
-    {
-        public const string MODULE = "BreedRoleByBreeds";
+    {        public const string MODULE = "BreedRoleByBreeds";
 
         public int Id => throw new NotImplementedException();
 
@@ -80,11 +78,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

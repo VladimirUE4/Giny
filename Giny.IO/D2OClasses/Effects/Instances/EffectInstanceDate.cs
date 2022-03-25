@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("EffectInstanceDate", "")]
+{    [D2OClass("EffectInstanceDate", "")]
     public class EffectInstanceDate : EffectInstance , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint year;
@@ -79,11 +77,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}

@@ -5,11 +5,9 @@ using Giny.IO.D2OTypes;
 using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
-{
-    [D2OClass("MonsterDrop", "")]
+{    [D2OClass("MonsterDrop", "")]
     public class MonsterDrop : IDataObject , IIndexedData
     {
-
         public int Id => throw new NotImplementedException();
 
         public uint dropId;
@@ -170,11 +168,4 @@ namespace Giny.IO.D2OClasses
             }
         }
 
-    }
-}
-
-
-
-
-
-
+    }}
