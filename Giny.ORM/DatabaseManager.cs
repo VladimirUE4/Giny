@@ -26,7 +26,7 @@ namespace Giny.ORM
             get;
             private set;
         }
-        public event Action<string, int, int> OnLoadProgress;
+        public event Action<string, int, int> OnTablesLoadProgress;
 
         public event Action<Type, string> OnStartLoadTable;
 
@@ -47,8 +47,6 @@ namespace Giny.ORM
         {
             return UseProvider(ConnectionProvider);
         }
-
-
         private MySqlConnection UseProvider(MySqlConnection connection)
         {
             lock (SyncRoot)
@@ -80,7 +78,7 @@ namespace Giny.ORM
                 var definition = TableManager.Instance.GetDefinition(tableType);
                 var attribute = definition.TableAttribute;
 
-                OnLoadProgress?.Invoke(attribute.TableName, i, TableTypes.Length);
+                OnTablesLoadProgress?.Invoke(attribute.TableName, i, TableTypes.Length);
 
                 if (attribute.Load)
                 {

@@ -41,7 +41,7 @@ namespace Giny.Elements
          "giny_world", "root", "");
 
 
-            DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
+            DatabaseManager.Instance.OnTablesLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
 
             new Thread(new ThreadStart(() =>

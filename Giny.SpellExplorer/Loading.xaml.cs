@@ -40,22 +40,29 @@ namespace Giny.SpellExplorer
             DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(SpellRecord)), "127.0.0.1",
          "giny_world", "root", "");
 
-
-            DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
 
             new Thread(new ThreadStart(() =>
             {
                 AssemblyCore.OnAssembliesLoaded();
 
+                UpdateProgressBar(10);
+
                 DatabaseManager.Instance.LoadTable<SpellRecord>();
+                UpdateProgressBar(20);
                 DatabaseManager.Instance.LoadTable<MonsterRecord>();
+                UpdateProgressBar(30);
                 DatabaseManager.Instance.LoadTable<EffectRecord>();
+                UpdateProgressBar(40);
                 DatabaseManager.Instance.LoadTable<SpellStateRecord>();
+                UpdateProgressBar(50);
                 DatabaseManager.Instance.LoadTable<BreedRecord>();
                 SpellEffectManager.Instance.Initialize();
 
+                UpdateProgressBar(60);
                 DatabaseManager.Instance.LoadTable<SpellLevelRecord>();
+
+                UpdateProgressBar(100);
 
                 SpellRecord.Initialize();
 
@@ -69,29 +76,22 @@ namespace Giny.SpellExplorer
 
         }
 
+        private void UpdateProgressBar(int percentage)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                progressBar.Value = percentage;
+            });
+        }
+
         private void OnStartLoadTable(Type arg1, string arg2)
         {
             this.Dispatcher.Invoke(() =>
             {
-                loadingLbl.Content = "Loading " + arg2.FirstCharToUpper() + "...";
+                loadingLbl.Content = "Loading " + arg1.Name + "...";
             });
         }
 
-        private void OnLoadProgress(string arg1, double arg2)
-        {
-            try
-            {
-                this.Dispatcher.Invoke(() =>
-                {
-                    double percentage = arg2 * 100d;
-                    progressBar.Value = percentage;
-                });
-            }
-            catch
-            {
-                Environment.Exit(0);
-                // user close widow
-            }
-        }
+
     }
 }

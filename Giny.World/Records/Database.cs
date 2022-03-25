@@ -19,7 +19,7 @@ namespace Giny.World.Records
         [StartupInvoke("Database", StartupInvokePriority.SecondPass)]
         public void InitializeDatabase()
         {
-            DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
+            DatabaseManager.Instance.OnTablesLoadProgress += OnLoadProgress;
 
             DatabaseManager.Instance.Initialize(Assembly.GetExecutingAssembly(), ConfigFile.Instance.SQLHost,
                ConfigFile.Instance.SQLDBName, ConfigFile.Instance.SQLUser, ConfigFile.Instance.SQLPassword);
@@ -28,7 +28,7 @@ namespace Giny.World.Records
 
             ProgressLogger.Flush();
 
-            DatabaseManager.Instance.OnLoadProgress -= OnLoadProgress;
+            DatabaseManager.Instance.OnTablesLoadProgress -= OnLoadProgress;
         }
 
 

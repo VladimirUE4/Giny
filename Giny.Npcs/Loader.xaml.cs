@@ -49,7 +49,7 @@ namespace Giny.Npcs
             D2IFile = new D2IFile(@"C:\Users\Skinz\Desktop\Giny\Giny\Raiders\app\data\i18n\i18n_fr.d2i");
 
 
-            DatabaseManager.Instance.OnLoadProgress += OnLoadProgress;
+            DatabaseManager.Instance.OnTablesLoadProgress += OnLoadProgress;
             DatabaseManager.Instance.OnStartLoadTable += OnStartLoadTable;
 
             new Thread(new ThreadStart(() =>
