@@ -20,7 +20,6 @@ namespace Giny.EnumsBuilder
     class Program
     {
         private const string OutputPath = "Generated/";
-
         static void Main(string[] args)
         {
             Logger.DrawLogo();
