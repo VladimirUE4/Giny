@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("EffectInstance", "com.ankamagames.dofus.datacenter.effects")]
-    public class EffectInstance : IDataObject, IIndexedData
+    [D2OClass("EffectInstance", "")]
+    public class EffectInstance : IDataObject , IIndexedData
     {
 
         public int Id => throw new NotImplementedException();
@@ -20,7 +20,7 @@ namespace Giny.IO.D2OClasses
         public string targetMask;
         public int duration;
         public int delay;
-        public int random;
+        public double random;
         public int group;
         public int modificator;
         public bool trigger;
@@ -38,7 +38,6 @@ namespace Giny.IO.D2OClasses
         public object zoneMaxEfficiency;
         public object zoneStopAtTarget;
         public int effectElement;
-        public string rawZone;
         public int spellId;
 
         [D2OIgnore]
@@ -138,7 +137,7 @@ namespace Giny.IO.D2OClasses
             }
         }
         [D2OIgnore]
-        public int Random
+        public double Random
         {
             get
             {
@@ -368,3 +367,9 @@ namespace Giny.IO.D2OClasses
 
     }
 }
+
+
+
+
+
+

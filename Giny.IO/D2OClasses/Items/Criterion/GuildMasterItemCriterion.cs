@@ -6,10 +6,9 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("CensoredContent", "")]
-    public class CensoredContent : IDataObject , IIndexedData
+    [D2OClass("GuildMasterItemCriterion", "")]
+    public class GuildMasterItemCriterion : ItemCriterion , IIndexedData
     {
-        public const string MODULE = "CensoredContents";
 
         public int Id => throw new NotImplementedException();
 

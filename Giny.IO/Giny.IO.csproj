@@ -128,9 +128,12 @@
     <Compile Include="D2OClasses\Guild\EmblemBackground.cs" />
     <Compile Include="D2OClasses\Guild\EmblemSymbol.cs" />
     <Compile Include="D2OClasses\Guild\EmblemSymbolCategory.cs" />
+    <Compile Include="D2OClasses\Guild\GuildRank.cs" />
+    <Compile Include="D2OClasses\Guild\GuildRankNameSuggestion.cs" />
+    <Compile Include="D2OClasses\Guild\GuildRight.cs" />
+    <Compile Include="D2OClasses\Guild\GuildRightGroup.cs" />
     <Compile Include="D2OClasses\Guild\GuildTag.cs" />
     <Compile Include="D2OClasses\Guild\GuildTagsType.cs" />
-    <Compile Include="D2OClasses\Guild\RankName.cs" />
     <Compile Include="D2OClasses\Houses\HavenbagFurniture.cs" />
     <Compile Include="D2OClasses\Houses\HavenbagTheme.cs" />
     <Compile Include="D2OClasses\Houses\House.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="D2OClasses\Items\Criterion\GroupItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\GuildItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\GuildLevelItemCriterion.cs" />
+    <Compile Include="D2OClasses\Items\Criterion\GuildMasterItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\GuildRightsItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\ItemCriterion.cs" />
     <Compile Include="D2OClasses\Items\Criterion\ItemCriterionFactory.cs" />

@@ -24,7 +24,6 @@ namespace Giny.IO.D2OClasses
         public int subareaId;
         public int worldMapId;
         public uint level;
-        public int categoryId;
 
         [D2OIgnore]
         public int Id_

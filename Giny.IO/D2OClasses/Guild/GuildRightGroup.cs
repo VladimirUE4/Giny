@@ -6,16 +6,17 @@ using System.Collections.Generic;
 
 namespace Giny.IO.D2OClasses
 {
-    [D2OClass("RankName", "")]
-    public class RankName : IDataObject , IIndexedData
+    [D2OClass("GuildRightGroup", "")]
+    public class GuildRightGroup : IDataObject , IIndexedData
     {
-        public const string MODULE = "RankNames";
+        public const string MODULE = "GuildRightGroups";
 
         public int Id => (int)id;
 
         public int id;
         public uint nameId;
         public int order;
+        public List<GuildRight> guildRights;
 
         [D2OIgnore]
         public int Id_
@@ -51,6 +52,18 @@ namespace Giny.IO.D2OClasses
             set
             {
                 order = value;
+            }
+        }
+        [D2OIgnore]
+        public List<GuildRight> GuildRights
+        {
+            get
+            {
+                return guildRights;
+            }
+            set
+            {
+                guildRights = value;
             }
         }
 
