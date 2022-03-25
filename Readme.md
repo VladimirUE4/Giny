@@ -91,12 +91,13 @@ lifePoints : 1050 + 0 + 0 - actionPoints : 7 + 0 + 4 - statsPoints : 0 + 0 + 0 -
 
 ## En cours (prioritaire)
 
-* Revoir les guildes (refacto coté client)
-* Giny.Zaap
-* GG WP protocol builder message,types,enums :)
-* DatabaseSynchronizer, automatiser les champs manquant lors de la génération du Datacenter
+* DatabaseSynchronizer, automatiser les champs manquant lors de la génération du Datacenter et regénrer les D2O Classes.
 * Verifier que message Id IPC toujours valide (near ushort.maxValue)
-* GuildMemberRecord.cs public GuildMember ToGuildMember(Guild guild) Guilds.
+
+* Revoir les guildes (refacto coté client)
+* GuildMemberRecord.cs public GuildMember ToGuildMember(Guild guild) Guilds. (il y a des ```[WIP]``` a regarder de prêt)
+
+* Giny.Zaap
 * Fight stats
 * Damage done, inversé. (ItemEffects.cs) et calcul
 * ProgressLogger + Logger.log interactions... (back)
