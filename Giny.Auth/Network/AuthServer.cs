@@ -19,7 +19,7 @@ namespace Giny.Auth.Network
             get;
             set;
         }
-        private Server Server
+        private TcpServer Server
         {
             get;
             set;
@@ -31,7 +31,7 @@ namespace Giny.Auth.Network
         }
         public void Start(string ip, int port)
         {
-            this.Server = new Server(ip, port);
+            this.Server = new TcpServer(ip, port);
             this.Server.OnServerFailedToStart += OnServerFailedToStart;
             this.Server.OnServerStarted += OnServerStarted;
             this.Server.OnSocketConnected += OnClientConnected;

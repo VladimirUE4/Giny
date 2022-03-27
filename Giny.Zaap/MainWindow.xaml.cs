@@ -1,4 +1,6 @@
-﻿using Giny.IO;
+﻿using Giny.Core.Network;
+using Giny.IO;
+using Giny.Zaap.Network;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,19 +31,39 @@ namespace Giny.Zaap
             get;
             set;
         }
+        private ZaapServer ZaapServer
+        {
+            get;
+            set;
+        }
         public MainWindow()
         {
             InitializeComponent();
             ClientPath = ConfigurationManager.AppSettings["clientPath"];
+
+            ZaapServer = new ZaapServer();
+            ZaapServer.Start();
+
+        }
+
+        private void Server_OnSocketConnected(System.Net.Sockets.Socket obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Server_OnServerStarted()
+        {
+            Console.WriteLine("Server started.");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             var dofusPath = Path.Combine(ClientPath, ClientConstants.ExePath);
 
             ProcessStartInfo ps = new ProcessStartInfo();
             ps.FileName = dofusPath;
-            ps.Arguments = "--port=3000 --gameName=dofus --gameRelease=main --instanceId=1 --hash=89e700ea-7d27-40c9-b51e-16ef248507d --canLogin=true";
+            ps.Arguments = string.Format("--port={0} --gameName=dofus --gameRelease=main --instanceId=1 --hash=464e4625-67f1-4706-985c-8358f8661e3c --canLogin=true", ZaapServer.PORT);
             Process process = new Process();
             process.StartInfo = ps;
             process.Start();

@@ -10,87 +10,59 @@ using System.Threading.Tasks;
 
 namespace Giny.Core.Network
 {
-    public abstract class Client
+    public abstract class Client : TcpClient
     {
-        public const int BUFFER_LENGTH = 8192;
-
-        private Socket m_socket;
-
-        private byte[] m_buffer;
-
-        private int m_bufferEndPosition;
-
-        public IPEndPoint EndPoint
-        {
-            get
-            {
-                return m_socket.RemoteEndPoint as IPEndPoint;
-            }
-        }
-        public string Ip
-        {
-            get
-            {
-                if (EndPoint == null)
-                {
-                    return null;
-                }
-                return EndPoint.Address.ToString();
-            }
-        }
-        public bool Connected
-        {
-            get
-            {
-                return m_socket != null && m_socket.Connected;
-            }
-        }
-
         public Client()
         {
-            m_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            m_buffer = new byte[BUFFER_LENGTH];
+
         }
-        public Client(Socket socket)
+        public Client(Socket socket) : base(socket)
         {
-            this.m_buffer = new byte[BUFFER_LENGTH];
-            this.m_socket = socket;
-            BeginReceive();
+
         }
-
-        public abstract void OnConnectionClosed();
-
-        public abstract void OnConnected();
-
-        public abstract void OnDisconnected();
-
         public abstract void OnMessageReceived(NetworkMessage message);
 
         public abstract void OnMessageUnhandled(NetworkMessage message);
 
         public abstract void OnHandlingError(NetworkMessage message, Delegate handler, Exception ex);
 
-        public abstract void OnFailToConnect(Exception ex);
-
-        private void OnDataArrival(int dataSize)
+        public void Send(NetworkMessage message)
         {
-            if (m_buffer.Max() == 0)
+            if (Socket != null && Socket.Connected)
             {
-                m_bufferEndPosition = dataSize;
+                try
+                {
+                    using (var writer = new BigEndianWriter())
+                    {
+                        message.Pack(writer);
+                        Socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+                    }
+                }
+                catch
+                {
+                    Disconnect();
+                }
+            }
+        }
+        protected override void OnDataArrival(int dataSize)
+        {
+            if (Buffer.Max() == 0)
+            {
+                BufferPosition = dataSize;
             }
             else
             {
-                m_bufferEndPosition += dataSize;
+                BufferPosition += dataSize;
 
-                if (m_bufferEndPosition > BUFFER_LENGTH)
+                if (BufferPosition > BUFFER_LENGTH)
                 {
                     throw new Exception("Too large amount of data."); // todo copy in new buffer
                 }
             }
 
-            while (m_bufferEndPosition > 0)
+            while (BufferPosition > 0)
             {
-                using (BigEndianReader reader = new BigEndianReader(m_buffer))
+                using (BigEndianReader reader = new BigEndianReader(Buffer))
                 {
                     NetworkMessage message = ProtocolMessageManager.BuildMessage(reader);
 
@@ -101,127 +73,21 @@ namespace Giny.Core.Network
                     else
                     {
                         Disconnect();
-                        m_bufferEndPosition = 0;
+                        BufferPosition = 0;
                         return;
                     }
 
                     var newBuffer = new byte[BUFFER_LENGTH];
-                    Array.Copy(m_buffer, reader.Position, newBuffer, 0, newBuffer.Length - reader.Position);
+                    Array.Copy(Buffer, reader.Position, newBuffer, 0, newBuffer.Length - reader.Position);
 
-                    m_buffer = newBuffer;
+                    Buffer = newBuffer;
 
-                    m_bufferEndPosition -= (int)reader.Position;
+                    BufferPosition -= (int)reader.Position;
 
                 }
             }
 
 
         }
-        public void Send(NetworkMessage message)
-        {
-            if (m_socket != null && m_socket.Connected)
-            {
-                try
-                {
-                    using (var writer = new BigEndianWriter())
-                    {
-                        message.Pack(writer);
-                        m_socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
-                    }
-                }
-                catch
-                {
-                    Disconnect();
-                }
-            }
-        }
-        public abstract void OnSended(IAsyncResult result);
-
-        public void Connect(string host, int port)
-        {
-            m_socket?.BeginConnect(new IPEndPoint(IPAddress.Parse(host), port), new AsyncCallback(OnConnectionResulted), m_socket);
-        }
-
-        public void OnConnectionResulted(IAsyncResult result)
-        {
-            try
-            {
-                m_socket.EndConnect(result);
-                BeginReceive();
-                OnConnected();
-            }
-            catch (Exception ex)
-            {
-                OnFailToConnect(ex);
-            }
-        }
-        private void BeginReceive()
-        {
-            try
-            {
-                m_socket?.BeginReceive(m_buffer, 0, m_buffer.Length, SocketFlags.None, OnReceived, null);
-            }
-            catch (Exception ex)
-            {
-                Logger.Write("Unable to receive from client " + ex, Channels.Warning);
-                Disconnect();
-            }
-        }
-        public void OnReceived(IAsyncResult result)
-        {
-            if (m_socket == null)
-            {
-                return;
-            }
-
-            int size = 0;
-            try
-            {
-                size = m_socket.EndReceive(result);
-
-                if (size == 0)
-                {
-                    Dispose();
-                    OnConnectionClosed();
-                    return;
-                }
-
-            }
-            catch
-            {
-                Dispose();
-                OnConnectionClosed();
-                return;
-            }
-
-            OnDataArrival(size);
-            BeginReceive();
-        }
-        public void Disconnect()
-        {
-            if (m_socket != null)
-            {
-                Dispose();
-
-                try
-                {
-                    OnDisconnected();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Write("Unable to disconnect client : " + ex);
-                }
-            }
-        }
-
-        private void Dispose()
-        {
-            m_socket?.Shutdown(SocketShutdown.Both);
-            m_socket?.Close();
-            m_socket?.Dispose();
-            m_socket = null;
-
-        }
-
     }
 }

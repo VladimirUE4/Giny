@@ -30,7 +30,7 @@ namespace Giny.World.Network
         } = ServerStatusEnum.STARTING;
 
 
-        private Server Server
+        private TcpServer Server
         {
             get;
             set;
@@ -57,7 +57,7 @@ namespace Giny.World.Network
 
         public void Start(string ip, int port)
         {
-            this.Server = new Server(ip, port);
+            this.Server = new TcpServer(ip, port);
             this.Server.OnSocketConnected += OnClientConnected;
             this.Server.OnServerFailedToStart += OnServerFailedToStart;
             this.Server.OnServerStarted += OnServerStarted;

@@ -101,7 +101,8 @@
     <Compile Include="Network\Messages\NetworkMessage.cs" />
     <Compile Include="Network\Messages\ProtocolMessageManager.cs" />
     <Compile Include="Network\Proxy.cs" />
-    <Compile Include="Network\Server.cs" />
+    <Compile Include="Network\TcpClient.cs" />
+    <Compile Include="Network\TcpServer.cs" />
     <Compile Include="Pool\ReversedUniqueIdProvider.cs" />
     <Compile Include="Pool\UniqueIdProvider.cs" />
     <Compile Include="Pool\UniqueLongIdProvider.cs" />

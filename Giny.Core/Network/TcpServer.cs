@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Giny.Core.Network
 {
-    public class Server
+    public class TcpServer
     {
         public event Action OnServerStarted;
         public event Action<Exception> OnServerFailedToStart;
@@ -26,7 +26,7 @@ namespace Giny.Core.Network
             set;
         }
 
-        public Server(string ip, int port)
+        public TcpServer(string ip, int port)
         {
             EndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
             Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

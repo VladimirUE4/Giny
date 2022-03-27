@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7BD2D049-917B-4CD6-826C-FBC857527395}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Giny.Zaap</RootNamespace>
     <AssemblyName>Giny.Zaap</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -70,6 +73,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Network\TMessage.cs" />
+    <Compile Include="Network\TProtocol.cs" />
+    <Compile Include="Network\ZaapClient.cs" />
+    <Compile Include="Network\ZaapServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,10 +103,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Giny.Core\Giny.Core.csproj">
+      <Project>{8AB2DC30-B9CC-4D45-8104-71B384BB5F57}</Project>
+      <Name>Giny.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Giny.IO\Giny.IO.csproj">
       <Project>{125FA15D-C012-4AF3-8A65-F6A104A67FC1}</Project>
       <Name>Giny.IO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
