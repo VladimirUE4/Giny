@@ -26,7 +26,7 @@ namespace Giny.Zaap.Protocol
             get;
             private set;
         }
-        public SettingsGet(TMessage tMessage) : base(tMessage)
+        public SettingsGet() 
         {
         }
 

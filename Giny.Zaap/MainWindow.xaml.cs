@@ -26,9 +26,12 @@ namespace Giny.Zaap
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string Username;
+        public static MainWindow Instance;
 
-        public static string Password;
+        public static int InstanceId = 1;
+
+        public const int PORT = 3001;
+
         private string ClientPath
         {
             get;
@@ -41,6 +44,7 @@ namespace Giny.Zaap
         }
         public MainWindow()
         {
+            Instance = this;
             InitializeComponent();
             ClientPath = ConfigurationManager.AppSettings["clientPath"];
 
@@ -61,14 +65,11 @@ namespace Giny.Zaap
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Username = userName.Text;
-            Password = password.Text;
-
             var dofusPath = Path.Combine(ClientPath, ClientConstants.ExePath);
 
             ProcessStartInfo ps = new ProcessStartInfo();
             ps.FileName = dofusPath;
-            ps.Arguments = string.Format("--port={0} --gameName=dofus --gameRelease=main --instanceId=1 --hash=464e4625-67f1-4706-985c-8358f8661e3c --canLogin=true", ZaapServer.PORT);
+            ps.Arguments = string.Format("--port={0} --gameName=dofus --gameRelease=main --instanceId={1} --hash=464e4625-67f1-4706-985c-8358f8661e3c --canLogin=true", PORT, InstanceId++);
             Process process = new Process();
             process.StartInfo = ps;
             process.Start();

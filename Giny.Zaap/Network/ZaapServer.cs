@@ -12,7 +12,6 @@ namespace Giny.Zaap.Network
 {
     public class ZaapServer
     {
-        public const int PORT = 3001;
         private TcpServer Server
         {
             get;
@@ -21,7 +20,7 @@ namespace Giny.Zaap.Network
 
         internal void Start()
         {
-            this.Server = new TcpServer("127.0.0.1", PORT);
+            this.Server = new TcpServer("127.0.0.1", MainWindow.PORT);
             this.Server.OnSocketConnected += Server_OnSocketConnected;
             Server.Start();
 
@@ -29,7 +28,10 @@ namespace Giny.Zaap.Network
 
         private void Server_OnSocketConnected(System.Net.Sockets.Socket obj)
         {
-            var zaapClient = new ZaapClient(obj);
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                var zaapClient = new ZaapClient(obj, MainWindow.Instance.userName.Text, MainWindow.Instance.password.Text);
+            });
         }
     }
 }

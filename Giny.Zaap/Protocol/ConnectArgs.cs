@@ -26,7 +26,7 @@ namespace Giny.Zaap.Protocol
 
         private string Hash;
 
-        public ConnectArgs(TMessage tMessage) : base(tMessage)
+        public ConnectArgs() 
         {
 
         }

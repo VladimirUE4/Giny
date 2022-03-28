@@ -67,24 +67,13 @@ namespace Giny.Zaap.Network
 
         public void WriteMessageBegin(TMessage message, BigEndianWriter writer)
         {
-            if (this.StrictWrite)
-            {
-                int loc2 = VERSION_1 | message.Type;
-                writer.WriteInt(loc2);
+            int loc2 = VERSION_1 | message.Type;
+            writer.WriteInt(loc2);
+            writer.WriteInt(message.Name.Length);
+            writer.WriteUTFBytes(message.Name);
+            writer.WriteInt(message.SequenceId);
 
-                writer.WriteInt(message.Name.Length);
-                writer.WriteUTFBytes(message.Name);
-                writer.WriteInt(message.SequenceId);
-            }
-            else
-            {
-                writer.WriteInt(message.Name.Length);
-                writer.WriteUTFBytes(message.Name);
-                writer.WriteByte((byte)message.Type);
-                writer.WriteInt(message.SequenceId);
-            }
         }
-
         public void WriteFieldBegin(TField field, BigEndianWriter writer)
         {
             writer.WriteByte((byte)field.Type);

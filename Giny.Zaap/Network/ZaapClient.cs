@@ -15,19 +15,27 @@ namespace Giny.Zaap.Network
 {
     public class ZaapClient : TcpClient
     {
-        private int SequenceId
+        public string Username
         {
             get;
-            set;
+            private set;
+        }
+        public string Password
+        {
+            get;
+            private set;
         }
         private TProtocol TProtocol
         {
             get;
             set;
         }
-        public ZaapClient(Socket socket) : base(socket)
+        public ZaapClient(Socket socket, string username, string password) : base(socket)
         {
             this.TProtocol = new TProtocol();
+
+            this.Username = username;
+            this.Password = password;
         }
         public override void OnConnected()
         {
@@ -41,14 +49,16 @@ namespace Giny.Zaap.Network
 
         public void Send(ZaapMessage message)
         {
-            if (message.TMessage.TypeEnum == TMessageType.REPLY)
+            var tMessage = new TMessage()
             {
-                SequenceId++;
-            }
+                Name = "success",
+                Type = (int)TMessageType.REPLY,
+                SequenceId = 0, // good idea ?
+            };
 
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                TProtocol.WriteMessageBegin(message.TMessage, writer);
+                TProtocol.WriteMessageBegin(tMessage, writer);
 
                 message.Serialize(TProtocol, writer);
 
@@ -67,16 +77,16 @@ namespace Giny.Zaap.Network
                 switch (tMessage.Name)
                 {
                     case "connect":
-                        message = new ConnectArgs(tMessage);
+                        message = new ConnectArgs();
                         break;
                     case "settings_get":
-                        message = new SettingsGet(tMessage);
+                        message = new SettingsGet();
                         break;
                     case "userInfo_get":
-                        message = new UserInfoGet(tMessage);
+                        message = new UserInfoGet();
                         break;
                     case "auth_getGameToken":
-                        message = new AuthGetGameToken(tMessage);
+                        message = new AuthGetGameToken();
                         break;
                     default:
                         Logger.Write("Receive Unknown message : " + tMessage.Name, Channels.Warning);
@@ -84,7 +94,6 @@ namespace Giny.Zaap.Network
                 }
 
                 Logger.Write("Received : " + message.GetType().Name);
-
                 message.Deserialize(TProtocol, reader);
             }
 

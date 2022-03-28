@@ -10,7 +10,7 @@ namespace Giny.Zaap.Protocol
 {
     public class ConnectResult : ZaapMessage
     {
-        public ConnectResult(TMessage message) : base(message)
+        public ConnectResult()
         {
 
         }

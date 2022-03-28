@@ -12,8 +12,17 @@ namespace Giny.Zaap.Protocol
 
     public class AuthGetGameTokenResult : ZaapMessage
     {
-        public AuthGetGameTokenResult(TMessage tMessage) : base(tMessage)
+        /// <summary>
+        /// Should be ticket but...
+        /// </summary>
+        public string Password
         {
+            get;
+            private set;
+        }
+        public AuthGetGameTokenResult(  string password)  
+        {
+            this.Password = password;
         }
 
         public override void Deserialize(TProtocol protocol, BigEndianReader reader)
@@ -23,12 +32,10 @@ namespace Giny.Zaap.Protocol
 
         public override void Serialize(TProtocol protocol, BigEndianWriter writer)
         {
-            string toSend = MainWindow.Password;
+            protocol.WriteFieldBegin(new TField(Password, TType.STRING, 0), writer);
 
-            protocol.WriteFieldBegin(new TField(toSend, TType.STRING, 0), writer);
-
-            writer.WriteInt(toSend.Length);
-            writer.WriteUTFBytes(toSend);
+            writer.WriteInt(Password.Length);
+            writer.WriteUTFBytes(Password);
 
             protocol.WriteFieldStop(writer);
         }

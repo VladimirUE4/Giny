@@ -18,7 +18,6 @@ namespace Giny.Zaap.Network
         public string Name;
 
         public int Type;
-
         public TMessageType TypeEnum => (TMessageType)Type;
 
         public int SequenceId;

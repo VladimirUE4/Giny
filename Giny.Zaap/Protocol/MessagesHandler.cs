@@ -35,38 +35,39 @@ namespace Giny.Zaap.Protocol
 
         private static void HandleAuthGetGameToken(ZaapClient client, AuthGetGameToken message)
         {
-            client.Send(new AuthGetGameTokenResult(message.CreateReply("success")));
+            client.Send(new AuthGetGameTokenResult(client.Password));
         }
 
         private static void HandleUserInfoGet(ZaapClient client, UserInfoGet message)
         {
-            client.Send(new UserInfosGetResult(message.CreateReply("success")));
+            client.Send(new UserInfosGetResult(client.Username));
         }
 
         private static void HandleSettingsGet(ZaapClient client, SettingsGet message)
         {
-            string reply = null;
+            string result = null;
 
             switch (message.Key)
             {
                 case "autoConnectType":
-                    reply = "false";
+                    result = "false";
                     break;
                 case "language":
-                    reply = "fr";
+                    result = "fr";
                     break;
                 case "connectionPort":
-                    reply = "443";
+                    result = "443";
                     break;
                 default:
                     break;
             }
-            client.Send(new SettingsGetResult(message.CreateReply(reply)));
+
+            client.Send(new SettingsGetResult(result));
         }
 
         private static void HandleConnectArgs(ZaapClient client, ConnectArgs message)
         {
-            client.Send(new ConnectResult(message.CreateReply("succces")));
+            client.Send(new ConnectResult());
         }
     }
 }

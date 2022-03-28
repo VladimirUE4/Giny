@@ -156,8 +156,8 @@ namespace Giny.Auth.Network
         [WIP("parameters?")]
         public void OnIdentificationSuccess(bool wasConnected)
         {
-            Send(new IdentificationSuccessMessage(Account.Username, new AccountTagInformation(Account.Nickname, "none"),
-                 Account.Id, 0, HasRights, HasRights, string.Empty, 0, 0, 0, wasConnected, 0, false)); 
+            Send(new IdentificationSuccessMessage(Account.Username, new AccountTagInformation(Account.Nickname, Account.Id.ToString()),
+                 Account.Id, 0, HasRights, HasRights, string.Empty, 0, 0, 0, wasConnected, 0, false));
         }
         public void SendServerList()
         {

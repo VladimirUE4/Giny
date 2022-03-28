@@ -1131,7 +1131,13 @@ namespace Giny.World.Managers.Fights
 
         public bool ContainsBoss()
         {
-            return GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER).GetFighters<MonsterFighter>().Any(x => x.Record.IsBoss);
+            var monsterTeam = GetTeam(TeamTypeEnum.TEAM_TYPE_MONSTER);
+
+            if (monsterTeam == null)
+            {
+                return false;
+            }
+            return monsterTeam.GetFighters<MonsterFighter>().Any(x => x.Record.IsBoss);
         }
     }
 }

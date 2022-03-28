@@ -28,7 +28,7 @@ namespace Giny.Zaap.Protocol
             get;
             private set;
         }
-        public AuthGetGameToken(TMessage tMessage) : base(tMessage)
+        public AuthGetGameToken()  
         {
         }
 

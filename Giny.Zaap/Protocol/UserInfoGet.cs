@@ -19,7 +19,7 @@ namespace Giny.Zaap.Protocol
             get;
             set;
         }
-        public UserInfoGet(TMessage tMessage) : base(tMessage)
+        public UserInfoGet() 
         {
         }
 
