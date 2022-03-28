@@ -1,6 +1,7 @@
 ﻿using Giny.Core.IO;
 using Giny.Core.Network;
 using Giny.Core.Network.Messages;
+using Giny.Zaap.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace Giny.Zaap.Network
             get;
             set;
         }
+        private ConnectArgs ConnectArgs
+        {
+            get;
+            set;
+        }
         public ZaapClient(Socket socket) : base(socket)
         {
             this.TProtocol = new TProtocol();
@@ -29,37 +35,36 @@ namespace Giny.Zaap.Network
 
         public override void OnConnectionClosed()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Client disconnected.");
         }
 
         protected override void OnDataArrival(int dataSize)
         {
             using (BigEndianReader reader = new BigEndianReader(Buffer))
             {
-                TProtocol.ReadMessageBegin(reader);
+                var message = TProtocol.ReadMessageBegin(reader);
 
-                 reader.ReadByte(); // TBinaryProtocol , read struct begin ZaapServiceImpl
-                reader.ReadShort();
-                var test = reader.ReadUTF7BitLength();
+                this.ConnectArgs = new ConnectArgs();
+                ConnectArgs.Deserialize(TProtocol, reader);
+                Console.WriteLine(ConnectArgs.ToString());
             }
 
-          /*  var t = reader.ReadInt();
+            using (BigEndianWriter writer = new BigEndianWriter())
+            {
+                TMessage message = new TMessage()
+                {
+                    Name = "success",
+                    SequenceId = 0,
+                    Type = (int)TMessageType.REPLY,
+                };
 
-            var t1 = reader.ReadShort();
+                TProtocol.WriteMessageBegin(message, writer);
 
+                var result = new ConnectResult();
+                result.Write(TProtocol, writer);
 
-            var str1 = reader.ReadUTF();
-
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            reader.ReadByte();
-            var str2 = reader.ReadUTF(); */
+                Socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, result);
+            }
 
 
         }
@@ -76,7 +81,7 @@ namespace Giny.Zaap.Network
 
         public override void OnSended(IAsyncResult result)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sended " + result.AsyncState.ToString());
         }
     }
 }

@@ -337,10 +337,11 @@ namespace Giny.Core.IO
         public void WriteUTFBytes(string str)
         {
             var bytes = Encoding.UTF8.GetBytes(str);
-            var len = bytes.Length;
-            int i;
-            for (i = 0; i < len; i++)
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
                 m_writer.Write(bytes[i]);
+            }
         }
 
         /// <summary>

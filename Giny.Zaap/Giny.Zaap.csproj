@@ -59,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Protocol\MessagesHandler.cs" />
+    <Compile Include="Protocol\IZaapMessage.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,12 +69,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Protocol\ConnectArgs.cs" />
+    <Compile Include="Protocol\ConnectResult.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Network\TField.cs" />
     <Compile Include="Network\TMessage.cs" />
     <Compile Include="Network\TProtocol.cs" />
     <Compile Include="Network\ZaapClient.cs" />

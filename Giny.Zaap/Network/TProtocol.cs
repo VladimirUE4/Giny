@@ -36,6 +36,11 @@ namespace Giny.Zaap.Network
             StrictWrite = strictWrite;
         }
 
+        public void WriteFieldStop(BigEndianWriter writer)
+        {
+            writer.WriteByte((byte)TType.STOP);
+        }
+
         public TMessage ReadMessageBegin(BigEndianReader reader)
         {
             TMessage result = new TMessage();
@@ -51,6 +56,39 @@ namespace Giny.Zaap.Network
             result.Name = reader.ReadUTF7BitLength();
             result.SequenceId = reader.ReadInt();
             return result;
+        }
+
+        public TField ReadFieldBegin(BigEndianReader reader)
+        {
+            var type = (TType)reader.ReadByte();
+            int id = type == TType.STOP ? 0 : reader.ReadShort();
+            return new TField("", type, id);
+        }
+
+        public void WriteMessageBegin(TMessage message, BigEndianWriter writer)
+        {
+            if (this.StrictWrite)
+            {
+                int loc2 = VERSION_1 | message.Type;
+                writer.WriteInt(loc2);
+
+                writer.WriteInt(message.Name.Length);
+                writer.WriteUTFBytes(message.Name);
+                writer.WriteInt(message.SequenceId);
+            }
+            else
+            {
+                writer.WriteInt(message.Name.Length);
+                writer.WriteUTFBytes(message.Name);
+                writer.WriteByte((byte)message.Type);
+                writer.WriteInt(message.SequenceId);
+            }
+        }
+
+        public void WriteFieldBegin(TField field, BigEndianWriter writer)
+        {
+            writer.WriteByte((byte)field.Type);
+            writer.WriteShort((short)field.Id);
         }
     }
 }
