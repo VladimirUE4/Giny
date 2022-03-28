@@ -1,4 +1,5 @@
-﻿using Giny.Core.IO;
+﻿using Giny.Core;
+using Giny.Core.IO;
 using Giny.Core.Network;
 using Giny.Core.Network.Messages;
 using Giny.Zaap.Protocol;
@@ -14,12 +15,12 @@ namespace Giny.Zaap.Network
 {
     public class ZaapClient : TcpClient
     {
-        private TProtocol TProtocol
+        private int SequenceId
         {
             get;
             set;
         }
-        private ConnectArgs ConnectArgs
+        private TProtocol TProtocol
         {
             get;
             set;
@@ -38,35 +39,56 @@ namespace Giny.Zaap.Network
             Console.WriteLine("Client disconnected.");
         }
 
-        protected override void OnDataArrival(int dataSize)
+        public void Send(ZaapMessage message)
         {
-            using (BigEndianReader reader = new BigEndianReader(Buffer))
+            if (message.TMessage.TypeEnum == TMessageType.REPLY)
             {
-                var message = TProtocol.ReadMessageBegin(reader);
-
-                this.ConnectArgs = new ConnectArgs();
-                ConnectArgs.Deserialize(TProtocol, reader);
-                Console.WriteLine(ConnectArgs.ToString());
+                SequenceId++;
             }
 
             using (BigEndianWriter writer = new BigEndianWriter())
             {
-                TMessage message = new TMessage()
+                TProtocol.WriteMessageBegin(message.TMessage, writer);
+
+                message.Serialize(TProtocol, writer);
+
+                Socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, message);
+            }
+        }
+
+        protected override void OnDataArrival(int dataSize)
+        {
+            ZaapMessage message = null;
+
+            using (BigEndianReader reader = new BigEndianReader(Buffer))
+            {
+                TMessage tMessage = TProtocol.ReadMessageBegin(reader);
+
+                switch (tMessage.Name)
                 {
-                    Name = "success",
-                    SequenceId = 0,
-                    Type = (int)TMessageType.REPLY,
-                };
+                    case "connect":
+                        message = new ConnectArgs(tMessage);
+                        break;
+                    case "settings_get":
+                        message = new SettingsGet(tMessage);
+                        break;
+                    case "userInfo_get":
+                        message = new UserInfoGet(tMessage);
+                        break;
+                    case "auth_getGameToken":
+                        message = new AuthGetGameToken(tMessage);
+                        break;
+                    default:
+                        Logger.Write("Receive Unknown message : " + tMessage.Name, Channels.Warning);
+                        return;
+                }
 
-                TProtocol.WriteMessageBegin(message, writer);
+                Logger.Write("Received : " + message.GetType().Name);
 
-                var result = new ConnectResult();
-                result.Write(TProtocol, writer);
-
-                Socket.BeginSend(writer.Data, 0, writer.Data.Length, SocketFlags.None, OnSended, result);
+                message.Deserialize(TProtocol, reader);
             }
 
-
+            MessagesHandler.Handle(this, message);
         }
 
         public override void OnDisconnected()
@@ -81,7 +103,7 @@ namespace Giny.Zaap.Network
 
         public override void OnSended(IAsyncResult result)
         {
-            Console.WriteLine("Sended " + result.AsyncState.ToString());
+            Console.WriteLine("Send : " + result.AsyncState.GetType().Name.ToString());
         }
     }
 }

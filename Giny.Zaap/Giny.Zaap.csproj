@@ -38,6 +38,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Giny.World\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -59,8 +63,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Protocol\AuthGetGameToken.cs" />
+    <Compile Include="Protocol\AuthGetGameTokenResult.cs" />
     <Compile Include="Protocol\MessagesHandler.cs" />
-    <Compile Include="Protocol\IZaapMessage.cs" />
+    <Compile Include="Protocol\SettingsGet.cs" />
+    <Compile Include="Protocol\SettingsGetResult.cs" />
+    <Compile Include="Protocol\UserInfoGet.cs" />
+    <Compile Include="Protocol\UserInfosGetResult.cs" />
+    <Compile Include="Protocol\ZaapMessage.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

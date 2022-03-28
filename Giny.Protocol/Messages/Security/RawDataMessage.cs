@@ -9,7 +9,7 @@ namespace Giny.Protocol.Messages
 { 
     public class RawDataMessage : NetworkMessage  
     { 
-        public  const ushort Id = 6253;
+        public  const ushort Id = 4473;
         public override ushort MessageId => Id;
 
         public byte[] content;

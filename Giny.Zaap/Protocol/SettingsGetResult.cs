@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace Giny.Zaap.Protocol
 {
-    public class ConnectResult : ZaapMessage
+    public class SettingsGetResult : ZaapMessage
     {
-        public ConnectResult(TMessage message) : base(message)
+        public SettingsGetResult(TMessage tMessage) : base(tMessage)
         {
-
         }
 
         public override void Deserialize(TProtocol protocol, BigEndianReader reader)
@@ -31,6 +30,5 @@ namespace Giny.Zaap.Protocol
 
             protocol.WriteFieldStop(writer);
         }
-
     }
 }

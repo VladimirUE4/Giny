@@ -103,7 +103,7 @@ namespace Giny.Core.Network.Messages
                         return null;
                     }
 
-                    if (IsIPCMessage(message))
+                    if (IsIPCMessage(message)) // something wrong here.
                     {
                         reader.Seek(NetworkMessage.MESSAGE_ID_SIZE + NetworkMessage.ComputeTypeLen(messagePart.LengthBytesCount.Value), SeekOrigin.Begin);
                         finalReader = reader;

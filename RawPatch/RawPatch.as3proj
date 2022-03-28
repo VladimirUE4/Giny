@@ -12,7 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="C:\Users\Skinz\Desktop\Giny 2.58\RawPatch\apache-flex-sdk-4.16.1-bin" />
+    <movie preferredSDK="C:\Users\Skinz\Desktop\Giny\Giny\RawPatch\RawPatch\apache-flex-sdk-4.16.1-bin" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>

@@ -26,6 +26,9 @@ namespace Giny.Zaap
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string Username;
+
+        public static string Password;
         private string ClientPath
         {
             get;
@@ -58,6 +61,8 @@ namespace Giny.Zaap
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Username = userName.Text;
+            Password = password.Text;
 
             var dofusPath = Path.Combine(ClientPath, ClientConstants.ExePath);
 
@@ -67,7 +72,6 @@ namespace Giny.Zaap
             Process process = new Process();
             process.StartInfo = ps;
             process.Start();
-
         }
     }
 }

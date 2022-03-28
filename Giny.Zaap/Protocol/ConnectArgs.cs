@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Giny.Zaap.Protocol
 {
-    public class ConnectArgs : IZaapMessage
+    public class ConnectArgs : ZaapMessage
     {
         public enum TFieldId
         {
@@ -26,20 +26,17 @@ namespace Giny.Zaap.Protocol
 
         private string Hash;
 
-        public ConnectArgs()
+        public ConnectArgs(TMessage tMessage) : base(tMessage)
         {
-           
 
         }
 
-        public override string ToString()
+        public override void Serialize(TProtocol protocol, BigEndianWriter writer)
         {
-            return GameName + "," + ReleaseName;
+            throw new NotImplementedException();
         }
 
-     
-
-        public void Deserialize(TProtocol protocol,BigEndianReader reader)
+        public override void Deserialize(TProtocol protocol, BigEndianReader reader)
         {
             while (true)
             {
@@ -68,10 +65,10 @@ namespace Giny.Zaap.Protocol
                 }
             }
         }
-
-        public void Serialize(TProtocol protocol, BigEndianWriter writer)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return GameName + "," + ReleaseName;
         }
+
     }
 }

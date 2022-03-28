@@ -100,7 +100,7 @@ namespace Giny.Core.Network.Messages
             else
                 num1 = 0;
             if (num1 != 0)
-                this.Header = reader.ReadUShort();// new int?((int)reader.ReadShort());
+                this.Header = reader.ReadUShort();
             reader.ReadUInt();
             nullable1 = this.LengthBytesCount;
             long? nullable2;
